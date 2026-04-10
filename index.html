@@ -1254,6 +1254,7 @@ function saveProgress(){
   } catch(e){ console.warn('Save failed:', e); }
 }
 function loadProgress(){
+  if(!currentUser) return false; // guests always start fresh
   try {
     // Try per-user key first
     var key = getProgressKey();
