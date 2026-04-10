@@ -436,7 +436,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 
   <!-- Right side: Search + XP + Actions -->
   <div style="display:flex;align-items:center;gap:8px;flex-shrink:0">
-    <input type="text" placeholder="Search..." style="padding:6px 12px;border:1.5px solid #e0e0e0;border-radius:20px;font-size:12px;width:130px;outline:none;transition:border-color 0.2s" onfocus="this.style.borderColor='#00b894'" onblur="this.style.borderColor='#e0e0e0'">
+    <div style="position:relative">
+    <input type="text" id="globalSearch" placeholder="Search lessons..." style="padding:6px 12px 6px 30px;border:1.5px solid #e0e0e0;border-radius:20px;font-size:12px;width:150px;outline:none;transition:all 0.2s" onfocus="this.style.borderColor='#00b894';this.style.width='200px'" onblur="this.style.borderColor='#e0e0e0';if(!this.value)this.style.width='150px'" onkeyup="handleGlobalSearch(this.value)" onkeydown="if(event.key==='Escape'){this.value='';closeSearchResults();}">
+    <span style="position:absolute;left:10px;top:50%;transform:translateY(-50%);font-size:12px;pointer-events:none">🔍</span>
+    <div id="searchResultsDropdown" style="display:none;position:absolute;top:calc(100% + 6px);right:0;background:#fff;border:1.5px solid #e0e0e0;border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,0.12);width:320px;max-height:400px;overflow-y:auto;z-index:9999"></div>
+  </div>
     <div id="userAvatar" onclick="showAuthScreen()" style="padding:7px 18px;border-radius:20px;background:linear-gradient(135deg,#00b894,#0984e3);color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;font-weight:700;font-size:13px;white-space:nowrap;box-shadow:0 2px 8px rgba(0,184,148,0.3)" title="Log In">🔐 Log In</div>
   </div>
 </div>
@@ -804,7 +808,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
   </div>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 // ═══════════════════════════════════════════════════════════
 // SUPABASE CLOUD DATABASE CONNECTION
 // ═══════════════════════════════════════════════════════════
@@ -19654,7 +19658,7 @@ window.addEventListener('DOMContentLoaded', function(){
         <li style="display:flex;gap:10px;font-size:13px;color:#2d3436"><span style="color:#00b894;font-weight:700">✓</span> Priority support</li>
         <li style="display:flex;gap:10px;font-size:13px;color:#2d3436"><span style="color:#00b894;font-weight:700">✓</span> Early access to new modules</li>
       </ul>
-      <a href="https://buy.stripe.com/14A8wO20TaWT0IegQU3Nm0d" target="_blank" style="display:block;width:100%;padding:13px;border:2px solid #00b894;border-radius:10px;background:#fff;color:#00b894;font-size:14px;font-weight:700;cursor:pointer;text-align:center;text-decoration:none;transition:all 0.2s" onmouseover="this.style.background='#f0f9f7'" onmouseout="this.style.background='#fff'">Get Annual Plan</a>
+      <a href="https://buy.stripe.com/ANNUAL_PLAN_LINK_HERE" target="_blank" id="annualPlanBtn" style="display:block;width:100%;padding:13px;border:2px solid #00b894;border-radius:10px;background:#fff;color:#00b894;font-size:14px;font-weight:700;cursor:pointer;text-align:center;text-decoration:none;transition:all 0.2s" onmouseover="this.style.background='#f0f9f7'" onmouseout="this.style.background='#fff'">Get Annual Plan</a>
     </div>
 
   </div>
@@ -19711,9 +19715,148 @@ window.addEventListener('DOMContentLoaded', function(){
     <div style="font-weight:700;font-size:14px;margin-bottom:2px">This is a Pro feature</div>
     <div style="font-size:13px;color:#b2bec3">Start your 30-day free trial to unlock everything.</div>
   </div>
-  <a href="https://buy.stripe.com/14A8wO20TaWT0IegQU3Nm0d" target="_blank" style="background:linear-gradient(135deg,#00b894,#00cec9);color:#fff;padding:10px 20px;border-radius:8px;font-size:13px;font-weight:700;text-decoration:none;white-space:nowrap;flex-shrink:0">Try Free →</a>
+  <a href="https://buy.stripe.com/14A8wO20TaWT0IegQU3Nm0d" target="_padding:10px 20px;border-radius:8px;font-size:13px;font-weight:700;text-decoration:none;white-space:nowrap;flex-shrink:0">Try Free →</a>
   <span onclick="document.getElementById('upgradePrompt').style.display='none'" style="cursor:pointer;color:rgba(255,255,255,0.5);font-size:20px;padding:4px;flex-shrink:0">✕</span>
 </div>
+
+<script>
+// ── GLOBAL SEARCH ──────────────────────────────────────────────
+function buildSearchIndex(){
+  var index=[];
+  var subjects={
+    'App Building':APP_BUILDING,
+    'Financial Literacy':FINANCIAL_LITERACY
+  };
+  var curricula={
+    'Math':MATH_CURRICULUM,
+    'Science':SCIENCE_CURRICULUM,
+    'English':ENGLISH_CURRICULUM,
+    'History':HISTORY_CURRICULUM,
+    'Social Studies':SOCIAL_STUDIES_CURRICULUM
+  };
+  function addSubject(subjectName,data){
+    var grades=Object.keys(data);
+    for(var g=0;g<grades.length;g++){
+      var gradeData=data[grades[g]];
+      if(!gradeData||!gradeData.categories)continue;
+      var cats=Object.keys(gradeData.categories);
+      for(var c=0;c<cats.length;c++){
+        var cat=gradeData.categories[cats[c]];
+        if(!cat||!cat.lessons)continue;
+        for(var l=0;l<cat.lessons.length;l++){
+          var lesson=cat.lessons[l];
+          if(lesson&&lesson.title){
+            index.push({
+              id:lesson.id,
+              title:lesson.title,
+              emoji:lesson.emoji||'📚',
+              tagline:lesson.tagline||'',
+              subject:subjectName,
+              grade:grades[g],
+              category:cats[c]
+            });
+          }
+        }
+      }
+    }
+  }
+  Object.keys(subjects).forEach(function(k){addSubject(k,subjects[k]);});
+  Object.keys(curricula).forEach(function(k){addSubject(k,curricula[k]);});
+  return index;
+}
+
+var _searchIndex=null;
+function getSearchIndex(){
+  if(!_searchIndex)_searchIndex=buildSearchIndex();
+  return _searchIndex;
+}
+
+function handleGlobalSearch(query){
+  var dropdown=document.getElementById('searchResultsDropdown');
+  if(!query||query.trim().length<2){
+    dropdown.style.display='none';
+    return;
+  }
+  var q=query.toLowerCase().trim();
+  var index=getSearchIndex();
+  var results=index.filter(function(item){
+    return item.title.toLowerCase().includes(q)||
+           item.tagline.toLowerCase().includes(q)||
+           item.subject.toLowerCase().includes(q)||
+           item.category.toLowerCase().includes(q);
+  }).slice(0,10);
+
+  if(results.length===0){
+    dropdown.innerHTML='<div style="padding:16px;text-align:center;color:#b2bec3;font-size:13px">No lessons found for "'+query+'"</div>';
+    dropdown.style.display='block';
+    return;
+  }
+
+  var html='<div style="padding:8px 12px;font-size:11px;font-weight:700;color:#b2bec3;text-transform:uppercase;letter-spacing:1px">'+results.length+' lessons found</div>';
+  results.forEach(function(item){
+    var gradeLabel=item.grade==='PK'?'Pre-K':item.grade==='K'?'Kinder':'Grade '+item.grade;
+    html+='<div onclick="searchOpenLesson(''+item.id+'',''+item.subject+'',''+item.grade+'')" style="padding:10px 14px;cursor:pointer;border-top:1px solid #f5f5f5;transition:background 0.15s" onmouseover="this.style.background='#f0f9f7'" onmouseout="this.style.background='#fff'">'
+      +'<div style="display:flex;align-items:center;gap:8px">'
+      +'<span style="font-size:18px">'+item.emoji+'</span>'
+      +'<div style="flex:1;min-width:0">'
+      +'<div style="font-size:13px;font-weight:600;color:#2d3436;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+item.title+'</div>'
+      +'<div style="font-size:11px;color:#636e72;margin-top:1px">'+item.subject+' · '+gradeLabel+'</div>'
+      +'</div>'
+      +'<span style="font-size:11px;color:#00b894;font-weight:600;flex-shrink:0">Open →</span>'
+      +'</div></div>';
+  });
+  dropdown.innerHTML=html;
+  dropdown.style.display='block';
+}
+
+function searchOpenLesson(lessonId,subject,grade){
+  closeSearchResults();
+  document.getElementById('globalSearch').value='';
+  // Map subject name to subject key
+  var subjectMap={
+    'App Building':'app-building',
+    'Financial Literacy':'financial-literacy',
+    'Math':'math',
+    'Science':'science',
+    'English':'english',
+    'History':'history',
+    'Social Studies':'social-studies'
+  };
+  var subjectKey=subjectMap[subject]||'math';
+  if(typeof switchSubject==='function') switchSubject(subjectKey);
+  // Set grade
+  if(typeof currentGrade!=='undefined'){
+    currentGrade=grade;
+    if(typeof renderGradeContent==='function') renderGradeContent();
+    document.querySelectorAll('.grade-btn').forEach(function(b){
+      b.classList.toggle('active',b.dataset.grade==grade);
+    });
+  }
+  // Open the lesson after short delay to allow render
+  setTimeout(function(){
+    if(typeof openLesson==='function'){
+      // Find lesson in data
+      var index=getSearchIndex();
+      var found=index.find(function(i){return i.id===lessonId;});
+      if(found) openLesson(lessonId);
+    }
+  },300);
+}
+
+function closeSearchResults(){
+  var dropdown=document.getElementById('searchResultsDropdown');
+  if(dropdown) dropdown.style.display='none';
+}
+
+// Close search when clicking outside
+document.addEventListener('click',function(e){
+  var wrapper=document.getElementById('globalSearch');
+  var dropdown=document.getElementById('searchResultsDropdown');
+  if(wrapper&&dropdown&&!wrapper.contains(e.target)&&!dropdown.contains(e.target)){
+    dropdown.style.display='none';
+  }
+});
+</script>
 
 </body>
 </html>
