@@ -805,6 +805,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 </footer>
 
 <script>
+// Early declarations to avoid TDZ errors
+var timerInterval = null;
+var speechKeepAlive = null;
+
 // ═══════════════════════════════════════════════════════════
 // SUPABASE CLOUD DATABASE CONNECTION
 // ═══════════════════════════════════════════════════════════
@@ -1328,10 +1332,6 @@ function clearProgress(){
   StorageEngine.remove('cloud6_academy_progress');
 }
 
-// Load saved grade/subject early - only for logged-in users
-// Guests always start fresh for a clean demo experience
-if(typeof currentUser !== "undefined" && currentUser) loadProgress();
-
 // ═══════════════════════════════════════════════════════════
 // AUTHENTICATION SYSTEM (localStorage-based)
 // ═══════════════════════════════════════════════════════════
@@ -1339,6 +1339,10 @@ let currentUser = null;
 let _resetTargetUser = null; // temp holder for password reset flow
 let guestAnswersCorrect = 0;  // tracks correct answers in guest mode for signup prompt
 let guestPromptShown = false; // only show once per session
+
+// Load saved grade/subject early - only for logged-in users
+// Guests always start fresh for a clean demo experience
+if(currentUser) loadProgress();
 
 function getUsers(){
   try {
@@ -13121,7 +13125,6 @@ let currentQuestionIndex = 0;
 let questionsAnswered = 0;
 let smartScore = 0;
 let lessonStartTime = 0;
-let timerInterval = null;
 let aiCurrentStepIndex = 0;
 let currentLessonQuestions = [];
 let totalQuestionsEverAnswered = 0;
@@ -15214,7 +15217,6 @@ var isSpeaking = false;
 var speechSessionId = 0;
 var speechChunks = [];
 var speechChunkIndex = 0;
-var speechKeepAlive = null;
 var currentUtterance = null;
 
 function resetListenBtn(){
