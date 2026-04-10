@@ -431,6 +431,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
     </div>
     <div class="nav-tab" id="nav-builder" onclick="showAppBuilder()" style="padding:6px 12px;border-radius:8px;cursor:pointer;font-weight:600;font-size:13px;color:#636e72;background:transparent;white-space:nowrap;transition:all 0.2s">🤖 Build App</div>
     <div class="nav-tab" id="nav-assessment" onclick="showAssessment()" style="padding:6px 12px;border-radius:8px;cursor:pointer;font-weight:600;font-size:13px;color:#636e72;background:transparent;white-space:nowrap;transition:all 0.2s">📝 Assessment</div>
+    <div class="nav-tab" id="nav-printables" onclick="showPrintables()" style="padding:6px 12px;border-radius:8px;cursor:pointer;font-weight:600;font-size:13px;color:#636e72;background:transparent;white-space:nowrap;transition:all 0.2s">🖨️ Printables</div>
     <div class="nav-tab" id="nav-teacher" onclick="showTeacherDashboard()" style="padding:6px 12px;border-radius:8px;cursor:pointer;font-weight:600;font-size:13px;color:#636e72;background:transparent;white-space:nowrap;transition:all 0.2s;display:none">👩‍🏫 Teacher</div>
   </nav>
 
@@ -629,6 +630,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 
 <!-- ASSESSMENT SCREEN (hidden by default) -->
 <div id="assessmentScreen" style="display:none"></div>
+
+<!-- PRINTABLES SCREEN (hidden by default) -->
+<div id="printablesScreen" style="display:none"></div>
 
 <!-- APP BUILDER SCREEN (grades 6+ standalone Loveable-style builder) -->
 <div id="appBuilderScreen" style="display:none">
@@ -16679,6 +16683,7 @@ function hideAllScreens(){
   document.getElementById('gradePickerScreen').style.display = 'none';
   document.getElementById('appBuilderScreen').style.display = 'none';
   document.getElementById('teacherDashboardScreen').style.display = 'none';
+  document.getElementById('printablesScreen').style.display = 'none';
   document.getElementById('subjectBar').style.display = 'none';
 }
 
@@ -18530,6 +18535,457 @@ function showAcademy(){
   document.getElementById('subjectBar').style.display = 'flex';
   renderGradeView();
   window.scrollTo({top:0,behavior:'smooth'});
+}
+
+// ═══════════════════════════════════════════════════════════
+// FREE PRINTABLE WORKSHEETS
+// ═══════════════════════════════════════════════════════════
+const PRINTABLES_DATA = {
+  math: {
+    icon: '📐', name: 'Math',
+    worksheets: {
+      'PK': [
+        { title: 'Count & Color 1-5', desc: 'Count objects and color the correct number', problems: ['Color 2 stars: ☆ ☆ ☆ ☆ ☆','Circle the group with 3: 🍎🍎🍎 or 🍎🍎','Draw 4 circles','Count the dots: ● ● ● ● = ___','Color 1 heart: ♡ ♡ ♡','Circle the group with 5: 🌟🌟🌟🌟🌟 or 🌟🌟🌟','Draw 2 triangles','How many fish? 🐟🐟🐟 = ___','Color 5 balloons','Match: 3 = ___ (draw dots)'] },
+        { title: 'Shape Tracing', desc: 'Trace and identify basic shapes', problems: ['Trace the circle: ○','Trace the square: □','Trace the triangle: △','Color all the circles red','How many sides does a square have? ___','Draw a circle','Color the triangles blue','Trace the rectangle: ▭','Which shape has 3 sides? ___','Draw your favorite shape'] },
+        { title: 'Big & Small', desc: 'Compare sizes and sort objects', problems: ['Circle the BIG one: 🐘 🐭','Circle the SMALL one: 🌳 🌱','Draw a big circle and a small circle','Which is taller? 🏢 🏠 ','Sort: Put an X on the small ones','Circle the biggest star: ⭐ ✦ ✡','Draw something BIG','Which is longer? ———  —','Circle the smallest animal: 🐕 🐈 🐁','Draw 3 balls: big, medium, small'] }
+      ],
+      'K': [
+        { title: 'Addition to 5', desc: 'Simple addition problems within 5', problems: ['1 + 1 = ___','2 + 1 = ___','3 + 2 = ___','1 + 3 = ___','2 + 2 = ___','0 + 4 = ___','1 + 4 = ___','3 + 1 = ___','2 + 3 = ___','Draw 2 apples + 1 apple = ___ apples'] },
+        { title: 'Counting to 20', desc: 'Practice counting and writing numbers to 20', problems: ['Write the missing number: 1, 2, ___, 4, 5','Count: 6, 7, ___, 9, 10','What comes after 12? ___','Write the missing number: 15, 16, ___, 18','Count the stars and write the number: ⭐⭐⭐⭐⭐⭐⭐ = ___','What comes before 10? ___','Fill in: 11, ___, 13, ___, 15','Count by 1s: 16, 17, ___, ___, 20','Circle the bigger number: 8 or 14','Write numbers 1 to 10 in order'] },
+        { title: 'Subtraction from 5', desc: 'Take-away problems within 5', problems: ['3 - 1 = ___','5 - 2 = ___','4 - 1 = ___','2 - 1 = ___','5 - 3 = ___','4 - 2 = ___','3 - 3 = ___','5 - 1 = ___','4 - 3 = ___','5 apples, eat 2. How many left? ___'] }
+      ],
+      1: [
+        { title: 'Addition to 20', desc: 'Practice adding numbers up to 20', problems: ['7 + 5 = ___','9 + 3 = ___','8 + 6 = ___','6 + 7 = ___','5 + 9 = ___','11 + 4 = ___','8 + 8 = ___','7 + 6 = ___','9 + 9 = ___','12 + 5 = ___'] },
+        { title: 'Subtraction Within 20', desc: 'Practice subtracting within 20', problems: ['15 - 7 = ___','12 - 5 = ___','18 - 9 = ___','14 - 6 = ___','11 - 3 = ___','16 - 8 = ___','13 - 4 = ___','17 - 9 = ___','20 - 5 = ___','19 - 7 = ___'] },
+        { title: 'Place Value: Tens & Ones', desc: 'Understanding tens and ones place', problems: ['14 = ___ ten and ___ ones','27 = ___ tens and ___ ones','How many tens in 35? ___','How many ones in 42? ___','3 tens + 6 ones = ___','___ tens + ___ ones = 58','Which digit is in the tens place of 73? ___','19 = ___ ten and ___ ones','5 tens + 0 ones = ___','Write the number: 8 tens and 1 one = ___'] }
+      ],
+      2: [
+        { title: 'Two-Digit Addition', desc: 'Adding two-digit numbers', problems: ['24 + 13 = ___','35 + 22 = ___','41 + 27 = ___','56 + 18 = ___','63 + 29 = ___','47 + 35 = ___','38 + 44 = ___','55 + 27 = ___','19 + 46 = ___','72 + 19 = ___'] },
+        { title: 'Skip Counting', desc: 'Count by 2s, 5s, and 10s', problems: ['Count by 2s: 2, 4, ___, ___, 10','Count by 5s: 5, 10, ___, ___, 25','Count by 10s: 10, 20, ___, ___, 50','Count by 2s: 12, 14, ___, ___, ___','Count by 5s: 30, 35, ___, ___, ___','Count by 10s: 50, 60, ___, ___, ___','What comes next? 6, 8, 10, ___','What comes next? 15, 20, 25, ___','What comes next? 70, 80, 90, ___','Fill in: 20, 22, 24, ___, ___, 30'] },
+        { title: 'Telling Time', desc: 'Reading clocks to the half hour', problems: ['What time is it? The hour hand is on 3, minute hand on 12: ___','The hour hand is on 7, minute hand on 6: ___','Draw clock hands for 5:00','Draw clock hands for 2:30','What time? Hour hand between 9 and 10, minute on 6: ___','How many minutes in one hour? ___','Is 3:30 morning or afternoon at lunch? ___','What time is 30 minutes after 1:00? ___','Draw clock hands for 10:30','What time? Hour hand on 12, minute on 12: ___'] }
+      ],
+      3: [
+        { title: 'Multiplication Facts', desc: 'Times tables practice (0-5)', problems: ['3 × 4 = ___','5 × 2 = ___','4 × 5 = ___','2 × 7 = ___','3 × 6 = ___','5 × 5 = ___','4 × 3 = ___','2 × 9 = ___','3 × 8 = ___','5 × 7 = ___'] },
+        { title: 'Fractions Basics', desc: 'Understanding halves, thirds, and fourths', problems: ['Color 1/2 of the shape: [□□]','Color 1/4 of the shape: [□□□□]','What fraction is shaded? [■□] = ___','Color 2/3 of the shape: [□□□]','Circle the bigger fraction: 1/2 or 1/4','What fraction is shaded? [■■□□] = ___','Color 3/4 of the shape: [□□□□]','Is 1/3 bigger or smaller than 1/2? ___','Draw a shape and shade 1/2','How many fourths make a whole? ___'] },
+        { title: 'Word Problems', desc: 'Solve real-world math problems', problems: ['Sam has 24 stickers. He gets 18 more. How many total? ___','A box has 36 crayons. 14 are broken. How many good ones? ___','There are 5 rows with 6 chairs each. How many chairs? ___','Mom bought 3 packs of juice. Each has 8 boxes. How many boxes? ___','45 kids are on the bus. 17 get off. How many are left? ___','A book has 4 chapters with 9 pages each. How many pages? ___','Lisa has 52 beads. She uses 28. How many remain? ___','7 friends share 35 stickers equally. How many each? ___','A garden has 6 rows of 7 flowers. How many flowers? ___','Jake reads 12 pages a day for 5 days. How many total? ___'] }
+      ],
+      4: [
+        { title: 'Long Division', desc: 'Divide 2-3 digit numbers by 1 digit', problems: ['84 ÷ 4 = ___','96 ÷ 3 = ___','72 ÷ 6 = ___','135 ÷ 5 = ___','108 ÷ 9 = ___','256 ÷ 8 = ___','147 ÷ 7 = ___','192 ÷ 4 = ___','225 ÷ 5 = ___','364 ÷ 7 = ___'] },
+        { title: 'Equivalent Fractions', desc: 'Find and compare equivalent fractions', problems: ['1/2 = ___/4','2/3 = ___/6','1/3 = ___/9','3/4 = ___/8','True or false: 2/4 = 1/2? ___','Find the equivalent: 2/5 = ___/10','Which is bigger: 3/4 or 2/3? ___','Simplify: 4/8 = ___','Simplify: 6/9 = ___','1/4 = ___/12'] },
+        { title: 'Area & Perimeter', desc: 'Calculate area and perimeter of rectangles', problems: ['Perimeter of a rectangle: length=8, width=3. P = ___','Area of a rectangle: length=6, width=4. A = ___','A square has sides of 5 cm. Perimeter = ___','A square has sides of 7 cm. Area = ___','Rectangle: length=10, width=2. Area = ___','Rectangle: length=9, width=5. Perimeter = ___','A garden is 12 ft long and 8 ft wide. Area = ___','A fence around a yard 15 m by 10 m. How much fence? ___','A room is 11 ft by 9 ft. Area = ___','A picture frame is 6 in by 4 in. Perimeter = ___'] }
+      ],
+      5: [
+        { title: 'Decimal Operations', desc: 'Add, subtract, and multiply decimals', problems: ['3.5 + 2.7 = ___','8.4 - 3.9 = ___','12.6 + 4.8 = ___','7.2 × 3 = ___','15.5 - 8.7 = ___','0.6 × 4 = ___','9.15 + 3.85 = ___','20.0 - 6.45 = ___','2.5 × 2.5 = ___','14.7 + 8.35 = ___'] },
+        { title: 'Order of Operations', desc: 'PEMDAS practice problems', problems: ['3 + 4 × 2 = ___','(5 + 3) × 2 = ___','10 - 2 × 3 = ___','(8 - 3) × (2 + 1) = ___','12 ÷ 4 + 5 = ___','6 × (3 + 2) = ___','15 - (4 + 3) = ___','(9 - 3) ÷ 2 = ___','4 × 3 + 2 × 5 = ___','(12 + 8) ÷ (2 + 3) = ___'] },
+        { title: 'Volume of Rectangular Prisms', desc: 'Calculate volume using l × w × h', problems: ['l=4, w=3, h=2. Volume = ___','l=5, w=5, h=5. Volume = ___','l=10, w=2, h=3. Volume = ___','l=6, w=4, h=5. Volume = ___','l=8, w=3, h=2. Volume = ___','A box is 7 cm × 4 cm × 3 cm. Volume = ___','A pool is 12 ft × 8 ft × 5 ft. Volume = ___','l=9, w=6, h=2. Volume = ___','A cube has sides of 4 in. Volume = ___','l=11, w=3, h=4. Volume = ___'] }
+      ],
+      6: [
+        { title: 'Ratios & Proportions', desc: 'Understanding and solving ratios', problems: ['Write the ratio: 3 cats to 5 dogs = ___:___','If 2:5 = 4:___, find the missing number.','Simplify the ratio 12:8 = ___:___','There are 15 boys and 20 girls. Ratio of boys to total? ___','If 3 pizzas serve 12 people, how many for 20? ___','6:9 simplified = ___:___','A recipe uses 2 cups flour for 3 cups sugar. For 9 cups sugar? ___','Solve: 4/7 = x/21. x = ___','A map scale is 1:50. 3 cm = ___ cm real.','Ratio of 25 to 35 in simplest form: ___'] },
+        { title: 'Intro to Integers', desc: 'Adding and subtracting positive and negative numbers', problems: ['-3 + 5 = ___','7 + (-4) = ___','-6 + (-2) = ___','8 - 12 = ___','-5 - 3 = ___','-9 + 9 = ___','4 + (-10) = ___','-7 - (-3) = ___','15 + (-20) = ___','Order from least to greatest: 3, -5, 0, -2, 7'] },
+        { title: 'Percentages', desc: 'Finding percentages of numbers', problems: ['50% of 80 = ___','25% of 60 = ___','10% of 250 = ___','75% of 40 = ___','20% of 150 = ___','What percent is 15 out of 50? ___','A shirt is $40 with 25% off. Sale price? ___','30% of 90 = ___','You scored 18/20. What percent? ___','A tip of 15% on $60 = ___'] }
+      ],
+      7: [
+        { title: 'Expressions & Equations', desc: 'Solve one-step and two-step equations', problems: ['x + 7 = 15. x = ___','3x = 24. x = ___','x - 9 = 12. x = ___','x/4 = 8. x = ___','2x + 3 = 17. x = ___','5x - 10 = 25. x = ___','x/3 + 4 = 10. x = ___','4x - 7 = 21. x = ___','3(x + 2) = 18. x = ___','2x + 5 = x + 12. x = ___'] },
+        { title: 'Proportional Relationships', desc: 'Identify and use proportions', problems: ['Is 3/4 = 9/12 proportional? ___','Find the unit rate: 120 miles in 3 hours = ___ mph','$15 for 5 pounds. Price per pound? ___','y = 3x. Find y when x = 7: ___','A car goes 240 mi on 8 gal. Miles per gallon? ___','If 4 shirts cost $52, how much for 7? ___','y = 2.5x. Find x when y = 20: ___','Plot: (1,3), (2,6), (3,9). Is it proportional? ___','Rate: 150 words in 3 minutes = ___ words/min','$3.60 for 4 muffins. Cost of 10? ___'] },
+        { title: 'Geometry: Angles', desc: 'Classify and find missing angles', problems: ['An angle of 90° is called ___','An angle of 45° is ___ (acute/obtuse/right)','Two angles add to 180°. One is 65°. The other? ___','Two angles add to 90°. One is 35°. The other? ___','A triangle has angles 60° and 70°. Third angle? ___','An angle of 120° is ___ (acute/obtuse/right)','Supplementary to 110° is ___','Complementary to 28° is ___','A straight line has ___ degrees','Vertical angles are always ___'] }
+      ],
+      8: [
+        { title: 'Linear Equations', desc: 'Solve multi-step linear equations', problems: ['3x + 5 = 2x + 12. x = ___','2(x - 4) = 10. x = ___','5x - 3 = 3x + 7. x = ___','-2x + 8 = 14. x = ___','4(x + 1) = 2(x + 5). x = ___','x/2 + 3 = 7. x = ___','3(2x - 1) = 4x + 9. x = ___','-3(x - 2) = x + 10. x = ___','2x + 7 = -3. x = ___','5(x - 2) = 3(x + 4). x = ___'] },
+        { title: 'Pythagorean Theorem', desc: 'Find missing side lengths of right triangles', problems: ['a=3, b=4, c=? ___','a=5, b=12, c=? ___','a=6, b=8, c=? ___','c=13, a=5, b=? ___','a=8, b=15, c=? ___','c=10, b=6, a=? ___','Is 5, 12, 13 a right triangle? ___','Is 7, 10, 12 a right triangle? ___','a=9, b=12, c=? ___','A ladder 10 ft long leans on a wall. Base is 6 ft away. Height? ___'] },
+        { title: 'Exponents & Scientific Notation', desc: 'Work with powers and scientific notation', problems: ['2⁴ = ___','3³ = ___','5² × 5³ = 5^___','10⁶ = ___','Write in scientific notation: 45,000 = ___','Write in scientific notation: 0.0037 = ___','(2³)² = 2^___','4.5 × 10³ = ___','7.2 × 10⁻² = ___','Simplify: 6² × 6⁴ ÷ 6³ = 6^___'] }
+      ],
+      9: [
+        { title: 'Systems of Equations', desc: 'Solve systems using substitution and elimination', problems: ['y = 2x + 1 and y = x + 4. x=___, y=___','x + y = 10 and x - y = 4. x=___, y=___','2x + y = 7 and x = 3. y=___','y = 3x and x + y = 8. x=___, y=___','3x + 2y = 12 and x = 2. y=___','x + y = 6 and 2x + y = 10. x=___, y=___','y = x - 1 and y = -x + 5. x=___, y=___','2x - y = 1 and x + y = 5. x=___, y=___','3x + y = 10 and x - y = 2. x=___, y=___','Graph: y = x + 2 and y = -x + 4. Intersection? ___'] },
+        { title: 'Quadratic Expressions', desc: 'Factor and expand quadratics', problems: ['Expand: (x + 3)(x + 2) = ___','Expand: (x - 4)(x + 4) = ___','Factor: x² + 5x + 6 = ___','Factor: x² - 9 = ___','Expand: (x + 1)² = ___','Factor: x² + 7x + 12 = ___','Expand: (2x + 3)(x - 1) = ___','Factor: x² - 5x + 6 = ___','Expand: (x - 3)² = ___','Factor: x² - x - 12 = ___'] },
+        { title: 'Slope & Linear Functions', desc: 'Find slope and write equations of lines', problems: ['Find slope: (1,2) and (3,8). m = ___','Find slope: (0,5) and (4,5). m = ___','y = 3x + 2. Slope = ___, y-intercept = ___','Write equation with slope 2 through (0,3): y = ___','Find slope: (-1,4) and (2,-2). m = ___','Is y = 5 horizontal or vertical? ___','Write equation: slope = -1, y-int = 7: y = ___','Find y-intercept of 2x + y = 10: ___','Parallel lines have ___ slopes','Perpendicular slopes multiply to ___'] }
+      ],
+      10: [
+        { title: 'Quadratic Equations', desc: 'Solve using factoring and the quadratic formula', problems: ['Solve: x² - 5x + 6 = 0. x = ___','Solve: x² + 4x = 0. x = ___','Solve: x² - 16 = 0. x = ___','Solve: x² - 3x - 10 = 0. x = ___','Solve: 2x² - 8 = 0. x = ___','Use quadratic formula: x² + 2x - 3 = 0. x = ___','Solve: x² - 6x + 9 = 0. x = ___','Find vertex of y = x² - 4x + 3: (___,___)','Discriminant of x² + 3x + 5 = 0: ___','How many real solutions if discriminant < 0? ___'] },
+        { title: 'Right Triangle Trigonometry', desc: 'SOH-CAH-TOA problems', problems: ['sin(30°) = ___','cos(60°) = ___','tan(45°) = ___','Opposite=3, hypotenuse=5. sin(θ) = ___','Adjacent=4, hypotenuse=5. cos(θ) = ___','Opposite=6, adjacent=8. tan(θ) = ___','Find x: sin(30°) = x/10. x = ___','Find x: cos(45°) = 7/x. x = ___','A tree casts a 20 ft shadow. Angle = 40°. Height? (use tan)','SOH stands for ___'] },
+        { title: 'Polynomial Operations', desc: 'Add, subtract, and multiply polynomials', problems: ['(3x² + 2x) + (x² - 5x) = ___','(4x² - 3x + 1) - (2x² + x - 4) = ___','(x + 2)(x² - x + 3) = ___','Simplify: 5x³ - 2x³ + x³ = ___','(2x + 1)(3x - 4) = ___','(x² + 3x - 2) + (2x² - x + 5) = ___','x(x² - 4x + 7) = ___','(3x - 2)² = ___','Degree of 4x⁵ - 3x² + 7 = ___','(x + 3)(x - 3)(x + 1) = ___'] }
+      ],
+      11: [
+        { title: 'Logarithms', desc: 'Evaluate and solve logarithmic expressions', problems: ['log₂(8) = ___','log₁₀(1000) = ___','log₅(25) = ___','log₃(27) = ___','ln(e²) = ___','log₂(32) = ___','Solve: log(x) = 2. x = ___','log₄(64) = ___','Rewrite as log: 2⁵ = 32 → ___','Solve: 3ˣ = 81. x = ___'] },
+        { title: 'Sequences & Series', desc: 'Arithmetic and geometric sequences', problems: ['Find next term: 3, 7, 11, 15, ___','Find next term: 2, 6, 18, 54, ___','Arithmetic: a₁=5, d=3. Find a₁₀ = ___','Geometric: a₁=2, r=3. Find a₅ = ___','Sum of first 10 terms: a₁=1, d=2. S₁₀ = ___','Find d: 4, ___, 12, 16. d = ___','Find r: 3, 9, 27, ___. r = ___','Is 1, 4, 9, 16, 25 arithmetic? ___','Write a formula for: 5, 10, 15, 20... aₙ = ___','Sum of geometric: a₁=1, r=2, n=6. S₆ = ___'] },
+        { title: 'Trig Functions', desc: 'Graphing and evaluating trig functions', problems: ['sin(0°) = ___','cos(90°) = ___','tan(0°) = ___','sin(π/6) = ___','cos(π/3) = ___','Period of y = sin(x) is ___','Amplitude of y = 3cos(x) is ___','sin²(θ) + cos²(θ) = ___','Convert 180° to radians: ___','Convert π/4 to degrees: ___'] }
+      ],
+      12: [
+        { title: 'Limits & Intro to Calculus', desc: 'Evaluate limits and basic derivatives', problems: ['lim(x→2) (x²) = ___','lim(x→0) (3x + 5) = ___','lim(x→1) (x² - 1)/(x - 1) = ___','Derivative: d/dx (x²) = ___','Derivative: d/dx (3x + 5) = ___','Derivative: d/dx (x³) = ___','f(x) = 2x² + 1. f\'(x) = ___','lim(x→∞) (1/x) = ___','Derivative: d/dx (5x⁴) = ___','f(x) = x² - 4x + 3. f\'(2) = ___'] },
+        { title: 'Probability & Statistics', desc: 'Permutations, combinations, and distributions', problems: ['5! = ___','P(6,2) = ___','C(5,2) = ___','Probability of rolling a 3 on a die: ___','P(heads) on a fair coin: ___','How many ways to arrange 4 books? ___','C(8,3) = ___','Mean of 4, 6, 8, 10, 12: ___','Standard deviation measures ___','P(A or B) if mutually exclusive: P(A) + ___'] },
+        { title: 'Matrices', desc: 'Add, multiply, and find determinants', problems: ['[1 2] + [3 4] = ___\n[5 6]   [1 2]','Scalar: 3 × [2 1] = ___\n            [0 4]','Det |3 1| = ___\n    |2 4|','[2 0] × [1 3] = ___\n[1 3]   [0 2]','Det |5 2| = ___\n    |3 1|','Identity matrix I₂ = ___','A 2×3 matrix has ___ rows and ___ columns','[1 2] - [0 1] = ___\n[3 4]   [2 1]','Can you multiply a 2×3 and 3×1 matrix? ___','Result dimensions of 2×3 times 3×4: ___'] }
+      ]
+    }
+  },
+  science: {
+    icon: '🔬', name: 'Science',
+    worksheets: {
+      'PK': [
+        { title: 'My Five Senses', desc: 'Identify and explore the five senses', problems: ['Name the 5 senses: see, hear, ___, ___, ___','Which sense do you use to smell a flower? ___','Draw something you can taste','Circle what makes a sound: 🔔 📖 🎸 🧱','Which body part do we use to see? ___','Match: nose → ___ (sight/smell/taste)','Is ice cream cold or hot? You use your sense of ___','Draw your favorite thing to listen to','Circle soft things: 🧸 🪨 🧣 🔩','Which sense helps you taste your food? ___'] },
+        { title: 'Living vs. Non-Living', desc: 'Sort things into living and non-living', problems: ['Is a dog living or non-living? ___','Is a rock living or non-living? ___','Circle the living things: 🌸 🪨 🐛 📎','Living things need food and ___','Draw a living thing','Draw a non-living thing','Is a tree living or non-living? ___','Name 3 living things: ___','Name 3 non-living things: ___','Can a toy grow? ___ (yes/no)'] },
+        { title: 'Weather Watch', desc: 'Learn about different types of weather', problems: ['Draw a sunny day ☀️','Draw a rainy day 🌧️','What do you wear when it\'s cold? ___','Circle rainy weather items: ☂️ 🕶️ 🧥 👙','Is it hot or cold when it snows? ___','Draw clouds ☁️','What season has falling leaves? ___','What do we see in the sky during a storm? ___','Draw what you wear on a sunny day','Match: winter → ___ (hot/cold)'] }
+      ],
+      'K': [
+        { title: 'Animal Habitats', desc: 'Match animals to where they live', problems: ['A fish lives in ___','A bird lives in a ___','Where does a bear live? ___','Match: 🐟 → ocean / forest / desert','Match: 🐪 → ocean / forest / desert','Draw an animal that lives in water','Name an animal that lives in trees: ___','Where do penguins live? ___ (hot/cold place)','A rabbit lives in a ___','Draw a habitat for a frog'] },
+        { title: 'Plant Parts', desc: 'Identify parts of a plant', problems: ['Name the part that holds the plant in the ground: ___','What part of the plant makes food from sunlight? ___','The ___ is the colorful part that attracts bees','Label the stem on a drawing of a plant','Plants drink water through their ___','Seeds grow inside the ___','Draw a plant with roots, stem, and leaves','What do leaves need to make food? Sun and ___','A tree trunk is a very thick ___','Circle the plant parts: root, paw, leaf, stem, tail'] },
+        { title: 'Seasons', desc: 'Explore the four seasons', problems: ['Name the 4 seasons: spring, summer, ___, ___','In which season do leaves change color? ___','When does it snow? ___','Draw a tree in summer (full leaves)','Draw a tree in winter (no leaves)','Which season is the hottest? ___','In spring, flowers begin to ___','What do animals do in winter? Some ___','Which season comes after summer? ___','Draw your favorite season'] }
+      ],
+      1: [
+        { title: 'States of Matter', desc: 'Solid, liquid, and gas', problems: ['Ice is a ___ (solid/liquid/gas)','Water is a ___ (solid/liquid/gas)','Steam is a ___ (solid/liquid/gas)','Name a solid: ___','Name a liquid: ___','When ice melts, it becomes a ___','When water boils, it becomes ___','Does a solid have its own shape? ___','Can you pour a gas? ___','Draw something solid, liquid, and gas'] },
+        { title: 'Push & Pull Forces', desc: 'Understanding basic forces', problems: ['Opening a door is a ___ (push/pull)','Kicking a ball is a ___ (push/pull)','A magnet attracts metal. Is this push or pull? ___','Name something you push: ___','Name something you pull: ___','What makes a ball roll? A ___','Gravity pulls things ___ (up/down)','A tug-of-war uses ___ force','Does a heavier object need more force to move? ___','Draw an example of pushing'] },
+        { title: 'Life Cycles', desc: 'Learn the life cycle of a butterfly', problems: ['Stage 1 of a butterfly: ___','A caterpillar is stage ___ of the butterfly life cycle','What does a caterpillar turn into? A ___','The hard shell stage is called a ___','Put in order: butterfly, egg, chrysalis, caterpillar','How many stages in a butterfly life cycle? ___','What does a caterpillar eat? ___','Draw the 4 stages of a butterfly','A baby frog is called a ___','Do all animals have the same life cycle? ___'] }
+      ],
+      2: [
+        { title: 'Rocks & Minerals', desc: 'Types and properties of rocks', problems: ['Name the 3 types of rocks: igneous, sedimentary, ___','Rocks formed from volcanoes are called ___','Rocks formed in layers are called ___','Is a diamond a rock or a mineral? ___','What tool do scientists use to study rocks? ___','Rocks can be smooth or ___','Circle a property of rocks: color, taste, mood','Fossils are found in ___ rocks','Granite is an ___ rock (igneous/sedimentary)','Draw 3 different rocks and label them'] },
+        { title: 'The Water Cycle', desc: 'Evaporation, condensation, and precipitation', problems: ['Water heated by the sun turns to vapor. This is called ___','When water vapor cools and forms clouds, it\'s called ___','Rain, snow, and hail are types of ___','Where does evaporated water go? Up into the ___','Label the water cycle: evaporation → ___ → precipitation','Puddles disappear on sunny days because of ___','Clouds are made of tiny water ___','What heats the water in oceans and lakes? The ___','Snow is a type of ___ (evaporation/precipitation)','Draw and label the water cycle'] },
+        { title: 'Magnets', desc: 'Explore magnetic properties', problems: ['Magnets attract objects made of ___','Do magnets attract wood? ___','The two ends of a magnet are called ___','Do opposite poles attract or repel? ___','Do same poles attract or repel? ___','Name 3 things a magnet sticks to: ___','A compass uses a ___','Is aluminum magnetic? ___','The area around a magnet is called a magnetic ___','Circle magnetic items: paperclip, penny, nail, eraser'] }
+      ],
+      3: [
+        { title: 'The Solar System', desc: 'Planets, sun, and moon', problems: ['How many planets in our solar system? ___','The closest planet to the sun is ___','The largest planet is ___','Earth is the ___ planet from the sun','Which planet has rings? ___','The sun is a ___ (planet/star)','Name the 4 inner planets: ___','What force keeps planets orbiting the sun? ___','How long does Earth take to orbit the sun? ___','Draw and label 4 planets'] },
+        { title: 'Ecosystems', desc: 'Food chains and habitats', problems: ['In a food chain, plants are called ___','Animals that eat plants are called ___','Animals that eat other animals are called ___','Put in order: hawk, grass, rabbit','The sun provides ___ for plants','A food ___ shows who eats whom','An animal\'s home is called its ___','What happens if a predator disappears? Prey ___','Decomposers break down ___ material','Draw a food chain with 3 organisms'] },
+        { title: 'Simple Machines', desc: 'Identify the 6 simple machines', problems: ['A ramp is a type of simple machine called an ___','A seesaw is an example of a ___','A doorknob is a ___ and axle','A flagpole uses a ___','Name 6 simple machines: lever, pulley, ___, ___, ___, ___','A wheelbarrow combines a lever and a ___','Scissors are two ___ put together','A screw is really a wrapped ___','Simple machines make work ___ (harder/easier)','Draw a lever and label the fulcrum'] }
+      ],
+      4: [
+        { title: 'Electricity & Circuits', desc: 'Learn about circuits and conductors', problems: ['Electricity flows through a ___','A complete loop for electricity is called a ___','What powers a simple circuit? A ___','Materials that conduct electricity are called ___','Materials that block electricity are called ___','Is metal a conductor or insulator? ___','Is rubber a conductor or insulator? ___','A ___ can open or close a circuit','A broken circuit is called an ___ circuit','Draw a simple circuit with a battery, wire, and bulb'] },
+        { title: 'The Human Body Systems', desc: 'Major organ systems', problems: ['The heart is part of the ___ system','Lungs are part of the ___ system','Bones make up the ___ system','Muscles make up the ___ system','The brain is part of the ___ system','The stomach is part of the ___ system','What does the circulatory system pump? ___','What do lungs help us do? ___','How many bones in the human body (about)? ___','Draw and label the heart'] },
+        { title: 'Weathering & Erosion', desc: 'How Earth\'s surface changes', problems: ['Breaking down of rocks is called ___','Moving of broken rock material is called ___','Water, wind, and ice cause ___','Freezing water in rock cracks causes ___','Rivers carry sediment by ___','What builds up at the end of a river? A ___','Plant roots can cause ___','Glaciers are rivers of ___','The Grand Canyon was carved by ___','Name 2 things that cause erosion: ___'] }
+      ],
+      5: [
+        { title: 'Matter & Chemical Changes', desc: 'Physical vs chemical changes', problems: ['Cutting paper is a ___ change (physical/chemical)','Burning wood is a ___ change (physical/chemical)','Melting ice is a ___ change','Rusting iron is a ___ change','Name a sign of chemical change: ___','Baking a cake is a ___ change','Dissolving sugar in water is a ___ change','Cooking an egg is a ___ change','Can you reverse a chemical change? ___','List 3 physical changes: ___'] },
+        { title: 'Earth\'s Layers', desc: 'Structure of the Earth', problems: ['Name Earth\'s 4 layers: ___, ___, ___, ___','The outermost layer is the ___','The hottest layer is the ___','The thickest layer is the ___','Tectonic plates are in the ___','Magma comes from the ___','The inner core is ___ (solid/liquid)','The outer core is ___ (solid/liquid)','Earthquakes happen when ___ move','Draw and label Earth\'s 4 layers'] },
+        { title: 'Mixtures & Solutions', desc: 'Combining and separating matter', problems: ['A mixture of salt and water is called a ___','The substance that dissolves is the ___','The substance doing the dissolving is the ___','Name a way to separate a mixture: ___','Trail mix is a ___ (mixture/solution)','Lemonade is a ___ (mixture/solution)','Can you separate sand and water by filtering? ___','Stirring helps a solute dissolve ___ (faster/slower)','Hot water dissolves sugar ___ than cold water','Name 3 mixtures you find at home: ___'] }
+      ],
+      6: [
+        { title: 'Cells: Building Blocks of Life', desc: 'Plant and animal cell structures', problems: ['The basic unit of life is a ___','The "brain" of the cell is the ___','What surrounds the cell? The cell ___','Which cells have a cell wall: plant or animal? ___','Which organelle makes energy? ___','Chloroplasts are found in ___ cells','What do chloroplasts do? ___','The jelly-like substance in cells is called ___','Name 3 parts of a cell: ___','Draw and label a plant cell'] },
+        { title: 'Energy Forms & Transfer', desc: 'Types of energy and how it moves', problems: ['Name 5 forms of energy: ___','A moving car has ___ energy','A battery stores ___ energy','Sound is a form of ___ energy','The sun gives off ___ and ___ energy','Energy cannot be ___ or destroyed','Energy changes from one form to ___','A light bulb converts electrical energy to ___','Rubbing hands together converts motion to ___','What type of energy does food contain? ___'] },
+        { title: 'Weather vs. Climate', desc: 'Understanding weather patterns and climate', problems: ['Weather is the ___ condition of the atmosphere','Climate is the ___ weather pattern over time','Name 3 weather instruments: ___','A barometer measures air ___','A thermometer measures ___','An anemometer measures wind ___','Is "It\'s raining today" weather or climate? ___','Is "Florida is warm year-round" weather or climate? ___','What causes wind? Differences in ___','Name the 3 main climate zones: ___'] }
+      ],
+      7: [
+        { title: 'Genetics & Heredity', desc: 'DNA, genes, and traits', problems: ['DNA stands for ___','Genes are found on ___','Traits passed from parents to children is called ___','The "father of genetics" is ___','A dominant trait is shown with a ___ letter','A recessive trait is shown with a ___ letter','What is a Punnett square used for? ___','If Bb × Bb, what fraction is BB? ___','Genotype refers to ___ (genes/appearance)','Phenotype refers to ___ (genes/appearance)'] },
+        { title: 'Chemical Reactions', desc: 'Balancing equations and reaction types', problems: ['In a chemical equation, reactants are on the ___','Products are on the ___ side','What does → mean in a chemical equation? ___','Balance: _H₂ + _O₂ → _H₂O','In a reaction, atoms are ___ (created/rearranged)','A reaction that releases heat is ___','A reaction that absorbs heat is ___','Burning is also called ___','Rust is iron reacting with ___','Signs of a chemical reaction: gas, color change, ___'] },
+        { title: 'Human Body: Digestive System', desc: 'How food is broken down', problems: ['Digestion begins in the ___','What enzyme in saliva breaks down starch? ___','Food travels from mouth to stomach via the ___','The stomach uses ___ to break down food','The small intestine absorbs ___','The large intestine absorbs ___','The liver produces ___ to break down fats','The pancreas makes digestive ___','Undigested food leaves the body through the ___','Put in order: stomach, mouth, esophagus, small intestine'] }
+      ],
+      8: [
+        { title: 'Forces & Motion', desc: 'Newton\'s three laws', problems: ['Newton\'s 1st Law is about ___','An object at rest stays at rest unless acted on by a ___','Newton\'s 2nd Law: F = ___ × a','If mass = 10 kg and a = 3 m/s², F = ___','Newton\'s 3rd Law: every action has an equal and opposite ___','What is the unit of force? ___','Friction is a force that ___ motion','Gravity pulls objects toward Earth at ___ m/s²','Mass vs. weight: which changes on the Moon? ___','A 50 kg object on Earth weighs about ___ N'] },
+        { title: 'Periodic Table Basics', desc: 'Elements, symbols, and groups', problems: ['How many elements are on the periodic table? ___','The symbol for oxygen is ___','The symbol for gold is ___','Rows on the periodic table are called ___','Columns are called ___','The atomic number tells you the number of ___','Hydrogen has atomic number ___','Metals are found on the ___ side of the table','Noble gases are in group ___','Name 3 elements and their symbols: ___'] },
+        { title: 'Waves & Sound', desc: 'Properties of waves', problems: ['The highest point of a wave is the ___','The lowest point of a wave is the ___','Wavelength is the distance from crest to ___','Frequency is measured in ___','Sound travels fastest through ___ (solids/gases)','Sound cannot travel through a ___','The speed of light is about ___ m/s','A wave with high frequency has a ___ pitch','Amplitude relates to ___ (pitch/volume)','Name 2 types of waves: transverse and ___'] }
+      ],
+      9: [
+        { title: 'Cell Division', desc: 'Mitosis and meiosis', problems: ['Mitosis produces ___ identical cells','Meiosis produces ___ cells','Mitosis is for ___ (growth/reproduction)','Meiosis is for making ___ cells','Name the phases of mitosis: prophase, ___, ___, ___','How many chromosomes do human cells have? ___','Gametes have ___ chromosomes (23/46)','DNA replication happens in ___ phase','What is the result of meiosis? 4 ___ cells','Crossing over happens in meiosis ___ (I/II)'] },
+        { title: 'Atomic Structure', desc: 'Protons, neutrons, electrons, and isotopes', problems: ['Protons have a ___ charge','Electrons have a ___ charge','Neutrons have ___ charge','Protons and neutrons are in the ___','Electrons orbit in ___ or energy levels','The atomic number = number of ___','Mass number = protons + ___','Isotopes differ in number of ___','Carbon-14 has ___ neutrons (atomic # = 6)','An ion has gained or lost ___'] },
+        { title: 'Ecology & Biomes', desc: 'Major biomes and ecological relationships', problems: ['Name 5 major biomes: ___','The tundra is characterized by ___','Which biome has the most biodiversity? ___','A symbiotic relationship where both benefit is ___','A parasite harms its ___','Name the levels: organism → population → ___ → ecosystem','The role of an organism in its ecosystem is its ___','What is biodiversity? ___','Deforestation reduces ___','An invasive species is one that is ___'] }
+      ],
+      10: [
+        { title: 'Chemical Bonding', desc: 'Ionic, covalent, and metallic bonds', problems: ['An ionic bond involves ___ of electrons','A covalent bond involves ___ of electrons','NaCl is an example of ___ bonding','H₂O has ___ bonds','Metals form ___ bonds with each other','Ionic bonds form between ___ and nonmetals','How many electrons does carbon need to share? ___','Draw a Lewis dot structure for water','Electronegativity determines bond ___','Which bond is stronger: ionic or covalent? ___'] },
+        { title: 'Evolution & Natural Selection', desc: 'Darwin\'s theory and evidence', problems: ['Natural selection was proposed by ___','Organisms best adapted to their environment ___','Variations in a population are caused by ___','Fossils provide evidence for ___','Homologous structures suggest common ___','What are vestigial structures? ___','Natural selection acts on the ___ (individual/population)','Adaptations help organisms ___','Name 3 types of evidence for evolution: ___','Survival of the ___ (strongest/fittest)'] },
+        { title: 'Energy & Thermodynamics', desc: 'Laws of thermodynamics and energy transfer', problems: ['The 1st law of thermodynamics: energy is ___','The 2nd law: entropy always ___','Heat flows from ___ to cold','Conduction transfers heat through ___','Convection transfers heat through ___','Radiation transfers heat through ___','Entropy is a measure of ___','In an exothermic reaction, energy is ___','Endothermic reactions ___ energy','Absolute zero is ___ Kelvin'] }
+      ],
+      11: [
+        { title: 'Organic Chemistry Basics', desc: 'Carbon compounds and functional groups', problems: ['Organic chemistry is the study of ___ compounds','Carbon can form ___ bonds','The simplest hydrocarbon is ___','Alkanes have ___ bonds (single/double)','Alkenes have ___ bonds','An alcohol has the functional group ___','A carboxylic acid ends in ___','Name the first 4 alkanes: ___','Isomers have the same ___ but different structures','Polymers are made of repeating ___'] },
+        { title: 'Human Anatomy: Nervous System', desc: 'Brain, neurons, and reflexes', problems: ['The basic unit of the nervous system is the ___','The 3 parts of a neuron: cell body, ___, ___','The gap between neurons is called a ___','Neurotransmitters cross the ___','The brain has 3 main parts: cerebrum, ___, ___','The cerebrum controls ___','The cerebellum controls ___','The spinal cord is part of the ___ nervous system','Fight-or-flight is the ___ nervous system','A reflex arc goes: receptor → ___ → effector'] },
+        { title: 'Electromagnetic Spectrum', desc: 'Types of electromagnetic radiation', problems: ['List the EM spectrum in order of increasing frequency: ___','Which EM wave has the longest wavelength? ___','Which has the shortest wavelength? ___','Visible light is between ___ and ___','What type of EM wave do microwaves use? ___','X-rays are used for ___','UV radiation comes from the ___','All EM waves travel at the speed of ___','Infrared radiation is felt as ___','Higher frequency = ___ energy'] }
+      ],
+      12: [
+        { title: 'Quantum Mechanics Intro', desc: 'Wave-particle duality and quantum numbers', problems: ['Light behaves as both a wave and a ___','The photoelectric effect was explained by ___','Quantum numbers describe electron ___','The principal quantum number (n) describes ___','How many electrons fit in the first shell? ___','Heisenberg\'s uncertainty principle states ___','Schrödinger\'s equation describes electron ___','An orbital can hold a maximum of ___ electrons','What is a photon? ___','de Broglie showed that matter has ___ properties'] },
+        { title: 'Molecular Biology: DNA & Protein', desc: 'DNA replication, transcription, translation', problems: ['DNA is made of 4 bases: A, T, ___, ___','A pairs with ___','C pairs with ___','DNA → mRNA is called ___','mRNA → protein is called ___','Transcription occurs in the ___','Translation occurs on ___','A codon is ___ bases long','The start codon is ___','Name the 3 types of RNA: ___'] },
+        { title: 'Astrophysics', desc: 'Stars, galaxies, and the universe', problems: ['Our galaxy is called the ___','The Big Bang occurred about ___ billion years ago','A light-year measures ___','What determines a star\'s color? ___','The life cycle of a massive star ends in a ___','A neutron star or black hole forms from ___','What is a nebula? ___','Hubble\'s law relates distance to ___','Dark matter makes up about ___% of the universe','The HR diagram plots ___ vs luminosity'] }
+      ]
+    }
+  },
+  english: {
+    icon: '📖', name: 'English',
+    worksheets: {
+      'PK': [
+        { title: 'Letter Tracing A-F', desc: 'Practice writing uppercase letters A through F', problems: ['Trace: A A A A A','Trace: B B B B B','Trace: C C C C C','Trace: D D D D D','Trace: E E E E E','Trace: F F F F F','Circle the letter A: A P Q R A M','Circle the letter B: D B R B P B','What letter does Apple start with? ___','What letter does Ball start with? ___'] },
+        { title: 'Rhyming Words', desc: 'Identify words that rhyme', problems: ['Do CAT and HAT rhyme? ___','Do DOG and LOG rhyme? ___','What rhymes with FUN? s_n','Circle the rhyming pair: big/pig, cat/dog','What rhymes with CAKE? l___','Do FISH and DISH rhyme? ___','Say a word that rhymes with STAR: ___','Do RED and BED rhyme? ___','Circle rhyming words: moon/spoon, tree/cat','What rhymes with KING? r___'] },
+        { title: 'Beginning Sounds', desc: 'Identify the first sound in words', problems: ['🐱 Cat starts with the letter ___','🌞 Sun starts with the letter ___','🐕 Dog starts with the letter ___','🐟 Fish starts with the letter ___','🍌 Banana starts with the letter ___','Match: 🎵 Music → M / B / S','Match: 🌈 Rainbow → T / R / P','What sound does 🏠 House start with? ___','Circle words that start with S: sun, cat, snake, dog','Draw something that starts with the letter T'] }
+      ],
+      'K': [
+        { title: 'Sight Words Practice', desc: 'Read and write common sight words', problems: ['Trace and write: THE ___','Trace and write: AND ___','Trace and write: IS ___','Trace and write: IT ___','Trace and write: YOU ___','Fill in: ___ cat is big. (The/An)','Fill in: I ___ happy. (is/am)','Circle sight words: the, xjk, and, bpt, is','Write a sentence using "the": ___','Write a sentence using "and": ___'] },
+        { title: 'CVC Words', desc: 'Read and write consonant-vowel-consonant words', problems: ['C + A + T = ___','D + O + G = ___','Fill in: H _ T (a/o)','Fill in: B _ G (a/u)','Rhyme with CAN: _AN','Rhyme with PIG: _IG','Match picture to word: 🔴 → red / rod / rid','Sound it out: S-U-N = ___','Write the CVC word: a pet that says meow = ___','Write 3 CVC words you know: ___'] },
+        { title: 'Uppercase & Lowercase Match', desc: 'Match capital to lowercase letters', problems: ['Match: A → ___ (a, b, c)','Match: B → ___ (a, b, d)','Match: D → ___ (b, d, p)','Write the lowercase: G → ___','Write the lowercase: R → ___','Write the uppercase: m → ___','Write the uppercase: t → ___','Circle the lowercase letters: a, B, c, D, e, F','How many letters in the alphabet? ___','Write your name in uppercase: ___'] }
+      ],
+      1: [
+        { title: 'Sentence Building', desc: 'Put words in order to make sentences', problems: ['Unscramble: is / The / big / dog → ___','Unscramble: like / I / apples → ___','Unscramble: can / She / run / fast → ___','Add a period or question mark: I like pizza___','Add a period or question mark: Do you like dogs___','Write a sentence about your pet: ___','Every sentence starts with a ___ letter','A sentence ends with a ___ or ? or !','Fix: the cat is fluffy → ___','Write a sentence with 5+ words: ___'] },
+        { title: 'Short Vowel Sounds', desc: 'Identify and practice short vowel sounds', problems: ['The short a sound is in: c_t (a/o)','The short e sound is in: b_d (e/i)','The short i sound is in: f_sh (e/i)','The short o sound is in: d_g (a/o)','The short u sound is in: b_s (u/o)','Circle words with short a: cat, cake, hat, rain','Circle words with short i: kite, sit, fin, ride','Write 2 words with short e: ___','Write 2 words with short u: ___','Which vowel? H_t (the thing on your head): ___'] },
+        { title: 'Reading Comprehension', desc: 'Read short passages and answer questions', problems: ['Read: "The dog ran to the park. He played with a ball." What did the dog do? ___','Where did the dog go? ___','Read: "Sam has a red bike. He rides it every day." What color is the bike? ___','Who rides the bike? ___','Read: "It is raining. We need an umbrella." Why do we need an umbrella? ___','Read: "The cat sat on the mat. It was a fat cat." Where is the cat? ___','What word describes the cat? ___','Read: "I like to eat apples and bananas." Name one fruit mentioned: ___','Make a prediction: "Dark clouds are in the sky." What might happen? ___','Read: "Mom baked cookies. They smell great!" Who baked? ___'] }
+      ],
+      2: [
+        { title: 'Nouns & Verbs', desc: 'Identify nouns and verbs in sentences', problems: ['Circle the noun: The DOG ran fast.','Circle the verb: She RUNS every day.','Is "cat" a noun or verb? ___','Is "jump" a noun or verb? ___','Write a noun: ___','Write a verb: ___','Circle ALL nouns: The boy ate a sandwich at the park.','Circle the verb: Birds fly south in winter.','Fill in a noun: The ___ is sleeping.','Fill in a verb: The kids ___ outside.'] },
+        { title: 'Spelling Practice', desc: 'Common 2nd grade spelling words', problems: ['Spell the word: \'\'not here\'\' → th___','Spell: \'\'more than one\'\' → m___ny','Spell: opposite of yes → ___','Spell: you do this to a book → r___d','Spell: it comes after today → t___m___rrow','Unscramble: EECASBU → ___','Unscramble: PEPLA → ___','Fill in: bec_use (a/o)','Fill in: peo_le (p/b)','Write 3 words with "tion": ___'] },
+        { title: 'Story Writing', desc: 'Write a short story with a beginning, middle, and end', problems: ['Write a character name: ___','Where does your story take place? ___','Beginning: What happens first? Write 2 sentences: ___','Middle: What is the problem? Write 2 sentences: ___','End: How is the problem solved? Write 2 sentences: ___','Add a describing word (adjective) to: The ___ dragon flew away.','Write dialogue: The character said, "___"','What is the title of your story? ___','Draw a picture of your main character','Write one more sentence to make your ending better: ___'] }
+      ],
+      3: [
+        { title: 'Parts of Speech', desc: 'Nouns, verbs, adjectives, and adverbs', problems: ['An adjective describes a ___','An adverb describes a ___','Circle the adjective: The TALL tree swayed.','Circle the adverb: She ran QUICKLY to school.','Write an adjective for "dog": The ___ dog.','Write an adverb for "sang": She sang ___.','Is "beautiful" an adjective or adverb? ___','Is "slowly" an adjective or adverb? ___','Add an adjective: The ___ cake was delicious.','Add an adverb: He ___ finished his homework.'] },
+        { title: 'Prefixes & Suffixes', desc: 'Understanding word parts', problems: ['un + happy = ___. It means ___','re + write = ___. It means ___','pre + view = ___. It means ___','teach + er = ___. It means ___','hope + ful = ___. It means ___','care + less = ___. It means ___','What does the prefix "un-" mean? ___','What does the suffix "-er" mean? ___','Add a prefix to "do" to mean "do again": ___','Add a suffix to "play" to mean "a person who plays": ___'] },
+        { title: 'Paragraph Writing', desc: 'Write organized paragraphs with topic sentences', problems: ['What is a topic sentence? ___','Write a topic sentence about your favorite food: ___','Write 3 supporting details about your favorite food: ___','Write a closing sentence: ___','What are the 3 parts of a paragraph? ___','Indent means to start the first line with a ___','Fix the paragraph order: "In conclusion, dogs are great. Dogs are the best pets. They are loyal and fun."','Write a topic sentence about school: ___','How many sentences should a good paragraph have? At least ___','Write a complete paragraph about your best friend (4-5 sentences): ___'] }
+      ],
+      4: [
+        { title: 'Figurative Language', desc: 'Similes, metaphors, and idioms', problems: ['A simile uses ___ or "as" to compare','A metaphor compares WITHOUT using ___','Is this a simile or metaphor? "She is as fast as lightning." ___','Is this a simile or metaphor? "Time is money." ___','Write a simile about the moon: The moon is like ___','Write a metaphor about the stars: The stars are ___','What does the idiom "break a leg" mean? ___','What does "it\'s raining cats and dogs" mean? ___','Personification gives human traits to ___','Write a sentence with personification: The wind ___'] },
+        { title: 'Opinion Writing', desc: 'Write persuasive opinion essays', problems: ['An opinion essay states your ___','A fact can be ___ (proven/felt)','An opinion is what you ___ (know/believe)','Write an opinion: The best season is ___ because ___','Give 3 reasons to support your opinion: ___','A transition word connects ideas. Name one: ___','Write a concluding sentence for your opinion: ___','Is this fact or opinion? "Summer has the longest days." ___','Is this fact or opinion? "Summer is the best season." ___','Write an opinion paragraph: Should kids have homework? ___'] },
+        { title: 'Vocabulary in Context', desc: 'Use context clues to determine meaning', problems: ['The ENORMOUS elephant was the biggest one. Enormous means: ___','She was FAMISHED after not eating all day. Famished means: ___','The TIMID kitten hid behind the couch. Timid means: ___','He was ECSTATIC when he won first place. Ecstatic means: ___','The FRIGID wind made everyone shiver. Frigid means: ___','Context clues are found ___ the unknown word','Use "abundant" in a sentence: ___','Use "reluctant" in a sentence: ___','What does "courageous" mean based on: "The courageous firefighter ran into the burning building"? ___','Write a sentence where context helps define "peculiar": ___'] }
+      ],
+      5: [
+        { title: 'Essay Structure', desc: 'Introduction, body paragraphs, and conclusion', problems: ['How many paragraphs in a 5-paragraph essay? ___','The first paragraph is the ___','The last paragraph is the ___','A thesis statement tells the reader your ___','Write a thesis about "reading is important": ___','Body paragraphs start with a ___ sentence','How many body paragraphs in a standard essay? ___','A conclusion should restate the ___','Name 3 transition words: ___','Write an introduction paragraph about your favorite hobby: ___'] },
+        { title: 'Greek & Latin Roots', desc: 'Understanding word origins', problems: ['The root "bio" means ___','The root "graph" means ___','The root "tele" means ___','Biography = bio + graph = ___','Telephone = tele + phone = ___','The root "port" means ___','Transport = trans + port = ___','The root "dict" means ___','Predict = pre + dict = ___','Use the root "aud" (hear) to make a word: ___'] },
+        { title: 'Point of View', desc: 'First person, second person, third person', problems: ['First person uses pronouns like ___','Third person uses pronouns like ___','What POV? "I went to the store." ___','What POV? "She walked to school." ___','What POV? "You should try this." ___','Rewrite in 1st person: "He ate lunch." → ___','Rewrite in 3rd person: "I love dogs." → ___','Narrator means the person who ___ the story','What is "omniscient" POV? ___','Write 2 sentences in first person: ___'] }
+      ],
+      6: [
+        { title: 'Literary Analysis', desc: 'Analyzing theme, conflict, and character', problems: ['Theme is the ___ of a story','Name 2 types of conflict: ___ vs ___ and ___ vs ___','A protagonist is the ___','An antagonist is the ___','What is the setting of a story? ___','The sequence of events is called the ___','Rising action leads to the ___','The turning point is the ___','Falling action comes after the ___','Write a theme for a story about a lost dog: ___'] },
+        { title: 'Research Skills', desc: 'Citing sources and evaluating information', problems: ['A primary source is a ___ account','A secondary source ___ or analyzes primary sources','Is a diary a primary or secondary source? ___','Is a textbook primary or secondary? ___','Name 3 reliable source types: ___','What does "cite" mean? ___','What is plagiarism? ___','A bibliography lists all ___ used','What does the "C" in CRAAP test stand for? ___','Write a citation for a book with author "Smith" and title "Science Today": ___'] },
+        { title: 'Argumentative Writing', desc: 'Making and supporting claims', problems: ['A claim is a statement that can be ___','Evidence supports your ___','Reasoning explains ___ the evidence matters','A counterclaim is the ___ argument','Name a transition for adding evidence: ___','Write a claim about school uniforms: ___','Give one piece of evidence for your claim: ___','Write your reasoning: ___','What is a rebuttal? ___','A strong conclusion restates the ___ and ___'] }
+      ],
+      7: [
+        { title: 'Narrative Techniques', desc: 'Dialogue, pacing, and description', problems: ['Dialogue is when characters ___','Punctuation goes ___ the quotation marks','Write a line of dialogue: ___','Pacing controls the ___ of the story','Short sentences create ___ (tension/calm)','Imagery appeals to the 5 ___','Write a sentence with visual imagery: ___','Write a sentence with auditory imagery: ___','A flashback shows events from the ___','Foreshadowing hints at ___'] },
+        { title: 'Vocabulary: Connotation & Denotation', desc: 'Understanding word meanings and associations', problems: ['Denotation is the ___ meaning of a word','Connotation is the ___ or feeling of a word','Is the connotation of "cheap" positive or negative? ___','Is "thrifty" positive or negative? ___','Both "cheap" and "thrifty" denote ___','Choose the positive connotation: skinny / slender ___','Choose the negative: curious / nosy ___','Write a word with positive connotation for "old": ___','Write a word with negative connotation for "talk": ___','Tone is created through word ___ (choice/length)'] },
+        { title: 'Informational Text Features', desc: 'Headings, graphs, captions, and text structure', problems: ['Name 5 text features: ___','A caption appears under a ___','Headings organize text into ___','Bold words are usually ___ words','A glossary is found at the ___ of a book','An index is organized ___','Text structure types include: chronological, ___, ___','A sidebar provides ___ information','A table of contents shows ___','Why do authors use text features? ___'] }
+      ],
+      8: [
+        { title: 'Rhetorical Devices', desc: 'Ethos, pathos, and logos in persuasion', problems: ['Ethos appeals to ___ (credibility/emotion/logic)','Pathos appeals to ___','Logos appeals to ___','A doctor promoting medicine uses ___','A sad commercial about animals uses ___','Statistics in an argument use ___','Repetition is used for ___','Rhetorical question: a question not meant to be ___','Allusion is a reference to ___','Write a sentence using pathos about recycling: ___'] },
+        { title: 'Shakespeare Introduction', desc: 'Basic Shakespeare terms and themes', problems: ['Shakespeare was born in ___ (country)','A tragedy ends in ___','A comedy ends in ___','Romeo and Juliet is a ___','Name 3 Shakespeare plays: ___','Shakespeare wrote in ___ pentameter','A soliloquy is when a character speaks ___','An aside is directed at the ___','"To be or not to be" is from ___','A couplet is ___ rhyming lines'] },
+        { title: 'MLA Format Basics', desc: 'Formatting papers and citations in MLA style', problems: ['MLA stands for ___','MLA uses ___ spacing','Font should be ___ pt Times New Roman','The header includes your name, teacher, ___, date','An in-text citation includes author and ___','A works cited page goes at the ___','Titles of books are ___ (italicized/quoted)','Titles of poems are ___ (italicized/quoted)','Last name and page number go in the ___','Alphabetize works cited by author\'s ___ name'] }
+      ],
+      9: [
+        { title: 'Literary Movements', desc: 'Romanticism, Realism, Modernism', problems: ['Romanticism emphasized ___ and individualism','Realism focused on ___ life as it really is','Modernism rejected traditional ___','Name a Romantic author: ___','Name a Realist author: ___','Name a Modernist author: ___','Transcendentalism is related to ___','Harlem Renaissance celebrated ___ culture','Naturalism emphasizes ___ forces controlling humans','Gothic literature features ___ and mystery'] },
+        { title: 'Analytical Essay Writing', desc: 'Thesis, evidence, and commentary', problems: ['An analytical essay breaks down a text to show ___','A strong thesis is ___ (broad/specific)','Evidence comes from the ___','Commentary explains the ___ of the evidence','Embed quotes by weaving them into ___','After a quote, always provide ___','A topic sentence previews the ___','Avoid ___ person in formal essays','Conclude by connecting back to the ___','Write a thesis analyzing symbolism in a novel: ___'] },
+        { title: 'Vocabulary: SAT Prep Words', desc: 'Common SAT vocabulary words', problems: ['Ubiquitous means ___','Ephemeral means ___','Pragmatic means ___','Benevolent means ___','Ambiguous means ___','Use "ubiquitous" in a sentence: ___','Use "ephemeral" in a sentence: ___','Antonym of "benevolent": ___','Synonym of "pragmatic": ___','Juxtaposition means placing things ___ for comparison'] }
+      ],
+      10: [
+        { title: 'Poetry Analysis', desc: 'Meter, rhyme scheme, and poetic devices', problems: ['Iambic pentameter has ___ beats per line','A sonnet has ___ lines','The rhyme scheme of a Shakespearean sonnet: ___','A couplet is ___','Enjambment means a sentence ___ to the next line','A stanza is a ___ in a poem','Alliteration is the repetition of ___','Assonance is the repetition of ___ sounds','Write an example of alliteration: ___','Identify the rhyme scheme: AABB means ___'] },
+        { title: 'Research Paper Structure', desc: 'Writing a full research paper', problems: ['A thesis statement should be ___ and arguable','An outline organizes your ___','Topic sentences begin each ___','In-text citations prevent ___','A counterargument shows you\'ve considered ___','The introduction should end with the ___','Body paragraphs follow the pattern: claim, ___, commentary','A transition sentence connects ___','The conclusion should NOT introduce ___','What makes a source "scholarly"? ___'] },
+        { title: 'Dramatic Irony & Satire', desc: 'Advanced literary techniques', problems: ['Dramatic irony: the audience knows something the ___ does not','Situational irony: the ___ is different from what\'s expected','Verbal irony: saying the ___ of what you mean','Satire uses humor to ___','Parody imitates something for ___','Sarcasm is a form of ___ irony','Write an example of situational irony: ___','Jonathan Swift used satire in ___','A foil character ___ the protagonist','An unreliable narrator cannot be ___'] }
+      ],
+      11: [
+        { title: 'American Literature Survey', desc: 'Key works and authors in American lit', problems: ['Who wrote "The Great Gatsby"? ___','Who wrote "To Kill a Mockingbird"? ___','The Scarlet Letter was written by ___','Mark Twain\'s real name was ___','Who wrote "The Raven"? ___','Walt Whitman wrote ___','Emily Dickinson\'s poetry focused on ___','The Lost Generation includes authors like ___','Toni Morrison won the ___ Prize','Name a work by Langston Hughes: ___'] },
+        { title: 'Synthesis Writing', desc: 'Combining multiple sources into one argument', problems: ['Synthesis means ___ ideas from multiple sources','A synthesis essay requires at least ___ sources','You must ___ sources, not just summarize','A concession acknowledges the ___','Qualify means to ___ or limit your claim','A strong synthesis shows how sources ___','Paraphrase means to put in your ___','When should you use a direct quote? ___','A warrant connects evidence to your ___','Write a synthesis thesis using two viewpoints on social media: ___'] },
+        { title: 'Rhetorical Analysis', desc: 'Analyzing how authors persuade', problems: ['SOAPSTone: S = Speaker, O = ___, A = ___','P = Purpose, S = Subject, Tone = ___','Diction refers to word ___','Syntax refers to sentence ___','Anaphora is the repetition of words at the ___','Parallelism uses similar ___ structures','An appeal to authority is ___','A logical fallacy is a flaw in ___','Name 2 logical fallacies: ___','Analyze the rhetoric: "Ask not what your country can do for you..." — this uses ___'] }
+      ],
+      12: [
+        { title: 'World Literature', desc: 'Key works from global literary traditions', problems: ['Who wrote "1984"? ___','Who wrote "Things Fall Apart"? ___','"One Hundred Years of Solitude" was written by ___','"The Odyssey" was written by ___','Magical realism originated in ___','Existentialism is explored in works by ___','Kafka wrote "The ___"','Dante wrote "The Divine ___"','Name a Russian literary great: ___','Name a Japanese author: ___'] },
+        { title: 'College Essay Writing', desc: 'Crafting personal statements and application essays', problems: ['A college essay should show your ___','Start with a ___ to grab attention','The best essays are ___ (generic/specific)','Show, don\'t ___','Avoid clichés like ___','A good essay answers "so what?" by showing ___','The ideal length is usually ___ words','Write a hook for an essay about a challenge you overcame: ___','Your voice should sound ___ (formal/authentic)','End with ___ (growth/reflection)'] },
+        { title: 'Critical Theory Intro', desc: 'Feminist, Marxist, and postcolonial lenses', problems: ['A critical lens is a way of ___ a text','Feminist criticism examines ___','Marxist criticism focuses on ___ and power','Postcolonial criticism analyzes effects of ___','Psychoanalytic criticism draws on ___','New Historicism considers the ___ context','Reader-response theory says meaning comes from ___','Structuralism analyzes underlying ___','Deconstruction questions ___ meanings','Apply a feminist lens: how might you read Cinderella? ___'] }
+      ]
+    }
+  },
+  history: {
+    icon: '🏛️', name: 'History',
+    worksheets: {
+      'PK': [
+        { title: 'All About Me Timeline', desc: 'Learn about personal history and sequence', problems: ['When is your birthday? ___','How old are you? ___','Draw yourself as a baby','Draw yourself now','What could you do as a baby? ___','What can you do now that you couldn\'t before? ___','First you were a baby, then a toddler, now you are a ___','Put in order: walk, crawl, run','What do you want to be when you grow up? ___','Draw your family'] },
+        { title: 'Community Helpers', desc: 'People who help our community', problems: ['A ___ puts out fires','A ___ keeps us safe','A ___ helps sick people','A ___ delivers our mail','A ___ teaches us at school','Match: 🚒 → firefighter / doctor / teacher','Match: 🏥 → firefighter / doctor / teacher','Draw your favorite community helper','Who helps you at school? ___','Why are community helpers important? ___'] },
+        { title: 'Holidays We Celebrate', desc: 'Learn about common holidays', problems: ['On July 4th we celebrate ___','On Thanksgiving we give ___','What holiday has a Christmas tree? ___','What do we do on Valentine\'s Day? ___','Draw a holiday you celebrate','What is your favorite holiday? ___','We celebrate the New Year on ___','On MLK Day we honor ___','Presidents\' Day celebrates ___','Draw something you do on your favorite holiday'] }
+      ],
+      'K': [
+        { title: 'American Symbols', desc: 'Learn about the flag, eagle, and Statue of Liberty', problems: ['How many stripes on the American flag? ___','How many stars on the flag? ___','The stars represent the ___','The stripes represent the ___','The national bird is the ___','The Statue of Liberty is in ___','She holds a ___ in her hand','The Liberty Bell is in ___','What does freedom mean? ___','Draw the American flag and color it'] },
+        { title: 'Then and Now', desc: 'Compare life long ago to today', problems: ['Long ago, people traveled by ___','Today, we travel by ___','Long ago, there were no ___ (phones/rocks)','People used to write letters, now we send ___','Draw a house from long ago','Draw a house today','Long ago, kids played with ___ (iPads/wooden toys)','Today we cook with a stove. Long ago they used a ___','Name something that is the same then and now: ___','Would you rather live then or now? Why? ___'] },
+        { title: 'Maps & Globes', desc: 'Basic geography concepts', problems: ['A globe is shaped like a ___','A map is ___ (flat/round)','Blue on a map or globe represents ___','Green usually represents ___','Name the 7 continents: ___','What continent do we live on? ___','A compass rose shows ___','N stands for ___','What country do you live in? ___','Draw a simple map of your classroom'] }
+      ],
+      1: [
+        { title: 'Famous Americans', desc: 'Learn about George Washington, Abraham Lincoln, and more', problems: ['The first president was ___','Who is on the penny? ___','Who is on the $1 bill? ___','Abraham Lincoln freed the ___','Who said "I have a dream"? ___','Martin Luther King Jr. wanted ___','George Washington was called "Father of ___"','Rosa Parks refused to give up her ___','Benjamin Franklin discovered ___','Draw one famous American and write their name'] },
+        { title: 'Past, Present, Future', desc: 'Understanding the concept of time', problems: ['Yesterday is in the ___ (past/present/future)','Tomorrow is in the ___','Right now is the ___','Name something you did yesterday: ___','Name something you are doing now: ___','Name something you will do tomorrow: ___','Put in order: future, past, present','A calendar helps us track ___','How many months in a year? ___','Name the days of the week: ___'] },
+        { title: 'Rules & Laws', desc: 'Why we have rules in communities', problems: ['A rule tells us what we ___ and should not do','Name a school rule: ___','Name a rule at home: ___','Laws are rules for the whole ___','Who makes laws? The ___','A traffic light is an example of a ___','What happens if you break a rule? ___','Why do we need rules? To keep everyone ___','Name a law everyone follows: ___','Draw a sign that shows a rule'] }
+      ],
+      2: [
+        { title: 'Native Americans', desc: 'First peoples of North America', problems: ['Native Americans were the ___ people in America','Name a Native American tribe: ___','Many tribes lived in groups called ___','Some tribes lived in teepees made of ___','Corn, beans, and squash were called the "Three ___"','Native Americans used ___ for transportation on water','Totem poles told stories about ___','A longhouse was used by tribes in the ___','What did Native Americans teach the Pilgrims? ___','Draw a traditional Native American home'] },
+        { title: 'Explorers', desc: 'Christopher Columbus and other explorers', problems: ['Columbus sailed in the year ___','He sailed from ___ (country)','His three ships were: Niña, Pinta, and ___','Columbus was looking for a route to ___','He landed in the ___ (Americas/Asia)','Name another explorer: ___','Explorers traveled by ___','Maps helped explorers find their ___','What did explorers bring back? ___','Was exploration always good for native peoples? Why/why not? ___'] },
+        { title: 'U.S. Geography', desc: 'States, capitals, and regions', problems: ['How many states are in the U.S.? ___','Name your state: ___','What is the capital of the U.S.? ___','Name the 4 U.S. regions: ___','The longest river is the ___','The Great Lakes are in the ___ region','Hawaii is surrounded by the ___ Ocean','Alaska borders ___','The Rocky Mountains are in the ___','Label your state on a U.S. map'] }
+      ],
+      3: [
+        { title: 'The 13 Colonies', desc: 'Early American colonial life', problems: ['How many original colonies were there? ___','The first permanent colony was ___','Jamestown was founded in ___','The Pilgrims landed at ___ Rock','Name 3 of the 13 colonies: ___','Colonists came to America for ___','The colonies were ruled by ___','Name a crop grown in the southern colonies: ___','Colonial children learned at home or in ___','Draw a colonial house'] },
+        { title: 'American Revolution Basics', desc: 'Why America fought for independence', problems: ['The colonists were upset about taxation without ___','The Boston Tea Party protested a tax on ___','The Declaration of Independence was signed in ___','Who wrote the Declaration? ___','The war was fought against ___','Name a patriot: ___','What does "independence" mean? ___','The war ended in ___ (year)','July 4th celebrates ___','The first president after the war was ___'] },
+        { title: 'World Cultures', desc: 'Comparing cultures around the world', problems: ['Culture includes language, food, and ___','Name a holiday celebrated in Mexico: ___','In Japan, people greet with a ___','Name a food from Italy: ___','What language do people speak in Brazil? ___','Name a type of music from Africa: ___','Chinese New Year celebrates ___','In India, a popular festival is ___','What do all cultures have in common? ___','Draw a flag from another country'] }
+      ],
+      4: [
+        { title: 'Westward Expansion', desc: 'Lewis & Clark, Oregon Trail, and Manifest Destiny', problems: ['Lewis and Clark explored the ___ of the U.S.','Their guide was ___','The Oregon Trail went from Missouri to ___','Manifest Destiny was the belief that America should expand from ___','The Gold Rush was in ___ (state)','The year of the Gold Rush was ___','Pioneers traveled in ___','The transcontinental railroad connected the ___ to the ___','Name a challenge pioneers faced: ___','How did westward expansion affect Native Americans? ___'] },
+        { title: 'The Civil War', desc: 'Causes and key events', problems: ['The Civil War was fought between the ___ and the ___','The main cause was disagreement over ___','The North was also called the ___','The South was also called the ___','The president during the Civil War was ___','The Emancipation Proclamation freed ___','The war lasted from ___ to ___','Name a major battle: ___','Who won the Civil War? ___','The 13th Amendment abolished ___'] },
+        { title: 'State History', desc: 'Explore your own state\'s history', problems: ['My state is ___','My state became a state in the year ___','The capital of my state is ___','My state is known for ___','A famous person from my state: ___','My state\'s nickname is ___','Name a Native American tribe from your state: ___','An important event in your state\'s history: ___','What region is your state in? ___','Draw your state flag'] }
+      ],
+      5: [
+        { title: 'The Constitution', desc: 'The supreme law of the land', problems: ['The Constitution was written in ___','It was signed in ___ (city)','The first 10 amendments are called the ___','The 1st Amendment protects freedom of ___','The 3 branches of government are: ___','Checks and balances prevent one branch from having too much ___','The Constitution begins with "We the ___"','An amendment is a ___ to the Constitution','How many amendments are there? ___','Who is called the "Father of the Constitution"? ___'] },
+        { title: 'Immigration & Ellis Island', desc: 'The story of American immigration', problems: ['Ellis Island is in ___ (city)','Millions of immigrants came through Ellis Island in the ___','Immigrants came to America for a better ___','Name a country many immigrants came from: ___','The Statue of Liberty welcomed ___','Angel Island processed immigrants from ___','What is a "melting pot"? ___','Name a challenge immigrants faced: ___','How did immigration change America? ___','Why is America called a "nation of immigrants"? ___'] },
+        { title: 'Ancient Civilizations', desc: 'Egypt, Greece, and Rome', problems: ['The pyramids were built in ancient ___','The Greeks invented ___','The Roman Empire was ruled by ___','The Colosseum is in ___','Egyptian writing is called ___','Greek city-states included Athens and ___','What was the Roman Senate? ___','Who was Cleopatra? ___','The Olympic Games started in ancient ___','Name a Greek god or goddess: ___'] }
+      ],
+      6: [
+        { title: 'Medieval Europe', desc: 'Feudalism, castles, and the Black Plague', problems: ['The Medieval period is also called the ___','Feudalism was a system of ___ and loyalty','A lord gave land to a ___','Peasants who worked the land were called ___','The Black Plague killed about ___ of Europe\'s population','The Crusades were wars over the ___','Castles were built for ___','A knight served a ___','The Magna Carta limited the power of the ___','Guilds were associations of ___'] },
+        { title: 'Renaissance & Reformation', desc: 'Rebirth of art, science, and religious reform', problems: ['Renaissance means ___','The Renaissance began in ___','Name a Renaissance artist: ___','Leonardo da Vinci painted the ___','The printing press was invented by ___','Martin Luther started the ___','He nailed ___ Theses to a church door','The Reformation changed the ___ Church','What is humanism? ___','Name a Renaissance scientist: ___'] },
+        { title: 'Age of Exploration', desc: 'European exploration of the Americas', problems: ['Name 3 European exploring nations: ___','The Columbian Exchange was a transfer of ___','Europeans brought ___ to the Americas (name a disease)','The Americas were named after ___','Magellan\'s crew was the first to ___ the globe','Conquistadors conquered civilizations like the ___','The Treaty of Tordesillas divided the world between ___','What motivated explorers? God, glory, and ___','The Middle Passage refers to ___','How did exploration change the world? ___'] }
+      ],
+      7: [
+        { title: 'The Enlightenment', desc: 'Age of Reason and its thinkers', problems: ['The Enlightenment emphasized ___ and science','John Locke believed in natural ___','Locke\'s rights: life, liberty, and ___','Montesquieu proposed separation of ___','Voltaire championed freedom of ___','Rousseau wrote about the social ___','The Enlightenment influenced the ___ Revolution','Name a document inspired by Enlightenment ideas: ___','What does "consent of the governed" mean? ___','How do Enlightenment ideas affect us today? ___'] },
+        { title: 'French Revolution', desc: 'Causes, events, and aftermath', problems: ['The French Revolution began in ___','The 3 estates were: clergy, nobility, and ___','The storming of the ___ started the revolution','The motto was: Liberty, Equality, ___','The guillotine was used during the ___','Who was the king during the revolution? ___','The Reign of Terror was led by ___','Napoleon came to power after ___','What is a revolution? ___','Compare the French and American Revolutions: ___'] },
+        { title: 'Industrial Revolution', desc: 'Factories, inventions, and social change', problems: ['The Industrial Revolution began in ___','The steam engine was improved by ___','Factories replaced ___','Child labor was common in ___','Urbanization means people moved to ___','The cotton gin was invented by ___','Name a negative effect of industrialization: ___','Labor unions fought for ___','The assembly line was later developed by ___','How did the Industrial Revolution change daily life? ___'] }
+      ],
+      8: [
+        { title: 'Civil Rights Movement', desc: 'The fight for equality in America', problems: ['The Civil Rights Movement was mainly in the ___','Brown v. Board ended ___ in schools','Rosa Parks refused to give up her seat in ___','The Montgomery Bus Boycott lasted ___ days','Martin Luther King Jr. gave the "I Have a ___" speech','The March on Washington was in ___','The Civil Rights Act was signed in ___','Name another civil rights leader: ___','What did the Voting Rights Act of 1965 do? ___','Why is the Civil Rights Movement important today? ___'] },
+        { title: 'World War II', desc: 'Causes, major events, and outcomes', problems: ['WWII lasted from ___ to ___','The Axis powers were Germany, ___, and Japan','The Allied powers included the U.S., Britain, and ___','The leader of Nazi Germany was ___','D-Day was the invasion of ___','The Holocaust was the genocide of ___','The war in the Pacific ended with ___','The United Nations was created after WWII to ___','Name a WWII battle: ___','What lesson should we learn from WWII? ___'] },
+        { title: 'The Cold War', desc: 'U.S. vs. Soviet Union rivalry', problems: ['The Cold War was between the U.S. and ___','It was called "cold" because ___','The Iron Curtain divided ___','NATO was formed to counter ___','The Berlin Wall divided ___','The Space Race was won by ___ (moon landing)','The Cuban Missile Crisis was in ___','Proxy wars were fought in ___ and Vietnam','The Cold War ended in ___','What is the difference between capitalism and communism? ___'] }
+      ],
+      9: [
+        { title: 'World History: Ancient Civilizations', desc: 'Mesopotamia, Egypt, Indus Valley, and China', problems: ['The "Cradle of Civilization" is ___','Mesopotamia was between the Tigris and ___','Cuneiform was a system of ___','The Code of Hammurabi was an early set of ___','Egyptian pharaohs were buried in ___','The Nile River flows through ___','The Indus Valley civilization was in modern-day ___','The Great Wall was built by ancient ___','What is an empire? ___','Name a major achievement of ancient civilizations: ___'] },
+        { title: 'Comparative Government', desc: 'Democracy, monarchy, and authoritarian systems', problems: ['Democracy means rule by the ___','A monarchy is ruled by a ___','An authoritarian government has ___ citizen input','A dictatorship is ruled by ___','A republic elects ___ to make decisions','The U.S. is a constitutional ___','Name a current monarchy: ___','What is an oligarchy? ___','Theocracy is government ruled by ___','Compare democracy and authoritarianism: ___'] },
+        { title: 'Imperialism', desc: 'European colonization of Africa and Asia', problems: ['Imperialism is when a powerful nation controls ___','The Scramble for Africa happened in the ___','The Berlin Conference divided ___ among European powers','Name 2 imperial European nations: ___','India was colonized by ___','What motivated imperialism? ___','Name a negative effect of imperialism: ___','What is ethnocentrism? ___','The Sepoy Mutiny was in ___','How did imperialism lead to future conflicts? ___'] }
+      ],
+      10: [
+        { title: 'World War I', desc: 'Causes, alliances, and consequences', problems: ['WWI lasted from ___ to ___','MAIN causes: Militarism, Alliances, ___, Nationalism','The assassination of ___ started WWI','The two alliance systems were: ___ and ___','Trench warfare was characterized by ___','New weapons included: tanks, poison gas, and ___','The U.S. entered WWI in ___','The Treaty of Versailles punished ___','The League of Nations was proposed by ___','How did WWI set the stage for WWII? ___'] },
+        { title: 'The Roaring 20s & Great Depression', desc: 'Boom and bust in American history', problems: ['The 1920s are called the "Roaring ___"','The Harlem Renaissance celebrated ___','Prohibition banned ___','The 19th Amendment gave ___ the right to vote','The stock market crashed in ___','The Great Depression lasted from ___ to ___','The Dust Bowl was caused by ___','FDR\'s plan to fix the economy was called the ___','Name a New Deal program: ___','How did the Great Depression end? ___'] },
+        { title: 'Decolonization', desc: 'Independence movements in the 20th century', problems: ['Decolonization is the process of gaining ___','India gained independence in ___','India\'s independence leader was ___','Gandhi used ___ resistance','African nations gained independence mostly in the ___','Name an African independence leader: ___','Vietnam fought for independence from ___','The partition of India created ___ (country)','What challenges did new nations face? ___','How is decolonization still relevant today? ___'] }
+      ],
+      11: [
+        { title: 'U.S. Government & Politics', desc: 'How the U.S. political system works', problems: ['The 3 branches of government: ___','The president serves ___ year terms','The Senate has ___ members','The House of Representatives has ___ members','The Supreme Court has ___ justices','A bill becomes a ___ when the president signs it','The Electoral College determines ___','Name the 2 major political parties: ___','What does "filibuster" mean? ___','Name a landmark Supreme Court case: ___'] },
+        { title: 'Vietnam War & 1960s', desc: 'America in the turbulent 1960s', problems: ['The Vietnam War was fought to prevent the spread of ___','The domino theory stated ___','The Gulf of Tonkin Resolution gave the president power to ___','The Tet Offensive was in ___','The anti-war movement grew on ___','Kent State shooting was in ___','The war ended in ___','How many Americans served in Vietnam? About ___','Name a cultural change in the 1960s: ___','What lessons did America learn from Vietnam? ___'] },
+        { title: 'Modern America: 1980s-2000s', desc: 'Reagan era through the War on Terror', problems: ['The Berlin Wall fell in ___','The Cold War ended with the collapse of ___','The Gulf War was in ___','September 11, 2001 was an attack by ___','The War on Terror began after ___','Name a president from this era: ___','The internet became widely used in the ___','NAFTA stands for ___','The 2008 financial crisis was caused by ___','Name a major technological change: ___'] }
+      ],
+      12: [
+        { title: 'Historiography', desc: 'How history is studied and interpreted', problems: ['Historiography is the study of ___','A primary source is a ___ account','A secondary source ___ primary sources','Bias means a source may favor ___','Name 2 types of primary sources: ___','Why do historians disagree? ___','Context means understanding the ___ of events','Causation vs correlation: causation means one thing ___ another','What is historical revisionism? ___','Why is it important to study multiple perspectives? ___'] },
+        { title: 'Globalization', desc: 'The interconnected modern world', problems: ['Globalization is the increasing ___ of the world','Name a global organization: ___','Free trade agreements reduce ___','The internet accelerated ___','Name a benefit of globalization: ___','Name a criticism of globalization: ___','Outsourcing means sending jobs ___','Cultural diffusion is the spread of ___','Climate change is a ___ issue','How has globalization affected your daily life? ___'] },
+        { title: 'Current Events Analysis', desc: 'Analyzing modern issues through a historical lens', problems: ['Name a current global issue: ___','How does history help us understand current events? ___','Compare a current conflict to a historical one: ___','What role does media play in shaping history? ___','Name a recent social movement: ___','How has technology changed political participation? ___','What is diplomacy? ___','Name an international treaty or agreement: ___','How do elections shape a nation\'s future? ___','Write a brief analysis connecting a current event to history: ___'] }
+      ]
+    }
+  }
+};
+
+function showPrintables(){
+  stopSpeech();
+  setActiveNav('nav-printables');
+  hideAllScreens();
+  const screen = document.getElementById('printablesScreen');
+  screen.style.display = 'block';
+  renderPrintablesScreen();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+let printablesGrade = 'K';
+let printablesSubject = 'math';
+
+function renderPrintablesScreen(){
+  const screen = document.getElementById('printablesScreen');
+  const gradeColor = GRADE_COLORS[printablesGrade] || '#00b894';
+  const gradeName = GRADE_NAMES[printablesGrade] || printablesGrade;
+
+  let gradeTabsHtml = '';
+  GRADES.forEach(function(g){
+    const c = GRADE_COLORS[g] || '#00b894';
+    const n = GRADE_NAMES[g] || g;
+    const isActive = g == printablesGrade || String(g) === String(printablesGrade);
+    gradeTabsHtml += '<div onclick="printablesGrade=\'' + g + '\';renderPrintablesScreen()" style="padding:8px 16px;border-radius:20px;cursor:pointer;font-size:13px;font-weight:' + (isActive?'700':'500') + ';white-space:nowrap;background:' + (isActive ? c : '#f0f0f0') + ';color:' + (isActive ? '#fff' : '#636e72') + ';transition:all 0.2s">' + n + '</div>';
+  });
+
+  const subjects = Object.keys(PRINTABLES_DATA);
+  let subjectTabsHtml = '';
+  subjects.forEach(function(s){
+    const d = PRINTABLES_DATA[s];
+    const isActive = s === printablesSubject;
+    subjectTabsHtml += '<div onclick="printablesSubject=\'' + s + '\';renderPrintablesScreen()" style="padding:8px 16px;border-radius:20px;cursor:pointer;font-size:13px;font-weight:' + (isActive?'700':'500') + ';white-space:nowrap;background:' + (isActive ? gradeColor : '#f0f0f0') + ';color:' + (isActive ? '#fff' : '#636e72') + ';transition:all 0.2s">' + d.icon + ' ' + d.name + '</div>';
+  });
+
+  const subjectData = PRINTABLES_DATA[printablesSubject];
+  const worksheets = subjectData && subjectData.worksheets[printablesGrade] ? subjectData.worksheets[printablesGrade] : [];
+
+  let cardsHtml = '';
+  worksheets.forEach(function(ws, idx){
+    cardsHtml += '<div style="background:#fff;border-radius:16px;border:1px solid #e0e0e0;overflow:hidden;transition:all 0.3s" onmouseover="this.style.transform=\'translateY(-4px)\';this.style.boxShadow=\'0 8px 24px rgba(0,0,0,0.1)\'" onmouseout="this.style.transform=\'none\';this.style.boxShadow=\'none\'">' +
+      '<div style="background:linear-gradient(135deg,' + gradeColor + '22,' + gradeColor + '11);padding:24px">' +
+        '<div style="font-size:32px;margin-bottom:8px">' + subjectData.icon + '</div>' +
+        '<h3 style="color:#2d3436;font-size:17px;margin-bottom:4px">' + ws.title + '</h3>' +
+        '<p style="color:#636e72;font-size:13px">' + ws.desc + '</p>' +
+        '<div style="margin-top:8px;font-size:11px;color:' + gradeColor + ';font-weight:600">' + gradeName + ' • ' + subjectData.name + ' • ' + ws.problems.length + ' problems</div>' +
+      '</div>' +
+      '<div style="padding:16px 24px;display:flex;gap:8px">' +
+        '<button onclick="previewPrintable(\'' + printablesSubject + '\',' + idx + ')" style="flex:1;padding:10px;border:2px solid ' + gradeColor + ';border-radius:10px;background:#fff;color:' + gradeColor + ';font-size:13px;font-weight:600;cursor:pointer">👁️ Preview</button>' +
+        '<button onclick="printWorksheet(\'' + printablesSubject + '\',' + idx + ')" style="flex:1;padding:10px;border:none;border-radius:10px;background:' + gradeColor + ';color:#fff;font-size:13px;font-weight:600;cursor:pointer">🖨️ Print</button>' +
+      '</div>' +
+    '</div>';
+  });
+
+  if(!cardsHtml){
+    cardsHtml = '<div style="grid-column:1/-1;text-align:center;padding:48px;color:#636e72"><p style="font-size:18px">No printables available for this grade and subject yet.</p><p>Try selecting a different combination!</p></div>';
+  }
+
+  screen.innerHTML =
+    '<div style="background:linear-gradient(135deg,#00b894,#0984e3);padding:48px;text-align:center;color:#fff">' +
+      '<h1 style="font-size:36px;font-weight:800;margin-bottom:8px">🖨️ Free Printable Worksheets</h1>' +
+      '<p style="font-size:16px;opacity:0.9;max-width:550px;margin:0 auto">Download and print free worksheets for every grade and subject. Perfect for homework, extra practice, or homeschool.</p>' +
+    '</div>' +
+    '<div style="padding:20px 24px;background:#fff;border-bottom:1px solid #eee">' +
+      '<div style="margin-bottom:12px;font-size:13px;font-weight:700;color:#636e72;text-transform:uppercase;letter-spacing:1px">Grade Level</div>' +
+      '<div style="display:flex;gap:6px;flex-wrap:wrap">' + gradeTabsHtml + '</div>' +
+    '</div>' +
+    '<div style="padding:16px 24px;background:#fafafa;border-bottom:1px solid #eee">' +
+      '<div style="margin-bottom:12px;font-size:13px;font-weight:700;color:#636e72;text-transform:uppercase;letter-spacing:1px">Subject</div>' +
+      '<div style="display:flex;gap:6px;flex-wrap:wrap">' + subjectTabsHtml + '</div>' +
+    '</div>' +
+    '<div style="padding:32px 24px">' +
+      '<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px;max-width:1200px;margin:0 auto">' + cardsHtml + '</div>' +
+    '</div>';
+}
+
+function previewPrintable(subject, idx){
+  const ws = PRINTABLES_DATA[subject].worksheets[printablesGrade][idx];
+  const gradeColor = GRADE_COLORS[printablesGrade] || '#00b894';
+  const gradeName = GRADE_NAMES[printablesGrade] || printablesGrade;
+  const subjectName = PRINTABLES_DATA[subject].name;
+
+  let problemsHtml = '';
+  ws.problems.forEach(function(p, i){
+    problemsHtml += '<div style="padding:14px 16px;border:1px dashed #d0d0d0;border-radius:8px;font-size:15px;color:#2d3436;line-height:1.6;background:#fafafa">' +
+      '<span style="font-weight:700;color:' + gradeColor + ';margin-right:8px">' + (i+1) + '.</span>' + p.replace(/\n/g,'<br>') +
+    '</div>';
+  });
+
+  var overlay = document.createElement('div');
+  overlay.id = 'printablePreviewOverlay';
+  overlay.style.cssText = 'position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.6);z-index:10000;display:flex;align-items:flex-start;justify-content:center;padding:40px 20px;overflow-y:auto';
+  overlay.onclick = function(e){ if(e.target === overlay) overlay.remove(); };
+  overlay.innerHTML =
+    '<div style="background:#fff;border-radius:20px;max-width:700px;width:100%;max-height:90vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,0.3)">' +
+      '<div style="padding:32px;border-bottom:2px solid ' + gradeColor + '22">' +
+        '<div style="display:flex;justify-content:space-between;align-items:flex-start">' +
+          '<div>' +
+            '<div style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:' + gradeColor + ';margin-bottom:8px">Cloud6 Academy — Free Printable</div>' +
+            '<h2 style="font-size:24px;font-weight:800;color:#2d3436;margin-bottom:4px">' + ws.title + '</h2>' +
+            '<p style="color:#636e72;font-size:14px">' + gradeName + ' • ' + subjectName + '</p>' +
+            '<p style="color:#636e72;font-size:13px;margin-top:4px">' + ws.desc + '</p>' +
+          '</div>' +
+          '<button onclick="document.getElementById(\'printablePreviewOverlay\').remove()" style="background:none;border:none;font-size:24px;cursor:pointer;color:#636e72;padding:4px">✕</button>' +
+        '</div>' +
+      '</div>' +
+      '<div style="padding:24px 32px">' +
+        '<div style="margin-bottom:16px;font-size:14px;color:#636e72">Name: __________________________________ &nbsp;&nbsp; Date: ______________</div>' +
+        '<div style="display:flex;flex-direction:column;gap:10px">' + problemsHtml + '</div>' +
+      '</div>' +
+      '<div style="padding:16px 32px 24px;display:flex;gap:12px">' +
+        '<button onclick="document.getElementById(\'printablePreviewOverlay\').remove()" style="flex:1;padding:12px;border:2px solid #e0e0e0;border-radius:10px;background:#fff;color:#636e72;font-size:14px;font-weight:600;cursor:pointer">Close</button>' +
+        '<button onclick="document.getElementById(\'printablePreviewOverlay\').remove();printWorksheet(\'' + subject + '\',' + idx + ')" style="flex:1;padding:12px;border:none;border-radius:10px;background:' + gradeColor + ';color:#fff;font-size:14px;font-weight:600;cursor:pointer">🖨️ Print This Worksheet</button>' +
+      '</div>' +
+    '</div>';
+  document.body.appendChild(overlay);
+}
+
+function printWorksheet(subject, idx){
+  const ws = PRINTABLES_DATA[subject].worksheets[printablesGrade][idx];
+  const gradeName = GRADE_NAMES[printablesGrade] || printablesGrade;
+  const subjectName = PRINTABLES_DATA[subject].name;
+
+  let problemsHtml = '';
+  ws.problems.forEach(function(p, i){
+    problemsHtml += '<div style="padding:12px 0;border-bottom:1px dashed #ccc;font-size:16px;line-height:2;color:#222">' +
+      '<strong>' + (i+1) + '.</strong> ' + p.replace(/\n/g,'<br>') +
+    '</div>';
+  });
+
+  var printWin = window.open('','_blank','width=800,height=900');
+  printWin.document.write('<!DOCTYPE html><html><head><title>' + ws.title + ' - Cloud6 Academy</title>' +
+    '<style>@page{size:letter;margin:0.75in}body{font-family:Arial,Helvetica,sans-serif;padding:20px;color:#222}h1{font-size:22px;margin-bottom:2px}h2{font-size:16px;color:#555;font-weight:normal;margin-bottom:16px}.header{border-bottom:2px solid #00b894;padding-bottom:12px;margin-bottom:20px}.name-line{font-size:14px;color:#666;margin-bottom:20px}.footer{margin-top:30px;text-align:center;font-size:11px;color:#aaa;border-top:1px solid #ddd;padding-top:10px}</style>' +
+    '</head><body>' +
+    '<div class="header"><div style="font-size:12px;font-weight:bold;color:#00b894;letter-spacing:1px;text-transform:uppercase;margin-bottom:8px">Cloud6 Academy — Free Printable Worksheet</div>' +
+    '<h1>' + ws.title + '</h1>' +
+    '<h2>' + gradeName + ' • ' + subjectName + ' — ' + ws.desc + '</h2></div>' +
+    '<div class="name-line">Name: ____________________________________________ &nbsp;&nbsp;&nbsp; Date: ____________________</div>' +
+    '<div>' + problemsHtml + '</div>' +
+    '<div class="footer">© Cloud6 Academy • cloud6llc.github.io/cloud6-academy • Free for personal and classroom use</div>' +
+    '</body></html>');
+  printWin.document.close();
+  printWin.focus();
+  setTimeout(function(){ printWin.print(); }, 500);
 }
 
 function showGradePicker(){
