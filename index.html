@@ -550,12 +550,12 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
         <button onclick="showGradePicker()" style="width:100%;padding:13px;border:2px solid #e0e0e0;border-radius:10px;background:#fff;color:#2d3436;font-size:14px;font-weight:600;cursor:pointer">Get Started Free</button>
       </div>
 
-      <!-- PRO -->
+      <!-- PRO MONTHLY -->
       <div style="background:#fff;border:2px solid #00b894;border-radius:16px;padding:32px 28px;text-align:left;position:relative;box-shadow:0 8px 32px rgba(0,184,148,0.15)">
         <div style="position:absolute;top:-13px;left:50%;transform:translateX(-50%);background:#00b894;color:#fff;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:4px 16px;border-radius:100px;white-space:nowrap">Most Popular</div>
-        <div style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#00b894;margin-bottom:12px">Pro</div>
-        <div style="font-size:48px;font-weight:800;color:#2d3436;line-height:1;margin-bottom:4px"><sup style="font-size:22px;vertical-align:top;margin-top:10px;display:inline-block">$</sup>99</div>
-        <div style="color:#636e72;font-size:13px;margin-bottom:4px">per year</div>
+        <div style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#00b894;margin-bottom:12px">Pro Monthly</div>
+        <div style="font-size:48px;font-weight:800;color:#2d3436;line-height:1;margin-bottom:4px"><sup style="font-size:22px;vertical-align:top;margin-top:10px;display:inline-block">$</sup>9<span style="font-size:28px">.99</span></div>
+        <div style="color:#636e72;font-size:13px;margin-bottom:4px">per month</div>
         <div style="background:rgba(0,184,148,0.1);color:#00b894;font-size:12px;font-weight:600;padding:4px 12px;border-radius:20px;display:inline-block;margin-bottom:16px">30-day free trial</div>
         <ul style="list-style:none;margin-bottom:28px;display:flex;flex-direction:column;gap:10px">
           <li style="display:flex;gap:10px;font-size:13px;color:#2d3436"><span style="color:#00b894;font-weight:700">✓</span> All lessons unlocked</li>
@@ -565,6 +565,20 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
         </ul>
         <a href="https://buy.stripe.com/14A8wO20TaWT0IegQU3Nm0d" target="_blank" style="display:block;width:100%;padding:13px;background:linear-gradient(135deg,#00b894,#00cec9);color:#fff;border:none;border-radius:10px;font-size:14px;font-weight:700;cursor:pointer;text-align:center;text-decoration:none;box-shadow:0 4px 16px rgba(0,184,148,0.35)">Start Free Trial →</a>
         <p style="text-align:center;font-size:12px;color:#b2bec3;margin-top:10px">No charge for 30 days</p>
+      </div>
+
+      <!-- PRO ANNUAL -->
+      <div style="background:#f8f9fa;border:2px solid #e0e0e0;border-radius:16px;padding:32px 28px;text-align:left">
+        <div style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#636e72;margin-bottom:12px">Pro Annual</div>
+        <div style="font-size:48px;font-weight:800;color:#2d3436;line-height:1;margin-bottom:4px"><sup style="font-size:22px;vertical-align:top;margin-top:10px;display:inline-block">$</sup>99</div>
+        <div style="color:#636e72;font-size:13px;margin-bottom:4px">per year</div>
+        <div style="background:rgba(253,203,110,0.2);color:#e17055;font-size:12px;font-weight:600;padding:4px 12px;border-radius:20px;display:inline-block;margin-bottom:16px">Save $21 vs monthly</div>
+        <ul style="list-style:none;margin-bottom:28px;display:flex;flex-direction:column;gap:10px">
+          <li style="display:flex;gap:10px;font-size:13px;color:#2d3436"><span style="color:#00b894;font-weight:700">✓</span> Everything in Pro</li>
+          <li style="display:flex;gap:10px;font-size:13px;color:#2d3436"><span style="color:#00b894;font-weight:700">✓</span> 2 months free vs monthly</li>
+          <li style="display:flex;gap:10px;font-size:13px;color:#2d3436"><span style="color:#00b894;font-weight:700">✓</span> Priority support</li>
+        </ul>
+        <a href="https://buy.stripe.com/14A8wO20TaWT0IegQU3Nm0d" target="_blank" style="display:block;width:100%;padding:13px;border:2px solid #00b894;border-radius:10px;background:#fff;color:#00b894;font-size:14px;font-weight:700;cursor:pointer;text-align:center;text-decoration:none">Get Annual Plan</a>
       </div>
 
     </div>
@@ -1286,6 +1300,7 @@ function getProgressKey(){
   return 'cloud6_progress_' + username;
 }
 function saveProgress(){
+  if(!currentUser) return; // guests never save — always start fresh
   try {
     const data = {
       totalXP: totalXP,
@@ -1325,6 +1340,7 @@ function loadProgress(){
   } catch(e){ return false; }
 }
 function applySavedProgress(){
+  if(!currentUser) return; // guests always start fresh — no saved state
   // Re-load with correct user key now that currentUser is set
   var key = getProgressKey();
   var userData = StorageEngine.load(key);
@@ -19687,12 +19703,12 @@ window.addEventListener('DOMContentLoaded', function(){
       <button onclick="hidePricingScreen()" style="width:100%;padding:13px;border:2px solid #e0e0e0;border-radius:10px;background:#fff;color:#2d3436;font-size:14px;font-weight:600;cursor:pointer;transition:border-color 0.2s" onmouseover="this.style.borderColor='#636e72'" onmouseout="this.style.borderColor='#e0e0e0'">Continue with Free</button>
     </div>
 
-    <!-- PRO (featured) -->
+    <!-- PRO MONTHLY (featured) -->
     <div style="background:#fff;border:2px solid #00b894;border-radius:16px;padding:32px 28px;position:relative;box-shadow:0 8px 32px rgba(0,184,148,0.15)">
       <div style="position:absolute;top:-13px;left:50%;transform:translateX(-50%);background:#00b894;color:#fff;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:4px 16px;border-radius:100px;white-space:nowrap">⭐ Most Popular</div>
-      <div style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#00b894;margin-bottom:12px">Pro</div>
-      <div style="font-size:48px;font-weight:800;color:#2d3436;line-height:1;margin-bottom:4px"><sup style="font-size:22px;vertical-align:top;margin-top:10px;display:inline-block">$</sup>99</div>
-      <div style="color:#636e72;font-size:13px;margin-bottom:4px">per year</div>
+      <div style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#00b894;margin-bottom:12px">Pro Monthly</div>
+      <div style="font-size:48px;font-weight:800;color:#2d3436;line-height:1;margin-bottom:4px"><sup style="font-size:22px;vertical-align:top;margin-top:10px;display:inline-block">$</sup>9<span style="font-size:28px">.99</span></div>
+      <div style="color:#636e72;font-size:13px;margin-bottom:4px">per month</div>
       <div style="background:rgba(0,184,148,0.1);color:#00b894;font-size:12px;font-weight:600;padding:4px 12px;border-radius:20px;display:inline-block;margin-bottom:16px">30-day free trial</div>
       <ul style="list-style:none;margin-bottom:28px;display:flex;flex-direction:column;gap:10px">
         <li style="display:flex;gap:10px;font-size:13px;color:#2d3436"><span style="color:#00b894;font-weight:700">✓</span> All lessons unlocked</li>
@@ -19704,6 +19720,20 @@ window.addEventListener('DOMContentLoaded', function(){
       </ul>
       <a href="https://buy.stripe.com/14A8wO20TaWT0IegQU3Nm0d" target="_blank" style="display:block;width:100%;padding:13px;background:linear-gradient(135deg,#00b894,#00cec9);color:#fff;border:none;border-radius:10px;font-size:14px;font-weight:700;cursor:pointer;text-align:center;text-decoration:none;transition:opacity 0.2s;box-shadow:0 4px 16px rgba(0,184,148,0.35)" onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='1'">Start Free Trial →</a>
       <p style="text-align:center;font-size:12px;color:#b2bec3;margin-top:10px">No charge for 30 days</p>
+    </div>
+
+    <!-- PRO ANNUAL -->
+    <div style="background:#fff;border:2px solid #e0e0e0;border-radius:16px;padding:32px 28px">
+      <div style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#636e72;margin-bottom:12px">Pro Annual</div>
+      <div style="font-size:48px;font-weight:800;color:#2d3436;line-height:1;margin-bottom:4px"><sup style="font-size:22px;vertical-align:top;margin-top:10px;display:inline-block">$</sup>99</div>
+      <div style="color:#636e72;font-size:13px;margin-bottom:4px">per year</div>
+      <div style="background:rgba(253,203,110,0.2);color:#e17055;font-size:12px;font-weight:600;padding:4px 12px;border-radius:20px;display:inline-block;margin-bottom:16px">Save $21 vs monthly</div>
+      <ul style="list-style:none;margin-bottom:28px;display:flex;flex-direction:column;gap:10px">
+        <li style="display:flex;gap:10px;font-size:13px;color:#2d3436"><span style="color:#00b894;font-weight:700">✓</span> Everything in Pro</li>
+        <li style="display:flex;gap:10px;font-size:13px;color:#2d3436"><span style="color:#00b894;font-weight:700">✓</span> 2 months free vs monthly</li>
+        <li style="display:flex;gap:10px;font-size:13px;color:#2d3436"><span style="color:#00b894;font-weight:700">✓</span> Priority support</li>
+      </ul>
+      <a href="https://buy.stripe.com/14A8wO20TaWT0IegQU3Nm0d" target="_blank" style="display:block;width:100%;padding:13px;border:2px solid #00b894;border-radius:10px;background:#fff;color:#00b894;font-size:14px;font-weight:700;cursor:pointer;text-align:center;text-decoration:none;transition:all 0.2s" onmouseover="this.style.background='#f0f9f7'" onmouseout="this.style.background='#fff'">Get Annual Plan</a>
     </div>
 
   </div>
@@ -19737,8 +19767,8 @@ window.addEventListener('DOMContentLoaded', function(){
         </div>
       </div>
       <div style="text-align:center">
-        <a href="https://calendar.app.google/fHXaA5st778mNtvi8" target="_blank" style="display:inline-block;padding:14px 36px;background:linear-gradient(135deg,#fdcb6e,#e17055);color:#fff;border:none;border-radius:10px;font-size:15px;font-weight:700;cursor:pointer;text-decoration:none;transition:opacity 0.2s;box-shadow:0 4px 16px rgba(253,203,110,0.4)">Request District Pilot →</a>
-        <p style="margin-top:12px;font-size:13px;color:#00b894;font-weight:500">✓ Free 30-day pilot for qualifying districts</p>
+        <a href="mailto:cloud6appdevelopment@gmail.com?subject=School%2FDistrict%20Inquiry%20-%20Cloud6%20Academy&body=Hi%20Cloud6%20Team%2C%0A%0AI%27m%20interested%20in%20bringing%20Cloud6%20Academy%20to%20our%20school%2Fdistrict.%0A%0ASchool%2FDistrict%20Name%3A%20%0ANumber%20of%20Students%3A%20%0AContact%20Name%3A%20%0ARole%3A%20%0A%0APlease%20send%20me%20pricing%20and%20pilot%20information.%0A%0AThank%20you!" style="display:inline-block;padding:14px 36px;background:linear-gradient(135deg,#0984e3,#6c5ce7);color:#fff;border:none;border-radius:10px;font-size:15px;font-weight:700;cursor:pointer;text-decoration:none;transition:opacity 0.2s;box-shadow:0 4px 16px rgba(9,132,227,0.4)" onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='1'">📧 Request School/District Info →</a>
+        <p style="margin-top:12px;font-size:13px;color:#00b894;font-weight:500">✓ Free 30-day pilot for qualifying schools & districts</p>
       </div>
     </div>
   </div>
