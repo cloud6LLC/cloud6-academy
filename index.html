@@ -19577,6 +19577,15 @@ function updateTabButtons(active) {
   });
 }
 
+function showPricingScreen(){
+  document.getElementById('pricingScreen').style.display='block';
+  document.body.style.overflow='hidden';
+}
+function hidePricingScreen(){
+  document.getElementById('pricingScreen').style.display='none';
+  document.body.style.overflow='';
+}
+
 // Start the app
 window.addEventListener('DOMContentLoaded', function(){
   initApp();
