@@ -192,14 +192,97 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 .explanation.wrong{background:#ffeaea;color:#d63031;border:1px solid #d63031}
 /* Responsive */
 @media(max-width:768px){
-.grade-sidebar{width:48px}
-.categories-container{padding:16px}
-.grade-hero{padding:24px}
+/* -- TOP NAV -- */
+.top-nav{flex-direction:column!important;height:auto!important;padding:8px 12px 0!important;gap:0!important;align-items:stretch!important}
+.top-nav>div:first-child{font-size:16px!important;text-align:center;margin-bottom:6px}
+.top-nav>div:last-child{position:absolute;top:8px;right:12px;gap:4px!important}
+.top-nav>div:last-child input[type="text"]{display:none!important}
+.top-nav nav{width:100%;padding:6px 0!important;overflow-x:auto;-webkit-overflow-scrolling:touch;gap:2px!important;justify-content:flex-start!important;flex-wrap:nowrap!important;display:flex!important;border-top:1px solid #e8f5f0}
+.top-nav .nav-tab{font-size:11px!important;padding:5px 8px!important;flex-shrink:0}
+/* -- SUBJECT BAR -- */
+.subject-bar{padding:6px 12px!important;height:auto!important;-webkit-overflow-scrolling:touch}
+.subject-tab{padding:6px 10px!important;font-size:11px!important}
+/* -- GRADE SIDEBAR + MAIN LAYOUT -- */
+.main-layout{flex-direction:column}
+.grade-sidebar{width:100%!important;flex-direction:row;display:flex;overflow-x:auto;-webkit-overflow-scrolling:touch;border-right:none!important;border-bottom:1px solid #e0e0e0;padding:6px 8px!important}
+.grade-btn{margin:2px!important;flex-shrink:0}
+.content-area{width:100%}
+/* -- GRADE HERO -- */
+.grade-hero{padding:20px 16px!important}
+.grade-hero h1{font-size:22px!important}
+.grade-hero .stats{flex-wrap:wrap;gap:8px!important}
+.grade-hero .stat{padding:8px 12px!important}
+/* -- CATEGORIES -- */
+.categories-container{padding:12px!important}
+.category-pills{padding:12px!important}
 .skill-grid{grid-template-columns:1fr}
-.ai-builder{flex-direction:column;height:auto}
-.ai-builder .chat-side,.ai-builder .preview-side{width:100%}
+/* -- LESSON OVERLAY -- */
+.lesson-header{padding:14px 16px!important;flex-wrap:wrap;gap:8px}
+.lesson-header h2{font-size:16px!important}
 .lesson-body{flex-direction:column}
-.lesson-sidebar{width:100%;border-left:none;border-top:1px solid #eee}
+.lesson-content{padding:16px!important}
+.lesson-sidebar{width:100%!important;border-left:none!important;border-top:1px solid #eee;flex-direction:row;flex-wrap:wrap;gap:8px!important;padding:12px!important}
+.sidebar-box{min-width:120px;flex:1}
+/* -- ACTIVITY AREA -- */
+.activity-area{padding:14px!important}
+.mc-option{padding:10px 12px!important;font-size:13px!important}
+.match-container{grid-template-columns:1fr!important}
+.dd-container{flex-direction:column}
+.calc-inputs{flex-direction:column}
+.calc-input-group input{width:100%!important}
+/* -- AI BUILDER -- */
+.ai-builder{flex-direction:column;height:auto;max-height:none!important}
+.ai-builder .chat-side,.ai-builder .preview-side{width:100%!important}
+.ai-builder .phone{width:220px!important;height:400px!important}
+/* -- FOOTER -- */
+#siteFooter{padding:24px 16px 16px!important}
+#siteFooter>div:first-child{grid-template-columns:1fr!important;gap:20px!important}
+#siteFooter>div:last-child{flex-direction:column!important;text-align:center}
+/* -- HOME SCREEN HERO -- */
+#homeScreen>div:first-child{padding:32px 16px!important}
+#homeScreen>div:first-child h1{font-size:26px!important}
+#homeScreen>div:first-child p{font-size:15px!important}
+#homeScreen>div:first-child button{padding:12px 28px!important;font-size:14px!important}
+/* -- HOME FEATURED SUBJECTS -- */
+#homeScreen>div:nth-child(2){padding:24px 16px!important}
+/* -- HOME WHY SECTION -- */
+#homeScreen>div:nth-child(3){padding:24px 16px!important}
+/* -- PRICING SECTION -- */
+#homeScreen>div:nth-child(4){padding:32px 12px!important}
+#homeScreen>div:nth-child(4) h2{font-size:24px!important}
+/* -- DISTRICT SECTION -- */
+#homeScreen>div:nth-child(5){padding:32px 12px!important}
+#homeScreen>div:nth-child(5) h2{font-size:22px!important}
+/* -- GRADE PICKER -- */
+#gradePickerScreen>div:first-child{padding:32px 16px!important}
+#gradePickerScreen>div:first-child h1{font-size:24px!important}
+#gradePickerScreen>div:nth-child(2){padding:24px 16px!important}
+/* -- PRINTABLES SCREEN -- */
+#printablesScreen>div:first-child{padding:32px 16px!important}
+#printablesScreen>div:first-child h1{font-size:24px!important}
+#printablesScreen>div:first-child p{font-size:14px!important}
+/* -- AUTH SCREEN -- */
+#authScreen>div{padding:20px!important}
+#authScreen>div>div{width:100%!important;max-width:100%!important;margin:20px 12px!important;padding:24px 20px!important}
+/* -- GENERAL MOBILE FIXES -- */
+.fb-input{width:100%!important}
+.submit-btn{width:100%;text-align:center}
+.next-btn{width:100%;text-align:center}
+.budget-item{flex-wrap:wrap}
+/* -- PRINTABLE PREVIEW OVERLAY -- */
+#printablePreviewOverlay{padding:16px 8px!important}
+#printablePreviewOverlay>div{border-radius:12px!important}
+#printablePreviewOverlay>div>div:first-child{padding:20px 16px!important}
+#printablePreviewOverlay>div>div:nth-child(2){padding:16px!important}
+#printablePreviewOverlay>div>div:last-child{padding:12px 16px 16px!important;flex-direction:column!important}
+/* -- PRICING SCREEN OVERLAY -- */
+#pricingScreen>div{padding:24px 12px!important}
+/* -- ASSESSMENT SCREEN -- */
+#assessmentScreen>div:first-child{padding:32px 16px!important}
+/* -- TEACHER DASHBOARD -- */
+#teacherDashboardScreen{padding:12px!important}
+/* -- APP BUILDER SCREEN -- */
+#appBuilderScreen>div{padding:12px!important}
 }
 /* Scrollbar */
 ::-webkit-scrollbar{width:6px}
