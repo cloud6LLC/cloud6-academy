@@ -360,7 +360,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 <!-- ═══════════════════════════════════════════════════════════ -->
 <!-- LOGIN / SIGNUP / RESET PASSWORD SCREEN -->
 <!-- ═══════════════════════════════════════════════════════════ -->
-<div id="authScreen" style="display:none;min-height:100vh;background:linear-gradient(135deg,#00b894 0%,#0984e3 50%,#6c5ce7 100%);align-items:center;justify-content:center;padding:24px">
+<div id="authScreen" style="display:none;position:fixed;top:0;left:0;right:0;bottom:0;z-index:500;background:linear-gradient(135deg,#00b894 0%,#0984e3 50%,#6c5ce7 100%);align-items:center;justify-content:center;padding:24px;overflow-y:auto">
   <div style="background:#fff;border-radius:20px;padding:48px 40px;max-width:420px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,0.3)">
     <!-- Logo -->
     <div style="text-align:center;margin-bottom:32px">
@@ -2068,6 +2068,14 @@ function enterApp(){
 function showAuthScreen(){
   // Stop any playing audio
   if(typeof stopSpeech === 'function') stopSpeech();
+  // Close lesson overlay if open
+  var lessonOv = document.getElementById('lessonOverlay');
+  if(lessonOv) lessonOv.classList.remove('active');
+  // Close any modals
+  var premGate = document.getElementById('premiumGateModal');
+  if(premGate) premGate.remove();
+  var guestGate = document.getElementById('guestSignupRequiredModal');
+  if(guestGate) guestGate.remove();
   // Hide the entire app
   document.getElementById('authScreen').style.display = 'flex';
   document.querySelector('.top-nav').style.display = 'none';
@@ -2078,6 +2086,9 @@ function showAuthScreen(){
   document.getElementById('assessmentScreen').style.display = 'none';
   document.getElementById('gradePickerScreen').style.display = 'none';
   document.getElementById('siteFooter').style.display = 'none';
+  // Hide pricing screen if open
+  var pricingEl = document.getElementById('pricingScreen');
+  if(pricingEl) pricingEl.style.display = 'none';
   showLoginForm();
 }
 
