@@ -3157,7 +3157,7 @@ APP_BUILDING[8] = {
       abL("ab8a3",3,"Founder-Market Fit: Are YOU the Right Person to Build This?","🧑‍💼","Being passionate about a problem matters!",
         "The best founders are solving problems they personally have. Steve Jobs wanted elegant tech. Brian Chesky (Airbnb) struggled to pay rent. Evan Spiegel (Snapchat) wanted privacy. If YOU don't care about your problem, why would users? Founder-market fit = you're obsessed!",
         ["Do YOU have this problem?","Are you willing to spend 5 years on this?","Do you have relevant skills or connections?","Is there passion behind the mission?","Passion creates great products, not forced ideas"],
-        "🧑‍💼 Robert Kiyosaki (Rich Dad Poor Dad author) says the richest entrepreneurs are those obsessed with solving their own problems!",
+        "🧑‍💼 From the book Rich Dad Poor Dad, author Robert Kiyosaki says the richest entrepreneurs are those obsessed with solving their own problems!",
         fb("The best startups are founded by people who are _____ about the problem they're solving.",
           ["passionate","obsessed","personally affected","experienced","frustrated"]))
     ]},
@@ -3771,7 +3771,7 @@ APP_BUILDING[12] = {
       abL("ab12a3",3,"Exit Strategy: When Do You Sell Your Company?","🎯","Building a company means someday passing it on!",
         "Keep forever: Build lifestyle business (millions/year, low stress). IPO: Go public, infinite upside, lawsuits. Acquisition: Sell to bigger company (exit in 5-7 years, $100M+). Most founders don't think about exit — you should! Exit strategy shapes everything!",
         ["Lifestyle business: Profitable, independent, no growth pressure","Venture-backed: Aiming for 100x return ($100M+ exit)","Acquisition: Sell to bigger company (fast payoff, limited upside)","IPO: Go public (hardest, biggest potential, most scrutiny)","Lifestyle > VC for happiness, VC > lifestyle for wealth"],
-        "🎯 Robert Kiyosaki (Rich Dad Poor Dad) says the goal isn't profit — it's systems that run without you!",
+        "🎯 From the book Rich Dad Poor Dad, Robert Kiyosaki says the goal isn't profit — it's systems that run without you!",
         fb("Your long-term goal should be building an app company that either provides _____ (lifestyle) or returns huge value to investors (VC).",
           ["income","wealth","passive income","recurring revenue"]))
     ]},
@@ -4436,7 +4436,7 @@ FINANCIAL_LITERACY[4] = {
             "An owner builds a business that makes money",
             "Rich people think like owners, not employees"
           ],
-          "Robert Kiyosaki says: 'The rich don't work for money. They make money work for them.'",
+          "From the book Rich Dad Poor Dad, Robert Kiyosaki says: 'The rich don't work for money. They make money work for them.'",
           mc(
             "Who makes more money?",
             [
@@ -4629,7 +4629,7 @@ FINANCIAL_LITERACY[4] = {
         abL(
           "4D1",
           1,
-          "Needs vs. Wants (The Rich Dad Secret)",
+          "Needs vs. Wants (From the Book Rich Dad Poor Dad)",
           "🎯",
           "Needs keep you alive. Wants are everything else.",
           "A need is something you MUST have (food, shelter, clothes). A want is something you WISH you had. Rich people buy needs, smart wants, and investments. Poor people buy wants!",
@@ -4773,16 +4773,16 @@ FINANCIAL_LITERACY[5] = {
         abL(
           "5A1",
           1,
-          "The Rich Dad Poor Dad Mindset",
+          "The Mindset (From the Book Rich Dad Poor Dad)",
           "👨‍💼",
           "Poor people work for money. Rich people own businesses that work for them.",
-          "Rich Dad Poor Dad taught millions that MINDSET is everything. A poor person sells their time. A rich person builds systems that make money.",
+          "From the book Rich Dad Poor Dad: this book taught millions that MINDSET is everything. A poor person sells their time. A rich person builds systems that make money.",
           [
             "Poor mindset: trade time for money",
             "Rich mindset: own systems that make money",
             "Your mindset determines your financial future"
           ],
-          "Robert Kiyosaki went from poor to millionaire just by changing his mindset about money!",
+          "From the book Rich Dad Poor Dad, author Robert Kiyosaki went from poor to millionaire just by changing his mindset about money!",
           mc(
             "What's the rich mindset?",
             [
@@ -5120,7 +5120,7 @@ FINANCIAL_LITERACY[6] = {
           "Assets vs. Liabilities (The Most Important Lesson)",
           "⚖️",
           "An asset puts money IN. A liability takes money OUT.",
-          "This is the core of Rich Dad Poor Dad. Rich people buy assets. Poor people buy liabilities. That's the whole difference!",
+          "From the book Rich Dad Poor Dad: this is the most important lesson. Rich people buy assets. Poor people buy liabilities. That's the whole difference!",
           [
             "Asset = puts money in your pocket",
             "Liability = takes money out of your pocket",
@@ -5824,7 +5824,7 @@ FINANCIAL_LITERACY[8] = {
             "Businesses: exponential income growth (builds on itself)",
             "Jobs are safety nets, not wealth builders"
           ],
-          "Rich Dad Poor Dad teaches: get a job to pay bills, but build a business to build wealth!",
+          "From the book Rich Dad Poor Dad: get a job to pay bills, but build a business to build wealth!",
           mc(
             "What's the wealth-building path?",
             [
@@ -13095,6 +13095,73 @@ SOCIAL_STUDIES_CURRICULUM[12] = {
 function startQuestions(){
   document.getElementById('lesson-intro-section').style.display='none';
   document.getElementById('questions-area').style.display='block';
+  showReadingPassage();
+}
+
+function buildReadingPassage(lesson){
+  var intro = (typeof lesson.content.intro === 'string') ? lesson.content.intro : (lesson.tagline || lesson.title);
+  var kp = lesson.content.keyPoints || [];
+  if(!Array.isArray(kp)) kp = [kp];
+  var pointsText = kp.map(function(p){
+    if(typeof p === 'string') return p;
+    if(p && p.text) return p.text;
+    if(p && p.instructions) return p.instructions;
+    if(p && p.x) return p.x;
+    return '';
+  }).filter(function(p){ return p.length > 0; });
+  var funFact = lesson.content.funFact || '';
+
+  // Build a cohesive reading paragraph from the lesson content
+  var passage = '';
+  passage += intro;
+  if(pointsText.length > 0){
+    passage += ' Here is what you need to know: ';
+    passage += pointsText.join('. ') + '.';
+  }
+  if(funFact){
+    passage += ' Fun fact: ' + funFact.replace(/^[🎉🎯📊💵🪙🐷❤️🙏🎁🍎🎮✋💰🏦🧠📈⚖️🔥🚀💡🏠📱🎓💳🏗️📝🛡️💎🌟✨🔑⭐🎪🎭🎨🧑‍💼🏆]\s*/,'');
+  }
+  return { title: lesson.title, emoji: lesson.emoji, passage: passage };
+}
+
+function showReadingPassage(){
+  if(!currentOpenLesson) { showQuestion(0); return; }
+  var lesson = currentOpenLesson;
+  var reading = buildReadingPassage(lesson);
+  var area = document.getElementById('questions-area');
+
+  area.innerHTML = `
+    <div style="max-width:680px;margin:0 auto">
+      <div style="text-align:center;margin-bottom:20px">
+        <span style="font-size:40px">${reading.emoji || '📖'}</span>
+        <h2 style="font-size:22px;font-weight:700;color:#2d3436;margin:8px 0 4px">${reading.title}</h2>
+        <div style="font-size:13px;color:#636e72;font-weight:600;text-transform:uppercase;letter-spacing:1px">📖 Read Before You Answer</div>
+      </div>
+      <div style="background:linear-gradient(135deg,#f8f9fa,#fff);border:2px solid #e0e0e0;border-radius:16px;padding:28px 32px;margin-bottom:24px;position:relative">
+        <div style="position:absolute;top:-12px;left:24px;background:#00b894;color:#fff;padding:4px 14px;border-radius:8px;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px">Lesson Reading</div>
+        <p style="font-size:16px;line-height:1.8;color:#2d3436;margin:8px 0 0;text-align:left">${reading.passage}</p>
+      </div>
+      <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+        <button onclick="speakReadingPassage()" style="display:inline-flex;align-items:center;gap:8px;padding:12px 24px;background:linear-gradient(135deg,#0984e3,#74b9ff);color:#fff;border:none;border-radius:12px;font-size:15px;font-weight:700;cursor:pointer;box-shadow:0 4px 12px rgba(9,132,227,0.3);transition:all 0.2s">
+          🔊 Listen to Reading
+        </button>
+        <button onclick="beginQuestions()" style="display:inline-flex;align-items:center;gap:8px;padding:12px 28px;background:linear-gradient(135deg,#00b894,#00cec9);color:#fff;border:none;border-radius:12px;font-size:15px;font-weight:700;cursor:pointer;box-shadow:0 4px 12px rgba(0,184,148,0.3);transition:all 0.2s">
+          I'm Ready — Start Questions →
+        </button>
+      </div>
+    </div>
+  `;
+}
+
+function speakReadingPassage(){
+  if(!currentOpenLesson) return;
+  if(isSpeaking){ stopSpeech(); return; }
+  var reading = buildReadingPassage(currentOpenLesson);
+  speakText(reading.title + '. ' + reading.passage);
+}
+
+function beginQuestions(){
+  stopSpeech();
   showQuestion(0);
 }
 
