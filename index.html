@@ -503,8 +503,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
     <div class="nav-tab" id="nav-learning" style="padding:6px 12px;border-radius:8px;cursor:pointer;font-weight:600;font-size:13px;color:#636e72;background:transparent;white-space:nowrap;transition:all 0.2s;position:relative" onclick="toggleLearningDropdown()">
       📖 Learn ▾
       <div id="learning-dropdown" style="display:none;position:absolute;top:100%;left:0;background:#fff;border:1px solid #e0e0e0;border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,0.12);padding:8px;z-index:1000;min-width:190px;margin-top:6px">
-        <div onclick="event.stopPropagation();switchSubject('app-building');closeLearningDropdown()" style="padding:9px 14px;border-radius:8px;cursor:pointer;font-size:13px;display:flex;align-items:center;gap:8px" onmouseover="this.style.background='#f0f9f7'" onmouseout="this.style.background='transparent'">📱 App Building</div>
-        <div onclick="event.stopPropagation();switchSubject('financial-literacy');closeLearningDropdown()" style="padding:9px 14px;border-radius:8px;cursor:pointer;font-size:13px;display:flex;align-items:center;gap:8px" onmouseover="this.style.background='#f0f9f7'" onmouseout="this.style.background='transparent'">💰 Financial Literacy</div>
+        <div onclick="event.stopPropagation();switchSubject('app-building');closeLearningDropdown()" style="padding:9px 14px;border-radius:8px;cursor:pointer;font-size:13px;display:flex;align-items:center;gap:8px" onmouseover="this.style.background='#f0f9f7'" onmouseout="this.style.background='transparent'">📱 App Building <span style="background:linear-gradient(135deg,#00b894,#0984e3);color:#fff;font-size:9px;font-weight:700;padding:2px 6px;border-radius:10px;margin-left:auto">PRO</span></div>
+        <div onclick="event.stopPropagation();switchSubject('financial-literacy');closeLearningDropdown()" style="padding:9px 14px;border-radius:8px;cursor:pointer;font-size:13px;display:flex;align-items:center;gap:8px" onmouseover="this.style.background='#f0f9f7'" onmouseout="this.style.background='transparent'">💰 Financial Literacy <span style="background:linear-gradient(135deg,#00b894,#0984e3);color:#fff;font-size:9px;font-weight:700;padding:2px 6px;border-radius:10px;margin-left:auto">PRO</span></div>
         <div onclick="event.stopPropagation();switchSubject('math');closeLearningDropdown()" style="padding:9px 14px;border-radius:8px;cursor:pointer;font-size:13px;display:flex;align-items:center;gap:8px" onmouseover="this.style.background='#f0f9f7'" onmouseout="this.style.background='transparent'">📐 Math</div>
         <div onclick="event.stopPropagation();switchSubject('science');closeLearningDropdown()" style="padding:9px 14px;border-radius:8px;cursor:pointer;font-size:13px;display:flex;align-items:center;gap:8px" onmouseover="this.style.background='#f0f9f7'" onmouseout="this.style.background='transparent'">🔬 Science</div>
         <div onclick="event.stopPropagation();switchSubject('english');closeLearningDropdown()" style="padding:9px 14px;border-radius:8px;cursor:pointer;font-size:13px;display:flex;align-items:center;gap:8px" onmouseover="this.style.background='#f0f9f7'" onmouseout="this.style.background='transparent'">📖 English</div>
@@ -528,10 +528,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 <!-- SUBJECT TABS BAR -->
 <div class="subject-bar" id="subjectBar" style="display: none; gap: 4px; padding: 8px 24px; background: rgb(250, 250, 250); border-bottom: 1px solid rgb(240, 240, 240); overflow-x: auto; flex-wrap: nowrap;">
   <div class="subject-tab" data-subject="app-building" onclick="switchSubject(&#39;app-building&#39;)" style="padding:8px 14px;border-radius:8px;cursor:pointer;font-size:13px;font-weight:600;white-space:nowrap;transition:all 0.2s">
-    📱 App Building
+    📱 App Building <span style="background:linear-gradient(135deg,#00b894,#0984e3);color:#fff;font-size:9px;font-weight:700;padding:2px 6px;border-radius:10px;margin-left:4px;vertical-align:middle">PRO</span>
   </div>
   <div class="subject-tab" data-subject="financial-literacy" onclick="switchSubject(&#39;financial-literacy&#39;)" style="padding:8px 14px;border-radius:8px;cursor:pointer;font-size:13px;font-weight:600;white-space:nowrap;transition:all 0.2s">
-    💰 Financial Literacy
+    💰 Financial Literacy <span style="background:linear-gradient(135deg,#00b894,#0984e3);color:#fff;font-size:9px;font-weight:700;padding:2px 6px;border-radius:10px;margin-left:4px;vertical-align:middle">PRO</span>
   </div>
   <div class="subject-tab" data-subject="math" onclick="switchSubject(&#39;math&#39;)" style="padding:8px 14px;border-radius:8px;cursor:pointer;font-size:13px;font-weight:600;white-space:nowrap;transition:all 0.2s">
     📐 Math
@@ -569,12 +569,14 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
   <div style="padding:40px 48px">
     <h2 style="color:#2d3436;margin-bottom:24px">Featured Subjects</h2>
     <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:20px">
-      <div onclick="switchSubject(&#39;app-building&#39;);showAcademy()" style="padding:24px;border-radius:16px;border:1px solid #e0e0e0;cursor:pointer;transition:all 0.3s;background:#fff" onmouseover="this.style.transform=&#39;translateY(-4px)&#39;;this.style.boxShadow=&#39;0 8px 24px rgba(0,0,0,0.1)&#39;" onmouseout="this.style.transform=&#39;none&#39;;this.style.boxShadow=&#39;none&#39;">
+      <div onclick="switchSubject(&#39;app-building&#39;)" style="padding:24px;border-radius:16px;border:1px solid #e0e0e0;cursor:pointer;transition:all 0.3s;background:#fff;position:relative" onmouseover="this.style.transform=&#39;translateY(-4px)&#39;;this.style.boxShadow=&#39;0 8px 24px rgba(0,0,0,0.1)&#39;" onmouseout="this.style.transform=&#39;none&#39;;this.style.boxShadow=&#39;none&#39;">
+        <div style="position:absolute;top:12px;right:12px;background:linear-gradient(135deg,#00b894,#0984e3);color:#fff;font-size:10px;font-weight:700;padding:3px 10px;border-radius:20px">PRO</div>
         <div style="font-size:36px;margin-bottom:12px">📱</div>
         <h3 style="color:#2d3436;margin-bottom:4px">App Building</h3>
         <p style="font-size:13px;color:#636e72">Learn to build real apps with AI! Type a prompt and watch your app come to life.</p>
       </div>
-      <div onclick="switchSubject(&#39;financial-literacy&#39;);showAcademy()" style="padding:24px;border-radius:16px;border:1px solid #e0e0e0;cursor:pointer;transition:all 0.3s;background:#fff" onmouseover="this.style.transform=&#39;translateY(-4px)&#39;;this.style.boxShadow=&#39;0 8px 24px rgba(0,0,0,0.1)&#39;" onmouseout="this.style.transform=&#39;none&#39;;this.style.boxShadow=&#39;none&#39;">
+      <div onclick="switchSubject(&#39;financial-literacy&#39;)" style="padding:24px;border-radius:16px;border:1px solid #e0e0e0;cursor:pointer;transition:all 0.3s;background:#fff;position:relative" onmouseover="this.style.transform=&#39;translateY(-4px)&#39;;this.style.boxShadow=&#39;0 8px 24px rgba(0,0,0,0.1)&#39;" onmouseout="this.style.transform=&#39;none&#39;;this.style.boxShadow=&#39;none&#39;">
+        <div style="position:absolute;top:12px;right:12px;background:linear-gradient(135deg,#00b894,#0984e3);color:#fff;font-size:10px;font-weight:700;padding:3px 10px;border-radius:20px">PRO</div>
         <div style="font-size:36px;margin-bottom:12px">💰</div>
         <h3 style="color:#2d3436;margin-bottom:4px">Financial Literacy</h3>
         <p style="font-size:13px;color:#636e72">Think like an entrepreneur, not an employee. Learn about 401k, Roth IRA, LLCs, and financial freedom.</p>
@@ -1526,8 +1528,40 @@ function clearProgress(){
 // ═══════════════════════════════════════════════════════════
 let currentUser = null;
 let _resetTargetUser = null; // temp holder for password reset flow
-let guestAnswersCorrect = 0;  // tracks correct answers in guest mode for signup prompt
+let guestAnswersTotal = 0;  // tracks ALL answers in guest mode (correct + wrong)
 let guestPromptShown = false; // only show once per session
+
+// Check if user has premium (paid) access
+function isPremiumUser(){
+  if(!currentUser) return false;
+  var users = getUsers();
+  var u = users[currentUser.username];
+  return u && u.isPremium === true;
+}
+
+// Check if a subject requires premium access
+function isPremiumSubject(subject){
+  return subject === 'app-building' || subject === 'financial-literacy';
+}
+
+// Show premium upgrade modal when user tries to access paid content
+function showPremiumGate(){
+  var existing = document.getElementById('premiumGateModal');
+  if(existing) existing.remove();
+  var modal = document.createElement('div');
+  modal.id = 'premiumGateModal';
+  modal.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.55);z-index:9999;display:flex;align-items:center;justify-content:center;padding:16px;box-sizing:border-box';
+  modal.innerHTML = '<div style="background:#fff;border-radius:24px;max-width:460px;width:100%;padding:40px 32px;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,0.25);position:relative">' +
+    '<button onclick="document.getElementById(\'premiumGateModal\').remove()" style="position:absolute;top:16px;right:16px;background:none;border:none;font-size:20px;cursor:pointer;color:#b2bec3;line-height:1">&#10005;</button>' +
+    '<div style="font-size:52px;margin-bottom:12px">🔒</div>' +
+    '<h2 style="font-size:24px;font-weight:800;color:#2d3436;margin-bottom:8px">Premium Content</h2>' +
+    '<p style="color:#636e72;font-size:15px;margin-bottom:24px;line-height:1.5">App Building and Financial Literacy are <strong>premium subjects</strong>. Upgrade to Pro to unlock full access to these courses!</p>' +
+    '<button onclick="document.getElementById(\'premiumGateModal\').remove();showPricingScreen();" style="width:100%;padding:14px;background:linear-gradient(135deg,#00b894,#0984e3);color:#fff;border:none;border-radius:12px;font-size:16px;font-weight:700;cursor:pointer;margin-bottom:12px;box-shadow:0 4px 15px rgba(0,184,148,0.3)">⭐ View Pro Plans</button>' +
+    '<button onclick="document.getElementById(\'premiumGateModal\').remove();" style="width:100%;padding:12px;background:#f5f5f5;color:#636e72;border:none;border-radius:12px;font-size:14px;font-weight:600;cursor:pointer">Maybe Later</button>' +
+    '<div style="margin-top:16px;font-size:12px;color:#b2bec3">Math, Science, English, History & Social Studies are free!</div>' +
+  '</div>';
+  document.body.appendChild(modal);
+}
 
 // Load saved grade/subject early - only for logged-in users
 // Guests always start fresh for a clean demo experience
@@ -13359,6 +13393,16 @@ function showWorkedExample(){
 
 function openLesson(lessonId){
   stopSpeech();
+  // Gate premium subjects
+  if(isPremiumSubject(currentSubject) && !isPremiumUser()){
+    showPremiumGate();
+    return;
+  }
+  // Gate guests after 5 questions — require signup to continue
+  if(!currentUser && guestAnswersTotal >= 5){
+    showGuestSignupRequired();
+    return;
+  }
   const data = getSubjectData(currentSubject, currentGrade);
   if(!data) return;
   let lesson = null;
@@ -13515,6 +13559,11 @@ function getSubjectData(subject, grade){
 function switchSubject(subject){
   stopSpeech();
   if(typeof timerInterval !== 'undefined' && timerInterval){ clearInterval(timerInterval); timerInterval = null; }
+  // Gate premium subjects behind payment
+  if(isPremiumSubject(subject) && !isPremiumUser()){
+    showPremiumGate();
+    return;
+  }
   currentSubject = subject;
   saveProgress();
   document.querySelectorAll('.subject-tab').forEach(tab => {
@@ -13566,25 +13615,42 @@ function continueAsGuest(){
   showHome();
 }
 
+// Mandatory signup gate — shown after 5 questions as guest (cannot dismiss)
+function showGuestSignupRequired(){
+  var existing = document.getElementById('guestSignupRequiredModal');
+  if(existing) existing.remove();
+  var modal = document.createElement('div');
+  modal.id = 'guestSignupRequiredModal';
+  modal.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.65);z-index:9999;display:flex;align-items:center;justify-content:center;padding:16px;box-sizing:border-box';
+  modal.innerHTML = '<div style="background:#fff;border-radius:24px;max-width:440px;width:100%;padding:40px 32px;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,0.25)">' +
+    '<div style="font-size:52px;margin-bottom:12px">📝</div>' +
+    '<h2 style="font-size:24px;font-weight:800;color:#2d3436;margin-bottom:8px">Create a Free Account to Continue</h2>' +
+    '<p style="color:#636e72;font-size:15px;margin-bottom:24px;line-height:1.5">You\'ve answered <strong>5 questions</strong> — great job! Create a <strong>free username</strong> to save your progress, XP, and keep learning.</p>' +
+    '<button onclick="document.getElementById(\'guestSignupRequiredModal\').remove();showAuthScreen();showSignupForm();" style="width:100%;padding:14px;background:linear-gradient(135deg,#00b894,#0984e3);color:#fff;border:none;border-radius:12px;font-size:16px;font-weight:700;cursor:pointer;margin-bottom:12px;box-shadow:0 4px 15px rgba(0,184,148,0.3)">Create Free Account</button>' +
+    '<button onclick="document.getElementById(\'guestSignupRequiredModal\').remove();showAuthScreen();showLoginForm();" style="width:100%;padding:12px;background:#f5f5f5;color:#636e72;border:none;border-radius:12px;font-size:14px;font-weight:600;cursor:pointer">I already have an account — Log In</button>' +
+    '<div style="margin-top:20px;font-size:12px;color:#b2bec3">No credit card needed · Math, Science, English, History & Social Studies are free!</div>' +
+  '</div>';
+  document.body.appendChild(modal);
+}
+
 function showSaveProgressModal(){
   if(currentUser) return; // already logged in
-  if(guestAnswersCorrect < 10) return; // only show after 10 questions
+  if(guestAnswersTotal < 5) return; // only show after 5 questions
   guestPromptShown = true;
   var existing = document.getElementById('saveProgressModal');
   if(existing) existing.remove();
 
   var modal = document.createElement('div');
   modal.id = 'saveProgressModal';
-  modal.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.55);z-index:9999;display:flex;align-items:center;justify-content:center;padding:16px;box-sizing:border-box';
+  modal.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.65);z-index:9999;display:flex;align-items:center;justify-content:center;padding:16px;box-sizing:border-box';
   modal.innerHTML = `
-    <div style="background:#fff;border-radius:24px;max-width:440px;width:100%;padding:40px 32px;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,0.25);position:relative">
+    <div style="background:#fff;border-radius:24px;max-width:440px;width:100%;padding:40px 32px;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,0.25)">
       <div style="font-size:52px;margin-bottom:12px">🎉</div>
-      <h2 style="font-size:24px;font-weight:800;color:#2d3436;margin-bottom:8px">You're on a roll!</h2>
-      <p style="color:#636e72;font-size:15px;margin-bottom:24px;line-height:1.5">You've answered <strong>10 questions</strong> correctly! Create a <strong>free account</strong> to save your XP, track your progress, and keep learning where you left off.</p>
-      <button onclick="closeSaveProgressModal();showAuthScreen();showSignupForm();" style="width:100%;padding:14px;background:linear-gradient(135deg,#00b894,#0984e3);color:#fff;border:none;border-radius:12px;font-size:16px;font-weight:700;cursor:pointer;margin-bottom:12px;box-shadow:0 4px 15px rgba(0,184,148,0.3)">✨ Create Free Account</button>
-      <button onclick="closeSaveProgressModal();" style="width:100%;padding:12px;background:#f5f5f5;color:#636e72;border:none;border-radius:12px;font-size:14px;font-weight:600;cursor:pointer">Keep exploring as guest</button>
-      <div style="margin-top:20px;font-size:12px;color:#b2bec3">No credit card needed · 100% free for students</div>
-      <button onclick="closeSaveProgressModal();" style="position:absolute;top:16px;right:16px;background:none;border:none;font-size:20px;cursor:pointer;color:#b2bec3;line-height:1">✕</button>
+      <h2 style="font-size:24px;font-weight:800;color:#2d3436;margin-bottom:8px">Create a Free Account to Continue</h2>
+      <p style="color:#636e72;font-size:15px;margin-bottom:24px;line-height:1.5">You've answered <strong>5 questions</strong> — awesome! Create a <strong>free username</strong> to save your progress and keep learning.</p>
+      <button onclick="closeSaveProgressModal();showAuthScreen();showSignupForm();" style="width:100%;padding:14px;background:linear-gradient(135deg,#00b894,#0984e3);color:#fff;border:none;border-radius:12px;font-size:16px;font-weight:700;cursor:pointer;margin-bottom:12px;box-shadow:0 4px 15px rgba(0,184,148,0.3)">Create Free Account</button>
+      <button onclick="closeSaveProgressModal();showAuthScreen();showLoginForm();" style="width:100%;padding:12px;background:#f5f5f5;color:#636e72;border:none;border-radius:12px;font-size:14px;font-weight:600;cursor:pointer">I already have an account — Log In</button>
+      <div style="margin-top:20px;font-size:12px;color:#b2bec3">No credit card needed · Math, Science, English, History & Social Studies are free!</div>
     </div>`;
   document.body.appendChild(modal);
 }
@@ -15441,14 +15507,6 @@ function selectAnswer(qIndex, choiceIndex, choiceId, isCorrect, el){
     </div>`;
     document.getElementById('answer-feedback').innerHTML = feedbackHtml;
 
-    // Guest mode: count correct answers and prompt signup after 5
-    if(!currentUser && !guestPromptShown){
-      guestAnswersCorrect++;
-      if(guestAnswersCorrect >= 10){
-        setTimeout(function(){ showSaveProgressModal(); }, 1200);
-      }
-    }
-
   } else {
     el.classList.add('wrong-answer');
     el.style.borderColor = '#d63031';
@@ -15504,6 +15562,14 @@ function selectAnswer(qIndex, choiceIndex, choiceId, isCorrect, el){
 
   questionsAnswered++;
   totalQuestionsEverAnswered++;
+
+  // Guest mode: count ALL answers and require signup after 5
+  if(!currentUser && !guestPromptShown){
+    guestAnswersTotal++;
+    if(guestAnswersTotal >= 5){
+      setTimeout(function(){ showSaveProgressModal(); }, 1200);
+    }
+  }
 
   // ═══ WEEKLY STATS TRACKING ═══
   var weekKey = getWeekKey();
@@ -16552,7 +16618,7 @@ function selectMatchRight(idx){
 
   if(matchCompleted >= matchPairsData.length){
     questionsAnswered++; totalQuestionsEverAnswered++;
-    if(!currentUser && !guestPromptShown){ guestAnswersCorrect++; if(guestAnswersCorrect >= 10) setTimeout(function(){ showSaveProgressModal(); }, 1200); }
+    if(!currentUser && !guestPromptShown){ guestAnswersTotal++; if(guestAnswersTotal >= 5) setTimeout(function(){ showSaveProgressModal(); }, 1200); }
     document.getElementById('questions-count').textContent = questionsAnswered;
     document.getElementById('match-feedback').innerHTML = '<div class="answer-explanation correct">✅ Great job matching all the pairs!</div>';
     document.getElementById('match-next-btn').style.display = 'block';
@@ -16619,7 +16685,7 @@ function placeDDOption(targetIdx){
 
   if(ddPlaced >= ddTotalTargets || ddPlaced >= document.querySelectorAll('.dd-opt').length){
     questionsAnswered++; totalQuestionsEverAnswered++;
-    if(!currentUser && !guestPromptShown){ guestAnswersCorrect++; if(guestAnswersCorrect >= 10) setTimeout(function(){ showSaveProgressModal(); }, 1200); }
+    if(!currentUser && !guestPromptShown){ guestAnswersTotal++; if(guestAnswersTotal >= 5) setTimeout(function(){ showSaveProgressModal(); }, 1200); }
     document.getElementById('questions-count').textContent = questionsAnswered;
     document.getElementById('dd-feedback').innerHTML = '<div class="answer-explanation correct">✅ Great job placing all the items!</div>';
     document.getElementById('dd-next-btn').style.display = 'block';
@@ -16676,7 +16742,7 @@ function checkFillBlank(qIndex, isOpenEnded){
   }
   fb.style.display = 'block';
   questionsAnswered++; totalQuestionsEverAnswered++;
-  if(!currentUser && !guestPromptShown){ guestAnswersCorrect++; if(guestAnswersCorrect >= 10) setTimeout(function(){ showSaveProgressModal(); }, 1200); }
+  if(!currentUser && !guestPromptShown){ guestAnswersTotal++; if(guestAnswersTotal >= 5) setTimeout(function(){ showSaveProgressModal(); }, 1200); }
   document.getElementById('questions-count').textContent = questionsAnswered;
   document.getElementById('smartscore-display').textContent = smartScore;
   document.getElementById('fb-next-'+qIndex).style.display = 'block';
@@ -16726,7 +16792,7 @@ function pickSortItem(idx){
     fb.innerHTML = '<div class="answer-explanation correct">✅ Great job putting those in order!</div>';
     fb.style.display = 'block';
     questionsAnswered++; totalQuestionsEverAnswered++;
-    if(!currentUser && !guestPromptShown){ guestAnswersCorrect++; if(guestAnswersCorrect >= 10) setTimeout(function(){ showSaveProgressModal(); }, 1200); }
+    if(!currentUser && !guestPromptShown){ guestAnswersTotal++; if(guestAnswersTotal >= 5) setTimeout(function(){ showSaveProgressModal(); }, 1200); }
     document.getElementById('questions-count').textContent = questionsAnswered;
     document.getElementById('smartscore-display').textContent = smartScore;
     document.getElementById('sort-next-'+qIndex).style.display = 'block';
@@ -18382,6 +18448,11 @@ function builderLogChat(msg){
 let builderInitialized = false;
 function showAppBuilder(){
   stopSpeech();
+  // Gate behind premium
+  if(!isPremiumUser()){
+    showPremiumGate();
+    return;
+  }
   setActiveNav('nav-builder');
   hideAllScreens();
   document.getElementById('appBuilderScreen').style.display = 'block';
@@ -20639,11 +20710,11 @@ window.addEventListener('DOMContentLoaded', function(){
       <div style="font-size:48px;font-weight:800;color:#2d3436;line-height:1;margin-bottom:4px"><sup style="font-size:22px;vertical-align:top;margin-top:10px;display:inline-block">$</sup>0</div>
       <div style="color:#636e72;font-size:13px;margin-bottom:20px">Forever free</div>
       <ul style="list-style:none;margin-bottom:28px;display:flex;flex-direction:column;gap:10px">
-        <li style="display:flex;gap:10px;font-size:13px;color:#2d3436"><span style="color:#00b894;font-weight:700">✓</span> 5 lessons access</li>
-        <li style="display:flex;gap:10px;font-size:13px;color:#2d3436"><span style="color:#00b894;font-weight:700">✓</span> Basic progress tracking</li>
+        <li style="display:flex;gap:10px;font-size:13px;color:#2d3436"><span style="color:#00b894;font-weight:700">✓</span> Math, Science, English, History & Social Studies</li>
+        <li style="display:flex;gap:10px;font-size:13px;color:#2d3436"><span style="color:#00b894;font-weight:700">✓</span> Progress tracking (free account required)</li>
+        <li style="display:flex;gap:10px;font-size:13px;color:#b2bec3"><span style="color:#b2bec3">✕</span> App Building</li>
+        <li style="display:flex;gap:10px;font-size:13px;color:#b2bec3"><span style="color:#b2bec3">✕</span> Financial Literacy</li>
         <li style="display:flex;gap:10px;font-size:13px;color:#b2bec3"><span style="color:#b2bec3">✕</span> AI Builder</li>
-        <li style="display:flex;gap:10px;font-size:13px;color:#b2bec3"><span style="color:#b2bec3">✕</span> Certificates</li>
-        <li style="display:flex;gap:10px;font-size:13px;color:#b2bec3"><span style="color:#b2bec3">✕</span> All lesson modules</li>
       </ul>
       <button onclick="hidePricingScreen()" style="width:100%;padding:13px;border:2px solid #e0e0e0;border-radius:10px;background:#fff;color:#2d3436;font-size:14px;font-weight:600;cursor:pointer;transition:border-color 0.2s" onmouseover="this.style.borderColor='#636e72'" onmouseout="this.style.borderColor='#e0e0e0'">Continue with Free</button>
     </div>
