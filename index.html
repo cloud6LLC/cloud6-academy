@@ -14456,6 +14456,13 @@ function applyLessonTranslationsES(){
                 if(o && o.label != null) lesson.activity.dropTargets[i].label_es = o.label;
               });
             }
+            // String-form dd() activities: opts/targets are plain strings, not objects
+            if(Array.isArray(es.activity.dragOptionsStrings)){
+              lesson.activity.dragOptionsStrings_es = es.activity.dragOptionsStrings;
+            }
+            if(Array.isArray(es.activity.dropTargetsStrings)){
+              lesson.activity.dropTargetsStrings_es = es.activity.dropTargetsStrings;
+            }
             if(Array.isArray(es.activity.sortItems) && Array.isArray(lesson.activity.sortItems)){
               es.activity.sortItems_es = es.activity.sortItems;
               lesson.activity.sortItems_es = es.activity.sortItems;
@@ -15839,6 +15846,303 @@ Object.assign(LESSON_TRANSLATIONS_ES, {
   'financial-literacy:3E1': { title: 'Ganancia = Dinero que Queda Después de los Gastos', tagline: 'En un negocio, la ganancia es lo que te queda' },
   'financial-literacy:3E2': { title: '¿Qué Cuenta Como Gasto del Negocio?', tagline: 'Los gastos del negocio son las cosas que necesitas para generar dinero' },
   'financial-literacy:3E3': { title: 'Por Qué la Gente Exitosa Lleva la Cuenta de Su Dinero', tagline: 'Lleva un registro de lo que ganas y lo que gastas' },
+});
+
+// Grade 3 App Building activity translations
+Object.assign(LESSON_TRANSLATIONS_ES, {
+  'app-building:ab3a1': Object.assign({}, LESSON_TRANSLATIONS_ES['app-building:ab3a1'] || {}, {
+    activity: {
+      instructions: '¿Cuál de estas es una app?',
+      choices: [
+        { text: 'Instagram', explanation: '¡Sí! Instagram es una app para compartir fotos y videos.' },
+        { text: 'Un lápiz', explanation: '¡Un lápiz es un objeto real, no una app digital!' },
+        { text: 'YouTube', explanation: '¡YouTube también es una app, pero Instagram es la mejor respuesta aquí!' },
+        { text: 'Un sándwich', explanation: '¡Rico, pero no es una app!' }
+      ]
+    }
+  }),
+  'app-building:ab3a2': Object.assign({}, LESSON_TRANSLATIONS_ES['app-building:ab3a2'] || {}, {
+    activity: {
+      instructions: '¡Empareja el problema con la app que lo resolvió!',
+      dragOptions: [
+        { label: 'Perderse' },
+        { label: 'Aburrirse y querer ver videos' },
+        { label: 'Olvidar la tarea' },
+        { label: 'Querer hablar con amigos lejanos' }
+      ],
+      dropTargets: [
+        { label: 'Google Maps' },
+        { label: 'YouTube' },
+        { label: 'App de tareas' },
+        { label: 'FaceTime' }
+      ]
+    }
+  }),
+  'app-building:ab3a3': Object.assign({}, LESSON_TRANSLATIONS_ES['app-building:ab3a3'] || {}, {
+    activity: {
+      instructions: '¿Cuál es la MEJOR manera de encontrar una idea de app?',
+      choices: [
+        { text: 'Copiar exactamente la app de alguien más', explanation: '¡Copiar no es crear! Encuentra TU propio problema para resolver.' },
+        { text: 'Pensar en problemas que tienes todos los días', explanation: '¡SÍ! Las mejores ideas de apps vienen de problemas reales que TÚ vives.' },
+        { text: 'Construir la cosa más complicada posible', explanation: '¡Las apps simples suelen ser las mejores! Empieza de a poco.' },
+        { text: 'Esperar a ser adulto', explanation: '¿Para qué esperar? ¡Los niños construyen apps increíbles TODO el tiempo!' }
+      ]
+    }
+  }),
+  'app-building:ab3b1': Object.assign({}, LESSON_TRANSLATIONS_ES['app-building:ab3b1'] || {}, {
+    activity: {
+      instructions: '¡Arrastra cada parte de la app al lugar correcto en la pantalla!',
+      dragOptions: [
+        { label: 'Nombre/Encabezado de la app' },
+        { label: 'Contenido principal' },
+        { label: 'Botón de acción' },
+        { label: 'Navegación inferior' },
+        { label: 'Barra de búsqueda' }
+      ],
+      dropTargets: [
+        { label: 'Muy arriba de la pantalla' },
+        { label: 'En medio de la pantalla' },
+        { label: 'Un botón de color en el que se puede tocar' },
+        { label: 'Abajo de la pantalla' },
+        { label: 'Cerca de arriba, donde escribes para buscar' }
+      ]
+    }
+  }),
+  'app-building:ab3b2': Object.assign({}, LESSON_TRANSLATIONS_ES['app-building:ab3b2'] || {}, {
+    activity: {
+      instructions: '¡Empareja la app con su color principal!',
+      matchPairs: [
+        { left: 'Facebook', right: 'Azul — confianza y calma' },
+        { left: 'YouTube', right: 'Rojo — emocionante' },
+        { left: 'Spotify', right: 'Verde — fresco y lleno de vida' },
+        { left: 'Snapchat', right: 'Amarillo — divertido y con energía' },
+        { left: 'Instagram', right: 'Morado/Rosa — creativo' }
+      ]
+    }
+  }),
+  'app-building:ab3b3': Object.assign({}, LESSON_TRANSLATIONS_ES['app-building:ab3b3'] || {}, {
+    activity: {
+      instructions: '¡Pon estos pasos de diseño de app en el orden correcto!',
+      sortItems: ['Agrega colores y hazla bonita','Dibuja cajas donde va el contenido','Decide para qué es la pantalla','Muéstrasela a un amigo para recibir comentarios','Elige qué idea de app vas a diseñar']
+    }
+  }),
+  'app-building:ab3c1': Object.assign({}, LESSON_TRANSLATIONS_ES['app-building:ab3c1'] || {}, {
+    activity: {
+      instructions: '¿Qué es el vibe coding?',
+      choices: [
+        { text: 'Escribir miles de líneas de código a mano', explanation: '¡Esa es la programación tradicional! El vibe coding es diferente.' },
+        { text: 'Describirle a la IA lo que quieres y la IA lo construye', explanation: '¡SÍ! Vibe coding significa que describes tu idea y la IA la convierte en una app de verdad.' },
+        { text: 'Un tipo de baile que haces mientras programas', explanation: '¡Ja! Suena divertido pero no es eso.' },
+        { text: 'Algo que solo los adultos pueden hacer', explanation: '¡Nop! Cualquiera puede hacer vibe coding — ¡incluso los niños!' }
+      ]
+    }
+  }),
+  'app-building:ab3c2': Object.assign({}, LESSON_TRANSLATIONS_ES['app-building:ab3c2'] || {}, {
+    activity: {
+      instructions: '¿Cuál descripción entendería MEJOR la IA?',
+      choices: [
+        { text: 'Hazme una app', explanation: '¡Demasiado vago! La IA no sabe qué tipo de app quieres.' },
+        { text: 'Quiero algo padre', explanation: '¿Qué significa "padre"? ¡La IA necesita más detalles!' },
+        { text: 'Construye una app de cuidado de mascotas llamada PawPal con un diseño verde y blanco. Tiene un botón para agregar una mascota y muestra el nombre y la foto de mi mascota.', explanation: '¡PERFECTO! Esto le dice a la IA el nombre, los colores y exactamente qué mostrar.' },
+        { text: 'App por favor', explanation: 'La IA necesita saber más.' }
+      ]
+    }
+  }),
+  'app-building:ab3d1': Object.assign({}, LESSON_TRANSLATIONS_ES['app-building:ab3d1'] || {}, {
+    activity: {
+      instructions: '¿Cómo consigue la gente las apps en su teléfono?',
+      choices: [
+        { text: 'Las descargan desde el App Store o Play Store', explanation: '¡Correcto! El App Store (iPhone) y Play Store (Android) son donde encuentras y descargas apps.' },
+        { text: 'Tienen que construir cada app por sí mismos', explanation: '¡Eso tardaría para siempre! Las tiendas de apps te dejan descargar apps que otros han hecho.' },
+        { text: 'Las apps vienen preinstaladas y no puedes agregar más', explanation: '¡Siempre puedes agregar más apps desde la tienda!' },
+        { text: 'Tienes que mandarle una carta a Apple', explanation: '¡Jaja, no! Todo se hace desde la tienda.' }
+      ]
+    }
+  }),
+  'app-building:ab3d2': Object.assign({}, LESSON_TRANSLATIONS_ES['app-building:ab3d2'] || {}, {
+    activity: {
+      instructions: '¡Empareja la app con cómo gana dinero!',
+      matchPairs: [
+        { left: 'Netflix', right: 'Suscripción mensual' },
+        { left: 'Fortnite', right: 'Compras dentro de la app (skins)' },
+        { left: 'YouTube', right: 'Gratis con anuncios' },
+        { left: 'Minecraft', right: 'Compra única' },
+        { left: 'Spotify Free', right: 'Gratis con anuncios entre canciones' }
+      ]
+    }
+  }),
+  'app-building:ab3d3': Object.assign({}, LESSON_TRANSLATIONS_ES['app-building:ab3d3'] || {}, {
+    activity: {
+      instructions: '¡Pon estos en orden de PEOR a MEJOR calificación de la tienda!',
+      sortItems: ['⭐ (1 estrella) — Terrible, nadie la quiere','⭐⭐ (2 estrellas) — Regular','⭐⭐⭐ (3 estrellas) — Aceptable, promedio','⭐⭐⭐⭐ (4 estrellas) — ¡Muy buena!','⭐⭐⭐⭐⭐ (5 estrellas) — ¡INCREÍBLE, a todos les encanta!']
+    }
+  }),
+  'app-building:ab3e1': Object.assign({}, LESSON_TRANSLATIONS_ES['app-building:ab3e1'] || {}, {
+    activity: {
+      instructions: '¿Cuál es la MEJOR manera de conseguir tus primeros usuarios?',
+      choices: [
+        { text: 'Esperar y rezar para que la gente la encuentre mágicamente', explanation: '¡Si no le dices a nadie, nadie sabrá!' },
+        { text: 'Cuéntale a tus amigos y familiares y pídeles que la prueben', explanation: '¡SÍ! Tus amigos y familiares son tus primeros usuarios. ¡Si les encanta, se lo contarán a SUS amigos!' },
+        { text: 'Spamear a todos en internet', explanation: '¡A nadie le gusta el spam! Sé genuino y útil.' },
+        { text: 'Rendirte porque a nadie le va a importar', explanation: '¡No te rindas!' }
+      ]
+    }
+  }),
+  'app-building:ab3e2': Object.assign({}, LESSON_TRANSLATIONS_ES['app-building:ab3e2'] || {}, {
+    activity: {
+      instructions: '¡Empareja el nombre de la app con lo que hace!',
+      matchPairs: [
+        { left: 'Snapchat', right: 'Snap (foto) + Chat con amigos' },
+        { left: 'Instagram', right: 'Compartir fotos al instante' },
+        { left: 'YouTube', right: 'Tú transmites (tube = TV)' },
+        { left: 'TikTok', right: 'Videos cortos como el tictac del reloj' },
+        { left: 'FaceTime', right: 'Tiempo cara a cara en video' }
+      ]
+    }
+  }),
+  'app-building:ab3e3': Object.assign({}, LESSON_TRANSLATIONS_ES['app-building:ab3e3'] || {}, {
+    activity: {
+      instructions: 'Completa este pitch: "Mi app ayuda a los niños a _____ para que puedan _____."',
+      prompt: 'Mi app ayuda a los niños a _____ para que puedan _____.'
+    }
+  })
+});
+
+// Grade 3 Financial Literacy activity translations
+Object.assign(LESSON_TRANSLATIONS_ES, {
+  'financial-literacy:3A1': Object.assign({}, LESSON_TRANSLATIONS_ES['financial-literacy:3A1'] || {}, {
+    activity: {
+      instructions: '¿Qué significa ser el jefe de tu propio dinero?',
+      choices: [
+        { text: 'Tú decides qué hacer y te quedas con el dinero que ganas', explanation: '' },
+        { text: 'Alguien más te dice qué hacer', explanation: '' },
+        { text: 'Tienes que esperar a ser más grande', explanation: '' }
+      ]
+    }
+  }),
+  'financial-literacy:3A2': Object.assign({}, LESSON_TRANSLATIONS_ES['financial-literacy:3A2'] || {}, {
+    activity: {
+      instructions: 'Llena los espacios sobre tu puesto de limonada:',
+      prompt: 'Si vendes 20 vasos a $0.50 cada uno, ganas ___ dólares. Si tus insumos cuestan $3, te quedan ___ dólares de ganancia.'
+    }
+  }),
+  'financial-literacy:3A3': Object.assign({}, LESSON_TRANSLATIONS_ES['financial-literacy:3A3'] || {}, {
+    activity: {
+      instructions: '¿Cuál es un ejemplo de trueque?',
+      choices: [
+        { text: 'Intercambiar tus cartas de béisbol por las de otra persona', explanation: '' },
+        { text: 'Comprar algo en una tienda', explanation: '' },
+        { text: 'Recibir una mesada de tus papás', explanation: '' }
+      ]
+    }
+  }),
+  'financial-literacy:3B1': Object.assign({}, LESSON_TRANSLATIONS_ES['financial-literacy:3B1'] || {}, {
+    activity: {
+      instructions: 'Empareja el quehacer con el dinero que podrías ganar:',
+      dragOptionsStrings: ['Pasear al perro','Lavar el auto','Limpiar tu cuarto','Ayudar en el jardín'],
+      dropTargetsStrings: ['$2','$5','$1','$3']
+    }
+  }),
+  'financial-literacy:3B2': Object.assign({}, LESSON_TRANSLATIONS_ES['financial-literacy:3B2'] || {}, {
+    activity: {
+      instructions: '¿Qué te enseña más sobre el dinero?',
+      choices: [
+        { text: 'Ganar dinero haciendo quehaceres', explanation: '' },
+        { text: 'Recibir mesada gratis', explanation: '' },
+        { text: 'Los dos son exactamente lo mismo', explanation: '' }
+      ]
+    }
+  }),
+  'financial-literacy:3B3': Object.assign({}, LESSON_TRANSLATIONS_ES['financial-literacy:3B3'] || {}, {
+    activity: {
+      instructions: '¿Cuál es una buena idea de negocio paralelo para un niño de 8 años?',
+      choices: [
+        { text: 'Pasear perros de los vecinos o vender manualidades hechas a mano', explanation: '' },
+        { text: 'Trabajar en un banco', explanation: '' },
+        { text: 'Administrar un restaurante', explanation: '' }
+      ]
+    }
+  }),
+  'financial-literacy:3C1': Object.assign({}, LESSON_TRANSLATIONS_ES['financial-literacy:3C1'] || {}, {
+    activity: {
+      instructions: '¿Por qué un banco es mejor que una alcancía?',
+      choices: [
+        { text: 'El banco te paga intereses por tus ahorros', explanation: '' },
+        { text: 'Las alcancías son muy pequeñas', explanation: '' },
+        { text: 'Los bancos tienen decoraciones más padres', explanation: '' }
+      ]
+    }
+  }),
+  'financial-literacy:3C2': Object.assign({}, LESSON_TRANSLATIONS_ES['financial-literacy:3C2'] || {}, {
+    activity: {
+      instructions: 'Completa esta historia sencilla de interés compuesto:',
+      prompt: 'Ahorras $10. El banco te da $1 de interés. Ahora tienes $11. El año que viene, el banco te da interés sobre TODOS los $11, no solo sobre los $10. Eso es interés ___.'
+    }
+  }),
+  'financial-literacy:3C3': Object.assign({}, LESSON_TRANSLATIONS_ES['financial-literacy:3C3'] || {}, {
+    activity: {
+      instructions: '¿Qué es una buena meta de ahorro?',
+      choices: [
+        { text: 'Un videojuego o un juguete que de verdad quieres', explanation: '' },
+        { text: 'Solo guardar dinero al azar', explanation: '' },
+        { text: 'Ahorrar para cosas que no te importan', explanation: '' }
+      ]
+    }
+  }),
+  'financial-literacy:3D1': Object.assign({}, LESSON_TRANSLATIONS_ES['financial-literacy:3D1'] || {}, {
+    activity: {
+      instructions: 'Empareja lo que pasa cuando pides prestado:',
+      dragOptionsStrings: ['Le pides prestados $20 a tu mamá','Tu mamá te presta $50 para un juguete','Le pides prestado a un prestamista abusivo'],
+      dropTargetsStrings: ['Devuelves $22 (ella ganó interés)','Devolverías $55 en vez de $50','Podrías deber MUCHÍSIMO más de lo que pediste']
+    }
+  }),
+  'financial-literacy:3D2': Object.assign({}, LESSON_TRANSLATIONS_ES['financial-literacy:3D2'] || {}, {
+    activity: {
+      instructions: '¿Cuál es una buena deuda?',
+      choices: [
+        { text: 'Pedir prestado para aprender habilidades que te ayudan a ganar más', explanation: '' },
+        { text: 'Pedir prestado para comprar cosas que no necesitas', explanation: '' },
+        { text: 'Usar una tarjeta de crédito para comprar dulces', explanation: '' }
+      ]
+    }
+  }),
+  'financial-literacy:3D3': Object.assign({}, LESSON_TRANSLATIONS_ES['financial-literacy:3D3'] || {}, {
+    activity: {
+      instructions: '¿Cuál es la forma MÁS LISTA de pedir prestado?',
+      choices: [
+        { text: 'Encontrar la tasa de interés MÁS BAJA posible', explanation: '' },
+        { text: 'Tomar el primer préstamo que te ofrezcan', explanation: '' },
+        { text: 'Pedirle a la primera persona que veas', explanation: '' }
+      ]
+    }
+  }),
+  'financial-literacy:3E1': Object.assign({}, LESSON_TRANSLATIONS_ES['financial-literacy:3E1'] || {}, {
+    activity: {
+      instructions: 'Completa estas matemáticas de ganancia:',
+      prompt: 'Ganas $30 vendiendo pulseras. Tus insumos cuestan $8. Tu ganancia es $___.'
+    }
+  }),
+  'financial-literacy:3E2': Object.assign({}, LESSON_TRANSLATIONS_ES['financial-literacy:3E2'] || {}, {
+    activity: {
+      instructions: '¿Cuáles son gastos del negocio?',
+      dragOptionsStrings: ['Limonada y vasos para tu puesto','Correa para pasear perros','Dulces que comes en casa','Tenis para caminar'],
+      dropTargetsStrings: ['SÍ - insumos para tu negocio','SÍ - herramienta para tu negocio','NO - botana personal','Quizás - si es solo para el negocio']
+    }
+  }),
+  'financial-literacy:3E3': Object.assign({}, LESSON_TRANSLATIONS_ES['financial-literacy:3E3'] || {}, {
+    activity: {
+      instructions: '¿Por qué registrar tus ganancias y gastos?',
+      choices: [
+        { text: 'Para ver si tu negocio está ganando o perdiendo dinero', explanation: '' },
+        { text: 'Porque es divertido escribir cosas', explanation: '' },
+        { text: 'Para impresionar a tus amigos', explanation: '' }
+      ]
+    }
+  })
+});
+
+Object.assign(LESSON_TRANSLATIONS_ES, {
+  // Placeholder for continuation — following existing structure
 
   // ─── SCIENCE 3 ───
   'science:s3A1': { title: 'Ecosistemas', tagline: 'Comunidades de seres vivos y sus hogares' },
@@ -20964,8 +21268,17 @@ let ddPlaced = 0;
 let ddTotalTargets = 0;
 
 function renderDragDropActivity(activity, qIndex){
-  const opts = (activity.dragOptions||[]).map(o => typeof o === 'string' ? o : (tf(o, 'label') || o));
-  const targets = (activity.dropTargets||[]).map(o => typeof o === 'string' ? o : (tf(o, 'label') || o));
+  const esActive = currentLang === 'es';
+  const optsStringsEs = esActive && Array.isArray(activity.dragOptionsStrings_es) ? activity.dragOptionsStrings_es : null;
+  const targetsStringsEs = esActive && Array.isArray(activity.dropTargetsStrings_es) ? activity.dropTargetsStrings_es : null;
+  const opts = (activity.dragOptions||[]).map((o, i) => {
+    if(typeof o === 'string') return (optsStringsEs && optsStringsEs[i]) || o;
+    return tf(o, 'label') || o;
+  });
+  const targets = (activity.dropTargets||[]).map((o, i) => {
+    if(typeof o === 'string') return (targetsStringsEs && targetsStringsEs[i]) || o;
+    return tf(o, 'label') || o;
+  });
   ddSelectedOption = null;
   ddPlaced = 0;
   ddTotalTargets = targets.length;
