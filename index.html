@@ -15706,6 +15706,172 @@ Object.assign(LESSON_TRANSLATIONS_ES, {
 })();
 
 // ═══════════════════════════════════════════════════════════
+// PHASE 3b — Templated activity translations for Grade 1/2/3 History + English
+// The data for these subjects uses a formulaic activity pattern:
+//   History: mc("Why study <topic>?", [{text:"To understand our world better"...
+//   English: mc("Why is <topic> important?", [{text:"It builds communication skills"...
+// We can Spanish-localize the whole lot in one pass by supplying a
+// topic-localized question plus the three reusable choice translations.
+// ═══════════════════════════════════════════════════════════
+(function(){
+  const L = LESSON_TRANSLATIONS_ES;
+
+  // ── History Grade 1 (h1A1..h1E3) — topic names in Spanish
+  const hist1 = {
+    h1A1:'los símbolos americanos', h1A2:'la historia de los peregrinos', h1A3:'a Martin Luther King Jr.',
+    h1B1:'cómo leer mapas', h1B2:'los continentes', h1B3:'la rosa de los vientos',
+    h1C1:'las reglas y las leyes', h1C2:'a los líderes de la comunidad', h1C3:'qué significa ser un buen ciudadano',
+    h1D1:'los bienes y los servicios', h1D2:'a los pueblos indígenas', h1D3:'los cuentos tradicionales',
+    h1E1:'las tradiciones familiares', h1E2:'a los inventores', h1E3:'la responsabilidad'
+  };
+  const hist2 = {
+    h2A1:'a los exploradores', h2A2:'la vida colonial', h2A3:'a estadounidenses famosos',
+    h2B1:'las regiones del mapa de EE. UU.', h2B2:'las formas del terreno', h2B3:'los recursos naturales',
+    h2C1:'el gobierno local', h2C2:'las elecciones', h2C3:'los derechos y las responsabilidades',
+    h2D1:'el dinero y el comercio', h2D2:'las historias de inmigración', h2D3:'los días festivos del mundo',
+    h2E1:'la herencia cultural', h2E2:'cómo leer una línea del tiempo', h2E3:'la resolución de problemas'
+  };
+  function addHistActivity(gradePrefix, topicMap){
+    const choicesES = [
+      { text:'Para entender mejor nuestro mundo', explanation:'¡La historia nos da perspectiva!' },
+      { text:'No es relevante hoy', explanation:'¡La historia marca todo!' },
+      { text:'Solo para los exámenes', explanation:'¡Nos ayuda a tomar mejores decisiones!' }
+    ];
+    Object.keys(topicMap).forEach(function(id){
+      const key = 'history:' + id;
+      if(!L[key]) L[key] = {};
+      L[key].activity = {
+        instructions: '¿Por qué estudiar ' + topicMap[id] + '?',
+        choices: choicesES
+      };
+      // Topic-aware intro/keyPoints/funFact so the intro pane reads in Spanish
+      const topicCap = topicMap[id].charAt(0).toUpperCase() + topicMap[id].slice(1);
+      L[key].intro = 'Aprende sobre ' + topicMap[id] + ' y cómo ha influido en nuestro mundo.';
+      L[key].keyPoints = [
+        topicCap + ' forma parte de nuestra historia',
+        'La historia nos enseña lecciones',
+        'Entender el pasado nos ayuda con el futuro'
+      ];
+      L[key].funFact = '¡Quien no aprende de la historia está condenado a repetirla!';
+    });
+  }
+  addHistActivity('h1', hist1);
+  addHistActivity('h2', hist2);
+
+  // ── English Grade 1 (e1A1..e1E3) and Grade 2 (e2A1..e2E3) — topic names
+  const eng1 = {
+    e1A1:'las palabras CVC', e1A2:'unir los sonidos', e1A3:'leer oraciones',
+    e1B1:'escribir en un diario', e1B2:'las letras mayúsculas', e1B3:'los puntos e interrogación',
+    e1C1:'las palabras a la vista (set 2)', e1C2:'las palabras compuestas', e1C3:'las familias de palabras',
+    e1D1:'los verbos', e1D2:'los adjetivos', e1D3:'los pronombres',
+    e1E1:'mostrar y contar', e1E2:'la lectura con compañero', e1E3:'recontar un cuento'
+  };
+  const eng2 = {
+    e2A1:'los libros por capítulos', e2A2:'la ficción vs. la no ficción', e2A3:'la idea principal',
+    e2B1:'escribir párrafos', e2B2:'las cartas amistosas', e2B3:'las bases de la edición',
+    e2C1:'las pistas del contexto', e2C2:'los prefijos', e2C3:'los sufijos',
+    e2D1:'el tiempo pasado', e2D2:'la puntuación', e2D3:'las comas',
+    e2E1:'los reportes de libros', e2E2:'las presentaciones orales', e2E3:'las discusiones en grupo'
+  };
+  function addEngActivity(topicMap){
+    const choicesES = [
+      { text:'Desarrolla tus habilidades de comunicación', explanation:'¡El lenguaje es poder!' },
+      { text:'No es útil', explanation:'¡La comunicación es esencial!' },
+      { text:'Solo para la escuela', explanation:'¡Se usa en todo lo de la vida!' }
+    ];
+    Object.keys(topicMap).forEach(function(id){
+      const key = 'english:' + id;
+      if(!L[key]) L[key] = {};
+      L[key].activity = {
+        instructions: '¿Por qué es importante ' + topicMap[id] + '?',
+        choices: choicesES
+      };
+      const topicCap = topicMap[id].charAt(0).toUpperCase() + topicMap[id].slice(1);
+      L[key].intro = 'Practica ' + topicMap[id] + ' para fortalecer tu lectura y escritura.';
+      L[key].keyPoints = [
+        topicCap + ' fortalece la comunicación',
+        'La lectura y la escritura van juntas',
+        'Practica un poco todos los días'
+      ];
+      L[key].funFact = '¡Leer 20 minutos al día te expone a 1.8 millones de palabras al año!';
+    });
+  }
+  addEngActivity(eng1);
+  addEngActivity(eng2);
+
+  // ── Science Grade 1/2 activities (content-specific — direct translations)
+  const sciActivities = {
+    's1A1': { q:'¿Qué hacen las raíces?', choices:[{text:'Toman agua del suelo', expl:'¡Las raíces son como popotes!'}, {text:'Hacen comida para la planta', expl:'¡Eso lo hacen las hojas!'}, {text:'Atrapan la luz del sol', expl:'¡Eso lo hacen las hojas!'}] },
+    's1A2': { q:'¿Qué animal tiene plumas?', choices:[{text:'Un pájaro', expl:'¡Los pájaros tienen plumas!'}, {text:'Un pez', expl:'¡Los peces tienen escamas!'}, {text:'Un perro', expl:'¡Los perros tienen pelo!'}] },
+    's1A3': { q:'¿Qué es un hábitat?', choices:[{text:'Un lugar donde viven los animales', expl:'¡Los hábitats son el hogar de los animales!'}, {text:'Solo un montón de rocas', expl:'¡Un hábitat tiene todo lo que el animal necesita!'}, {text:'Un parque de juegos', expl:'¡Los animales viven en hábitats naturales!'}] },
+    's1B1': { q:'¿De qué está hecha la Tierra?', choices:[{text:'Tierra, rocas, arena, agua y aire', expl:'¡Esos son los materiales de la Tierra!'}, {text:'Solo plástico y metal', expl:'¡La Tierra es de materiales naturales!'}, {text:'Solo agua', expl:'¡La Tierra tiene muchos materiales!'}] },
+    's1B2': { q:'¿Qué podemos ver en el cielo de noche?', choices:[{text:'Estrellas y la luna', expl:'¡Las estrellas brillan de noche!'}, {text:'Solo durante el día', expl:'¡De noche vemos cosas distintas!'}, {text:'Nada', expl:'¡El cielo de noche es increíble!'}] },
+    's1B3': { q:'¿Qué le pasa al agua con el sol?', choices:[{text:'Sube como vapor invisible', expl:'¡El calor hace que el agua suba!'}, {text:'Se queda en un lugar', expl:'¡El agua se mueve!'}, {text:'Se convierte en hielo', expl:'¡El calor del sol hace vapor!'}] },
+    's1C1': { q:'¿Qué crea el sonido?', choices:[{text:'Las vibraciones', expl:'¡Las vibraciones hacen sonido!'}, {text:'La luz', expl:'¡Eso es otra cosa!'}, {text:'Nada, el sonido aparece solo', expl:'¡Las vibraciones hacen sonido!'}] },
+    's1C2': { q:'¿Qué es una fuente de luz?', choices:[{text:'El sol', expl:'¡El sol es una fuente de luz!'}, {text:'Una sombra', expl:'¡Las sombras bloquean la luz!'}, {text:'Una piedra', expl:'¡Las piedras no hacen luz!'}] },
+    's1C3': { q:'¿Qué es el movimiento?', choices:[{text:'Cuando algo cambia de lugar', expl:'¡Movimiento = cambio de posición!'}, {text:'Cuando algo está quieto', expl:'¡Eso no es movimiento!'}, {text:'Un color', expl:'¡El movimiento es físico!'}] },
+    's1D1': { q:'¿Qué debe hacer un científico?', choices:[{text:'Observar con cuidado y anotar lo que ve', expl:'¡Observar y anotar es clave!'}, {text:'Solo recordar las cosas', expl:'¡Anotar ayuda a recordar!'}, {text:'No mirar con cuidado', expl:'¡Observar con cuidado es clave!'}] },
+    's1D2': { q:'¿Qué hacen los científicos con sus predicciones?', choices:[{text:'Las prueban para ver si son correctas', expl:'¡Probar las predicciones nos enseña!'}, {text:'Nunca las revisan', expl:'¡Probamos las predicciones!'}, {text:'Las olvidan', expl:'¡Las predicciones guían los experimentos!'}] },
+    's1D3': { q:'¿Qué herramienta mide la temperatura?', choices:[{text:'Un termómetro', expl:'¡Los termómetros miden el calor!'}, {text:'Una regla', expl:'¡Las reglas miden longitud!'}, {text:'Una balanza', expl:'¡Las balanzas miden peso!'}] },
+    's1E1': { q:'¿En qué estación florecen las flores?', choices:[{text:'Primavera', expl:'¡La primavera es la estación de crecer!'}, {text:'Verano', expl:'¡El verano es caluroso!'}, {text:'Invierno', expl:'¡El invierno es frío!'}] },
+    's1E2': { q:'¿Qué es la conservación?', choices:[{text:'Proteger la naturaleza y los recursos', expl:'¡Conservar es proteger!'}, {text:'Desperdiciar todo', expl:'¡Eso es lo contrario!'}, {text:'Usar mucho plástico', expl:'¡Debemos conservar!'}] },
+    's1E3': { q:'¿Cuál es una máquina simple?', choices:[{text:'Una palanca', expl:'¡Las palancas son máquinas simples!'}, {text:'Una nube', expl:'¡Las nubes no son máquinas!'}, {text:'Una flor', expl:'¡Las flores no son máquinas!'}] },
+    's2A1': { q:'¿Cuál es la primera etapa de la vida de una mariposa?', choices:[{text:'Un huevo', expl:'¡Las mariposas empiezan como huevos!'}, {text:'Una mariposa', expl:'¡Esa es la última etapa!'}, {text:'Una flor', expl:'¡Las flores no son etapas!'}] },
+    's2A2': { q:'¿Qué hacen las plantas en una cadena alimenticia?', choices:[{text:'Producen comida con la luz del sol', expl:'¡Las plantas son productoras!'}, {text:'Se comen a los animales', expl:'¡Las plantas hacen su propia comida!'}, {text:'Descomponen cosas muertas', expl:'¡Las plantas son productoras!'}] },
+    's2A3': { q:'¿Por qué los animales tienen adaptaciones?', choices:[{text:'Para sobrevivir', expl:'¡Las adaptaciones son herramientas para sobrevivir!'}, {text:'Para verse bonitos', expl:'¡Las adaptaciones ayudan a sobrevivir!'}, {text:'Para hacer ruido', expl:'¡Tienen muchos propósitos!'}] },
+    's2B1': { q:'¿Qué causa la erosión?', choices:[{text:'El agua, el viento y el hielo', expl:'¡Estos erosionan la Tierra!'}, {text:'Solo las plantas', expl:'¡El agua y el viento erosionan!'}, {text:'Solo los animales', expl:'¡Las fuerzas naturales erosionan!'}] },
+    's2B2': { q:'¿Qué podemos aprender de los fósiles?', choices:[{text:'Sobre animales que vivieron hace mucho', expl:'¡Los fósiles nos enseñan historia!'}, {text:'Solo de plantas', expl:'¡Los fósiles también incluyen animales!'}, {text:'Nada importante', expl:'¡Los fósiles son muy importantes!'}] },
+    's2B3': { q:'¿Qué es un recurso natural?', choices:[{text:'Algo de la Tierra que las personas usan', expl:'¡Los recursos naturales nos ayudan!'}, {text:'Un juguete de la tienda', expl:'¡Los recursos vienen de la naturaleza!'}, {text:'Un videojuego', expl:'¡Los recursos son cosas naturales!'}] },
+    's2C1': { q:'¿Cuál es un gas?', choices:[{text:'El aire', expl:'¡El aire es un gas!'}, {text:'El hielo', expl:'¡El hielo es un sólido!'}, {text:'El agua', expl:'¡El agua es un líquido!'}] },
+    's2C2': { q:'¿Cómo se mueve el calor?', choices:[{text:'De lo caliente a lo frío', expl:'¡Siempre va así!'}, {text:'De lo frío a lo caliente', expl:'¡Eso es al revés!'}, {text:'No se mueve', expl:'¡El calor sí viaja!'}] },
+    's2C3': { q:'¿Qué es una fuerza?', choices:[{text:'Un empujón o un jalón', expl:'¡Las fuerzas mueven cosas!'}, {text:'Un color', expl:'¡Las fuerzas causan movimiento!'}, {text:'Un sentimiento', expl:'¡Las fuerzas son físicas!'}] },
+    's2D1': { q:'¿Cuál es el primer paso del método científico?', choices:[{text:'Hacer una pregunta', expl:'¡Las preguntas inician la ciencia!'}, {text:'Hacer un experimento', expl:'¡Primero preguntamos!'}, {text:'Escribir conclusiones', expl:'¡Eso va al final!'}] },
+    's2D2': { q:'¿Qué es una prueba justa?', choices:[{text:'Cambiar solo una cosa a la vez', expl:'¡Las pruebas justas son controladas!'}, {text:'Cambiar todo', expl:'¡Cambiamos una sola cosa!'}, {text:'No probar nada', expl:'¡Probar con cuidado importa!'}] },
+    's2D3': { q:'¿Cómo organizan los científicos los datos?', choices:[{text:'Con tablas y gráficas', expl:'¡Organizar nos ayuda a entender!'}, {text:'Olvidándolos', expl:'¡Los organizamos con cuidado!'}, {text:'Solo con dibujos', expl:'¡Las tablas y gráficas ayudan!'}] },
+    's2E1': { q:'¿Qué es una forma del terreno?', choices:[{text:'Una característica natural de la Tierra', expl:'¡Las formas del terreno moldean la Tierra!'}, {text:'Un tipo de clima', expl:'¡Son accidentes geográficos!'}, {text:'Un animal marino', expl:'¡Las formas del terreno son geográficas!'}] },
+    's2E2': { q:'¿Qué crea la contaminación?', choices:[{text:'Los carros y las fábricas', expl:'¡Son fuentes de contaminación!'}, {text:'Solo las plantas', expl:'¡Las actividades humanas contaminan!'}, {text:'Nada — no existe', expl:'¡La contaminación es real!'}] },
+    's2E3': { q:'¿Qué son los inventos?', choices:[{text:'Creaciones nuevas que resuelven problemas', expl:'¡Los inventos nos ayudan!'}, {text:'Solo cosas de la naturaleza', expl:'¡Los inventos son creaciones humanas!'}, {text:'Cosas que no funcionan', expl:'¡Los inventos son útiles!'}] }
+  };
+  Object.keys(sciActivities).forEach(function(id){
+    const key = 'science:' + id;
+    const src = sciActivities[id];
+    if(!L[key]) L[key] = {};
+    L[key].activity = {
+      instructions: src.q,
+      choices: src.choices.map(function(c){ return { text: c.text, explanation: c.expl }; })
+    };
+  });
+
+  // ── Social Studies Grade 2 activities (content-specific)
+  const ssG2 = {
+    's2A1': { q:'¿Qué hacen los buenos vecinos?', choices:[{text:'Se ayudan y se saludan', expl:'¡Los buenos vecinos son amables y ayudan!'}, {text:'No se hablan', expl:'¡Los buenos vecinos son amistosos!'}, {text:'Solo salen de noche', expl:'¡Los buenos vecinos son amistosos siempre!'}] },
+    's2A2': { q:'¿Por qué hay tareas en el salón?', choices:[{text:'Para ayudar a mantener el salón limpio', expl:'¡Las tareas ayudan a todos!'}, {text:'Para dar trabajo a los niños', expl:'¡Las tareas nos ayudan, no nos molestan!'}, {text:'Para entristecer al maestro', expl:'¡A los maestros les gusta que ayudemos!'}] },
+    's2A3': { q:'¿Qué es una acción amable?', choices:[{text:'Ayudar a alguien que está triste', expl:'¡Ayudar a otros es amable!'}, {text:'Quitarle el juguete a alguien', expl:'¡Eso es ser malo!'}, {text:'Llamar a alguien por un mal nombre', expl:'¡Eso no es amable!'}] },
+    's2B1': { q:'¿La comida es una necesidad o un deseo?', choices:[{text:'Una necesidad', expl:'¡Necesitamos comida para estar sanos!'}, {text:'Un deseo', expl:'¡La comida la necesitamos para vivir!'}, {text:'Ninguno de los dos', expl:'¡La comida es una necesidad clara!'}] },
+    's2B2': { q:'¿Qué pasa cuando ahorras dinero?', choices:[{text:'Tienes más dinero después', expl:'¡Ahorrar hace crecer tu dinero!'}, {text:'Tu dinero desaparece', expl:'¡El dinero ahorrado está seguro!'}, {text:'Nunca lo puedes usar', expl:'¡Lo puedes usar cuando quieras!'}] },
+    's2B3': { q:'¿Qué hace un maestro?', choices:[{text:'Enseña a los niños', expl:'¡Los maestros nos ayudan a aprender!'}, {text:'Arregla carros', expl:'¡Eso es un mecánico!'}, {text:'Cultiva comida', expl:'¡Eso es un agricultor!'}] },
+    's2C1': { q:'¿Por qué las familias celebran los días festivos?', choices:[{text:'Para estar juntos y celebrar', expl:'¡Los días festivos unen a las familias!'}, {text:'Porque tienen que trabajar', expl:'¡Los días festivos son tiempos felices!'}, {text:'Porque son aburridos', expl:'¡Los días festivos son divertidos!'}] },
+    's2C2': { q:'¿Todas las familias son iguales?', choices:[{text:'No, cada familia es diferente', expl:'¡Las familias son maravillosamente distintas!'}, {text:'Sí, todas son iguales', expl:'¡Cada familia es única!'}, {text:'Las familias no importan', expl:'¡Las familias son muy importantes!'}] },
+    's2C3': { q:'¿Para qué nos sirven la música y el baile?', choices:[{text:'Para expresar sentimientos y divertirnos', expl:'¡La música y el baile nos hacen felices!'}, {text:'Para poner triste a la gente', expl:'¡La música nos suele alegrar!'}, {text:'Para estar en silencio', expl:'¡La música y el baile son ruidosos y divertidos!'}] },
+    's2D1': { q:'¿Qué pasa en verano?', choices:[{text:'Hace calor y se puede jugar afuera', expl:'¡El verano es cálido y divertido!'}, {text:'Cae nieve del cielo', expl:'¡Eso es en invierno!'}, {text:'Salen las primeras flores', expl:'¡Eso es en primavera!'}] },
+    's2D2': { q:'¿Qué es una rutina diaria?', choices:[{text:'Cosas que hacemos cada día en orden', expl:'¡Las rutinas nos ayudan!'}, {text:'Cosas que cambian cada día', expl:'¡Las rutinas se mantienen iguales!'}, {text:'Solo jugar', expl:'¡Las rutinas incluyen trabajo y juego!'}] },
+    's2D3': { q:'¿Por qué es bueno aprender del mundo?', choices:[{text:'Nos ayuda a entender cómo vive la gente', expl:'¡Aprender nos hace más listos!'}, {text:'Es aburrido', expl:'¡El mundo es interesante!'}, {text:'A nadie le importa el mundo', expl:'¡A todos nos debe importar!'}] },
+    's2E1': { q:'¿Qué es un vecindario?', choices:[{text:'El área alrededor de donde vives', expl:'¡Tu vecindario es tu zona!'}, {text:'Un lugar muy lejano', expl:'¡Los vecindarios están cerca!'}, {text:'Solo las tiendas', expl:'¡Los vecindarios también tienen casas!'}] },
+    's2E2': { q:'¿Para qué nos sirve un mapa?', choices:[{text:'Para encontrar dónde están las cosas', expl:'¡Los mapas nos orientan!'}, {text:'Para hacernos dormir', expl:'¡Los mapas nos ayudan a encontrar cosas!'}, {text:'Para probar la comida', expl:'¡Los mapas son de lugares, no de comida!'}] },
+    's2E3': { q:'¿Qué puedes encontrar cerca de tu escuela?', choices:[{text:'Parques, tiendas y edificios', expl:'¡Las escuelas están en vecindarios!'}, {text:'Olas del océano', expl:'¡Las escuelas no suelen estar junto al mar!'}, {text:'Solo montañas', expl:'¡Las escuelas están en muchos lugares!'}] }
+  };
+  Object.keys(ssG2).forEach(function(id){
+    const key = 'social-studies:' + id;
+    const src = ssG2[id];
+    if(!L[key]) L[key] = {};
+    L[key].activity = {
+      instructions: src.q,
+      choices: src.choices.map(function(c){ return { text: c.text, explanation: c.expl }; })
+    };
+  });
+})();
+
+// ═══════════════════════════════════════════════════════════
 // AUTO-TRANSLATE ACTIVITY CONTENT for PK/K/1 across all subjects
 // Runs after manual LESSON_TRANSLATIONS_ES are merged — only fills in
 // activity fields that still don't have an _es twin. English data is
