@@ -15054,6 +15054,307 @@ Object.assign(LESSON_TRANSLATIONS_ES, {
   'financial-literacy:fl1e2': { title: 'Bases del Presupuesto', tagline: '¡Planea tu dinero!', intro: 'Un presupuesto = plan para tu dinero. "Gano $5. Ahorro $2. Gasto $3." ¡Eso es un presupuesto! Uno sencillo te ayuda a alcanzar metas.', keyPoints: ['Presupuesto = plan','Ingresos - gastos = balance','Los presupuestos sencillos funcionan','Planear = éxito','El balance importa'], funFact: '📋 ¡Todos deberían tener un presupuesto!' },
   'financial-literacy:fl1e3': { title: '¡Tu Futuro Financiero!', tagline: '¡Estás empezando genial!', intro: 'Estás aprendiendo habilidades que te ayudarán toda la vida. ¡Sigue ahorrando, sigue aprendiendo, sigue soñando! ¡Tu futuro financiero es BRILLANTE!', keyPoints: ['El futuro es brillante','Sigue aprendiendo','Sigue practicando','Cree en ti','¡Tú puedes!'], funFact: '🚀 ¡Vas rumbo al éxito financiero!' },
 
+  // ─── GRADE 1 APP BUILDING — activity translations ───
+  'app-building:ab1a1_activity': {},  // placeholder — merged into ab1a1 below
+});
+
+// Grade 1 App Building activity translations (merged onto existing entries)
+Object.assign(LESSON_TRANSLATIONS_ES, {
+  'app-building:ab1a1': Object.assign({}, LESSON_TRANSLATIONS_ES['app-building:ab1a1'] || {}, {
+    activity: {
+      instructions: 'Si tocas un botón de juego que dice "Saltar", ¿qué debería pasar?',
+      choices: [
+        { text: 'Nada', explanation: '¡Las apps DEBEN reaccionar cuando las tocas!' },
+        { text: 'El personaje salta', explanation: '¡SÍ! Acción = toque, Reacción = salto' },
+        { text: 'La app se cierra', explanation: '¡Eso no es lo que significa "Saltar"!' }
+      ]
+    }
+  }),
+  'app-building:ab1a2': Object.assign({}, LESSON_TRANSLATIONS_ES['app-building:ab1a2'] || {}, {
+    activity: {
+      instructions: '¡Empareja la acción con la pantalla que aparece!',
+      dragOptions: [
+        { label: 'Tocar Inicio' },
+        { label: 'Tocar Tienda' },
+        { label: 'Tocar Perfil' }
+      ],
+      dropTargets: [
+        { label: 'Ver la info de tu cuenta' },
+        { label: 'Ver todo lo que puedes comprar' },
+        { label: 'Ver la actividad reciente' }
+      ]
+    }
+  }),
+  'app-building:ab1a3': Object.assign({}, LESSON_TRANSLATIONS_ES['app-building:ab1a3'] || {}, {
+    activity: {
+      instructions: '¿Qué hace especial a tu app favorita?',
+      choices: [
+        { text: 'Una característica o idea muy genial', explanation: '¡SÍ! ¡Toda gran app tiene algo especial!' },
+        { text: 'Solo existe', explanation: '¡Las apps exitosas tienen características especiales!' },
+        { text: 'El color', explanation: '¡El color ayuda, pero las características son más importantes!' }
+      ]
+    }
+  }),
+  'app-building:ab1b1': Object.assign({}, LESSON_TRANSLATIONS_ES['app-building:ab1b1'] || {}, {
+    activity: {
+      instructions: '¡El propósito de mi app es ayudar a la gente a _____!',
+      prompt: '¿Qué haría tu app?'
+    }
+  }),
+  'app-building:ab1b2': Object.assign({}, LESSON_TRANSLATIONS_ES['app-building:ab1b2'] || {}, {
+    activity: {
+      instructions: '¡Empareja la app con quién la usa!',
+      matchPairs: [
+        { left: 'App de aprender con juegos', right: 'Niños' },
+        { left: 'App de correo de negocios', right: 'Adultos' },
+        { left: 'App de moda', right: 'Adolescentes' }
+      ]
+    }
+  }),
+  'app-building:ab1b3': Object.assign({}, LESSON_TRANSLATIONS_ES['app-building:ab1b3'] || {}, {
+    activity: {
+      instructions: '¿Por qué los diseñadores hacen bocetos de sus ideas de app?',
+      choices: [
+        { text: 'Para planear dónde va cada cosa', explanation: '¡Exacto! ¡Bocetos = planear!' },
+        { text: 'Porque todavía no saben programar', explanation: '¡Incluso los diseñadores expertos hacen bocetos primero!' },
+        { text: 'Es una pérdida de tiempo', explanation: '¡Hacer bocetos ahorra tiempo después!' }
+      ]
+    }
+  }),
+  'app-building:ab1c1': Object.assign({}, LESSON_TRANSLATIONS_ES['app-building:ab1c1'] || {}, {
+    activity: {
+      instructions: '¡Empareja el sonido con cuándo lo escuchas!',
+      dragOptions: [
+        { label: 'Sonido de "ding"' },
+        { label: 'Sonido de error' },
+        { label: 'Sonido de celebración' }
+      ],
+      dropTargets: [
+        { label: 'Respondiste mal' },
+        { label: 'Terminaste un nivel' },
+        { label: 'Ganaste puntos' }
+      ]
+    }
+  }),
+  'app-building:ab1c2': Object.assign({}, LESSON_TRANSLATIONS_ES['app-building:ab1c2'] || {}, {
+    activity: {
+      instructions: '¿Por qué las apps tienen animaciones?',
+      choices: [
+        { text: 'Para que las apps se sientan vivas y respondan bien', explanation: '¡SÍ! ¡Las animaciones son SÚPER importantes!' },
+        { text: 'Solo para perder tiempo', explanation: '¡Las animaciones tienen un propósito!' },
+        { text: 'Las computadoras las necesitan para funcionar', explanation: '¡Las animaciones son para la experiencia del USUARIO!' }
+      ]
+    }
+  }),
+  'app-building:ab1c3': Object.assign({}, LESSON_TRANSLATIONS_ES['app-building:ab1c3'] || {}, {
+    activity: {
+      instructions: '¡Mi app recompensaría a la gente con _____!',
+      prompt: '¿Qué sistema de recompensas crearías?'
+    }
+  }),
+  'app-building:ab1d1': Object.assign({}, LESSON_TRANSLATIONS_ES['app-building:ab1d1'] || {}, {
+    activity: {
+      instructions: '¡Empareja la app con el problema que resuelve!',
+      matchPairs: [
+        { left: 'App de mapas', right: 'Perderse' },
+        { left: 'App del clima', right: 'No saber si va a llover' },
+        { left: 'Calculadora', right: 'Problemas de matemáticas' }
+      ]
+    }
+  }),
+  'app-building:ab1d2': Object.assign({}, LESSON_TRANSLATIONS_ES['app-building:ab1d2'] || {}, {
+    activity: {
+      instructions: '¡Empareja la app con cómo conecta a las personas!',
+      dragOptions: [
+        { label: 'App de mensajes' },
+        { label: 'Videollamada' },
+        { label: 'Red social' }
+      ],
+      dropTargets: [
+        { label: 'Ver a alguien cara a cara' },
+        { label: 'Escribir a un amigo al instante' },
+        { label: 'Compartir con muchas personas' }
+      ]
+    }
+  }),
+  'app-building:ab1d3': Object.assign({}, LESSON_TRANSLATIONS_ES['app-building:ab1d3'] || {}, {
+    activity: {
+      instructions: '¿Cómo hacen las apps de aprender que enseñar sea mejor?',
+      choices: [
+        { text: 'Puedes aprender a tu ritmo con respuestas al instante', explanation: '¡SÍ! ¡El aprendizaje interactivo es poderoso!' },
+        { text: 'La verdad no ayudan', explanation: '¡Las apps de aprender son MUY efectivas!' },
+        { text: 'Solo para niños', explanation: '¡Personas de todas las edades aprenden con apps!' }
+      ]
+    }
+  }),
+  'app-building:ab1e1': Object.assign({}, LESSON_TRANSLATIONS_ES['app-building:ab1e1'] || {}, {
+    activity: {
+      instructions: '¿Qué es un lenguaje de programación?',
+      choices: [
+        { text: 'Palabras que entiende la computadora', explanation: '¡SÍ! ¡Como los idiomas humanos pero para código!' },
+        { text: 'Inglés', explanation: '¡Las computadoras no hablan inglés!' },
+        { text: 'Algo muy difícil', explanation: '¡Los lenguajes de programación se pueden aprender!' }
+      ]
+    }
+  }),
+  'app-building:ab1e2': Object.assign({}, LESSON_TRANSLATIONS_ES['app-building:ab1e2'] || {}, {
+    activity: {
+      instructions: '¡Pon los pasos de desarrollo de una app en orden!',
+      sortItems: ['Promocionar la app','Probar si hay problemas','Planear y diseñar','Enviar a la tienda de apps','Construir la app']
+    }
+  }),
+  'app-building:ab1e3': Object.assign({}, LESSON_TRANSLATIONS_ES['app-building:ab1e3'] || {}, {
+    activity: {
+      instructions: '¡La idea de app más genial que tengo es _____!',
+      prompt: '¿Qué vas a crear?'
+    }
+  })
+});
+
+// Grade 1 Financial Literacy activity translations
+Object.assign(LESSON_TRANSLATIONS_ES, {
+  'financial-literacy:fl1a1': Object.assign({}, LESSON_TRANSLATIONS_ES['financial-literacy:fl1a1'] || {}, {
+    activity: {
+      instructions: '¿Cuál vale más: un nickel o un dime?',
+      choices: [
+        { text: 'Un dime (10¢)', explanation: '¡SÍ! Dime = 10, nickel = 5' },
+        { text: 'Un nickel (5¢)', explanation: '' },
+        { text: 'Igual', explanation: '' }
+      ]
+    }
+  }),
+  'financial-literacy:fl1a2': Object.assign({}, LESSON_TRANSLATIONS_ES['financial-literacy:fl1a2'] || {}, {
+    activity: {
+      instructions: 'Si algo cuesta 50¢ y das 75¢, ¿cuál es tu cambio?',
+      dragOptions: [
+        { label: 'Quarter' },
+        { label: 'Dime' },
+        { label: 'Penny' }
+      ],
+      dropTargets: [
+        { label: 'Tu cambio = 25¢' }
+      ]
+    }
+  }),
+  'financial-literacy:fl1a3': Object.assign({}, LESSON_TRANSLATIONS_ES['financial-literacy:fl1a3'] || {}, {
+    activity: {
+      instructions: '¿Cuánto es un dime más un nickel?',
+      choices: [
+        { text: '15¢', explanation: '¡SÍ! 10 + 5 = 15' },
+        { text: '6¢', explanation: '' },
+        { text: '5¢', explanation: '' }
+      ]
+    }
+  }),
+  'financial-literacy:fl1b1': Object.assign({}, LESSON_TRANSLATIONS_ES['financial-literacy:fl1b1'] || {}, {
+    activity: {
+      instructions: '¡Quiero comprar _____ y _____!',
+      prompt: '¿Qué comprarías?'
+    }
+  }),
+  'financial-literacy:fl1b2': Object.assign({}, LESSON_TRANSLATIONS_ES['financial-literacy:fl1b2'] || {}, {
+    activity: {
+      instructions: '¡Empareja tienda con precio!',
+      matchPairs: [
+        { left: 'Tienda A', right: 'Mejor precio' },
+        { left: 'Tienda B', right: 'Más cara' },
+        { left: 'Tienda C', right: 'Más barata' }
+      ]
+    }
+  }),
+  'financial-literacy:fl1b3': Object.assign({}, LESSON_TRANSLATIONS_ES['financial-literacy:fl1b3'] || {}, {
+    activity: {
+      instructions: '¿Deberías comprar algo solo porque está en oferta?',
+      choices: [
+        { text: 'Solo si lo NECESITAS o lo PRESUPUESTASTE', explanation: '¡SÍ! ¡Pensamiento listo!' },
+        { text: '¡Siempre compra lo que está en oferta!', explanation: '' },
+        { text: 'Nunca compres nada', explanation: '' }
+      ]
+    }
+  }),
+  'financial-literacy:fl1c1': Object.assign({}, LESSON_TRANSLATIONS_ES['financial-literacy:fl1c1'] || {}, {
+    activity: {
+      instructions: '¡Empareja el método de ahorro con el tipo!',
+      dragOptions: [
+        { label: 'Alcancía' },
+        { label: 'Cuenta de banco' },
+        { label: 'Frasco' }
+      ],
+      dropTargets: [
+        { label: 'Almacenamiento en casa' }
+      ]
+    }
+  }),
+  'financial-literacy:fl1c2': Object.assign({}, LESSON_TRANSLATIONS_ES['financial-literacy:fl1c2'] || {}, {
+    activity: {
+      instructions: 'Mi meta de ahorro es un _____. Cuesta _____ y voy a ahorrar _____ semanas.',
+      prompt: '¿Cuál es tu meta?'
+    }
+  }),
+  'financial-literacy:fl1c3': Object.assign({}, LESSON_TRANSLATIONS_ES['financial-literacy:fl1c3'] || {}, {
+    activity: {
+      instructions: '¿Por qué celebrar tu progreso al ahorrar?',
+      choices: [
+        { text: 'Te mantiene motivado para seguir ahorrando', explanation: '¡SÍ! ¡Celebrar = motivación!' },
+        { text: 'No debería importarte', explanation: '' },
+        { text: 'Solo celebra montos grandes', explanation: '' }
+      ]
+    }
+  }),
+  'financial-literacy:fl1d1': Object.assign({}, LESSON_TRANSLATIONS_ES['financial-literacy:fl1d1'] || {}, {
+    activity: {
+      instructions: '¡Empareja el trabajo con lo que hacen!',
+      matchPairs: [
+        { left: 'Doctor', right: 'Ayudar a la gente' },
+        { left: 'Maestro', right: 'Enseñar a los niños' },
+        { left: 'Chef', right: 'Cocinar comida' }
+      ]
+    }
+  }),
+  'financial-literacy:fl1d2': Object.assign({}, LESSON_TRANSLATIONS_ES['financial-literacy:fl1d2'] || {}, {
+    activity: {
+      instructions: '¿Mesada o ganancias?',
+      dragOptions: [
+        { label: 'Hacer los quehaceres' },
+        { label: 'Regalo de cumpleaños' }
+      ],
+      dropTargets: [
+        { label: 'Ganancias (¡trabajaste!)' }
+      ]
+    }
+  }),
+  'financial-literacy:fl1d3': Object.assign({}, LESSON_TRANSLATIONS_ES['financial-literacy:fl1d3'] || {}, {
+    activity: {
+      instructions: '¿Por qué registrar tu dinero?',
+      choices: [
+        { text: 'Para saber a dónde va', explanation: '¡SÍ! ¡Saber = poder!' },
+        { text: 'Es aburrido', explanation: '' },
+        { text: 'Solo si eres rico', explanation: '' }
+      ]
+    }
+  }),
+  'financial-literacy:fl1e1': Object.assign({}, LESSON_TRANSLATIONS_ES['financial-literacy:fl1e1'] || {}, {
+    activity: {
+      instructions: '¡Estoy orgulloso/a de _____!',
+      prompt: '¿De qué estás orgulloso/a?'
+    }
+  }),
+  'financial-literacy:fl1e2': Object.assign({}, LESSON_TRANSLATIONS_ES['financial-literacy:fl1e2'] || {}, {
+    activity: {
+      instructions: 'Mi presupuesto: gano _____, ahorro _____ y gasto _____.',
+      prompt: 'Haz un presupuesto simple:'
+    }
+  }),
+  'financial-literacy:fl1e3': Object.assign({}, LESSON_TRANSLATIONS_ES['financial-literacy:fl1e3'] || {}, {
+    activity: {
+      instructions: 'Mi sueño más grande con dinero es _____.',
+      prompt: '¿Cuál es tu meta más grande?'
+    }
+  })
+});
+
+Object.assign(LESSON_TRANSLATIONS_ES, {
+
   // ─── SCIENCE 1 ───
   'science:s1A1': { title: 'Partes de la Planta', tagline: '¡Explora las partes de las plantas!', intro: 'Las plantas tienen partes distintas y cada una tiene un trabajo. Las raíces toman agua del suelo. El tallo sostiene la planta. Las hojas atrapan la luz del sol. Las flores hacen semillas para nuevas plantas.', keyPoints: ['Las raíces toman agua del suelo','El tallo sostiene a la planta','Las hojas y flores tienen trabajos especiales'], funFact: '¡Algunas plantas tienen raíces que crecen más profundo de lo que la planta es alta!' },
   'science:s1A2': { title: 'Grupos de Animales', tagline: '¡Explora los grupos de animales!', intro: 'Los animales se pueden agrupar por lo que cubre su cuerpo. Los mamíferos tienen pelo. Los pájaros tienen plumas. Los peces tienen escamas. Los insectos tienen exoesqueleto.', keyPoints: ['Los mamíferos tienen pelo','Los pájaros tienen plumas y ponen huevos','Los peces tienen escamas y viven en agua'], funFact: '¡Un ornitorrinco es tan especial que es un mamífero pero pone huevos!' },
