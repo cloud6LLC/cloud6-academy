@@ -16349,17 +16349,34 @@ Object.assign(LESSON_TRANSLATIONS_ES, {
         instructions: '¿Por qué estudiar ' + topicMap[id] + '?',
         choices: choicesES
       };
-      // Topic-aware intro/keyPoints/funFact so the intro pane reads in Spanish
+      // Topic-aware intro/keyPoints/funFact — only set if not already hand-written
       const topicCap = topicMap[id].charAt(0).toUpperCase() + topicMap[id].slice(1);
-      L[key].intro = 'Aprende sobre ' + topicMap[id] + ' y cómo ha influido en nuestro mundo.';
-      L[key].keyPoints = [
+      if(L[key].intro == null) L[key].intro = 'Aprende sobre ' + topicMap[id] + ' y cómo ha influido en nuestro mundo.';
+      if(L[key].keyPoints == null) L[key].keyPoints = [
         topicCap + ' forma parte de nuestra historia',
         'La historia nos enseña lecciones',
         'Entender el pasado nos ayuda con el futuro'
       ];
-      L[key].funFact = '¡Quien no aprende de la historia está condenado a repetirla!';
+      if(L[key].funFact == null) L[key].funFact = '¡Quien no aprende de la historia está condenado a repetirla!';
     });
   }
+  // History PK + K topic names (drives both intro pane + mc activity)
+  const histPK = {
+    hPKA1:'cómo era hace mucho tiempo', hPKA2:'a tu familia', hPKA3:'los días festivos',
+    hPKB1:'a los presidentes', hPKB2:'las escuelas de antes y de ahora', hPKB3:'los mapas como dibujos',
+    hPKC1:'a los ayudantes de la comunidad', hPKC2:'las reglas', hPKC3:'ser justo',
+    hPKD1:'compartir', hPKD2:'las banderas', hPKD3:'los trajes y las tradiciones',
+    hPKE1:'los hogares del mundo', hPKE2:'los días especiales', hPKE3:'a los héroes'
+  };
+  const histK = {
+    hKA1:'el pasado y el presente', hKA2:'la historia familiar', hKA3:'los días feriados nacionales',
+    hKB1:'los símbolos americanos', hKB2:'a George Washington', hKB3:'los mapas y los globos terráqueos',
+    hKC1:'mi vecindario', hKC2:'las reglas del salón', hKC3:'la votación',
+    hKD1:'las necesidades y los deseos', hKD2:'las celebraciones del mundo', hKD3:'las comidas tradicionales',
+    hKE1:'los hogares en todas partes', hKE2:'las estaciones y los festivales', hKE3:'respetar a los demás'
+  };
+  addHistActivity('hPK', histPK);
+  addHistActivity('hK', histK);
   addHistActivity('h1', hist1);
   addHistActivity('h2', hist2);
 
@@ -16392,15 +16409,32 @@ Object.assign(LESSON_TRANSLATIONS_ES, {
         choices: choicesES
       };
       const topicCap = topicMap[id].charAt(0).toUpperCase() + topicMap[id].slice(1);
-      L[key].intro = 'Practica ' + topicMap[id] + ' para fortalecer tu lectura y escritura.';
-      L[key].keyPoints = [
+      if(L[key].intro == null) L[key].intro = 'Practica ' + topicMap[id] + ' para fortalecer tu lectura y escritura.';
+      if(L[key].keyPoints == null) L[key].keyPoints = [
         topicCap + ' fortalece la comunicación',
         'La lectura y la escritura van juntas',
         'Practica un poco todos los días'
       ];
-      L[key].funFact = '¡Leer 20 minutos al día te expone a 1.8 millones de palabras al año!';
+      if(L[key].funFact == null) L[key].funFact = '¡Leer 20 minutos al día te expone a 1.8 millones de palabras al año!';
     });
   }
+  // English PK + K topic names
+  const engPK = {
+    ePKA1:'las letras A a E', ePKA2:'las letras F a J', ePKA3:'las letras K a O',
+    ePKB1:'escribir garabateando', ePKB2:'dibujar cuentos', ePKB3:'escribir tu nombre',
+    ePKC1:'las palabras de acción', ePKC2:'las palabras de colores', ePKC3:'los nombres de animales',
+    ePKD1:'las palabras que riman', ePKD2:'escuchar', ePKD3:'compartir cuentos',
+    ePKE1:'mostrar y contar', ePKE2:'seguir indicaciones', ePKE3:'cantar el ABC'
+  };
+  const engK = {
+    eKA1:'las letras mayúsculas', eKA2:'las letras minúsculas', eKA3:'los sonidos de las letras',
+    eKB1:'las palabras a la vista (set 1)', eKB2:'escribir tu primer nombre', eKB3:'las oraciones simples',
+    eKC1:'aprender palabras nuevas cada día', eKC2:'los pares que riman', eKC3:'las palabras opuestas',
+    eKD1:'los sustantivos: personas', eKD2:'los sustantivos: lugares', eKD3:'los sustantivos: cosas',
+    eKE1:'contar un cuento', eKE2:'usar oraciones completas', eKE3:'hacer preguntas'
+  };
+  addEngActivity(engPK);
+  addEngActivity(engK);
   addEngActivity(eng1);
   addEngActivity(eng2);
 
@@ -16437,6 +16471,39 @@ Object.assign(LESSON_TRANSLATIONS_ES, {
     's2E2': { q:'¿Qué crea la contaminación?', choices:[{text:'Los carros y las fábricas', expl:'¡Son fuentes de contaminación!'}, {text:'Solo las plantas', expl:'¡Las actividades humanas contaminan!'}, {text:'Nada — no existe', expl:'¡La contaminación es real!'}] },
     's2E3': { q:'¿Qué son los inventos?', choices:[{text:'Creaciones nuevas que resuelven problemas', expl:'¡Los inventos nos ayudan!'}, {text:'Solo cosas de la naturaleza', expl:'¡Los inventos son creaciones humanas!'}, {text:'Cosas que no funcionan', expl:'¡Los inventos son útiles!'}] }
   };
+  // ── Science PK + K activities (content-specific, hand-translated)
+  Object.assign(sciActivities, {
+    'sPKA1': { q:'¿Qué hacen los animales?', choices:[{text:'Se mueven y comen', expl:'¡Los animales necesitan moverse y comer!'},{text:'No necesitan comer', expl:'¡Todos los animales necesitan comida!'},{text:'Nunca se mueven', expl:'¡Los animales corren, vuelan y nadan!'}] },
+    'sPKA2': { q:'¿Qué necesitan las plantas para crecer?', choices:[{text:'Agua y luz del sol', expl:'¡A todas las plantas les encanta el sol y el agua!'},{text:'Solo agua', expl:'¡Las plantas necesitan ambos!'},{text:'Nada — crecen solas', expl:'¡Las plantas necesitan cuidado!'}] },
+    'sPKA3': { q:'¿Cuál muestra distintos tipos de clima?', choices:[{text:'Soleado, lluvioso y nevado', expl:'¡Todos esos son tipos de clima!'},{text:'Solo soleado', expl:'¡El clima cambia mucho!'},{text:'Juguetes y juegos', expl:'¡Eso no es clima!'}] },
+    'sPKB1': { q:'¿Qué sentido usas para escuchar?', choices:[{text:'Tus oídos', expl:'¡Los oídos nos ayudan a oír!'},{text:'Tus ojos', expl:'¡Los ojos nos ayudan a ver!'},{text:'Tu nariz', expl:'¡La nariz te ayuda a oler!'}] },
+    'sPKB2': { q:'¿De dónde viene el agua?', choices:[{text:'De la lluvia que cae de las nubes', expl:'¡Las nubes nos traen agua!'},{text:'Del pasto', expl:'¡El agua viene de las nubes!'},{text:'De los juguetes', expl:'¡Eso no produce agua!'}] },
+    'sPKB3': { q:'¿Qué pasa en invierno?', choices:[{text:'Hace frío y cae nieve', expl:'¡El invierno es frío!'},{text:'Las hojas cambian de color', expl:'¡Eso es en otoño!'},{text:'Empiezan a salir las flores', expl:'¡Eso es en primavera!'}] },
+    'sPKC1': { q:'¿Cuándo sale el sol?', choices:[{text:'En la mañana', expl:'¡El sol sale en la mañana!'},{text:'En la tarde', expl:'¡En la tarde se mete!'},{text:'En la noche', expl:'¡De noche está oscuro!'}] },
+    'sPKC2': { q:'¿Cuál de estos es frío?', choices:[{text:'El helado', expl:'¡El helado es frío!'},{text:'El sol', expl:'¡El sol es muy caliente!'},{text:'Una fogata', expl:'¡El fuego es caliente!'}] },
+    'sPKC3': { q:'¿Qué tipo de sonido hace un bebé?', choices:[{text:'Llora o hace arrullitos', expl:'¡Los bebés lloran y arrullan!'},{text:'Ladra', expl:'¡Los perros ladran!'},{text:'Pía', expl:'¡Los pájaros pían!'}] },
+    'sPKD1': { q:'¿De qué color es el pasto?', choices:[{text:'Verde', expl:'¡El pasto es verde!'},{text:'Azul', expl:'¡Ese es el cielo!'},{text:'Rojo', expl:'¡El pasto no es rojo!'}] },
+    'sPKD2': { q:'¿Cómo se llama un perro bebé?', choices:[{text:'Cachorro', expl:'¡Los perritos bebés son cachorros!'},{text:'Becerro', expl:'¡Ese es el bebé de la vaca!'},{text:'Pollito', expl:'¡Ese es el bebé del pájaro!'}] },
+    'sPKD3': { q:'¿Para qué te ayudan tus piernas?', choices:[{text:'Para caminar y correr', expl:'¡Las piernas te ayudan a moverte!'},{text:'Para ver cosas', expl:'¡Los ojos te ayudan a ver!'},{text:'Para oír sonidos', expl:'¡Los oídos te ayudan a oír!'}] },
+    'sPKE1': { q:'¿Qué pasa cuando empujas algo?', choices:[{text:'Se aleja', expl:'¡Empujar mueve las cosas!'},{text:'Se acerca a ti', expl:'¡Eso es jalar!'},{text:'Se queda quieto', expl:'¡Empujar mueve las cosas!'}] },
+    'sPKE2': { q:'¿Qué nos ayuda a aprender de la naturaleza?', choices:[{text:'Observar con cuidado', expl:'¡Observar con cuidado nos enseña!'},{text:'Ignorar las cosas', expl:'¡Hay que poner atención!'},{text:'Ver de pasadita', expl:'¡Tenemos que mirar bien!'}] },
+    'sPKE3': { q:'¿Con qué puedes construir?', choices:[{text:'Con bloques y palitos', expl:'¡Muchas cosas sirven para construir!'},{text:'Solo con papel', expl:'¡Los bloques y otras cosas también sirven!'},{text:'Con nada — no se puede construir', expl:'¡Puedes construir con muchos materiales!'}] },
+    'sKA1': { q:'¿Cuál es un ser vivo?', choices:[{text:'Un perro', expl:'¡Los perros están vivos!'},{text:'Una piedra', expl:'¡Las piedras no crecen!'},{text:'Una silla', expl:'¡Las sillas no están vivas!'}] },
+    'sKA2': { q:'¿Qué necesitan las plantas para crecer?', choices:[{text:'Agua y luz del sol', expl:'¡Esto las ayuda a crecer!'},{text:'Solo luz del sol', expl:'¡Las plantas también necesitan agua!'},{text:'Juguetes y juegos', expl:'¡Las plantas no necesitan eso!'}] },
+    'sKA3': { q:'¿Dónde hacen su hogar los pájaros?', choices:[{text:'En los nidos', expl:'¡Los pájaros construyen nidos!'},{text:'En madrigueras', expl:'¡Los conejos cavan madrigueras!'},{text:'En el agua', expl:'¡Los peces viven en el agua!'}] },
+    'sKB1': { q:'¿Qué hace el sol?', choices:[{text:'Nos da luz y calor', expl:'¡El sol nos ayuda!'},{text:'Solo alumbra de noche', expl:'¡El sol alumbra de día!'},{text:'Nos ayuda a dormir', expl:'¡La luna nos ayuda de noche!'}] },
+    'sKB2': { q:'¿Cuál oración es verdadera?', choices:[{text:'Las rocas son duras y no crecen', expl:'¡Las rocas son sólidas y no cambian!'},{text:'Las rocas son blandas', expl:'¡Las rocas son duras!'},{text:'Las rocas necesitan comida para vivir', expl:'¡Las rocas no están vivas!'}] },
+    'sKB3': { q:'¿Qué es el aire?', choices:[{text:'Algo que respiramos', expl:'¡El aire es lo que respiramos!'},{text:'Algo que podemos ver y agarrar', expl:'¡El aire es invisible!'},{text:'Solo está en los globos', expl:'¡El aire está en todas partes!'}] },
+    'sKC1': { q:'¿Qué crea una sombra?', choices:[{text:'Que se bloquea la luz', expl:'¡Las sombras se forman cuando la luz no pasa!'},{text:'Que hace mucho frío', expl:'¡El frío no hace sombras!'},{text:'Cerrar los ojos', expl:'¡Las sombras se hacen al bloquear la luz!'}] },
+    'sKC2': { q:'¿Qué hace un imán?', choices:[{text:'Atrae el metal hacia él', expl:'¡Los imanes atraen el metal!'},{text:'Aleja todo', expl:'¡Los imanes atraen ciertas cosas!'},{text:'Enfría las cosas', expl:'¡Los imanes no enfrían cosas!'}] },
+    'sKC3': { q:'¿Qué objeto flota?', choices:[{text:'Un barco', expl:'¡Los barcos están hechos para flotar!'},{text:'Una piedra', expl:'¡Las piedras se hunden!'},{text:'Un martillo', expl:'¡Las herramientas pesadas se hunden!'}] },
+    'sKD1': { q:'¿Qué hacen los científicos?', choices:[{text:'Hacen preguntas y experimentan', expl:'¡Los científicos exploran y prueban!'},{text:'Solo memorizan datos', expl:'¡Los científicos descubren cosas nuevas!'},{text:'Juegan videojuegos', expl:'¡Los científicos estudian la naturaleza!'}] },
+    'sKD2': { q:'¿Qué nos ayuda a aprender ciencias?', choices:[{text:'Hacer buenas preguntas', expl:'¡Las preguntas guían el descubrimiento!'},{text:'Nunca preguntar nada', expl:'¡Las preguntas son importantes!'},{text:'Solo adivinar', expl:'¡Necesitamos preguntar y probar!'}] },
+    'sKD3': { q:'¿Qué herramienta te ayuda a ver cosas pequeñas?', choices:[{text:'Una lupa', expl:'¡Las lupas hacen las cosas más grandes!'},{text:'Un termómetro', expl:'¡Eso mide el calor!'},{text:'Una regla', expl:'¡Las reglas miden el largo!'}] },
+    'sKE1': { q:'¿Qué usas para medir la temperatura?', choices:[{text:'Un termómetro', expl:'¡Los termómetros miden el calor!'},{text:'Una regla', expl:'¡Las reglas miden el largo!'},{text:'Una lupa', expl:'¡Las lupas hacen las cosas más grandes!'}] },
+    'sKE2': { q:'¿Qué pasa en primavera?', choices:[{text:'Las plantas empiezan a crecer', expl:'¡La primavera es la temporada de crecer!'},{text:'Caen las hojas', expl:'¡Eso es en otoño!'},{text:'Hace mucho frío', expl:'¡Eso es en invierno!'}] },
+    'sKE3': { q:'¿Qué objeto se puede reciclar?', choices:[{text:'Una botella de plástico', expl:'¡El plástico se puede reciclar!'},{text:'Un juguete roto que tiramos', expl:'¡Hay que reciclar cuando se pueda!'},{text:'Un calcetín usado', expl:'¡Algunos calcetines se reciclan en programas especiales!'}] }
+  });
   Object.keys(sciActivities).forEach(function(id){
     const key = 'science:' + id;
     const src = sciActivities[id];
@@ -16468,6 +16535,49 @@ Object.assign(LESSON_TRANSLATIONS_ES, {
   Object.keys(ssG2).forEach(function(id){
     const key = 'social-studies:' + id;
     const src = ssG2[id];
+    if(!L[key]) L[key] = {};
+    L[key].activity = {
+      instructions: src.q,
+      choices: src.choices.map(function(c){ return { text: c.text, explanation: c.expl }; })
+    };
+  });
+
+  // ── Social Studies PK + K activities (content-specific)
+  const ssPKK = {
+    'sPKA1': { q:'¿Qué pasa en la escuela?', choices:[{text:'Aprendemos y jugamos con amigos', expl:'¡La escuela es donde crecemos y nos divertimos!'},{text:'Nos vamos a dormir', expl:'¡La escuela es para aprender, no para dormir!'},{text:'Vamos a la tienda', expl:'¡Las tiendas son distintas a la escuela!'}] },
+    'sPKA2': { q:'¿Por qué seguimos las reglas?', choices:[{text:'Para estar seguros y divertirnos', expl:'¡Las reglas nos protegen y hacen el aprendizaje divertido!'},{text:'Para entristecer a los maestros', expl:'¡Las reglas hacen felices a los maestros!'},{text:'Porque son aburridas', expl:'¡Las reglas nos ayudan a divertirnos más!'}] },
+    'sPKA3': { q:'¿Cuál es un ejemplo de ser amable?', choices:[{text:'Compartir tu juguete con un amigo', expl:'¡Compartir muestra que te importan los demás!'},{text:'Empujar a alguien del columpio', expl:'¡Eso es ser malo, no amable!'},{text:'Quitarle la merienda a alguien', expl:'¡Eso es robar, no ser amable!'}] },
+    'sPKB1': { q:'¿Qué pasa cuando compartes tu juguete?', choices:[{text:'Tu amigo se pone feliz', expl:'¡Compartir hace sonreír a los amigos!'},{text:'Se rompe tu juguete', expl:'¡Los juguetes no se rompen por compartir!'},{text:'Nunca lo vuelves a ver', expl:'¡Casi siempre te devuelven tu juguete!'}] },
+    'sPKB2': { q:'¿Qué nos ayuda a guardar monedas?', choices:[{text:'Una alcancía', expl:'¡Las alcancías guardan monedas seguras!'},{text:'Un plato', expl:'¡Los platos son para la comida, no para monedas!'},{text:'Un zapato', expl:'¡Los zapatos son para usar!'}] },
+    'sPKB3': { q:'¿Qué usamos para comprar cosas en la tienda?', choices:[{text:'Dinero', expl:'¡El dinero nos deja comprar lo que necesitamos!'},{text:'Piedras', expl:'¡Las tiendas no aceptan piedras!'},{text:'Hojas', expl:'¡Las tiendas necesitan dinero, no hojas!'}] },
+    'sPKC1': { q:'¿Quién está en tu familia?', choices:[{text:'Personas que te quieren y te cuidan', expl:'¡Los familiares nos quieren!'},{text:'Solo personas que se ven como tú', expl:'¡Los familiares pueden verse distintos!'},{text:'Solo niños', expl:'¡Las familias incluyen adultos y niños!'}] },
+    'sPKC2': { q:'¿De dónde viene la comida?', choices:[{text:'De granjas y tiendas', expl:'¡Los granjeros cultivan la comida y las tiendas la venden!'},{text:'Solo de los árboles', expl:'¡La comida viene de muchos lugares!'},{text:'Solo del cielo', expl:'¡La comida viene de la tierra y del agua!'}] },
+    'sPKC3': { q:'¿Qué nos da una casa?', choices:[{text:'Un lugar seguro para vivir', expl:'¡Las casas nos mantienen seguros y calientitos!'},{text:'Un carro para manejar', expl:'¡Los carros son distintos a las casas!'},{text:'Un lugar para nadar', expl:'¡Eso es una alberca, no una casa!'}] },
+    'sPKD1': { q:'¿Qué nos ponemos en un día lluvioso?', choices:[{text:'Una chamarra', expl:'¡Las chamarras nos mantienen secos cuando llueve!'},{text:'Solo shorts', expl:'¡Necesitamos chamarras para la lluvia!'},{text:'Un traje de baño', expl:'¡Usamos chamarras, no trajes de baño!'}] },
+    'sPKD2': { q:'¿Qué estación es fría y nevada?', choices:[{text:'El invierno', expl:'¡El invierno es la estación más fría con nieve!'},{text:'El verano', expl:'¡El verano es caluroso!'},{text:'La primavera', expl:'¡La primavera es cuando crecen las cosas!'}] },
+    'sPKD3': { q:'¿Quién apaga los incendios?', choices:[{text:'Los bomberos', expl:'¡Los bomberos son valientes y nos ayudan!'},{text:'Los maestros', expl:'¡Los maestros nos ayudan a aprender!'},{text:'Los jardineros', expl:'¡Los jardineros cuidan las plantas!'}] },
+    'sPKE1': { q:'¿Tu salón está cerca o lejos de ti?', choices:[{text:'Cerca', expl:'¡Tu salón está justo donde tú estás!'},{text:'Lejos', expl:'¡Tu salón está cerca de ti!'},{text:'En el océano', expl:'¡Tu salón está en tierra!'}] },
+    'sPKE2': { q:'¿Qué nos dice una dirección?', choices:[{text:'Dónde vive alguien', expl:'¡Las direcciones nos ayudan a encontrar casas!'},{text:'Qué le gusta comer a alguien', expl:'¡Las direcciones no nos dicen de comida!'},{text:'Qué edad tiene alguien', expl:'¡Las direcciones no dicen la edad!'}] },
+    'sPKE3': { q:'¿Dónde vives?', choices:[{text:'En una casa en algún lugar', expl:'¡Todos vivimos en algún lado!'},{text:'En una nube', expl:'¡La gente no vive en las nubes!'},{text:'Bajo el agua', expl:'¡La gente vive en tierra!'}] },
+    'sKA1': { q:'¿Qué hacen los buenos vecinos?', choices:[{text:'Se ayudan y se saludan', expl:'¡Los buenos vecinos son amables y serviciales!'},{text:'Nunca se hablan', expl:'¡Los buenos vecinos son amistosos!'},{text:'Solo salen de noche', expl:'¡Los buenos vecinos son amistosos siempre!'}] },
+    'sKA2': { q:'¿Por qué hay tareas en el salón?', choices:[{text:'Para ayudar a mantener el salón limpio', expl:'¡Las tareas ayudan a todos!'},{text:'Para dar trabajo a los niños', expl:'¡Las tareas nos ayudan, no nos lastiman!'},{text:'Para entristecer al maestro', expl:'¡A los maestros les encanta que los niños ayuden!'}] },
+    'sKA3': { q:'¿Qué acción muestra amabilidad?', choices:[{text:'Ayudar a alguien que está triste', expl:'¡Ayudar a otros es amable!'},{text:'Quitarle el juguete a alguien', expl:'¡Eso es ser malo!'},{text:'Llamar a alguien por un mal nombre', expl:'¡Eso no es amable!'}] },
+    'sKB1': { q:'¿La comida es una necesidad o un deseo?', choices:[{text:'Una necesidad', expl:'¡Necesitamos comida para estar sanos!'},{text:'Un deseo', expl:'¡Necesitamos comida para vivir!'},{text:'Ninguno', expl:'¡La comida es claramente una necesidad!'}] },
+    'sKB2': { q:'¿Qué pasa cuando ahorras dinero?', choices:[{text:'Tienes más dinero después', expl:'¡Ahorrar hace crecer tu dinero!'},{text:'Tu dinero desaparece', expl:'¡El dinero ahorrado está seguro!'},{text:'Nunca lo puedes usar', expl:'¡Lo puedes usar cuando quieras!'}] },
+    'sKB3': { q:'¿Qué hace un maestro?', choices:[{text:'Enseña a los niños', expl:'¡Los maestros nos ayudan a aprender!'},{text:'Arregla carros', expl:'¡Eso es un mecánico!'},{text:'Cultiva alimentos', expl:'¡Eso es un agricultor!'}] },
+    'sKC1': { q:'¿Por qué las familias celebran los días festivos?', choices:[{text:'Para pasar tiempo juntos y celebrar', expl:'¡Los días festivos unen a las familias!'},{text:'Porque tienen que trabajar', expl:'¡Los días festivos son tiempos felices!'},{text:'Porque son aburridos', expl:'¡Los días festivos son divertidos!'}] },
+    'sKC2': { q:'¿Todas las familias son iguales?', choices:[{text:'No, las familias son diferentes', expl:'¡Las familias son maravillosamente distintas!'},{text:'Sí, todas las familias son iguales', expl:'¡Las familias son únicas!'},{text:'Las familias no importan', expl:'¡Las familias son muy importantes!'}] },
+    'sKC3': { q:'¿Para qué nos sirven la música y el baile?', choices:[{text:'Para expresar sentimientos y divertirnos', expl:'¡La música y el baile nos hacen felices!'},{text:'Para poner triste a la gente', expl:'¡La música suele alegrarnos!'},{text:'Para estar callados', expl:'¡La música y el baile son ruidosos y divertidos!'}] },
+    'sKD1': { q:'¿Qué pasa en verano?', choices:[{text:'Hace calor y se puede jugar afuera', expl:'¡El verano es cálido y divertido!'},{text:'Cae nieve del cielo', expl:'¡Eso es invierno!'},{text:'Salen las primeras flores', expl:'¡Las flores florecen en primavera!'}] },
+    'sKD2': { q:'¿Qué es una rutina diaria?', choices:[{text:'Cosas que hacemos cada día en orden', expl:'¡Las rutinas nos ayudan!'},{text:'Cosas que cambian cada día', expl:'¡Las rutinas se mantienen iguales!'},{text:'Solo jugar', expl:'¡Las rutinas incluyen trabajo y juego!'}] },
+    'sKD3': { q:'¿Por qué es bueno aprender del mundo?', choices:[{text:'Nos ayuda a entender cómo vive la gente', expl:'¡Aprender nos hace más listos!'},{text:'Es aburrido', expl:'¡El mundo es interesante!'},{text:'A nadie le importa el mundo', expl:'¡A todos nos debe importar!'}] },
+    'sKE1': { q:'¿Qué es un vecindario?', choices:[{text:'El área alrededor de donde vives', expl:'¡Tu vecindario es tu zona!'},{text:'Un lugar muy lejano', expl:'¡Los vecindarios están cerca!'},{text:'Solo tiendas', expl:'¡Los vecindarios también tienen casas!'}] },
+    'sKE2': { q:'¿Para qué sirve un mapa?', choices:[{text:'Para encontrar dónde están las cosas', expl:'¡Los mapas nos orientan!'},{text:'Para hacernos dormir', expl:'¡Los mapas nos ayudan a encontrar cosas!'},{text:'Para probar comida', expl:'¡Los mapas son de lugares, no de comida!'}] },
+    'sKE3': { q:'¿Qué podrías encontrar cerca de tu escuela?', choices:[{text:'Parques, tiendas y edificios', expl:'¡Las escuelas están en vecindarios!'},{text:'Olas del océano', expl:'¡Las escuelas no suelen estar junto al mar!'},{text:'Solo montañas', expl:'¡Las escuelas están en muchos lugares!'}] }
+  };
+  Object.keys(ssPKK).forEach(function(id){
+    const key = 'social-studies:' + id;
+    const src = ssPKK[id];
     if(!L[key]) L[key] = {};
     L[key].activity = {
       instructions: src.q,
