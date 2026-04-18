@@ -15168,6 +15168,109 @@ Object.assign(LESSON_TRANSLATIONS_ES, {
   'financial-literacy:flKe3': Object.assign({}, LESSON_TRANSLATIONS_ES['financial-literacy:flKe3'] || {}, { activity: { instructions: '¡Mi meta de dinero es _____!', prompt: '¿Qué vas a lograr?' }})
 });
 
+// Math PK (85 lessons) — templated translations by category
+(function(){
+  const m = LESSON_TRANSLATIONS_ES;
+  const ns = 'math:';
+  const titles = {
+    // A: Counting & Cardinality
+    'mPKA1':'Contar hasta 3','mPKA2':'Contar hasta 5','mPKA3':'Contar hasta 10',
+    'mPKA4':'Contar objetos hasta 5','mPKA5':'Contar objetos hasta 10',
+    'mPKA6':'Contar a partir de cualquier número','mPKA7':'Contar cuántos hay en un grupo',
+    'mPKA8':'Contar uno a uno','mPKA9':'Decir cuántos después de contar',
+    'mPKA10':'Contar objetos en una fila','mPKA11':'Contar objetos esparcidos',
+    'mPKA12':'Contar y escribir hasta 5','mPKA13':'Contar y escribir hasta 10',
+    'mPKA14':'Contar sonidos o acciones','mPKA15':'Contar a partir de un número',
+    'mPKA16':'Contar otra vez para revisar',
+    // B: Number Recognition
+    'mPKB17':'Reconocer el número 1','mPKB18':'Reconocer el número 2',
+    'mPKB19':'Reconocer el número 3','mPKB20':'Reconocer los números 4 y 5',
+    'mPKB21':'Reconocer los números 6 y 7','mPKB22':'Reconocer los números 8 y 9',
+    'mPKB23':'Reconocer el número 10','mPKB24':'Reconocer los números del 0 al 10',
+    'mPKB25':'Emparejar número con grupo','mPKB26':'Emparejar grupo con número',
+    'mPKB27':'Identificar números en una recta numérica','mPKB28':'Ordenar números del 1 al 5',
+    'mPKB29':'Ordenar números del 1 al 10','mPKB30':'Encontrar el número que falta (1-5)',
+    'mPKB31':'Encontrar el número que falta (1-10)','mPKB32':'Número antes y después',
+    // C: Comparing & Ordering
+    'mPKC33':'Comparar grupos — más','mPKC34':'Comparar grupos — menos',
+    'mPKC35':'Comparar grupos — iguales','mPKC36':'Qué grupo tiene más',
+    'mPKC37':'Qué grupo tiene menos','mPKC38':'Comparar números hasta 5',
+    'mPKC39':'Comparar números hasta 10','mPKC40':'Uno más que un número',
+    'mPKC41':'Uno menos que un número','mPKC42':'Ordenar 3 números de menor a mayor',
+    'mPKC43':'Ordenar 3 números de mayor a menor','mPKC44':'El más largo y el más corto',
+    'mPKC45':'El más alto y el más bajo','mPKC46':'El más pesado y el más ligero',
+    'mPKC47':'El más grande y el más pequeño','mPKC48':'El más y el menos',
+    'mPKC49':'¿Qué sigue? (1-5)','mPKC50':'¿Qué viene antes? (1-5)',
+    'mPKC51':'Menor y mayor (1-5)','mPKC52':'Menor y mayor (1-10)',
+    'mPKC53':'Orden de los números 1-10',
+    // D: Patterns & Sorting (note: lesson IDs jump back to 49 in source — preserve as-is)
+    'mPKD49':'Identificar patrones AB','mPKD50':'Continuar patrones AB',
+    'mPKD51':'Identificar patrones ABB','mPKD52':'Continuar patrones ABB',
+    'mPKD53':'Identificar patrones ABC','mPKD54':'Crear un patrón',
+    'mPKD55':'¿Qué sigue en el patrón?','mPKD56':'Encontrar el error en un patrón',
+    'mPKD57':'Clasificar por color','mPKD58':'Clasificar por forma',
+    'mPKD59':'Clasificar por tamaño','mPKD60':'Clasificar en dos grupos',
+    'mPKD61':'Clasificar en tres grupos','mPKD62':'Clasificar objetos',
+    'mPKD63':'Emparejar y clasificar','mPKD64':'Describir una regla para clasificar',
+    // E: Early Addition & Subtraction
+    'mPKE65':'Juntar grupos hasta 3','mPKE66':'Juntar grupos hasta 5',
+    'mPKE67':'¿Cuántos hay en total hasta 5?','mPKE68':'Oraciones de suma hasta 3',
+    'mPKE69':'Oraciones de suma hasta 5','mPKE70':'Quitar de grupos hasta 3',
+    'mPKE71':'Quitar de grupos hasta 5','mPKE72':'¿Cuántos quedan hasta 5?',
+    'mPKE73':'Oraciones de resta hasta 3','mPKE74':'Oraciones de resta hasta 5',
+    'mPKE75':'Problemas de palabras — sumar hasta 5','mPKE76':'Problemas de palabras — restar hasta 5',
+    'mPKE77':'Hacer 5 de dos formas','mPKE78':'Separar el 5',
+    'mPKE79':'Componer números hasta 5','mPKE80':'Descomponer números hasta 5'
+  };
+  const taglines = {
+    'mPKA1':'¡A contar!','mPKA2':'¡Cuenta más alto!','mPKA3':'¡Sigue contando!',
+    'mPKA4':'Cuenta lo que ves','mPKA5':'Cuenta más objetos','mPKA6':'Empieza a contar desde donde sea',
+    'mPKA7':'Cuenta un conjunto','mPKA8':'Un conteo por cada objeto','mPKA9':'Di el total',
+    'mPKA10':'Cuenta objetos en filas','mPKA11':'Cuenta cuando están mezclados',
+    'mPKA12':'Escribe el número','mPKA13':'Cuenta y registra','mPKA14':'Cuenta aplausos y golpecitos',
+    'mPKA15':'Continúa desde un número','mPKA16':'Cuenta de nuevo para verificar',
+    'mPKB17':'Conoce el número 1','mPKB18':'Conoce el número 2','mPKB19':'Conoce el número 3',
+    'mPKB20':'Conoce el 4 y el 5','mPKB21':'Conoce el 6 y el 7','mPKB22':'Conoce el 8 y el 9',
+    'mPKB23':'Conoce el número 10','mPKB24':'Conoce todos los números','mPKB25':'El número va con el grupo',
+    'mPKB26':'El grupo va con el número','mPKB27':'Encuentra los números en orden',
+    'mPKB28':'Ordena los números','mPKB29':'Ordena números más grandes','mPKB30':'Llena el espacio',
+    'mPKB31':'Encuentra el hueco','mPKB32':'Encuentra a los vecinos',
+    'mPKC33':'¿Cuál tiene más?','mPKC34':'¿Cuál tiene menos?','mPKC35':'¿Son iguales?',
+    'mPKC36':'Elige el grupo más grande','mPKC37':'Elige el grupo más pequeño',
+    'mPKC38':'Compara dos números','mPKC39':'Compara números más grandes','mPKC40':'Suma uno más',
+    'mPKC41':'Quita uno','mPKC42':'Del más pequeño al más grande','mPKC43':'Del más grande al más pequeño',
+    'mPKC44':'Compara longitud','mPKC45':'Compara altura','mPKC46':'Compara peso',
+    'mPKC47':'Compara tamaño','mPKC48':'Encuentra las palabras de cantidad',
+    'mPKC49':'¡El orden de los números 1 a 5!','mPKC50':'¿Qué número viene justo antes?',
+    'mPKC51':'¡Los números menor y mayor!','mPKC52':'¡Encuentra el más grande y el más pequeño!',
+    'mPKC53':'¡Pon los números en orden!',
+    'mPKD49':'Encuentra patrones simples','mPKD50':'Sigue el patrón','mPKD51':'Encuentra patrones complejos',
+    'mPKD52':'Sigue patrones complejos','mPKD53':'Encuentra patrones de tres partes',
+    'mPKD54':'Inventa tu propio patrón','mPKD55':'Predice qué sigue','mPKD56':'Encuentra el error',
+    'mPKD57':'Agrupa por color','mPKD58':'Agrupa por forma','mPKD59':'Agrupa por tamaño',
+    'mPKD60':'Haz dos conjuntos','mPKD61':'Haz tres conjuntos','mPKD62':'Clasifica con una regla',
+    'mPKD63':'Empareja primero, luego agrupa','mPKD64':'Explica tu clasificación',
+    'mPKE65':'Junta grupos pequeños','mPKE66':'Junta grupos más grandes','mPKE67':'Encuentra el total',
+    'mPKE68':'Escribe oraciones con +','mPKE69':'Escribe oraciones más grandes',
+    'mPKE70':'Quita objetos','mPKE71':'Quita de grupos más grandes','mPKE72':'Encuentra cuántos quedan',
+    'mPKE73':'Escribe oraciones con −','mPKE74':'Escribe oraciones de resta más grandes',
+    'mPKE75':'Cuentos con sumas','mPKE76':'Cuentos con restas','mPKE77':'Encuentra parejas que hacen 5',
+    'mPKE78':'Toma el 5 y sepáralo','mPKE79':'Pon los números juntos','mPKE80':'Separa los números'
+  };
+  const stdByCat = {
+    A: { intro:'Practica tus habilidades para contar.', keyPoints:['Toca cada objeto al contar','Di un número por cada uno','El último número te dice cuántos'], funFact:'¡Contar es una de las primeras habilidades de matemáticas!' },
+    B: { intro:'Aprende a reconocer los números y a emparejarlos con grupos.', keyPoints:['Cada número tiene su forma','Los números nos dicen cuántos','Practica reconociéndolos rápido'], funFact:'¡Los números 0 al 9 forman todos los demás números!' },
+    C: { intro:'Compara grupos y números: más, menos o iguales.', keyPoints:['Cuenta cada grupo','Compara los números','Más, menos o iguales'], funFact:'¡Comparar nos ayuda a tomar decisiones todos los días!' },
+    D: { intro:'Encuentra patrones y clasifica por color, forma o tamaño.', keyPoints:['Los patrones se repiten','Clasifica por una regla','Los patrones están en todos lados'], funFact:'¡La música, los días y las estaciones son patrones!' },
+    E: { intro:'Junta y separa grupos con sumas y restas pequeñas.', keyPoints:['Sumar = juntar','Restar = quitar','Cuenta con tus dedos para revisar'], funFact:'¡Las primeras sumas y restas son la base para grandes problemas!' }
+  };
+  Object.keys(titles).forEach(function(id){
+    const catMatch = id.match(/[A-E]/);
+    const cat = catMatch ? catMatch[0] : 'A';
+    m[ns+id] = Object.assign({ title: titles[id], tagline: taglines[id] || '' }, stdByCat[cat]);
+  });
+})();
+
 // Math K (104 lessons) — templated translations by category
 (function(){
   const m = LESSON_TRANSLATIONS_ES;
@@ -16849,6 +16952,112 @@ Object.assign(LESSON_TRANSLATIONS_ES, {
       choices: src.choices.map(function(c){ return { text: c.text, explanation: c.expl }; })
     };
   });
+
+  // ── Math PK activities (85 lessons — content-specific hand translations)
+  // Most answers are pure numbers, which are language-neutral; question
+  // text and explanations are translated.
+  const mathPK = {
+    'mPKA1': { q:'Cuenta las estrellas: ⭐⭐⭐ ¿Cuántas estrellas hay?', choices:[{text:'3',expl:'¡Hay 3 estrellas: ⭐ una, ⭐ dos, ⭐ tres!'},{text:'2',expl:'Cuenta de nuevo: ⭐ una, ⭐ dos, ⭐ tres. ¡Hay 3!'},{text:'4',expl:'Cuenta con cuidado: ⭐ una, ⭐ dos, ⭐ tres. ¡Hay 3!'}] },
+    'mPKA2': { q:'Cuenta las manzanas: 🍎🍎🍎🍎🍎 ¿Cuántas manzanas hay?', choices:[{text:'5',expl:'¡Hay 5 manzanas: 🍎 una, 🍎 dos, 🍎 tres, 🍎 cuatro, 🍎 cinco!'},{text:'4',expl:'Cuenta de nuevo: 1, 2, 3, 4, 5. ¡Hay 5!'},{text:'6',expl:'Cuenta con cuidado: 1, 2, 3, 4, 5. ¡Hay 5!'}] },
+    'mPKA3': { q:'Cuenta los patos: 🦆🦆🦆🦆🦆🦆🦆🦆🦆🦆 ¿Cuántos patos hay?', choices:[{text:'10',expl:'Hay 10 patos. Cuenta: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10!'},{text:'9',expl:'Cuenta de nuevo con cuidado: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10. ¡Hay 10!'},{text:'8',expl:'Cuenta cada pato: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10. ¡Hay 10!'}] },
+    'mPKA4': { q:'Cuenta las galletas: 🍪🍪🍪🍪 ¿Cuántas galletas hay?', choices:[{text:'4',expl:'¡Hay 4 galletas: 🍪 una, 🍪 dos, 🍪 tres, 🍪 cuatro!'},{text:'3',expl:'Cuenta de nuevo: 1, 2, 3, 4. ¡Hay 4!'},{text:'5',expl:'Cuenta cada galleta: 1, 2, 3, 4. ¡Hay 4!'}] },
+    'mPKA5': { q:'Cuenta los peces: 🐟🐟🐟🐟🐟🐟🐟 ¿Cuántos peces hay?', choices:[{text:'7',expl:'Hay 7 peces. Cuenta: 1, 2, 3, 4, 5, 6, 7!'},{text:'6',expl:'Cuenta de nuevo: 1, 2, 3, 4, 5, 6, 7. ¡Hay 7!'},{text:'8',expl:'Cuenta cada pez: 1, 2, 3, 4, 5, 6, 7. ¡Hay 7!'}] },
+    'mPKA6': { q:'Empieza en 4 y cuenta: 4, 5, ___, 7. ¿Qué número sigue?', choices:[{text:'6',expl:'¡Después del 5 viene el 6. Así: 4, 5, 6, 7!'},{text:'5',expl:'¡Ese es el número que ya dijiste! Sigue el 6.'},{text:'8',expl:'¡8 viene después del 7! Sigue el 6.'}] },
+    'mPKA7': { q:'¿Cuántas 🌟 hay? 🌟🌟🌟🌟🌟🌟', choices:[{text:'6',expl:'Cuenta: 🌟 una, 🌟 dos, 🌟 tres, 🌟 cuatro, 🌟 cinco, 🌟 seis. ¡Hay 6!'},{text:'5',expl:'Cuenta de nuevo: 1, 2, 3, 4, 5, 6. ¡Hay 6!'},{text:'7',expl:'Cuenta con cuidado: 1, 2, 3, 4, 5, 6. ¡Hay 6!'}] },
+    'mPKA8': { q:'Señala y cuenta los perros: 🐶🐶🐶 ¿Cuántos perros hay?', choices:[{text:'3',expl:'¡Señala cada perro y cuenta: 🐶 uno, 🐶 dos, 🐶 tres!'},{text:'2',expl:'Cuenta de nuevo señalando cada perro: 1, 2, 3.'},{text:'4',expl:'Cuenta cada perro: 1, 2, 3. ¡Hay 3!'}] },
+    'mPKA9': { q:'Cuenta los gatos: 🐱🐱🐱🐱 ¿Cuántos hay en total?', choices:[{text:'4',expl:'Cuenta: 1, 2, 3, 4. ¡Hay 4 gatos en total!'},{text:'3',expl:'Cuenta de nuevo: 🐱 uno, 🐱 dos, 🐱 tres, 🐱 cuatro. ¡Hay 4!'},{text:'5',expl:'Cuenta con cuidado: 1, 2, 3, 4. ¡Hay 4!'}] },
+    'mPKA10': { q:'Cuenta las flores en una fila: 🌺🌺🌺🌺🌺 ¿Cuántas hay?', choices:[{text:'5',expl:'Cuenta a lo largo de la fila: 🌺 una, 🌺 dos, 🌺 tres, 🌺 cuatro, 🌺 cinco!'},{text:'4',expl:'Cuenta de nuevo: 1, 2, 3, 4, 5. ¡Hay 5!'},{text:'6',expl:'Cuenta cada flor: 1, 2, 3, 4, 5. ¡Hay 5!'}] },
+    'mPKA11': { q:'Cuenta las fresas dispersas: 🍓🍓🍓🍓🍓🍓 ¿Cuántas hay?', choices:[{text:'6',expl:'Cuenta cada fresa: 🍓 una, 🍓 dos, 🍓 tres, 🍓 cuatro, 🍓 cinco, 🍓 seis!'},{text:'5',expl:'Cuenta de nuevo con cuidado: 1, 2, 3, 4, 5, 6. ¡Hay 6!'},{text:'7',expl:'Cuenta cada una: 1, 2, 3, 4, 5, 6. ¡Hay 6!'}] },
+    'mPKA12': { q:'Cuéntalos y elige el número: 🎈🎈🎈🎈 ¿Qué número?', choices:[{text:'4',expl:'Cuenta: 🎈 uno, 🎈 dos, 🎈 tres, 🎈 cuatro. ¡Escribe 4!'},{text:'3',expl:'Cuenta de nuevo: 1, 2, 3, 4. ¡Es 4!'},{text:'5',expl:'Cuenta con cuidado: 1, 2, 3, 4. ¡Es 4!'}] },
+    'mPKA13': { q:'Cuéntalos y elige el número: 🚗🚗🚗🚗🚗🚗🚗🚗 ¿Qué número?', choices:[{text:'8',expl:'Cuenta: 1, 2, 3, 4, 5, 6, 7, 8. ¡Es 8!'},{text:'7',expl:'Cuenta de nuevo: 1, 2, 3, 4, 5, 6, 7, 8. ¡Es 8!'},{text:'9',expl:'Cuenta cada carrito: 1, 2, 3, 4, 5, 6, 7, 8. ¡Es 8!'}] },
+    'mPKA14': { q:'Aplaudo 5 veces. ¿Cuántos aplausos escuchas? Aplauso aplauso aplauso aplauso aplauso', choices:[{text:'5',expl:'Cuenta los aplausos: 1, 2, 3, 4, 5. ¡Hay 5 aplausos!'},{text:'4',expl:'Cuenta de nuevo: 1, 2, 3, 4, 5. ¡Son 5!'},{text:'6',expl:'Cuenta con cuidado: 1, 2, 3, 4, 5. ¡Son 5!'}] },
+    'mPKA15': { q:'Empieza en 3 y sigue contando: 3, 4, 5, ___. ¿Qué sigue?', choices:[{text:'6',expl:'¡Después del 5 viene el 6. Así: 3, 4, 5, 6!'},{text:'5',expl:'¡Ya dijiste 5! Después del 5 viene el 6.'},{text:'7',expl:'¡7 viene después del 6! Sigue el 6.'}] },
+    'mPKA16': { q:'Cuéntalas dos veces: 🍪🍪🍪 ¿Te dio el mismo número las dos veces?', choices:[{text:'Sí, 3 las dos veces',expl:'¡Contar dos veces te ayuda a revisar! Las dos veces cuentas 1, 2, 3.'},{text:'No, números diferentes',expl:'Cuenta otra vez con cuidado — debería darte 3 cada vez.'},{text:'No estoy seguro',expl:'¡Cuenta despacito y verás que te da 3 las dos veces!'}] },
+    'mPKB17': { q:'¿Qué número es este? 1', choices:[{text:'1',expl:'¡Ese es el número 1! Parece una línea recta.'},{text:'2',expl:'¡Ese es el 2! Este es el 1. ¡Mira que el 1 es solo una línea!'},{text:'3',expl:'¡Ese es el 3! Este es el 1.'}] },
+    'mPKB18': { q:'¿Qué número es este? 2', choices:[{text:'2',expl:'¡Ese es el número 2! Tiene una curva arriba.'},{text:'1',expl:'¡Ese es el 1! Este es el 2. ¿Ves la curva?'},{text:'3',expl:'¡Ese es el 3! Este es el 2.'}] },
+    'mPKB19': { q:'¿Qué número es este? 3', choices:[{text:'3',expl:'¡Ese es el número 3! Parece dos jorobitas a la derecha.'},{text:'2',expl:'¡Ese es el 2! Este es el 3. ¡Mira la jorobita extra!'},{text:'4',expl:'¡Ese es el 4! Este es el 3.'}] },
+    'mPKB20': { q:'¿Qué número es este? 4', choices:[{text:'4',expl:'¡Ese es el número 4! Tiene líneas rectas y un palito.'},{text:'3',expl:'¡Ese es el 3! Este es el 4. ¡Mira la línea extra!'},{text:'5',expl:'¡Ese es el 5! Este es el 4.'}] },
+    'mPKB21': { q:'¿Qué número es este? 6', choices:[{text:'6',expl:'¡Ese es el número 6! Tiene un círculo abajo.'},{text:'5',expl:'¡Ese es el 5! Este es el 6. ¡Mira la forma diferente!'},{text:'9',expl:'¡Ese es el 9! Este es el 6 — el círculo está abajo.'}] },
+    'mPKB22': { q:'¿Qué número es este? 8', choices:[{text:'8',expl:'¡Ese es el número 8! Parece dos círculos uno arriba del otro.'},{text:'7',expl:'¡Ese es el 7! Este es el 8. ¿Ves los dos círculos?'},{text:'9',expl:'¡Ese es el 9! Este es el 8.'}] },
+    'mPKB23': { q:'¿Qué número es este? 10', choices:[{text:'10',expl:'¡Ese es el 10! Es el número 1 y el 0 juntos.'},{text:'1',expl:'¡Ese es el 1! Este es el 10. ¡Mira los dos números!'},{text:'0',expl:'¡Ese es el 0! Este es el 10.'}] },
+    'mPKB24': { q:'¿Qué número es este? 7', choices:[{text:'7',expl:'¡Ese es el número 7! Viene después del 6 y antes del 8.'},{text:'6',expl:'¡Ese es el 6! Este es el 7. ¡Uno más!'},{text:'8',expl:'¡Ese es el 8! Este es el 7.'}] },
+    'mPKB25': { q:'¿Qué grupo coincide con el número 3?', choices:[{text:'🐶🐶🐶',expl:'¡El número 3 coincide con un grupo de 3 perros!'},{text:'🐶🐶',expl:'Eso son 2 perros. ¡Encuentra el grupo de 3!'},{text:'🐶🐶🐶🐶',expl:'Eso son 4 perros. ¡Encuentra el grupo de 3!'}] },
+    'mPKB26': { q:'¿Cuántas 🌟 hay aquí? 🌟🌟🌟🌟', choices:[{text:'4',expl:'Cuenta: 1, 2, 3, 4. ¡El número 4 coincide con este grupo!'},{text:'3',expl:'Cuenta de nuevo: 1, 2, 3, 4. ¡Son 4!'},{text:'5',expl:'Cuenta con cuidado: 1, 2, 3, 4. ¡Son 4!'}] },
+    'mPKB27': { q:'En una recta numérica, ¿qué número viene después del 5? 4, 5, ___', choices:[{text:'6',expl:'¡Después del 5 viene el 6 en la recta numérica!'},{text:'5',expl:'¡Ese es el número de antes! Después del 5 viene el 6.'},{text:'4',expl:'¡4 viene antes! Después del 5 viene el 6.'}] },
+    'mPKB28': { q:'Pon estos en orden: 3, 1, 2. ¿Cuál va primero?', choices:[{text:'1',expl:'1 va primero, luego 2, luego 3. Orden: 1, 2, 3'},{text:'2',expl:'¡2 va segundo! 1 va primero.'},{text:'3',expl:'¡3 va al final! 1 va primero.'}] },
+    'mPKB29': { q:'Pon estos en orden: 5, 3, 7. ¿Cuál va primero?', choices:[{text:'3',expl:'3 es el más pequeño. Orden: 3, 5, 7'},{text:'5',expl:'¡5 va en medio! 3 va primero.'},{text:'7',expl:'¡7 va al final! 3 va primero.'}] },
+    'mPKB30': { q:'¿Qué falta? 1, 2, ___, 4, 5', choices:[{text:'3',expl:'¡Después del 2 va el 3, luego el 4. El número que falta es 3!'},{text:'2',expl:'¡El 2 ya está! El número que falta es el 3.'},{text:'4',expl:'¡El 4 ya está! El número que falta es el 3.'}] },
+    'mPKB31': { q:'¿Qué falta? 3, 4, 5, ___, 7, 8', choices:[{text:'6',expl:'¡Después del 5 va el 6, luego el 7. El número que falta es 6!'},{text:'5',expl:'¡El 5 ya está! El número que falta es el 6.'},{text:'7',expl:'¡El 7 ya está! El número que falta es el 6.'}] },
+    'mPKB32': { q:'¿Qué viene después del 5?', choices:[{text:'6',expl:'¡Después del 5 viene el 6!'},{text:'5',expl:'¡5 es el número con el que empezaste! Después viene el 6.'},{text:'4',expl:'¡4 viene antes del 5! Después del 5 viene el 6.'}] },
+    'mPKC33': { q:'¿Qué grupo tiene MÁS? 🍎🍎 o 🍎🍎🍎', choices:[{text:'🍎🍎🍎',expl:'🍎🍎🍎 tiene 3. 🍎🍎 tiene 2. ¡Así que 🍎🍎🍎 tiene MÁS!'},{text:'🍎🍎',expl:'¡Ese tiene menos! 🍎🍎🍎 tiene más porque tiene 3!'},{text:'Son iguales',expl:'¡No son iguales! Uno tiene 3 y el otro tiene 2.'}] },
+    'mPKC34': { q:'¿Qué grupo tiene MENOS? 🐶🐶🐶🐶 o 🐶🐶', choices:[{text:'🐶🐶',expl:'🐶🐶 tiene 2. 🐶🐶🐶🐶 tiene 4. ¡Así que 🐶🐶 tiene MENOS!'},{text:'🐶🐶🐶🐶',expl:'¡Ese tiene más! 🐶🐶 tiene menos porque tiene 2!'},{text:'Son iguales',expl:'¡No son iguales! Uno tiene 4 y el otro tiene 2.'}] },
+    'mPKC35': { q:'¿Tienen la MISMA cantidad? 🌟🌟🌟 y 🌟🌟🌟', choices:[{text:'Sí, 3 cada uno',expl:'¡Los dos grupos tienen 3 estrellas. Tienen la MISMA cantidad!'},{text:'No, cantidades diferentes',expl:'¡Cuenta de nuevo! Los dos tienen 3.'},{text:'No se puede saber',expl:'¡Sí se puede! Solo cuenta — los dos tienen 3.'}] },
+    'mPKC36': { q:'¿Cuál tiene MÁS objetos? A) 🎈 B) 🎈🎈🎈', choices:[{text:'B) 🎈🎈🎈',expl:'B tiene 3 globos. A tiene 1. ¡B tiene MÁS!'},{text:'A) 🎈',expl:'¡Ese tiene solo 1! B tiene 3, que es MÁS.'},{text:'Son iguales',expl:'¡No son iguales! A tiene 1 y B tiene 3.'}] },
+    'mPKC37': { q:'¿Cuál tiene MENOS objetos? A) 🍪🍪🍪🍪🍪 B) 🍪🍪', choices:[{text:'B) 🍪🍪',expl:'B tiene 2 galletas. A tiene 5. ¡B tiene MENOS!'},{text:'A) 🍪🍪🍪🍪🍪',expl:'¡Ese tiene 5! B tiene 2, que es MENOS.'},{text:'Son iguales',expl:'¡No son iguales! A tiene 5 y B tiene 2.'}] },
+    'mPKC38': { q:'¿Qué número es MÁS? 3 o 5', choices:[{text:'5',expl:'5 es más que 3. ¡5 es más grande!'},{text:'3',expl:'¡3 es menos! 5 es MÁS que 3.'},{text:'Son iguales',expl:'¡No son iguales! 5 es más que 3.'}] },
+    'mPKC39': { q:'¿Qué número es MÁS? 6 o 9', choices:[{text:'9',expl:'9 es más que 6. ¡9 es más grande!'},{text:'6',expl:'¡6 es menos! 9 es MÁS que 6.'},{text:'Son iguales',expl:'¡No son iguales! 9 es más que 6.'}] },
+    'mPKC40': { q:'Uno más que 3 es ___', choices:[{text:'4',expl:'¡3 y uno más son 4!'},{text:'3',expl:'¡Ese es con el que empezaste! Uno más es 4.'},{text:'5',expl:'¡5 es dos más! Uno más que 3 es 4.'}] },
+    'mPKC41': { q:'Uno menos que 5 es ___', choices:[{text:'4',expl:'¡5 con uno menos es 4!'},{text:'5',expl:'¡Ese es con el que empezaste! Uno menos es 4.'},{text:'6',expl:'¡6 es uno MÁS! Uno menos que 5 es 4.'}] },
+    'mPKC42': { q:'Pon estos en orden de menor a mayor: 7, 2, 5. ¿Cuál es el primero?', choices:[{text:'2',expl:'2 es el más pequeño. Orden: 2, 5, 7'},{text:'5',expl:'¡5 va en medio! 2 es el más pequeño.'},{text:'7',expl:'¡7 es el más grande! 2 va primero.'}] },
+    'mPKC43': { q:'Pon estos en orden de mayor a menor: 3, 8, 5. ¿Cuál es el primero?', choices:[{text:'8',expl:'8 es el más grande. Orden: 8, 5, 3'},{text:'5',expl:'¡5 va en medio! 8 es el más grande.'},{text:'3',expl:'¡3 es el más pequeño! 8 va primero.'}] },
+    'mPKC44': { q:'¿Cuál es el MÁS LARGO? _____ (línea grande) o _ (línea chica)', choices:[{text:'_____ (línea grande)',expl:'¡La línea grande es más larga. Es la más larga!'},{text:'_ (línea chica)',expl:'¡Esa es más corta! La grande es la más larga.'},{text:'Son iguales',expl:'¡No son iguales! Una es claramente más larga.'}] },
+    'mPKC45': { q:'¿Cuál es el MÁS ALTO? 🌳 o 🌱', choices:[{text:'🌳',expl:'¡El árbol grande es más alto. Es el más alto!'},{text:'🌱',expl:'¡Esa es más baja! El árbol es el más alto.'},{text:'Son iguales',expl:'¡No son iguales! Uno es claramente más alto.'}] },
+    'mPKC46': { q:'¿Cuál es MÁS PESADO? 🪨 o 🪶', choices:[{text:'🪨',expl:'¡La roca es más pesada que la pluma!'},{text:'🪶',expl:'¡Las plumas son ligeras! La roca es más pesada.'},{text:'Son iguales',expl:'¡No son iguales! La roca es claramente más pesada.'}] },
+    'mPKC47': { q:'¿Cuál es el MÁS GRANDE? 🍎 o 🍒', choices:[{text:'🍎',expl:'¡La manzana es más grande que la cereza!'},{text:'🍒',expl:'¡Las cerezas son chiquitas! La manzana es la más grande.'},{text:'Son iguales',expl:'¡No son iguales! La manzana es claramente más grande.'}] },
+    'mPKC48': { q:'¿Qué grupo tiene MÁS? A) 🐠 B) 🐠🐠 C) 🐠🐠🐠🐠', choices:[{text:'C) 🐠🐠🐠🐠',expl:'C tiene 4 peces. ¡Es el que tiene MÁS!'},{text:'A) 🐠',expl:'¡Ese tiene solo 1! C tiene 4, que es la mayoría.'},{text:'B) 🐠🐠',expl:'¡Ese tiene 2! C tiene 4, que es más.'}] },
+    'mPKC49': { q:'1, 2, 3, ___ ¿Qué sigue?', choices:[{text:'4',expl:'¡Después del 3 viene el 4! Cuenta: 1, 2, 3, 4 ✅'},{text:'5',expl:'¡5 viene después del 4! Justo después del 3 va el 4.'},{text:'2',expl:'¡2 ya está antes del 3! Después del 3 va el 4.'}] },
+    'mPKC50': { q:'___, 3, 4, 5. ¿Qué viene antes del 3?', choices:[{text:'2',expl:'¡2 viene antes del 3! Cuenta: 1, 2, 3 — ¡así que 2 va justo antes del 3! ✅'},{text:'4',expl:'¡4 viene DESPUÉS del 3! Antes del 3 va el 2.'},{text:'1',expl:'¡1 viene antes del 2! Justo antes del 3 va el 2.'}] },
+    'mPKC51': { q:'Mira: 2, 4, 1. ¿Qué número es el MENOR (más pequeño)?', choices:[{text:'1',expl:'¡1 es el menor porque es el más pequeño! 1 < 2 < 4 ✅'},{text:'4',expl:'¡4 es el más grande! El más pequeño es el 1.'},{text:'2',expl:'¡2 va en medio! El más pequeño es el 1.'}] },
+    'mPKC52': { q:'Mira: 3, 7, 5. ¿Cuál es el MAYOR (más grande)?', choices:[{text:'7',expl:'¡7 es el mayor porque es el número más grande! 3 < 5 < 7 ✅'},{text:'3',expl:'¡3 es el más pequeño! El más grande es el 7.'},{text:'5',expl:'¡5 va en medio! El más grande es el 7.'}] },
+    // mPKC53 is so() — uses sortItems handled separately
+    'mPKD49': { q:'¿Qué patrón ves? 🍎🌟🍎🌟🍎🌟', choices:[{text:'🍎🌟 se repite',expl:'Manzana, estrella, manzana, estrella... ¡🍎🌟 se sigue repitiendo!'},{text:'Todos iguales',expl:'¡Son diferentes! Manzana y estrella se alternan.'},{text:'Sin patrón',expl:'¡Sí hay patrón! Manzana, estrella se repite.'}] },
+    'mPKD50': { q:'¿Qué sigue? 🔴🔵🔴🔵🔴___', choices:[{text:'🔵',expl:'Rojo, azul, rojo, azul, rojo... ¡El que sigue es azul!'},{text:'🔴',expl:'¡Acabamos de ver rojo! Después del rojo viene el azul.'},{text:'🟡',expl:'¡Amarillo no está en el patrón! Solo rojo y azul.'}] },
+    'mPKD51': { q:'¿Qué patrón ves? 🌻🌻🌙🌻🌻🌙', choices:[{text:'🌻🌻🌙 se repite',expl:'Dos flores, una luna... ¡🌻🌻🌙 se sigue repitiendo!'},{text:'Todas flores',expl:'¡No! Dos flores, luego una luna.'},{text:'Sin patrón',expl:'¡Sí hay patrón! 🌻🌻🌙 se repite.'}] },
+    'mPKD52': { q:'¿Qué sigue? 🎈🎈⭐🎈🎈⭐🎈___', choices:[{text:'🎈',expl:'Globo, globo, estrella... Globo, globo, estrella... ¡El que sigue es globo!'},{text:'⭐',expl:'¡La estrella ya pasó! El que sigue es globo.'},{text:'🎉',expl:'¡Eso no está en el patrón! Sigue el globo.'}] },
+    'mPKD53': { q:'¿Qué patrón ves? 🔴🟡🟢🔴🟡🟢', choices:[{text:'🔴🟡🟢 se repite',expl:'Rojo, amarillo, verde, rojo, amarillo, verde... ¡🔴🟡🟢 se repite!'},{text:'Todos colores diferentes',expl:'¡Sí, pero se repite el patrón!'},{text:'Sin patrón',expl:'¡Sí hay patrón! 🔴🟡🟢 se repite.'}] },
+    'mPKD54': { q:'¿Cuál muestra un patrón que TÚ podrías hacer? A) Desordenado B) 🍎🍌🍎🍌🍎 C) Al azar', choices:[{text:'B) 🍎🍌🍎🍌🍎',expl:'¡B es un patrón claro! Manzana y plátano se repiten.'},{text:'A) Desordenado',expl:'¡Eso no es un patrón! Los patrones se repiten.'},{text:'C) Al azar',expl:'¡Eso no es un patrón! Los patrones se repiten.'}] },
+    'mPKD55': { q:'¿Qué sigue? 🎨🎭🎨🎭🎨___', choices:[{text:'🎭',expl:'Arte, teatro, arte, teatro... ¡El que sigue es teatro!'},{text:'🎨',expl:'¡Acabamos de ver arte! Después del arte viene el teatro.'},{text:'🎪',expl:'¡Eso no está en el patrón! Sigue el teatro.'}] },
+    'mPKD56': { q:'¿Qué tiene de mal este patrón? 🌟🌟💫🌟🌟💫', choices:[{text:'Nada está mal',expl:'¡De hecho está correcto! Dos estrellas, una distinta... ¡el patrón es 🌟🌟💫!'},{text:'La primera',expl:'¡La primera está bien! El patrón es 🌟🌟💫.'},{text:'La última',expl:'¡La última está bien! El patrón es 🌟🌟💫.'}] },
+    'mPKD57': { q:'¿Qué grupo muestra los rojos clasificados de los demás?', choices:[{text:'🔴🔴🔴 🟡 🟢',expl:'¡Los círculos rojos están juntos! Eso es clasificar por color.'},{text:'🔴🟡🔴🟢🔴',expl:'¡Están mezclados! Hay que ponerlos juntos.'},{text:'🟡🟢🔴',expl:'¡Solo hay un rojo! Hay que agrupar todos los rojos juntos.'}] },
+    'mPKD58': { q:'¿Cuál muestra los círculos clasificados de los cuadrados? ⭕⭕⭕□□', choices:[{text:'⭕⭕⭕□□',expl:'¡Todos los círculos están juntos, luego todos los cuadrados!'},{text:'⭕□⭕□⭕□',expl:'¡Están mezclados! Hay que ponerlos juntos.'},{text:'□□⭕⭕⭕',expl:'También funciona, ¡pero la primera muestra el orden círculos-cuadrados!'}] },
+    'mPKD59': { q:'¿Cuál muestra los grandes clasificados de los chicos? 🍎🍎🍎 (grandes) 🍎🍎 (chicos)', choices:[{text:'🍎🍎🍎 (grandes) 🍎🍎 (chicos)',expl:'¡Las manzanas grandes están juntas, las chicas están juntas!'},{text:'🍎 chica 🍎 grande 🍎 chica',expl:'¡Están mezcladas! Hay que ponerlas juntas.'},{text:'Todas mezcladas',expl:'¡No están clasificadas! Hay que separarlas.'}] },
+    'mPKD60': { q:'Clasifica de dos formas: 🍎🍌🍎🍌. ¿Cuál hace dos grupos?', choices:[{text:'Manzanas juntas, plátanos juntos',expl:'¡Eso son dos grupos: uno de manzanas, uno de plátanos!'},{text:'Grandes y pequeños',expl:'¡Pero todos son del mismo tamaño! Mejor por tipo.'},{text:'Por color',expl:'¡También funciona! Pero por tipo es la mejor opción aquí.'}] },
+    'mPKD61': { q:'Clasifica en tres grupos: 🔴🟡🟢🔴🟡🟢. ¿Cuántos grupos?', choices:[{text:'3 grupos (rojo, amarillo, verde)',expl:'¡Tres grupos: uno rojo, uno amarillo, uno verde!'},{text:'2 grupos',expl:'¡Hay 3 colores! Necesitas 3 grupos.'},{text:'6 grupos',expl:'¡Demasiados! Hay 3 colores diferentes, así que 3 grupos.'}] },
+    'mPKD62': { q:'¿Cuál es una buena regla para clasificar 🍎🥦🍌🥕?', choices:[{text:'Frutas vs. verduras',expl:'¡Puedes clasificar por tipo: las frutas juntas, las verduras juntas!'},{text:'Grandes vs. pequeños',expl:'¡Mejor por tipo de comida!'},{text:'Por color',expl:'También funciona, pero "frutas vs. verduras" es más claro aquí.'}] },
+    'mPKD63': { q:'¿Qué objeto coincide y se clasifica con 🐶🐶🐶?', choices:[{text:'Otro 🐶',expl:'¡Un perro coincide y va con los otros perros!'},{text:'🐱',expl:'¡Un gato no coincide con un perro!'},{text:'🐦',expl:'¡Un pájaro no coincide con un perro!'}] },
+    'mPKD64': { q:'Si clasificas 🔴🔵 por separado, ¿cuál es tu regla?', choices:[{text:'Color: rojo y azul',expl:'¡Genial! ¡Clasificar por color es una buena regla!'},{text:'Tamaño',expl:'¡Son del mismo tamaño! La regla es por color.'},{text:'Sin regla',expl:'¡Sí hay regla! Estás clasificando por color.'}] },
+    'mPKE65': { q:'Junta: 🍎 y 🍎🍎. ¿Cuántas hay en total?', choices:[{text:'3',expl:'¡1 manzana más 2 manzanas hacen 3 manzanas en total!'},{text:'2',expl:'¡Ese es solo un grupo! 1 + 2 = 3'},{text:'4',expl:'¡Cuenta de nuevo! 1 + 2 = 3'}] },
+    'mPKE66': { q:'Junta: 🌟🌟 y 🌟🌟🌟. ¿Cuántas hay en total?', choices:[{text:'5',expl:'¡2 estrellas más 3 estrellas hacen 5 estrellas en total!'},{text:'3',expl:'¡Ese es solo un grupo! 2 + 3 = 5'},{text:'6',expl:'¡Cuenta de nuevo! 2 + 3 = 5'}] },
+    'mPKE67': { q:'¿Cuántos hay en total? 🐶🐶 y 🐶', choices:[{text:'3',expl:'¡2 perros más 1 perro hacen 3 perros en total!'},{text:'2',expl:'¡Ese es solo el primer grupo! 2 + 1 = 3'},{text:'4',expl:'¡Cuenta de nuevo! 2 + 1 = 3'}] },
+    'mPKE68': { q:'¿Qué oración coincide? 🍪 y 🍪🍪', choices:[{text:'1 + 2 = 3',expl:'¡1 galleta más 2 galletas hacen 3. Eso es 1 + 2 = 3!'},{text:'2 + 2 = 4',expl:'¡No! Tienes 1 y 2, no 2 y 2.'},{text:'3 + 1 = 4',expl:'¡No! Tienes 1 + 2 = 3.'}] },
+    'mPKE69': { q:'¿Qué oración coincide? 🎈🎈🎈 y 🎈🎈', choices:[{text:'3 + 2 = 5',expl:'¡3 globos más 2 globos hacen 5. Eso es 3 + 2 = 5!'},{text:'2 + 2 = 4',expl:'¡No! Tienes 3 y 2, no 2 y 2.'},{text:'5 + 0 = 5',expl:'¡Ya tienes dos grupos! Es 3 + 2 = 5.'}] },
+    'mPKE70': { q:'Empieza con 🌟🌟🌟. Quita 🌟🌟. ¿Cuántas quedan?', choices:[{text:'1',expl:'¡Empezaste con 3 estrellas. Quitaste 2. Te queda 1!'},{text:'2',expl:'¡Eso es lo que quitaste! Te queda 1.'},{text:'3',expl:'¡Ese es con el que empezaste! Te queda 1.'}] },
+    'mPKE71': { q:'Empieza con 🍎🍎🍎🍎🍎. Quita 🍎🍎. ¿Cuántas quedan?', choices:[{text:'3',expl:'¡Empezaste con 5 manzanas. Quitaste 2. Te quedan 3!'},{text:'2',expl:'¡Eso es lo que quitaste! Te quedan 3.'},{text:'5',expl:'¡Ese es con el que empezaste! Te quedan 3.'}] },
+    'mPKE72': { q:'¿Cuántos quedan? Empieza: 🐠🐠🐠🐠. Quita: 🐠🐠', choices:[{text:'2',expl:'¡Tenías 4 peces. 2 se nadaron. ¡Quedan 2 peces!'},{text:'4',expl:'¡Ese es con el que empezaste! Quedan 2.'},{text:'6',expl:'¡Ese es sumando! Estamos restando: 4 - 2 = 2.'}] },
+    'mPKE73': { q:'¿Qué oración coincide? Empieza: 🍌🍌🍌. Quita: 🍌🍌', choices:[{text:'3 - 2 = 1',expl:'¡Empezaste con 3. Quitaste 2. Eso es 3 - 2 = 1!'},{text:'2 - 1 = 1',expl:'¡No! Empezaste con 3, no con 2.'},{text:'3 + 2 = 5',expl:'¡Estamos restando, no sumando! 3 - 2 = 1.'}] },
+    'mPKE74': { q:'¿Qué oración coincide? Empieza: 🎪🎪🎪🎪🎪. Quita: 🎪🎪🎪', choices:[{text:'5 - 3 = 2',expl:'¡Empezaste con 5. Quitaste 3. Eso es 5 - 3 = 2!'},{text:'3 - 2 = 1',expl:'¡No! Empezaste con 5, no con 3.'},{text:'5 + 3 = 8',expl:'¡Estamos restando, no sumando! 5 - 3 = 2.'}] },
+    'mPKE75': { q:'Hay 2 perros jugando. Llegan 2 perros más. ¿Cuántos perros hay ahora?', choices:[{text:'4',expl:'¡Empezaste con 2 perros. Llegaron 2 más. 2 + 2 = 4 perros!'},{text:'2',expl:'¡Ese es con el que empezaste! Llegaron 2 más, así que ahora hay 4.'},{text:'6',expl:'¡Cuenta de nuevo! 2 + 2 = 4.'}] },
+    'mPKE76': { q:'Hay 5 galletas. Te comes 2. ¿Cuántas quedan?', choices:[{text:'3',expl:'¡Empezaste con 5 galletas. Te comiste 2. ¡5 - 2 = 3 quedan!'},{text:'2',expl:'¡Ese es lo que comiste! Quedan 3.'},{text:'7',expl:'¡Estamos restando, no sumando! 5 - 2 = 3.'}] },
+    'mPKE77': { q:'¿Qué TAMBIÉN hace 5? 1 + 4 = 5, así que ___ + ___ = 5', choices:[{text:'2 + 3 = 5',expl:'¡Tanto 1+4 como 2+3 hacen 5!'},{text:'2 + 2 = 4',expl:'¡Eso hace 4, no 5! Prueba 2 + 3.'},{text:'3 + 3 = 6',expl:'¡Eso hace 6! Prueba 2 + 3 para hacer 5.'}] },
+    'mPKE78': { q:'Separa 5 en dos grupos: 5 = 3 + ___', choices:[{text:'2',expl:'¡5 se puede separar en 3 y 2!'},{text:'3',expl:'¡Ese ya es un grupo! Necesitas 2 más.'},{text:'4',expl:'¡3 + 4 = 7! La respuesta es 2.'}] },
+    'mPKE79': { q:'¿Cuál hace 5? Elige la mejor respuesta.', choices:[{text:'2 + 3',expl:'¡2 + 3 = 5! ¡Buena composición!'},{text:'1 + 3',expl:'¡Eso hace 4, no 5! Prueba 2 + 3.'},{text:'2 + 2',expl:'¡Eso hace 4! Prueba 2 + 3.'}] },
+    'mPKE80': { q:'Separa 4 en dos grupos: 4 = 2 + ___', choices:[{text:'2',expl:'¡4 se puede separar en 2 y 2!'},{text:'1',expl:'¡2 + 1 = 3, no 4! La respuesta es 2.'},{text:'3',expl:'¡2 + 3 = 5, no 4! La respuesta es 2.'}] }
+  };
+  Object.keys(mathPK).forEach(function(id){
+    const key = 'math:' + id;
+    const src = mathPK[id];
+    if(!L[key]) L[key] = {};
+    L[key].activity = {
+      instructions: src.q,
+      choices: src.choices.map(function(c){ return { text: c.text, explanation: c.expl }; })
+    };
+  });
+  // mPKC53 is sort-order: numbers stay identical
+  if(!L['math:mPKC53']) L['math:mPKC53'] = {};
+  L['math:mPKC53'].activity = {
+    instructions: '¡Pon estos números en orden de menor a mayor!',
+    sortItems: ['1','3','5','7','9']
+  };
 
   // ── Grade 3 History activities (content-specific, hand-translated)
   const histG3 = {
