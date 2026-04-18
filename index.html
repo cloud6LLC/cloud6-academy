@@ -1674,6 +1674,14 @@ function t(key){
   return valEn != null ? valEn : key;
 }
 
+// Field-level translator: reads `${field}_es` when in Spanish, falls back to `${field}`.
+// Used for per-lesson and per-category Spanish twin fields added in Phase 2.
+function tf(obj, field){
+  if(!obj) return '';
+  if(currentLang === 'es' && obj[field + '_es'] != null) return obj[field + '_es'];
+  return obj[field];
+}
+
 function applyTranslations(root){
   const scope = root || document;
   scope.querySelectorAll('[data-i18n]').forEach(function(el){
@@ -14178,10 +14186,13 @@ function openLesson(lessonId){
 }
 
 function renderLessonModal(lesson){
+  const introVal = tf(lesson.content, 'intro');
+  const kpVal = tf(lesson.content, 'keyPoints');
+  const funFactVal = tf(lesson.content, 'funFact');
   return `
     <div class="lesson-header">
       <div style="display:flex;align-items:center;gap:12px;flex:1">
-        <h2 style="margin:0">${lesson.emoji} ${lesson.title}</h2>
+        <h2 style="margin:0">${lesson.emoji} ${tf(lesson, 'title')}</h2>
         <button class="audio-btn" onclick="speakLesson()" title="${t('ui.lessonReadAloud')}">🔊</button>
       </div>
       <button class="close-btn" onclick="closeLesson()">×</button>
@@ -14197,10 +14208,10 @@ function renderLessonModal(lesson){
               ${t('ui.lessonStopBtn')}
             </button>
           </div>
-          <div class="intro">${typeof lesson.content.intro === 'string' ? lesson.content.intro : (Array.isArray(lesson.content.intro) ? '' : String(lesson.content.intro || ''))}</div>
+          <div class="intro">${typeof introVal === 'string' ? introVal : (Array.isArray(introVal) ? '' : String(introVal || ''))}</div>
           <div class="key-points">
             <h3>${t('ui.lessonKeyPoints')}</h3>
-            ${(Array.isArray(lesson.content.keyPoints) ? lesson.content.keyPoints : (lesson.content.keyPoints ? [lesson.content.keyPoints] : [])).map(kp => {
+            ${(Array.isArray(kpVal) ? kpVal : (kpVal ? [kpVal] : [])).map(kp => {
               if(typeof kp === 'string') return '<div class="kp">' + kp + '</div>';
               if(kp && typeof kp === 'object' && kp.instructions) return '<div class="kp">' + kp.instructions + '</div>';
               if(kp && typeof kp === 'object' && kp.prompt) return '<div class="kp">' + kp.prompt + '</div>';
@@ -14211,7 +14222,7 @@ function renderLessonModal(lesson){
           </div>
           <div class="fun-fact">
             <div class="ff-label">${t('ui.lessonFunFact')}</div>
-            ${lesson.content.funFact}
+            ${funFactVal || ''}
           </div>
           <button onclick="showWorkedExample()" style="margin-top:16px;display:inline-flex;align-items:center;gap:8px;padding:12px 24px;background:#fff;color:#0984e3;border:2px solid #0984e3;border-radius:12px;font-size:15px;font-weight:700;cursor:pointer;transition:all 0.2s;margin-right:12px" onmouseover="this.style.background='#0984e311'" onmouseout="this.style.background='#fff'">
             ${t('ui.lessonLearnExample')}
@@ -14269,6 +14280,329 @@ function closeLesson(){
   // Return to the same grade and subject view
   renderGradeView();
 }
+
+// ═══════════════════════════════════════════════════════════
+// LESSON TRANSLATIONS (Phase 2) — Spanish twin fields applied
+// onto existing lesson/category/grade-data objects. English is
+// never modified. Populated per-grade below, merged once at load.
+// ═══════════════════════════════════════════════════════════
+const LESSON_TRANSLATIONS_ES = {};
+const CATEGORY_TRANSLATIONS_ES = {};
+const GRADE_DATA_TRANSLATIONS_ES = {};
+
+function applyLessonTranslationsES(){
+  const curricula = {
+    'app-building': APP_BUILDING,
+    'financial-literacy': FINANCIAL_LITERACY,
+    'math': MATH_CURRICULUM,
+    'science': SCIENCE_CURRICULUM,
+    'english': ENGLISH_CURRICULUM,
+    'history': HISTORY_CURRICULUM,
+    'social-studies': SOCIAL_STUDIES_CURRICULUM
+  };
+  Object.keys(curricula).forEach(function(subject){
+    const cur = curricula[subject];
+    Object.keys(cur).forEach(function(grade){
+      const gd = cur[grade];
+      if(!gd) return;
+      const gKey = subject + '.' + grade;
+      if(GRADE_DATA_TRANSLATIONS_ES[gKey] && GRADE_DATA_TRANSLATIONS_ES[gKey].description != null){
+        gd.description_es = GRADE_DATA_TRANSLATIONS_ES[gKey].description;
+      }
+      if(!gd.categories) return;
+      Object.keys(gd.categories).forEach(function(catKey){
+        const cat = gd.categories[catKey];
+        const cKey = subject + '.' + grade + '.' + catKey;
+        if(CATEGORY_TRANSLATIONS_ES[cKey] && CATEGORY_TRANSLATIONS_ES[cKey].name != null){
+          cat.name_es = CATEGORY_TRANSLATIONS_ES[cKey].name;
+        }
+        (cat.lessons || []).forEach(function(lesson){
+          // Namespaced key ("subject:lessonId") avoids collisions across curricula
+          // (e.g. science PK 'sPKA1' vs social-studies PK 'sPKA1').
+          const es = LESSON_TRANSLATIONS_ES[subject + ':' + lesson.id] || LESSON_TRANSLATIONS_ES[lesson.id];
+          if(!es) return;
+          if(es.title != null) lesson.title_es = es.title;
+          if(es.tagline != null) lesson.tagline_es = es.tagline;
+          if(lesson.content){
+            if(es.intro != null) lesson.content.intro_es = es.intro;
+            if(es.keyPoints != null) lesson.content.keyPoints_es = es.keyPoints;
+            if(es.funFact != null) lesson.content.funFact_es = es.funFact;
+          }
+        });
+      });
+    });
+  });
+}
+
+// ═══════════════════════════════════════════════════════════
+// PHASE 2 TRANSLATIONS — Grade PK (Pre-K, ages 4-5)
+// Latin American Spanish. Additive: base lesson/category objects
+// are left untouched; these merge into `_es` twin fields at load.
+// ═══════════════════════════════════════════════════════════
+Object.assign(GRADE_DATA_TRANSLATIONS_ES, {
+  'app-building.PK': { description: '¡Descubre qué son los teléfonos, las tabletas y las apps con actividades divertidas con imágenes!' },
+  'financial-literacy.PK': { description: '¡Aprende ideas básicas del dinero con actividades divertidas!' },
+  'math.PK': { description: 'Matemáticas de Pre-Kínder — contar, reconocer números y las primeras ideas matemáticas' },
+  'science.PK': { description: 'Ciencias para los más pequeños' },
+  'english.PK': { description: 'Lenguaje para los más pequeños' },
+  'history.PK': { description: 'Historia y geografía para los más pequeños' },
+  'social-studies.PK': { description: 'Estudios sociales para los más pequeños' }
+});
+
+Object.assign(CATEGORY_TRANSLATIONS_ES, {
+  // App Building PK
+  'app-building.PK.A': { name: '¿Qué Son los Teléfonos y las Tabletas?' },
+  'app-building.PK.B': { name: 'Mis Apps Favoritas' },
+  'app-building.PK.C': { name: 'Ideas Sencillas para Apps' },
+  'app-building.PK.D': { name: 'Actividades Divertidas con Apps' },
+  'app-building.PK.E': { name: 'La Diversión de Crear' },
+  // Financial Literacy PK
+  'financial-literacy.PK.A': { name: '¿Qué Es el Dinero?' },
+  'financial-literacy.PK.B': { name: 'Compartir y Cuidar' },
+  'financial-literacy.PK.C': { name: 'Necesidades vs. Deseos' },
+  'financial-literacy.PK.D': { name: 'Ganar Dinero' },
+  'financial-literacy.PK.E': { name: 'La Diversión del Dinero' },
+  // Math PK
+  'math.PK.A': { name: 'Contar y Cantidad' },
+  'math.PK.B': { name: 'Reconocer Números' },
+  'math.PK.C': { name: 'Comparar y Ordenar' },
+  'math.PK.D': { name: 'Patrones y Clasificar' },
+  'math.PK.E': { name: 'Primeras Sumas y Restas' },
+  // Science PK
+  'science.PK.A': { name: 'Ciencias de la Vida' },
+  'science.PK.B': { name: 'La Tierra y el Espacio' },
+  'science.PK.C': { name: 'Ciencias Físicas' },
+  'science.PK.D': { name: 'El Método Científico' },
+  'science.PK.E': { name: 'Ingeniería y Tecnología' },
+  // English PK
+  'english.PK.A': { name: 'Lectura' },
+  'english.PK.B': { name: 'Escritura' },
+  'english.PK.C': { name: 'Vocabulario' },
+  'english.PK.D': { name: 'Gramática' },
+  'english.PK.E': { name: 'Comunicación' },
+  // History PK
+  'history.PK.A': { name: 'Historia de EE. UU.' },
+  'history.PK.B': { name: 'Historia del Mundo' },
+  'history.PK.C': { name: 'Gobierno' },
+  'history.PK.D': { name: 'Geografía' },
+  'history.PK.E': { name: 'Cultura' },
+  // Social Studies PK
+  'social-studies.PK.A': { name: 'Comunidad' },
+  'social-studies.PK.B': { name: 'Economía' },
+  'social-studies.PK.C': { name: 'Culturas del Mundo' },
+  'social-studies.PK.D': { name: 'Eventos Actuales' },
+  'social-studies.PK.E': { name: 'Mapas y Geografía' }
+});
+
+Object.assign(LESSON_TRANSLATIONS_ES, {
+  // ─── APP BUILDING PK ───
+  'app-building:abPKa1': { title: '¡Los Teléfonos y las Tabletas Son Ayudantes Mágicos!', tagline: '¡Nos ayudan a hacer cosas geniales!', intro: '¡Los teléfonos y las tabletas son aparatos especiales que pueden hacer MUCHAS cosas! Pueden jugar juegos, mostrar fotos, poner música y ayudarte a hablar con personas que están lejos. ¡Son como cajitas mágicas!', keyPoints: ['Los teléfonos caben en tu bolsillo','Las tabletas son más grandes que los teléfonos','Los teléfonos y las tabletas pueden hacer las mismas cosas','Necesitan electricidad para funcionar','Tocamos la pantalla para que hagan cosas'], funFact: '📱 ¡Tu teléfono es miles de millones de veces más poderoso que las computadoras que llevaron personas a la LUNA!' },
+  'app-building:abPKa2': { title: 'Las Apps Son Como Ayudantes Mágicos', tagline: '¡Cada app hace cosas diferentes!', intro: 'Las apps son como ayudantes chiquitos que viven en tu teléfono. Una app juega juegos, otra te muestra caricaturas, otra pone música. ¡Cuando tocas la foto de una app, ese ayudante despierta!', keyPoints: ['Las apps son ayudantes en tu teléfono','Cada app hace cosas diferentes','Tocas la app para que funcione','Las apps tienen muchos colores','Hay miles de apps para elegir'], funFact: '✨ ¡La primera app del mundo era mucho más sencilla que los juegos que juegas ahora!' },
+  'app-building:abPKa3': { title: '¡Las Personas Hacen las Apps!', tagline: 'Las apps no aparecen solas — ¡las crean personas!', intro: 'Cada app que ves la hizo una persona (o un equipo de personas) que tuvo una idea. Pensaron "quiero hacer un juego" o "quiero hacer una app para dibujar" y entonces la construyeron.', keyPoints: ['Las personas con ideas hacen las apps','A los creadores de apps se les llama programadores','Usan computadoras especiales para crear apps','Cualquiera puede aprender a hacer apps','¡Tú puedes hacer apps cuando seas grande!'], funFact: '👩‍💻 ¡Una niña de 10 años hizo una app que enseña a los niños a programar. Ahora 100,000 niños la usan!' },
+  'app-building:abPKb1': { title: 'Apps Que Me Encanta Usar', tagline: '¿Cuáles son TUS apps favoritas?', intro: 'Piensa en las apps con las que te gusta jugar. Tal vez te gusta un juego, o ver videos, o dibujar. ¡Cada app es especial y hace cosas diferentes!', keyPoints: ['A cada persona le gustan apps diferentes','Tu app favorita puede no ser la mía','Las apps nos ayudan a divertirnos','Las apps nos enseñan cosas nuevas','Podemos tener varias apps favoritas'], funFact: '🎉 ¡Hay una app para casi todo!' },
+  'app-building:abPKb2': { title: 'Las Apps Son Ayudantes', tagline: '¡Las apps nos ayudan a jugar, aprender y divertirnos!', intro: 'Las apps hacen cosas útiles para nosotros. Algunas apps te ayudan a aprender números, otras te ayudan a dibujar, otras te dejan jugar con amigos. ¡Todas son ayudantes!', keyPoints: ['Las apps son ayudantes','Algunas apps nos enseñan','Algunas apps nos dejan jugar','Algunas apps nos dejan hablar con amigos','Las apps nos hacen felices'], funFact: '🤝 ¿Sabías que hay una app que ayuda a los niños a aprender a leer?' },
+  'app-building:abPKb3': { title: 'Las Apps Vienen en Muchos Colores', tagline: '¡Cada app se ve diferente!', intro: '¿Has notado que las apps tienen diferentes dibujos y colores? Algunas son rojas, otras azules, otras tienen animalitos. ¡Los creadores de apps eligen los colores y los dibujos para que las apps se vean especiales!', keyPoints: ['Las apps tienen colores diferentes','Las apps tienen dibujos diferentes','Las apps coloridas son divertidas de ver','Los dibujos nos ayudan a encontrarlas','¡Tú también puedes hacer apps bonitas!'], funFact: '🌈 ¡Los creadores de apps piensan mucho en los colores para que se vean bonitas!' },
+  'app-building:abPKc1': { title: '¡Los Problemas Están en Todos Lados!', tagline: '¡Cuando algo es difícil, esa es una idea para una app!', intro: 'Si te aburres, ese es un problema. ¡Una app podría arreglarlo! Si no te acuerdas dónde están tus juguetes, una app podría ayudarte. ¡Cada problemita es una idea para una nueva app!', keyPoints: ['Busca problemitas','Aburrido = idea de app de juegos','No encuentro algo = idea de app para buscar','Quiero dibujar = idea de app de arte','Los problemas son ideas esperando a salir'], funFact: '🤔 ¡El que fundó YouTube dijo: "quiero compartir un video con mi amigo." Ese problema se convirtió en YouTube!' },
+  'app-building:abPKc2': { title: 'La App de Mis Sueños', tagline: '¿Qué app quieres TÚ que exista?', intro: 'Cierra los ojos e imagina. ¿Qué quisieras que hiciera TU app? ¿Una app que cuenta chistes? ¿Una app que te ayude a encontrar tu juguete favorito? ¡TUS ideas son buenas ideas!', keyPoints: ['Tus ideas importan','¿Qué haría TU día mejor?','Imaginar es el primer paso','Las apps geniales empiezan como sueños','¡Tú puedes hacer que las apps sean reales!'], funFact: '⭐ ¡Una niña de 9 años quería una app para organizar sus cosas. Ahora les enseña a OTROS niños a usarla!' },
+  'app-building:abPKc3': { title: '¡Los Juegos También Son Apps!', tagline: '¡Tus juegos favoritos son apps!', intro: '¿Conoces esos juegos que juegas en tabletas y teléfonos? ¡Esos son apps! Alguien los hizo. ¡Y tal vez TÚ puedas crear una app de juego cuando aprendas a programar!', keyPoints: ['Los juegos son un tipo de app','Tus juegos favoritos = apps que alguien hizo','Los que hacen juegos primero tuvieron ideas','Luego construyeron esas ideas','¡Tú también puedes hacer juegos!'], funFact: '🎮 ¿Sabías que algunos niños de tu edad hicieron un juego que jugaron 1 MILLÓN de personas?' },
+  'app-building:abPKd1': { title: 'Apps para Dibujar', tagline: '¡Puedes hacer dibujos bonitos en tu teléfono!', intro: 'Con una app para dibujar, puedes hacer arte en tu tableta o teléfono. Tocas colores, mueves tu dedo y ¡PUM — hiciste arte! ¡A veces es más fácil que con marcadores y crayones!', keyPoints: ['Las apps de dibujo te dejan hacer dibujos','Puedes borrar si te equivocas','Puedes usar muchos colores','Comparte tus dibujos con amigos','¡Las apps de dibujo son súper divertidas!'], funFact: '🎨 ¡Algunos artistas famosos ahora hacen arte usando apps de dibujo!' },
+  'app-building:abPKd2': { title: 'Apps de Juegos', tagline: '¡Vamos a pensar en juegos divertidos!', intro: '¡Los juegos son MUY divertidos! Algunos son juegos de memoria, otros de carreras, otros para construir. ¿Cuál es TU tipo de juego favorito?', keyPoints: ['Los juegos pueden ser rompecabezas divertidos','Los juegos pueden ser carreras','Los juegos pueden ser para construir','Los juegos hacen pensar a nuestro cerebro','¡Los juegos son DIVERTIDOS!'], funFact: '🎮 ¡El juego más popular de todos era sencillo — solo había que mover un cuadrito!' },
+  'app-building:abPKd3': { title: 'Hablar con Amigos', tagline: '¡Las apps nos ayudan a hablar con la gente!', intro: '¡Las apps de videollamada te dejan ver a tus amigos aunque estén lejos! Ellos te ven, tú los ves, y pueden sonreír y saludar. ¡Mágico!', keyPoints: ['Las apps de video nos dejan ver amigos lejanos','Podemos saludar y sonreír por la pantalla','Las apps de mensajes mandan palabras a los amigos','Las apps nos dejan compartir fotos con amigos','Los amigos lejanos se sienten más cerca con las apps'], funFact: '💬 ¡Los niños pueden hablar con abuelitos que viven lejos usando apps de video!' },
+  'app-building:abPKe1': { title: 'Cuando Seas Grande', tagline: '¡Tal vez TÚ harás apps!', intro: 'Ahora juegas con apps y juegos. Pero cuando seas grande, ¡TÚ podrías ser la persona que hace apps que JUEGAN millones de niños! ¿Qué genial, no?', keyPoints: ['Crecer es emocionante','Puedes aprender a programar','Algún día puedes hacer apps','Tus ideas pueden hacerse reales','Ser creador es increíble'], funFact: '🌟 ¡El creador de apps más joven tenía 7 años! ¡Tú también puedes ser creador!' },
+  'app-building:abPKe2': { title: 'Aprendiendo a Programar', tagline: '¡Programar es como dar instrucciones!', intro: 'Hacer apps usa algo llamado "programar". Programar es cuando le dices a la computadora exactamente qué hacer. "Haz un botón aquí. Cuando alguien lo toque, ¡pon un sonido!" ¡Eso es programar!', keyPoints: ['Programar es dar instrucciones','Le dices a las computadoras qué hacer','Es como una receta muy detallada','Las computadoras escuchan muy bien','¡Programar es divertido!'], funFact: '💻 ¡Los niños aprenden a programar desde MUY pequeños ahora!' },
+  'app-building:abPKe3': { title: '¡Tienes Grandes Ideas!', tagline: '¡Tus ideas importan y pueden convertirse en apps increíbles!', intro: 'Cada app en el mundo empezó como una idea en la cabeza de alguien. ¡Ese alguien puedes ser TÚ! ¡Nunca dejes de pensar en cosas geniales que quieras crear!', keyPoints: ['Tus ideas son importantes','Cada app empezó como una idea loca','Las ideas locas se hacen apps reales','Sigue imaginando y soñando','¡El mundo necesita TUS ideas!'], funFact: '💡 ¡El fundador de Instagram tuvo la idea en su carro. Ahora 1,000 MILLONES de personas la usan!' },
+
+  // ─── FINANCIAL LITERACY PK ───
+  'financial-literacy:flPKa1': { title: 'El Dinero Es Especial', tagline: '¡El dinero nos ayuda a conseguir cosas!', intro: 'El dinero son monedas y billetes especiales que nos ayudan a conseguir cosas que queremos y necesitamos. Puedes cambiar dinero por juguetes, comida o cosas divertidas. El dinero vale porque todos estamos de acuerdo en que vale.', keyPoints: ['El dinero viene en monedas y billetes','El dinero nos ayuda a comprar cosas','Todos usamos dinero','El dinero es especial y tiene valor','Guardamos el dinero en un lugar seguro'], funFact: '💵 ¡Las monedas se han usado por miles de años!' },
+  'financial-literacy:flPKa2': { title: 'Las Monedas Son Diferentes', tagline: '¡Cada moneda es especial!', intro: '¡Las monedas vienen de diferentes tamaños y colores! Un penny, un nickel, un dime y un quarter son diferentes. Valen cantidades diferentes. Unas son más grandes, otras más chiquitas. ¡Aprender de monedas es divertido!', keyPoints: ['Las monedas tienen tamaños diferentes','Monedas diferentes = valores diferentes','El penny es la más chiquita','El quarter es la más grande','Cada moneda es especial'], funFact: '🪙 ¡Las primeras monedas se hicieron en Turquía hace 2,700 años!' },
+  'financial-literacy:flPKa3': { title: 'Las Alcancías', tagline: '¡Ahorrar es guardar!', intro: '¡Una alcancía es una forma divertida de ahorrar dinero! Pones monedas y quedan seguras adentro. Cuando se llena, ¡tienes mucho dinero ahorrado! Ahorrar es guardar dinero para después.', keyPoints: ['Las alcancías son para ahorrar','Guarda monedas para el futuro','Cuando se llena, tienes mucho','Ahorrar = guardar dinero seguro','Ahorrar se siente bien'], funFact: '🐷 ¡Las primeras alcancías tenían forma de cerditos!' },
+  'financial-literacy:flPKb1': { title: 'Compartir Es Cuidar', tagline: '¡Cuando compartimos, hacemos felices a los demás!', intro: 'Cuando compartes tus juguetes con un amigo, ellos están felices y se sienten queridos. Cuando compartes dinero con personas que lo necesitan, ¡también se sienten queridas! Compartir muestra que te importa.', keyPoints: ['Compartir hace felices a las personas','Las personas amables comparten','Cuando compartimos, todos sonríen','Compartir juguetes y ayudar = bueno','Amor = compartir'], funFact: '❤️ ¡Compartir es una de las cosas más bonitas que puedes hacer!' },
+  'financial-literacy:flPKb2': { title: 'Ayudar a los Demás', tagline: '¡A veces las personas necesitan ayuda!', intro: 'Algunas personas no tienen tanto como nosotros. ¡Podemos ayudarlas! Cuando ayudas a alguien, se sienten mejor. ¡Ayudar a los demás con dinero o con amabilidad es increíble!', keyPoints: ['Algunas personas necesitan ayuda','Podemos dar para ayudar','Ayudar se siente maravilloso','Las personas amables ayudan','Todos merecen amabilidad'], funFact: '🙏 ¡Ayudar a los demás TE hace feliz también!' },
+  'financial-literacy:flPKb3': { title: 'Ser Generoso', tagline: '¡Generosidad = dar con amor!', intro: '¡Cuando le das algo a alguien sin esperar nada a cambio, eso es ser generoso! Las personas generosas dan juguetes, ayuda, sonrisas o dinero. ¡La generosidad hace el mundo mejor!', keyPoints: ['Generosidad = dar libremente','Las personas generosas son felices','Dar regalos = generosidad','Actos bondadosos = generosidad','El mundo necesita generosidad'], funFact: '🎁 ¡Las personas más generosas son las más felices!' },
+  'financial-literacy:flPKc1': { title: 'Lo Que NECESITAMOS', tagline: '¡Comida, hogar, ropa = necesidades!', intro: 'Algunas cosas las NECESITAMOS para vivir. La comida nos mantiene sanos. Un hogar nos mantiene seguros. La ropa nos mantiene calientes. Estas son necesidades. ¡No podemos vivir sin ellas!', keyPoints: ['Comida = la necesitamos','Hogar = lo necesitamos','Ropa = la necesitamos','Las necesidades nos mantienen sanos y seguros','Todos tenemos las mismas necesidades básicas'], funFact: '🍎 ¡Tu cuerpo necesita comida y agua todos los días!' },
+  'financial-literacy:flPKc2': { title: 'Lo Que QUEREMOS', tagline: '¡Los juguetes y los juegos = deseos!', intro: 'Algunas cosas las QUEREMOS porque son divertidas o padres. Un juguete nuevo, un videojuego o un helado. Estos son deseos. ¡Son bonitos pero no los NECESITAMOS para vivir!', keyPoints: ['Deseos = cosas que nos gustaría tener','Juguetes, juegos, dulces = deseos','Los deseos son divertidos pero no necesarios','Todos tenemos deseos diferentes','Los deseos son regalos especiales'], funFact: '🎮 ¡Los deseos hacen la vida más divertida!' },
+  'financial-literacy:flPKc3': { title: '¡Las Necesidades Primero!', tagline: '¡Las necesidades van antes que los deseos!', intro: 'El dinero va primero a las necesidades (comida, hogar, ropa). Después, si nos sobra, podemos comprar deseos (juguetes, dulces). ¡Las personas inteligentes piensan primero en las necesidades!', keyPoints: ['Las necesidades van primero','Los deseos después','Planear bien = necesidades primero','Ahorra para los deseos','Las buenas decisiones empiezan con las necesidades'], funFact: '✋ ¡Los papás planean así — necesidades primero, luego la diversión!' },
+  'financial-literacy:flPKd1': { title: 'El Domingo', tagline: '¡Trabajo = dinero!', intro: 'A veces los papás te dan dinero llamado "domingo" o "mesada" por ayudar en la casa. Haces quehaceres (trabajo) y ganas dinero. ¡Así funciona el mundo — trabajas y ganas!', keyPoints: ['Domingo = dinero por ayudar','Trabajo = quehaceres y ayudar','Todos trabajan para ganar dinero','Ganar se siente increíble','El dinero premia el trabajo duro'], funFact: '💵 ¡El domingo te enseña a trabajar y ganar dinero!' },
+  'financial-literacy:flPKd2': { title: 'Crecer y los Trabajos', tagline: '¡Las personas trabajan para ganar dinero!', intro: 'Cuando seas grande, vas a tener un "trabajo" — ¡trabajo por el que te pagan! Doctores, maestros, constructores, artistas — todos trabajan y ganan dinero. ¡Así los adultos consiguen el dinero que necesitan!', keyPoints: ['Ser grande = tener un trabajo','Los trabajos = trabajo que gana dinero','Diferentes trabajos ganan distinto','El trabajo duro = más dinero','Todos trabajan'], funFact: '👷 ¡Hay millones de trabajos diferentes en el mundo!' },
+  'financial-literacy:flPKd3': { title: 'Ahorrar para Algo Especial', tagline: '¡Ahorrar = esperar por algo increíble!', intro: 'Si quieres un juguete especial, ¡puedes ahorrar tu domingo! Pon el dinero en tu alcancía, no lo gastes, y pronto tendrás suficiente. ¡Ahorrar para algo te hace feliz cuando lo consigues!', keyPoints: ['Ahorrar = guardar dinero','Esperas por algo especial','Ahorrar se siente bien','Trabajo duro = alcanzar metas','Ahorrar enseña paciencia'], funFact: '🎯 ¡Si ahorras un poquito cada día, los sueños grandes se hacen realidad!' },
+  'financial-literacy:flPKe1': { title: 'Contar Dinero', tagline: '¡Las matemáticas del dinero son divertidas!', intro: '¡Aprender a contar monedas es genial! Un penny + un penny = dos pennies. Cuenta tu domingo y ve cuánto tienes. ¡Las matemáticas del dinero te hacen más listo!', keyPoints: ['Contar enseña matemáticas','Monedas = practicar contando','Sumas el dinero','Contar dinero son matemáticas de verdad','Las matemáticas están en todo el dinero'], funFact: '🔢 ¡Contar dinero te hace mejor en matemáticas!' },
+  'financial-literacy:flPKe2': { title: 'Juegos de Dinero', tagline: '¡El dinero = juegos divertidos!', intro: '¡Los juegos te enseñan sobre el dinero! Algunos usan dinero de juguete, y aprendes a gastar con cuidado. ¡Los juegos hacen que aprender sobre dinero sea SÚPER divertido!', keyPoints: ['Los juegos de dinero te enseñan','Los juegos usan dinero de juguete','Jugar enseña habilidades reales','Los juegos son súper divertidos','¡Aprender jugando = lo mejor!'], funFact: '🎲 ¡Los juegos de mesa con dinero te ayudan a aprender!' },
+  'financial-literacy:flPKe3': { title: '¡Estás Aprendiendo de Dinero!', tagline: '¡Ya te estás volviendo listo con el dinero!', intro: 'Cada vez que piensas en gastar o ahorrar, ¡estás aprendiendo! Te estás volviendo listo con el dinero. Sigue haciendo preguntas, sigue aprendiendo, ¡y serás un experto en dinero!', keyPoints: ['Ya estás aprendiendo','Las preguntas ayudan a aprender','Las personas listas aprenden de dinero','Habilidades del dinero = habilidades para la vida','¡Sigue siendo curioso!'], funFact: '⭐ ¡Los niños que aprenden de dinero temprano se vuelven grandes ahorradores!' },
+
+  // ─── SCIENCE PK ───
+  'science:sPKA1': { title: 'Animales', tagline: '¡Explora los animales!', intro: 'Los perros, los gatos, los pájaros y los peces son animales. Los animales tienen cuerpos. Algunos son grandes, otros pequeños.', keyPoints: ['Los animales son seres vivos','Los animales se mueven y comen','Cada animal se ve diferente'], funFact: '¡El cuello de la jirafa es tan largo que alcanza las hojas altas de los árboles!' },
+  'science:sPKA2': { title: 'Plantas', tagline: '¡Explora las plantas!', intro: 'Las plantas son seres vivos. Las flores, el pasto y los árboles son plantas. Las plantas crecen de la tierra y necesitan sol y agua.', keyPoints: ['Las plantas necesitan agua y sol para crecer','Las plantas tienen hojas y raíces','Las plantas son verdes o de muchos colores'], funFact: '¡Algunas plantas huelen rico y atraen a las mariposas!' },
+  'science:sPKA3': { title: 'El Clima', tagline: '¡Explora el clima!', intro: 'El clima es cómo se siente afuera. A veces hace sol, a veces llueve, y a veces hace frío o calor. El clima cambia todos los días.', keyPoints: ['El clima puede ser soleado, lluvioso o nevado','El clima cambia cada día','Usamos ropa diferente para diferentes climas'], funFact: '¡El relámpago es cuando pasa electricidad en el cielo — tan rápido que ilumina todo!' },
+  'science:sPKB1': { title: 'Los Sentidos', tagline: '¡Explora los sentidos!', intro: 'Usas tus sentidos para aprender del mundo. Tus ojos ven colores. Tus oídos oyen sonidos. Tu nariz huele cosas.', keyPoints: ['Tenemos cinco sentidos','Los sentidos nos ayudan a explorar','Ojos ven, oídos oyen, nariz huele'], funFact: '¡Tu nariz puede oler pizza desde muy lejos!' },
+  'science:sPKB2': { title: 'El Agua', tagline: '¡Explora el agua!', intro: 'El agua está en todas partes. Tomamos agua, nos bañamos con agua y las plantas también beben agua. La lluvia trae agua desde el cielo.', keyPoints: ['El agua es un líquido que podemos beber','El agua puede estar caliente o fría','La lluvia trae agua de las nubes'], funFact: '¡Las nubes están hechas de pedacitos de agua flotando en el aire!' },
+  'science:sPKB3': { title: 'Las Estaciones', tagline: '¡Explora las estaciones!', intro: 'Hay cuatro estaciones. En otoño, las hojas cambian de color. En invierno, hace frío y nieva. En primavera, las flores florecen. En verano, hace calor y sol.', keyPoints: ['Primavera, verano, otoño e invierno son estaciones','Cada estación es diferente','Las estaciones pasan una tras otra'], funFact: '¡En otoño, las ardillas juntan bellotas y las esconden para comer después!' },
+  'science:sPKC1': { title: 'Día y Noche', tagline: '¡Explora el día y la noche!', intro: 'Cuando sale el sol, es de día y podemos ver. Cuando se mete el sol, es de noche y está oscuro. El sol es grande y brillante.', keyPoints: ['El sol nos da luz en el día','La noche es cuando el sol se fue','Dormimos en la noche y jugamos de día'], funFact: '¡El sol está tan caliente que si viajaras hacia él, te cocerías al instante — aunque esté súper lejos!' },
+  'science:sPKC2': { title: 'Caliente y Frío', tagline: '¡Explora lo caliente y lo frío!', intro: 'Algunas cosas están calientes, como el sol y una tina tibia. Otras cosas están frías, como el hielo y la nieve. Caliente y frío nos dicen qué tan tibio está algo.', keyPoints: ['Las cosas calientes nos pueden quemar','Las cosas frías se sienten heladas','La temperatura nos dice qué tan caliente o frío está algo'], funFact: '¡El hielo está tan frío que puede pegar tu lengua a una paleta!' },
+  'science:sPKC3': { title: 'Los Sonidos', tagline: '¡Explora los sonidos!', intro: 'Todo hace sonidos. Los animales hacen sonidos como ladrar y piar. Nosotros hacemos sonidos cuando hablamos y reímos. Hasta los juguetes hacen sonidos.', keyPoints: ['Los sonidos están en todos lados','Los sonidos fuertes son muy ruidosos','Los sonidos suaves son silenciosos'], funFact: '¡El rugido de un león es tan fuerte que se puede oír desde 5 millas de distancia!' },
+  'science:sPKD1': { title: 'Colores en la Naturaleza', tagline: '¡Explora los colores en la naturaleza!', intro: 'Vemos muchos colores afuera. El cielo es azul. El pasto es verde. Las flores pueden ser rosas, rojas o amarillas. También vemos colores en los arcoíris.', keyPoints: ['Los colores están en toda la naturaleza','El arcoíris tiene muchos colores','Las flores tienen colores diferentes'], funFact: '¡Los pavorreales tienen plumas azules, verdes y moradas para presumir a otros pavorreales!' },
+  'science:sPKD2': { title: 'Animales Bebés', tagline: '¡Explora los animales bebés!', intro: 'Los animales bebés son versiones pequeñas de los grandes. Los bebés de las vacas se llaman becerros. Los bebés de los perros son cachorros. Los pajaritos nacen de huevos.', keyPoints: ['Todos los animales empiezan como bebés','Los bebés se parecen a sus papás','Los cachorros crecen y se vuelven perros'], funFact: '¡A un bebé canguro le dicen joey y vive en una bolsita en su mamá como un bolsillo!' },
+  'science:sPKD3': { title: 'Mi Cuerpo', tagline: '¡Explora tu cuerpo!', intro: 'Tu cuerpo tiene muchas partes. Tu cabeza, brazos y piernas te ayudan a moverte. Tus ojos, oídos y nariz te ayudan a conocer el mundo.', keyPoints: ['Tu cuerpo tiene cabeza, brazos y piernas','Tu corazón bombea sangre dentro de ti','Creces más grande cada año'], funFact: '¡Tu corazón es del tamaño de tu puño y trabaja muy fuerte todo el día!' },
+  'science:sPKE1': { title: 'Empujar y Jalar', tagline: '¡Explora empujar y jalar!', intro: 'Cuando empujas algo, se aleja. Cuando jalas algo, viene hacia ti. Empujar y jalar son formas de mover cosas.', keyPoints: ['Empujar hace que las cosas se alejen','Jalar trae las cosas hacia ti','Tus músculos te ayudan a empujar y jalar'], funFact: '¡Un bulldozer empuja muy fuerte para mover pilas enormes de tierra!' },
+  'science:sPKE2': { title: 'Observar con Cuidado', tagline: '¡Explora cómo observar con cuidado!', intro: 'Cuando observas algo con cuidado, miras de cerca y ves los detalles. Los bichos, las plantas y las nubes se ven distintos cuando los observas. Observar con cuidado nos ayuda a aprender.', keyPoints: ['Mirar de cerca te ayuda a ver detalles','Observar la naturaleza nos enseña cosas','Puedes encontrar cosas nuevas cuando miras bien'], funFact: '¡Si observas bien a una mariposa, puedes ver los dibujos bonitos de sus alas!' },
+  'science:sPKE3': { title: 'Construir Cosas', tagline: '¡Explora cómo construir cosas!', intro: 'Puedes construir con bloques, palitos y otros materiales. Construir te ayuda a hacer cosas nuevas. Torres altas, puentes y casas se pueden construir.', keyPoints: ['Puedes construir con muchos materiales','Construir es divertido y creativo','Todos pueden ser constructores'], funFact: '¡Los ingenieros usan matemáticas para hacer rascacielos que tocan las nubes!' },
+
+  // ─── ENGLISH PK (templated content) ───
+  'english:ePKA1': { title: 'Letras A a E', tagline: '¡Domina las letras a-e!', intro: 'Practica tus habilidades con las letras a, b, c, d y e.', keyPoints: ['Las letras A-E fortalecen la comunicación','La lectura y la escritura van juntas','Practica todos los días'], funFact: '¡Leer 20 minutos al día te expone a 1.8 millones de palabras al año!' },
+  'english:ePKA2': { title: 'Letras F a J', tagline: '¡Domina las letras f-j!', intro: 'Practica tus habilidades con las letras f, g, h, i y j.', keyPoints: ['Las letras F-J fortalecen la comunicación','La lectura y la escritura van juntas','Practica todos los días'], funFact: '¡Leer 20 minutos al día te expone a 1.8 millones de palabras al año!' },
+  'english:ePKA3': { title: 'Letras K a O', tagline: '¡Domina las letras k-o!', intro: 'Practica tus habilidades con las letras k, l, m, n y o.', keyPoints: ['Las letras K-O fortalecen la comunicación','La lectura y la escritura van juntas','Practica todos los días'], funFact: '¡Leer 20 minutos al día te expone a 1.8 millones de palabras al año!' },
+  'english:ePKB1': { title: 'Escritura de Garabatos', tagline: '¡Domina la escritura de garabatos!', intro: 'Practica tus habilidades de escritura con garabatos.', keyPoints: ['Los garabatos fortalecen la comunicación','La lectura y la escritura van juntas','Practica todos los días'], funFact: '¡Leer 20 minutos al día te expone a 1.8 millones de palabras al año!' },
+  'english:ePKB2': { title: 'Dibujar Cuentos', tagline: '¡Domina el dibujo de cuentos!', intro: 'Practica tus habilidades para dibujar cuentos.', keyPoints: ['Dibujar cuentos fortalece la comunicación','La lectura y la escritura van juntas','Practica todos los días'], funFact: '¡Leer 20 minutos al día te expone a 1.8 millones de palabras al año!' },
+  'english:ePKB3': { title: 'Escribir Mi Nombre', tagline: '¡Domina escribir tu nombre!', intro: 'Practica tus habilidades para escribir tu nombre.', keyPoints: ['Escribir tu nombre fortalece la comunicación','La lectura y la escritura van juntas','Practica todos los días'], funFact: '¡Leer 20 minutos al día te expone a 1.8 millones de palabras al año!' },
+  'english:ePKC1': { title: 'Palabras de Acción', tagline: '¡Domina las palabras de acción!', intro: 'Practica tus habilidades con palabras de acción.', keyPoints: ['Las palabras de acción fortalecen la comunicación','La lectura y la escritura van juntas','Practica todos los días'], funFact: '¡Leer 20 minutos al día te expone a 1.8 millones de palabras al año!' },
+  'english:ePKC2': { title: 'Palabras de Colores', tagline: '¡Domina las palabras de colores!', intro: 'Practica tus habilidades con palabras de colores.', keyPoints: ['Las palabras de colores fortalecen la comunicación','La lectura y la escritura van juntas','Practica todos los días'], funFact: '¡Leer 20 minutos al día te expone a 1.8 millones de palabras al año!' },
+  'english:ePKC3': { title: 'Nombres de Animales', tagline: '¡Domina los nombres de animales!', intro: 'Practica tus habilidades con los nombres de animales.', keyPoints: ['Los nombres de animales fortalecen la comunicación','La lectura y la escritura van juntas','Practica todos los días'], funFact: '¡Leer 20 minutos al día te expone a 1.8 millones de palabras al año!' },
+  'english:ePKD1': { title: 'Palabras Que Riman', tagline: '¡Domina las palabras que riman!', intro: 'Practica tus habilidades con palabras que riman.', keyPoints: ['Las rimas fortalecen la comunicación','La lectura y la escritura van juntas','Practica todos los días'], funFact: '¡Leer 20 minutos al día te expone a 1.8 millones de palabras al año!' },
+  'english:ePKD2': { title: 'Habilidades de Escuchar', tagline: '¡Domina escuchar con atención!', intro: 'Practica tus habilidades para escuchar con atención.', keyPoints: ['Escuchar fortalece la comunicación','La lectura y la escritura van juntas','Practica todos los días'], funFact: '¡Leer 20 minutos al día te expone a 1.8 millones de palabras al año!' },
+  'english:ePKD3': { title: 'Compartir Cuentos', tagline: '¡Domina compartir cuentos!', intro: 'Practica tus habilidades para compartir cuentos.', keyPoints: ['Compartir cuentos fortalece la comunicación','La lectura y la escritura van juntas','Practica todos los días'], funFact: '¡Leer 20 minutos al día te expone a 1.8 millones de palabras al año!' },
+  'english:ePKE1': { title: 'Mostrar y Contar', tagline: '¡Domina mostrar y contar!', intro: 'Practica tus habilidades para mostrar y contar.', keyPoints: ['Mostrar y contar fortalece la comunicación','La lectura y la escritura van juntas','Practica todos los días'], funFact: '¡Leer 20 minutos al día te expone a 1.8 millones de palabras al año!' },
+  'english:ePKE2': { title: 'Seguir Instrucciones', tagline: '¡Domina seguir instrucciones!', intro: 'Practica tus habilidades para seguir instrucciones.', keyPoints: ['Seguir instrucciones fortalece la comunicación','La lectura y la escritura van juntas','Practica todos los días'], funFact: '¡Leer 20 minutos al día te expone a 1.8 millones de palabras al año!' },
+  'english:ePKE3': { title: 'Cantar el ABC', tagline: '¡Domina cantar el abecedario!', intro: 'Practica tus habilidades cantando el abecedario.', keyPoints: ['Cantar el abecedario fortalece la comunicación','La lectura y la escritura van juntas','Practica todos los días'], funFact: '¡Leer 20 minutos al día te expone a 1.8 millones de palabras al año!' },
+
+  // ─── HISTORY PK (templated content) ───
+  'history:hPKA1': { title: 'Hace Mucho Tiempo', tagline: '¡Explora cómo era hace mucho tiempo!', intro: 'Aprende sobre cómo era hace mucho tiempo y cómo afecta lo que vivimos hoy.', keyPoints: ['El pasado formó nuestro mundo','La historia nos enseña lecciones','Entender el pasado ayuda al futuro'], funFact: '¡Quien no aprende de la historia, está condenado a repetirla!' },
+  'history:hPKA2': { title: 'Mi Familia', tagline: '¡Explora tu familia!', intro: 'Aprende sobre tu familia y cómo te conecta con el pasado.', keyPoints: ['Nuestras familias formaron nuestro mundo','La historia nos enseña lecciones','Entender el pasado ayuda al futuro'], funFact: '¡Quien no aprende de la historia, está condenado a repetirla!' },
+  'history:hPKA3': { title: 'Los Días Festivos', tagline: '¡Explora los días festivos!', intro: 'Aprende sobre los días festivos y lo que celebramos.', keyPoints: ['Los días festivos formaron nuestro mundo','La historia nos enseña lecciones','Entender el pasado ayuda al futuro'], funFact: '¡Quien no aprende de la historia, está condenado a repetirla!' },
+  'history:hPKB1': { title: 'Los Presidentes', tagline: '¡Explora a los presidentes!', intro: 'Aprende sobre los presidentes y lo que hacen.', keyPoints: ['Los presidentes formaron nuestro mundo','La historia nos enseña lecciones','Entender el pasado ayuda al futuro'], funFact: '¡Quien no aprende de la historia, está condenado a repetirla!' },
+  'history:hPKB2': { title: 'Las Escuelas Antes y Ahora', tagline: '¡Explora cómo eran las escuelas antes!', intro: 'Aprende cómo han cambiado las escuelas a través del tiempo.', keyPoints: ['Las escuelas cambiaron nuestro mundo','La historia nos enseña lecciones','Entender el pasado ayuda al futuro'], funFact: '¡Quien no aprende de la historia, está condenado a repetirla!' },
+  'history:hPKB3': { title: 'Los Mapas Son Dibujos', tagline: '¡Explora los mapas!', intro: 'Aprende que los mapas son dibujos que muestran lugares.', keyPoints: ['Los mapas formaron nuestro mundo','La historia nos enseña lecciones','Entender el pasado ayuda al futuro'], funFact: '¡Quien no aprende de la historia, está condenado a repetirla!' },
+  'history:hPKC1': { title: 'Ayudantes de la Comunidad', tagline: '¡Explora a los ayudantes de la comunidad!', intro: 'Aprende quiénes son las personas que cuidan tu comunidad.', keyPoints: ['Los ayudantes formaron nuestro mundo','La historia nos enseña lecciones','Entender el pasado ayuda al futuro'], funFact: '¡Quien no aprende de la historia, está condenado a repetirla!' },
+  'history:hPKC2': { title: 'Las Reglas', tagline: '¡Explora las reglas!', intro: 'Aprende por qué las reglas son importantes para todos.', keyPoints: ['Las reglas formaron nuestro mundo','La historia nos enseña lecciones','Entender el pasado ayuda al futuro'], funFact: '¡Quien no aprende de la historia, está condenado a repetirla!' },
+  'history:hPKC3': { title: 'Ser Justo', tagline: '¡Explora qué significa ser justo!', intro: 'Aprende por qué es importante ser justo con los demás.', keyPoints: ['Ser justo formó nuestro mundo','La historia nos enseña lecciones','Entender el pasado ayuda al futuro'], funFact: '¡Quien no aprende de la historia, está condenado a repetirla!' },
+  'history:hPKD1': { title: 'Compartir', tagline: '¡Explora compartir con los demás!', intro: 'Aprende por qué compartir hace el mundo mejor.', keyPoints: ['Compartir formó nuestro mundo','La historia nos enseña lecciones','Entender el pasado ayuda al futuro'], funFact: '¡Quien no aprende de la historia, está condenado a repetirla!' },
+  'history:hPKD2': { title: 'Las Banderas', tagline: '¡Explora las banderas!', intro: 'Aprende que cada país tiene una bandera especial.', keyPoints: ['Las banderas formaron nuestro mundo','La historia nos enseña lecciones','Entender el pasado ayuda al futuro'], funFact: '¡Quien no aprende de la historia, está condenado a repetirla!' },
+  'history:hPKD3': { title: 'Trajes y Tradiciones', tagline: '¡Explora los trajes y las tradiciones!', intro: 'Aprende sobre la ropa y costumbres de diferentes lugares.', keyPoints: ['Los trajes y tradiciones formaron nuestro mundo','La historia nos enseña lecciones','Entender el pasado ayuda al futuro'], funFact: '¡Quien no aprende de la historia, está condenado a repetirla!' },
+  'history:hPKE1': { title: 'Casas del Mundo', tagline: '¡Explora las casas del mundo!', intro: 'Aprende sobre las diferentes casas en todo el mundo.', keyPoints: ['Las casas del mundo formaron nuestro mundo','La historia nos enseña lecciones','Entender el pasado ayuda al futuro'], funFact: '¡Quien no aprende de la historia, está condenado a repetirla!' },
+  'history:hPKE2': { title: 'Días Especiales', tagline: '¡Explora los días especiales!', intro: 'Aprende sobre los días que celebramos con nuestras familias.', keyPoints: ['Los días especiales formaron nuestro mundo','La historia nos enseña lecciones','Entender el pasado ayuda al futuro'], funFact: '¡Quien no aprende de la historia, está condenado a repetirla!' },
+  'history:hPKE3': { title: 'Héroes', tagline: '¡Explora a los héroes!', intro: 'Aprende sobre personas valientes que ayudan a los demás.', keyPoints: ['Los héroes formaron nuestro mundo','La historia nos enseña lecciones','Entender el pasado ayuda al futuro'], funFact: '¡Quien no aprende de la historia, está condenado a repetirla!' },
+
+  // ─── SOCIAL STUDIES PK ───
+  'social-studies:sPKA1': { title: 'Mi Escuela', tagline: '¡Conoce tu escuela!', intro: 'Tu escuela es un lugar seguro donde aprendes y juegas con amigos. ¡Está llena de maestros y ayudantes que te quieren!', keyPoints: ['La escuela es un lugar para aprender y jugar','Los maestros y los amigos nos ayudan','Nos sentimos seguros en la escuela'], funFact: '¿Sabías que los salones de Pre-Kínder muchas veces tienen el mismo maestro todo el día para que los niños se sientan cómodos?' },
+  'social-studies:sPKA2': { title: 'Las Reglas Nos Ayudan', tagline: '¡Las reglas nos mantienen seguros y felices!', intro: 'Las reglas son cosas sencillas que seguimos para que todos estén seguros. Cuando seguimos las reglas, nadie se lastima y todos podemos divertirnos juntos. Reglas como sentarse en silencio o levantar la mano nos ayudan a escuchar al maestro.', keyPoints: ['Las reglas nos mantienen seguros','Seguir las reglas nos ayuda a aprender','Todos están felices cuando seguimos las reglas'], funFact: '¡Algunas escuelas dan estampitas o caritas felices como premio por seguir las reglas!' },
+  'social-studies:sPKA3': { title: 'Ser Amable', tagline: '¡Ser amable es ser bueno y ayudar a los demás!', intro: 'Cuando eres amable, usas palabras bonitas y ayudas a tus amigos. Puedes compartir un juguete, dar un abrazo o ayudar a alguien que está triste. Las personas amables hacen del mundo un lugar feliz para todos.', keyPoints: ['La amabilidad es ayudar y cuidar a los demás','Las palabras y acciones amables hacen sonreír','Todos son felices cuando somos amables'], funFact: '¡Algunas escuelas celebran el "día de la amabilidad" donde cada niño hace algo amable por un amigo!' },
+  'social-studies:sPKB1': { title: 'Compartir', tagline: '¡Compartir es dejar que otros usen lo que tienes!', intro: 'Cuando compartes, le das algo a un amigo o lo dejas usarlo contigo. Compartir juguetes, comida o libros hace felices a todos. Cuando compartes, ayudas a tus amigos y ellos recuerdan que eres amable.', keyPoints: ['Compartir hace felices a los amigos','Todos disfrutan más cuando comparten','A los amigos les gustan las personas que comparten'], funFact: '¡Compartir un juguete a veces significa que te lo regresan Y que hiciste feliz a un amigo!' },
+  'social-studies:sPKB2': { title: 'Ahorrar Monedas', tagline: '¡El dinero nos ayuda a conseguir cosas que queremos y necesitamos!', intro: 'Un penny es una moneda chiquita. Cuando guardas tus monedas en un frasco, juntas más y más. Cuando ahorras, puedes comprar algo especial después. Las alcancías nos ayudan a ahorrar para lo que nos gusta.', keyPoints: ['Las monedas valen dinero','Ahorrar monedas te ayuda a conseguir lo que quieres','Una alcancía guarda las monedas para ahorrar'], funFact: '¡A las alcancías se les dice "piggy banks" en inglés porque los cerditos son redonditos como un frasco de ahorros!' },
+  'social-studies:sPKB3': { title: 'Comprar Cosas', tagline: '¡Las tiendas son lugares donde conseguimos lo que necesitamos!', intro: 'Cuando vas a la tienda, puedes comprar comida, juguetes y ropa. La tienda tiene ayudantes que trabajan ahí. Necesitas dinero para comprar cosas. Las personas usan las tiendas para conseguir lo que sus familias necesitan.', keyPoints: ['Las tiendas venden lo que necesitamos y queremos','Necesitamos dinero para comprar','Las tiendas tienen ayudantes que trabajan ahí'], funFact: '¡Las primeras tiendas eran solo personas vendiendo cosas afuera de sus casas!' },
+  'social-studies:sPKC1': { title: 'Familias en Todas Partes', tagline: '¡Una familia son personas que te quieren y te cuidan!', intro: 'Las familias vienen de muchos tamaños. Algunas son grandes, con abuelitos, tíos y tías. Otras son chiquitas, de solo dos personas. Cada familia es especial y muestra amor de maneras diferentes. Las familias viven juntas y se ayudan.', keyPoints: ['Las familias se aman y se cuidan','Las familias pueden ser de tamaños diferentes','Todas las familias son especiales'], funFact: '¡Algunas familias tienen un papá, otras dos, y algunos niños viven con sus abuelitos u otros parientes!' },
+  'social-studies:sPKC2': { title: 'Comida del Mundo', tagline: '¡Cada lugar tiene su comida favorita!', intro: 'Las personas en todo el mundo comen comidas diferentes. Algunos niños comen arroz, otros pan y otros verduras que se cultivan cerca. A las familias les gusta comer comida de su país. La comida nos reúne para comer juntos.', keyPoints: ['Cada país tiene comidas diferentes','La comida ayuda a las personas a estar sanas','Las familias disfrutan comer juntas'], funFact: '¡El arroz es la comida más comida en todo el mundo!' },
+  'social-studies:sPKC3': { title: 'Las Casas', tagline: '¡Una casa es un lugar seguro donde viven las familias!', intro: 'Las casas pueden ser casas grandes, departamentos o casas móviles. Cada casa tiene puerta, cuartos y un techo para que no nos mojemos. Las casas tienen lugares para dormir, comer y jugar. Adentro de una casa nos sentimos seguros y queridos. Hay muchos tipos de casas a nuestro alrededor.', keyPoints: ['Las casas son lugares donde viven las familias','Las casas nos mantienen seguros y secos','Hay muchos tipos de casas'], funFact: '¡Algunas casas son de madera, otras de piedra y otras de barro, según el lugar donde estén!' },
+  'social-studies:sPKD1': { title: 'El Clima y Nosotros', tagline: '¡El clima cambia y afecta lo que hacemos!', intro: 'Algunos días son soleados y cálidos, otros son lluviosos y fríos. El clima nos dice qué ponernos. En días lluviosos usamos chamarra. En días calurosos usamos ropa corta. El clima cambia todos los días y tenemos que estar listos.', keyPoints: ['El clima cambia todos los días','El clima nos dice qué ponernos','Distinto clima necesita distinta ropa'], funFact: '¡Los arcoíris solo salen cuando hay sol Y lluvia al mismo tiempo!' },
+  'social-studies:sPKD2': { title: 'Las Estaciones', tagline: '¡El año tiene cuatro estaciones que se repiten!', intro: 'En primavera crecen las flores. En verano hace calor y es bueno jugar afuera. En otoño las hojas cambian de color y se caen. En invierno hace frío y nieva. Cada estación es diferente y cambia la naturaleza.', keyPoints: ['Hay cuatro estaciones cada año','Cada estación tiene su propio clima','Las estaciones cambian cómo se ve la naturaleza'], funFact: '¡Las hojas se ponen rojas, naranjas y amarillas en otoño por el frío!' },
+  'social-studies:sPKD3': { title: 'Ayudantes de la Comunidad', tagline: '¡Los ayudantes de la comunidad son personas que nos cuidan!', intro: 'Los bomberos apagan los incendios y ayudan a las personas. Los policías nos mantienen seguros. Los doctores ayudan a los enfermos a sentirse mejor. Los maestros nos enseñan. ¡Todos estos ayudantes hacen nuestra comunidad segura y maravillosa!', keyPoints: ['Los ayudantes de la comunidad nos mantienen seguros','Hay muchos tipos de ayudantes','Los ayudantes cuidan su comunidad'], funFact: '¡Los bomberos tienen perritos dálmatas en sus estaciones para acompañarlos!' },
+  'social-studies:sPKE1': { title: 'Cerca y Lejos', tagline: '¡Las cosas pueden estar cerca o lejos!', intro: 'Tu salón está cerca de ti. Tu casa es donde vives. La luna está muy lejos en el cielo. Usamos palabras como "cerca" y "lejos" para decir dónde están las cosas. Saber dónde están las cosas nos ayuda a encontrarlas.', keyPoints: ['"Cerca" significa que algo está junto a nosotros','"Lejos" significa que algo está muy retirado','Usamos estas palabras para encontrar cosas'], funFact: '¡La estrella más lejana que podemos ver está a millones de millas de distancia!' },
+  'social-studies:sPKE2': { title: 'Mi Dirección', tagline: '¡Tu dirección es donde vives!', intro: 'Una dirección le dice a las personas exactamente dónde está tu casa. Tiene el número de tu casa y el nombre de tu calle. Tu dirección ayuda a la gente a encontrarte. Todos tienen una dirección especial donde viven. Debes aprender tu dirección para cuando seas grande.', keyPoints: ['Una dirección dice dónde vives','Cada casa tiene una dirección','Tu dirección ayuda a encontrarte'], funFact: '¡En algunos países las casas no tienen números, tienen nombres especiales!' },
+  'social-studies:sPKE3': { title: 'Dónde Vivo', tagline: '¡Tu casa está en un barrio, pueblo o ciudad!', intro: 'Tú vives en un lugar especial. Puede ser una ciudad grande con edificios altos o un pueblo pequeño con campos y árboles. Algunas personas viven cerca de las montañas o del mar. Hay casas y edificios alrededor de tu barrio. El lugar donde vives es especial.', keyPoints: ['Todos viven en un lugar especial','Los lugares se ven diferentes unos de otros','Donde vivimos cambia cómo vivimos'], funFact: '¡Algunas personas viven en barcos en vez de casas!' }
+});
+
+// ─── MATH PK (85 lessons) ───
+// Templated content: the math PK lessons mostly use common counting/number
+// recognition language that repeats; we provide Spanish twins for titles,
+// taglines, intro, keyPoints, and funFact below.
+(function(){
+  const m = LESSON_TRANSLATIONS_ES;
+  const ns = 'math:';
+  const std = {
+    tagline: '¡A contar!',
+    intro: 'Cuenta los objetos y di cuántos hay. Toca cada uno mientras cuentas.',
+    keyPoints: ['Toca cada objeto una vez','Di un número por cada uno','El último número te dice cuántos hay'],
+    funFact: '¡Contar es una de las primeras habilidades de matemáticas!'
+  };
+  // Counting & Cardinality — titles
+  const counts = {
+    'mPKA1':'Contar hasta 3','mPKA2':'Contar hasta 5','mPKA3':'Contar hasta 10',
+    'mPKA4':'Contar objetos hasta 5','mPKA5':'Contar objetos hasta 10',
+    'mPKA6':'Contar hacia adelante desde cualquier número',
+    'mPKA7':'Contar cuántos hay en un grupo',
+    'mPKA8':'Contar uno por uno','mPKA9':'Decir cuántos hay después de contar',
+    'mPKA10':'Contar objetos en fila','mPKA11':'Contar objetos regados',
+    'mPKA12':'Contar y escribir hasta 5','mPKA13':'Contar y escribir hasta 10',
+    'mPKA14':'Contar sonidos o acciones','mPKA15':'Seguir contando desde un número',
+    'mPKA16':'Contar otra vez para revisar'
+  };
+  Object.keys(counts).forEach(function(id){ m[ns+id] = Object.assign({title:counts[id]}, std); });
+  // Number Recognition (B17-B32)
+  const recog = {
+    'mPKB17':'Reconocer el número 1','mPKB18':'Reconocer el número 2','mPKB19':'Reconocer el número 3',
+    'mPKB20':'Reconocer los números 4 y 5','mPKB21':'Reconocer los números 6 y 7',
+    'mPKB22':'Reconocer los números 8 y 9','mPKB23':'Reconocer el número 10',
+    'mPKB24':'Reconocer los números 0 al 10','mPKB25':'Unir un número con su grupo',
+    'mPKB26':'Unir un grupo con su número','mPKB27':'Identificar números en la recta numérica',
+    'mPKB28':'Ordenar los números del 1 al 5','mPKB29':'Ordenar los números del 1 al 10',
+    'mPKB30':'Encontrar el número que falta (1 al 5)','mPKB31':'Encontrar el número que falta (1 al 10)',
+    'mPKB32':'Número de antes y después'
+  };
+  const stdRecog = {
+    tagline: '¡Conoce los números!',
+    intro: 'Mira el número y dilo en voz alta.',
+    keyPoints: ['Observa la forma','Di el nombre del número','Búscalo en muchos lugares'],
+    funFact: '¡Los números están en todas partes!'
+  };
+  Object.keys(recog).forEach(function(id){ m[ns+id] = Object.assign({title:recog[id]}, stdRecog); });
+  // Comparing & Ordering (C33-C53)
+  const cmp = {
+    'mPKC33':'Comparar grupos — más','mPKC34':'Comparar grupos — menos',
+    'mPKC35':'Comparar grupos — iguales','mPKC36':'Qué grupo tiene más',
+    'mPKC37':'Qué grupo tiene menos','mPKC38':'Comparar números hasta 5',
+    'mPKC39':'Comparar números hasta 10','mPKC40':'Uno más que un número',
+    'mPKC41':'Uno menos que un número','mPKC42':'Ordenar 3 números de menor a mayor',
+    'mPKC43':'Ordenar 3 números de mayor a menor','mPKC44':'El más largo y el más corto',
+    'mPKC45':'El más alto y el más bajo','mPKC46':'El más pesado y el más ligero',
+    'mPKC47':'El más grande y el más pequeño','mPKC48':'El que tiene más y el que tiene menos',
+    'mPKC49':'¿Qué sigue? (1 al 5)','mPKC50':'¿Qué viene antes? (1 al 5)',
+    'mPKC51':'Menor y mayor (1 al 5)','mPKC52':'Menor y mayor (1 al 10)',
+    'mPKC53':'Ordenar números del 1 al 10'
+  };
+  const stdCmp = {
+    tagline: '¡Compara!',
+    intro: 'Mira los grupos o los números y decide cuál es más, cuál es menos, o si son iguales.',
+    keyPoints: ['Cuenta cada grupo','Di cuál tiene más o menos','Usa las palabras: más, menos, iguales'],
+    funFact: '¡Comparar nos ayuda a entender los números!'
+  };
+  Object.keys(cmp).forEach(function(id){ m[ns+id] = Object.assign({title:cmp[id]}, stdCmp); });
+  // Patterns & Sorting (D49-D64)
+  const pat = {
+    'mPKD49':'Identificar patrones AB','mPKD50':'Continuar patrones AB',
+    'mPKD51':'Identificar patrones ABB','mPKD52':'Continuar patrones ABB',
+    'mPKD53':'Identificar patrones ABC','mPKD54':'Crear un patrón',
+    'mPKD55':'¿Qué sigue en el patrón?','mPKD56':'Encontrar el error en el patrón',
+    'mPKD57':'Clasificar por color','mPKD58':'Clasificar por forma',
+    'mPKD59':'Clasificar por tamaño','mPKD60':'Clasificar en dos grupos',
+    'mPKD61':'Clasificar en tres grupos','mPKD62':'Clasificar objetos',
+    'mPKD63':'Parear y clasificar','mPKD64':'Describir una regla para clasificar'
+  };
+  const stdPat = {
+    tagline: '¡Descubre patrones y clasifica!',
+    intro: 'Los patrones se repiten. Clasificar es poner cosas juntas que van juntas.',
+    keyPoints: ['Mira lo que se repite','Decide cómo agrupar','Los patrones ayudan a predecir'],
+    funFact: '¡Los patrones están en todas partes — en la ropa, la música y la naturaleza!'
+  };
+  Object.keys(pat).forEach(function(id){ m[ns+id] = Object.assign({title:pat[id]}, stdPat); });
+  // Early Addition & Subtraction (E65-E80)
+  const addSub = {
+    'mPKE65':'Juntar grupos hasta 3','mPKE66':'Juntar grupos hasta 5',
+    'mPKE67':'¿Cuántos hay en total (hasta 5)?','mPKE68':'Oraciones de suma hasta 3',
+    'mPKE69':'Oraciones de suma hasta 5','mPKE70':'Quitar de grupos hasta 3',
+    'mPKE71':'Quitar de grupos hasta 5','mPKE72':'¿Cuántos quedan (hasta 5)?',
+    'mPKE73':'Oraciones de resta hasta 3','mPKE74':'Oraciones de resta hasta 5',
+    'mPKE75':'Problemas de palabras — sumar hasta 5','mPKE76':'Problemas de palabras — restar hasta 5',
+    'mPKE77':'Hacer 5 de dos maneras','mPKE78':'Separar el 5',
+    'mPKE79':'Componer números hasta 5','mPKE80':'Descomponer números hasta 5'
+  };
+  const stdAS = {
+    tagline: '¡Suma y resta!',
+    intro: 'Sumar es juntar grupos. Restar es quitar cosas de un grupo.',
+    keyPoints: ['Cuenta cada grupo','Junta o quita','Cuenta el total o lo que queda'],
+    funFact: '¡Sumar y restar son las matemáticas que usamos todos los días!'
+  };
+  Object.keys(addSub).forEach(function(id){ m[ns+id] = Object.assign({title:addSub[id]}, stdAS); });
+})();
+
+// Apply all Phase 2 translations after every curriculum has loaded.
+try { applyLessonTranslationsES(); } catch(e){ console.warn('Lesson translation merge skipped:', e); }
 
 function getSubjectData(subject, grade){
   // For App Building grades 6-12, always show Ship Real Apps curriculum
@@ -14513,7 +14847,7 @@ function renderGradeView(){
   const subjectLabel = (currentSubject === 'app-building' && gradeNum >= 6)
     ? t('subjects.ship-real-apps')
     : (t('subjects.' + currentSubject) || currentSubject);
-  const desc = data.description || `${subjectLabel} — ${gradeName}`;
+  const desc = tf(data, 'description') || `${subjectLabel} — ${gradeName}`;
   const totalLessons = Object.values(data.categories).reduce((sum,c)=>sum+c.lessons.length,0);
 
   let html = `
@@ -14535,7 +14869,7 @@ function renderGradeView(){
         <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px">
           <div style="width:40px;height:40px;border-radius:10px;background:${color};color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:16px">${letter}</div>
           <div>
-            <div style="font-weight:700;font-size:16px;color:#2d3436">${cat.icon} ${cat.name}</div>
+            <div style="font-weight:700;font-size:16px;color:#2d3436">${cat.icon} ${tf(cat, 'name')}</div>
           </div>
         </div>
         <div style="display:flex;flex-direction:column;gap:6px;padding-left:52px">`;
@@ -14544,7 +14878,8 @@ function renderGradeView(){
       const bestScore = lessonScores[lesson.id] || 0;
       const mastery = getMasteryLevel(bestScore);
       const isDone = completedLessons.has(lesson.id);
-      const statusLabel = isDone ? mastery.emoji + ' ' + mastery.label + (bestScore > 0 ? ' (' + bestScore + ')' : '') : 'Start';
+      const startLabel = currentLang === 'es' ? 'Empezar' : 'Start';
+      const statusLabel = isDone ? mastery.emoji + ' ' + mastery.label + (bestScore > 0 ? ' (' + bestScore + ')' : '') : startLabel;
       const statusColor = isDone ? mastery.color : color;
       const statusBg = isDone ? mastery.bg : color + '15';
       const borderColor = isDone ? mastery.color + '44' : '#f0f0f0';
@@ -14556,8 +14891,8 @@ function renderGradeView(){
                onmouseout="this.style.background='${bgColor}';this.style.borderColor='${borderColor}'">
             <span style="font-size:20px">${lesson.emoji}</span>
             <div style="flex:1">
-              <div style="font-weight:600;color:#2d3436;font-size:14px">${letter}.${idx+1} ${lesson.title}</div>
-              <div style="font-size:12px;color:#636e72;margin-top:2px">${lesson.tagline}</div>
+              <div style="font-weight:600;color:#2d3436;font-size:14px">${letter}.${idx+1} ${tf(lesson, 'title')}</div>
+              <div style="font-size:12px;color:#636e72;margin-top:2px">${tf(lesson, 'tagline')}</div>
             </div>
             ${isDone && bestScore > 0 ? '<div style="width:40px;height:4px;background:#e0e0e0;border-radius:2px;position:relative;margin-right:8px"><div style="width:' + bestScore + '%;height:100%;background:' + mastery.color + ';border-radius:2px"></div></div>' : ''}
             <div style="font-size:11px;color:${statusColor};font-weight:700;background:${statusBg};padding:4px 10px;border-radius:6px;white-space:nowrap">${statusLabel}</div>
@@ -16776,13 +17111,19 @@ function speakLesson(){
     return;
   }
   var lesson = currentOpenLesson;
-  var text = lesson.title + '. ';
-  if(lesson.content && lesson.content.intro) text += lesson.content.intro + ' ';
-  if(lesson.content && lesson.content.keyPoints){
-    text += 'Here are the key points. ';
-    text += lesson.content.keyPoints.join('. ') + '. ';
+  var title = tf(lesson, 'title');
+  var intro = tf(lesson.content, 'intro');
+  var keyPoints = tf(lesson.content, 'keyPoints');
+  var funFact = tf(lesson.content, 'funFact');
+  var kpIntro = currentLang === 'es' ? 'Estos son los puntos clave. ' : 'Here are the key points. ';
+  var ffIntro = currentLang === 'es' ? '¡Y aquí tienes un dato curioso! ' : 'And here is a fun fact! ';
+  var text = title + '. ';
+  if(intro && typeof intro === 'string') text += intro + ' ';
+  if(Array.isArray(keyPoints)){
+    text += kpIntro;
+    text += keyPoints.map(function(kp){ return typeof kp === 'string' ? kp : (kp && (kp.x || kp.text) || ''); }).filter(Boolean).join('. ') + '. ';
   }
-  if(lesson.content && lesson.content.funFact) text += 'And here is a fun fact! ' + lesson.content.funFact;
+  if(funFact) text += ffIntro + funFact;
   speakText(text);
 }
 
@@ -17647,8 +17988,8 @@ function renderRecommendationsView(){
       ${recs.map(r => `
         <div onclick="switchSubject('${r.subject}');openLesson('${r.lesson.id}')" style="padding:20px;border-radius:12px;border:1px solid #e0e0e0;cursor:pointer;transition:all 0.2s;background:#fff" onmouseover="this.style.boxShadow='0 4px 16px rgba(0,0,0,0.1)'" onmouseout="this.style.boxShadow='none'">
           <div style="font-size:32px;margin-bottom:8px">${r.lesson.emoji}</div>
-          <div style="font-weight:700;color:#2d3436;margin-bottom:4px">${r.lesson.title}</div>
-          <div style="font-size:12px;color:#636e72;margin-bottom:8px">${r.lesson.tagline}</div>
+          <div style="font-weight:700;color:#2d3436;margin-bottom:4px">${tf(r.lesson, 'title')}</div>
+          <div style="font-size:12px;color:#636e72;margin-bottom:8px">${tf(r.lesson, 'tagline')}</div>
           <div style="font-size:11px;color:#00b894;font-weight:600">${subjectEmojis[r.subject]} ${t('subjects.' + r.subject)}</div>
         </div>
       `).join('')}
@@ -17703,7 +18044,7 @@ function performSearch(query){
       if(!gData || !gData.categories) return;
       Object.values(gData.categories).forEach(cat => {
         cat.lessons.forEach(lesson => {
-          const searchStr = `${lesson.title} ${lesson.tagline} ${cat.name}`.toLowerCase();
+          const searchStr = `${lesson.title || ''} ${lesson.tagline || ''} ${cat.name || ''} ${lesson.title_es || ''} ${lesson.tagline_es || ''} ${cat.name_es || ''}`.toLowerCase();
           if(searchStr.includes(query)){
             results.push({
               lesson, subject: subjectKey, grade,
@@ -17743,7 +18084,7 @@ function showSearchResults(results){
          onmouseover="this.style.background='#f0f9f7'" onmouseout="this.style.background='transparent'">
       <span style="font-size:20px">${r.lesson.emoji}</span>
       <div style="flex:1">
-        <div style="font-weight:600;font-size:13px;color:#2d3436">${r.lesson.title}</div>
+        <div style="font-weight:600;font-size:13px;color:#2d3436">${tf(r.lesson, 'title')}</div>
         <div style="font-size:11px;color:#636e72">${r.subjectName} · ${r.gradeName}</div>
       </div>
     </div>
