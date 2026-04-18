@@ -14196,14 +14196,15 @@ function showWorkedExample(){
   var lesson = currentOpenLesson;
   var q = currentLessonQuestions[0]; // Use first question as example
 
-  var exampleQ = q.question || (q.activity ? q.activity.instructions : '') || 'Sample question from this lesson';
+  var exampleQ = q.question || (q.activity ? tf(q.activity, 'instructions') : '') || t('ui.answerThisQuestion');
   var correctAnswer = '';
   var explanation = '';
   var choices = q.choices || (q.activity ? q.activity.choices : []) || [];
   choices.forEach(function(c){
     if(c.correct === true || c.correct === 'true'){
-      correctAnswer = c.text;
-      if(c.explanation) explanation = c.explanation;
+      correctAnswer = tf(c, 'text');
+      var ex = tf(c, 'explanation');
+      if(ex) explanation = ex;
     }
   });
 
@@ -14424,6 +14425,41 @@ function applyLessonTranslationsES(){
             if(es.intro != null) lesson.content.intro_es = es.intro;
             if(es.keyPoints != null) lesson.content.keyPoints_es = es.keyPoints;
             if(es.funFact != null) lesson.content.funFact_es = es.funFact;
+          }
+          // Activity-level translations (question text, prompt, choice text/explanation)
+          if(es.activity && lesson.activity){
+            if(es.activity.instructions != null) lesson.activity.instructions_es = es.activity.instructions;
+            if(es.activity.prompt != null) lesson.activity.prompt_es = es.activity.prompt;
+            if(Array.isArray(es.activity.choices) && Array.isArray(lesson.activity.choices)){
+              es.activity.choices.forEach(function(c, i){
+                if(!lesson.activity.choices[i]) return;
+                if(c && c.text != null) lesson.activity.choices[i].text_es = c.text;
+                if(c && c.explanation != null) lesson.activity.choices[i].explanation_es = c.explanation;
+              });
+            }
+            if(Array.isArray(es.activity.matchPairs) && Array.isArray(lesson.activity.matchPairs)){
+              es.activity.matchPairs.forEach(function(p, i){
+                if(!lesson.activity.matchPairs[i]) return;
+                if(p && p.left != null) lesson.activity.matchPairs[i].left_es = p.left;
+                if(p && p.right != null) lesson.activity.matchPairs[i].right_es = p.right;
+              });
+            }
+            if(Array.isArray(es.activity.dragOptions) && Array.isArray(lesson.activity.dragOptions)){
+              es.activity.dragOptions.forEach(function(o, i){
+                if(!lesson.activity.dragOptions[i]) return;
+                if(o && o.label != null) lesson.activity.dragOptions[i].label_es = o.label;
+              });
+            }
+            if(Array.isArray(es.activity.dropTargets) && Array.isArray(lesson.activity.dropTargets)){
+              es.activity.dropTargets.forEach(function(o, i){
+                if(!lesson.activity.dropTargets[i]) return;
+                if(o && o.label != null) lesson.activity.dropTargets[i].label_es = o.label;
+              });
+            }
+            if(Array.isArray(es.activity.sortItems) && Array.isArray(lesson.activity.sortItems)){
+              es.activity.sortItems_es = es.activity.sortItems;
+              lesson.activity.sortItems_es = es.activity.sortItems;
+            }
           }
         });
       });
@@ -17075,17 +17111,18 @@ function showQuestion(index){
     const letter = String.fromCharCode(65 + idx);
     const choiceId = c.id || letter;
     const isCorrect = c.correct === true || c.correct === 'true';
+    const choiceText = tf(c, 'text');
     choicesHtml += `
       <div class="mc-option" id="choice-${index}-${idx}" onclick="selectAnswer(${index},${idx},'${choiceId}',${isCorrect},this)"
            style="padding:14px 18px;border:2px solid #e0e0e0;border-radius:10px;cursor:pointer;display:flex;align-items:center;gap:12px;margin-bottom:8px;transition:all 0.2s;background:#fff"
            onmouseover="if(!this.classList.contains('correct-answer')&&!this.classList.contains('wrong-answer'))this.style.borderColor='#00b894'"
            onmouseout="if(!this.classList.contains('correct-answer')&&!this.classList.contains('wrong-answer'))this.style.borderColor='#e0e0e0'">
         <div style="width:32px;height:32px;border-radius:50%;background:#f0f0f0;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;color:#636e72;flex-shrink:0">${letter}</div>
-        <div style="flex:1;font-size:14px;color:#2d3436">${c.text}</div>
+        <div style="flex:1;font-size:14px;color:#2d3436">${choiceText}</div>
       </div>`;
   });
 
-  const questionText = q.question || q.activity?.instructions || t('ui.answerThisQuestion');
+  const questionText = q.question || (q.activity ? tf(q.activity, 'instructions') : '') || t('ui.answerThisQuestion');
 
   area.innerHTML = `
     <div class="question-counter">${t('ui.questionOf').replace('{n}', index+1)}</div>
@@ -17135,7 +17172,7 @@ function selectAnswer(qIndex, choiceIndex, choiceId, isCorrect, el){
 
     var feedbackHtml = `<div class="answer-explanation correct" style="background:#e8f8f0;border-left:4px solid #00b894;padding:16px;border-radius:8px;margin-top:12px">
       <div style="font-weight:700;color:#00b894;font-size:16px;margin-bottom:4px">${t('ui.correctPoints').replace('{n}', gain)}</div>
-      <div style="color:#2d3436;font-size:14px">${choices[choiceIndex]?.explanation || t('ui.greatJob')}</div>
+      <div style="color:#2d3436;font-size:14px">${tf(choices[choiceIndex] || {}, 'explanation') || t('ui.greatJob')}</div>
       ${inChallengeZone ? '<div style="margin-top:8px;padding:6px 12px;background:#fdcb6e22;border-radius:6px;font-size:12px;color:#fdcb6e;font-weight:700">' + t('ui.challengeZoneMsg') + '</div>' : ''}
       ${consecutiveCorrect >= 3 ? '<div style="margin-top:6px;font-size:12px;color:#00b894;font-weight:600">' + t('ui.inARow').replace('{n}', consecutiveCorrect) + '</div>' : ''}
     </div>`;
@@ -17169,14 +17206,14 @@ function selectAnswer(qIndex, choiceIndex, choiceId, isCorrect, el){
         opt.classList.add('correct-highlight');
         opt.style.borderColor = '#00b894';
         opt.style.background = '#c8f7e8';
-        correctText = choices[idx].text;
+        correctText = tf(choices[idx], 'text');
       }
     });
 
     // ═══ STEP-BY-STEP EXPLANATION (IXL-style) ═══
-    var wrongExpl = choices[choiceIndex]?.explanation || '';
+    var wrongExpl = (choices[choiceIndex] ? tf(choices[choiceIndex], 'explanation') : '') || '';
     var correctExpl = '';
-    choices.forEach(c => { if((c.correct === true || c.correct === 'true') && c.explanation) correctExpl = c.explanation; });
+    choices.forEach(c => { if((c.correct === true || c.correct === 'true')){ var ex = tf(c, 'explanation'); if(ex) correctExpl = ex; } });
 
     var stepsHtml = `<div class="answer-explanation wrong" style="background:#fff5f5;border-left:4px solid #d63031;padding:16px;border-radius:8px;margin-top:12px">
       <div style="font-weight:700;color:#d63031;font-size:16px;margin-bottom:8px">${t('ui.notQuiteRight').replace('{n}', penalty)}</div>
