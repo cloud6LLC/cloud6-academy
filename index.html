@@ -15199,8 +15199,155 @@ Object.assign(LESSON_TRANSLATIONS_ES, {
   });
 })();
 
+// ═══════════════════════════════════════════════════════════
+// AUTO-TRANSLATE ACTIVITY CONTENT for PK/K/1 across all subjects
+// Runs after manual LESSON_TRANSLATIONS_ES are merged — only fills in
+// activity fields that still don't have an _es twin. English data is
+// never modified. Uses pattern-based translations for the repetitive
+// math content and phrase-level translations for common UI phrasings.
+// ═══════════════════════════════════════════════════════════
+function autoTranslateActivitiesES(){
+  // Phrase dictionary — longer phrases first so they take precedence.
+  const phrases = [
+    // Math counting questions
+    [/^Count the (.+?):\s*([^\?]*?)\s*How many\s*(.+?)\?$/i, function(_, a, emojis, b){ return 'Cuenta ' + _articleES(a) + ': ' + emojis.trim() + ' ¿Cuántas ' + _wordES(a) + ' hay?'; }],
+    [/^Count(?: the)?\s+(.+?)\s*:\s*([^\?]+)\s*How many\??$/i, function(_, a, emojis){ return 'Cuenta ' + _articleES(a) + ': ' + emojis.trim() + ' ¿Cuántas ' + _wordES(a) + ' hay?'; }],
+    [/^How many\s+(.+?)\?\s*(.+)$/i, function(_, a, emojis){ return '¿Cuántas ' + _wordES(a) + ' hay? ' + emojis.trim(); }],
+    [/^How many\s+([^\?]+)\?$/i, function(_, a){ return '¿Cuántas ' + _wordES(a) + ' hay?'; }],
+    [/^What number is this\?\s*(\d+)$/i, function(_, n){ return '¿Qué número es este? ' + n; }],
+    [/^What comes (?:next|after)\b.*\?$/i, function(){ return '¿Qué sigue?'; }],
+    [/^What comes before\b.*\?$/i, function(){ return '¿Qué viene antes?'; }],
+    [/^Which has MORE\??/i, function(){ return '¿Cuál tiene MÁS?'; }],
+    [/^Which has FEWER\??/i, function(){ return '¿Cuál tiene MENOS?'; }],
+    [/^Which is LONGER\??/i, function(){ return '¿Cuál es MÁS LARGO?'; }],
+    [/^Which is TALLER\??/i, function(){ return '¿Cuál es MÁS ALTO?'; }],
+    [/^Which is BIGGER\??/i, function(){ return '¿Cuál es MÁS GRANDE?'; }],
+    [/^Which is SMALLER\??/i, function(){ return '¿Cuál es MÁS PEQUEÑO?'; }],
+    [/^Which is HEAVIER\??/i, function(){ return '¿Cuál es MÁS PESADO?'; }],
+    [/^Which number is MORE\?\s*(\d+)\s*or\s*(\d+)$/i, function(_, a, b){ return '¿Qué número es MÁS? ' + a + ' o ' + b; }],
+    [/^One more than\s+(\d+)\s+is\s+___$/i, function(_, n){ return 'Uno más que ' + n + ' es ___'; }],
+    [/^One fewer than\s+(\d+)\s+is\s+___$/i, function(_, n){ return 'Uno menos que ' + n + ' es ___'; }],
+    // Common explanation phrases
+    [/^There are\s+(\d+)\s+([A-Za-z]+)[:.]?\s*.*$/i, function(_, n, thing){ return '¡Hay ' + n + ' ' + _wordES(thing) + '! Cuenta: ' + _countTo(n) + '.'; }],
+    [/^Count again.*$/i, function(){ return '¡Cuenta otra vez con cuidado!'; }],
+    [/^Count carefully.*$/i, function(){ return '¡Cuenta con cuidado!'; }],
+    [/^Count each\s+([A-Za-z]+)[:.]?\s*.*$/i, function(_, thing){ return 'Cuenta cada ' + _wordES(thing) + ' con cuidado.'; }],
+    [/^Great job!\s*Keep going!?$/i, function(){ return '¡Muy bien hecho! ¡Sigue así!'; }],
+    [/^Yes!.*$/i, function(s){ return '¡Sí! ' + _softTranslate(s.replace(/^Yes!\s*/i, '')); }],
+    [/^That's right!?.*$/i, function(s){ return '¡Correcto! ' + _softTranslate(s.replace(/^[Tt]hat's right!?\s*/,'')); }],
+    [/^Exactly!.*$/i, function(s){ return '¡Exacto! ' + _softTranslate(s.replace(/^Exactly!\s*/i,'')); }],
+    [/^YES!.*$/i, function(s){ return '¡SÍ! ' + _softTranslate(s.replace(/^YES!\s*/, '')); }],
+    [/^Absolutely!.*$/i, function(s){ return '¡Claro que sí! ' + _softTranslate(s.replace(/^Absolutely!\s*/i,'')); }],
+    [/^Correct!.*$/i, function(s){ return '¡Correcto! ' + _softTranslate(s.replace(/^Correct!\s*/i,'')); }]
+  ];
+
+  // Nouns → Spanish (best-effort for common math objects)
+  const nounMap = {
+    'stars':'estrellas','star':'estrella','apples':'manzanas','apple':'manzana',
+    'ducks':'patos','duck':'pato','cookies':'galletas','cookie':'galleta',
+    'fish':'peces','dogs':'perros','dog':'perro','cats':'gatos','cat':'gato',
+    'flowers':'flores','flower':'flor','balloons':'globos','balloon':'globo',
+    'strawberries':'fresas','strawberry':'fresa','cars':'carros','car':'carro',
+    'claps':'aplausos','clap':'aplauso','rabbits':'conejos','rabbit':'conejo',
+    'frogs':'ranas','frog':'rana','butterflies':'mariposas','butterfly':'mariposa',
+    'leaves':'hojas','leaf':'hoja','objects':'objetos','object':'objeto',
+    'numbers':'números','number':'número','groups':'grupos','group':'grupo',
+    'shapes':'figuras','shape':'figura','blocks':'bloques','block':'bloque',
+    'letters':'letras','letter':'letra','coins':'monedas','coin':'moneda',
+    'books':'libros','book':'libro','pencils':'lápices','pencil':'lápiz',
+    'trees':'árboles','tree':'árbol','bugs':'bichos','bug':'bicho',
+    'toys':'juguetes','toy':'juguete','hats':'sombreros','hat':'sombrero',
+    'people':'personas','person':'persona','things':'cosas','thing':'cosa',
+    'items':'artículos','item':'artículo','crayons':'crayones','crayon':'crayón'
+  };
+  function _wordES(w){
+    var k = (w||'').trim().toLowerCase().replace(/[.!?]+$/, '');
+    return nounMap[k] || k;
+  }
+  function _articleES(w){
+    var es = _wordES(w);
+    return (/s$/.test(es) ? 'las ' : 'la ') + es;
+  }
+  function _countTo(n){
+    var arr = [];
+    for(var i = 1; i <= Math.min(parseInt(n)||0, 20); i++){ arr.push(i); }
+    return arr.join(', ');
+  }
+  function _softTranslate(s){
+    // Very small phrase swaps for leftover English tails
+    return (s||'')
+      .replace(/\bGames are apps\b/gi, 'Los juegos son apps')
+      .replace(/\bThat's great!?/gi, '¡Muy bien!')
+      .replace(/\bGood job!?/gi, '¡Buen trabajo!')
+      .replace(/\bKeep going!?/gi, '¡Sigue así!')
+      .replace(/\bis right\b/gi, 'es correcto')
+      .replace(/\bTry again\b/gi, 'Inténtalo otra vez');
+  }
+
+  function translate(s){
+    if(!s || typeof s !== 'string') return null;
+    var out = s;
+    for(var i = 0; i < phrases.length; i++){
+      var m = out.match(phrases[i][0]);
+      if(m){
+        var replaced = phrases[i][1].apply(null, m);
+        if(replaced && replaced !== out){ return replaced; }
+      }
+    }
+    return null;
+  }
+
+  const curricula = {
+    'app-building': typeof APP_BUILDING !== 'undefined' ? APP_BUILDING : null,
+    'financial-literacy': typeof FINANCIAL_LITERACY !== 'undefined' ? FINANCIAL_LITERACY : null,
+    'math': typeof MATH_CURRICULUM !== 'undefined' ? MATH_CURRICULUM : null,
+    'science': typeof SCIENCE_CURRICULUM !== 'undefined' ? SCIENCE_CURRICULUM : null,
+    'english': typeof ENGLISH_CURRICULUM !== 'undefined' ? ENGLISH_CURRICULUM : null,
+    'history': typeof HISTORY_CURRICULUM !== 'undefined' ? HISTORY_CURRICULUM : null,
+    'social-studies': typeof SOCIAL_STUDIES_CURRICULUM !== 'undefined' ? SOCIAL_STUDIES_CURRICULUM : null
+  };
+  const grades = ['PK','K',1];
+  Object.keys(curricula).forEach(function(subject){
+    const cur = curricula[subject];
+    if(!cur) return;
+    grades.forEach(function(g){
+      const gd = cur[g];
+      if(!gd || !gd.categories) return;
+      Object.keys(gd.categories).forEach(function(catKey){
+        const cat = gd.categories[catKey];
+        (cat.lessons || []).forEach(function(lesson){
+          const act = lesson.activity;
+          if(!act) return;
+          if(act.instructions && !act.instructions_es){
+            var tr = translate(act.instructions);
+            if(tr) act.instructions_es = tr;
+          }
+          if(Array.isArray(act.choices)){
+            act.choices.forEach(function(c){
+              if(!c) return;
+              if(c.text && !c.text_es){
+                if(/^\s*[\d+\-*/.,\s]+\s*$/.test(c.text)){
+                  c.text_es = c.text; // numeric choices pass through
+                } else {
+                  var tr = translate(c.text);
+                  if(tr) c.text_es = tr;
+                }
+              }
+              if(c.explanation && !c.explanation_es){
+                var tr2 = translate(c.explanation);
+                if(tr2) c.explanation_es = tr2;
+              }
+            });
+          }
+        });
+      });
+    });
+  });
+}
+
 // Apply all Phase 2 translations after every curriculum has loaded.
 try { applyLessonTranslationsES(); } catch(e){ console.warn('Lesson translation merge skipped:', e); }
+try { autoTranslateActivitiesES(); } catch(e){ console.warn('Auto activity translator skipped:', e); }
 
 function getSubjectData(subject, grade){
   // For App Building grades 6-12, always show Ship Real Apps curriculum
@@ -17122,7 +17269,7 @@ function showQuestion(index){
       </div>`;
   });
 
-  const questionText = q.question || (q.activity ? tf(q.activity, 'instructions') : '') || t('ui.answerThisQuestion');
+  const questionText = (q.activity ? tf(q.activity, 'instructions') : '') || (q.activity ? tf(q.activity, 'prompt') : '') || q.question || t('ui.answerThisQuestion');
 
   area.innerHTML = `
     <div class="question-counter">${t('ui.questionOf').replace('{n}', index+1)}</div>
