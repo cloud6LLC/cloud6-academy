@@ -15207,10 +15207,218 @@ Object.assign(LESSON_TRANSLATIONS_ES, {
 // math content and phrase-level translations for common UI phrasings.
 // ═══════════════════════════════════════════════════════════
 function autoTranslateActivitiesES(){
+  // ─── Word-level translator (used as the last-resort fallback) ───
+  const wordMap = {
+    // Articles / determiners
+    'the':'','a':'un','an':'un','this':'este','that':'ese','these':'estos','those':'esos',
+    'my':'mi','your':'tu','his':'su','her':'su','our':'nuestro','their':'su',
+    // Copula / verbs
+    'is':'es','are':'son','was':'era','were':'eran','be':'ser','been':'sido',
+    'do':'hacen','does':'hace','did':'hizo','can':'puede','could':'podría','will':'va a',
+    'has':'tiene','have':'tiene','had':'tenía',
+    'make':'hacer','makes':'hace','made':'hizo','making':'haciendo',
+    'use':'usar','uses':'usa','used':'usó','using':'usando',
+    'get':'conseguir','gets':'consigue','got':'consiguió',
+    'go':'ir','goes':'va','went':'fue','going':'yendo',
+    'help':'ayudar','helps':'ayuda','helped':'ayudó','helping':'ayudando',
+    'need':'necesitar','needs':'necesita','needed':'necesitó',
+    'want':'querer','wants':'quiere','wanted':'quiso',
+    'like':'gustar','likes':'le gusta','liked':'le gustó',
+    'see':'ver','sees':'ve','saw':'vio','seeing':'viendo',
+    'know':'saber','knows':'sabe','knew':'supo',
+    'think':'pensar','thinks':'piensa','thought':'pensó',
+    'play':'jugar','plays':'juega','played':'jugó','playing':'jugando',
+    'learn':'aprender','learns':'aprende','learned':'aprendió','learning':'aprendiendo',
+    'teach':'enseñar','teaches':'enseña','taught':'enseñó',
+    'work':'trabajar','works':'trabaja','worked':'trabajó','working':'trabajando',
+    'build':'construir','builds':'construye','built':'construyó','building':'construyendo',
+    'find':'encontrar','finds':'encuentra','found':'encontró','finding':'encontrando',
+    'show':'mostrar','shows':'muestra','showed':'mostró',
+    'say':'decir','says':'dice','said':'dijo','saying':'diciendo',
+    'call':'llamar','calls':'llama','called':'se llama',
+    'start':'empezar','starts':'empieza','started':'empezó',
+    'put':'poner','putting':'poniendo',
+    'take':'tomar','takes':'toma','took':'tomó',
+    'give':'dar','gives':'da','gave':'dio','given':'dado',
+    'come':'venir','comes':'viene','came':'vino',
+    'live':'vivir','lives':'vive','living':'viviendo',
+    'eat':'comer','eats':'come','ate':'comió','eating':'comiendo',
+    'drink':'beber','drinks':'bebe','drank':'bebió','drinking':'bebiendo',
+    'read':'leer','reads':'lee','reading':'leyendo',
+    'write':'escribir','writes':'escribe','writing':'escribiendo','wrote':'escribió',
+    'watch':'ver','watches':'ve','watching':'viendo',
+    'listen':'escuchar','listens':'escucha','listening':'escuchando',
+    'run':'correr','runs':'corre','running':'corriendo',
+    'jump':'saltar','jumps':'salta','jumping':'saltando',
+    'grow':'crecer','grows':'crece','grew':'creció','growing':'creciendo',
+    'open':'abrir','opens':'abre','opening':'abriendo',
+    'close':'cerrar','closes':'cierra','closed':'cerrado','closing':'cerrando',
+    'save':'ahorrar','saves':'ahorra','saved':'ahorró','saving':'ahorrando',
+    'spend':'gastar','spends':'gasta','spent':'gastó','spending':'gastando',
+    'buy':'comprar','buys':'compra','bought':'compró','buying':'comprando',
+    'sell':'vender','sells':'vende','sold':'vendió','selling':'vendiendo',
+    'share':'compartir','shares':'comparte','shared':'compartió','sharing':'compartir',
+    'count':'contar','counts':'cuenta','counted':'contó','counting':'contando',
+    'move':'mover','moves':'se mueve','moved':'se movió','moving':'moviéndose',
+    'change':'cambiar','changes':'cambia','changed':'cambió','changing':'cambiando',
+    'love':'amar','loves':'ama','loved':'amó',
+    'stay':'quedarse','stays':'se queda','stayed':'se quedó',
+    'become':'volverse','becomes':'se vuelve','became':'se volvió',
+    'cost':'costar','costs':'cuesta',
+    // Pronouns
+    'i':'yo','you':'tú','he':'él','she':'ella','it':'','we':'nosotros','they':'ellos',
+    'me':'mí','him':'él','her':'ella','us':'nosotros','them':'ellos',
+    // Prepositions / conjunctions
+    'in':'en','on':'en','at':'en','to':'a','from':'de','with':'con','without':'sin',
+    'of':'de','for':'para','about':'sobre','by':'por','as':'como',
+    'and':'y','or':'o','but':'pero','so':'entonces','because':'porque','if':'si',
+    'when':'cuando','where':'donde','while':'mientras','then':'entonces',
+    'than':'que','not':'no','also':'también','too':'también','very':'muy',
+    'just':'solo','only':'solo','all':'todos','every':'cada','many':'muchos',
+    'some':'algunos','any':'algún','each':'cada','more':'más','most':'la mayoría',
+    'less':'menos','few':'pocos','fewer':'menos','big':'grande','small':'pequeño',
+    // Numbers
+    'one':'uno','two':'dos','three':'tres','four':'cuatro','five':'cinco',
+    'six':'seis','seven':'siete','eight':'ocho','nine':'nueve','ten':'diez',
+    'first':'primero','second':'segundo','third':'tercero',
+    // Common nouns
+    'phone':'teléfono','phones':'teléfonos','tablet':'tableta','tablets':'tabletas',
+    'app':'app','apps':'apps','game':'juego','games':'juegos',
+    'kid':'niño','kids':'niños','child':'niño','children':'niños',
+    'person':'persona','people':'personas','friend':'amigo','friends':'amigos',
+    'family':'familia','families':'familias','parent':'papá','parents':'papás',
+    'teacher':'maestro','teachers':'maestros','school':'escuela','schools':'escuelas',
+    'home':'casa','homes':'casas','house':'casa','houses':'casas',
+    'store':'tienda','stores':'tiendas','business':'negocio','businesses':'negocios',
+    'money':'dinero','coin':'moneda','coins':'monedas','bill':'billete','bills':'billetes',
+    'thing':'cosa','things':'cosas','stuff':'cosas','idea':'idea','ideas':'ideas',
+    'color':'color','colors':'colores','shape':'figura','shapes':'figuras',
+    'number':'número','numbers':'números','letter':'letra','letters':'letras',
+    'word':'palabra','words':'palabras','sound':'sonido','sounds':'sonidos',
+    'day':'día','days':'días','night':'noche','year':'año','years':'años',
+    'time':'tiempo','times':'veces','book':'libro','books':'libros',
+    'toy':'juguete','toys':'juguetes','food':'comida','foods':'comidas',
+    'water':'agua','sun':'sol','moon':'luna','star':'estrella','stars':'estrellas',
+    'tree':'árbol','trees':'árboles','flower':'flor','flowers':'flores',
+    'plant':'planta','plants':'plantas','animal':'animal','animals':'animales',
+    'dog':'perro','dogs':'perros','cat':'gato','cats':'gatos',
+    'bird':'pájaro','birds':'pájaros','fish':'pez','apple':'manzana','apples':'manzanas',
+    'maker':'creador','makers':'creadores','builder':'constructor','builders':'constructores',
+    'programmer':'programador','programmers':'programadores','designer':'diseñador',
+    'robot':'robot','robots':'robots','scientist':'científico','scientists':'científicos',
+    'problem':'problema','problems':'problemas','solution':'solución','solutions':'soluciones',
+    'question':'pregunta','questions':'preguntas','answer':'respuesta','answers':'respuestas',
+    'rule':'regla','rules':'reglas','job':'trabajo','jobs':'trabajos',
+    // Adjectives / modifiers
+    'good':'bueno','bad':'malo','great':'excelente','amazing':'increíble',
+    'pretty':'bonito','beautiful':'hermoso','nice':'amable','kind':'amable',
+    'fun':'divertido','funny':'chistoso','happy':'feliz','sad':'triste',
+    'special':'especial','important':'importante','different':'diferente',
+    'same':'mismo','new':'nuevo','old':'viejo','young':'joven',
+    'real':'real','easy':'fácil','hard':'difícil','smart':'listo',
+    'fast':'rápido','slow':'lento','right':'correcto','wrong':'incorrecto',
+    'tall':'alto','short':'corto','heavy':'pesado','light':'ligero',
+    'bigger':'más grande','smaller':'más pequeño','longer':'más largo','taller':'más alto',
+    'fewer':'menos','less':'menos','better':'mejor','worse':'peor',
+    'always':'siempre','never':'nunca','sometimes':'a veces','today':'hoy',
+    'really':'de verdad','already':'ya','still':'todavía','even':'incluso',
+    // Misc
+    'please':'por favor','thanks':'gracias','thank':'gracias','welcome':'bienvenido',
+    'hello':'hola','hi':'hola','bye':'adiós','goodbye':'adiós','yes':'sí','no':'no',
+    'maybe':'tal vez','ok':'bien','okay':'bien','sure':'claro',
+    'so much':'mucho','a lot':'mucho','lots':'muchos','very much':'mucho',
+    'makes you':'te hace','made it':'lo hicieron','make it':'hacerlo'
+  };
+  function _wTr(word){
+    var lower = word.toLowerCase();
+    if(wordMap.hasOwnProperty(lower)){ return wordMap[lower]; }
+    return null; // unknown word — keep English
+  }
+  // Normalize common English contractions and idiomatic phrases before word-by-word.
+  const phraseMap = [
+    [/\bdon't\b/gi, 'no'], [/\bdoesn't\b/gi, 'no'], [/\bdidn't\b/gi, 'no'],
+    [/\bcan't\b/gi, 'no puede'], [/\bcouldn't\b/gi, 'no pudo'],
+    [/\bwon't\b/gi, 'no va a'], [/\bwouldn't\b/gi, 'no quisiera'],
+    [/\bisn't\b/gi, 'no es'], [/\baren't\b/gi, 'no son'],
+    [/\bwasn't\b/gi, 'no era'], [/\bweren't\b/gi, 'no eran'],
+    [/\bhasn't\b/gi, 'no ha'], [/\bhaven't\b/gi, 'no han'],
+    [/\bI'm\b/g, 'yo soy'], [/\byou're\b/gi, 'tú eres'], [/\bwe're\b/gi, 'somos'],
+    [/\bthey're\b/gi, 'son'], [/\bit's\b/gi, 'es'], [/\bthat's\b/gi, 'eso es'],
+    [/\bI've\b/g, 'yo he'], [/\byou've\b/gi, 'has'], [/\bwe've\b/gi, 'hemos'],
+    [/\blet's\b/gi, 'vamos a'],
+    [/\bneed to\b/gi, 'necesita'], [/\bneeds to\b/gi, 'necesita'],
+    [/\bwant to\b/gi, 'quiere'], [/\bwants to\b/gi, 'quiere'],
+    [/\blike to\b/gi, 'le gusta'], [/\blikes to\b/gi, 'le gusta'],
+    [/\bhave to\b/gi, 'tiene que'], [/\bhas to\b/gi, 'tiene que'],
+    [/\ba lot of\b/gi, 'muchos'], [/\blots of\b/gi, 'muchos'],
+    [/\bso much\b/gi, 'mucho'], [/\bso many\b/gi, 'muchos'],
+    [/\bmore than\b/gi, 'más que'], [/\bless than\b/gi, 'menos que'],
+    [/\bmost of\b/gi, 'la mayoría de'], [/\ball of\b/gi, 'todo el'],
+    [/\bgrown-ups?\b/gi, 'adultos'], [/\bgrown ups?\b/gi, 'adultos'],
+    [/\bkind of\b/gi, 'tipo de'], [/\bsort of\b/gi, 'tipo de'],
+    // Question-word starters — drop the leading auxiliary
+    [/^What do\s+/i, '¿Qué '], [/^What does\s+/i, '¿Qué '], [/^What did\s+/i, '¿Qué '],
+    [/^Why do\s+/i, '¿Por qué '], [/^Why does\s+/i, '¿Por qué '],
+    [/^How do\s+/i, '¿Cómo '], [/^How does\s+/i, '¿Cómo '],
+    [/^How are\s+/i, '¿Cómo son '], [/^How is\s+/i, '¿Cómo es '],
+    [/^When do\s+/i, '¿Cuándo '], [/^When does\s+/i, '¿Cuándo '],
+    [/^Where do\s+/i, '¿Dónde '], [/^Where does\s+/i, '¿Dónde '],
+    [/^Who is\s+/i, '¿Quién es '], [/^Who are\s+/i, '¿Quiénes son '],
+    [/^Who makes\s+/i, '¿Quién hace '], [/^Who made\s+/i, '¿Quién hizo '],
+    [/^Which is\s+/i, '¿Cuál es '], [/^Which are\s+/i, '¿Cuáles son '],
+    [/^Do you\s+/i, '¿Tú '], [/^Does\s+/i, '¿'], [/^Do\s+/i, '¿'],
+    [/^Is this\s+/i, '¿Esto es '], [/^Are these\s+/i, '¿Estos son '],
+    // Common question endings — "do?" / "does?" drop
+    /** kept separate to avoid capturing elsewhere **/
+    [/\s+do\?$/i, '?'], [/\s+does\?$/i, '?']
+  ];
+  function _preClean(text){
+    var out = text;
+    for(var i = 0; i < phraseMap.length; i++){ out = out.replace(phraseMap[i][0], phraseMap[i][1]); }
+    return out;
+  }
+  function _wordByWord(text){
+    // First pass — normalize contractions and common phrases
+    var pre = _preClean(text);
+    // Only translate English letter words; preserve punctuation, numbers, emojis.
+    var out = pre.replace(/([A-Za-z']+)/g, function(word){
+      var tr = _wTr(word);
+      if(tr === null) return word;
+      if(tr === '') return ''; // articles drop
+      // Capitalize if original started with uppercase
+      if(/^[A-Z]/.test(word) && tr.length){
+        return tr.charAt(0).toUpperCase() + tr.slice(1);
+      }
+      return tr;
+    });
+    // Question handling: bare "What/Why/How/Who/Where/When" at start → add ¿
+    out = out.replace(/^([QW])(ué|or qué|ómo|uién|uiénes|uándo|ónde|ual)/i, '¿$1$2');
+    // Clean up spacing/punctuation
+    out = out.replace(/\s{2,}/g, ' ').replace(/\s([,.!?:;])/g, '$1').trim();
+    // Add closing ? if question-word present but no ? at end
+    if(/^¿/.test(out) && !/\?$/.test(out)) out += '?';
+    return out;
+  }
+
   // Phrase dictionary — longer phrases first so they take precedence.
   const phrases = [
+    // Questions
+    [/^What is (?:a|an|the)?\s*(.+?)\?$/i, function(_, a){ return '¿Qué es ' + _articleES(a) + '?'; }],
+    [/^Who (?:makes|made)\s+(.+?)\?$/i, function(_, a){ return '¿Quién hace ' + _articleES(a) + '?'; }],
+    [/^Who are\s+(.+?)\?$/i, function(_, a){ return '¿Quiénes son ' + _articleES(a) + '?'; }],
+    [/^Why (?:do|does|is|are)\s+(.+?)\?$/i, function(_, a){ return '¿Por qué ' + _wordByWord(a) + '?'; }],
+    [/^How (?:do|does|can)\s+(.+?)\?$/i, function(_, a){ return '¿Cómo ' + _wordByWord(a) + '?'; }],
+    [/^When (?:do|does)\s+(.+?)\?$/i, function(_, a){ return '¿Cuándo ' + _wordByWord(a) + '?'; }],
+    [/^Where (?:do|does)\s+(.+?)\?$/i, function(_, a){ return '¿Dónde ' + _wordByWord(a) + '?'; }],
+    [/^Which (?:one|of these|of them)?\s*(?:is|are|shows)?\s*(.+?)\?$/i, function(_, a){ return '¿Cuál ' + _wordByWord(a) + '?'; }],
+    [/^Match (?:the)?\s*(.+?)\s*(?:to|with)\s+(.+?)[!?.]?$/i, function(_, a, b){ return '¡Une ' + _wordByWord(a) + ' con ' + _wordByWord(b) + '!'; }],
+    [/^Start with\s+(.+?)[!?.]?$/i, function(_, a){ return 'Empieza con ' + _wordByWord(a); }],
+    [/^Put together:?\s*(.+)$/i, function(_, a){ return 'Junta: ' + _wordByWord(a); }],
+    [/^Take away\s*(.+)$/i, function(_, a){ return 'Quita ' + _wordByWord(a); }],
+    [/^Tell us about\s+(.+?)[!?.]?$/i, function(_, a){ return 'Cuéntanos sobre ' + _wordByWord(a); }],
+    [/^What (?:would|will)\s+(.+?)\?$/i, function(_, a){ return '¿Qué ' + _wordByWord(a) + '?'; }],
     // Math counting questions
-    [/^Count the (.+?):\s*([^\?]*?)\s*How many\s*(.+?)\?$/i, function(_, a, emojis, b){ return 'Cuenta ' + _articleES(a) + ': ' + emojis.trim() + ' ¿Cuántas ' + _wordES(a) + ' hay?'; }],
+    [/^Count the (.+?):\s*([^\?]*?)\s*How many\s*(.+?)\?$/i, function(_, a, emojis){ return 'Cuenta ' + _articleES(a) + ': ' + emojis.trim() + ' ¿Cuántas ' + _wordES(a) + ' hay?'; }],
     [/^Count(?: the)?\s+(.+?)\s*:\s*([^\?]+)\s*How many\??$/i, function(_, a, emojis){ return 'Cuenta ' + _articleES(a) + ': ' + emojis.trim() + ' ¿Cuántas ' + _wordES(a) + ' hay?'; }],
     [/^How many\s+(.+?)\?\s*(.+)$/i, function(_, a, emojis){ return '¿Cuántas ' + _wordES(a) + ' hay? ' + emojis.trim(); }],
     [/^How many\s+([^\?]+)\?$/i, function(_, a){ return '¿Cuántas ' + _wordES(a) + ' hay?'; }],
@@ -15227,18 +15435,22 @@ function autoTranslateActivitiesES(){
     [/^Which number is MORE\?\s*(\d+)\s*or\s*(\d+)$/i, function(_, a, b){ return '¿Qué número es MÁS? ' + a + ' o ' + b; }],
     [/^One more than\s+(\d+)\s+is\s+___$/i, function(_, n){ return 'Uno más que ' + n + ' es ___'; }],
     [/^One fewer than\s+(\d+)\s+is\s+___$/i, function(_, n){ return 'Uno menos que ' + n + ' es ___'; }],
-    // Common explanation phrases
+    // Common explanation phrases — boolean affirmations first
+    [/^(?:YES|Yes)[!,.]?\s*(.*)$/i, function(_, rest){ return '¡Sí!' + (rest ? ' ' + _wordByWord(rest) : ''); }],
+    [/^(?:YEAH|Yeah)[!,.]?\s*(.*)$/i, function(_, rest){ return '¡Claro!' + (rest ? ' ' + _wordByWord(rest) : ''); }],
+    [/^(?:Yes|YES),?\s+(.+)$/i, function(_, rest){ return '¡Sí! ' + _wordByWord(rest); }],
+    [/^(?:That'?s right|Correct|Exactly|Absolutely)[!.]?\s*(.*)$/i, function(_, rest){ return '¡Correcto!' + (rest ? ' ' + _wordByWord(rest) : ''); }],
+    [/^(?:Awesome|Great|Good|Nice|Wonderful)[!.]?\s*(.*)$/i, function(_, rest){ return '¡Muy bien!' + (rest ? ' ' + _wordByWord(rest) : ''); }],
+    [/^(?:No|NO|Not)[!,.]?\s*(.+)$/i, function(_, rest){ return '¡No! ' + _wordByWord(rest); }],
+    [/^Actually,?\s+(.+)$/i, function(_, rest){ return 'En realidad, ' + _wordByWord(rest); }],
     [/^There are\s+(\d+)\s+([A-Za-z]+)[:.]?\s*.*$/i, function(_, n, thing){ return '¡Hay ' + n + ' ' + _wordES(thing) + '! Cuenta: ' + _countTo(n) + '.'; }],
     [/^Count again.*$/i, function(){ return '¡Cuenta otra vez con cuidado!'; }],
     [/^Count carefully.*$/i, function(){ return '¡Cuenta con cuidado!'; }],
     [/^Count each\s+([A-Za-z]+)[:.]?\s*.*$/i, function(_, thing){ return 'Cuenta cada ' + _wordES(thing) + ' con cuidado.'; }],
     [/^Great job!\s*Keep going!?$/i, function(){ return '¡Muy bien hecho! ¡Sigue así!'; }],
-    [/^Yes!.*$/i, function(s){ return '¡Sí! ' + _softTranslate(s.replace(/^Yes!\s*/i, '')); }],
-    [/^That's right!?.*$/i, function(s){ return '¡Correcto! ' + _softTranslate(s.replace(/^[Tt]hat's right!?\s*/,'')); }],
-    [/^Exactly!.*$/i, function(s){ return '¡Exacto! ' + _softTranslate(s.replace(/^Exactly!\s*/i,'')); }],
-    [/^YES!.*$/i, function(s){ return '¡SÍ! ' + _softTranslate(s.replace(/^YES!\s*/, '')); }],
-    [/^Absolutely!.*$/i, function(s){ return '¡Claro que sí! ' + _softTranslate(s.replace(/^Absolutely!\s*/i,'')); }],
-    [/^Correct!.*$/i, function(s){ return '¡Correcto! ' + _softTranslate(s.replace(/^Correct!\s*/i,'')); }]
+    [/^Keep going!?$/i, function(){ return '¡Sigue así!'; }],
+    [/^Good job!?$/i, function(){ return '¡Buen trabajo!'; }],
+    [/^Try again!?$/i, function(){ return '¡Inténtalo otra vez!'; }]
   ];
 
   // Nouns → Spanish (best-effort for common math objects)
@@ -15294,6 +15506,10 @@ function autoTranslateActivitiesES(){
         if(replaced && replaced !== out){ return replaced; }
       }
     }
+    // Last-resort word-by-word translation so untranslated content
+    // at least reads partly in Spanish instead of fully in English.
+    var wb = _wordByWord(s);
+    if(wb && wb !== s) return wb;
     return null;
   }
 
