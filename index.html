@@ -17635,6 +17635,146 @@ function generateSubjectQuestion(lessonTitle, textSources, index){
   return generateContentQuestion(lessonTitle, textSources, index);
 }
 
+// Bilingual runtime pool translation. Every generate*Question function
+// returns localizeQPool(poolEntry). The dictionary POOL_ES_BY_Q is keyed
+// by the English question text; translating a pool entry is just adding
+// one line to the dictionary below. Entries without an ES match render
+// in English — no word-by-word garbage.
+const POOL_ES_BY_Q = {};
+Object.assign(POOL_ES_BY_Q, {
+  // ══ History generator — fallback pool ══
+  'What is a primary source?':
+    { q:'¿Qué es una fuente primaria?', c:'Un documento original o relato de primera mano de la época', w1:'Un libro de texto escrito 100 años después', w2:'Una película sobre la historia', e:'Las fuentes primarias incluyen cartas, diarios, fotos y artefactos de la época' },
+  'What is a civilization?':
+    { q:'¿Qué es una civilización?', c:'Una sociedad compleja con su propia cultura, gobierno y sistemas', w1:'Un grupo pequeño de personas', w2:'Cualquier país con bandera', e:'Las civilizaciones tienen gobierno, cultura, escritura y estructuras sociales organizadas' },
+  'What is the purpose of studying history?':
+    { q:'¿Para qué estudiamos la historia?', c:'Para aprender del pasado y entender cómo llegamos al presente', w1:'Para memorizar fechas', w2:'La historia no tiene propósito', e:'Entender la historia nos ayuda a tomar mejores decisiones y evitar errores del pasado' },
+  'What is an artifact?':
+    { q:'¿Qué es un artefacto?', c:'Un objeto hecho por los humanos de una época anterior', w1:'Un invento moderno', w2:'Un tipo de clase de arte', e:'Los artefactos incluyen herramientas, cerámica y objetos que nos cuentan de culturas pasadas' },
+  'What does "chronological order" mean?':
+    { q:'¿Qué significa "orden cronológico"?', c:'Los eventos puestos en el orden en que ocurrieron', w1:'Eventos listados por importancia', w2:'Eventos listados por orden alfabético', e:'Cronológico = orden en el tiempo, del más antiguo al más reciente' },
+  'What is a secondary source?':
+    { q:'¿Qué es una fuente secundaria?', c:'Un análisis o interpretación escrita después de los hechos', w1:'Una carta de la época', w2:'Una fotografía del evento', e:'Los libros de texto, documentales y biografías son fuentes secundarias' },
+  // History — Revolution
+  'In what year did the American colonies declare independence?':
+    { q:'¿En qué año declararon la independencia las colonias americanas?', c:'1776', w1:'1492', w2:'1812', e:'La Declaración de Independencia se firmó el 4 de julio de 1776' },
+  'Who wrote the Declaration of Independence?':
+    { q:'¿Quién escribió la Declaración de Independencia?', c:'Thomas Jefferson', w1:'George Washington', w2:'Abraham Lincoln', e:'Thomas Jefferson fue el autor principal de la Declaración' },
+  'What was the Boston Tea Party?':
+    { q:'¿Qué fue el Motín del Té de Boston?', c:'Una protesta contra los impuestos británicos donde los colonos tiraron té al puerto', w1:'Una fiesta elegante de té en Boston', w2:'Una celebración del dominio británico', e:'Los colonos protestaron la Ley del Té tirando té al puerto de Boston en 1773' },
+  'What are the first 10 amendments called?':
+    { q:'¿Cómo se llaman las primeras 10 enmiendas?', c:'La Carta de Derechos', w1:'La Constitución', w2:'La Declaración', e:'La Carta de Derechos protege las libertades individuales como la palabra y la religión' },
+  'Who was the first President of the United States?':
+    { q:'¿Quién fue el primer presidente de Estados Unidos?', c:'George Washington', w1:'Thomas Jefferson', w2:'Benjamin Franklin', e:'George Washington fue el primer presidente de 1789 a 1797' },
+  'What did "No taxation without representation" mean?':
+    { q:'¿Qué significaba "Ningún impuesto sin representación"?', c:'Que no se debe cobrar impuestos sin darle voz al pueblo', w1:'Que nadie debería pagar impuestos', w2:'Que solo los ricos deberían pagar impuestos', e:'Los colonos protestaban porque Gran Bretaña les cobraba impuestos sin representarlos en el Parlamento' },
+  'How many original colonies were there?':
+    { q:'¿Cuántas colonias originales hubo?', c:'13', w1:'50', w2:'10', e:'Las 13 colonias declararon la independencia y se volvieron los primeros estados' },
+  // History — Civil War
+  'What was the main cause of the American Civil War?':
+    { q:'¿Cuál fue la causa principal de la Guerra Civil Americana?', c:'Desacuerdos sobre la esclavitud y los derechos de los estados', w1:'Una disputa por una frontera', w2:'Una discusión solo sobre impuestos', e:'La Guerra Civil se peleó sobre todo por el tema de la esclavitud' },
+  'What did the Emancipation Proclamation do?':
+    { q:'¿Qué hizo la Proclamación de Emancipación?', c:'Declaró libres a las personas esclavizadas en los estados confederados', w1:'Creó un nuevo impuesto', w2:'Empezó la Guerra Civil', e:'La proclamación de Lincoln en 1863 liberó a las personas esclavizadas en los estados rebeldes' },
+  'When did the Civil War take place?':
+    { q:'¿Cuándo fue la Guerra Civil?', c:'1861-1865', w1:'1776-1783', w2:'1914-1918', e:'La Guerra Civil Americana duró de 1861 a 1865' },
+  'Who was the president during the Civil War?':
+    { q:'¿Quién fue presidente durante la Guerra Civil?', c:'Abraham Lincoln', w1:'George Washington', w2:'Theodore Roosevelt', e:'Lincoln lideró la Unión y trabajó para terminar con la esclavitud' },
+  'What was Reconstruction?':
+    { q:'¿Qué fue la Reconstrucción?', c:'El periodo después de la Guerra Civil en que se reconstruyó y reintegró el Sur', w1:'La construcción de la Casa Blanca', w2:'El periodo antes de la guerra', e:'La Reconstrucción (1865-1877) trató de cómo reconstruir y reunificar la nación' },
+  'What amendment abolished slavery?':
+    { q:'¿Qué enmienda abolió la esclavitud?', c:'La Enmienda 13', w1:'La Enmienda 1', w2:'La Enmienda 5', e:'La Enmienda 13 (1865) terminó la esclavitud de forma permanente en Estados Unidos' },
+  // History — Civil Rights
+  'Who delivered the "I Have a Dream" speech?':
+    { q:'¿Quién pronunció el discurso "Tengo un Sueño"?', c:'Martin Luther King Jr.', w1:'Abraham Lincoln', w2:'Rosa Parks', e:'MLK dio su famoso discurso durante la Marcha sobre Washington en 1963' },
+  'What did Rosa Parks do that changed history?':
+    { q:'¿Qué hizo Rosa Parks que cambió la historia?', c:'Se negó a ceder su asiento en el autobús a un pasajero blanco', w1:'Escribió la Constitución', w2:'Inventó el teléfono', e:'El acto de desafío de Rosa Parks en 1955 inició el Boicot de Autobuses de Montgomery' },
+  'What was the Civil Rights Act of 1964?':
+    { q:'¿Qué fue la Ley de Derechos Civiles de 1964?', c:'Una ley que prohibió la discriminación por raza, color, religión, sexo u origen nacional', w1:'Una ley sobre impuestos', w2:'Una declaración de guerra', e:'Esta ley histórica hizo ilegal la segregación y la discriminación' },
+  'What does "segregation" mean?':
+    { q:'¿Qué significa "segregación"?', c:'Separar a las personas según su raza', w1:'Unir a las personas', w2:'Un tipo de gobierno', e:'La segregación mantenía separados en escuelas, restaurantes y otros lugares a las personas negras y blancas' },
+  'When did women gain the right to vote in the U.S.?':
+    { q:'¿Cuándo obtuvieron las mujeres el derecho al voto en EE. UU.?', c:'1920 (Enmienda 19)', w1:'1776', w2:'1965', e:'La Enmienda 19 les dio a las mujeres el derecho al voto en 1920' },
+
+  // ══ Science generator — fallback pool ══
+  // (Finding and translating the science fallback)
+  'What is matter?':
+    { q:'¿Qué es la materia?', c:'Todo lo que tiene masa y ocupa espacio', w1:'Solo cosas que puedes ver', w2:'Solo líquidos y sólidos', e:'La materia es todo lo que es físico — sólido, líquido o gas' },
+  'What are the three main states of matter?':
+    { q:'¿Cuáles son los tres estados principales de la materia?', c:'Sólido, líquido y gas', w1:'Caliente, frío y tibio', w2:'Grande, mediano y pequeño', e:'La materia existe como sólido, líquido o gas dependiendo de la temperatura y la presión' },
+  'What is energy?':
+    { q:'¿Qué es la energía?', c:'La capacidad de hacer trabajo o causar un cambio', w1:'Solo la electricidad', w2:'Un tipo de comida', e:'La energía viene en muchas formas: luz, calor, movimiento, química y eléctrica' },
+  'What is the law of conservation of energy?':
+    { q:'¿Qué es la ley de conservación de la energía?', c:'La energía no se crea ni se destruye, solo se transforma', w1:'La energía se gasta y desaparece', w2:'Solo los científicos tienen energía', e:'La energía cambia de una forma a otra, pero la cantidad total se mantiene' },
+  'What do scientists do when experiments don\'t work as expected?':
+    { q:'¿Qué hacen los científicos cuando los experimentos no salen como esperaban?', c:'Analizan qué pasó y vuelven a intentarlo con cambios', w1:'Se dan por vencidos', w2:'Ocultan los resultados', e:'Los experimentos fallidos dan datos valiosos y nos ayudan a aprender' },
+
+  // ══ Social Studies generator — fallback pool ══
+  'What is a community?':
+    { q:'¿Qué es una comunidad?', c:'Un grupo de personas que vive, trabaja e interactúa en la misma zona', w1:'Un solo edificio', w2:'Un tipo de gobierno', e:'Las comunidades comparten espacios, recursos y conexiones sociales' },
+  'What is culture?':
+    { q:'¿Qué es la cultura?', c:'Las creencias, tradiciones, comida, arte y lengua de un grupo de personas', w1:'Solo la comida que come la gente', w2:'El tipo de gobierno que tiene un país', e:'La cultura incluye todas las prácticas y valores que comparte un grupo' },
+  'What is immigration?':
+    { q:'¿Qué es la inmigración?', c:'Mudarse a un nuevo país para vivir y trabajar', w1:'Salir de vacaciones', w2:'Mudarse a otra habitación en tu casa', e:'Los inmigrantes dejan su país para empezar una nueva vida en otro lugar' },
+  'What is a natural resource?':
+    { q:'¿Qué es un recurso natural?', c:'Algo de la naturaleza que la gente usa, como agua, árboles o petróleo', w1:'Algo hecho en una fábrica', w2:'Un tipo de programa del gobierno', e:'Los recursos naturales vienen de la Tierra y sostienen la vida y la economía' },
+  'Why do people live in communities?':
+    { q:'¿Por qué las personas viven en comunidades?', c:'Para compartir recursos, ayudarse y estar seguros', w1:'Porque el gobierno las obliga', w2:'Las personas prefieren vivir solas', e:'Las comunidades dan seguridad, conexión social y recursos compartidos' },
+  // Social Studies — Government
+  'What are the three branches of the U.S. government?':
+    { q:'¿Cuáles son las tres ramas del gobierno de EE. UU.?', c:'Legislativa, Ejecutiva, Judicial', w1:'Ejército, Marina, Fuerza Aérea', w2:'Local, Estatal, Federal', e:'Las tres ramas se equilibran unas a otras' },
+  'What is democracy?':
+    { q:'¿Qué es la democracia?', c:'Un sistema donde los ciudadanos votan para elegir a sus líderes', w1:'El mando de un rey o una reina', w2:'Cuando una persona decide todo', e:'En una democracia, el poder viene del pueblo a través del voto' },
+
+  // ══ FinLit generator — fallback pool (the generic entries) ══
+  'You sell cookies for $2 each. How much money do you make from selling 25 cookies?':
+    { q:'Vendes galletas a $2 cada una. ¿Cuánto dinero ganas al vender 25 galletas?', c:'$50', w1:'$25', w2:'$100', e:'$2 × 25 = $50 de ingresos totales' },
+  'What is income?':
+    { q:'¿Qué es el ingreso?', c:'Dinero que ganas por trabajar o vender cosas', w1:'Dinero que gastas', w2:'Un tipo de impuesto', e:'El ingreso es el dinero que recibes de un empleo, negocio o inversiones' },
+  'You want to buy a $60 game. You save $8/week. How many weeks until you can buy it?':
+    { q:'Quieres comprar un juego de $60. Ahorras $8 por semana. ¿Cuántas semanas necesitas para comprarlo?', c:'8 semanas', w1:'60 semanas', w2:'6 semanas', e:'$60 ÷ $8 = 7.5, así que necesitas 8 semanas completas' },
+  'What does "revenue" mean in business?':
+    { q:'¿Qué significa "ingresos" en un negocio?', c:'El dinero total que recibe un negocio de sus ventas', w1:'El dinero que queda después de los gastos', w2:'Un impuesto que paga el negocio', e:'Ingresos = total de ventas antes de restar los costos' },
+  'You buy supplies for $25 and sell products for $80. What is your profit?':
+    { q:'Compras materiales por $25 y vendes productos por $80. ¿Cuál es tu ganancia?', c:'$55', w1:'$80', w2:'$25', e:'$80 - $25 = $55 de ganancia' },
+  'Why is it smart to have multiple streams of income?':
+    { q:'¿Por qué es inteligente tener varias fuentes de ingresos?', c:'Si una fuente se detiene, sigues recibiendo dinero', w1:'Solo puedes tener un trabajo a la vez', w2:'Tener varios ingresos es ilegal', e:'Varias fuentes de ingresos reducen el riesgo financiero' },
+
+  // ══ AppBuild generator — common entries ══
+  'What does "UI" stand for in app development?':
+    { q:'¿Qué significan las siglas "UI" en el desarrollo de apps?', c:'Interfaz de Usuario', w1:'Internet Universal', w2:'Imagen Subida', e:'UI = Interfaz de Usuario (User Interface) — lo que el usuario ve y con lo que interactúa' },
+  'What does API stand for?':
+    { q:'¿Qué significa API?', c:'Interfaz de Programación de Aplicaciones', w1:'App Teléfono Internet', w2:'Instalador Automático de Programas', e:'API = Application Programming Interface — permite que las apps se comuniquen' },
+  'What is a variable in programming?':
+    { q:'¿Qué es una variable en programación?', c:'Un contenedor con nombre que guarda un valor', w1:'Un tipo de computadora', w2:'Un botón en la pantalla', e:'Las variables guardan datos como números, texto o valores verdadero/falso' },
+  'What does "debugging" mean?':
+    { q:'¿Qué significa "depurar" (debugging)?', c:'Encontrar y arreglar errores en el código', w1:'Agregar errores al código a propósito', w2:'Borrar tu proyecto entero', e:'Depurar = encontrar y arreglar problemas (bugs) en el código' },
+
+  // ══ English generator — common entries ══
+  'What is a noun?':
+    { q:'¿Qué es un sustantivo?', c:'Una palabra que nombra una persona, lugar, cosa o idea', w1:'Una palabra de acción', w2:'Una palabra que describe', e:'Los sustantivos nombran cosas como "perro", "escuela" o "felicidad"' },
+  'What is a verb?':
+    { q:'¿Qué es un verbo?', c:'Una palabra de acción o de estado', w1:'Una palabra que nombra una cosa', w2:'Un signo de puntuación', e:'Los verbos muestran acción (correr) o estado (ser, estar)' },
+  'What is a synonym?':
+    { q:'¿Qué es un sinónimo?', c:'Una palabra con el mismo significado que otra', w1:'Una palabra con significado opuesto', w2:'Una palabra en otro idioma', e:'Los sinónimos son palabras como "feliz" y "contento" que significan casi lo mismo' },
+  'What is an antonym?':
+    { q:'¿Qué es un antónimo?', c:'Una palabra con significado opuesto a otra', w1:'Una palabra con el mismo significado', w2:'Una palabra que rima', e:'Los antónimos son palabras opuestas como "caliente" y "frío"' }
+});
+function localizeQPool(p){
+  const es = currentLang === 'es';
+  const esEntry = es ? POOL_ES_BY_Q[p.q] : null;
+  const q = esEntry ? esEntry.q : p.q;
+  const c = esEntry ? esEntry.c : p.c;
+  const w1 = esEntry ? esEntry.w1 : p.w1;
+  const w2 = esEntry ? esEntry.w2 : p.w2;
+  const e = esEntry ? esEntry.e : p.e;
+  const wrongPrefix = es ? '❌ La respuesta correcta es: ' : '❌ The correct answer is: ';
+  return { type:'multiple-choice', question:q, choices:shuffleArray([
+    {text:c, correct:true, explanation:'✅ '+e},
+    {text:w1, correct:false, explanation:wrongPrefix+c+'. '+e},
+    {text:w2, correct:false, explanation:wrongPrefix+c+'. '+e}
+  ])};
+}
+
 // ═══ FINANCIAL LITERACY QUESTION GENERATOR ═══
 function generateFinLitQuestion(title, sources, idx){
   var t = (title||'').toLowerCase();
@@ -17774,11 +17914,7 @@ function generateFinLitQuestion(title, sources, idx){
     ];
   }
   var p = pools[idx % pools.length];
-  return { type:'multiple-choice', question:p.q, choices:shuffleArray([
-    {text:p.c, correct:true, explanation:'✅ '+p.e},
-    {text:p.w1, correct:false, explanation:'❌ The correct answer is: '+p.c+'. '+p.e},
-    {text:p.w2, correct:false, explanation:'❌ The correct answer is: '+p.c+'. '+p.e}
-  ])};
+  return localizeQPool(p);
 }
 
 // ═══ APP BUILDING QUESTION GENERATOR ═══
@@ -17909,11 +18045,7 @@ function generateAppBuildQuestion(title, sources, idx){
     ];
   }
   var p = pools[idx % pools.length];
-  return { type:'multiple-choice', question:p.q, choices:shuffleArray([
-    {text:p.c, correct:true, explanation:'✅ '+p.e},
-    {text:p.w1, correct:false, explanation:'❌ The correct answer is: '+p.c+'. '+p.e},
-    {text:p.w2, correct:false, explanation:'❌ The correct answer is: '+p.c+'. '+p.e}
-  ])};
+  return localizeQPool(p);
 }
 
 // ═══ SCIENCE QUESTION GENERATOR ═══
@@ -18033,11 +18165,7 @@ function generateScienceQuestion(title, sources, idx){
     ];
   }
   var p = pools[idx % pools.length];
-  return { type:'multiple-choice', question:p.q, choices:shuffleArray([
-    {text:p.c, correct:true, explanation:'✅ '+p.e},
-    {text:p.w1, correct:false, explanation:'❌ The correct answer is: '+p.c+'. '+p.e},
-    {text:p.w2, correct:false, explanation:'❌ The correct answer is: '+p.c+'. '+p.e}
-  ])};
+  return localizeQPool(p);
 }
 
 // ═══ ENGLISH QUESTION GENERATOR ═══
@@ -18142,11 +18270,7 @@ function generateEnglishQuestion(title, sources, idx){
     ];
   }
   var p = pools[idx % pools.length];
-  return { type:'multiple-choice', question:p.q, choices:shuffleArray([
-    {text:p.c, correct:true, explanation:'✅ '+p.e},
-    {text:p.w1, correct:false, explanation:'❌ The correct answer is: '+p.c+'. '+p.e},
-    {text:p.w2, correct:false, explanation:'❌ The correct answer is: '+p.c+'. '+p.e}
-  ])};
+  return localizeQPool(p);
 }
 
 // ═══ HISTORY QUESTION GENERATOR ═══
@@ -18234,11 +18358,7 @@ function generateHistoryQuestion(title, sources, idx){
     ];
   }
   var p = pools[idx % pools.length];
-  return { type:'multiple-choice', question:p.q, choices:shuffleArray([
-    {text:p.c, correct:true, explanation:'✅ '+p.e},
-    {text:p.w1, correct:false, explanation:'❌ The correct answer is: '+p.c+'. '+p.e},
-    {text:p.w2, correct:false, explanation:'❌ The correct answer is: '+p.c+'. '+p.e}
-  ])};
+  return localizeQPool(p);
 }
 
 // ═══ SOCIAL STUDIES QUESTION GENERATOR ═══
@@ -18314,11 +18434,7 @@ function generateSocialStudiesQuestion(title, sources, idx){
     ];
   }
   var p = pools[idx % pools.length];
-  return { type:'multiple-choice', question:p.q, choices:shuffleArray([
-    {text:p.c, correct:true, explanation:'✅ '+p.e},
-    {text:p.w1, correct:false, explanation:'❌ The correct answer is: '+p.c+'. '+p.e},
-    {text:p.w2, correct:false, explanation:'❌ The correct answer is: '+p.c+'. '+p.e}
-  ])};
+  return localizeQPool(p);
 }
 
 // ═══ GENERIC CONTENT-BASED QUESTION (fallback) ═══
