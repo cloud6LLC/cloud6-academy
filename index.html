@@ -14903,6 +14903,271 @@ Object.assign(LESSON_TRANSLATIONS_ES, {
   'social-studies:sKE3': { title: 'Cerca de Mi Escuela', tagline: '¡Hay muchos lugares cerca de tu escuela!', intro: 'Cerca de tu escuela hay tiendas, parques, edificios y otras escuelas. Los lugares cercanos son fáciles de visitar. A veces están a una caminata corta. Aprender sobre los lugares cercanos te ayuda a entender tu vecindario.', keyPoints: ['Hay muchos lugares cerca de la escuela','Algunos se pueden caminar','Conocer tu vecindario ayuda','Moverse = saber qué está cerca'], funFact: '¡Muchas escuelas tienen parques justo al lado donde juegan los niños!' }
 });
 
+// ─── PRE-K APP BUILDING activity translations ───
+Object.assign(LESSON_TRANSLATIONS_ES, {
+  'app-building:abPKa1': Object.assign({}, LESSON_TRANSLATIONS_ES['app-building:abPKa1'] || {}, { activity: { instructions: '¿Qué es un teléfono?', choices: [
+    { text: 'Un aparato ayudante mágico', explanation: '¡Sí! ¡Los teléfonos son ayudantes increíbles!' },
+    { text: 'Solo para hablar', explanation: '¡Los teléfonos hacen MUCHO más que llamadas!' },
+    { text: 'Solo para adultos', explanation: '¡Los niños también usan teléfonos!' }
+  ]}}),
+  'app-building:abPKa2': Object.assign({}, LESSON_TRANSLATIONS_ES['app-building:abPKa2'] || {}, { activity: { instructions: '¡Empareja la app con lo que hace!',
+    dragOptions: [{ label: 'Juego' }, { label: 'Música' }, { label: 'Fotos' }],
+    dropTargets: [{ label: 'Reproducir canciones' }, { label: 'Tomar fotos' }, { label: 'Jugar juegos' }]
+  }}),
+  'app-building:abPKa3': Object.assign({}, LESSON_TRANSLATIONS_ES['app-building:abPKa3'] || {}, { activity: { instructions: '¿Quién hace las apps?', choices: [
+    { text: 'Personas con buenas ideas', explanation: '¡Sí! ¡Personas como tú!' },
+    { text: 'Robots', explanation: '¡Los robots no hacen apps solos!' },
+    { text: 'Solo los científicos', explanation: '¡Personas normales también hacen apps!' }
+  ]}}),
+  'app-building:abPKb1': Object.assign({}, LESSON_TRANSLATIONS_ES['app-building:abPKb1'] || {}, { activity: { instructions: 'Mi app favorita es _____. ¡Me gusta porque es divertida!', prompt: 'Cuéntanos sobre tu app favorita:' }}),
+  'app-building:abPKb2': Object.assign({}, LESSON_TRANSLATIONS_ES['app-building:abPKb2'] || {}, { activity: { instructions: '¡Empareja el tipo de app con lo que hace!',
+    matchPairs: [
+      { left: 'App de dibujar', right: 'Nos ayuda a dibujar' },
+      { left: 'App de juegos', right: 'Es divertida' },
+      { left: 'App de aprender', right: 'Nos enseña cosas' }
+    ]
+  }}),
+  'app-building:abPKb3': Object.assign({}, LESSON_TRANSLATIONS_ES['app-building:abPKb3'] || {}, { activity: { instructions: '¿Por qué las apps tienen colores diferentes?', choices: [
+    { text: 'Para que se vean bonitas', explanation: '¡Sí! ¡Los colores hacen especiales a las apps!' },
+    { text: 'Es un accidente', explanation: '¡No, los creadores eligen los colores con cuidado!' },
+    { text: 'Porque tienen que', explanation: '¡Eligen los colores porque se ven bonitos!' }
+  ]}}),
+  'app-building:abPKc1': Object.assign({}, LESSON_TRANSLATIONS_ES['app-building:abPKc1'] || {}, { activity: { instructions: '¡Empareja el problema con la idea de app!',
+    dragOptions: [{ label: 'Aburrido' }, { label: 'Hace frío afuera' }, { label: 'Cuarto desordenado' }],
+    dropTargets: [{ label: 'App del clima' }, { label: 'App de juegos' }, { label: 'App con lista para limpiar' }]
+  }}),
+  'app-building:abPKc2': Object.assign({}, LESSON_TRANSLATIONS_ES['app-building:abPKc2'] || {}, { activity: { instructions: '¡Quiero hacer una app que ayude a la gente a _____!', prompt: '¿Cuál es tu idea de app?' }}),
+  'app-building:abPKc3': Object.assign({}, LESSON_TRANSLATIONS_ES['app-building:abPKc3'] || {}, { activity: { instructions: '¿Los juegos son apps?', choices: [
+    { text: '¡Sí, los juegos son apps!', explanation: '¡Exacto! ¡Tus juegos favoritos son apps!' },
+    { text: 'No, los juegos no son apps', explanation: '¡Todos los juegos son apps!' },
+    { text: 'A veces tal vez', explanation: '¡Los juegos SIEMPRE son apps!' }
+  ]}}),
+  'app-building:abPKd1': Object.assign({}, LESSON_TRANSLATIONS_ES['app-building:abPKd1'] || {}, { activity: { instructions: '¡Empareja la herramienta con lo que hace!',
+    matchPairs: [
+      { left: 'Lápiz', right: 'Dibuja líneas' },
+      { left: 'Borrador', right: 'Borra los errores' },
+      { left: 'Cubeta de pintura', right: 'Llena con color' }
+    ]
+  }}),
+  'app-building:abPKd2': Object.assign({}, LESSON_TRANSLATIONS_ES['app-building:abPKd2'] || {}, { activity: { instructions: '¡Empareja el tipo de juego con lo que hace!',
+    dragOptions: [{ label: 'Juego de emparejar' }, { label: 'Juego de carreras' }, { label: 'Juego de rompecabezas' }],
+    dropTargets: [{ label: 'Encuentra parejas iguales' }, { label: 'Va rápido y gana' }, { label: 'Resuelve problemas' }]
+  }}),
+  'app-building:abPKd3': Object.assign({}, LESSON_TRANSLATIONS_ES['app-building:abPKd3'] || {}, { activity: { instructions: '¿Cómo nos ayudan las apps a hablar con los amigos?', choices: [
+    { text: 'Podemos hacer videollamadas', explanation: '¡Sí! ¡Podemos ver a nuestros amigos en la pantalla!' },
+    { text: 'Las apps no nos ayudan a hablar', explanation: '¡Las apps son GENIALES para hablar con amigos!' },
+    { text: 'Solo para adultos', explanation: '¡Los niños también usan apps de mensajes!' }
+  ]}}),
+  'app-building:abPKe1': Object.assign({}, LESSON_TRANSLATIONS_ES['app-building:abPKe1'] || {}, { activity: { instructions: '¡Cuando sea grande, quiero hacer una app que _____!', prompt: '¿Qué app vas a construir tú algún día?' }}),
+  'app-building:abPKe2': Object.assign({}, LESSON_TRANSLATIONS_ES['app-building:abPKe2'] || {}, { activity: { instructions: '¿Qué es la programación?', choices: [
+    { text: 'Decirle a una computadora qué hacer', explanation: '¡Exacto! ¡Programar = dar instrucciones!' },
+    { text: 'Un idioma secreto', explanation: '¡No es secreto — es como construimos las apps!' },
+    { text: 'Solo para gente lista', explanation: '¡Cualquiera puede aprender a programar!' }
+  ]}}),
+  'app-building:abPKe3': Object.assign({}, LESSON_TRANSLATIONS_ES['app-building:abPKe3'] || {}, { activity: { instructions: '¡La idea de app más genial que tengo es _____!', prompt: 'Comparte tu mejor idea de app:' }})
+});
+
+// ─── KINDER APP BUILDING activity translations ───
+Object.assign(LESSON_TRANSLATIONS_ES, {
+  'app-building:abKa1': Object.assign({}, LESSON_TRANSLATIONS_ES['app-building:abKa1'] || {}, { activity: { instructions: '¿Cuál de estas es una app?', choices: [
+    { text: 'Un juego en tu tableta', explanation: '¡Sí! ¡Los juegos son apps!' },
+    { text: 'Un libro que lees en la escuela', explanation: '¡Los libros no son apps, pero existen apps de lectura!' },
+    { text: 'Un programa de dibujo en una computadora', explanation: '¡Los programas de dibujo también son apps, pero elige el mejor ejemplo!' },
+    { text: 'Un lápiz', explanation: '¡Los lápices son herramientas, pero no apps digitales!' }
+  ]}}),
+  'app-building:abKa2': Object.assign({}, LESSON_TRANSLATIONS_ES['app-building:abKa2'] || {}, { activity: { instructions: '¿Qué actividades pasan en estas apps?',
+    dragOptions: [{ label: 'Temple Run' }, { label: 'Candy Crush' }, { label: 'Pokémon Go' }],
+    dropTargets: [{ label: 'Tocar y emparejar' }, { label: 'Correr y saltar' }, { label: 'Atrapar criaturas' }]
+  }}),
+  'app-building:abKa3': Object.assign({}, LESSON_TRANSLATIONS_ES['app-building:abKa3'] || {}, { activity: { instructions: '¡Empareja la app con lo que enseña!',
+    matchPairs: [
+      { left: 'App de matemáticas', right: 'Números y suma' },
+      { left: 'App de idiomas', right: 'Palabras de un idioma nuevo' },
+      { left: 'App de ciencias', right: 'Cómo funciona la naturaleza' }
+    ]
+  }}),
+  'app-building:abKb1': Object.assign({}, LESSON_TRANSLATIONS_ES['app-building:abKb1'] || {}, { activity: { instructions: '¿Qué hace un desarrollador de apps?', choices: [
+    { text: 'Construye apps escribiendo código', explanation: '¡Correcto! Los desarrolladores crean apps.' },
+    { text: 'Solo diseña cómo se ven las apps', explanation: '¡Los desarrolladores hacen mucho más que diseñar!' },
+    { text: 'Prueba apps para encontrar problemas', explanation: '¡Eso es parte, pero los desarrolladores las construyen primero!' }
+  ]}}),
+  'app-building:abKb2': Object.assign({}, LESSON_TRANSLATIONS_ES['app-building:abKb2'] || {}, { activity: { instructions: '¡Empareja el trabajo con lo que hacen al construir apps!',
+    dragOptions: [{ label: 'Diseñador' }, { label: 'Programador' }, { label: 'Tester' }],
+    dropTargets: [{ label: 'Escribe instrucciones' }, { label: 'La hace bonita' }, { label: 'Encuentra problemas' }]
+  }}),
+  'app-building:abKb3': Object.assign({}, LESSON_TRANSLATIONS_ES['app-building:abKb3'] || {}, { activity: { instructions: '¿Por qué las apps de hoy son mucho mejores que las viejas?', choices: [
+    { text: 'La tecnología mejoró', explanation: '¡Sí! ¡Mejores computadoras y teléfonos = mejores apps!' },
+    { text: 'Los desarrolladores se hicieron flojos', explanation: '¡Los desarrolladores trabajan MÁS DURO ahora!' },
+    { text: 'Las apps no cambian', explanation: '¡Las apps siempre están mejorando!' }
+  ]}}),
+  'app-building:abKc1': Object.assign({}, LESSON_TRANSLATIONS_ES['app-building:abKc1'] || {}, { activity: { instructions: '¡Empareja el problema con la app que podría resolverlo!',
+    dragOptions: [{ label: 'Hace frío afuera' }, { label: 'Demasiada tarea' }, { label: 'No encuentras a tu amigo' }],
+    dropTargets: [{ label: 'App del clima' }, { label: 'App de tareas' }, { label: 'App de mapas' }]
+  }}),
+  'app-building:abKc2': Object.assign({}, LESSON_TRANSLATIONS_ES['app-building:abKc2'] || {}, { activity: { instructions: '¡La app que quiero hacer ayudaría a la gente a _____!', prompt: 'Describe la app de tus sueños:' }}),
+  'app-building:abKc3': Object.assign({}, LESSON_TRANSLATIONS_ES['app-building:abKc3'] || {}, { activity: { instructions: '¿Qué hace especial a una app?', choices: [
+    { text: 'Características e ideas geniales', explanation: '¡Sí! ¡Las características únicas hacen que las apps destaquen!' },
+    { text: 'Solo tener un nombre', explanation: '¡Las apps necesitan cosas especiales para ser memorables!' },
+    { text: 'Ser la primera app', explanation: '¡Muchas apps hacen lo mismo, pero las características las hacen diferentes!' }
+  ]}}),
+  'app-building:abKd1': Object.assign({}, LESSON_TRANSLATIONS_ES['app-building:abKd1'] || {}, { activity: { instructions: '¡Empareja la app con sus mejores colores!',
+    matchPairs: [
+      { left: 'App de juegos', right: 'Brillantes y vivos' },
+      { left: 'App para dormir', right: 'Tranquilos y oscuros' },
+      { left: 'App para niños', right: 'Colores del arcoíris' }
+    ]
+  }}),
+  'app-building:abKd2': Object.assign({}, LESSON_TRANSLATIONS_ES['app-building:abKd2'] || {}, { activity: { instructions: '¡Empareja el botón con lo que probablemente hace!',
+    dragOptions: [{ label: 'Un botón azul que dice GUARDAR' }, { label: 'Un botón rojo que dice ELIMINAR' }, { label: 'Un botón verde que dice JUGAR' }],
+    dropTargets: [{ label: 'Comenzar un juego' }, { label: 'Quitar algo' }, { label: 'Conservar tu trabajo' }]
+  }}),
+  'app-building:abKd3': Object.assign({}, LESSON_TRANSLATIONS_ES['app-building:abKd3'] || {}, { activity: { instructions: '¿Qué hace que una app sea fácil de usar?', choices: [
+    { text: 'Botones claros y diseño simple', explanation: '¡Sí! ¡Diseño simple = usuarios felices!' },
+    { text: 'Muchos botones por todos lados', explanation: '¡Demasiados botones confunden a la gente!' },
+    { text: 'Hacerla complicada', explanation: '¡Lo fácil siempre es mejor!' }
+  ]}}),
+  'app-building:abKe1': Object.assign({}, LESSON_TRANSLATIONS_ES['app-building:abKe1'] || {}, { activity: { instructions: '¿Qué es la programación?', choices: [
+    { text: 'Escribir instrucciones para las computadoras', explanation: '¡Exacto! ¡Eso es la programación!' },
+    { text: 'Escribir letras al azar', explanation: '¡Programar es cuidadoso y específico!' },
+    { text: 'Algo solo para adultos', explanation: '¡Los niños programan todo el tiempo!' }
+  ]}}),
+  'app-building:abKe2': Object.assign({}, LESSON_TRANSLATIONS_ES['app-building:abKe2'] || {}, { activity: { instructions: '¡Cuando sea grande, quiero hacer una app que _____!', prompt: '¿Cuál es tu idea de app del futuro?' }}),
+  'app-building:abKe3': Object.assign({}, LESSON_TRANSLATIONS_ES['app-building:abKe3'] || {}, { activity: { instructions: '¡Puedo hacer apps increíbles porque _____!', prompt: 'Termina esta oración con tu superpoder:' }})
+});
+
+// ─── PRE-K FINANCIAL LITERACY activity translations ───
+Object.assign(LESSON_TRANSLATIONS_ES, {
+  'financial-literacy:flPKa1': Object.assign({}, LESSON_TRANSLATIONS_ES['financial-literacy:flPKa1'] || {}, { activity: { instructions: '¿Qué es el dinero?', choices: [
+    { text: 'Monedas y billetes que usamos para comprar cosas', explanation: '¡Sí! ¡El dinero = herramienta para intercambiar!' },
+    { text: 'Solo juguetes', explanation: '¡El dinero es mucho más importante!' },
+    { text: 'Piedras', explanation: '¡El dinero es especial!' }
+  ]}}),
+  'financial-literacy:flPKa2': Object.assign({}, LESSON_TRANSLATIONS_ES['financial-literacy:flPKa2'] || {}, { activity: { instructions: '¡Empareja la moneda con su tamaño!',
+    dragOptions: [{ label: 'Penny' }, { label: 'Quarter' }, { label: 'Dime' }],
+    dropTargets: [{ label: 'La más grande' }, { label: 'La más pequeña' }, { label: 'Mediana' }]
+  }}),
+  'financial-literacy:flPKa3': Object.assign({}, LESSON_TRANSLATIONS_ES['financial-literacy:flPKa3'] || {}, { activity: { instructions: '¿Para qué es una alcancía?', choices: [
+    { text: 'Para guardar dinero para después', explanation: '¡SÍ! ¡Las alcancías = ahorro!' },
+    { text: 'Para jugar con monedas', explanation: '¡Es para ahorrar, no para jugar!' },
+    { text: 'Para esconder cosas', explanation: '¡Es solo para dinero!' }
+  ]}}),
+  'financial-literacy:flPKb1': Object.assign({}, LESSON_TRANSLATIONS_ES['financial-literacy:flPKb1'] || {}, { activity: { instructions: '¡Empareja la acción con el sentimiento!',
+    matchPairs: [
+      { left: 'Compartir tu merienda', right: 'El amigo se siente feliz' },
+      { left: 'Dar un abrazo', right: 'La persona se siente querida' },
+      { left: 'Compartir juguetes', right: 'El amigo sonríe' }
+    ]
+  }}),
+  'financial-literacy:flPKb2': Object.assign({}, LESSON_TRANSLATIONS_ES['financial-literacy:flPKb2'] || {}, { activity: { instructions: '¡Puedo ayudar a otros _____!', prompt: '¿Cómo ayudarías?' }}),
+  'financial-literacy:flPKb3': Object.assign({}, LESSON_TRANSLATIONS_ES['financial-literacy:flPKb3'] || {}, { activity: { instructions: '¿Qué es la generosidad?', choices: [
+    { text: 'Dar sin esperar nada a cambio', explanation: '¡SÍ! ¡Eso es generosidad!' },
+    { text: 'Quedarse con todo', explanation: '¡Eso es egoísmo!' },
+    { text: 'Solo dar en cumpleaños', explanation: '¡La generosidad es en cualquier momento!' }
+  ]}}),
+  'financial-literacy:flPKc1': Object.assign({}, LESSON_TRANSLATIONS_ES['financial-literacy:flPKc1'] || {}, { activity: { instructions: '¡Empareja la necesidad con por qué la necesitamos!',
+    matchPairs: [
+      { left: 'Comida', right: 'Nos mantiene sanos' },
+      { left: 'Hogar', right: 'Nos mantiene seguros' },
+      { left: 'Ropa', right: 'Nos mantiene calientes' }
+    ]
+  }}),
+  'financial-literacy:flPKc2': Object.assign({}, LESSON_TRANSLATIONS_ES['financial-literacy:flPKc2'] || {}, { activity: { instructions: '¡Empareja el objeto con NECESIDAD o DESEO!',
+    dragOptions: [{ label: 'Comida' }, { label: 'Juguete' }, { label: 'Casa' }],
+    dropTargets: [{ label: 'Deseo' }, { label: 'Necesidad' }, { label: 'Necesidad' }]
+  }}),
+  'financial-literacy:flPKc3': Object.assign({}, LESSON_TRANSLATIONS_ES['financial-literacy:flPKc3'] || {}, { activity: { instructions: '¿Qué debe ir primero?', choices: [
+    { text: 'Necesidades como la comida y el hogar', explanation: '¡SÍ! ¡Las necesidades nos mantienen vivos!' },
+    { text: 'Juguetes divertidos y dulces', explanation: '¡Los deseos van después de las necesidades!' },
+    { text: 'Lo que sea que queramos', explanation: '¡Planear bien = primero las necesidades!' }
+  ]}}),
+  'financial-literacy:flPKd1': Object.assign({}, LESSON_TRANSLATIONS_ES['financial-literacy:flPKd1'] || {}, { activity: { instructions: '¡Yo ganaría mesada ayudando con _____!', prompt: '¿Qué harías?' }}),
+  'financial-literacy:flPKd2': Object.assign({}, LESSON_TRANSLATIONS_ES['financial-literacy:flPKd2'] || {}, { activity: { instructions: '¡Empareja el trabajo con lo que hacen!',
+    matchPairs: [
+      { left: 'Maestro', right: 'Ayuda a los niños a aprender' },
+      { left: 'Chef', right: 'Cocina comida' },
+      { left: 'Doctor', right: 'Ayuda a la gente a sentirse mejor' }
+    ]
+  }}),
+  'financial-literacy:flPKd3': Object.assign({}, LESSON_TRANSLATIONS_ES['financial-literacy:flPKd3'] || {}, { activity: { instructions: '¿Cómo ahorras para algo especial?', choices: [
+    { text: 'Pones dinero en una alcancía y esperas', explanation: '¡SÍ! ¡Eso es ahorrar!' },
+    { text: 'Lo gastas todo de una vez', explanation: '¡Entonces no tienes dinero!' },
+    { text: 'Solo lo deseas', explanation: '¡De verdad tienes que ahorrar!' }
+  ]}}),
+  'financial-literacy:flPKe1': Object.assign({}, LESSON_TRANSLATIONS_ES['financial-literacy:flPKe1'] || {}, { activity: { instructions: '¡Empareja las monedas con el total!',
+    dragOptions: [{ label: 'Un penny' }, { label: 'Un penny' }, { label: 'Un penny' }],
+    dropTargets: [{ label: '3 pennies' }]
+  }}),
+  'financial-literacy:flPKe2': Object.assign({}, LESSON_TRANSLATIONS_ES['financial-literacy:flPKe2'] || {}, { activity: { instructions: '¡Un juego de dinero que me gustaría jugar es _____!', prompt: '¿Qué te suena divertido?' }}),
+  'financial-literacy:flPKe3': Object.assign({}, LESSON_TRANSLATIONS_ES['financial-literacy:flPKe3'] || {}, { activity: { instructions: '¡Tengo ganas de aprender más sobre _____!', prompt: '¿Qué quieres aprender?' }})
+});
+
+// ─── KINDER FINANCIAL LITERACY activity translations ───
+Object.assign(LESSON_TRANSLATIONS_ES, {
+  'financial-literacy:flKa1': Object.assign({}, LESSON_TRANSLATIONS_ES['financial-literacy:flKa1'] || {}, { activity: { instructions: '¿Cuánto vale un dime?', choices: [
+    { text: '10 centavos', explanation: '¡SÍ!' },
+    { text: '5 centavos', explanation: '' },
+    { text: '1 centavo', explanation: '' }
+  ]}}),
+  'financial-literacy:flKa2': Object.assign({}, LESSON_TRANSLATIONS_ES['financial-literacy:flKa2'] || {}, { activity: { instructions: '¿Los billetes son dinero?', choices: [
+    { text: 'Sí, los billetes son dinero', explanation: '¡Por supuesto!' },
+    { text: 'No, solo las monedas', explanation: '' },
+    { text: 'Tal vez', explanation: '' }
+  ]}}),
+  'financial-literacy:flKa3': Object.assign({}, LESSON_TRANSLATIONS_ES['financial-literacy:flKa3'] || {}, { activity: { instructions: '¡Tengo _____ monedas y valen _____!', prompt: 'Cuéntanos sobre tu dinero:' }}),
+  'financial-literacy:flKb1': Object.assign({}, LESSON_TRANSLATIONS_ES['financial-literacy:flKb1'] || {}, { activity: { instructions: '¡Empareja el quehacer con la recompensa!',
+    matchPairs: [
+      { left: 'Limpiar el cuarto', right: 'Ganar dinero' },
+      { left: 'Ayudar con los platos', right: 'Ganar dinero' },
+      { left: 'Pasear al perro', right: 'Ganar dinero' }
+    ]
+  }}),
+  'financial-literacy:flKb2': Object.assign({}, LESSON_TRANSLATIONS_ES['financial-literacy:flKb2'] || {}, { activity: { instructions: '¿NECESIDAD o DESEO?',
+    dragOptions: [{ label: 'Comida' }, { label: 'Juguete' }],
+    dropTargets: [{ label: 'DESEO' }, { label: 'NECESIDAD' }]
+  }}),
+  'financial-literacy:flKb3': Object.assign({}, LESSON_TRANSLATIONS_ES['financial-literacy:flKb3'] || {}, { activity: { instructions: '¿Cómo consigues un juguete especial?', choices: [
+    { text: 'Ahorra la mesada hasta tener suficiente', explanation: '¡SÍ! ¡Así es!' },
+    { text: 'Deseándolo mucho', explanation: '' },
+    { text: 'Simplemente tomarlo', explanation: '' }
+  ]}}),
+  'financial-literacy:flKc1': Object.assign({}, LESSON_TRANSLATIONS_ES['financial-literacy:flKc1'] || {}, { activity: { instructions: '¡Empareja el artículo con la tienda!',
+    matchPairs: [
+      { left: 'Leche y pan', right: 'Tienda de comida' },
+      { left: 'Juguetes', right: 'Juguetería' },
+      { left: 'Ropa', right: 'Tienda de ropa' }
+    ]
+  }}),
+  'financial-literacy:flKc2': Object.assign({}, LESSON_TRANSLATIONS_ES['financial-literacy:flKc2'] || {}, { activity: { instructions: '¡Empareja el objeto con su precio!',
+    dragOptions: [{ label: 'Dulce' }, { label: 'Bicicleta' }],
+    dropTargets: [{ label: 'Cuesta más' }, { label: 'Cuesta poco' }]
+  }}),
+  'financial-literacy:flKc3': Object.assign({}, LESSON_TRANSLATIONS_ES['financial-literacy:flKc3'] || {}, { activity: { instructions: '¿Deberías comprar algo solo porque está padre?', choices: [
+    { text: 'Solo si lo NECESITAS o lo PUEDES PAGAR', explanation: '¡SÍ! ¡Pensamiento listo!' },
+    { text: '¡Sí, siempre!', explanation: '' },
+    { text: 'Nunca compres nada', explanation: '' }
+  ]}}),
+  'financial-literacy:flKd1': Object.assign({}, LESSON_TRANSLATIONS_ES['financial-literacy:flKd1'] || {}, { activity: { instructions: '¿Qué es un banco?', choices: [
+    { text: 'Un lugar seguro para guardar dinero', explanation: '¡SÍ!' },
+    { text: 'Un lugar para jugar', explanation: '' },
+    { text: 'Solo para adultos', explanation: '' }
+  ]}}),
+  'financial-literacy:flKd2': Object.assign({}, LESSON_TRANSLATIONS_ES['financial-literacy:flKd2'] || {}, { activity: { instructions: '¡Voy a gastar _____ y ahorrar _____!', prompt: '¿Cómo dividirías el dinero?' }}),
+  'financial-literacy:flKd3': Object.assign({}, LESSON_TRANSLATIONS_ES['financial-literacy:flKd3'] || {}, { activity: { instructions: '¿Y si cometes un error con el dinero?', choices: [
+    { text: 'Aprende y hazlo mejor la próxima vez', explanation: '¡SÍ! ¡Eso es crecer!' },
+    { text: 'Rendirse', explanation: '' },
+    { text: 'Ocultarlo', explanation: '' }
+  ]}}),
+  'financial-literacy:flKe1': Object.assign({}, LESSON_TRANSLATIONS_ES['financial-literacy:flKe1'] || {}, { activity: { instructions: '¡Empareja la habilidad con lo que aprendiste!',
+    matchPairs: [
+      { left: 'Contar', right: '¡Aprendiste esto!' },
+      { left: 'Elegir', right: '¡Aprendiste esto!' },
+      { left: 'Ahorrar', right: '¡Aprendiste esto!' }
+    ]
+  }}),
+  'financial-literacy:flKe2': Object.assign({}, LESSON_TRANSLATIONS_ES['financial-literacy:flKe2'] || {}, { activity: { instructions: '¡Soy más feliz cuando _____!', prompt: '¿Qué te hace feliz?' }}),
+  'financial-literacy:flKe3': Object.assign({}, LESSON_TRANSLATIONS_ES['financial-literacy:flKe3'] || {}, { activity: { instructions: '¡Mi meta de dinero es _____!', prompt: '¿Qué vas a lograr?' }})
+});
+
 // Math K (104 lessons) — templated translations by category
 (function(){
   const m = LESSON_TRANSLATIONS_ES;
