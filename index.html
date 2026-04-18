@@ -15869,6 +15869,225 @@ Object.assign(LESSON_TRANSLATIONS_ES, {
       choices: src.choices.map(function(c){ return { text: c.text, explanation: c.expl }; })
     };
   });
+
+  // ── Grade 3 History activities (content-specific, hand-translated)
+  const histG3 = {
+    h3A1: { q:'¿Qué funcionario dirige una ciudad?',
+      choices:[{text:'El alcalde', expl:'El alcalde es el líder del gobierno local, elegido para dirigir la ciudad.'},
+               {text:'El gobernador', expl:'El gobernador dirige un estado, no una ciudad.'},
+               {text:'El presidente', expl:'El presidente dirige todo el país.'}] },
+    h3A2: { q:'¿Quién apaga los incendios en la comunidad?',
+      choices:[{text:'Los bomberos', expl:'Los bomberos están entrenados para responder a incendios y emergencias.'},
+               {text:'Los policías', expl:'Los policías se enfocan en la seguridad y la ley.'},
+               {text:'Los maestros', expl:'Los maestros enseñan a los estudiantes en las escuelas.'}] },
+    h3A3: { q:'¿Qué describe un área rural?',
+      choices:[{text:'Granjas y espacios abiertos', expl:'Las áreas rurales tienen granjas, campos y terrenos amplios.'},
+               {text:'Edificios altos y calles llenas', expl:'Eso describe un área urbana, no rural.'},
+               {text:'Centros comerciales y autopistas', expl:'Esas son cosas de áreas urbanas y suburbanas.'}] },
+    h3B1: { q:'¿Qué representan las estrellas de la bandera?',
+      choices:[{text:'Los 50 estados', expl:'Cada estrella representa uno de los 50 Estados Unidos.'},
+               {text:'Las 13 colonias', expl:'Las franjas representan las 13 colonias originales.'},
+               {text:'El número de presidentes', expl:'Las estrellas representan estados, no presidentes.'}] },
+    h3B2: { q:'¿Qué representa la Estatua de la Libertad?',
+      choices:[{text:'Libertad y bienvenida a América', expl:'La estatua simboliza libertad y recibe a los visitantes.'},
+               {text:'La casa de un ex presidente', expl:'Es un símbolo, no la casa de un presidente.'},
+               {text:'El ejército americano', expl:'La estatua representa libertad, no el ejército.'}] },
+    h3B3: { q:'¿Qué americano trabajó por la igualdad de derechos?',
+      choices:[{text:'Martin Luther King Jr.', expl:'MLK Jr. lideró el Movimiento por los Derechos Civiles para lograr la igualdad.'},
+               {text:'George Washington', expl:'Washington fue el primer presidente.'},
+               {text:'Benjamin Franklin', expl:'Franklin fue un padre fundador e inventor.'}] },
+    h3C1: { q:'¿Qué muestra la clave de un mapa?',
+      choices:[{text:'Qué significan los símbolos del mapa', expl:'La clave explica lo que representan los colores y símbolos.'},
+               {text:'Historias famosas de un lugar', expl:'La clave es una herramienta de explicación, no cuentos.'},
+               {text:'El dueño del mapa', expl:'La clave explica los símbolos, no la propiedad.'}] },
+    h3C2: { q:'¿Cuál es el océano más grande?',
+      choices:[{text:'El océano Pacífico', expl:'El Pacífico cubre más área que cualquier otro océano.'},
+               {text:'El océano Atlántico', expl:'El Atlántico es el segundo océano más grande.'},
+               {text:'El océano Índico', expl:'El océano Índico es más pequeño que el Pacífico.'}] },
+    h3C3: { q:'¿Qué es un valle?',
+      choices:[{text:'Un área baja entre montañas', expl:'Los valles son zonas bajas rodeadas por lugares más altos.'},
+               {text:'Una montaña muy alta', expl:'Las montañas son altas, no los valles.'},
+               {text:'Un área plana cubierta de pasto', expl:'Las áreas planas son llanuras, no valles.'}] },
+    h3D1: { q:'¿Cuál es un servicio?',
+      choices:[{text:'Un corte de cabello en un salón', expl:'Un corte de cabello es un servicio que da un estilista.'},
+               {text:'Una pizza', expl:'La comida es un bien, no un servicio.'},
+               {text:'Una bicicleta', expl:'Una bicicleta es un bien, no un servicio.'}] },
+    h3D2: { q:'¿Cuál es una necesidad?',
+      choices:[{text:'La comida', expl:'La comida es una necesidad para sobrevivir y estar sano.'},
+               {text:'Un videojuego', expl:'Un videojuego es un deseo, no una necesidad.'},
+               {text:'Un carro de lujo', expl:'Eso es un deseo; el techo sí es una necesidad.'}] },
+    h3D3: { q:'¿Por qué es importante ahorrar dinero?',
+      choices:[{text:'Para necesidades y deseos del futuro', expl:'Ahorrar te deja planear el futuro y manejar emergencias.'},
+               {text:'Para esconderlo de los amigos', expl:'El dinero se ahorra para planear, no para esconderlo.'},
+               {text:'Porque los adultos te obligan', expl:'Ahorramos porque nos ayuda en el futuro.'}] },
+    h3E1: { q:'¿Por qué las comunidades tienen leyes?',
+      choices:[{text:'Para mantener a la gente segura y ordenada', expl:'Las leyes protegen a las personas y hacen que la sociedad funcione con justicia.'},
+               {text:'Para hacer la vida difícil', expl:'Las leyes están hechas para ayudar, no complicar.'},
+               {text:'Porque al gobierno le gustan las reglas', expl:'Las leyes cumplen funciones importantes de seguridad.'}] },
+    h3E2: { q:'¿Qué muestra ser un buen ciudadano?',
+      choices:[{text:'Ayudar a un amigo a limpiar el parque', expl:'Ayudar y cuidar los espacios comunes es buena ciudadanía.'},
+               {text:'Quedarte con el dinero que encontraste sin buscar al dueño', expl:'La honestidad es parte de ser buen ciudadano.'},
+               {text:'Seguir las reglas solo cuando los adultos miran', expl:'Los buenos ciudadanos siguen las reglas siempre.'}] },
+    h3E3: { q:'¿Qué es votar?',
+      choices:[{text:'Marcar tu elección en una decisión importante', expl:'Votar es la forma de expresar tu elección en las decisiones.'},
+               {text:'Obligar a otros a pensar como tú', expl:'Votar es justo, no obligar a nadie.'},
+               {text:'Darle dinero a los candidatos', expl:'Votar es elegir, no gastar dinero.'}] }
+  };
+  Object.keys(histG3).forEach(function(id){
+    const key = 'history:' + id;
+    const src = histG3[id];
+    if(!L[key]) L[key] = {};
+    L[key].activity = {
+      instructions: src.q,
+      choices: src.choices.map(function(c){ return { text: c.text, explanation: c.expl }; })
+    };
+  });
+
+  // ── Grade 3 Science activities
+  const sciG3 = {
+    s3A1: { q:'¿Qué aportan las plantas al ecosistema?',
+      choices:[{text:'Comida y oxígeno', expl:'Las plantas producen comida mediante la fotosíntesis y liberan oxígeno que los animales respiran.'},
+               {text:'Solo refugio', expl:'Sí dan refugio, pero también producen comida y oxígeno.'},
+               {text:'Agua y suelo', expl:'Aunque están en los ecosistemas, las plantas aportan específicamente comida y oxígeno.'}] },
+    s3A2: { q:'¿Cuál es un rasgo heredado?',
+      choices:[{text:'El color de los ojos', expl:'El color de los ojos está determinado por los genes que pasan los padres.'},
+               {text:'El idioma que hablas', expl:'El idioma se aprende del entorno; no se hereda.'},
+               {text:'La comida favorita', expl:'Los gustos por la comida se aprenden; no se heredan.'}] },
+    s3A3: { q:'¿Cómo estudian los científicos la vida antigua?',
+      choices:[{text:'Examinando fósiles', expl:'Los fósiles dan evidencia directa de organismos del pasado.'},
+               {text:'Preguntándoles a personas mayores', expl:'Los humanos no llevamos suficiente tiempo para ver vida antigua.'},
+               {text:'Solo leyendo libros', expl:'Los libros ayudan, pero los fósiles dan evidencia física.'}] },
+    s3B1: { q:'¿Cuáles son los tres tipos principales de rocas?',
+      choices:[{text:'Ígneas, sedimentarias y metamórficas', expl:'Estos tres tipos se forman por distintos procesos geológicos.'},
+               {text:'Duras, blandas y medianas', expl:'Esa no es una clasificación científica de las rocas.'},
+               {text:'Viejas, nuevas y antiguas', expl:'La edad no determina los tipos de roca.'}] },
+    s3B2: { q:'¿Qué capa del suelo es la mejor para cultivar plantas?',
+      choices:[{text:'La capa superior', expl:'La capa superior tiene más materia orgánica y nutrientes que las plantas necesitan.'},
+               {text:'El subsuelo', expl:'El subsuelo tiene menos nutrientes que la capa de arriba.'},
+               {text:'La roca madre', expl:'La roca madre es muy dura y tiene poca materia orgánica.'}] },
+    s3B3: { q:'¿Qué herramienta mide la presión del aire?',
+      choices:[{text:'El barómetro', expl:'Los barómetros miden la presión atmosférica para ayudar a predecir el clima.'},
+               {text:'El termómetro', expl:'Los termómetros miden la temperatura, no la presión.'},
+               {text:'La regla', expl:'Las reglas miden la longitud, no el clima.'}] },
+    s3C1: { q:'¿Cuál es un ejemplo de energía térmica?',
+      choices:[{text:'Una cobija calientita', expl:'La energía térmica es calor que mantiene a las cosas tibias.'},
+               {text:'Una onda de sonido', expl:'El sonido es otra forma de energía.'},
+               {text:'Una sombra', expl:'Las sombras vienen de la luz, no del calor.'}] },
+    s3C2: { q:'¿Qué pasa cuando dos polos norte se enfrentan?',
+      choices:[{text:'Se repelen', expl:'Los polos iguales se alejan uno del otro.'},
+               {text:'Se atraen', expl:'Los polos opuestos se atraen; los iguales se repelen.'},
+               {text:'No pasa nada', expl:'Siempre hay una fuerza entre los polos magnéticos.'}] },
+    s3C3: { q:'¿Qué máquina simple es un sube y baja?',
+      choices:[{text:'Una palanca', expl:'Una palanca usa un punto de apoyo para levantar o mover con menos fuerza.'},
+               {text:'Una polea', expl:'Las poleas usan cuerdas y ruedas, no un punto de apoyo como el sube y baja.'},
+               {text:'Un tornillo', expl:'Los tornillos convierten el giro en movimiento hacia adelante.'}] },
+    s3D1: { q:'¿Qué hace buena a una hipótesis?',
+      choices:[{text:'Que se pueda probar', expl:'Una buena hipótesis se puede probar con un experimento.'},
+               {text:'Que siempre sea correcta', expl:'Las hipótesis pueden resultar falsas y aun así darnos datos valiosos.'},
+               {text:'Que sea sencilla', expl:'Ser sencilla ayuda, pero lo clave es que se pueda probar.'}] },
+    s3D2: { q:'¿Qué es una variable controlada?',
+      choices:[{text:'Un factor que se mantiene igual', expl:'Las variables controladas se mantienen iguales para que no afecten el resultado.'},
+               {text:'Un factor que cambia', expl:'Esa es la variable independiente, la que el científico cambia a propósito.'},
+               {text:'Un resultado que se mide', expl:'Esa es la variable dependiente, no la controlada.'}] },
+    s3D3: { q:'¿Qué tipo de gráfica muestra mejor los cambios en el tiempo?',
+      choices:[{text:'Una gráfica de líneas', expl:'Las gráficas de líneas están hechas para mostrar cambios a lo largo del tiempo.'},
+               {text:'Una gráfica de pastel', expl:'Las gráficas de pastel muestran partes de un todo, no cambios en el tiempo.'},
+               {text:'Una gráfica de barras', expl:'Las gráficas de barras comparan categorías, no tendencias en el tiempo.'}] },
+    s3E1: { q:'¿Dónde se forman normalmente los huracanes?',
+      choices:[{text:'Sobre agua cálida del océano', expl:'Los huracanes necesitan agua cálida para formar su energía.'},
+               {text:'Sobre las montañas', expl:'Los huracanes se forman sobre el agua, no sobre montañas.'},
+               {text:'En los desiertos', expl:'Los huracanes necesitan agua y humedad para formarse.'}] },
+    s3E2: { q:'¿Qué describe el clima?',
+      choices:[{text:'Los patrones del tiempo a largo plazo', expl:'El clima son las condiciones promedio de un lugar durante muchos años.'},
+               {text:'La temperatura de hoy', expl:'Eso es tiempo meteorológico, no clima.'},
+               {text:'El pronóstico de mañana', expl:'Los pronósticos predicen el tiempo, no el clima.'}] },
+    s3E3: { q:'¿Qué es un prototipo?',
+      choices:[{text:'Una versión de prueba de un diseño', expl:'Los prototipos permiten probar ideas antes de hacer el producto final.'},
+               {text:'Solo el producto final', expl:'Los prototipos van antes del producto final para probar el diseño.'},
+               {text:'Solo un dibujo', expl:'Los prototipos suelen ser modelos funcionales, no solo dibujos.'}] }
+  };
+  Object.keys(sciG3).forEach(function(id){
+    const key = 'science:' + id;
+    const src = sciG3[id];
+    if(!L[key]) L[key] = {};
+    L[key].activity = {
+      instructions: src.q,
+      choices: src.choices.map(function(c){ return { text: c.text, explanation: c.expl }; })
+    };
+  });
+
+  // ── Grade 3 Social Studies activities (ss3A1..ss3E3)
+  const ssG3 = {
+    ss3A1: { q:'¿Cuál es el PROPÓSITO principal de una comunidad?',
+      choices:[{text:'Que las personas vivan juntas y se apoyen', expl:'Las comunidades existen para que las personas vivan juntas, se apoyen y compartan recursos.'},
+               {text:'Un lugar donde solo viven los ricos', expl:'Las comunidades incluyen personas de todo tipo y trasfondo.'},
+               {text:'Un lugar donde nadie se habla', expl:'Las comunidades se construyen con gente que convive y se relaciona.'}] },
+    ss3A2: { q:'¿Qué tipo de comunidad tiene más granjas?',
+      choices:[{text:'Una comunidad rural', expl:'Las comunidades rurales tienen terrenos abiertos ideales para las granjas.'},
+               {text:'Una comunidad urbana', expl:'Las ciudades no tienen espacio para granjas grandes.'},
+               {text:'Una comunidad suburbana', expl:'Los suburbios tienen algunas granjas, pero sobre todo casas y patios pequeños.'}] },
+    ss3A3: { q:'¿Por qué son importantes los ayudantes de la comunidad?',
+      choices:[{text:'Mantienen a la gente segura y dan servicios esenciales', expl:'Los ayudantes protegen, enseñan y cuidan a todas las personas.'},
+               {text:'Solo son importantes en emergencias', expl:'Los ayudantes trabajan todos los días para mantener la seguridad y los servicios.'},
+               {text:'Solo ayudan a los ricos', expl:'Los ayudantes sirven a toda la comunidad.'}] },
+    ss3B1: { q:'¿Cuál es el PROPÓSITO de la clave de un mapa?',
+      choices:[{text:'Explicar lo que significan los símbolos del mapa', expl:'La clave nos dice lo que representa cada símbolo y color.'},
+               {text:'Hacer el mapa más colorido', expl:'La clave tiene un propósito práctico, no solo decorativo.'},
+               {text:'Mostrar solo los lugares más importantes', expl:'La clave explica todos los símbolos, no solo los importantes.'}] },
+    ss3B2: { q:'En un mapa, ¿qué dirección es HACIA ARRIBA?',
+      choices:[{text:'El Norte', expl:'El Norte siempre se muestra en la parte de arriba del mapa.'},
+               {text:'El Sur', expl:'El Sur es la dirección opuesta al Norte.'},
+               {text:'El Este', expl:'El Este apunta a la derecha en un mapa.'}] },
+    ss3B3: { q:'¿Por qué muchas comunidades se desarrollan cerca de los ríos?',
+      choices:[{text:'Los ríos dan agua y transporte', expl:'El agua dulce y el transporte fácil hicieron de los ríos lugares ideales para asentarse.'},
+               {text:'Los ríos son los lugares más bonitos', expl:'Aunque son bonitos, los beneficios prácticos son más importantes.'},
+               {text:'Los ríos son el único lugar con comida', expl:'La comida se encuentra en muchos lugares, pero los ríos dan ventajas especiales.'}] },
+    ss3C1: { q:'¿Cuál es la razón PRINCIPAL por la que las comunidades necesitan leyes?',
+      choices:[{text:'Para mantener a la gente segura y organizada', expl:'Las leyes protegen a las personas y ayudan a que la sociedad funcione bien.'},
+               {text:'Para castigar a la gente', expl:'Aunque las leyes tienen consecuencias, su propósito principal es proteger.'},
+               {text:'Para hacer la vida difícil', expl:'Las leyes buscan ayudar, no dañar, a las comunidades.'}] },
+    ss3C2: { q:'¿Quién es el líder electo principal de una ciudad?',
+      choices:[{text:'El alcalde', expl:'Los alcaldes son los jefes ejecutivos de las ciudades y pueblos.'},
+               {text:'El jefe de policía', expl:'El jefe de policía dirige al departamento de policía, no a toda la ciudad.'},
+               {text:'El director de la escuela', expl:'Los directores dirigen escuelas, no ciudades.'}] },
+    ss3C3: { q:'¿Qué es votar?',
+      choices:[{text:'Elegir a los líderes con una boleta', expl:'Votar es como los ciudadanos escogen a sus representantes del gobierno.'},
+               {text:'Quejarse de las decisiones del gobierno', expl:'Aunque la gente puede opinar, votar es la forma oficial de participar.'},
+               {text:'Discutir con otros ciudadanos', expl:'Votar es un proceso formal, no una pelea.'}] },
+    ss3D1: { q:'¿Cuál es un ejemplo de SERVICIO?',
+      choices:[{text:'Un maestro que te ayuda a aprender', expl:'Enseñar es una acción que alguien hace, así que es un servicio.'},
+               {text:'Un juguete que compras en la tienda', expl:'Un juguete es un bien físico, no un servicio.'},
+               {text:'Una camisa que usas', expl:'Una camisa es un bien porque es un objeto físico.'}] },
+    ss3D2: { q:'¿Qué es un PRODUCTOR?',
+      choices:[{text:'Una persona o negocio que hace bienes o da servicios', expl:'Los productores crean los bienes y servicios que hay en la economía.'},
+               {text:'Una persona que compra cosas en la tienda', expl:'Eso describe a un consumidor, no a un productor.'},
+               {text:'Un trabajador del gobierno', expl:'Pueden ser productores, pero no todos los trabajadores son del gobierno.'}] },
+    ss3D3: { q:'¿Por qué alguien ahorraría dinero?',
+      choices:[{text:'Para comprar algo más caro en el futuro', expl:'Ahorrar te deja alcanzar metas que requieren más dinero.'},
+               {text:'Porque el dinero pierde valor rápido', expl:'La inflación puede reducir el valor del dinero, por eso ahorrar importa.'},
+               {text:'Porque gastar es ilegal', expl:'Gastar dinero es legal y normal.'}] },
+    ss3E1: { q:'¿Qué es una tradición familiar?',
+      choices:[{text:'Algo que una familia hace junta una y otra vez', expl:'Las tradiciones son prácticas queridas que las familias repiten y transmiten.'},
+               {text:'Algo que toda familia debe hacer', expl:'Las familias tienen tradiciones distintas.'},
+               {text:'Una regla que nunca cambia', expl:'Aunque se repiten, las familias pueden cambiar las tradiciones con el tiempo.'}] },
+    ss3E2: { q:'¿Cuál de estos es un día festivo religioso?',
+      choices:[{text:'La Navidad', expl:'La Navidad celebra el nacimiento de Jesús y es una gran fiesta cristiana.'},
+               {text:'El Día de la Marmota', expl:'El Día de la Marmota no es un día religioso.'},
+               {text:'El Día de la Tierra', expl:'El Día de la Tierra es ambiental, no religioso.'}] },
+    ss3E3: { q:'¿Por qué distintas culturas tienen comidas tradicionales distintas?',
+      choices:[{text:'Porque cada región cultiva alimentos diferentes', expl:'El clima y la geografía determinan qué ingredientes hay en cada lugar.'},
+               {text:'Porque algunas comidas son mejores', expl:'Las comidas tradicionales son igual de válidas y nutritivas.'},
+               {text:'Porque a algunas culturas no les gusta cocinar', expl:'Todas las culturas tienen tradiciones culinarias.'}] }
+  };
+  Object.keys(ssG3).forEach(function(id){
+    const key = 'social-studies:' + id;
+    const src = ssG3[id];
+    if(!L[key]) L[key] = {};
+    L[key].activity = {
+      instructions: src.q,
+      choices: src.choices.map(function(c){ return { text: c.text, explanation: c.expl }; })
+    };
+  });
 })();
 
 // ═══════════════════════════════════════════════════════════
