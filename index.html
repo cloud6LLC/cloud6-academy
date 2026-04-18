@@ -18252,7 +18252,363 @@ Object.assign(POOL_ES_BY_Q, {
     { q:'¿Qué es un prompt en IA?', c:'El texto que le das a un modelo de IA para obtener una respuesta', w1:'Una pantalla de computadora', w2:'Un mensaje de error', e:'Los prompts le dicen a la IA qué quieres — mejor prompt, mejor resultado' }
 });
 
-// ══ Batch 6 — English topic pools (grammar, figurative, poetry, reading, writing, phonics, vocab, sentence, speech)
+// ══ Batch 7 — Math topic pools (transformations, measurement, data, geometry)
+Object.assign(POOL_ES_BY_Q, {
+  'A shape is flipped over a line. What transformation is this?':
+    { q:'Una figura se voltea sobre una línea. ¿Qué transformación es?', c:'Reflexión', w1:'Rotación', w2:'Traslación', e:'Voltear sobre una línea es una reflexión' },
+  'A shape slides to a new position without turning. What is this?':
+    { q:'Una figura se desliza a otra posición sin girar. ¿Qué es esto?', c:'Traslación', w1:'Rotación', w2:'Reflexión', e:'Deslizar sin girar es una traslación' },
+  'A shape is turned around a point. What transformation?':
+    { q:'Una figura gira alrededor de un punto. ¿Qué transformación?', c:'Rotación', w1:'Traslación', w2:'Reflexión', e:'Girar alrededor de un punto central es una rotación' },
+  'Which transformation changes the size of a shape?':
+    { q:'¿Qué transformación cambia el tamaño de una figura?', c:'Dilatación', w1:'Reflexión', w2:'Traslación', e:'La dilatación hace las figuras más grandes o pequeñas manteniendo la misma forma' },
+  'A line of symmetry divides a shape into two halves that are:':
+    { q:'Un eje de simetría divide una figura en dos mitades que son:', c:'Imágenes especulares entre sí', w1:'De diferentes tamaños', w2:'De diferentes formas', e:'Los ejes de simetría crean mitades iguales que son imágenes especulares' },
+  'Two shapes are congruent if they have:':
+    { q:'Dos figuras son congruentes si tienen:', c:'La misma forma Y el mismo tamaño', w1:'Solo la misma forma', w2:'Solo el mismo tamaño', e:'Congruente = misma forma + mismo tamaño' },
+  'Two shapes are similar if they have:':
+    { q:'Dos figuras son semejantes si tienen:', c:'La misma forma pero pueden ser de diferentes tamaños', w1:'El mismo tamaño pero diferentes formas', w2:'Nada en común', e:'Las figuras semejantes tienen lados proporcionales y ángulos iguales' },
+  'How many inches are in 1 foot?':
+    { q:'¿Cuántas pulgadas hay en 1 pie?', c:'12', w1:'10', w2:'6', e:'1 pie = 12 pulgadas' },
+  'How many feet are in 1 yard?':
+    { q:'¿Cuántos pies hay en 1 yarda?', c:'3', w1:'4', w2:'6', e:'1 yarda = 3 pies' },
+  'How many centimeters are in 1 meter?':
+    { q:'¿Cuántos centímetros hay en 1 metro?', c:'100', w1:'10', w2:'1000', e:'1 metro = 100 centímetros' },
+  'How many millimeters are in 1 centimeter?':
+    { q:'¿Cuántos milímetros hay en 1 centímetro?', c:'10', w1:'100', w2:'1', e:'1 centímetro = 10 milímetros' },
+  'How many cups are in 1 quart?':
+    { q:'¿Cuántas tazas hay en 1 cuarto de galón?', c:'4', w1:'2', w2:'8', e:'1 cuarto = 4 tazas' },
+  'How many ounces are in 1 pound?':
+    { q:'¿Cuántas onzas hay en 1 libra?', c:'16', w1:'8', w2:'12', e:'1 libra = 16 onzas' },
+  'How many grams are in 1 kilogram?':
+    { q:'¿Cuántos gramos hay en 1 kilogramo?', c:'1,000', w1:'100', w2:'10,000', e:'1 kilogramo = 1,000 gramos' },
+  'How many feet are in 1 mile?':
+    { q:'¿Cuántos pies hay en 1 milla?', c:'5,280', w1:'1,000', w2:'2,640', e:'1 milla = 5,280 pies' },
+  'How many quarts are in 1 gallon?':
+    { q:'¿Cuántos cuartos de galón hay en 1 galón?', c:'4', w1:'2', w2:'8', e:'1 galón = 4 cuartos' },
+  'How many meters are in 1 kilometer?':
+    { q:'¿Cuántos metros hay en 1 kilómetro?', c:'1,000', w1:'100', w2:'10', e:'1 kilómetro = 1,000 metros' },
+  'What type of graph uses bars to compare quantities?':
+    { q:'¿Qué tipo de gráfica usa barras para comparar cantidades?', c:'Gráfica de barras', w1:'Gráfica de líneas', w2:'Gráfica circular', e:'Las gráficas de barras usan rectángulos para comparar diferentes grupos' },
+  'What type of graph shows change over time?':
+    { q:'¿Qué tipo de gráfica muestra cambios con el tiempo?', c:'Gráfica de líneas', w1:'Gráfica de barras', w2:'Gráfica circular', e:'Las gráficas de líneas conectan datos para mostrar tendencias en el tiempo' },
+  'What does a pie chart show?':
+    { q:'¿Qué muestra una gráfica circular?', c:'Partes de un todo como porcentajes', w1:'Cambios con el tiempo', w2:'Comparación de dos variables', e:'Las gráficas circulares dividen un círculo en porciones que muestran proporciones' },
+  'What is the range of this data set: 3, 7, 12, 5, 20?':
+    { q:'¿Cuál es el rango de este conjunto de datos: 3, 7, 12, 5, 20?', c:'17', w1:'20', w2:'3', e:'Rango = mayor - menor = 20 - 3 = 17' },
+  'In a pictograph, what does a key tell you?':
+    { q:'En un pictograma, ¿qué te dice la clave?', c:'Qué representa cada símbolo', w1:'El título de la gráfica', w2:'Dónde poner la gráfica', e:'La clave muestra el valor que cada imagen representa' },
+  'A histogram shows data grouped in:':
+    { q:'Un histograma muestra los datos agrupados en:', c:'Intervalos (rangos de valores)', w1:'Categorías individuales', w2:'Solo porcentajes', e:'Los histogramas usan intervalos para agrupar datos continuos' },
+  'What is an outlier?':
+    { q:'¿Qué es un valor atípico?', c:'Un dato que es mucho más alto o más bajo que los demás', w1:'El valor más común', w2:'El valor del medio', e:'Los valores atípicos son valores extremos que difieren mucho del resto' },
+  'What is a right triangle?':
+    { q:'¿Qué es un triángulo rectángulo?', c:'Un triángulo con un ángulo de 90°', w1:'Un triángulo con todos los lados iguales', w2:'Cualquier triángulo', e:'Los triángulos rectángulos tienen exactamente un ángulo de 90 grados' },
+  'What are parallel lines?':
+    { q:'¿Qué son las líneas paralelas?', c:'Líneas que nunca se cruzan y siempre están a la misma distancia', w1:'Líneas que se cruzan en ángulo recto', w2:'Líneas de distinto largo', e:'Las líneas paralelas van en la misma dirección y nunca se tocan' },
+  'What are perpendicular lines?':
+    { q:'¿Qué son las líneas perpendiculares?', c:'Líneas que se cruzan formando un ángulo de 90°', w1:'Líneas que nunca se cruzan', w2:'Líneas del mismo largo', e:'Las líneas perpendiculares se encuentran en ángulos rectos' },
+  'What is an equilateral triangle?':
+    { q:'¿Qué es un triángulo equilátero?', c:'Un triángulo con los tres lados iguales', w1:'Un triángulo sin lados iguales', w2:'Un triángulo con un ángulo recto', e:'Equilátero = todos los lados y ángulos son iguales (60° cada uno)' },
+  'What is the sum of angles in any triangle?':
+    { q:'¿Cuál es la suma de los ángulos de cualquier triángulo?', c:'180°', w1:'360°', w2:'90°', e:'Los tres ángulos internos de todo triángulo suman 180°' },
+  'What is the sum of angles in a quadrilateral?':
+    { q:'¿Cuál es la suma de los ángulos de un cuadrilátero?', c:'360°', w1:'180°', w2:'540°', e:'Todos los cuadriláteros tienen ángulos internos que suman 360°' }
+});
+
+// ══ Batch 8 — FinLit remaining (invest, credit, fallback)
+Object.assign(POOL_ES_BY_Q, {
+  'Your monthly income is $1,000. Experts say to save at least 10%. How much is that?':
+    { q:'Tu ingreso mensual es $1,000. Los expertos dicen que ahorres al menos 10%. ¿Cuánto es?', c:'$100', w1:'$10', w2:'$1,000', e:'10% de $1,000 = $100' },
+  'Your business earned $5,000 this month. Expenses were $3,200. What is net income?':
+    { q:'Tu negocio ganó $5,000 este mes. Los gastos fueron $3,200. ¿Cuál es el ingreso neto?', c:'$1,800', w1:'$5,000', w2:'$8,200', e:'$5,000 - $3,200 = $1,800 de ingreso neto' },
+  'You invest $500 to start a business and earn $1,500 in the first year. What is your return on investment?':
+    { q:'Inviertes $500 para iniciar un negocio y ganas $1,500 el primer año. ¿Cuál es tu retorno de inversión?', c:'200%', w1:'100%', w2:'$1,000', e:'($1,500 - $500) / $500 = 200% de ROI' },
+  'If you invest $200 at 5% simple interest for 2 years, how much interest do you earn?':
+    { q:'Si inviertes $200 al 5% de interés simple por 2 años, ¿cuánto interés ganas?', c:'$20', w1:'$10', w2:'$200', e:'$200 × 5% × 2 = $20' },
+  'Why do investors diversify?':
+    { q:'¿Por qué los inversionistas diversifican?', c:'Para reducir el riesgo repartiendo el dinero en diferentes inversiones', w1:'Para poner todo el dinero en una sola acción', w2:'Diversificar no es importante', e:'Diversificar reduce el impacto si una sola inversión pierde valor' },
+  '$1,000 at 8% interest for 1 year earns how much?':
+    { q:'$1,000 al 8% de interés por 1 año, ¿cuánto genera?', c:'$80', w1:'$8', w2:'$800', e:'$1,000 × 0.08 = $80' },
+  'You saved $50/month for 12 months. How much did you save total (before interest)?':
+    { q:'Ahorraste $50 al mes durante 12 meses. ¿Cuánto ahorraste en total (antes de intereses)?', c:'$600', w1:'$50', w2:'$120', e:'$50 × 12 = $600' },
+  'Which grows faster: simple interest or compound interest?':
+    { q:'¿Qué crece más rápido: interés simple o interés compuesto?', c:'Interés compuesto', w1:'Interés simple', w2:'Crecen al mismo ritmo', e:'El interés compuesto gana interés sobre el interés, por eso crece más rápido' },
+  'If $500 doubles every 10 years, how much will you have in 20 years?':
+    { q:'Si $500 se duplica cada 10 años, ¿cuánto tendrás en 20 años?', c:'$2,000', w1:'$1,000', w2:'$500', e:'$500 → $1,000 tras 10 años → $2,000 tras 20 años' },
+  'What does "ROI" stand for?':
+    { q:'¿Qué significan las siglas "ROI"?', c:'Return on Investment (retorno de inversión)', w1:'Rate of Income', w2:'Real Operating Interest', e:'ROI = retorno de inversión, mide las ganancias frente al costo' },
+  'You borrow $1,000 at 5% interest for 1 year. How much do you owe total?':
+    { q:'Pides prestados $1,000 al 5% de interés por 1 año. ¿Cuánto debes en total?', c:'$1,050', w1:'$1,000', w2:'$50', e:'$1,000 + ($1,000 × 5%) = $1,050' },
+  'Which helps build good credit?':
+    { q:'¿Qué ayuda a construir buen crédito?', c:'Pagar las cuentas a tiempo cada mes', w1:'Usar al máximo tu tarjeta de crédito', w2:'No usar nunca el crédito', e:'Los pagos puntuales y constantes construyen buen crédito' },
+  'You have a $500 credit card balance at 20% annual interest. How much interest per year?':
+    { q:'Tienes un saldo de $500 en una tarjeta de crédito al 20% de interés anual. ¿Cuánto interés por año?', c:'$100', w1:'$500', w2:'$20', e:'$500 × 20% = $100 de interés anual' },
+  'Why is it bad to only pay the minimum on a credit card?':
+    { q:'¿Por qué es malo pagar solo el mínimo de una tarjeta de crédito?', c:'Terminas pagando mucho más en intereses con el tiempo', w1:'El pago mínimo es todo lo que debes', w2:'Mejora tu crédito más rápido', e:'Los pagos mínimos hacen que los intereses se acumulen sobre el saldo' },
+  'A car loan of $10,000 at 4% for 1 year costs how much in interest?':
+    { q:'Un préstamo de auto de $10,000 al 4% por 1 año, ¿cuánto cuesta en intereses?', c:'$400', w1:'$4,000', w2:'$40', e:'$10,000 × 4% = $400' },
+  'What is a good credit score range?':
+    { q:'¿Cuál es un buen rango de puntuación de crédito?', c:'670-850', w1:'100-200', w2:'0-50', e:'Las puntuaciones de crédito de 670+ generalmente se consideran buenas' },
+  'You owe $200 on a card. You pay $50. What do you still owe (before interest)?':
+    { q:'Debes $200 en una tarjeta. Pagas $50. ¿Cuánto debes todavía (antes de intereses)?', c:'$150', w1:'$200', w2:'$50', e:'$200 - $50 = $150 restantes' },
+  'You earn $10/hour and work 15 hours. What is your gross pay?':
+    { q:'Ganas $10 por hora y trabajas 15 horas. ¿Cuál es tu pago bruto?', c:'$150', w1:'$10', w2:'$100', e:'$10 × 15 horas = $150' },
+  'What is the difference between gross pay and net pay?':
+    { q:'¿Cuál es la diferencia entre pago bruto y pago neto?', c:'El bruto es antes de impuestos; el neto es lo que te llevas a casa', w1:'Son lo mismo', w2:'El neto siempre es más', e:'Pago bruto - impuestos y deducciones = pago neto' },
+  'You sell cookies for $2 each. It costs $0.50 to make each one. Your profit per cookie is:':
+    { q:'Vendes galletas a $2 cada una. Cuesta $0.50 hacer cada una. Tu ganancia por galleta es:', c:'$1.50', w1:'$2.00', w2:'$0.50', e:'$2.00 - $0.50 = $1.50 de ganancia' },
+  'If you save $5 every day for 30 days, how much will you have?':
+    { q:'Si ahorras $5 cada día por 30 días, ¿cuánto tendrás?', c:'$150', w1:'$50', w2:'$30', e:'$5 × 30 = $150' },
+  'A t-shirt costs $15 and is 20% off. What is the sale price?':
+    { q:'Una camiseta cuesta $15 con 20% de descuento. ¿Cuál es el precio de oferta?', c:'$12', w1:'$3', w2:'$15', e:'20% de $15 = $3 de descuento → $15 - $3 = $12' }
+});
+
+// ══ Batch 9 — App Building remaining (platforms, testing, UX, monetization, general)
+Object.assign(POOL_ES_BY_Q, {
+  'What is a native app?':
+    { q:'¿Qué es una app nativa?', c:'Una app hecha específicamente para una plataforma (iOS o Android)', w1:'Una app que funciona en todos los dispositivos', w2:'Un navegador web', e:'Las apps nativas usan lenguajes específicos de la plataforma como Swift (iOS) o Kotlin (Android)' },
+  'What is the difference between iOS and Android?':
+    { q:'¿Cuál es la diferencia entre iOS y Android?', c:'iOS es el sistema operativo de Apple; Android es el de Google — usan diferentes lenguajes', w1:'Son lo mismo', w2:'iOS solo es para laptops', e:'iOS funciona en iPhones/iPads; Android en Samsung, Google Pixel y más' },
+  'What is a cross-platform app?':
+    { q:'¿Qué es una app multiplataforma?', c:'Una app que se hace una sola vez y funciona en iOS y Android', w1:'Una app que solo funciona sin conexión', w2:'Un programa solo para escritorio', e:'Herramientas como React Native y Flutter permiten construir para ambas plataformas a la vez' },
+  'What programming language is used for iOS apps?':
+    { q:'¿Qué lenguaje de programación se usa para apps de iOS?', c:'Swift', w1:'Python', w2:'Java', e:'Swift de Apple es el lenguaje principal para construir apps de iOS' },
+  'What is an APK file?':
+    { q:'¿Qué es un archivo APK?', c:'El formato de archivo que se usa para instalar apps en dispositivos Android', w1:'Un archivo de app de iOS', w2:'Un archivo de música', e:'APK = Android Package Kit — es como un .exe para Android' },
+  'Why is testing important in app development?':
+    { q:'¿Por qué es importante probar en el desarrollo de apps?', c:'Para encontrar errores y asegurarse de que la app funcione bien antes de publicarla', w1:'Probar no es importante', w2:'Solo para que la app se vea bonita', e:'Las pruebas evitan caídas, errores y malas experiencias para el usuario' },
+  'What is a bug in software?':
+    { q:'¿Qué es un bug en el software?', c:'Un error o falla en el código que causa un comportamiento inesperado', w1:'Un virus', w2:'Una función', e:'Los bugs son problemas no intencionales que hay que encontrar y arreglar' },
+  'What is QA (Quality Assurance)?':
+    { q:'¿Qué es QA (aseguramiento de calidad)?', c:'El proceso de verificar que una app cumple con estándares de calidad antes de lanzarla', w1:'Un lenguaje de programación', w2:'Un tipo de base de datos', e:'Los equipos de QA prueban apps para asegurarse de que funcionen bien y sean fáciles de usar' },
+  'What is beta testing?':
+    { q:'¿Qué es una prueba beta?', c:'Que usuarios reales prueben una versión previa al lanzamiento para encontrar errores', w1:'La primera línea de código que escribes', w2:'Probar solo en tu propio dispositivo', e:'Las pruebas beta detectan problemas que las pruebas internas podrían pasar por alto' },
+  'What should you do when you find a bug?':
+    { q:'¿Qué debes hacer cuando encuentras un bug?', c:'Documentarlo, encontrar la causa, arreglarlo y volver a probar', w1:'Ignorarlo', w2:'Borrar todo el proyecto', e:'Buena depuración: reproducir → aislar → arreglar → verificar' },
+  'What does UX stand for?':
+    { q:'¿Qué significan las siglas UX?', c:'User Experience (experiencia de usuario)', w1:'Universal Extension', w2:'User Exit', e:'UX = experiencia de usuario — cómo se siente la gente al usar tu app' },
+  'What is a user persona?':
+    { q:'¿Qué es un user persona?', c:'Una representación ficticia de tu usuario ideal basada en investigación', w1:'Tu perfil personal', w2:'Una pantalla de inicio de sesión', e:'Los personas ayudan a diseñar para necesidades reales, no solo para suposiciones' },
+  'What is usability testing?':
+    { q:'¿Qué es una prueba de usabilidad?', c:'Observar a usuarios reales probar tu app para ver dónde se confunden', w1:'Probar si el código compila', w2:'Revisar la velocidad de la app', e:'Las pruebas de usabilidad revelan problemas que los desarrolladores quizá no noten' },
+  'Why is good UX important?':
+    { q:'¿Por qué es importante una buena UX?', c:'Los usuarios dejan de usar apps que son confusas o frustrantes', w1:'La UX no importa si el código funciona', w2:'Solo para apps caras', e:'Una buena UX mantiene a los usuarios interesados, aumenta la retención y las descargas' },
+  'What is a user flow?':
+    { q:'¿Qué es un flujo de usuario?', c:'El camino que un usuario sigue en tu app para completar una tarea', w1:'Velocidad de internet', w2:'Qué tan rápido carga la app', e:'Los flujos de usuario trazan cada paso: abrir app → registrarse → explorar → comprar' },
+  'What is a freemium model?':
+    { q:'¿Qué es un modelo freemium?', c:'La app es gratis de usar, pero las funciones premium cuestan dinero', w1:'La app es completamente gratis para siempre', w2:'La app cuesta dinero para descargar', e:'Freemium permite probar la app gratis y luego pagar por funciones adicionales' },
+  'What is an in-app purchase?':
+    { q:'¿Qué es una compra dentro de la app?', c:'Comprar funciones, contenido o artículos extra dentro de una app', w1:'Comprar la app en la App Store', w2:'Comprar un teléfono nuevo', e:'Las compras dentro de la app son una forma común de que las apps ganen dinero después de la descarga' },
+  'What is a subscription model?':
+    { q:'¿Qué es un modelo de suscripción?', c:'Los usuarios pagan una tarifa recurrente (mensual/anual) para acceder a la app', w1:'Una compra única', w2:'Una app gratis con anuncios', e:'Las suscripciones dan ingresos recurrentes constantes — como Netflix o Spotify' },
+  'What percentage does Apple take from App Store purchases?':
+    { q:'¿Qué porcentaje se queda Apple de las compras en la App Store?', c:'15-30%', w1:'0%', w2:'90%', e:'Apple toma entre 15-30% de las ventas, según los ingresos del desarrollador' },
+  'Why do some apps show ads?':
+    { q:'¿Por qué algunas apps muestran anuncios?', c:'Los anuncios generan ingresos para que la app pueda seguir siendo gratis', w1:'Porque el gobierno lo exige', w2:'Los anuncios hacen que las apps sean más rápidas', e:'Las apps con anuncios son gratuitas de descargar y ganan dinero de los anunciantes' },
+  'What are the three main technologies used to build websites?':
+    { q:'¿Cuáles son las tres tecnologías principales para construir sitios web?', c:'HTML, CSS y JavaScript', w1:'Word, Excel y PowerPoint', w2:'Facebook, Instagram y TikTok', e:'HTML (estructura) + CSS (estilo) + JavaScript (interactividad)' },
+  'What is the first step in building an app?':
+    { q:'¿Cuál es el primer paso para construir una app?', c:'Planear qué problema resuelve la app y para quién es', w1:'Escribir código de inmediato', w2:'Comprar un nombre de dominio', e:'Las buenas apps empiezan entendiendo el problema y al usuario objetivo' },
+  'What does "responsive design" mean?':
+    { q:'¿Qué significa "diseño responsivo"?', c:'La app ajusta su diseño para adaptarse a diferentes tamaños de pantalla', w1:'La app responde a comandos de voz', w2:'La app carga más rápido', e:'El diseño responsivo asegura que tu app se vea bien en teléfonos, tabletas y computadoras' },
+  'What is GitHub used for?':
+    { q:'¿Para qué se usa GitHub?', c:'Para guardar y compartir código, registrar cambios y colaborar', w1:'Para jugar videojuegos', w2:'Para enviar correos', e:'GitHub es una plataforma para control de versiones y colaboración en código' },
+  'What is a prototype?':
+    { q:'¿Qué es un prototipo?', c:'Una versión temprana de tu app para probar ideas antes del desarrollo completo', w1:'La app final publicada', w2:'Un tipo de lenguaje de programación', e:'Los prototipos permiten probar conceptos rápidamente antes de invertir todo el tiempo de desarrollo' },
+  'What is version control?':
+    { q:'¿Qué es el control de versiones?', c:'Un sistema que registra los cambios en tu código a lo largo del tiempo', w1:'Controlar qué versión de la app descargan los usuarios', w2:'Contar cuántas versiones de una app existen', e:'El control de versiones (como Git) permite registrar, deshacer y colaborar en cambios de código' },
+  'What does "open source" mean?':
+    { q:'¿Qué significa "código abierto"?', c:'El código está disponible públicamente para que cualquiera lo vea, use o mejore', w1:'La app es gratis de descargar', w2:'El código fuente está oculto', e:'Código abierto significa que el código se comparte públicamente para transparencia y colaboración' },
+  'Why should you test your app on multiple devices?':
+    { q:'¿Por qué deberías probar tu app en varios dispositivos?', c:'Diferentes dispositivos pueden mostrar o comportarse de forma diferente', w1:'Probar no es necesario', w2:'Solo importan los iPhones', e:'Probar en varios dispositivos detecta problemas de diseño, rendimiento y compatibilidad' },
+  'What is a "bug" in software?':
+    { q:'¿Qué es un "bug" en el software?', c:'Un error o falla en el código que causa un comportamiento inesperado', w1:'Un virus que hackea tu computadora', w2:'Una función que hace la app más genial', e:'Los bugs son errores no intencionales que hay que encontrar y arreglar' },
+  'What is the purpose of app analytics?':
+    { q:'¿Cuál es el propósito de las analíticas de una app?', c:'Registrar cómo interactúan los usuarios con tu app y encontrar mejoras', w1:'Espiar a los usuarios', w2:'Hacer la app más lenta', e:'Las analíticas ayudan a entender el comportamiento del usuario y mejorar la experiencia' }
+});
+
+// ══ Batch 10 — Science topic pools (biology, physics, chemistry, earth, space, scientific method)
+Object.assign(POOL_ES_BY_Q, {
+  'What gas do plants absorb during photosynthesis?':
+    { q:'¿Qué gas absorben las plantas durante la fotosíntesis?', c:'Dióxido de carbono (CO₂)', w1:'Oxígeno', w2:'Nitrógeno', e:'Las plantas absorben CO₂ y liberan oxígeno durante la fotosíntesis' },
+  'What is the powerhouse of the cell?':
+    { q:'¿Cuál es la central de energía de la célula?', c:'La mitocondria', w1:'El núcleo', w2:'La pared celular', e:'Las mitocondrias producen energía (ATP) para la célula' },
+  'What do plants need for photosynthesis?':
+    { q:'¿Qué necesitan las plantas para la fotosíntesis?', c:'Luz solar, agua y dióxido de carbono', w1:'Oscuridad y frío', w2:'Solo tierra', e:'Las plantas usan la luz para convertir CO₂ y agua en glucosa y oxígeno' },
+  'Which part of the plant absorbs water from the soil?':
+    { q:'¿Qué parte de la planta absorbe agua del suelo?', c:'Las raíces', w1:'Las hojas', w2:'Las flores', e:'Las raíces absorben agua y nutrientes del suelo' },
+  'What is the basic unit of all living things?':
+    { q:'¿Cuál es la unidad básica de todos los seres vivos?', c:'La célula', w1:'Un átomo', w2:'Una molécula', e:'Todos los organismos vivos están formados por una o más células' },
+  'What part of the cell contains DNA?':
+    { q:'¿Qué parte de la célula contiene el ADN?', c:'El núcleo', w1:'La pared celular', w2:'La mitocondria', e:'El núcleo es el centro de control que guarda el ADN' },
+  'What is the function of the cell membrane?':
+    { q:'¿Cuál es la función de la membrana celular?', c:'Controla qué entra y sale de la célula', w1:'Produce energía', w2:'Almacena alimento', e:'La membrana celular actúa como un portero de la célula' },
+  'What is a producer in an ecosystem?':
+    { q:'¿Qué es un productor en un ecosistema?', c:'Un organismo que produce su propio alimento (como las plantas)', w1:'Un animal que caza', w2:'Un hongo', e:'Los productores usan la luz solar para producir alimento mediante la fotosíntesis' },
+  'What is a decomposer?':
+    { q:'¿Qué es un descomponedor?', c:'Un organismo que descompone materia muerta', w1:'Un depredador grande', w2:'Un tipo de planta', e:'Los descomponedores como hongos y bacterias reciclan los nutrientes al suelo' },
+  'What happens if a predator is removed from a food chain?':
+    { q:'¿Qué pasa si se elimina un depredador de una cadena alimentaria?', c:'La población de presas aumenta, lo cual puede dañar el ecosistema', w1:'Nada cambia', w2:'Todos los animales mueren', e:'Eliminar depredadores desequilibra la cadena — las presas se sobrepoblan y dañan los recursos' },
+  'What is heredity?':
+    { q:'¿Qué es la herencia?', c:'La transmisión de características de los padres a los hijos', w1:'Aprender nuevas habilidades', w2:'Cambiar tu apariencia', e:'La herencia es por qué los niños suelen parecerse a sus padres' },
+  'What are genes?':
+    { q:'¿Qué son los genes?', c:'Segmentos de ADN que determinan características específicas', w1:'Un tipo de ropa', w2:'Químicos en la comida', e:'Los genes llevan instrucciones como color de ojos, estatura y tipo de sangre' },
+  'What is Newton\'s First Law of Motion?':
+    { q:'¿Cuál es la Primera Ley del Movimiento de Newton?', c:'Un objeto en reposo se queda en reposo a menos que actúe una fuerza sobre él', w1:'Cada acción tiene una reacción igual', w2:'Fuerza es igual a masa por aceleración', e:'También se llama Ley de la Inercia — los objetos resisten cambios en su movimiento' },
+  'What is acceleration?':
+    { q:'¿Qué es la aceleración?', c:'Un cambio de velocidad o dirección con el tiempo', w1:'Moverse a velocidad constante', w2:'Quedarse quieto', e:'Aceleración = acelerar, frenar o cambiar de dirección' },
+  'Newton\'s Second Law: F = m × a. If mass doubles, what happens to acceleration (same force)?':
+    { q:'Segunda Ley de Newton: F = m × a. Si la masa se duplica, ¿qué pasa con la aceleración (con la misma fuerza)?', c:'La aceleración se reduce a la mitad', w1:'La aceleración se duplica', w2:'La aceleración se mantiene igual', e:'Más masa = menos aceleración con la misma fuerza' },
+  'How does heat transfer by conduction?':
+    { q:'¿Cómo se transfiere el calor por conducción?', c:'Por contacto directo entre materiales', w1:'Por corrientes de aire', w2:'Por ondas electromagnéticas', e:'La conducción transfiere calor cuando los objetos se tocan (como una sartén caliente a tu mano)' },
+  'What is a wave?':
+    { q:'¿Qué es una onda?', c:'Una perturbación que transfiere energía de un lugar a otro', w1:'Solo el movimiento del agua', w2:'Un tipo de viento', e:'Las ondas llevan energía — la luz, el sonido y las olas del mar son ejemplos' },
+  'What are the two types of waves?':
+    { q:'¿Cuáles son los dos tipos de ondas?', c:'Transversales y longitudinales', w1:'Rápidas y lentas', w2:'Claras y oscuras', e:'Las ondas transversales suben/bajan (luz); las longitudinales van adelante/atrás (sonido)' },
+  'What causes earthquakes?':
+    { q:'¿Qué causa los terremotos?', c:'El movimiento de las placas tectónicas a lo largo de fallas', w1:'Vientos fuertes', w2:'Lluvias intensas', e:'Las placas tectónicas se desplazan y liberan energía, haciendo temblar la tierra' },
+  'What is a fossil?':
+    { q:'¿Qué es un fósil?', c:'Restos o huellas preservadas de seres vivos antiguos', w1:'Un animal vivo', w2:'Un tipo de roca formada ayer', e:'Los fósiles nos dan pistas sobre la vida hace millones de años' },
+  'What are Earth\'s layers from outside to center?':
+    { q:'¿Cuáles son las capas de la Tierra de afuera al centro?', c:'Corteza, manto, núcleo externo, núcleo interno', w1:'Agua, roca, metal', w2:'Arriba, medio, abajo', e:'La Tierra tiene 4 capas principales, siendo la corteza la más delgada' },
+  'What is an atom?':
+    { q:'¿Qué es un átomo?', c:'La unidad más pequeña de un elemento que conserva sus propiedades', w1:'Una molécula completa', w2:'Una célula', e:'Los átomos son los bloques de construcción de toda la materia' },
+  'What is the chemical formula for water?':
+    { q:'¿Cuál es la fórmula química del agua?', c:'H₂O', w1:'CO₂', w2:'NaCl', e:'El agua tiene 2 átomos de hidrógeno y 1 de oxígeno: H₂O' },
+  'What are the three subatomic particles?':
+    { q:'¿Cuáles son las tres partículas subatómicas?', c:'Protones, neutrones y electrones', w1:'Átomos, moléculas y compuestos', w2:'Sólidos, líquidos y gases', e:'Los protones (+) y neutrones (neutros) están en el núcleo; los electrones (-) orbitan alrededor' },
+  'What force keeps planets in orbit around the Sun?':
+    { q:'¿Qué fuerza mantiene a los planetas en órbita alrededor del Sol?', c:'La gravedad', w1:'El magnetismo', w2:'El viento', e:'La gravedad atrae a los planetas hacia el Sol, manteniéndolos en órbita' },
+  'What is the largest planet in our solar system?':
+    { q:'¿Cuál es el planeta más grande de nuestro sistema solar?', c:'Júpiter', w1:'Saturno', w2:'La Tierra', e:'Júpiter es tan grande que más de 1,000 Tierras cabrían dentro' },
+  'What causes the seasons on Earth?':
+    { q:'¿Qué causa las estaciones en la Tierra?', c:'La inclinación del eje de la Tierra mientras orbita el Sol', w1:'Que la Tierra se acerque o aleje del Sol', w2:'Que la Luna bloquee el sol', e:'La inclinación de 23.5° de la Tierra hace que diferentes partes reciban más o menos luz solar' },
+  'What are the three stages of the water cycle?':
+    { q:'¿Cuáles son las tres etapas del ciclo del agua?', c:'Evaporación, condensación, precipitación', w1:'Congelación, fusión, ebullición', w2:'Amanecer, mediodía, atardecer', e:'El agua se evapora, se condensa en nubes y cae como precipitación' },
+  'What type of cloud is tall and brings thunderstorms?':
+    { q:'¿Qué tipo de nube es alta y trae tormentas?', c:'Cumulonimbo', w1:'Cirro', w2:'Estrato', e:'Los cumulonimbos son nubes enormes y altas que producen tormentas' },
+  'What instrument measures temperature?':
+    { q:'¿Qué instrumento mide la temperatura?', c:'Termómetro', w1:'Barómetro', w2:'Anemómetro', e:'Los termómetros miden la temperatura; los barómetros miden la presión del aire' },
+  'What is the function of the lungs?':
+    { q:'¿Cuál es la función de los pulmones?', c:'Intercambiar oxígeno y dióxido de carbono al respirar', w1:'Bombear sangre', w2:'Digerir alimentos', e:'Los pulmones toman oxígeno y liberan dióxido de carbono' },
+  'What is the scientific method?':
+    { q:'¿Qué es el método científico?', c:'Un proceso de hacer preguntas, probar y analizar resultados', w1:'Memorizar datos científicos', w2:'Un tipo de ecuación matemática', e:'Método científico: pregunta → hipótesis → experimento → análisis → conclusión' },
+  'What is a control group?':
+    { q:'¿Qué es un grupo de control?', c:'El grupo que no se cambia en un experimento, se usa como comparación', w1:'El grupo que recibe más tratamiento', w2:'Un control remoto', e:'El grupo de control se mantiene igual para que los científicos vean qué cambia la variable' },
+  'What are the three states of matter?':
+    { q:'¿Cuáles son los tres estados de la materia?', c:'Sólido, líquido, gas', w1:'Caliente, frío, tibio', w2:'Grande, mediano, pequeño', e:'La materia existe como sólido, líquido y gas según la temperatura y la presión' },
+  'What does a scientist do when an experiment fails?':
+    { q:'¿Qué hace un científico cuando un experimento falla?', c:'Analiza qué pasó y vuelve a intentar con cambios', w1:'Se rinde de inmediato', w2:'Cambia los resultados para que se vean correctos', e:'Los experimentos fallidos dan datos valiosos — los científicos aprenden y ajustan' }
+});
+
+// ══ Batch 11 — English remaining (grammar, lit, poetry, reading, writing, phonics, vocab, sentence, speech, vowels)
+Object.assign(POOL_ES_BY_Q, {
+  'Which word is a noun in: "The cat sat on the mat"?':
+    { q:'¿Qué palabra es un sustantivo en: "The cat sat on the mat"?', c:'cat', w1:'sat', w2:'on', e:'Los sustantivos son personas, lugares o cosas — "cat" y "mat" son sustantivos' },
+  'Which word is an adjective: "The tall building"?':
+    { q:'¿Qué palabra es un adjetivo en: "The tall building"?', c:'tall', w1:'the', w2:'building', e:'Los adjetivos describen sustantivos — "tall" describe "building"' },
+  'In "She runs quickly," which word is the adverb?':
+    { q:'En "She runs quickly", ¿qué palabra es el adverbio?', c:'quickly', w1:'she', w2:'runs', e:'"Quickly" describe cómo corre — modifica al verbo' },
+  'What is an idiom?':
+    { q:'¿Qué es un modismo (idiom)?', c:'Una frase cuyo significado es diferente al de las palabras literales', w1:'Una palabra que suena como lo que significa', w2:'Un tipo de símil', e:'Ejemplo: "Break a leg" no significa realmente romperse una pierna — significa "buena suerte"' },
+  'What is onomatopoeia?':
+    { q:'¿Qué es la onomatopeya?', c:'Una palabra que suena como lo que describe', w1:'Un tipo de metáfora', w2:'Una comparación usando "como"', e:'Ejemplos: buzz, hiss, pop, splash — la palabra suena como el ruido' },
+  '"The stars danced in the sky" is an example of:':
+    { q:'"The stars danced in the sky" es un ejemplo de:', c:'Personificación', w1:'Símil', w2:'Aliteración', e:'Las estrellas no pueden bailar — darles una acción humana es personificación' },
+  'What is a stanza in poetry?':
+    { q:'¿Qué es una estrofa en poesía?', c:'Un grupo de versos que forma una sección de un poema', w1:'El título de un poema', w2:'Una sola palabra de un poema', e:'Las estrofas son como párrafos en los poemas, separadas por líneas en blanco' },
+  'How many syllables are in a haiku?':
+    { q:'¿Cuántas sílabas tiene un haiku?', c:'17 (5-7-5)', w1:'10 (3-4-3)', w2:'20 (5-10-5)', e:'El haiku sigue 5 sílabas, 7 sílabas, 5 sílabas' },
+  'What is free verse poetry?':
+    { q:'¿Qué es la poesía en verso libre?', c:'Poesía que no sigue un patrón fijo de rima o ritmo', w1:'Poesía que debe rimar', w2:'Poesía escrita en un idioma extranjero', e:'El verso libre no tiene estructura requerida — el poeta elige la forma' },
+  'What is the "setting" of a story?':
+    { q:'¿Qué es el "escenario" de una historia?', c:'Dónde y cuándo ocurre la historia', w1:'El personaje principal', w2:'La lección de la historia', e:'Escenario = el tiempo y lugar de los hechos de la historia' },
+  'What is the "plot" of a story?':
+    { q:'¿Qué es la "trama" de una historia?', c:'La secuencia de eventos que ocurren en la historia', w1:'El lugar de la historia', w2:'El nombre del autor', e:'La trama es la serie de eventos: principio, medio y final' },
+  'What is the "theme" of a story?':
+    { q:'¿Cuál es el "tema" de una historia?', c:'El mensaje o lección principal que el autor quiere compartir', w1:'El título del libro', w2:'Cuántas páginas tiene la historia', e:'El tema es el significado más profundo, como "la amistad es valiosa"' },
+  'What is the climax of a story?':
+    { q:'¿Qué es el clímax de una historia?', c:'El punto más emocionante o decisivo de la historia', w1:'El principio', w2:'La última oración', e:'El clímax es el punto máximo del conflicto — el momento más intenso' },
+  'What is the narrator\'s point of view?':
+    { q:'¿Qué es el punto de vista del narrador?', c:'La perspectiva desde la cual se cuenta la historia', w1:'Dónde está parado el narrador', w2:'Solo la opinión del narrador', e:'Primera persona (yo), tercera persona (él/ella/ellos), etc.' },
+  'What are the three parts of a paragraph?':
+    { q:'¿Cuáles son las tres partes de un párrafo?', c:'Oración temática, detalles de apoyo, oración de cierre', w1:'Título, imagen, número de página', w2:'Pregunta, respuesta, ejemplo', e:'Un buen párrafo empieza con un tema, agrega detalles y cierra' },
+  'What is the purpose of persuasive writing?':
+    { q:'¿Cuál es el propósito de la escritura persuasiva?', c:'Convencer al lector de estar de acuerdo con tu opinión', w1:'Contar una historia', w2:'Describir un lugar', e:'La escritura persuasiva usa evidencia y razonamiento para convencer' },
+  'What makes a strong conclusion?':
+    { q:'¿Qué hace una conclusión fuerte?', c:'Retoma la tesis y resume los puntos clave sin dar información nueva', w1:'Introduce un tema completamente nuevo', w2:'Dice "Fin"', e:'Las conclusiones cierran tu argumento y dejan una impresión duradera' },
+  'What is a supporting detail?':
+    { q:'¿Qué es un detalle de apoyo?', c:'Un dato, ejemplo o razón que respalda la idea principal', w1:'El tema del párrafo', w2:'Un título para el ensayo', e:'Los detalles de apoyo dan evidencia a tu oración temática' },
+  'Why is it important to cite sources in a research paper?':
+    { q:'¿Por qué es importante citar fuentes en un trabajo de investigación?', c:'Para dar crédito al autor original y evitar el plagio', w1:'No es importante', w2:'Para hacer el trabajo más largo', e:'Citar fuentes muestra honestidad y permite a los lectores encontrar la información original' },
+  'What are the vowels in the English alphabet?':
+    { q:'¿Cuáles son las vocales en el alfabeto inglés?', c:'A, E, I, O, U', w1:'B, C, D, F, G', w2:'X, Y, Z', e:'A, E, I, O, U son vocales — a veces Y también es vocal' },
+  'The prefix "un-" means:':
+    { q:'El prefijo "un-" significa:', c:'No (lo opuesto)', w1:'De nuevo', w2:'Antes', e:'"Un-" hace las palabras opuestas: unfair (injusto), unkind (descortés), unable (incapaz)' },
+  'What goes at the end of a question?':
+    { q:'¿Qué va al final de una pregunta en inglés?', c:'Un signo de interrogación de cierre (?)', w1:'Un punto (.)', w2:'Un signo de exclamación (!)', e:'En inglés las preguntas siempre terminan con signo de interrogación' },
+  'When do you use a comma?':
+    { q:'¿Cuándo usas una coma?', c:'Para separar elementos en una lista o hacer una pausa en una oración', w1:'Al final de cada oración', w2:'Solo después del nombre de alguien', e:'Las comas separan los elementos de una lista: "manzanas, naranjas y plátanos"' },
+  'What is the subject of a sentence?':
+    { q:'¿Cuál es el sujeto de una oración?', c:'La persona, lugar o cosa de la que trata la oración', w1:'La palabra de acción', w2:'La última palabra', e:'En "The dog ran fast", el sujeto es "The dog"' },
+  'What is the predicate of a sentence?':
+    { q:'¿Cuál es el predicado de una oración?', c:'La parte que dice qué hace o es el sujeto', w1:'La primera palabra', w2:'El sustantivo', e:'En "The dog ran fast", el predicado es "ran fast"' },
+  'What is the difference between active and passive voice?':
+    { q:'¿Cuál es la diferencia entre voz activa y pasiva?', c:'Activa: el sujeto hace la acción. Pasiva: el sujeto recibe la acción.', w1:'La activa es más ruidosa', w2:'Son lo mismo', e:'Activa: "The dog bit the man." Pasiva: "The man was bitten by the dog."' },
+  'What is the purpose of a thesis in a speech?':
+    { q:'¿Cuál es el propósito de una tesis en un discurso?', c:'Declarar claramente el punto principal que quieres comunicar', w1:'Contar un chiste', w2:'Listar tus fuentes', e:'Una tesis fuerte le da al público tu argumento central' },
+  'What is one key to good public speaking?':
+    { q:'¿Cuál es una clave para hablar bien en público?', c:'Hacer contacto visual y hablar con claridad', w1:'Leer cada palabra de tus notas', w2:'Hablar lo más rápido posible', e:'El contacto visual y la claridad ayudan a captar y conectar con tu audiencia' },
+  'What is a counterargument?':
+    { q:'¿Qué es un contraargumento?', c:'Un punto de vista opuesto que reconoces y respondes', w1:'Estar de acuerdo con todo', w2:'Ignorar otras opiniones', e:'Responder a los contraargumentos fortalece tu postura en un debate' },
+  'What is active listening?':
+    { q:'¿Qué es la escucha activa?', c:'Prestar toda la atención, entender y responder con reflexión', w1:'Solo oír palabras sin pensar', w2:'Hablar por encima del orador', e:'Los oyentes activos se enfocan, hacen preguntas y muestran que entienden' },
+  'Why should you use evidence in a presentation?':
+    { q:'¿Por qué debes usar evidencia en una presentación?', c:'Para respaldar tus afirmaciones y hacer tu argumento más fuerte', w1:'Para llenar tiempo', w2:'La evidencia no se necesita en presentaciones', e:'Datos, estadísticas y ejemplos hacen tus puntos más convincentes' },
+  'What is the plural of "child"?':
+    { q:'¿Cuál es el plural de "child"?', c:'children', w1:'childs', w2:'childes', e:'"Child" tiene una forma plural irregular: "children"' },
+  'Which sentence is correct?':
+    { q:'¿Qué oración es correcta?', c:'They\'re going to their house over there.', w1:'There going to they\'re house over their.', w2:'Their going to there house over they\'re.', e:'They\'re = they are; their = de ellos; there = allí' }
+});
+
+// ══ Batch 12 — Social Studies remaining (civics, geography, economics, culture, rights)
+Object.assign(POOL_ES_BY_Q, {
+  'What does Congress do?':
+    { q:'¿Qué hace el Congreso?', c:'Hace las leyes del país', w1:'Hace cumplir las leyes', w2:'Interpreta las leyes', e:'El Congreso (Senado + Cámara de Representantes) escribe y aprueba leyes' },
+  'How old must you be to vote in the United States?':
+    { q:'¿Qué edad debes tener para votar en Estados Unidos?', c:'18 años', w1:'16 años', w2:'21 años', e:'La Enmienda 26 estableció la edad para votar en los 18 años' },
+  'What is the purpose of the Supreme Court?':
+    { q:'¿Cuál es el propósito de la Corte Suprema?', c:'Interpretar las leyes y decidir si siguen la Constitución', w1:'Escribir nuevas leyes', w2:'Elegir al Presidente', e:'La Corte Suprema es la corte más alta y decide la constitucionalidad' },
+  'What are responsibilities of a citizen?':
+    { q:'¿Cuáles son las responsabilidades de un ciudadano?', c:'Votar, obedecer las leyes, pagar impuestos y servir en jurados', w1:'Solo pagar impuestos', w2:'Los ciudadanos no tienen responsabilidades', e:'Los ciudadanos participan en la democracia votando, sirviendo y cumpliendo las leyes' },
+  'What does "checks and balances" mean?':
+    { q:'¿Qué significa "pesos y contrapesos"?', c:'Cada rama del gobierno puede limitar el poder de las otras', w1:'Equilibrar una chequera', w2:'Solo el presidente tiene poder', e:'Los pesos y contrapesos evitan que una rama se vuelva demasiado poderosa' },
+  'What is the Bill of Rights?':
+    { q:'¿Qué es la Carta de Derechos?', c:'Las primeras 10 enmiendas de la Constitución que protegen las libertades individuales', w1:'Una lista de compras', w2:'La Declaración de Independencia', e:'La Carta de Derechos garantiza libertades como la palabra, la religión y la prensa' },
+  'What is latitude?':
+    { q:'¿Qué es la latitud?', c:'Líneas imaginarias que van de este a oeste y miden la distancia desde el ecuador', w1:'Líneas que van de norte a sur', w2:'La altura de una montaña', e:'Las líneas de latitud son horizontales — el ecuador está en 0° de latitud' },
+  'What is longitude?':
+    { q:'¿Qué es la longitud?', c:'Líneas imaginarias que van de norte a sur y miden la distancia desde el Meridiano de Greenwich', w1:'Líneas que van de este a oeste', w2:'Qué tan largo es un país', e:'Las líneas de longitud son verticales — el Meridiano de Greenwich está en 0° de longitud' },
+  'What is supply and demand?':
+    { q:'¿Qué es la oferta y la demanda?', c:'La oferta es cuánto hay disponible; la demanda es cuánto lo quiere la gente', w1:'La oferta es lo que compras; la demanda es lo que vendes', w2:'Son lo mismo', e:'Cuando la demanda es alta y la oferta es baja, los precios suben' },
+  'What happens to prices when demand goes up but supply stays the same?':
+    { q:'¿Qué pasa con los precios cuando la demanda sube pero la oferta se mantiene igual?', c:'Los precios suben', w1:'Los precios bajan', w2:'Los precios se quedan exactamente igual', e:'Mayor demanda con la misma oferta = precios más altos (la escasez sube el costo)' },
+  'What is the difference between goods and services?':
+    { q:'¿Cuál es la diferencia entre bienes y servicios?', c:'Los bienes son productos físicos; los servicios son acciones que la gente hace para otros', w1:'Son lo mismo', w2:'Los bienes son gratis; los servicios cuestan dinero', e:'Un libro es un bien; un corte de cabello es un servicio' },
+  'What is the "melting pot" metaphor for America?':
+    { q:'¿Qué es la metáfora del "crisol" (melting pot) para Estados Unidos?', c:'Personas de muchas culturas se mezclan para formar una nación', w1:'Una olla para cocinar', w2:'Un experimento de ciencias', e:'La idea del crisol dice que inmigrantes diversos se combinan para crear la cultura estadounidense' },
+  'What is the difference between urban, suburban, and rural?':
+    { q:'¿Cuál es la diferencia entre urbano, suburbano y rural?', c:'Urbano = ciudad, suburbano = cerca de la ciudad, rural = campo', w1:'Todos significan lo mismo', w2:'Urbano = granja, rural = ciudad', e:'Las áreas urbanas están muy pobladas, las suburbanas están fuera de las ciudades, las rurales son campo abierto' },
+  'What is a community helper?':
+    { q:'¿Qué es un ayudante de la comunidad?', c:'Una persona cuyo trabajo ayuda a mantener la comunidad segura, sana o funcionando', w1:'Alguien que solo se ayuda a sí mismo', w2:'Un tipo de máquina', e:'Los bomberos, maestros, doctores y policías son ayudantes de la comunidad' },
+  'What is the Universal Declaration of Human Rights?':
+    { q:'¿Qué es la Declaración Universal de los Derechos Humanos?', c:'Un documento que lista los derechos fundamentales que todas las personas deben tener', w1:'Una ley solo para Estados Unidos', w2:'Un tipo de pasaporte', e:'Adoptada por la ONU en 1948, describe 30 derechos humanos básicos' },
+  'What does "equality" mean?':
+    { q:'¿Qué significa "igualdad"?', c:'Que todos tengan los mismos derechos y oportunidades', w1:'Que todos reciban la misma cantidad de dinero', w2:'Que todos se vean iguales', e:'La igualdad significa un trato justo sin importar raza, género u origen' },
+  'Why is freedom of speech important?':
+    { q:'¿Por qué es importante la libertad de expresión?', c:'Permite a las personas expresar ideas y opiniones sin castigo del gobierno', w1:'Significa que puedes decir cualquier cosa sin consecuencias', w2:'Solo aplica a los políticos', e:'La libertad de expresión es esencial para la democracia — las personas deben poder compartir ideas' }
+});
 Object.assign(POOL_ES_BY_Q, {
   'What is an adjective?':
     { q:'¿Qué es un adjetivo?', c:'Una palabra que describe un sustantivo', w1:'Una palabra de acción', w2:'Un signo de puntuación', e:'"Grande", "azul" y "feliz" son adjetivos' },
