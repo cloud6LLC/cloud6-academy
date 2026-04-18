@@ -21284,26 +21284,49 @@ let printablesSubject = 'math';
 function renderPrintablesScreen(){
   const screen = document.getElementById('printablesScreen');
   const gradeColor = GRADE_COLORS[printablesGrade] || '#00b894';
-  const gradeName = GRADE_NAMES[printablesGrade] || printablesGrade;
+  const gradeNameStr = gradeName(printablesGrade) || printablesGrade;
+  const es = currentLang === 'es';
 
   let gradeTabsHtml = '';
   GRADES.forEach(function(g){
     const c = GRADE_COLORS[g] || '#00b894';
-    const n = GRADE_NAMES[g] || g;
+    const n = gradeName(g) || g;
     const isActive = g == printablesGrade || String(g) === String(printablesGrade);
     gradeTabsHtml += '<div onclick="printablesGrade=\'' + g + '\';renderPrintablesScreen()" style="padding:8px 16px;border-radius:20px;cursor:pointer;font-size:13px;font-weight:' + (isActive?'700':'500') + ';white-space:nowrap;background:' + (isActive ? c : '#f0f0f0') + ';color:' + (isActive ? '#fff' : '#636e72') + ';transition:all 0.2s">' + n + '</div>';
   });
 
   const subjects = Object.keys(PRINTABLES_DATA);
+  // Map printables-data subject keys to I18N subject keys where they differ
+  const pdToI18n = {
+    'math':'math','science':'science','english':'english','history':'history',
+    'social-studies':'social-studies','financial-literacy':'financial-literacy',
+    'app-building':'app-building','financialLiteracy':'financial-literacy',
+    'appBuilding':'app-building','socialStudies':'social-studies'
+  };
   let subjectTabsHtml = '';
   subjects.forEach(function(s){
     const d = PRINTABLES_DATA[s];
     const isActive = s === printablesSubject;
-    subjectTabsHtml += '<div onclick="printablesSubject=\'' + s + '\';renderPrintablesScreen()" style="padding:8px 16px;border-radius:20px;cursor:pointer;font-size:13px;font-weight:' + (isActive?'700':'500') + ';white-space:nowrap;background:' + (isActive ? gradeColor : '#f0f0f0') + ';color:' + (isActive ? '#fff' : '#636e72') + ';transition:all 0.2s">' + d.icon + ' ' + d.name + '</div>';
+    const i18nKey = pdToI18n[s] || s;
+    const localizedName = t('subjects.' + i18nKey) || d.name;
+    subjectTabsHtml += '<div onclick="printablesSubject=\'' + s + '\';renderPrintablesScreen()" style="padding:8px 16px;border-radius:20px;cursor:pointer;font-size:13px;font-weight:' + (isActive?'700':'500') + ';white-space:nowrap;background:' + (isActive ? gradeColor : '#f0f0f0') + ';color:' + (isActive ? '#fff' : '#636e72') + ';transition:all 0.2s">' + d.icon + ' ' + localizedName + '</div>';
   });
 
   const subjectData = PRINTABLES_DATA[printablesSubject];
+  const subjectI18nKey = pdToI18n[printablesSubject] || printablesSubject;
+  const localizedSubjectName = t('subjects.' + subjectI18nKey) || (subjectData && subjectData.name) || '';
   const worksheets = subjectData && subjectData.worksheets[printablesGrade] ? subjectData.worksheets[printablesGrade] : [];
+  const problemsLabel = es ? 'problemas' : 'problems';
+  const previewLabel = es ? '👁️ Vista Previa' : '👁️ Preview';
+  const printLabel = es ? '🖨️ Imprimir' : '🖨️ Print';
+  const emptyMsg1 = es ? 'Aún no hay imprimibles para este grado y materia.' : 'No printables available for this grade and subject yet.';
+  const emptyMsg2 = es ? '¡Prueba con otra combinación!' : 'Try selecting a different combination!';
+  const heroTitle = es ? '🖨️ Hojas de Trabajo Imprimibles Gratis' : '🖨️ Free Printable Worksheets';
+  const heroDesc = es
+    ? 'Descarga e imprime hojas de trabajo gratis para cada grado y materia. Perfecto para tareas, práctica extra o escuela en casa.'
+    : 'Download and print free worksheets for every grade and subject. Perfect for homework, extra practice, or homeschool.';
+  const gradeLevelLabel = es ? 'Nivel de Grado' : 'Grade Level';
+  const subjectLabel = es ? 'Materia' : 'Subject';
 
   let cardsHtml = '';
   worksheets.forEach(function(ws, idx){
@@ -21312,30 +21335,30 @@ function renderPrintablesScreen(){
         '<div style="font-size:32px;margin-bottom:8px">' + subjectData.icon + '</div>' +
         '<h3 style="color:#2d3436;font-size:17px;margin-bottom:4px">' + ws.title + '</h3>' +
         '<p style="color:#636e72;font-size:13px">' + ws.desc + '</p>' +
-        '<div style="margin-top:8px;font-size:11px;color:' + gradeColor + ';font-weight:600">' + gradeName + ' • ' + subjectData.name + ' • ' + ws.problems.length + ' problems</div>' +
+        '<div style="margin-top:8px;font-size:11px;color:' + gradeColor + ';font-weight:600">' + gradeNameStr + ' • ' + localizedSubjectName + ' • ' + ws.problems.length + ' ' + problemsLabel + '</div>' +
       '</div>' +
       '<div style="padding:16px 24px;display:flex;gap:8px">' +
-        '<button onclick="previewPrintable(\'' + printablesSubject + '\',' + idx + ')" style="flex:1;padding:10px;border:2px solid ' + gradeColor + ';border-radius:10px;background:#fff;color:' + gradeColor + ';font-size:13px;font-weight:600;cursor:pointer">👁️ Preview</button>' +
-        '<button onclick="printWorksheet(\'' + printablesSubject + '\',' + idx + ')" style="flex:1;padding:10px;border:none;border-radius:10px;background:' + gradeColor + ';color:#fff;font-size:13px;font-weight:600;cursor:pointer">🖨️ Print</button>' +
+        '<button onclick="previewPrintable(\'' + printablesSubject + '\',' + idx + ')" style="flex:1;padding:10px;border:2px solid ' + gradeColor + ';border-radius:10px;background:#fff;color:' + gradeColor + ';font-size:13px;font-weight:600;cursor:pointer">' + previewLabel + '</button>' +
+        '<button onclick="printWorksheet(\'' + printablesSubject + '\',' + idx + ')" style="flex:1;padding:10px;border:none;border-radius:10px;background:' + gradeColor + ';color:#fff;font-size:13px;font-weight:600;cursor:pointer">' + printLabel + '</button>' +
       '</div>' +
     '</div>';
   });
 
   if(!cardsHtml){
-    cardsHtml = '<div style="grid-column:1/-1;text-align:center;padding:48px;color:#636e72"><p style="font-size:18px">No printables available for this grade and subject yet.</p><p>Try selecting a different combination!</p></div>';
+    cardsHtml = '<div style="grid-column:1/-1;text-align:center;padding:48px;color:#636e72"><p style="font-size:18px">' + emptyMsg1 + '</p><p>' + emptyMsg2 + '</p></div>';
   }
 
   screen.innerHTML =
     '<div style="background:linear-gradient(135deg,#00b894,#0984e3);padding:48px;text-align:center;color:#fff">' +
-      '<h1 style="font-size:36px;font-weight:800;margin-bottom:8px">🖨️ Free Printable Worksheets</h1>' +
-      '<p style="font-size:16px;opacity:0.9;max-width:550px;margin:0 auto">Download and print free worksheets for every grade and subject. Perfect for homework, extra practice, or homeschool.</p>' +
+      '<h1 style="font-size:36px;font-weight:800;margin-bottom:8px">' + heroTitle + '</h1>' +
+      '<p style="font-size:16px;opacity:0.9;max-width:550px;margin:0 auto">' + heroDesc + '</p>' +
     '</div>' +
     '<div style="padding:20px 24px;background:#fff;border-bottom:1px solid #eee">' +
-      '<div style="margin-bottom:12px;font-size:13px;font-weight:700;color:#636e72;text-transform:uppercase;letter-spacing:1px">Grade Level</div>' +
+      '<div style="margin-bottom:12px;font-size:13px;font-weight:700;color:#636e72;text-transform:uppercase;letter-spacing:1px">' + gradeLevelLabel + '</div>' +
       '<div style="display:flex;gap:6px;flex-wrap:wrap">' + gradeTabsHtml + '</div>' +
     '</div>' +
     '<div style="padding:16px 24px;background:#fafafa;border-bottom:1px solid #eee">' +
-      '<div style="margin-bottom:12px;font-size:13px;font-weight:700;color:#636e72;text-transform:uppercase;letter-spacing:1px">Subject</div>' +
+      '<div style="margin-bottom:12px;font-size:13px;font-weight:700;color:#636e72;text-transform:uppercase;letter-spacing:1px">' + subjectLabel + '</div>' +
       '<div style="display:flex;gap:6px;flex-wrap:wrap">' + subjectTabsHtml + '</div>' +
     '</div>' +
     '<div style="padding:32px 24px">' +
@@ -21419,11 +21442,14 @@ function showGradePicker(){
   const gp = document.getElementById('gradePickerScreen');
   gp.style.display = 'block';
 
+  const es = currentLang === 'es';
+  const heroTitle = es ? 'Elige Tu Grado' : 'Choose Your Grade';
+  const heroDesc = es ? '¡Elige tu grado para empezar a aprender!' : 'Select your grade level to start learning!';
   let cardsHtml = '';
   GRADES.forEach(function(g){
     const color = GRADE_COLORS[g] || '#00b894';
-    const name = GRADE_NAMES[g];
-    const ages = GRADE_AGES[g];
+    const name = gradeName(g);
+    const ages = gradeAge(g);
     const emoji = g === 'PK' ? '🧒' : g === 'K' ? '🎒' : g <= 2 ? '✏️' : g <= 5 ? '📚' : g <= 8 ? '🔬' : '🎓';
     cardsHtml += '<div class="grade-pick-card" data-grade="' + g + '" style="padding:28px 20px;border-radius:16px;border:2px solid ' + color + '33;cursor:pointer;transition:all 0.3s;background:#fff;text-align:center;min-width:140px">' +
       '<div style="width:64px;height:64px;border-radius:50%;background:' + color + ';color:#fff;display:flex;align-items:center;justify-content:center;margin:0 auto 12px;font-size:24px;font-weight:800">' + g + '</div>' +
@@ -21434,8 +21460,8 @@ function showGradePicker(){
   });
 
   gp.innerHTML = '<div style="background:linear-gradient(135deg,#00b894,#0984e3);padding:48px;text-align:center;color:#fff">' +
-    '<h1 style="font-size:36px;font-weight:800;margin-bottom:12px">Choose Your Grade</h1>' +
-    '<p style="font-size:16px;opacity:0.9">Select your grade level to start learning!</p>' +
+    '<h1 style="font-size:36px;font-weight:800;margin-bottom:12px">' + heroTitle + '</h1>' +
+    '<p style="font-size:16px;opacity:0.9">' + heroDesc + '</p>' +
   '</div>' +
   '<div style="padding:40px 48px">' +
     '<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:20px;max-width:1000px;margin:0 auto">' +
@@ -21468,67 +21494,91 @@ function showProfile(){
   const ps = document.getElementById('profileScreen');
   ps.style.display = 'block';
 
+  const es = currentLang === 'es';
   // Guest mode: show sign-up prompt instead of profile
   if(!currentUser){
+    const gTitle = es ? 'Crea Tu Cuenta Gratis' : 'Create Your Free Account';
+    const gDesc = es
+      ? 'Regístrate para llevar tu XP, guardar tu progreso, ganar insignias y retomar justo donde te quedaste.'
+      : 'Sign up to track your XP, save your progress, earn badges, and pick up exactly where you left off.';
+    const gCreate = es ? '✨ Crear Cuenta Gratis' : '✨ Create Free Account';
+    const gBack = es ? '← Volver a Explorar' : '← Back to Exploring';
+    const gFine = es ? 'Sin tarjeta de crédito · 100% gratis para estudiantes' : 'No credit card · 100% free for students';
     ps.innerHTML = `
       <div style="max-width:480px;margin:80px auto;padding:40px 32px;text-align:center;background:#fff;border-radius:24px;box-shadow:0 8px 32px rgba(0,0,0,0.08)">
         <div style="font-size:56px;margin-bottom:16px">🌟</div>
-        <h2 style="font-size:26px;font-weight:800;color:#2d3436;margin-bottom:10px">Create Your Free Account</h2>
-        <p style="color:#636e72;font-size:15px;line-height:1.6;margin-bottom:28px">Sign up to track your XP, save your progress, earn badges, and pick up exactly where you left off.</p>
-        <button onclick="showAuthScreen();" style="width:100%;padding:14px;background:linear-gradient(135deg,#00b894,#0984e3);color:#fff;border:none;border-radius:12px;font-size:16px;font-weight:700;cursor:pointer;margin-bottom:12px;box-shadow:0 4px 15px rgba(0,184,148,0.3)">✨ Create Free Account</button>
-        <button onclick="showHome();" style="width:100%;padding:12px;background:#f5f5f5;color:#636e72;border:none;border-radius:12px;font-size:14px;font-weight:600;cursor:pointer">← Back to Exploring</button>
-        <div style="margin-top:20px;font-size:12px;color:#b2bec3">No credit card · 100% free for students</div>
+        <h2 style="font-size:26px;font-weight:800;color:#2d3436;margin-bottom:10px">${gTitle}</h2>
+        <p style="color:#636e72;font-size:15px;line-height:1.6;margin-bottom:28px">${gDesc}</p>
+        <button onclick="showAuthScreen();" style="width:100%;padding:14px;background:linear-gradient(135deg,#00b894,#0984e3);color:#fff;border:none;border-radius:12px;font-size:16px;font-weight:700;cursor:pointer;margin-bottom:12px;box-shadow:0 4px 15px rgba(0,184,148,0.3)">${gCreate}</button>
+        <button onclick="showHome();" style="width:100%;padding:12px;background:#f5f5f5;color:#636e72;border:none;border-radius:12px;font-size:14px;font-weight:600;cursor:pointer">${gBack}</button>
+        <div style="margin-top:20px;font-size:12px;color:#b2bec3">${gFine}</div>
       </div>`;
     return;
   }
 
+  const labels = {
+    totalXP: es ? 'XP Total' : 'Total XP',
+    qsAnswered: es ? 'Preguntas Respondidas' : 'Questions Answered',
+    awardsEarnedLabel: es ? 'Premios Ganados' : 'Awards Earned',
+    subjectsAvailable: es ? 'Materias Disponibles' : 'Subjects Available',
+    weeklyProgress: es ? '📊 Tu Progreso Semanal' : '📊 Your Weekly Progress',
+    recentAwards: es ? 'Premios Recientes' : 'Recent Awards',
+    joinClass: es ? 'Unirse a una Clase' : 'Join a Class',
+    enterClassCode: es ? 'Escribe el código de clase (ej. ABC123)' : 'Enter class code (e.g. ABC123)',
+    joinClassBtn: es ? 'Unirse' : 'Join Class',
+    myAssignments: es ? 'Mis Asignaciones' : 'My Assignments',
+    noAssignments: es ? 'Aún no tienes asignaciones — ¡revisa pronto!' : 'No assignments assigned yet — check back soon!',
+    completeForAwards: es ? '¡Completa lecciones para ganar premios! Ganas uno cada 25 preguntas respondidas.' : 'Complete lessons to earn awards! You get one every 25 questions answered.',
+    backAcademy: es ? '← Volver a la Academia' : '← Back to Academy',
+    logOut: es ? '🚪 Cerrar Sesión' : '🚪 Log Out'
+  };
   ps.innerHTML = `
     <div style="max-width:800px;margin:0 auto;padding:40px 24px">
       <div style="text-align:center;margin-bottom:32px">
         <div style="width:100px;height:100px;border-radius:50%;background:linear-gradient(135deg,#00b894,#0984e3);color:#fff;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:40px;font-weight:800">${currentUser.name.charAt(0).toUpperCase()}</div>
         <h1 style="color:#2d3436;margin-bottom:4px">${currentUser.name}</h1>
-        <p style="color:#636e72">${currentUser.email + ' · '}${GRADE_NAMES[currentGrade]} · ${GRADE_AGES[currentGrade]}</p>
+        <p style="color:#636e72">${currentUser.email + ' · '}${gradeName(currentGrade)} · ${gradeAge(currentGrade)}</p>
       </div>
       <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:16px;margin-bottom:32px">
         <div style="padding:20px;border-radius:12px;background:#00b89411;text-align:center;border:1px solid #00b89433">
           <div style="font-size:32px;font-weight:800;color:#00b894">${totalXP}</div>
-          <div style="font-size:12px;color:#636e72;margin-top:4px">Total XP</div>
+          <div style="font-size:12px;color:#636e72;margin-top:4px">${labels.totalXP}</div>
         </div>
         <div style="padding:20px;border-radius:12px;background:#0984e311;text-align:center;border:1px solid #0984e333">
           <div style="font-size:32px;font-weight:800;color:#0984e3">${totalQuestionsEverAnswered}</div>
-          <div style="font-size:12px;color:#636e72;margin-top:4px">Questions Answered</div>
+          <div style="font-size:12px;color:#636e72;margin-top:4px">${labels.qsAnswered}</div>
         </div>
         <div style="padding:20px;border-radius:12px;background:#ffa50211;text-align:center;border:1px solid #ffa50233">
           <div style="font-size:32px;font-weight:800;color:#ffa502">${awardsEarned.length}</div>
-          <div style="font-size:12px;color:#636e72;margin-top:4px">Awards Earned</div>
+          <div style="font-size:12px;color:#636e72;margin-top:4px">${labels.awardsEarnedLabel}</div>
         </div>
         <div style="padding:20px;border-radius:12px;background:#e8439311;text-align:center;border:1px solid #e8439333">
           <div style="font-size:32px;font-weight:800;color:#e84393">7</div>
-          <div style="font-size:12px;color:#636e72;margin-top:4px">Subjects Available</div>
+          <div style="font-size:12px;color:#636e72;margin-top:4px">${labels.subjectsAvailable}</div>
         </div>
       </div>
-      <h2 style="color:#2d3436;margin-bottom:20px">📊 Your Weekly Progress</h2>
+      <h2 style="color:#2d3436;margin-bottom:20px">${labels.weeklyProgress}</h2>
       <div id="weekly-stats-dashboard"></div>
-      <h3 style="color:#2d3436;margin-bottom:16px;margin-top:32px">Recent Awards</h3>
+      <h3 style="color:#2d3436;margin-bottom:16px;margin-top:32px">${labels.recentAwards}</h3>
       <div style="display:flex;flex-wrap:wrap;gap:12px;margin-bottom:32px">
         ${awardsEarned.length > 0 ? awardsEarned.map(name => {
           const award = AWARD_TYPES.find(a => a.name === name);
           return award ? `<div style="padding:12px 20px;border-radius:12px;background:${award.color}11;border:1px solid ${award.color}33;text-align:center"><span style="font-size:24px">${award.emoji}</span><div style="font-size:11px;font-weight:600;color:${award.color};margin-top:4px">${award.name}</div></div>` : '';
-        }).join('') : '<p style="color:#636e72;font-size:14px">Complete lessons to earn awards! You get one every 25 questions answered.</p>'}
+        }).join('') : '<p style="color:#636e72;font-size:14px">' + labels.completeForAwards + '</p>'}
       </div>
-      <h3 style="color:#2d3436;margin-bottom:12px">Join a Class</h3>
+      <h3 style="color:#2d3436;margin-bottom:12px">${labels.joinClass}</h3>
       <div style="display:flex;gap:8px;margin-bottom:24px">
-        <input type="text" id="joinClassCodeInput" placeholder="Enter class code (e.g. ABC123)" style="flex:1;padding:12px 16px;border:2px solid #e0e0e0;border-radius:10px;font-size:14px;outline:none;text-transform:uppercase" maxlength="6">
-        <button onclick="joinClass(document.getElementById('joinClassCodeInput').value.trim().toUpperCase())" style="padding:12px 20px;background:#0984e3;color:#fff;border:none;border-radius:10px;font-weight:700;cursor:pointer;font-size:14px;white-space:nowrap">Join Class</button>
+        <input type="text" id="joinClassCodeInput" placeholder="${labels.enterClassCode}" style="flex:1;padding:12px 16px;border:2px solid #e0e0e0;border-radius:10px;font-size:14px;outline:none;text-transform:uppercase" maxlength="6">
+        <button onclick="joinClass(document.getElementById('joinClassCodeInput').value.trim().toUpperCase())" style="padding:12px 20px;background:#0984e3;color:#fff;border:none;border-radius:10px;font-weight:700;cursor:pointer;font-size:14px;white-space:nowrap">${labels.joinClassBtn}</button>
       </div>
       <div id="joinClassMsg" style="display:none;padding:10px 14px;border-radius:8px;font-size:13px;margin-bottom:16px"></div>
 
-      <h3 style="color:#2d3436;margin-bottom:12px">My Assignments</h3>
-      <div id="studentAssignmentsList" style="margin-bottom:32px"><p style="color:#636e72;font-size:14px">No assignments assigned yet — check back soon!</p></div>
+      <h3 style="color:#2d3436;margin-bottom:12px">${labels.myAssignments}</h3>
+      <div id="studentAssignmentsList" style="margin-bottom:32px"><p style="color:#636e72;font-size:14px">${labels.noAssignments}</p></div>
 
       <div style="display:flex;gap:12px;flex-wrap:wrap">
-        <button onclick="showAcademy()" style="padding:12px 24px;background:#00b894;color:#fff;border:none;border-radius:8px;font-weight:700;cursor:pointer;font-size:14px">← Back to Academy</button>
-        <button onclick="logoutStudent()" style="padding:12px 24px;background:#d63031;color:#fff;border:none;border-radius:8px;font-weight:700;cursor:pointer;font-size:14px">🚪 Log Out</button>
+        <button onclick="showAcademy()" style="padding:12px 24px;background:#00b894;color:#fff;border:none;border-radius:8px;font-weight:700;cursor:pointer;font-size:14px">${labels.backAcademy}</button>
+        <button onclick="logoutStudent()" style="padding:12px 24px;background:#d63031;color:#fff;border:none;border-radius:8px;font-weight:700;cursor:pointer;font-size:14px">${labels.logOut}</button>
       </div>
     </div>`;
   // Load assignments after rendering
@@ -21547,44 +21597,57 @@ function showProfile(){
       else if(s >= 80) proficientCount++;
     });
 
+    const sLabels = {
+      qsWeek: es ? 'Preguntas Esta Semana' : 'Questions This Week',
+      skillsPracticed: es ? 'Habilidades Practicadas' : 'Skills Practiced',
+      minutesSpent: es ? 'Minutos Usados' : 'Minutes Spent',
+      xpEarned: es ? 'XP Ganados' : 'XP Earned',
+      masteryProgress: es ? 'Progreso de Dominio' : 'Mastery Progress',
+      mastered: es ? '👑 Dominado' : '👑 Mastered',
+      proficient: es ? '✅ Experto' : '✅ Proficient',
+      overallStats: es ? 'Estadísticas Generales' : 'Overall Stats',
+      totalXPLine: es ? 'XP Total' : 'Total XP',
+      lifetimeQs: es ? 'Preguntas de por Vida' : 'Lifetime Questions',
+      awardsEarnedLine: es ? 'Premios Ganados' : 'Awards Earned'
+    };
     statsContainer.innerHTML = `
       <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:16px">
         <div style="text-align:center;padding:20px;background:#fff;border-radius:12px;border:1px solid #e0e0e0">
           <div style="font-size:32px;font-weight:800;color:#0984e3">${ws.questions}</div>
-          <div style="font-size:12px;color:#636e72;margin-top:4px">Questions This Week</div>
+          <div style="font-size:12px;color:#636e72;margin-top:4px">${sLabels.qsWeek}</div>
         </div>
         <div style="text-align:center;padding:20px;background:#fff;border-radius:12px;border:1px solid #e0e0e0">
           <div style="font-size:32px;font-weight:800;color:#00b894">${ws.lessonsCompleted}</div>
-          <div style="font-size:12px;color:#636e72;margin-top:4px">Skills Practiced</div>
+          <div style="font-size:12px;color:#636e72;margin-top:4px">${sLabels.skillsPracticed}</div>
         </div>
         <div style="text-align:center;padding:20px;background:#fff;border-radius:12px;border:1px solid #e0e0e0">
           <div style="font-size:32px;font-weight:800;color:#fdcb6e">${mins}</div>
-          <div style="font-size:12px;color:#636e72;margin-top:4px">Minutes Spent</div>
+          <div style="font-size:12px;color:#636e72;margin-top:4px">${sLabels.minutesSpent}</div>
         </div>
         <div style="text-align:center;padding:20px;background:#fff;border-radius:12px;border:1px solid #e0e0e0">
           <div style="font-size:32px;font-weight:800;color:#e17055">${ws.xpEarned || 0}</div>
-          <div style="font-size:12px;color:#636e72;margin-top:4px">XP Earned</div>
+          <div style="font-size:12px;color:#636e72;margin-top:4px">${sLabels.xpEarned}</div>
         </div>
       </div>
       <div style="display:flex;gap:16px;margin-top:16px;flex-wrap:wrap">
         <div style="flex:1;min-width:180px;padding:16px;background:#fff;border-radius:12px;border:1px solid #e0e0e0">
-          <div style="font-size:13px;color:#636e72;margin-bottom:8px;font-weight:600">Mastery Progress</div>
+          <div style="font-size:13px;color:#636e72;margin-bottom:8px;font-weight:600">${sLabels.masteryProgress}</div>
           <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px">
-            <span style="font-size:12px;color:#fdcb6e;font-weight:700;width:70px">👑 Mastered</span>
+            <span style="font-size:12px;color:#fdcb6e;font-weight:700;width:70px">${sLabels.mastered}</span>
             <div style="flex:1;height:6px;background:#f0f0f0;border-radius:3px"><div style="width:${totalSkills ? Math.round(masteredCount/totalSkills*100) : 0}%;height:100%;background:#fdcb6e;border-radius:3px"></div></div>
             <span style="font-size:11px;color:#636e72">${masteredCount}</span>
           </div>
           <div style="display:flex;align-items:center;gap:10px">
-            <span style="font-size:12px;color:#0984e3;font-weight:700;width:70px">✅ Proficient</span>
+            <span style="font-size:12px;color:#0984e3;font-weight:700;width:70px">${sLabels.proficient}</span>
             <div style="flex:1;height:6px;background:#f0f0f0;border-radius:3px"><div style="width:${totalSkills ? Math.round(proficientCount/totalSkills*100) : 0}%;height:100%;background:#0984e3;border-radius:3px"></div></div>
             <span style="font-size:11px;color:#636e72">${proficientCount}</span>
           </div>
         </div>
         <div style="flex:1;min-width:180px;padding:16px;background:#fff;border-radius:12px;border:1px solid #e0e0e0">
-          <div style="font-size:13px;color:#636e72;margin-bottom:8px;font-weight:600">Overall Stats</div>
-          <div style="font-size:13px;color:#2d3436;margin-bottom:4px">Total XP: <strong>${totalXP}</strong></div>
-          <div style="font-size:13px;color:#2d3436;margin-bottom:4px">Lifetime Questions: <strong>${totalQuestionsEverAnswered}</strong></div>
-          <div style="font-size:13px;color:#2d3436">Awards Earned: <strong>${awardsEarned.length}</strong></div>
+          <div style="font-size:13px;color:#636e72;margin-bottom:8px;font-weight:600">${sLabels.overallStats}</div>
+          <div style="font-size:13px;color:#2d3436;margin-bottom:4px">${sLabels.totalXPLine}: <strong>${totalXP}</strong></div>
+          <div style="font-size:13px;color:#2d3436;margin-bottom:4px">${sLabels.lifetimeQs}: <strong>${totalQuestionsEverAnswered}</strong></div>
+          <div style="font-size:13px;color:#2d3436">${sLabels.awardsEarnedLine}: <strong>${awardsEarned.length}</strong></div>
         </div>
       </div>
     `;
@@ -21592,7 +21655,8 @@ function showProfile(){
 }
 
 function logoutStudent(){
-  if(!confirm('Are you sure you want to log out?')) return;
+  var confirmMsg = currentLang === 'es' ? '¿Seguro que quieres cerrar sesión?' : 'Are you sure you want to log out?';
+  if(!confirm(confirmMsg)) return;
   // Save user's progress one final time before logout (per-user key preserved)
   saveProgress();
   // Clear auth session
@@ -21631,20 +21695,36 @@ function showAssessment(){
 
   const as = document.getElementById('assessmentScreen');
   as.style.display = 'block';
+  const es = currentLang === 'es';
+  const subjectKeys = ['app-building','financial-literacy','math','science','english','history','social-studies'];
+  const title = es ? '📝 Evaluaciones' : '📝 Assessments';
+  const desc = es
+    ? `Pruebas diagnósticas y evaluaciones de progreso para ${gradeName(currentGrade)}.`
+    : `Diagnostic tests and progress assessments for ${GRADE_NAMES[currentGrade]}.`;
+  const assessmentLabel = es ? 'Evaluación' : 'Assessment';
+  const comingSoon = es ? 'Muy Pronto' : 'Coming Soon';
+  const backBtn = es ? '← Volver a la Academia' : '← Back to Academy';
+  const cardDesc = function(name){
+    return es
+      ? `Pon a prueba tu conocimiento de ${name.toLowerCase()} en tu grado.`
+      : `Test your knowledge in ${name.toLowerCase()} at your grade level.`;
+  };
   as.innerHTML = `
     <div style="max-width:800px;margin:0 auto;padding:40px 24px;text-align:center">
-      <h1 style="color:#2d3436;margin-bottom:12px">📝 Assessments</h1>
-      <p style="color:#636e72;margin-bottom:32px">Diagnostic tests and progress assessments for ${GRADE_NAMES[currentGrade]}.</p>
+      <h1 style="color:#2d3436;margin-bottom:12px">${title}</h1>
+      <p style="color:#636e72;margin-bottom:32px">${desc}</p>
       <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px">
-        ${['App Building','Financial Literacy','Math','Science','English','History','Social Studies'].map(s => `
+        ${subjectKeys.map(key => {
+          const name = t('subjects.' + key);
+          return `
           <div style="padding:24px;border-radius:12px;border:1px solid #e0e0e0;text-align:left;background:#fff">
-            <h3 style="color:#2d3436;margin-bottom:4px">${s} Assessment</h3>
-            <p style="font-size:13px;color:#636e72;margin-bottom:12px">Test your knowledge in ${s.toLowerCase()} at your grade level.</p>
-            <div style="padding:8px 16px;background:#00b89411;color:#00b894;border-radius:6px;display:inline-block;font-weight:600;font-size:13px;cursor:pointer">Coming Soon</div>
+            <h3 style="color:#2d3436;margin-bottom:4px">${name} — ${assessmentLabel}</h3>
+            <p style="font-size:13px;color:#636e72;margin-bottom:12px">${cardDesc(name)}</p>
+            <div style="padding:8px 16px;background:#00b89411;color:#00b894;border-radius:6px;display:inline-block;font-weight:600;font-size:13px;cursor:pointer">${comingSoon}</div>
           </div>
-        `).join('')}
+        `; }).join('')}
       </div>
-      <button onclick="showAcademy()" style="padding:12px 24px;background:#00b894;color:#fff;border:none;border-radius:8px;font-weight:700;cursor:pointer;font-size:14px;margin-top:32px">← Back to Academy</button>
+      <button onclick="showAcademy()" style="padding:12px 24px;background:#00b894;color:#fff;border:none;border-radius:8px;font-weight:700;cursor:pointer;font-size:14px;margin-top:32px">${backBtn}</button>
     </div>`;
 }
 
