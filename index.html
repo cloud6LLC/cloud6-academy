@@ -15506,10 +15506,8 @@ function autoTranslateActivitiesES(){
         if(replaced && replaced !== out){ return replaced; }
       }
     }
-    // Last-resort word-by-word translation so untranslated content
-    // at least reads partly in Spanish instead of fully in English.
-    var wb = _wordByWord(s);
-    if(wb && wb !== s) return wb;
+    // NO word-by-word fallback — it produces Spanglish gibberish.
+    // Untranslated English stays English so readers aren't misled by broken output.
     return null;
   }
 
@@ -15871,6 +15869,44 @@ function renderGradeView(){
 // QUESTION SYSTEM (10 questions per lesson)
 // ═══════════════════════════════════════════════════════════
 var currentLessonData = null;
+// ═══════════════════════════════════════════════════════════
+// RUNTIME QUESTION TRANSLATIONS (Spanish twins for generated pools)
+// Populated below with hand-translated pairs. When a generated question
+// matches an entry here, its _es fields are attached so tf() can read them.
+// ═══════════════════════════════════════════════════════════
+const QUESTION_POOL_ES = {}; // "English question text" -> {q, choices:[{text, explanation}]}
+function attachQuestionES(q){
+  if(!q) return q;
+  const src = q.question || (q.activity && q.activity.instructions) || '';
+  const es = src ? QUESTION_POOL_ES[src] : null;
+  if(es){
+    if(es.q != null) q.question_es = es.q;
+    if(Array.isArray(es.choices) && Array.isArray(q.choices)){
+      es.choices.forEach(function(ec, i){
+        if(!q.choices[i]) return;
+        if(ec && ec.text != null) q.choices[i].text_es = ec.text;
+        if(ec && ec.explanation != null) q.choices[i].explanation_es = ec.explanation;
+      });
+    }
+  }
+  // Also attach to the nested activity object if present (for mc activity objects)
+  if(q.activity){
+    const asrc = q.activity.instructions || q.activity.prompt || '';
+    const aes = asrc ? QUESTION_POOL_ES[asrc] : null;
+    if(aes){
+      if(aes.q != null) q.activity.instructions_es = aes.q;
+      if(Array.isArray(aes.choices) && Array.isArray(q.activity.choices)){
+        aes.choices.forEach(function(ec, i){
+          if(!q.activity.choices[i]) return;
+          if(ec && ec.text != null) q.activity.choices[i].text_es = ec.text;
+          if(ec && ec.explanation != null) q.activity.choices[i].explanation_es = ec.explanation;
+        });
+      }
+    }
+  }
+  return q;
+}
+
 function generateLessonQuestions(lesson){
   currentLessonData = lesson; // Store globally for subject detection
   const questions = [];
@@ -15938,7 +15974,8 @@ function generateLessonQuestions(lesson){
       questions.push(generateSubjectQuestion(lesson.title, textSources, i));
     }
   }
-  return questions.slice(0, 10);
+  // Attach Spanish twins to every question from the curated pool dictionary
+  return questions.slice(0, 10).map(attachQuestionES);
 }
 
 // ═══ RANDOM MATH QUESTION GENERATOR (IXL-style) ═══
@@ -17485,7 +17522,7 @@ function showQuestion(index){
       </div>`;
   });
 
-  const questionText = (q.activity ? tf(q.activity, 'instructions') : '') || (q.activity ? tf(q.activity, 'prompt') : '') || q.question || t('ui.answerThisQuestion');
+  const questionText = (q.activity ? tf(q.activity, 'instructions') : '') || (q.activity ? tf(q.activity, 'prompt') : '') || tf(q, 'question') || t('ui.answerThisQuestion');
 
   area.innerHTML = `
     <div class="question-counter">${t('ui.questionOf').replace('{n}', index+1)}</div>
@@ -18606,22 +18643,25 @@ function renderMatchActivity(activity, qIndex){
   matchSelectedLeft = null;
   matchCompleted = 0;
   // Shuffle right side
-  const rightItems = pairs.map((p,i) => ({text: p.right, idx: i}));
+  const rightItems = pairs.map((p,i) => ({text: tf(p, 'right'), idx: i}));
   for(let i = rightItems.length-1; i > 0; i--){ const j = Math.floor(Math.random()*(i+1)); [rightItems[i],rightItems[j]]=[rightItems[j],rightItems[i]]; }
+  const es = currentLang === 'es';
+  const defaultInstr = es ? '¡Une cada elemento de la izquierda con su pareja a la derecha!' : 'Match each item on the left with its pair on the right!';
+  const hint = es ? 'Toca un elemento a la izquierda y luego toca su pareja a la derecha.' : 'Click an item on the left, then click its match on the right.';
   return `
-    <div class="question-counter">Question ${qIndex+1} of 10</div>
-    <div style="font-weight:600;margin-bottom:16px;font-size:16px">${activity.instructions || 'Match each item on the left with its pair on the right!'}</div>
-    <p style="font-size:13px;color:#636e72;margin-bottom:16px">Click an item on the left, then click its match on the right.</p>
+    <div class="question-counter">${t('ui.questionOf').replace('{n}', qIndex+1)}</div>
+    <div style="font-weight:600;margin-bottom:16px;font-size:16px">${tf(activity, 'instructions') || defaultInstr}</div>
+    <p style="font-size:13px;color:#636e72;margin-bottom:16px">${hint}</p>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
       <div id="match-left-col">
-        ${pairs.map((p,i) => `<div id="ml-${i}" class="match-item-left" onclick="selectMatchLeft(${i})" style="padding:14px;background:#f0f9f7;border:2px solid #00b894;border-radius:10px;margin-bottom:8px;font-size:14px;cursor:pointer;transition:all 0.2s;user-select:none">${p.left}</div>`).join('')}
+        ${pairs.map((p,i) => `<div id="ml-${i}" class="match-item-left" onclick="selectMatchLeft(${i})" style="padding:14px;background:#f0f9f7;border:2px solid #00b894;border-radius:10px;margin-bottom:8px;font-size:14px;cursor:pointer;transition:all 0.2s;user-select:none">${tf(p, 'left')}</div>`).join('')}
       </div>
       <div id="match-right-col">
         ${rightItems.map(r => `<div id="mr-${r.idx}" class="match-item-right" onclick="selectMatchRight(${r.idx})" style="padding:14px;background:#fff5f5;border:2px solid #e17055;border-radius:10px;margin-bottom:8px;font-size:14px;cursor:pointer;transition:all 0.2s;user-select:none">${r.text}</div>`).join('')}
       </div>
     </div>
     <div id="match-feedback" style="margin-top:12px"></div>
-    <button id="match-next-btn" class="next-btn" style="margin-top:16px;display:none" onclick="showQuestion(${qIndex+1})">Next Question →</button>
+    <button id="match-next-btn" class="next-btn" style="margin-top:16px;display:none" onclick="showQuestion(${qIndex+1})">${t('ui.nextQuestion')}</button>
   `;
 }
 
@@ -18674,23 +18714,26 @@ let ddPlaced = 0;
 let ddTotalTargets = 0;
 
 function renderDragDropActivity(activity, qIndex){
-  const opts = (activity.dragOptions||[]).map(o => typeof o === 'string' ? o : (o.label || o));
-  const targets = (activity.dropTargets||[]).map(t => typeof t === 'string' ? t : (t.label || t));
+  const opts = (activity.dragOptions||[]).map(o => typeof o === 'string' ? o : (tf(o, 'label') || o));
+  const targets = (activity.dropTargets||[]).map(o => typeof o === 'string' ? o : (tf(o, 'label') || o));
   ddSelectedOption = null;
   ddPlaced = 0;
   ddTotalTargets = targets.length;
+  const es = currentLang === 'es';
+  const defaultInstr = es ? '¡Coloca cada elemento en el lugar correcto!' : 'Place each item in the correct spot!';
+  const hint = es ? 'Toca un elemento de abajo y luego toca el lugar donde va.' : 'Click an item below, then click the target where it belongs.';
   return `
-    <div class="question-counter">Question ${qIndex+1} of 10</div>
-    <div style="font-weight:600;margin-bottom:16px;font-size:16px">${activity.instructions || 'Place each item in the correct spot!'}</div>
-    <p style="font-size:13px;color:#636e72;margin-bottom:16px">Click an item below, then click the target where it belongs.</p>
+    <div class="question-counter">${t('ui.questionOf').replace('{n}', qIndex+1)}</div>
+    <div style="font-weight:600;margin-bottom:16px;font-size:16px">${tf(activity, 'instructions') || defaultInstr}</div>
+    <p style="font-size:13px;color:#636e72;margin-bottom:16px">${hint}</p>
     <div id="dd-options" style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px">
       ${opts.map((o,i) => `<div id="ddo-${i}" class="dd-opt" onclick="selectDDOption(${i})" style="padding:10px 18px;background:#0984e3;color:#fff;border-radius:10px;cursor:pointer;font-size:14px;font-weight:600;transition:all 0.2s;user-select:none">${o}</div>`).join('')}
     </div>
     <div id="dd-targets" style="display:flex;flex-wrap:wrap;gap:12px">
-      ${targets.map((t,i) => `<div id="ddt-${i}" class="dd-target" onclick="placeDDOption(${i})" style="padding:18px 24px;border:2px dashed #b2bec3;border-radius:10px;min-width:140px;text-align:center;color:#636e72;font-size:14px;cursor:pointer;transition:all 0.2s;min-height:56px">${t}</div>`).join('')}
+      ${targets.map((tg,i) => `<div id="ddt-${i}" class="dd-target" onclick="placeDDOption(${i})" style="padding:18px 24px;border:2px dashed #b2bec3;border-radius:10px;min-width:140px;text-align:center;color:#636e72;font-size:14px;cursor:pointer;transition:all 0.2s;min-height:56px">${tg}</div>`).join('')}
     </div>
     <div id="dd-feedback" style="margin-top:12px"></div>
-    <button id="dd-next-btn" class="next-btn" style="margin-top:16px;display:none" onclick="showQuestion(${qIndex+1})">Next Question →</button>
+    <button id="dd-next-btn" class="next-btn" style="margin-top:16px;display:none" onclick="showQuestion(${qIndex+1})">${t('ui.nextQuestion')}</button>
   `;
 }
 
@@ -18737,20 +18780,25 @@ function placeDDOption(targetIdx){
 // FILL-IN-THE-BLANK ACTIVITY
 // ═══════════════════════════════════════════════════════════
 function renderFillBlankActivity(activity, qIndex){
-  const prompt = activity.prompt || activity.instructions || 'Fill in the blank:';
+  const es = currentLang === 'es';
+  const defaultPrompt = es ? 'Completa la frase:' : 'Fill in the blank:';
+  const defaultInstr = es ? '¡Completa la frase!' : 'Fill in the blank!';
+  const prompt = tf(activity, 'prompt') || tf(activity, 'instructions') || defaultPrompt;
   const answers = activity.correctAnswers;
   // If answers is a string that looks like "[Any..." then it's open-ended
   const isOpenEnded = typeof answers === 'string' && answers.startsWith('[');
+  const placeholder = es ? 'Escribe tu respuesta aquí...' : 'Type your answer here...';
+  const submitBtn = es ? 'Enviar ✓' : 'Submit ✓';
   return `
-    <div class="question-counter">Question ${qIndex+1} of 10</div>
-    <div style="font-weight:600;margin-bottom:16px;font-size:16px">${activity.instructions || 'Fill in the blank!'}</div>
+    <div class="question-counter">${t('ui.questionOf').replace('{n}', qIndex+1)}</div>
+    <div style="font-weight:600;margin-bottom:16px;font-size:16px">${tf(activity, 'instructions') || defaultInstr}</div>
     <div style="background:#f8f9fa;padding:20px;border-radius:12px;margin-bottom:16px;font-size:15px;line-height:1.8;color:#2d3436;border-left:4px solid #0984e3">${prompt}</div>
     <div style="display:flex;gap:8px;align-items:center;margin-bottom:16px">
-      <input type="text" id="fb-input-${qIndex}" placeholder="Type your answer here..." style="flex:1;padding:14px 18px;border:2px solid #e0e0e0;border-radius:10px;font-size:15px;outline:none;transition:border-color 0.2s" onfocus="this.style.borderColor='#0984e3'" onblur="this.style.borderColor='#e0e0e0'" onkeypress="if(event.key==='Enter')checkFillBlank(${qIndex},${isOpenEnded})">
-      <button onclick="checkFillBlank(${qIndex},${isOpenEnded})" style="padding:14px 24px;background:#00b894;color:#fff;border:none;border-radius:10px;font-weight:700;cursor:pointer;font-size:14px;white-space:nowrap">Submit ✓</button>
+      <input type="text" id="fb-input-${qIndex}" placeholder="${placeholder}" style="flex:1;padding:14px 18px;border:2px solid #e0e0e0;border-radius:10px;font-size:15px;outline:none;transition:border-color 0.2s" onfocus="this.style.borderColor='#0984e3'" onblur="this.style.borderColor='#e0e0e0'" onkeypress="if(event.key==='Enter')checkFillBlank(${qIndex},${isOpenEnded})">
+      <button onclick="checkFillBlank(${qIndex},${isOpenEnded})" style="padding:14px 24px;background:#00b894;color:#fff;border:none;border-radius:10px;font-weight:700;cursor:pointer;font-size:14px;white-space:nowrap">${submitBtn}</button>
     </div>
     <div id="fb-feedback-${qIndex}" style="display:none"></div>
-    <button id="fb-next-${qIndex}" class="next-btn" style="display:none;margin-top:12px" onclick="showQuestion(${qIndex+1})">Next Question →</button>
+    <button id="fb-next-${qIndex}" class="next-btn" style="display:none;margin-top:12px" onclick="showQuestion(${qIndex+1})">${t('ui.nextQuestion')}</button>
   `;
 }
 
@@ -18796,22 +18844,28 @@ let sortItems = [];
 let sortCorrectOrder = [];
 
 function renderSortActivity(activity, qIndex){
-  const items = [...(activity.sortItems || [])];
+  const es = currentLang === 'es';
+  // Use _es variant of sortItems if provided
+  const rawItems = tf(activity, 'sortItems') || activity.sortItems || [];
+  const items = [...rawItems];
   sortCorrectOrder = activity.correctOrder || items;
   // Shuffle items
   for(let i = items.length-1; i > 0; i--){ const j = Math.floor(Math.random()*(i+1)); [items[i],items[j]]=[items[j],items[i]]; }
   sortItems = items;
+  const defaultInstr = es ? '¡Pon estos elementos en el orden correcto!' : 'Put these items in the correct order!';
+  const hint = es ? 'Toca los elementos en orden (del primero al último).' : 'Click items in the correct order (first to last).';
+  const yourOrder = es ? 'Tu orden:' : 'Your order:';
   return `
-    <div class="question-counter">Question ${qIndex+1} of 10</div>
-    <div style="font-weight:600;margin-bottom:16px;font-size:16px">${activity.instructions || 'Put these items in the correct order!'}</div>
-    <p style="font-size:13px;color:#636e72;margin-bottom:16px">Click items in the correct order (first to last).</p>
+    <div class="question-counter">${t('ui.questionOf').replace('{n}', qIndex+1)}</div>
+    <div style="font-weight:600;margin-bottom:16px;font-size:16px">${tf(activity, 'instructions') || defaultInstr}</div>
+    <p style="font-size:13px;color:#636e72;margin-bottom:16px">${hint}</p>
     <div id="sort-items" style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px">
       ${items.map((item,i) => `<div id="si-${i}" class="sort-item" onclick="pickSortItem(${i})" style="padding:12px 20px;background:#6c5ce7;color:#fff;border-radius:10px;cursor:pointer;font-size:14px;font-weight:600;transition:all 0.2s;user-select:none">${item}</div>`).join('')}
     </div>
-    <div style="font-weight:600;font-size:13px;color:#636e72;margin-bottom:8px">Your order:</div>
+    <div style="font-weight:600;font-size:13px;color:#636e72;margin-bottom:8px">${yourOrder}</div>
     <div id="sort-result" style="display:flex;flex-wrap:wrap;gap:8px;min-height:48px;padding:12px;border:2px dashed #b2bec3;border-radius:10px;margin-bottom:16px"></div>
     <div id="sort-feedback" style="display:none"></div>
-    <button id="sort-next-${qIndex}" class="next-btn" style="display:none;margin-top:12px" onclick="showQuestion(${qIndex+1})">Next Question →</button>
+    <button id="sort-next-${qIndex}" class="next-btn" style="display:none;margin-top:12px" onclick="showQuestion(${qIndex+1})">${t('ui.nextQuestion')}</button>
   `;
 }
 
