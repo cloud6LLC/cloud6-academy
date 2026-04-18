@@ -18158,15 +18158,7 @@ function generateRandomMathQ(grade, title, lessonId, seed){
     else { var a=rInt(2,8); q='Find the derivative: f(x) = '+a+'x³'; correct=String(3*a)+'x²'; w1=a+'x²'; w2=String(a)+'x³'; expl='f\'(x) = 3·'+a+'x² = '+(3*a)+'x²'; }
   }
 
-  return {
-    type: 'multiple-choice',
-    question: q,
-    choices: shuffleArray([
-      {text: correct, correct: true, explanation: '✅ ' + expl},
-      {text: w1, correct: false, explanation: 'Not quite. ' + expl},
-      {text: w2, correct: false, explanation: 'Not quite. ' + expl}
-    ])
-  };
+  return mcQ(q, correct, w1, w2, expl);
 }
 
 function gcd(a,b){ return b===0? a : gcd(b, a%b); }
@@ -18776,13 +18768,98 @@ function generateTopicQuestion(grade, title, seed){
   return null; // No topic match, use grade fallback
 }
 
+// Translate English math-question templates to Spanish at render time.
+// Numbers, math symbols, and emojis are preserved exactly; only the
+// surrounding English words are swapped.
+function localizeMathStr(s){
+  if(typeof s !== 'string') return s;
+  var out = s;
+  // Question stems
+  out = out.replace(/^Count: /, 'Cuenta: ');
+  out = out.replace(/ How many\?$/, ' ¿Cuántas hay?');
+  out = out.replace(/^What is /, '¿Cuánto es ');
+  out = out.replace(/\?$/, '?'); // keep
+  out = out.replace(/^Solve: /, 'Resuelve: ');
+  out = out.replace(/^Compare: /, 'Compara: ');
+  out = out.replace(/\. Pick >, <, or =/, '. Elige >, < o =');
+  out = out.replace(/^Round /, 'Redondea ');
+  out = out.replace(/ to the nearest tens/, ' a la decena más cercana');
+  out = out.replace(/ to the nearest hundreds/, ' a la centena más cercana');
+  out = out.replace(/ to the nearest thousands/, ' al millar más cercano');
+  out = out.replace(/^Area of triangle: base=/, 'Área del triángulo: base=');
+  out = out.replace(/^Area of circle, radius=/, 'Área del círculo, radio=');
+  out = out.replace(/^Area of rectangle: length=/, 'Área del rectángulo: largo=');
+  out = out.replace(/, height=/, ', altura=');
+  out = out.replace(/, width=/, ', ancho=');
+  out = out.replace(/^Volume of a box: length=/, 'Volumen de una caja: largo=');
+  out = out.replace(/^Volume of sphere, radius=/, 'Volumen de esfera, radio=');
+  out = out.replace(/^Circumference of circle, radius=/, 'Circunferencia del círculo, radio=');
+  out = out.replace(/^Slope between /, 'Pendiente entre ');
+  out = out.replace(/^What is the slope of /, '¿Cuál es la pendiente de ');
+  out = out.replace(/^Triangle angles: /, 'Ángulos del triángulo: ');
+  out = out.replace(/\. Find the third angle\.$/, '. Encuentra el tercer ángulo.');
+  out = out.replace(/^Right triangle: legs=/, 'Triángulo rectángulo: catetos=');
+  out = out.replace(/\. Hypotenuse\?$/, '. ¿Hipotenusa?');
+  out = out.replace(/^Simplify: /, 'Simplifica: ');
+  out = out.replace(/^Factor: /, 'Factoriza: ');
+  out = out.replace(/^Evaluate: /, 'Evalúa: ');
+  out = out.replace(/^Find the derivative: /, 'Encuentra la derivada: ');
+  out = out.replace(/, find /, ', encuentra ');
+  out = out.replace(/^If /, 'Si ');
+  out = out.replace(/ as a decimal\?$/, ' como decimal?');
+  out = out.replace(/ \(factorial\)\?$/, ' (factorial)?');
+  out = out.replace(/^What is the GCF of /, '¿Cuál es el MCD de ');
+  out = out.replace(/ and (\d+)\?$/, ' y $1?');
+  out = out.replace(/^A recipe uses /, 'Una receta usa ');
+  out = out.replace(/ cups of flour for every /, ' tazas de harina por cada ');
+  out = out.replace(/ cups of sugar\. What is the ratio of flour to sugar\?$/, ' tazas de azúcar. ¿Cuál es la razón de harina a azúcar?');
+  out = out.replace(/^The ratio of boys to girls is /, 'La razón de niños a niñas es ');
+  out = out.replace(/\. If there are (\d+) boys, how many girls\?$/, '. Si hay $1 niños, ¿cuántas niñas?');
+  out = out.replace(/^Simplify the ratio /, 'Simplifica la razón ');
+  out = out.replace(/^There are (\d+) marbles total/, 'Hay $1 canicas en total');
+  out = out.replace(/\. The ratio of red to blue is /, '. La razón de rojas a azules es ');
+  out = out.replace(/\. How many red\?$/, '. ¿Cuántas rojas?');
+  out = out.replace(/, what is x\?$/, ', ¿cuánto vale x?');
+
+  // Explanations
+  out = out.replace(/^Count each one: there are /, 'Cuenta cada uno: ¡hay ');
+  out = out.replace(/(\d+)!$/, '$1!');
+  out = out.replace(/ rounded to nearest tens = /, ' redondeado a la decena más cercana = ');
+  out = out.replace(/ rounded to nearest hundreds = /, ' redondeado a la centena más cercana = ');
+  out = out.replace(/ rounded to nearest thousands = /, ' redondeado al millar más cercano = ');
+  out = out.replace(/^Multiply first: /, 'Multiplica primero: ');
+  out = out.replace(/, then add /, ', luego suma ');
+  out = out.replace(/, then /, ', luego ');
+  out = out.replace(/^Parentheses first: /, 'Paréntesis primero: ');
+  out = out.replace(/^The greatest common factor of /, 'El máximo común divisor de ');
+  out = out.replace(/^Cross multiply: /, 'Multiplica en cruz: ');
+  out = out.replace(/^Divide both by /, 'Divide ambos entre ');
+  out = out.replace(/^Total parts = /, 'Partes totales = ');
+  out = out.replace(/^Multiply both parts by /, 'Multiplica ambas partes por ');
+  out = out.replace(/^Negative × negative = positive: /, 'Negativo × negativo = positivo: ');
+  out = out.replace(/^Roots are /, 'Las raíces son ');
+  out = out.replace(/^In y = mx \+ b, slope m = /, 'En y = mx + b, la pendiente m = ');
+  out = out.replace(/^Slope = /, 'Pendiente = ');
+  out = out.replace(/ is greater than /, ' es mayor que ');
+  out = out.replace(/ is less than /, ' es menor que ');
+  out = out.replace(/^The ratio is /, 'La razón es ');
+  out = out.replace(/ \(flour to sugar\)$/, ' (harina a azúcar)');
+  out = out.replace(/, so /, ', así que ');
+  out = out.replace(/ girls$/, ' niñas');
+  return out;
+}
+
 function mcQ(q,correct,w1,w2,expl){
+  var es = (typeof currentLang !== 'undefined' && currentLang === 'es');
+  var qOut = es ? localizeMathStr(q) : q;
+  var explOut = es ? localizeMathStr(expl) : expl;
+  var wrongPrefix = es ? '❌ La respuesta correcta es: ' + correct + '. ' : 'Not quite. ';
   return {
-    type:'multiple-choice', question:q,
+    type:'multiple-choice', question:qOut,
     choices: shuffleArray([
-      {text:correct,correct:true,explanation:'✅ '+expl},
-      {text:w1,correct:false,explanation:'Not quite. '+expl},
-      {text:w2,correct:false,explanation:'Not quite. '+expl}
+      {text:correct,correct:true,explanation:'✅ '+explOut},
+      {text:w1,correct:false,explanation:wrongPrefix+explOut},
+      {text:w2,correct:false,explanation:wrongPrefix+explOut}
     ])
   };
 }
