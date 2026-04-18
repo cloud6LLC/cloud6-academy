@@ -18021,6 +18021,326 @@ Object.assign(POOL_ES_BY_Q, {
   'What was a major effect of the Industrial Revolution?':
     { q:'¿Cuál fue un efecto importante de la Revolución Industrial?', c:'La producción masiva hizo que los bienes fueran más baratos y accesibles', w1:'Todos se volvieron agricultores', w2:'Se prohibieron las máquinas', e:'Las fábricas producían grandes cantidades rápidamente y a menor costo' }
 });
+
+// ══ Batch 4 — Financial Literacy topic pools (Tax, Budget, Business, Invest, Insurance, Income, Marketing, NetWorth, Credit)
+Object.assign(POOL_ES_BY_Q, {
+  'A business laptop costs $800. If you deduct it as a business expense at a 25% tax rate, how much do you save on taxes?':
+    { q:'Una laptop para el negocio cuesta $800. Si la deduces como gasto de negocio con una tasa de impuestos del 25%, ¿cuánto ahorras en impuestos?', c:'$200', w1:'$800', w2:'$400', e:'25% de $800 = $200 ahorrados en impuestos' },
+  'Which of these is a valid business tax deduction?':
+    { q:'¿Cuál de estos es una deducción válida para un negocio?', c:'Útiles de oficina usados para tu negocio', w1:'Comida para tu familia', w2:'Boletos de cine por diversión', e:'Los gastos del negocio son deducibles; los personales no' },
+  'Your home office is 10% of your home. If rent is $1,200/month, what is your monthly home office deduction?':
+    { q:'Tu oficina en casa es el 10% de tu hogar. Si la renta es $1,200/mes, ¿cuál es tu deducción mensual?', c:'$120', w1:'$1,200', w2:'$12', e:'10% de $1,200 = $120' },
+  'What does "tax deduction" mean?':
+    { q:'¿Qué significa "deducción de impuestos"?', c:'Un gasto que reduce el ingreso sobre el que pagas impuestos', w1:'Dinero gratis del gobierno', w2:'Una multa por no pagar impuestos', e:'Las deducciones reducen el ingreso gravable' },
+  'You earned $5,000 from your business and had $1,000 in deductions. What is your taxable income?':
+    { q:'Ganaste $5,000 con tu negocio y tuviste $1,000 en deducciones. ¿Cuál es tu ingreso gravable?', c:'$4,000', w1:'$5,000', w2:'$6,000', e:'$5,000 - $1,000 de deducciones = $4,000 gravable' },
+  'Which expense can a kid entrepreneur deduct?':
+    { q:'¿Qué gasto puede deducir un niño emprendedor?', c:'Materiales de arte usados para hacer productos para vender', w1:'Dulces comprados en la tienda', w2:'Un juguete para uso personal', e:'Los gastos usados en el negocio son deducibles' },
+  'If your tax rate is 20% and you owe $3,000 in taxes, what was your taxable income?':
+    { q:'Si tu tasa de impuestos es 20% y debes $3,000, ¿cuál era tu ingreso gravable?', c:'$15,000', w1:'$3,000', w2:'$6,000', e:'$3,000 ÷ 0.20 = $15,000' },
+  'What is the purpose of filing taxes?':
+    { q:'¿Cuál es el propósito de declarar impuestos?', c:'Reportar tus ingresos y pagar lo que le debes al gobierno', w1:'Recibir un cheque gratis', w2:'Cerrar tu negocio', e:'Declarar impuestos reporta lo que ganaste y calcula lo que debes' },
+  'You spent $50 on business cards and $30 on website hosting. What is your total deductible amount?':
+    { q:'Gastaste $50 en tarjetas de presentación y $30 en hospedaje web. ¿Cuánto puedes deducir en total?', c:'$80', w1:'$50', w2:'$30', e:'$50 + $30 = $80 en deducciones' },
+  'An LLC home office deduction can save over how much per year?':
+    { q:'La deducción por oficina en casa de una LLC puede ahorrar más de cuánto al año?', c:'$3,000+', w1:'$50', w2:'$10', e:'La deducción por oficina en casa puede ahorrar más de $3,000 al año' },
+  'You earn $500/month. If you save 20%, how much do you save?':
+    { q:'Ganas $500 al mes. Si ahorras el 20%, ¿cuánto ahorras?', c:'$100', w1:'$20', w2:'$500', e:'20% de $500 = $100' },
+  'What is a budget?':
+    { q:'¿Qué es un presupuesto?', c:'Un plan de cómo gastar y ahorrar tu dinero', w1:'Una lista de cosas que quieres comprar', w2:'Un número de cuenta del banco', e:'Un presupuesto te ayuda a llevar cuenta de ingresos y gastos' },
+  'You have $200. You spend $75 on supplies and $45 on food. How much is left?':
+    { q:'Tienes $200. Gastas $75 en materiales y $45 en comida. ¿Cuánto te queda?', c:'$80', w1:'$120', w2:'$55', e:'$200 - $75 - $45 = $80' },
+  'Which is a "need" vs. a "want"?':
+    { q:'¿Cuál es una "necesidad" vs. un "deseo"?', c:'La renta es una necesidad; los videojuegos son un deseo', w1:'Los videojuegos son una necesidad y la renta un deseo', w2:'Ambos son deseos', e:'Las necesidades son esenciales; los deseos son extras' },
+  'If you save $25/week, how much will you have after 8 weeks?':
+    { q:'Si ahorras $25 por semana, ¿cuánto tendrás después de 8 semanas?', c:'$200', w1:'$25', w2:'$100', e:'$25 × 8 = $200' },
+  'Your monthly income is $1,000. Experts say to save at least 10%. How much should you save?':
+    { q:'Tu ingreso mensual es de $1,000. Los expertos dicen ahorrar al menos el 10%. ¿Cuánto deberías ahorrar?', c:'$100', w1:'$10', w2:'$1,000', e:'10% de $1,000 = $100' },
+  'What is the 50/30/20 rule?':
+    { q:'¿Qué es la regla 50/30/20?', c:'50% necesidades, 30% deseos, 20% ahorro', w1:'Pagar impuestos tres veces al año', w2:'Invertir en tres acciones', e:'Una regla popular para el presupuesto' },
+  'You budgeted $300 for food but spent $350. What happened?':
+    { q:'Presupuestaste $300 para comida pero gastaste $350. ¿Qué pasó?', c:'Te pasaste $50 del presupuesto', w1:'Ahorraste $50', w2:'Alcanzaste tu meta exacta', e:'Te pasaste por $50 — se trata de ajustar el próximo mes' },
+  'Why is an emergency fund important?':
+    { q:'¿Por qué es importante un fondo de emergencia?', c:'Cubre gastos inesperados sin endeudarte', w1:'Para dar propinas más grandes', w2:'No es importante', e:'Un fondo de emergencia te protege de gastos sorpresa' },
+  'If you earn $12/hour and work 20 hours, what is your gross pay?':
+    { q:'Si ganas $12/hora y trabajas 20 horas, ¿cuánto es tu pago bruto?', c:'$240', w1:'$12', w2:'$2,400', e:'$12 × 20 = $240' },
+  'You sell lemonade for $3 a cup. Supplies cost $0.75 per cup. What is your profit per cup?':
+    { q:'Vendes limonada a $3 el vaso. Los materiales cuestan $0.75 por vaso. ¿Cuál es tu ganancia por vaso?', c:'$2.25', w1:'$3', w2:'$0.75', e:'$3 - $0.75 = $2.25 de ganancia por vaso' },
+  'What is the difference between revenue and profit?':
+    { q:'¿Cuál es la diferencia entre ingresos y ganancias?', c:'Los ingresos son el dinero total recibido; la ganancia es lo que queda después de los gastos', w1:'Son lo mismo', w2:'Los ingresos van al gobierno', e:'Ingresos - gastos = ganancia' },
+  'Which business structure protects your personal assets?':
+    { q:'¿Qué tipo de negocio protege tus bienes personales?', c:'Una LLC (Sociedad de Responsabilidad Limitada)', w1:'Una empresa individual', w2:'Una sociedad sin registro', e:'La LLC separa los bienes personales de los del negocio' },
+  'You made $2,000 in sales and spent $800 on expenses. What is your profit?':
+    { q:'Tuviste $2,000 en ventas y gastaste $800. ¿Cuál es tu ganancia?', c:'$1,200', w1:'$2,000', w2:'$800', e:'$2,000 - $800 = $1,200 de ganancia' },
+  'What does LLC stand for?':
+    { q:'¿Qué significa LLC?', c:'Limited Liability Company (Sociedad de Responsabilidad Limitada)', w1:'Local Large Corporation', w2:'Loan Lending Center', e:'Una LLC es una estructura legal que protege al dueño' },
+  'If you sell 50 items at $10 each, what is your revenue?':
+    { q:'Si vendes 50 artículos a $10 cada uno, ¿cuánto son tus ingresos?', c:'$500', w1:'$50', w2:'$5,000', e:'50 × $10 = $500' },
+  'Why might a kid start a business?':
+    { q:'¿Por qué un niño podría empezar un negocio?', c:'Para ganar dinero y aprender habilidades', w1:'Por ley', w2:'Para no ir a la escuela', e:'Los negocios enseñan responsabilidad, creatividad y matemáticas' },
+  'Your business earned $5,000 this month. Expenses were $3,200. What is your profit?':
+    { q:'Tu negocio ganó $5,000 este mes. Los gastos fueron $3,200. ¿Cuál es tu ganancia?', c:'$1,800', w1:'$5,000', w2:'$3,200', e:'$5,000 - $3,200 = $1,800' },
+  'What is a sole proprietorship?':
+    { q:'¿Qué es una empresa individual?', c:'Un negocio de una sola persona sin separación legal entre dueño y empresa', w1:'Una corporación grande', w2:'Una empresa con cientos de empleados', e:'La empresa individual es la forma de negocio más simple' },
+  'You invest $500 to start a business and earn $1,500 in the first year. What is your ROI?':
+    { q:'Inviertes $500 para empezar un negocio y ganas $1,500 el primer año. ¿Cuál es tu ROI?', c:'200%', w1:'100%', w2:'300%', e:'($1,500 - $500) ÷ $500 = 200% de retorno sobre la inversión' },
+  'What does ROI stand for?':
+    { q:'¿Qué significa ROI?', c:'Return on Investment (Retorno sobre la Inversión)', w1:'Rate of Income', w2:'Revenue Only Index', e:'El ROI mide cuánta ganancia sacaste de lo que invertiste' },
+  'You invest $100 at 10% annual interest. How much do you have after 1 year?':
+    { q:'Inviertes $100 al 10% de interés anual. ¿Cuánto tienes después de 1 año?', c:'$110', w1:'$100', w2:'$120', e:'$100 + 10% = $110' },
+  'What is compound interest?':
+    { q:'¿Qué es el interés compuesto?', c:'Interés que se gana sobre el interés anterior, haciendo crecer el dinero más rápido', w1:'Interés que no se gana', w2:'Un tipo de impuesto', e:'El interés compuesto hace que tu dinero crezca exponencialmente' },
+  'Which account grows your money over time?':
+    { q:'¿Qué cuenta hace crecer tu dinero con el tiempo?', c:'Una cuenta de ahorro con interés', w1:'Una cuenta sin interés', w2:'Una caja fuerte', e:'Las cuentas de ahorro pagan interés por tu depósito' },
+  'You save $1,000 at 5% annual interest. How much do you earn in interest after 1 year?':
+    { q:'Ahorras $1,000 al 5% de interés anual. ¿Cuánto ganas en interés después de 1 año?', c:'$50', w1:'$5', w2:'$500', e:'5% de $1,000 = $50' },
+  'What is a stock?':
+    { q:'¿Qué es una acción?', c:'Una pequeña parte de una empresa que puedes poseer', w1:'Un juguete', w2:'Un tipo de cuenta de banco', e:'Cuando compras una acción, eres dueño de una pequeña parte de la empresa' },
+  'What does it mean to diversify investments?':
+    { q:'¿Qué significa diversificar las inversiones?', c:'Repartir tu dinero en diferentes inversiones para reducir el riesgo', w1:'Poner todo tu dinero en una sola cosa', w2:'No invertir nada', e:'Diversificar = no poner todos los huevos en la misma canasta' },
+  'The Rule of 72 tells you what?':
+    { q:'¿Qué te dice la Regla del 72?', c:'Cuántos años tarda tu dinero en duplicarse al interés compuesto', w1:'Cuántos dólares vale una acción', w2:'Tu edad de jubilación', e:'72 ÷ la tasa de interés ≈ años para duplicar tu dinero' },
+  'What is the difference between simple and compound interest?':
+    { q:'¿Cuál es la diferencia entre interés simple y compuesto?', c:'El simple se gana sobre el monto original; el compuesto se gana sobre el interés previo también', w1:'Son lo mismo', w2:'El simple hace crecer el dinero más rápido', e:'El interés compuesto hace crecer el dinero más rápido con el tiempo' },
+  'What is insurance?':
+    { q:'¿Qué es un seguro?', c:'Una forma de protegerte financieramente contra pérdidas inesperadas', w1:'Dinero gratis del gobierno', w2:'Una cuenta de ahorro', e:'Un seguro transfiere el riesgo — tú pagas una prima y la aseguradora cubre las pérdidas grandes' },
+  'What is a mortgage?':
+    { q:'¿Qué es una hipoteca?', c:'Un préstamo para comprar una casa, que se paga en muchos años', w1:'Una cuenta de ahorro', w2:'Un pago de renta', e:'Las hipotecas suelen durar 15-30 años con pagos mensuales' },
+  'What is a down payment?':
+    { q:'¿Qué es un enganche (down payment)?', c:'Un pago inicial grande que se hace al comprar algo caro como una casa', w1:'Un recibo mensual', w2:'El último pago', e:'El enganche reduce cuánto necesitas pedir prestado' },
+  'What is the difference between renting and owning?':
+    { q:'¿Cuál es la diferencia entre rentar y ser dueño?', c:'Quien renta paga por usar; el dueño acumula capital y es dueño de la propiedad', w1:'Son lo mismo', w2:'Rentar siempre es mejor', e:'Ser dueño crea capital (valor propio), pero tiene costos de mantenimiento' },
+  'What is a premium in insurance?':
+    { q:'¿Qué es una prima en un seguro?', c:'El pago regular que haces para mantener el seguro activo', w1:'Un bono que recibes', w2:'Lo que te paga el seguro', e:'Las primas son pagos mensuales o anuales por la cobertura' },
+  'What is equity in a home?':
+    { q:'¿Qué es el capital (equity) en una casa?', c:'La parte de la casa que realmente te pertenece (valor menos lo que debes)', w1:'El precio total de la casa', w2:'Tu pago mensual', e:'Si tu casa vale $200,000 y debes $150,000, tu capital es $50,000' },
+  'What is gross pay?':
+    { q:'¿Qué es el pago bruto?', c:'Tus ingresos totales antes de cualquier deducción', w1:'Lo que te llevas a casa', w2:'Tu bono', e:'El pago bruto es tu sueldo completo; los impuestos y deducciones salen después' },
+  'What is net pay?':
+    { q:'¿Qué es el pago neto?', c:'Tu pago final después de impuestos y deducciones', w1:'Tus ingresos totales antes de deducciones', w2:'Solo tu bono', e:'Pago neto = pago bruto menos impuestos, seguros y otras deducciones' },
+  'You earn $15/hour and work 40 hours. What is your gross weekly pay?':
+    { q:'Ganas $15/hora y trabajas 40 horas. ¿Cuál es tu pago bruto semanal?', c:'$600', w1:'$150', w2:'$400', e:'$15 × 40 = $600 de pago bruto' },
+  'What is the difference between a salary and hourly wage?':
+    { q:'¿Cuál es la diferencia entre salario y pago por hora?', c:'El salario es una cantidad fija anual; el pago por hora depende de las horas trabajadas', w1:'Son lo mismo', w2:'Por hora siempre paga más', e:'Los asalariados ganan lo mismo sin importar las horas; los que cobran por hora cobran por tiempo' },
+  'What is a W-2 form?':
+    { q:'¿Qué es un formulario W-2?', c:'Un documento que muestra tus ingresos anuales y los impuestos retenidos', w1:'Una solicitud de empleo', w2:'Una licencia de negocio', e:'El W-2 se usa para declarar impuestos cada año' },
+  'What is overtime pay?':
+    { q:'¿Qué es el pago de horas extras?', c:'Pago extra (normalmente 1.5x) por trabajar más de 40 horas a la semana', w1:'Pago normal por más horas', w2:'Un bono por llegar temprano', e:'Las horas extras se pagan a tiempo y medio' },
+  'What is marketing?':
+    { q:'¿Qué es el marketing?', c:'Promover y vender productos o servicios a clientes potenciales', w1:'Hacer productos en una fábrica', w2:'Contratar empleados', e:'El marketing incluye publicidad, marca y llegar a tu público' },
+  'What is a target audience?':
+    { q:'¿Qué es un público objetivo?', c:'El grupo específico de personas con más probabilidad de comprar tu producto', w1:'Todas las personas del mundo', w2:'Solo tus amigos', e:'Enfocarte en un público ayuda a atraer clientes que realmente quieren tu producto' },
+  'What is a brand?':
+    { q:'¿Qué es una marca?', c:'La identidad de un negocio: su nombre, logo y reputación', w1:'Solo el logo de una empresa', w2:'El precio de un producto', e:'La marca es la impresión total que tus clientes tienen de tu negocio' },
+  'Why is social media important for businesses?':
+    { q:'¿Por qué las redes sociales son importantes para los negocios?', c:'Ayudan a llegar a clientes, construir marca y aumentar ventas', w1:'No son importantes', w2:'Solo sirven para entretenimiento', e:'Las redes sociales son una herramienta gratis y poderosa' },
+  'What is a USP (Unique Selling Proposition)?':
+    { q:'¿Qué es una USP (Propuesta Única de Venta)?', c:'Lo que hace a tu producto diferente y mejor que la competencia', w1:'Un método de envío', w2:'Una regulación del gobierno', e:'Tu USP le dice a los clientes por qué elegirte a TI sobre otros' },
+  'What is ROI in marketing?':
+    { q:'¿Qué es el ROI en marketing?', c:'Return on Investment — cuánta ganancia sacaste vs. lo que gastaste', w1:'Tasa de Interés', w2:'Índice de Solo Ingresos', e:'Si gastas $100 en anuncios y ganas $500, tu ROI es 400%' },
+  'What is net worth?':
+    { q:'¿Qué es el patrimonio neto?', c:'Total de activos menos total de pasivos', w1:'Cuánto ganas al año', w2:'Solo tu saldo bancario', e:'Patrimonio neto = lo que TIENES (activos) - lo que DEBES (pasivos)' },
+  'What is an asset?':
+    { q:'¿Qué es un activo?', c:'Algo de valor que posees (dinero, propiedad, inversiones)', w1:'Algo por lo que debes dinero', w2:'Un recibo mensual', e:'Los activos incluyen ahorros, inversiones, propiedades y objetos de valor' },
+  'What is a liability?':
+    { q:'¿Qué es un pasivo?', c:'Una deuda o algo que debes (préstamos, saldo de tarjeta)', w1:'Algo de valor', w2:'Ingresos de un trabajo', e:'Los pasivos son obligaciones financieras — lo que tienes que pagar' },
+  'Your assets total $50,000 and liabilities total $20,000. What is your net worth?':
+    { q:'Tus activos suman $50,000 y tus pasivos $20,000. ¿Cuál es tu patrimonio neto?', c:'$30,000', w1:'$70,000', w2:'$50,000', e:'$50,000 (activos) - $20,000 (pasivos) = $30,000' },
+  'Which of these is an asset?':
+    { q:'¿Cuál de estos es un activo?', c:'Una cuenta de ahorro con $5,000', w1:'Un saldo de tarjeta de $2,000', w2:'Un préstamo estudiantil de $10,000', e:'Las cuentas de ahorro son activos (algo que posees con valor)' },
+  'What is credit?':
+    { q:'¿Qué es el crédito?', c:'La capacidad de pedir dinero prestado con la promesa de devolverlo, generalmente con interés', w1:'Dinero gratis', w2:'Un tipo de impuesto', e:'El crédito te permite comprar ahora y pagar después' },
+  'What is interest on a loan?':
+    { q:'¿Qué es el interés en un préstamo?', c:'Dinero extra que pagas al prestamista por pedir prestado', w1:'Un bono que recibes', w2:'El monto original del préstamo', e:'El interés es el costo de pedir dinero prestado' },
+  'You borrow $1,000 at 5% interest for one year. How much do you owe total?':
+    { q:'Pides prestado $1,000 al 5% de interés por un año. ¿Cuánto debes en total?', c:'$1,050', w1:'$1,000', w2:'$500', e:'$1,000 + (5% × $1,000) = $1,050' },
+  'What is a credit score?':
+    { q:'¿Qué es un puntaje de crédito?', c:'Un número que muestra qué tan confiable eres para pagar dinero prestado', w1:'Tu edad', w2:'Tu salario', e:'Los puntajes de crédito van de 300 a 850 y se basan en tu historial de pagos' },
+  'How can you build good credit?':
+    { q:'¿Cómo construyes un buen crédito?', c:'Pagando las cuentas a tiempo cada mes', w1:'Ignorando las cuentas', w2:'Nunca usando dinero', e:'Los pagos a tiempo son el factor más importante del puntaje' },
+  'What is the difference between a debit card and a credit card?':
+    { q:'¿Cuál es la diferencia entre una tarjeta de débito y una de crédito?', c:'La de débito usa tu propio dinero; la de crédito pide prestado', w1:'Son exactamente iguales', w2:'La de débito es siempre peor', e:'La débito saca de tu cuenta; la crédito crea una deuda que debes pagar' },
+  'Why is only paying the minimum on a credit card dangerous?':
+    { q:'¿Por qué es peligroso pagar solo el mínimo de una tarjeta de crédito?', c:'Los intereses se acumulan en el saldo restante y pagas mucho más con el tiempo', w1:'No es peligroso', w2:'La tarjeta se rompe', e:'Pagar solo el mínimo puede mantenerte endeudado por años' },
+  'What is a good credit score?':
+    { q:'¿Qué es un buen puntaje de crédito?', c:'Generalmente 670 o más', w1:'Cualquier número', w2:'Menor es mejor', e:'Un buen puntaje ayuda a obtener mejores tasas en préstamos y tarjetas' }
+});
+
+// ══ Batch 5 — App Building topic pools (UI, API, code, AI, mobile, test, UX, monetize)
+Object.assign(POOL_ES_BY_Q, {
+  'Why should buttons have high contrast colors?':
+    { q:'¿Por qué los botones deben tener colores con alto contraste?', c:'Para que sean fáciles de ver y tocar para todos', w1:'Porque se ve bonito', w2:'El App Store lo exige', e:'El alto contraste mejora la accesibilidad' },
+  'What is the recommended minimum tap target size for mobile buttons?':
+    { q:'¿Cuál es el tamaño mínimo recomendado para los botones en móvil?', c:'44x44 puntos', w1:'10x10 pixeles', w2:'100x100 pulgadas', e:'Apple recomienda al menos 44x44 puntos' },
+  'What does accessibility mean in app design?':
+    { q:'¿Qué significa accesibilidad en el diseño de apps?', c:'Hacer que tu app sea usable por personas de todas las capacidades', w1:'Hacer que la descarga sea gratis', w2:'Agregar más colores', e:'La accesibilidad asegura que todos puedan usar la app' },
+  'Which color combination is hardest for colorblind users to distinguish?':
+    { q:'¿Qué combinación es más difícil para las personas con daltonismo?', c:'Rojo y verde', w1:'Blanco y negro', w2:'Azul y amarillo', e:'El daltonismo rojo-verde es el más común' },
+  'What is a wireframe?':
+    { q:'¿Qué es un wireframe?', c:'Un bosquejo sencillo del diseño de la app antes de construirla', w1:'El marco que sostiene la pantalla', w2:'Un tipo de conexión Wi-Fi', e:'Los wireframes son planos con poco detalle que muestran la estructura' },
+  'Why should you use consistent fonts throughout your app?':
+    { q:'¿Por qué usar tipografías consistentes en toda la app?', c:'Se ve profesional y es más fácil de leer', w1:'Solo se permite una fuente en iOS', w2:'Varias fuentes hacen las apps más rápidas', e:'La tipografía consistente mejora la legibilidad' },
+  'What is the purpose of white space in design?':
+    { q:'¿Para qué sirve el espacio en blanco en el diseño?', c:'Da aire a los elementos y mejora la legibilidad', w1:'Es espacio desperdiciado que hay que llenar', w2:'Hace la app más lenta', e:'El espacio en blanco ayuda a que los usuarios se enfoquen' },
+  'What is a CTA (Call to Action) button?':
+    { q:'¿Qué es un botón de CTA (Llamada a la Acción)?', c:'Un botón que le dice al usuario qué hacer, como "Regístrate" o "Compra Ya"', w1:'Un botón que llama por teléfono', w2:'Un menú oculto de desarrollador', e:'Los CTAs guían al usuario al siguiente paso' },
+  'Why do most apps put the main navigation at the bottom of the screen?':
+    { q:'¿Por qué la mayoría de apps ponen la navegación abajo?', c:'Es más fácil de alcanzar con el pulgar', w1:'La navegación arriba es ilegal', w2:'Abajo hace que cargue más rápido', e:'La navegación inferior está al alcance natural del pulgar' },
+  'What is a database used for in an app?':
+    { q:'¿Para qué se usa una base de datos en una app?', c:'Para guardar y organizar datos como cuentas de usuario y contenido', w1:'Para que se vea bonita', w2:'Para conectarse al Wi-Fi', e:'Las bases de datos guardan toda la información de la app de forma organizada' },
+  'What is Supabase?':
+    { q:'¿Qué es Supabase?', c:'Una plataforma de backend con base de datos, autenticación y almacenamiento', w1:'Un tipo de app de música', w2:'Una red social', e:'Supabase da herramientas de backend listas para usar' },
+  'What does CRUD stand for in programming?':
+    { q:'¿Qué significa CRUD en programación?', c:'Create, Read, Update, Delete (Crear, Leer, Actualizar, Borrar)', w1:'Code, Run, Upload, Debug', w2:'Connect, Restart, Undo, Download', e:'CRUD = las cuatro operaciones básicas con datos' },
+  'Why do apps need authentication?':
+    { q:'¿Por qué las apps necesitan autenticación?', c:'Para verificar quién es el usuario y proteger su cuenta', w1:'Para hacer la app más lenta', w2:'La autenticación es opcional', e:'La autenticación asegura que solo la persona correcta accede a su cuenta' },
+  'What is JSON?':
+    { q:'¿Qué es JSON?', c:'Un formato de texto para guardar y enviar datos entre apps', w1:'Un lenguaje de programación', w2:'Un tipo de imagen', e:'JSON (JavaScript Object Notation) es un formato ligero de datos' },
+  'What does a "GET" request do?':
+    { q:'¿Qué hace una petición "GET"?', c:'Recupera/lee datos de un servidor', w1:'Borra datos del servidor', w2:'Envía dinero a alguien', e:'Las peticiones GET traen datos, como cargar un perfil' },
+  'What is the purpose of a backend server?':
+    { q:'¿Para qué sirve un servidor backend?', c:'Para procesar datos, manejar la lógica y conectarse a la base de datos', w1:'Para mostrar los botones y colores', w2:'Para cargar el teléfono', e:'El backend maneja el procesamiento detrás de escena' },
+  'Why should you never store passwords as plain text?':
+    { q:'¿Por qué nunca guardar contraseñas en texto plano?', c:'Si alguien accede a la base, puede leer cada contraseña', w1:'Ocupan mucho espacio', w2:'Las contraseñas no necesitan guardarse', e:'Las contraseñas deben estar hasheadas (cifradas)' },
+  'What is an endpoint in an API?':
+    { q:'¿Qué es un endpoint en una API?', c:'Una URL específica que maneja un tipo de petición', w1:'El final de tu conexión a internet', w2:'Donde se guarda la app en el teléfono', e:'Los endpoints son URLs como /api/users' },
+  'How much does an Apple Developer account cost per year?':
+    { q:'¿Cuánto cuesta al año una cuenta de desarrollador de Apple?', c:'$99', w1:'$9.99', w2:'Gratis', e:'Apple cobra $99/año para una cuenta de desarrollador' },
+  'What percentage of submitted apps get rejected on the first try?':
+    { q:'¿Qué porcentaje de apps se rechaza en el primer intento?', c:'Alrededor del 40%', w1:'Alrededor del 5%', w2:'0% — todas se aprueban', e:'Cerca del 40% se rechazan inicialmente, pero puedes corregir y reenviar' },
+  'What is the most common reason apps get rejected from the App Store?':
+    { q:'¿Por qué suelen rechazarse las apps del App Store?', c:'Fallos y errores', w1:'El icono se ve feo', w2:'El nombre es muy largo', e:'Las apps que fallan durante la revisión son las más rechazadas' },
+  'What is TestFlight?':
+    { q:'¿Qué es TestFlight?', c:'La herramienta de Apple para probar tu app con usuarios reales antes de publicarla', w1:'Una app para reservar vuelos', w2:'Un juego de volar', e:'TestFlight permite a los probadores beta usar la app antes del lanzamiento' },
+  'Can you resubmit an app after it gets rejected?':
+    { q:'¿Puedes reenviar una app después del rechazo?', c:'Sí — corrige los problemas y vuelve a enviarla', w1:'No — el rechazo es permanente', w2:'Solo si pagas extra', e:'Los rechazos no son permanentes — lee los comentarios, corrige y reenvía' },
+  'What is App Store Optimization (ASO)?':
+    { q:'¿Qué es App Store Optimization (ASO)?', c:'Mejorar tu ficha para salir más arriba en las búsquedas', w1:'Hacer que la app cargue más rápido', w2:'Un lenguaje de programación', e:'ASO incluye palabras clave, capturas y descripciones' },
+  'What must your app have before Apple will approve it?':
+    { q:'¿Qué debe tener tu app para que Apple la apruebe?', c:'Un propósito claro, sin fallos y seguir las guías de Apple', w1:'Al menos 1 millón de usuarios', w2:'Un sistema de pagos integrado', e:'Apple pide apps estables, útiles y que sigan las reglas' },
+  'How long does the Apple review process usually take?':
+    { q:'¿Cuánto tarda la revisión de Apple?', c:'1-3 días en promedio', w1:'6 meses', w2:'5 minutos', e:'La mayoría de revisiones toman 1-3 días, aunque puede variar' },
+  'What are app screenshots used for on the App Store?':
+    { q:'¿Para qué sirven las capturas de pantalla en el App Store?', c:'Mostrar cómo se ve tu app antes de descargarla', w1:'Decorar el perfil del desarrollador', w2:'No son importantes', e:'Buenas capturas aumentan las descargas' },
+  'Why is a privacy policy required for apps?':
+    { q:'¿Por qué se requiere una política de privacidad en las apps?', c:'Para decir qué datos recolectas y cómo los usas', w1:'Es opcional para apps pequeñas', w2:'Apple quiere más papeleo', e:'Las políticas de privacidad son legales y protegen a los usuarios' },
+  'What does a "for loop" do?':
+    { q:'¿Qué hace un "ciclo for"?', c:'Repite un bloque de código un número específico de veces', w1:'Hace que el código corra al revés', w2:'Borra archivos', e:'Los ciclos for ejecutan código repetidamente' },
+  'What is a function?':
+    { q:'¿Qué es una función?', c:'Un bloque de código reutilizable que hace una tarea específica', w1:'Una ecuación matemática', w2:'Un tipo de variable', e:'Las funciones agrupan código reutilizable' },
+  'What is HTML used for?':
+    { q:'¿Para qué se usa HTML?', c:'Para estructurar el contenido de las páginas web', w1:'Para dar estilo a los colores y fuentes', w2:'Para hacer la página interactiva', e:'HTML define la estructura' },
+  'What is CSS used for?':
+    { q:'¿Para qué se usa CSS?', c:'Para dar estilo a las páginas web (colores, fuentes, diseño)', w1:'Para agregar interactividad', w2:'Para guardar datos del usuario', e:'CSS controla cómo se ven los elementos HTML' },
+  'What does JavaScript do on a website?':
+    { q:'¿Qué hace JavaScript en un sitio web?', c:'Agrega interactividad y comportamiento dinámico', w1:'Solo cambia colores', w2:'No tiene nada que ver con sitios web', e:'JavaScript hace las páginas interactivas' },
+  'What is an "if statement"?':
+    { q:'¿Qué es una "declaración if"?', c:'Código que corre solo cuando una condición es verdadera', w1:'Una pregunta que le haces a la computadora', w2:'Una forma de nombrar variables', e:'Las declaraciones if revisan condiciones' },
+  'What is an array?':
+    { q:'¿Qué es un arreglo?', c:'Una lista que guarda múltiples valores en orden', w1:'Un solo número', w2:'Un tipo de ciclo', e:'Los arreglos guardan varios elementos: ["manzana", "plátano"]' },
+  'What is React?':
+    { q:'¿Qué es React?', c:'Una biblioteca de JavaScript para construir interfaces de usuario', w1:'Una red social', w2:'Un tipo de base de datos', e:'React ayuda a construir interfaces con componentes reutilizables' },
+  'What is artificial intelligence (AI)?':
+    { q:'¿Qué es la inteligencia artificial (IA)?', c:'Sistemas informáticos que pueden hacer tareas que normalmente requieren inteligencia humana', w1:'Un robot que parece humano', w2:'Cualquier programa de computadora', e:'La IA incluye aprender, resolver problemas y tomar decisiones' },
+  'What is machine learning?':
+    { q:'¿Qué es el aprendizaje automático (machine learning)?', c:'Un tipo de IA donde las computadoras aprenden de los datos', w1:'Una clase de computación', w2:'Aprender a usar una máquina', e:'Mejora su desempeño analizando patrones en datos' },
+  'What is a chatbot?':
+    { q:'¿Qué es un chatbot?', c:'Un programa que simula una conversación usando IA', w1:'Una persona que chatea en línea', w2:'Una red social', e:'Los chatbots usan procesamiento de lenguaje natural' },
+  'How is AI used in apps today?':
+    { q:'¿Cómo se usa la IA en las apps hoy?', c:'Recomendaciones, asistentes de voz, reconocimiento de imágenes y autocompletado', w1:'La IA no se usa en las apps', w2:'Solo en videojuegos', e:'La IA está detrás de Siri, las recomendaciones de Netflix y los filtros de fotos' },
+  'What is a prompt in AI?':
+    { q:'¿Qué es un prompt en IA?', c:'El texto que le das a un modelo de IA para obtener una respuesta', w1:'Una pantalla de computadora', w2:'Un mensaje de error', e:'Los prompts le dicen a la IA qué quieres — mejor prompt, mejor resultado' }
+});
+
+// ══ Batch 6 — English topic pools (grammar, figurative, poetry, reading, writing, phonics, vocab, sentence, speech)
+Object.assign(POOL_ES_BY_Q, {
+  'What is an adjective?':
+    { q:'¿Qué es un adjetivo?', c:'Una palabra que describe un sustantivo', w1:'Una palabra de acción', w2:'Un signo de puntuación', e:'"Grande", "azul" y "feliz" son adjetivos' },
+  'What is an adverb?':
+    { q:'¿Qué es un adverbio?', c:'Una palabra que describe un verbo, adjetivo u otro adverbio', w1:'Una palabra que nombra una cosa', w2:'Solo un tipo de sustantivo', e:'Los adverbios suelen terminar en -mente, como "rápidamente"' },
+  'What is a pronoun?':
+    { q:'¿Qué es un pronombre?', c:'Una palabra que toma el lugar de un sustantivo', w1:'Una palabra de acción', w2:'Un signo de puntuación', e:'Él, ella, ellos y nosotros son pronombres' },
+  'What is a preposition?':
+    { q:'¿Qué es una preposición?', c:'Una palabra que muestra la relación entre un sustantivo y otra palabra', w1:'Una palabra de acción', w2:'Un tipo de adjetivo', e:'En, sobre, bajo y entre son preposiciones' },
+  'What is a conjunction?':
+    { q:'¿Qué es una conjunción?', c:'Una palabra que conecta palabras, frases u oraciones', w1:'Una palabra de acción', w2:'Un tipo de sustantivo', e:'Y, pero, o son conjunciones' },
+  'What is a simile?':
+    { q:'¿Qué es un símil?', c:'Una comparación usando "como" o "igual que"', w1:'Dos palabras que rinan', w2:'Una palabra que nombra una cosa', e:'"Ella corre como el viento" es un símil' },
+  'What is a metaphor?':
+    { q:'¿Qué es una metáfora?', c:'Una comparación que dice que algo ES otra cosa', w1:'Una comparación con "como"', w2:'Una palabra que rima', e:'"El tiempo es oro" es una metáfora' },
+  'What is personification?':
+    { q:'¿Qué es la personificación?', c:'Dar cualidades humanas a cosas no humanas', w1:'Describir a una persona real', w2:'Escribir sobre animales', e:'"El viento susurraba entre los árboles" es personificación' },
+  'What is hyperbole?':
+    { q:'¿Qué es la hipérbole?', c:'Una exageración extrema para dar énfasis', w1:'Un poema corto', w2:'Una oración que rima', e:'"Te he dicho un millón de veces" es hipérbole' },
+  'What is alliteration?':
+    { q:'¿Qué es la aliteración?', c:'Repetir el mismo sonido inicial en palabras cercanas', w1:'Una rima al final del verso', w2:'Dos palabras que significan lo mismo', e:'"Pedro Pérez pescaba" es aliteración' },
+  'What is a haiku?':
+    { q:'¿Qué es un haikú?', c:'Un poema japonés de 17 sílabas en tres versos (5-7-5)', w1:'Un cuento largo', w2:'Un discurso famoso', e:'Los haikús siguen el patrón de 5, 7 y 5 sílabas' },
+  'What is a stanza?':
+    { q:'¿Qué es una estrofa?', c:'Un grupo de versos en un poema, como un párrafo en prosa', w1:'Una sola palabra', w2:'El título del poema', e:'Las estrofas organizan el poema por secciones' },
+  'What is a rhyme scheme?':
+    { q:'¿Qué es un esquema de rima?', c:'El patrón de palabras que riman al final de los versos', w1:'La primera palabra de cada verso', w2:'El nombre del autor', e:'Los esquemas se escriben con letras como ABAB' },
+  'What is rhythm in poetry?':
+    { q:'¿Qué es el ritmo en poesía?', c:'El patrón de sílabas fuertes y suaves que dan musicalidad', w1:'Un tipo de rima', w2:'El título de un poema', e:'El ritmo le da al poema su calidad musical' },
+  'What is free verse?':
+    { q:'¿Qué es el verso libre?', c:'Poesía que no sigue un patrón fijo de rima o ritmo', w1:'Poesía con rima estricta', w2:'Poesía solo en inglés', e:'El verso libre le da total libertad al poeta' },
+  'What is the main idea of a passage?':
+    { q:'¿Cuál es la idea principal de un texto?', c:'El tema central o el punto más importante', w1:'La primera palabra', w2:'La longitud del texto', e:'La idea principal es de lo que trata más el texto' },
+  'What are story elements?':
+    { q:'¿Qué son los elementos de un cuento?', c:'Personajes, escenario, trama, tema y punto de vista', w1:'Solo el título', w2:'La portada del libro', e:'Estos elementos forman cualquier cuento' },
+  'What is a protagonist?':
+    { q:'¿Qué es un protagonista?', c:'El personaje principal de una historia', w1:'El villano', w2:'El lugar donde ocurre la historia', e:'El protagonista conduce la trama' },
+  'What is an antagonist?':
+    { q:'¿Qué es un antagonista?', c:'El personaje que se opone al protagonista', w1:'El héroe principal', w2:'El autor', e:'El antagonista crea el conflicto' },
+  'What is a climax in a story?':
+    { q:'¿Qué es el clímax de un cuento?', c:'El momento más emocionante o el punto de giro', w1:'El principio del cuento', w2:'El final del cuento', e:'El clímax es el pico de la tensión' },
+  'What is the difference between fiction and nonfiction?':
+    { q:'¿Cuál es la diferencia entre ficción y no ficción?', c:'La ficción es inventada; la no ficción se basa en hechos reales', w1:'Son lo mismo', w2:'La ficción es más corta', e:'La ficción viene de la imaginación; la no ficción presenta hechos' },
+  'What is first person point of view?':
+    { q:'¿Qué es el punto de vista de primera persona?', c:'Cuando el narrador usa "yo" o "nosotros"', w1:'Cuando el narrador usa "él" o "ella"', w2:'Cuando no hay narrador', e:'La primera persona nos pone dentro de la mente del narrador' },
+  'What is a topic sentence?':
+    { q:'¿Qué es una oración temática?', c:'Una oración que dice de qué trata el párrafo', w1:'La oración más larga del párrafo', w2:'La última oración', e:'Las oraciones temáticas presentan la idea principal' },
+  'What is a thesis statement?':
+    { q:'¿Qué es una tesis?', c:'Una oración que presenta el argumento principal de un ensayo', w1:'Una pregunta al lector', w2:'El título del ensayo', e:'La tesis guía todo el ensayo' },
+  'What is persuasive writing?':
+    { q:'¿Qué es la escritura persuasiva?', c:'Escritura que intenta convencer al lector de estar de acuerdo', w1:'Contar un cuento gracioso', w2:'Escribir un correo corto', e:'La escritura persuasiva usa razones y evidencia' },
+  'What is expository writing?':
+    { q:'¿Qué es la escritura expositiva?', c:'Escritura que explica o informa sobre un tema', w1:'Poesía', w2:'Cartas personales', e:'Los libros de texto y guías son escritura expositiva' },
+  'What should a good conclusion do?':
+    { q:'¿Qué debe hacer una buena conclusión?', c:'Reafirmar la idea principal y resumir los puntos clave', w1:'Agregar información nueva', w2:'Hacer una pregunta sin responder', e:'Las conclusiones cierran los escritos' },
+  'What is a citation?':
+    { q:'¿Qué es una cita?', c:'Una forma de dar crédito a las fuentes en tu escritura', w1:'Una multa por manejar rápido', w2:'Un título', e:'Las citas ayudan a evitar el plagio' },
+  'How many letters are in the English alphabet?':
+    { q:'¿Cuántas letras tiene el alfabeto inglés?', c:'26', w1:'24', w2:'30', e:'El alfabeto inglés tiene 26 letras' },
+  'What are vowels?':
+    { q:'¿Qué son las vocales?', c:'A, E, I, O, U (y a veces Y)', w1:'Todas las letras', w2:'Solo las consonantes', e:'Las vocales son sonidos que fluyen libres en la boca' },
+  'What is a syllable?':
+    { q:'¿Qué es una sílaba?', c:'Una parte de una palabra con un sonido de vocal', w1:'Una letra completa', w2:'Una oración', e:'"Mariposa" tiene cuatro sílabas: ma-ri-po-sa' },
+  'What is a consonant blend?':
+    { q:'¿Qué es un grupo consonántico?', c:'Dos o más consonantes juntas donde cada sonido se oye por separado', w1:'Dos vocales juntas', w2:'Una rima', e:'"BL" y "STR" son ejemplos de grupos consonánticos' },
+  'What is a digraph?':
+    { q:'¿Qué es un dígrafo?', c:'Dos letras que forman un solo sonido', w1:'Dos vocales seguidas', w2:'Un signo de puntuación', e:'"CH" y "SH" en inglés son dígrafos' },
+  'What is a prefix?':
+    { q:'¿Qué es un prefijo?', c:'Letras que se agregan al inicio de una palabra para cambiar su significado', w1:'Letras al final de una palabra', w2:'Una palabra completa', e:'"In-", "des-" y "re-" son prefijos' },
+  'What is a suffix?':
+    { q:'¿Qué es un sufijo?', c:'Letras que se agregan al final de una palabra', w1:'Letras al inicio', w2:'Una palabra separada', e:'"-mente" y "-ito" son sufijos' },
+  'What is a root word?':
+    { q:'¿Qué es una raíz de palabra?', c:'La parte base a la que se agregan prefijos y sufijos', w1:'Un signo de puntuación', w2:'Una palabra en otro idioma', e:'En "infelizmente", "feliz" es la raíz' },
+  'What are context clues?':
+    { q:'¿Qué son las pistas del contexto?', c:'Palabras cercanas que te ayudan a descubrir el significado de una palabra desconocida', w1:'Pistas de un juego', w2:'Definiciones del diccionario', e:'Las pistas del contexto ayudan a entender palabras nuevas al leer' },
+  'What is a subject in a sentence?':
+    { q:'¿Qué es el sujeto de una oración?', c:'La persona o cosa de la que habla la oración', w1:'Una palabra de acción', w2:'El final de la oración', e:'En "El perro corrió", "el perro" es el sujeto' },
+  'What is a predicate?':
+    { q:'¿Qué es un predicado?', c:'La parte de la oración que dice lo que hace o es el sujeto', w1:'La persona que habla', w2:'Un tipo de sustantivo', e:'En "El perro corrió", "corrió" es el predicado' },
+  'What is a sentence fragment?':
+    { q:'¿Qué es un fragmento de oración?', c:'Una oración incompleta a la que le falta sujeto o verbo', w1:'Una oración completa', w2:'Un título', e:'Los fragmentos no expresan una idea completa' },
+  'What is a run-on sentence?':
+    { q:'¿Qué es una oración desbordada?', c:'Dos o más oraciones unidas sin puntuación correcta', w1:'Una oración bien escrita', w2:'Un párrafo', e:'Las oraciones desbordadas necesitan puntuación o conectores' },
+  'What is active voice?':
+    { q:'¿Qué es la voz activa?', c:'Cuando el sujeto hace la acción', w1:'Cuando el sujeto recibe la acción', w2:'Una palabra muy fuerte', e:'"El niño pateó el balón" es voz activa' },
+  'What is passive voice?':
+    { q:'¿Qué es la voz pasiva?', c:'Cuando el sujeto recibe la acción', w1:'Cuando el sujeto hace la acción', w2:'Una palabra débil', e:'"El balón fue pateado por el niño" es voz pasiva' }
+});
 function localizeQPool(p){
   const es = currentLang === 'es';
   const esEntry = es ? POOL_ES_BY_Q[p.q] : null;
