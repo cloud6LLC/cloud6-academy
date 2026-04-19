@@ -22344,6 +22344,537 @@ Object.assign(LESSON_TRANSLATIONS_ES, {
     m[ns+id] = Object.assign({ title: titles[id], tagline: taglines[id] || '' }, stdByCat[cat]);
   });
 })();
+// Math Grade 6 — individual activity translations, categories A & B
+(function(){
+  var L = LESSON_TRANSLATIONS_ES;
+  function mact(id, instr, c0t, c0e, c1t, c1e, c2t, c2e){
+    var key = 'math:' + id;
+    if(!L[key]) L[key] = {};
+    L[key].activity = { instructions: instr, choices: [
+      { text: c0t, explanation: c0e },
+      { text: c1t, explanation: c1e },
+      { text: c2t, explanation: c2e }
+    ]};
+  }
+  // ── A: Razones y tasas ──────────────────────────────────────────────────────
+  mact('m6A1',
+    'La razón de gatos a perros en el refugio es 5 a 8. Escribe esta razón de tres formas.',
+    '5:8, 5/8, 5 a 8','Las tres son formas equivalentes de escribir la misma razón.',
+    '5:8, 8/5, 5 a 8','8/5 invierte la razón. La fracción debe ser 5/8.',
+    '8:5, 8/5, 5 a 8','8:5 invierte el orden. Empieza con los gatos (5), luego los perros (8).');
+  mact('m6A2',
+    '¿Qué razón es equivalente a 2:5?',
+    '6:15','2:5 × 3:3 = 6:15. Multiplica ambos lados por 3.',
+    '2:10','Solo multiplicas el segundo número. Debes multiplicar ambos por la misma cantidad.',
+    '4:10','Revisa tu multiplicación; una razón equivalente requiere multiplicar los dos términos por el mismo factor.');
+  mact('m6A3',
+    'Completa la tabla de razones. Si el primer número es 3 y el segundo es 7, ¿cuál es el segundo número cuando el primero es 9?',
+    '21','3:7 y 9:? significa 3×3=9, entonces 7×3=21. La respuesta es 21.',
+    '10','Sumar 3 a 7 da 10, pero estamos multiplicando por 3, no sumando.',
+    '16','9+7=16, pero eso no sigue el patrón de razón. Multiplica 7 por el mismo factor que el primer número.');
+  mact('m6A4',
+    'Un carro recorre 240 millas con 8 galones de gasolina. ¿Cuál es la tasa unitaria en millas por galón?',
+    '30 millas por galón','240 ÷ 8 = 30. El carro recorre 30 millas con 1 galón.',
+    '32 millas por galón','240 − 8 = 232, y 232/8 ≈ 29. Ese no es el resultado de la división correcta.',
+    '20 millas por galón','Quizás dividiste 240 entre 12 en vez de 8. Verifica tu división.');
+  mact('m6A5',
+    'La tienda A vende 6 bolígrafos por $2.40. La tienda B vende 8 bolígrafos por $3.20. ¿Qué tienda tiene el precio unitario más bajo por bolígrafo?',
+    'Ambas tienen el mismo precio unitario','Tienda A: $2.40÷6=$0.40. Tienda B: $3.20÷8=$0.40. ¡Iguales!',
+    'Tienda A','$2.40÷6=$0.40 y $3.20÷8=$0.40. Son iguales, no diferentes.',
+    'Tienda B','Calcula las tasas unitarias: $2.40÷6=$0.40 y $3.20÷8=$0.40. Son iguales.');
+  mact('m6A6',
+    '¿Cuánto es el 25% de 80?',
+    '20','25% = 0.25. 0.25 × 80 = 20. Un cuarto de 80 es 20.',
+    '25','Ese es el número del porcentaje. Necesitas encontrar el 25% DE 80: 0.25 × 80 = 20.',
+    '55','80 − 25 = 55, pero la resta no halla un porcentaje. Usa multiplicación: 0.25 × 80 = 20.');
+  mact('m6A7',
+    'Si el 20% de un número es 15, ¿cuál es el número?',
+    '75','Si 20% = 15, entonces 100% = 15 ÷ 0.20 = 75. Verifica: 0.20 × 75 = 15. ✓',
+    '35','15 + 20 = 35, pero la suma no funciona. Divide entre el decimal: 15 ÷ 0.20 = 75.',
+    '3','15 ÷ 5 = 3, pero debes dividir entre 0.20. La forma decimal de 20% es 0.20, así que 15 ÷ 0.20 = 75.');
+  mact('m6A8',
+    'Convierte el 35% a decimal y fracción en términos mínimos.',
+    '0.35 y 7/20','35% = 0.35 (mueve el decimal 2 lugares). 35/100 = 7/20 (divide entre el MCD de 5). ¡Ambos correctos!',
+    '0.035 y 35/100','0.035 es muy pequeño. 35% = 0.35. Y 35/100 no está simplificado; se reduce a 7/20.',
+    '3.5 y 7/10','3.5 es demasiado grande. 35% = 0.35. Y 7/10 = 70%, no 35%.');
+  mact('m6A9',
+    'En una razón de niños a niñas de 3:5, si hay 24 niños, ¿cuántas niñas hay?',
+    '40','3 partes = 24 niños, entonces 1 parte = 8. Niñas = 5 partes = 5 × 8 = 40.',
+    '29','24 + 5 = 29, pero la suma no resuelve razones. Halla una parte: 24÷3=8, luego 5×8=40.',
+    '72','24 × 3 = 72, pero esa es la operación incorrecta. 3 partes = 24, 1 parte = 8, 5 partes = 40.');
+  mact('m6A10',
+    'Usando una doble recta numérica con razón 3:4, si una cantidad es 15, ¿cuál es la otra?',
+    '20','3:4 y 15:? significa 3×5=15, entonces 4×5=20. La respuesta es 20.',
+    '12','15 − 3 = 12, pero eso es resta. Factor de escala: 15÷3=5, luego 4×5=20.',
+    '19','15 + 4 = 19, pero la suma no funciona. Halla la escala: 15÷3=5, luego 4×5=20.');
+  mact('m6A11',
+    'Una camisa cuesta originalmente $40 y está en oferta con 30% de descuento. ¿Cuál es el precio de oferta?',
+    '$28','Descuento = 0.30 × $40 = $12. Precio de oferta = $40 − $12 = $28.',
+    '$30','Calcula el descuento correctamente: 30% de $40 = $12. Luego $40 − $12 = $28.',
+    '$70','Eso suma el 30% en vez de restarlo. 30% de $40 = $12, así que $40 − $12 = $28.');
+  mact('m6A12',
+    'Un libro cuesta $15 y el impuesto sobre las ventas es del 8%. ¿Cuánto es el costo total?',
+    '$16.20','Impuesto = 0.08 × $15 = $1.20. Total = $15 + $1.20 = $16.20.',
+    '$15.80','Restaste el impuesto en vez de sumarlo. Impuesto = $1.20, entonces $15 + $1.20 = $16.20.',
+    '$23','8 es el porcentaje, no el monto del impuesto. Calcula: 0.08 × $15 = $1.20. Luego suma.');
+  mact('m6A13',
+    'La cuenta del restaurante es $50. Si quieres dejar una propina del 20%, ¿cuánto debes pagar en total?',
+    '$60','Propina = 0.20 × $50 = $10. Total = $50 + $10 = $60.',
+    '$70','Esa es una propina del 40%. Calcula: 0.20 × $50 = $10, así que $50 + $10 = $60.',
+    '$55','Esa es una propina del 10%. Para el 20%: 0.20 × $50 = $10, luego $50 + $10 = $60.');
+  mact('m6A14',
+    'Si depositas $200 en una cuenta bancaria con un interés simple del 5% durante 3 años, ¿cuánto interés ganas?',
+    '$30','I = $200 × 0.05 × 3 = $30. Ganas $30 de interés.',
+    '$45','Usa la fórmula correcta: I = $200 × 0.05 × 3 = $30.',
+    '$100','$200 × 0.05 = $10 por año, por 3 años = $30, no $100. Verifica tu multiplicación.');
+  mact('m6A15',
+    'Un videojuego costaba $40 el año pasado y cuesta $50 este año. ¿Cuál es el aumento porcentual?',
+    '25%','Cambio = $50 − $40 = $10. Aumento porcentual = ($10 ÷ $40) × 100 = 25%.',
+    '20%','Usa el precio original como base: ($10 ÷ $40) × 100 = 25%.',
+    '10%','El cambio es $10, pero ese no es el porcentaje todavía. ($10 ÷ $40) × 100 = 25%.');
+  mact('m6A16',
+    'Una chaqueta tenía un precio original de $120 y ahora cuesta $90. ¿Cuál es la disminución porcentual?',
+    '25%','Cambio = $120 − $90 = $30. Disminución porcentual = ($30 ÷ $120) × 100 = 25%.',
+    '30%','Usa la fórmula: ($30 ÷ $120) × 100 = 25%.',
+    '33%','Correcto: ($30 ÷ $120) × 100 = 25%.');
+  mact('m6A17',
+    'Una receta de galletas requiere 2 tazas de harina y 1 taza de azúcar. Si quieres hacer 3 veces la receta, ¿cuánta harina necesitas?',
+    '6 tazas','Multiplica todos los ingredientes por 3. Harina: 2 × 3 = 6 tazas.',
+    '5 tazas','2 + 3 = 5, pero debes multiplicar, no sumar. Harina: 2 × 3 = 6 tazas.',
+    '3 tazas','Eso es multiplicar solo por 1.5. Para triplicar la receta: 2 × 3 = 6 tazas de harina.');
+  mact('m6A18',
+    'En un mapa, 1 pulgada representa 5 millas. Si dos ciudades están a 3 pulgadas en el mapa, ¿a cuántas millas están en la realidad?',
+    '15 millas','1 pulgada:5 millas = 3 pulgadas:? millas. Respuesta: 3 × 5 = 15 millas.',
+    '8 millas','3 + 5 = 8, pero la suma no funciona para escalas. Usa proporción: 3 × 5 = 15 millas.',
+    '5 millas','Eso es solo el factor de escala para 1 pulgada. Para 3 pulgadas: 3 × 5 = 15 millas.');
+  mact('m6A19',
+    'Un carro viaja a 60 millas por hora. Si la relación entre distancia y tiempo es proporcional, ¿qué distancia recorre en 4 horas?',
+    '240 millas','Distancia = velocidad × tiempo = 60 × 4 = 240 millas.',
+    '64 millas','60 + 4 = 64, pero la suma no aplica aquí. Multiplica: 60 × 4 = 240 millas.',
+    '15 millas','60 ÷ 4 = 15, pero necesitas multiplicar. Distancia = 60 × 4 = 240 millas.');
+  mact('m6A20',
+    'En un concierto, la razón de adultos a niños es 2:3. Si hay 50 adultos, ¿cuántos niños hay?',
+    '75','2:3 = 50:? significa 2×25=50, entonces 3×25=75. Hay 75 niños.',
+    '100','50 + 50 = 100, pero la suma no resuelve razones. Halla la escala: 50÷2=25, luego 3×25=75.',
+    '25','Ese es el factor de escala, no la respuesta. Úsalo para hallar los niños: 3 × 25 = 75.');
+  // ── B: Sistema numérico ─────────────────────────────────────────────────────
+  mact('m6B21',
+    '¿Cuánto es 3/4 ÷ 1/2?',
+    '3/2 o 1 1/2','3/4 × 2/1 = 6/4 = 3/2 = 1 1/2. Invierte 1/2 para obtener 2/1, luego multiplica.',
+    '1/2','Eso es 3/4 − 1/4. Para dividir, usa el recíproco: 3/4 × 2/1 = 6/4 = 3/2.',
+    '2/3','Eso vendría de invertir 3/4 y multiplicar por 1/2. En cambio: 3/4 × 2/1 = 3/2.');
+  mact('m6B22',
+    '¿Cuánto es 2 1/2 ÷ 1 1/4?',
+    '2','2 1/2 = 5/2 y 1 1/4 = 5/4. Luego 5/2 ÷ 5/4 = 5/2 × 4/5 = 20/10 = 2.',
+    '3 1/2','Eso es suma. Para dividir: 5/2 ÷ 5/4 = 5/2 × 4/5 = 2.',
+    '1 1/5','Verifica tu conversión o el recíproco. 2 1/2 = 5/2, 1 1/4 = 5/4, y 5/2 × 4/5 = 2.');
+  mact('m6B23',
+    '¿Cuánto es 2/3 × 3/5?',
+    '2/5','2/3 × 3/5 = 6/15. Simplifica dividiendo entre el MCD de 3: 6/15 = 2/5.',
+    '5/8','Eso viene de sumar: 2/3 + 3/5. Para multiplicar: 2/3 × 3/5 = 6/15 = 2/5.',
+    '6/15','6/15 es correcto pero no simplificado. El MCD de 6 y 15 es 3, entonces 6/15 = 2/5.');
+  mact('m6B24',
+    '¿Cuánto es 2 1/3 × 1 1/2?',
+    '3 1/2','2 1/3 = 7/3 y 1 1/2 = 3/2. Luego 7/3 × 3/2 = 21/6 = 3 1/2.',
+    '3','Estás cerca, pero debes simplificar: 7/3 × 3/2 = 21/6 = 3 3/6 = 3 1/2.',
+    '2 1/6','Verifica tu conversión. 2 1/3 = 7/3, 1 1/2 = 3/2, entonces 7/3 × 3/2 = 21/6 = 3 1/2.');
+  mact('m6B25',
+    '¿Cuánto es −5 + 3?',
+    '−2','Empieza en −5, muévete 3 espacios a la derecha. Llegas a −2.',
+    '2','Estás tomando los valores absolutos. Con el negativo, la respuesta es negativa: −5 + 3 = −2.',
+    '−8','Eso es −5 − 3. Para la suma: −5 + 3 = −2. Te mueves a la derecha (dirección positiva).');
+  mact('m6B26',
+    '¿Cuánto es 4 − (−6)?',
+    '10','Menos un negativo se convierte en más: 4 − (−6) = 4 + 6 = 10.',
+    '−2','Eso es 4 − 6. Recuerda: menos un negativo es más. Entonces 4 − (−6) = 4 + 6 = 10.',
+    '2','La regla es: resta un negativo sumando. 4 − (−6) = 4 + 6 = 10.');
+  mact('m6B27',
+    '¿Cuánto es −4 × 5?',
+    '−20','Negativo × positivo = negativo. −4 × 5 = −20.',
+    '20','Olvidaste el signo negativo. Un negativo por un positivo es siempre negativo: −4 × 5 = −20.',
+    '1','5 − 4 = 1, pero eso es resta. Para multiplicar con un negativo: −4 × 5 = −20.');
+  mact('m6B28',
+    '¿Cuánto es −20 ÷ 4?',
+    '−5','Negativo ÷ positivo = negativo. −20 ÷ 4 = −5.',
+    '5','Olvidaste el signo negativo. Un negativo dividido entre un positivo es negativo: −20 ÷ 4 = −5.',
+    '−16','Eso es −20 + 4, no una división. Para −20 ÷ 4, la respuesta es −5.');
+  mact('m6B29',
+    '¿Cuánto es |−8|?',
+    '8','El valor absoluto es la distancia desde cero. |−8| = 8, porque está a 8 unidades del 0.',
+    '−8','El valor absoluto nunca es negativo. |−8| = 8, la distancia positiva desde cero.',
+    '0','Eso sería el valor de −8 + 8. En cambio, |−8| = 8, la distancia desde cero.');
+  mact('m6B30',
+    '¿Qué lista ordena estos enteros de menor a mayor? −3, 5, −8, 0',
+    '−8, −3, 0, 5','De izquierda a derecha en la recta numérica: −8 es el más a la izquierda, luego −3, luego 0, luego 5.',
+    '5, 0, −3, −8','Ese es de mayor a menor. Para de menor a mayor: −8, −3, 0, 5.',
+    '−3, −8, 0, 5','−8 < −3, entonces −8 va antes que −3. El orden correcto es: −8, −3, 0, 5.');
+  mact('m6B31',
+    '¿En qué cuadrante está el punto (−3, 4)?',
+    'Cuadrante II (arriba a la izquierda)','x = −3 (negativo, izquierda) y y = 4 (positivo, arriba). x negativo y y positivo = Cuadrante II.',
+    'Cuadrante I (arriba a la derecha)','El Cuadrante I tiene x positivo. Como x = −3 es negativo, el punto está en el Cuadrante II.',
+    'Cuadrante III (abajo a la izquierda)','El Cuadrante III tiene y negativo. Como y = 4 es positivo, el punto está en el Cuadrante II.');
+  mact('m6B32',
+    '¿Cuál es el MCD de 24 y 36?',
+    '12','Factores de 24: 1,2,3,4,6,8,12,24. Factores de 36: 1,2,3,4,6,9,12,18,36. El mayor común: 12.',
+    '6','6 es un factor común, pero no es el mayor. 12 divide exactamente a 24 y a 36.',
+    '24','24 solo divide a 24, no a 36. El MCD debe dividir a ambos números. Es 12.');
+  mact('m6B33',
+    '¿Cuál es el mcm de 4 y 6?',
+    '12','Múltiplos de 4: 4,8,12,16... Múltiplos de 6: 6,12,18... El menor común: 12.',
+    '24','24 es un múltiplo común, pero no el mínimo. 12 es menor: 12÷4=3 y 12÷6=2.',
+    '2','2 divide a ambos, pero eso es un factor común, no un múltiplo. Para el mcm de 4 y 6 es 12.');
+  mact('m6B34',
+    'Usa la propiedad distributiva para simplificar: 3(2 + 5)',
+    '21','3(2 + 5) = 3(2) + 3(5) = 6 + 15 = 21. O bien: 3 × 7 = 21.',
+    '11','2 + 5 = 7, pero olvidaste multiplicar por 3. Distribuye: 3(2) + 3(5) = 6 + 15 = 21.',
+    '6','Eso es solo 3 × 2, falta la parte 3 × 5. Distribuye completamente: 3(2) + 3(5) = 6 + 15 = 21.');
+  mact('m6B35',
+    '¿Cuál es la factorización prima de 12?',
+    '2² × 3','12 = 2 × 6 = 2 × 2 × 3 = 2² × 3. Todos los factores son primos.',
+    '2 × 6','6 no es primo. Sigue factorizando: 12 = 2 × 2 × 3 = 2² × 3.',
+    '3 × 4','4 no es primo. 12 = 2 × 2 × 3 = 2² × 3.');
+  mact('m6B36',
+    '¿Cuánto es 3⁴?',
+    '81','3⁴ = 3 × 3 × 3 × 3 = 81. Multiplica 3 por sí mismo 4 veces.',
+    '12','Eso es 3 × 4. Con exponentes, multiplicas la base por sí misma: 3⁴ = 3 × 3 × 3 × 3 = 81.',
+    '64','Eso es 4³. Necesitas 3⁴ = 3 × 3 × 3 × 3 = 81.');
+  mact('m6B37',
+    'Evalúa: 2 + 3²',
+    '11','Primero los exponentes: 3² = 9. Luego suma: 2 + 9 = 11.',
+    '25','Eso es (2 + 3)² = 5² = 25, pero los exponentes van antes de la suma. Haz 3² primero: 2 + 9 = 11.',
+    '8','Primero el exponente: 3² = 9, luego 2 + 9 = 11.');
+  mact('m6B38',
+    'Escribe 4,500 en notación científica.',
+    '4.5 × 10³','Mueve el decimal 3 lugares a la izquierda: 4,500 = 4.5 × 10³. El exponente es 3.',
+    '45 × 10²','45 no está entre 1 y 10. Forma correcta: 4.5 × 10³.',
+    '4.5 × 10²','Mover el decimal 2 lugares da 450, no 4,500. Para 4,500, mueve 3 lugares: 4.5 × 10³.');
+  mact('m6B39',
+    'Convierte 3/5 a decimal y a porcentaje.',
+    '0.6 y 60%','3 ÷ 5 = 0.6 (decimal). 0.6 × 100 = 60% (porcentaje).',
+    '0.35 y 35%','3/5 ≠ 35/100. Divide: 3 ÷ 5 = 0.6, luego 0.6 × 100 = 60%.',
+    '0.6 y 6%','El decimal es correcto (0.6), pero el porcentaje no. 0.6 × 100 = 60%, no 6%.');
+  mact('m6B40',
+    'Si una receta requiere 2 1/2 tazas de harina y quieres hacer la mitad, ¿cuánta harina necesitas?',
+    '1 1/4 tazas','2 1/2 × 1/2 = 5/2 × 1/2 = 5/4 = 1 1/4 tazas.',
+    '2 tazas','Estás restando 1/2. Multiplica: 2 1/2 × 1/2 = 5/2 × 1/2 = 5/4 = 1 1/4 tazas.',
+    '1 taza','Casi, pero no es exacto. Calcula: 5/2 × 1/2 = 5/4, que son 1 1/4 tazas, no 1.');
+})();
+// Math Grade 6 — individual activity translations, categories C, D & E
+(function(){
+  var L = LESSON_TRANSLATIONS_ES;
+  function mact(id, instr, c0t, c0e, c1t, c1e, c2t, c2e){
+    var key = 'math:' + id;
+    if(!L[key]) L[key] = {};
+    L[key].activity = { instructions: instr, choices: [
+      { text: c0t, explanation: c0e },
+      { text: c1t, explanation: c1e },
+      { text: c2t, explanation: c2e }
+    ]};
+  }
+  // ── C: Expresiones y ecuaciones ─────────────────────────────────────────────
+  mact('m6C41',
+    'Escribe una expresión: "Cinco menos que un número n"',
+    'n − 5','"Menos que" significa restar. "Cinco menos que n" = n − 5.',
+    '5 − n','Eso es "cinco menos un número", que da un valor diferente. "Menos que" va después del número principal: n − 5.',
+    'n + 5','Eso es "cinco más", no "cinco menos". Usa resta: n − 5.');
+  mact('m6C42',
+    'Evalúa 3x + 2 cuando x = 4.',
+    '14','Sustituye x = 4: 3(4) + 2 = 12 + 2 = 14.',
+    '18','3 × 4 = 12, y 12 + 6 ≠ 18. Correctamente: 3(4) + 2 = 12 + 2 = 14.',
+    '11','3 + 4 + 2 = 9, no 11. Sigue el orden de operaciones: 3(4) + 2 = 12 + 2 = 14.');
+  mact('m6C43',
+    'Simplifica: 3x + 5 + 2x − 1',
+    '5x + 4','Combina los términos x: 3x + 2x = 5x. Combina las constantes: 5 − 1 = 4. Resultado: 5x + 4.',
+    '5x + 6','Términos x: 3x + 2x = 5x ✓. Constantes: 5 − 1 = 4, no 6.',
+    '6x + 4','3x + 2x = 5x, no 6x. Combina correctamente: (3+2)x + (5−1) = 5x + 4.');
+  mact('m6C44',
+    'Expande: 4(2x + 3)',
+    '8x + 12','4(2x) + 4(3) = 8x + 12. Distribuye el 4 a cada término.',
+    '8x + 3','Solo distribuiste al primer término. Hazlo a los dos: 4(2x) + 4(3) = 8x + 12.',
+    '6x + 7','Distribuye: 4 × 2x = 8x y 4 × 3 = 12, así que el resultado es 8x + 12.');
+  mact('m6C45',
+    'Resuelve: x + 5 = 12',
+    'x = 7','Resta 5 de ambos lados: x + 5 − 5 = 12 − 5, entonces x = 7.',
+    'x = 17','Sumaste en vez de restar. Resta 5: x = 12 − 5 = 7.',
+    'x = 2.4','Eso viene de dividir. Usa resta: x = 12 − 5 = 7.');
+  mact('m6C46',
+    'Resuelve: 4x = 20',
+    'x = 5','Divide ambos lados entre 4: 4x ÷ 4 = 20 ÷ 4, entonces x = 5.',
+    'x = 24','Eso es 4 + 20. Para un paso con multiplicación, divide: x = 20 ÷ 4 = 5.',
+    'x = 80','Eso es 4 × 20. Debes deshacer la multiplicación dividiendo: x = 20 ÷ 4 = 5.');
+  mact('m6C47',
+    'Escribe una ecuación: "Tres veces un número es igual a 21."',
+    '3n = 21','Sea n = el número. "Tres veces" = 3n. "Igual a 21" = = 21. Ecuación: 3n = 21.',
+    'n + 3 = 21','Eso dice "un número más tres igual a 21". Necesitas multiplicación: 3n = 21.',
+    '3 + n = 21','Eso es "tres más un número". Necesitas "tres veces": 3n = 21.');
+  mact('m6C48',
+    '¿Qué desigualdad muestra una recta numérica con círculo cerrado en 5 y flecha a la derecha?',
+    'x ≥ 5','Círculo cerrado significa "igual a", y flecha a la derecha significa "mayor que". Juntos: x ≥ 5.',
+    'x > 5','El círculo abierto (no cerrado) significa "mayor que" sin "igual a". Círculo cerrado en 5: x ≥ 5.',
+    'x ≤ 5','La flecha a la izquierda con círculo cerrado significa "menor o igual que". Flecha a la derecha: x ≥ 5.');
+  mact('m6C49',
+    'Resuelve: x − 3 < 8',
+    'x < 11','Suma 3 a ambos lados: x − 3 + 3 < 8 + 3, entonces x < 11.',
+    'x > 11','Invertiste el símbolo incorrectamente. Sumar no requiere inversión: x < 8 + 3 = 11.',
+    'x < 5','8 − 3 = 5, pero debes sumar, no restar. x − 3 < 8 se convierte en x < 11.');
+  mact('m6C50',
+    'La calificación de un estudiante depende de las horas de estudio. ¿Cuál es la variable independiente?',
+    'Horas de estudio','Las horas de estudio (entrada) se controlan libremente. La calificación (salida) depende de ellas. Horas = independiente.',
+    'Calificación','La calificación depende de las horas de estudio, así que es la variable dependiente. Independiente = horas.',
+    'Ambas por igual','Una variable controla a la otra. La calificación depende de las horas, entonces las horas son independientes.');
+  mact('m6C51',
+    'Si y = 2x + 1, halla y cuando x = 3.',
+    '7','y = 2(3) + 1 = 6 + 1 = 7. Sustituye x = 3 en la regla.',
+    '6','Eso es solo 2 × 3. Olvidaste el +1. Calcula: 2(3) + 1 = 6 + 1 = 7.',
+    '5','2 + 3 = 5, pero eso es suma, no multiplicación. Usa: y = 2(3) + 1 = 7.');
+  mact('m6C52',
+    'Completa la tabla para y = x + 4: Si x = 2, ¿cuánto es y?',
+    '6','y = 2 + 4 = 6. Sustituye x = 2 en la ecuación.',
+    '8','2 × 4 = 8, pero la ecuación es suma, no multiplicación. y = 2 + 4 = 6.',
+    '4','Eso es solo la constante. Debes sumar 2: y = 2 + 4 = 6.');
+  mact('m6C53',
+    'Para y = 2x, ¿qué punto está en esta recta?',
+    '(2, 4)','Cuando x = 2, y = 2(2) = 4. El punto (2, 4) está en la recta y = 2x.',
+    '(2, 2)','Cuando x = 2, y debe ser 2(2) = 4, no 2. El punto correcto es (2, 4).',
+    '(4, 2)','Si x = 4, entonces y = 2(4) = 8, no 2. Y si x = 2, entonces y = 4. Usa (2, 4).');
+  mact('m6C54',
+    '¿Qué expresión es equivalente a 3(x + 2)?',
+    '3x + 6','3(x + 2) = 3x + 3(2) = 3x + 6. Distribuye el 3.',
+    '3x + 2','Solo distribuiste al x, no al 2. Completamente: 3(x) + 3(2) = 3x + 6.',
+    '3x + 3','3 por 2 es 6, no 3. Distribuye: 3(x + 2) = 3x + 6.');
+  mact('m6C55',
+    'Evalúa x² + 3x cuando x = 2.',
+    '10','2² + 3(2) = 4 + 6 = 10. Primero el exponente, luego multiplica, luego suma.',
+    '16','Sigue el orden: 2² = 4, luego 3(2) = 6, luego 4 + 6 = 10.',
+    '20','Usa el orden correcto: 2² + 3(2) = 4 + 6 = 10.');
+  mact('m6C56',
+    'Halla el área de un triángulo con base 8 y altura 6.',
+    '24 unidades cuadradas','A = (1/2) × base × altura = (1/2) × 8 × 6 = 24 unidades cuadradas.',
+    '48 unidades cuadradas','Eso es sin el 1/2. Usa la fórmula del triángulo: (1/2) × 8 × 6 = 24.',
+    '14 unidades cuadradas','8 + 6 = 14, pero eso es idea de perímetro. Para el área: (1/2) × 8 × 6 = 24.');
+  mact('m6C57',
+    'Halla el perímetro de un rectángulo con longitud 10 y ancho 5.',
+    '30 unidades','P = 2(10) + 2(5) = 20 + 10 = 30 unidades. O bien: 10 + 5 + 10 + 5 = 30.',
+    '50 unidades','Eso es 10 × 5. Para el perímetro: 2(10) + 2(5) = 20 + 10 = 30 unidades.',
+    '25 unidades','10 + 5 + 10 ≠ 25. Incluye todos los 4 lados: 10 + 5 + 10 + 5 = 30 unidades.');
+  mact('m6C58',
+    'Halla el volumen de un prisma rectangular con longitud 4, ancho 3 y altura 5.',
+    '60 unidades cúbicas','V = 4 × 3 × 5 = 60 unidades cúbicas.',
+    '12 unidades cúbicas','Eso es solo longitud × ancho. Incluye la altura: 4 × 3 × 5 = 60.',
+    '47 unidades cúbicas','4 + 3 + 5 = 12, pero 12 × 4 ≠ 47. Multiplica las tres dimensiones: 4 × 3 × 5 = 60.');
+  mact('m6C59',
+    'Usa la fórmula C = 5/9(F − 32) para convertir 68°F a Celsius.',
+    '20°C','C = 5/9(68 − 32) = 5/9(36) = 180/9 = 20°C.',
+    '36°C','Eso es solo 68 − 32 sin la multiplicación de 5/9. Completa: 5/9 × 36 = 20°C.',
+    '20.5°C','Calcula con cuidado: 5/9 × 36 = 20°C exactamente.');
+  mact('m6C60',
+    'Resuelve: 2x + 3 = 11',
+    'x = 4','Resta 3: 2x = 8. Divide entre 2: x = 4. Verifica: 2(4) + 3 = 8 + 3 = 11. ✓',
+    'x = 7','11 − 3 = 8, luego 8 ÷ 2 = 4. La respuesta es x = 4.',
+    'x = 14','Resuelve correctamente: 2x + 3 = 11 → 2x = 8 → x = 4.');
+  // ── D: Geometría ────────────────────────────────────────────────────────────
+  mact('m6D61',
+    'Halla el área de un triángulo con base 12 y altura 8.',
+    '48 unidades cuadradas','A = (1/2) × 12 × 8 = (1/2) × 96 = 48 unidades cuadradas.',
+    '96 unidades cuadradas','Eso es base × altura sin dividir entre 2. Para un triángulo: (1/2) × 12 × 8 = 48.',
+    '20 unidades cuadradas','12 + 8 = 20, pero eso es idea de perímetro. Usa: (1/2) × 12 × 8 = 48.');
+  mact('m6D62',
+    'Halla el área de un paralelogramo con base 10 y altura 7.',
+    '70 unidades cuadradas','A = 10 × 7 = 70 unidades cuadradas.',
+    '35 unidades cuadradas','Eso es 70 ÷ 2. Los paralelogramos no dividen entre 2; eso es para los triángulos. Usa: 10 × 7 = 70.',
+    '17 unidades cuadradas','10 + 7 = 17, pero eso es lógica de perímetro. Para el área, multiplica: 10 × 7 = 70.');
+  mact('m6D63',
+    'Halla el área de un trapezoide con bases 6 y 10 y altura 4.',
+    '32 unidades cuadradas','A = (1/2)(6 + 10) × 4 = (1/2)(16) × 4 = 8 × 4 = 32 unidades cuadradas.',
+    '24 unidades cuadradas','(6 + 10) × 4 = 64, pero olvidaste dividir entre 2. Usa: (1/2) × 16 × 4 = 32.',
+    '40 unidades cuadradas','Eso es 10 × 4. Para un trapezoide, primero promedia las bases: (6+10)/2 = 8, luego 8 × 4 = 32.');
+  mact('m6D64',
+    'Halla el área de una figura en L: parte vertical 4 × 2, parte horizontal 8 × 3.',
+    '32 unidades cuadradas','Rectángulo vertical: 4 × 2 = 8. Rectángulo horizontal: 8 × 3 = 24. Total: 8 + 24 = 32 unidades cuadradas.',
+    '40 unidades cuadradas','Trátalos por separado: 4×2 + 8×3 = 8 + 24 = 32 unidades cuadradas.',
+    '24 unidades cuadradas','Eso es solo la parte horizontal. Incluye ambas: 4×2 + 8×3 = 8 + 24 = 32.');
+  mact('m6D65',
+    'Halla el área superficial de un prisma rectangular con longitud 5, ancho 3 y altura 2.',
+    '62 unidades cuadradas','AS = 2(5×3 + 5×2 + 3×2) = 2(15 + 10 + 6) = 2(31) = 62 unidades cuadradas.',
+    '30 unidades cuadradas','Eso es solo l×a×h. El área superficial incluye todas las caras: 2(15 + 10 + 6) = 62.',
+    '31 unidades cuadradas','Eso es (15 + 10 + 6). Debes multiplicar por 2: 2 × 31 = 62 unidades cuadradas.');
+  mact('m6D66',
+    'Halla el área superficial de un prisma triangular con base triangular 4, altura 3 y altura del prisma 5.',
+    '56 unidades cuadradas','Triángulos: 2 × (1/2 × 4 × 3) = 12. Caras rectangulares ≈ 44. Total ≈ 56 unidades cuadradas.',
+    '60 unidades cuadradas','Ambas caras triangulares suman 2 × 6 = 12. Luego suma todas las caras rectangulares.',
+    '30 unidades cuadradas','Es demasiado pequeño. Incluye ambos triángulos (12) y los tres rectángulos (~44) ≈ 56.');
+  mact('m6D67',
+    'Halla el volumen de una caja con longitud 6, ancho 4 y altura 3.',
+    '72 unidades cúbicas','V = 6 × 4 × 3 = 72 unidades cúbicas.',
+    '52 unidades cúbicas','6 + 4 + 3 = 13, y 13 × 4 ≠ 52. Multiplica las tres: 6 × 4 × 3 = 72.',
+    '24 unidades cúbicas','Eso es solo 6 × 4. No olvides la altura: 6 × 4 × 3 = 72 unidades cúbicas.');
+  mact('m6D68',
+    '¿Cuántas caras muestra la red de un prisma rectangular?',
+    '6','Un prisma rectangular tiene 6 caras rectangulares, todas mostradas en su red.',
+    '4','Eso es un tetraedro. La red de un prisma rectangular muestra 6 caras.',
+    '8','Ese es el número de vértices, no de caras. La red muestra 6 caras rectangulares.');
+  mact('m6D69',
+    'Halla la distancia entre (2, 3) y (2, 8) en el plano coordenado.',
+    '5 unidades','Misma coordenada x, entonces distancia = |8 − 3| = 5 unidades verticalmente.',
+    '6 unidades','8 − 2 = 6, pero tienen el mismo x, así que usa y: |8 − 3| = 5 unidades.',
+    '10 unidades','2 + 8 = 10, pero así no se calcula la distancia. Usa |8 − 3| = 5 unidades.');
+  mact('m6D70',
+    'Los vértices de un rectángulo son (1,1), (5,1), (5,4) y (1,4). ¿Cuál es el área?',
+    '12 unidades cuadradas','Longitud = 5−1=4, ancho = 4−1=3. Área = 4 × 3 = 12 unidades cuadradas.',
+    '20 unidades cuadradas','5 × 4 = 20, pero estas son coordenadas, no dimensiones. Ancho = 3, largo = 4. Área = 12.',
+    '14 unidades cuadradas','Eso es idea de perímetro. Para el área: (5−1) × (4−1) = 4 × 3 = 12 unidades cuadradas.');
+  mact('m6D71',
+    'Un ángulo mide 65°. ¿De qué tipo es?',
+    'Agudo','65° < 90°, entonces es agudo.',
+    'Recto','Un ángulo recto mide exactamente 90°. Como 65° ≠ 90°, no es recto. 65° < 90°, entonces es agudo.',
+    'Obtuso','Los ángulos obtusos miden entre 90° y 180°. Como 65° < 90°, es agudo, no obtuso.');
+  mact('m6D72',
+    'Si un ángulo mide 30°, ¿cuál es su complemento?',
+    '60°','Los ángulos complementarios suman 90°. 90° − 30° = 60°.',
+    '150°','Eso es suplementario (suma 180°). El complemento suma 90°: 90° − 30° = 60°.',
+    '30°','Un ángulo no se complementa a sí mismo (a menos que sea 45°). 90° − 30° = 60°.');
+  mact('m6D73',
+    'Si un ángulo mide 120°, ¿cuál es su suplemento?',
+    '60°','Los ángulos suplementarios suman 180°. 180° − 120° = 60°.',
+    '70°','Usa la fórmula correcta: 180° − 120° = 60°.',
+    '120°','Un ángulo no se suplementa a sí mismo (a menos que sea 90°). 180° − 120° = 60°.');
+  mact('m6D74',
+    'Dos rectas se intersectan formando ángulos de 45°, ?, 45° y ?. ¿Cuáles son los ángulos desconocidos?',
+    '135° y 135°','Los ángulos verticales son iguales: los otros dos son 180° − 45° = 135° (suplementarios).',
+    '45° y 45°','Dos son 45°, y los otros dos (suplementarios) son 180° − 45° = 135°.',
+    '90° y 90°','90° + 45° ≠ 180°. Los ángulos adyacentes son suplementarios: 180° − 45° = 135°.');
+  mact('m6D75',
+    'Un triángulo tiene ángulos de 50° y 70°. ¿Cuál es el tercer ángulo?',
+    '60°','50° + 70° + ? = 180°. ? = 180° − 50° − 70° = 60°.',
+    '120°','50° + 70° = 120°. Para un triángulo: 180° − 120° = 60°, no 120°.',
+    '100°','Correctamente: 180° − (50° + 70°) = 180° − 120° = 60°.');
+  mact('m6D76',
+    'Los ángulos de un cuadrilátero son 90°, 90°, 90° y ?. ¿Cuál es el cuarto ángulo?',
+    '90°','90° + 90° + 90° + ? = 360°. ? = 360° − 270° = 90°. (Esto es un rectángulo.)',
+    '120°','90° + 90° + 90° = 270°, entonces ? = 360° − 270° = 90°, no 120°.',
+    '180°','270° + 180° = 450° > 360°. El cuarto ángulo debe ser 90°.');
+  mact('m6D77',
+    'Si un círculo tiene radio 5, ¿cuál es su diámetro?',
+    '10','Diámetro = 2 × radio = 2 × 5 = 10.',
+    '5','Ese es el radio, no el diámetro. Diámetro = 2 × radio = 2 × 5 = 10.',
+    '25','Eso es r². Para el diámetro: d = 2 × r = 2 × 5 = 10.');
+  mact('m6D78',
+    'Halla la circunferencia de un círculo con diámetro 10. (Usa π ≈ 3.14)',
+    '31.4 unidades','C = π × d = 3.14 × 10 = 31.4 unidades.',
+    '10 unidades','Ese es el diámetro, no la circunferencia. Usa: C = π × d = 3.14 × 10 = 31.4.',
+    '15.7 unidades','Eso es la mitad de la circunferencia. Completa: C = 3.14 × 10 = 31.4 unidades.');
+  mact('m6D79',
+    '¿Cuántas líneas de simetría tiene un cuadrado?',
+    '4','2 líneas diagonales y 2 desde los puntos medios de los lados = 4 líneas de simetría en total.',
+    '2','Un cuadrado tiene más de 2. Incluye las diagonales y las líneas medias: 4 líneas en total.',
+    '8','Son demasiadas. Un cuadrado tiene 4 líneas de simetría.');
+  mact('m6D80',
+    'Un rectángulo tiene longitud 12 y ancho 8. ¿Cuáles son su área y perímetro?',
+    'Área = 96, Perímetro = 40','Área = 12 × 8 = 96 unidades cuadradas. Perímetro = 2(12) + 2(8) = 24 + 16 = 40 unidades.',
+    'Área = 40, Perímetro = 96','Los intercambiaste. Área: 12 × 8 = 96. Perímetro: 2(12 + 8) = 40.',
+    'Área = 96, Perímetro = 20','El área está bien (96), pero el perímetro está mal. P = 2(12) + 2(8) = 40, no 20.');
+  // ── E: Estadística y probabilidad ──────────────────────────────────────────
+  mact('m6E81',
+    'Halla la media de 4, 8, 6 y 10.',
+    '7','Suma = 4 + 8 + 6 + 10 = 28. Cantidad = 4. Media = 28 ÷ 4 = 7.',
+    '6','Estás cerca pero es incorrecto. Suma = 28, cantidad = 4, entonces 28 ÷ 4 = 7.',
+    '8','Dos de los números son 8, pero la media es el promedio: 28 ÷ 4 = 7.');
+  mact('m6E82',
+    'Halla la mediana de 3, 7, 5, 9, 1.',
+    '5','Ordenados: 1, 3, 5, 7, 9. Valor del medio (3° de 5) = 5.',
+    '6','Eso es un promedio. Para un número impar de valores, usa el del medio: 5.',
+    '4','Con 5 valores, usa el del medio en el conjunto ordenado: 1, 3, 5, 7, 9. La mediana es 5.');
+  mact('m6E83',
+    'Halla la moda de 2, 5, 5, 8, 5, 3, 8.',
+    '5','2 aparece 1 vez, 5 aparece 3 veces, 8 aparece 2 veces, 3 aparece 1 vez. Mayor cantidad: 5 (tres veces).',
+    '8','8 aparece dos veces, pero 5 aparece tres veces. La moda es 5.',
+    'No hay moda','Los valores se repiten, así que sí hay moda. 5 aparece con más frecuencia (3 veces).');
+  mact('m6E84',
+    'Halla el rango de 12, 5, 18, 8, 3.',
+    '15','Máximo = 18, mínimo = 3. Rango = 18 − 3 = 15.',
+    '9','(12+5+18+8+3)÷5 ≈ 9.2 es la media, no el rango. Usa: máx − mín = 18 − 3 = 15.',
+    '18','Ese es el máximo. El rango es máximo − mínimo = 18 − 3 = 15.');
+  mact('m6E85',
+    'Halla la DMA de 2, 4, 6, 8 con media 5.',
+    '2','|2−5|=3, |4−5|=1, |6−5|=1, |8−5|=3. Suma=8. DMA=8÷4=2.',
+    '0','No todos los valores son iguales a la media, así que DMA > 0. (3+1+1+3)÷4 = 2.',
+    '4','La suma de las distancias es 8, no 16. DMA = 8 ÷ 4 = 2.');
+  mact('m6E86',
+    'Un diagrama de puntos tiene 3 puntos sobre el 5, 2 puntos sobre el 7 y 1 punto sobre el 9. ¿Cuántos datos hay en total?',
+    '6','3 + 2 + 1 = 6 datos en total.',
+    '3','Ese es solo el número de puntos sobre el valor más bajo. Suma todos los puntos: 3 + 2 + 1 = 6.',
+    '21','Eso sería la suma de los valores. Cuenta los puntos: 3 + 2 + 1 = 6.');
+  mact('m6E87',
+    'Un histograma tiene intervalos 0-10, 10-20, 20-30 con alturas 5, 8 y 3. ¿Cuántos datos hay en total?',
+    '16','5 + 8 + 3 = 16 datos en total (suma de frecuencias).',
+    '20','Suma las alturas (frecuencias): 5 + 8 + 3 = 16.',
+    '3','Ese es el número de intervalos. Suma las frecuencias: 5 + 8 + 3 = 16.');
+  mact('m6E88',
+    'Un conjunto de datos tiene mínimo 2, Q1 5, mediana 8, Q3 12, máximo 18. ¿Cuál está más cerca de la media?',
+    '8 (mediana)','La mediana (8) es la medida del centro mostrada en el diagrama de caja y representa la ubicación promedio.',
+    '18','18 es el máximo, un extremo, no el centro. La mediana (8) es más central.',
+    '2','2 es el mínimo. La mediana (8) es el valor del medio, que representa mejor el centro.');
+  mact('m6E89',
+    'Un diagrama de tallo y hoja muestra el tallo 3 con hojas 2, 4, 7. ¿Cuáles son los valores?',
+    '32, 34, 37','El tallo 3 representa las decenas. Las hojas 2, 4, 7 son los dígitos de las unidades. Valores: 32, 34, 37.',
+    '2, 4, 7','Esas son solo las hojas. Incluye el tallo: tallo 3 + hoja 2 = 32, etc.',
+    '3, 24, 37','El tallo 3 es el dígito de las decenas para todos. Los tres valores están en los 30: 32, 34, 37.');
+  mact('m6E90',
+    'Una tabla de frecuencias tiene valores 1, 2, 3 con frecuencias 4, 5 y 2. ¿Cuál es el conteo total?',
+    '11','4 + 5 + 2 = 11 datos en total.',
+    '6','Ese es el número de valores únicos. Suma las frecuencias: 4 + 5 + 2 = 11.',
+    '15','El conteo total = suma de frecuencias = 4 + 5 + 2 = 11.');
+  mact('m6E91',
+    'Una gráfica de barras muestra: manzanas (altura 6), naranjas (altura 4), plátanos (altura 8). ¿Cuál tiene la mayor frecuencia?',
+    'Plátanos','Los plátanos tienen la barra más alta (altura 8), por lo que tienen la mayor frecuencia.',
+    'Manzanas','Las manzanas son 6, pero los plátanos son 8. La barra más alta = mayor frecuencia.',
+    'Naranjas','Las naranjas son 4, la más corta. Los plátanos (8) tienen la mayor frecuencia.');
+  mact('m6E92',
+    'Un gráfico circular muestra: 30% rojo, 45% azul, 25% verde. ¿Qué sector es el más grande?',
+    'Azul (45%)','45% es el porcentaje más grande, así que el sector azul es el mayor.',
+    'Rojo (30%)','Rojo es 30%, menor que el 45% del azul. El azul tiene el sector más grande.',
+    'Verde (25%)','Verde es 25%, el más pequeño. El azul (45%) tiene el sector más grande.');
+  mact('m6E93',
+    'Datos: 1, 2, 3, 100. ¿Qué medida es menos afectada por el valor atípico 100?',
+    'Mediana = 2.5','Ordenados: 1, 2, 3, 100. Mediana = (2+3)÷2 = 2.5. Menos afectada por 100.',
+    'Media = 26.5','Media = (1+2+3+100)÷4 = 26.5, muy afectada por 100. La mediana es mejor.',
+    'Moda = no hay moda','La moda se refiere a la frecuencia, no a la ubicación. La mediana = 2.5 resiste el valor atípico.');
+  mact('m6E94',
+    'Una distribución tiene una cola que apunta a la derecha con la mayoría de los valores a la izquierda. ¿Está sesgada a la derecha o a la izquierda?',
+    'Sesgada a la derecha','Cola a la derecha = sesgada a la derecha. La mayoría de los datos están a la izquierda, con valores atípicos a la derecha.',
+    'Sesgada a la izquierda','Sesgada a la izquierda tiene la cola apuntando a la izquierda. Esta apunta a la derecha.',
+    'Simétrica','La simétrica no tiene cola; está equilibrada a ambos lados. Esta tiene una cola a la derecha.');
+  mact('m6E95',
+    'Datos: 5, 6, 7, 8, 50. Eliminar el 50 afectaría más a ¿cuál medida?',
+    'Media','La media cambia de 15.2 a 6.5 (cambio grande). La mediana sigue siendo 7 (cambio pequeño).',
+    'Mediana','Ordenados: 5,6,7,8,50. La mediana = 7 en ambos casos. La media es la más afectada.',
+    'Moda','No hay moda en ningún caso. La media es la más afectada por el valor atípico 50.');
+  mact('m6E96',
+    '¿Cuál es una pregunta estadística?',
+    '¿Cuánto miden los estudiantes de la clase?','Los diferentes estudiantes tienen diferentes alturas, así que las respuestas varían. Esto es estadístico.',
+    '¿Cuántos lados tiene un triángulo?','Un triángulo siempre tiene 3 lados (respuesta fija). Las preguntas estadísticas tienen respuestas variables.',
+    '¿Cuál es la capital de Francia?','Respuesta fija (París). Las preguntas estadísticas esperan respuestas variadas.');
+  mact('m6E97',
+    'Para los datos 2, 3, 4, 5, 6 con media 4 y rango 4, ¿qué es verdad?',
+    'Simétrico, centrado en 4, dispersión de 4','Los datos son simétricos alrededor de 4. Rango = 6−2 = 4. Media = 4, resumen típico.',
+    'Sesgado a la derecha','2,3,4,5,6 es simétrico, no sesgado. Espaciado igual a ambos lados del centro.',
+    'Hay valores atípicos','Todos los valores están cerca unos de otros, sin extremos. Es un conjunto compacto, sin valores atípicos.');
+  mact('m6E98',
+    '¿Qué conjunto de datos tiene menor variabilidad: (1,2,3,4,5) o (1,1,1,5,5)?',
+    '(1,2,3,4,5)','Rango = 4 (distribuido uniformemente). El segundo conjunto tiene grupos separados, mayor variabilidad.',
+    '(1,1,1,5,5)','Dos grupos con espacios. (1,2,3,4,5) está más uniformemente distribuido, menor variabilidad.',
+    'Igual','Ambos tienen rango 4, pero (1,2,3,4,5) es más uniforme (menor variabilidad).');
+  mact('m6E99',
+    'Un dado muestra del 1 al 6. ¿Cuál es la probabilidad de sacar un 2?',
+    '1/6','Un resultado favorable (2) entre 6 posibles. P(2) = 1/6 ≈ 16.7%.',
+    '1/5','Eso sería si hubiera 5 resultados en total. Un dado estándar tiene 6: P(2) = 1/6.',
+    '2/6 = 1/3','1/3 sería la probabilidad de sacar 2 o 3. Solo sacar 2: 1/6.');
+  mact('m6E100',
+    'Una encuesta de clase pregunta: "¿Cuál es tu color favorito?" ¿Qué tipo de datos se recogen?',
+    'Categórico','Los colores son categorías, no números. Esto es categórico (cualitativo).',
+    'Numérico','Los colores no son numéricos. Numérico sería "¿Cuántas horas...?". Esto es categórico.',
+    'Ambos','Esta encuesta es solo categórica. Categórico = categorías descriptivas como los colores.');
+})();
 // Ship Real Apps — apply translations directly to APP_BUILDING['ship'] lesson objects
 (function(){
   var L = LESSON_TRANSLATIONS_ES;
