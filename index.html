@@ -17916,6 +17916,390 @@ Object.assign(LESSON_TRANSLATIONS_ES, {
   });
 })();
 
+// Grade 2 App Building & Financial Literacy — add missing intro/keyPoints/funFact/activity _es fields
+(function(){
+  var L = LESSON_TRANSLATIONS_ES;
+
+  // ── helpers ──────────────────────────────────────────────────────────────
+  function merge(key, data){ Object.assign(L[key], data); }
+
+  // ── APP BUILDING GRADE 2 ─────────────────────────────────────────────────
+
+  // ab2a1 — Parts of an App (mt)
+  merge('app-building:ab2a1', {
+    intro: 'Las apps tienen pantallas (la parte que ves), botones (lo que tocas), datos (información que recuerdan) y lógica (cómo deciden qué hacer). Todas estas partes trabajan juntas para que la app funcione. ¡Entender las partes te ayuda a construir mejores apps!',
+    keyPoints: ['Pantallas = lo que los usuarios ven','Botones = controles del usuario','Datos = información almacenada','Lógica = cómo piensa la app','Las partes trabajan perfectamente juntas'],
+    funFact: '🧩 ¡Una app sencilla puede tener 5 partes. Las apps complejas tienen miles!',
+    activity: {
+      instructions: '¡Relaciona la parte con su descripción!',
+      matchPairs: [{left:'Pantalla',right:'Lo que ves'},{left:'Botón',right:'Lo que tocas'},{left:'Datos',right:'Información guardada'}]
+    }
+  });
+
+  // ab2a2 — Why Some Apps Are Popular (mc)
+  merge('app-building:ab2a2', {
+    intro: 'Algunas apps consiguen 100 millones de descargas. Otras, ninguna. ¿La diferencia? Las apps populares: 1) Resuelven un problema real. 2) Lo hacen de forma hermosa. 3) Hacen felices a los usuarios. 4) Siguen mejorando. ¡Esas cuatro cosas = éxito!',
+    keyPoints: ['Resolver un problema real','Resolverlo mejor que los demás','Hacer que la experiencia sea hermosa','Seguir añadiendo mejoras','Escuchar la opinión de los usuarios'],
+    funFact: '⭐ ¡Instagram tuvo éxito porque hizo que compartir fotos fuera FÁCIL y hermoso!',
+    activity: {
+      instructions: '¿Qué hace popular a una app?',
+      choices: [
+        {text:'Resolver un problema real muy bien', explanation:'¡SÍ! ¡Ese es el secreto!'},
+        {text:'Ser la primera', explanation:'¡No siempre! ¡Ser mejor suele superar a ser primero!'},
+        {text:'Tener muchos anuncios', explanation:'¡Demasiados anuncios hacen que las apps sean MENOS populares!'}
+      ]
+    }
+  });
+
+  // ab2a3 — Different Types of Apps (dd)
+  merge('app-building:ab2a3', {
+    intro: 'Juegos, redes sociales, productividad, salud, educación… ¡las apps existen para todo! Cada tipo tiene diferentes metas y funciones. Un juego trata de ser DIVERTIDO. Una app de productividad trata de ser EFICIENTE. ¡Entender los tipos de apps te ayuda a diseñar mejor!',
+    keyPoints: ['Juegos = entretenimiento','Social = conexión','Productividad = hacer cosas','Educación = aprender','Salud = bienestar'],
+    funFact: '📊 ¡Cada año nacen nuevas categorías de apps!',
+    activity: {
+      instructions: '¡Relaciona la app con su tipo!',
+      dragOptions: [{label:'Minecraft'},{label:'Instagram'},{label:'Google Docs'}],
+      dropTargets: [{label:'Productividad'},{label:'Juego'},{label:'Social'}]
+    }
+  });
+
+  // ab2b1 — Needs vs. Wants (mt)
+  merge('app-building:ab2b1', {
+    intro: 'Los usuarios NECESITAN mapas para encontrar lugares. Los usuarios QUIEREN filtros bonitos. Las buenas apps se enfocan en resolver necesidades y luego agregan deseos. ¡Si tu app está llena de cosas geniales pero no resuelve el problema principal, la gente no la usará!',
+    keyPoints: ['Necesidades = el problema principal','Deseos = extras agradables','Siempre resuelve las necesidades primero','Luego añade deseos divertidos','No dejes que los deseos distraigan de las necesidades'],
+    funFact: '⚖️ ¡La NECESIDAD de Instagram: compartir fotos. El DESEO: filtros geniales. ¡Los dos están ahí!',
+    activity: {
+      instructions: '¡Relaciona la app con su NECESIDAD principal!',
+      matchPairs: [{left:'Mapas',right:'Encontrar lugares'},{left:'Calculadora',right:'Hacer cuentas'},{left:'Temporizador',right:'Medir el tiempo'}]
+    }
+  });
+
+  // ab2b2 — User Personas (fb)
+  merge('app-building:ab2b2', {
+    intro: 'Los diseñadores profesionales crean "personas" — personas imaginarias que representan a usuarios reales. Ejemplo: "Sara, 10 años, ama los juegos, se aburre con los tutoriales largos." Diseña para SARA específicamente, no para "todos". ¡Esto hace mejores apps!',
+    keyPoints: ['Crea usuarios imaginarios pero realistas','Dales nombres y edades','Entiende sus problemas','Diseña específicamente para ellos','Esto supera a diseñar para "todos"'],
+    funFact: '👥 ¡Netflix tiene personas detalladas para diferentes tipos de espectadores!',
+    activity: {
+      instructions: '¡El usuario principal de mi app es _____. Tiene _____ años y _____!',
+      prompt: '¿Quién usaría tu app?'
+    }
+  });
+
+  // ab2b3 — Making Apps Easy to Use (mc)
+  merge('app-building:ab2b3', {
+    intro: 'Las mejores apps son SIMPLES. No tienes que pensar demasiado. Los botones son obvios. La navegación tiene sentido. Cuando una app es fácil, a todos les encanta. Ser fácil no es ser descuidado — ¡la simplicidad requiere un diseño EXCELENTE!',
+    keyPoints: ['Simple > complicado','Botones y menús obvios','Instrucciones claras cuando se necesitan','Pruébala con otras personas','Si los niños pueden usarla, los adultos también'],
+    funFact: '🎯 ¡El mejor diseño es INVISIBLE — simplemente sabes qué hacer!',
+    activity: {
+      instructions: '¿Qué hace mejor a una app?',
+      choices: [
+        {text:'Simple e intuitiva', explanation:'¡Sin duda! ¡La simplicidad = felicidad!'},
+        {text:'Compleja con muchas funciones', explanation:'¡Demasiadas funciones confunden a los usuarios!'},
+        {text:'Muchas opciones por todas partes', explanation:'¡El exceso de opciones = mal diseño!'}
+      ]
+    }
+  });
+
+  // ab2c1 — Ways Apps Make Money (mt)
+  merge('app-building:ab2c1', {
+    intro: 'Algunas apps son gratis (ganan dinero con anuncios). Otras cuestan dinero por adelantado. Algunas son gratis pero cobran por extras. Otras tienen suscripciones. ¡Entender cómo ganan dinero las apps te ayuda a planear el futuro de TU app!',
+    keyPoints: ['Gratis con anuncios = ganan con publicidad','Apps de pago = cobran por adelantado','Gratis con compras en la app = gratis, pero pagas por extras','Suscripciones = pago mensual/anual','Elige el modelo que se adapte a tu app'],
+    funFact: '💵 ¡La mayoría de las apps exitosas usan múltiples estrategias para ganar dinero!',
+    activity: {
+      instructions: '¡Relaciona el modelo de negocio con el ejemplo!',
+      matchPairs: [{left:'Gratis con anuncios',right:'YouTube'},{left:'App de pago',right:'Minecraft'},{left:'Suscripción',right:'Netflix'}]
+    }
+  });
+
+  // ab2c2 — Ads in Apps (mc)
+  merge('app-building:ab2c2', {
+    intro: 'Has visto anuncios en apps gratuitas. ¡Esos anuncios son cómo la app gana dinero! Las empresas le pagan al desarrollador por mostrar anuncios. Así es como YouTube, Instagram y muchas otras apps siguen siendo gratuitas. Anuncios = dinero. Dinero = los desarrolladores pueden seguir mejorando.',
+    keyPoints: ['Los anuncios financian las apps gratuitas','Las empresas pagan por espacio publicitario','Los usuarios ven anuncios, los desarrolladores ganan','Más usuarios = anuncios más valiosos','El diseño de los anuncios es importante'],
+    funFact: '📺 ¡La función más famosa de YouTube surgió gracias a los ingresos por publicidad!',
+    activity: {
+      instructions: '¿Cómo ganan dinero las apps gratuitas?',
+      choices: [
+        {text:'Con anuncios', explanation:'¡SÍ! ¡Los anuncios son cómo las apps gratis ganan dinero!'},
+        {text:'No ganan dinero', explanation:'¡Muchas apps gratuitas ganan MUCHÍSIMO dinero!'},
+        {text:'Cobran en secreto', explanation:'¡Las apps éticas son transparentes!'}
+      ]
+    }
+  });
+
+  // ab2c3 — In-App Purchases (dd)
+  merge('app-building:ab2c3', {
+    intro: 'En los juegos compras monedas, apariencias o poderes. En las apps puedes comprar más funciones. Estas son compras dentro de la app. ¡Juego gratis + comprar poderes = el desarrollador gana dinero Y tú puedes probarlo gratis!',
+    keyPoints: ['Compras en la app = extras opcionales','Los cosméticos (apariencias, colores) son populares','Los poderes hacen los juegos más fáciles','Las funciones premium desbloquean más','Las buenas apps hacen las compras justas y opcionales'],
+    funFact: '🎁 ¡Clash of Clans gana millones al día con compras dentro de la app!',
+    activity: {
+      instructions: '¡Relaciona la compra con su tipo!',
+      dragOptions: [{label:'Apariencia dorada para el personaje'},{label:'Impulso de velocidad'},{label:'Saltar anuncios'}],
+      dropTargets: [{label:'Cosmético (se ve genial)'},{label:'Ayuda en el juego'},{label:'Comodidad'}]
+    }
+  });
+
+  // ab2d1 — Planning Your App Idea (fb)
+  merge('app-building:ab2d1', {
+    intro: 'Antes de programar, escribe un plan: ¿Qué hace tu app? ¿Quién la usa? ¿Qué problema resuelve? ¿Cuáles son las pantallas principales? ¡Un plan sencillo ahorra HORAS de construcción. Los desarrolladores profesionales pasan semanas planificando!',
+    keyPoints: ['Escribe qué hace tu app','Describe quién la usa','Haz una lista de las pantallas principales','Explica las funciones principales','Planifica antes de construir'],
+    funFact: '📋 ¡Los grandes constructores pasan el 30% del tiempo planificando y el 70% construyendo!',
+    activity: {
+      instructions: 'Mi plan de app: Ayuda a las personas a _____. Las funciones principales son _____ y _____.',
+      prompt: 'Escribe un plan simple:'
+    }
+  });
+
+  // ab2d2 — Sketching Your App's Screens (mc)
+  merge('app-building:ab2d2', {
+    intro: 'Dibuja las pantallas principales de tu app. ¿Dónde van los botones? ¿Dónde está el título? ¿Qué información se muestra? Estos bocetos son tu plano. No necesitas computadora — solo papel y lápiz. ¡Los bocetos evitan errores más adelante!',
+    keyPoints: ['Dibuja cada pantalla principal','Marca dónde van los botones y el texto','Haz bocetos rápidos y sencillos','Muestra el flujo entre pantallas','Los bocetos ahorran tiempo de construcción'],
+    funFact: '✏️ ¡La primera versión de Facebook fue dibujada en una servilleta!',
+    activity: {
+      instructions: '¿Por qué dibujar antes de construir?',
+      choices: [
+        {text:'Para planificar y detectar problemas a tiempo', explanation:'¡SÍ! ¡Los bocetos evitan errores!'},
+        {text:'Es una pérdida de tiempo', explanation:'¡Los bocetos AHORRAN muchísimo tiempo!'},
+        {text:'Los bocetos son el diseño final', explanation:'¡Los bocetos son solo planeación!'}
+      ]
+    }
+  });
+
+  // ab2d3 — Building Step-by-Step (so)
+  merge('app-building:ab2d3', {
+    intro: 'No intentes construir toda la app de una vez. Divídela en partes pequeñas: 1) Construye la pantalla de inicio. 2) Haz que funcionen los botones. 3) Agrega la segunda pantalla. 4) Conéctalas. ¡Pasos pequeños = progreso más rápido y menos errores!',
+    keyPoints: ['Divide los proyectos grandes en pasos','Construye una pantalla a la vez','Prueba cada parte mientras avanzas','Celebra las pequeñas victorias','Pasos pequeños = éxito'],
+    funFact: '🔨 ¡Los desarrolladores profesionales construyen en pasos pequeñísimos!',
+    activity: {
+      instructions: '¡Pon los pasos de construcción en el orden correcto!',
+      sortItems: ['Prueba toda la app','Construye la segunda pantalla','Conecta las pantallas','Construye la pantalla principal','Corrige los problemas']
+    }
+  });
+
+  // ab2e1 — Learning to Code Now (mc)
+  merge('app-building:ab2e1', {
+    intro: '¡Puedes EMPEZAR a aprender a programar AHORA MISMO! Sitios web como Code.org, Scratch y otros enseñan a niños de tu edad. Juegos, acertijos y proyectos divertidos te enseñan programación real. ¡Para cuando seas adolescente, podrías estar construyendo apps de verdad!',
+    keyPoints: ['Aprender a programar es para todos','Empieza con herramientas divertidas como Scratch','Code.org tiene lecciones excelentes','Aprender requiere paciencia','Puedes aprender a tu propio ritmo'],
+    funFact: '💻 ¡El programador autodidacta más joven tenía 7 años!',
+    activity: {
+      instructions: '¿Cuándo puedes empezar a aprender a programar?',
+      choices: [
+        {text:'¡Ahora mismo! ¡Tienes la edad perfecta!', explanation:'¡SÍ! ¡Empieza cuando tengas curiosidad!'},
+        {text:'Cuando tengas 18 años', explanation:'¡Es demasiado tiempo de espera!'},
+        {text:'Solo en la escuela', explanation:'¡Puedes aprender en cualquier lugar!'}
+      ]
+    }
+  });
+
+  // ab2e2 — The Path to App Developer (dd)
+  merge('app-building:ab2e2', {
+    intro: 'Camino: 1) Aprende lo básico de programación (7-12 años). 2) Construye proyectos pequeños (12-16 años). 3) Únete a comunidades (cualquier edad). 4) Construye apps reales (adolescentes+). 5) Publica (cuando estés listo). 6) Promuévela (haz crecer tu base de usuarios). ¡Toma tiempo, pero es POSIBLE!',
+    keyPoints: ['Aprende primero los fundamentos de programación','Construye proyectos pequeños para practicar','Únete a comunidades de programación','No te compares con los demás','Celebra tu progreso'],
+    funFact: '🛤️ ¡Todo desarrollador de apps siguió un camino similar!',
+    activity: {
+      instructions: '¡Relaciona la etapa con la acción!',
+      dragOptions: [{label:'Etapa de aprendizaje'},{label:'Etapa de construcción'},{label:'Etapa de lanzamiento'}],
+      dropTargets: [{label:'Programar y crear proyectos'},{label:'Aprender lenguajes y conceptos'},{label:'Enviar a la tienda de apps'}]
+    }
+  });
+
+  // ab2e3 — Keep Dreaming Big! (fb)
+  merge('app-building:ab2e3', {
+    intro: 'A lo largo de la historia, niños tuvieron ideas que se convirtieron en apps que cambiaron el mundo. ¡Podrías ser el próximo! Sigue aprendiendo, mantén la curiosidad, construye cosas, pide opiniones y mejora. La grandeza viene de la pasión + la práctica. ¡TUS ideas importan!',
+    keyPoints: ['Tus ideas pueden volverse reales','La perseverancia supera a la perfección','Los comentarios te hacen mejor','Las ideas pequeñas se convierten en grandes','Nunca dejes de aprender y construir'],
+    funFact: '✨ ¡Al fundador de Instagram le dijeron que su idea era "un mal clon de Foursquare". Ahora es una de las empresas más valiosas del mundo!',
+    activity: {
+      instructions: '¡Mi mayor sueño como creador de apps es _____!',
+      prompt: '¿Qué crearás?'
+    }
+  });
+
+  // ── FINANCIAL LITERACY GRADE 2 ───────────────────────────────────────────
+
+  // fl2a1 — Bills and Coins Working Together (mc)
+  merge('financial-literacy:fl2a1', {
+    intro: 'Usas monedas para cantidades pequeñas (25¢) y billetes para cantidades mayores ($5, $10). ¡A veces usas los dos! Entender cuándo usar cada uno te ayuda a contar el dinero de forma más inteligente.',
+    keyPoints: ['Billetes para cantidades mayores','Monedas para cantidades menores','Mézclalos','Cuenta con cuidado','Matemáticas = dinero'],
+    funFact: '💵 ¡Contar $25.50 = dos billetes de $10, uno de $5 y una moneda de 25¢!',
+    activity: {
+      instructions: '¿Cuál vale más: un billete de $1 o 50 monedas de 1¢?',
+      choices: [
+        {text:'Son iguales (ambos valen $1)', explanation:'¡SÍ! $1 = 100¢'},
+        {text:'El billete de $1', explanation:'¡En realidad son iguales: $1 = 100 centavos!'},
+        {text:'Las 50 monedas de centavo', explanation:'¡50 monedas de 1¢ = 50¢, menos que $1!'}
+      ]
+    }
+  });
+
+  // fl2a2 — Giving and Receiving Money (mt)
+  merge('financial-literacy:fl2a2', {
+    intro: 'Ganas dinero. Lo gastas. Recibes regalos. ¡El dinero entra y sale! Entender el flujo te ayuda a planificar mejor.',
+    keyPoints: ['Ingreso = dinero que entra','Gastos = dinero que sale','Los regalos = ingreso sorpresa','Equilibrio = salud financiera','El flujo = ciclo continuo'],
+    funFact: '🎁 ¡El dinero nunca para de moverse!',
+    activity: {
+      instructions: '¡Clasifica en Ingreso o Gasto!',
+      matchPairs: [{left:'Ganar mesada',right:'Ingreso'},{left:'Comprar un juguete',right:'Gasto'},{left:'Dinero de cumpleaños',right:'Ingreso'}]
+    }
+  });
+
+  // fl2a3 — The Value of Money (fb)
+  merge('financial-literacy:fl2a3', {
+    intro: 'El dinero te permite comprar lo que necesitas y quieres. El dinero te da opciones. Por eso ahorrar es poderoso — ¡más dinero = más opciones!',
+    keyPoints: ['Dinero = opciones','Opciones = poder','Ahorrar = más posibilidades','Planificar con anticipación = libertad','El dinero importa'],
+    funFact: '💎 ¡El dinero es una herramienta para mejorar tu vida!',
+    activity: {
+      instructions: '¡Con más dinero podría _____!',
+      prompt: '¿Qué harías?'
+    }
+  });
+
+  // fl2b1 — Making a Real Budget (fb)
+  merge('financial-literacy:fl2b1', {
+    intro: 'Anota: ¿Cuánto recibes? (Ingresos) ¿Cuánto gastas? (Gastos) Ahorra la diferencia. ¡Eso es un presupuesto de verdad! Hasta los niños pueden hacer un presupuesto.',
+    keyPoints: ['Ingresos = dinero que entra','Gastos = dinero que sale','Planifica la diferencia','Lleva el registro','Presupuesto = control'],
+    funFact: '📊 ¡Los presupuestos son cómo funciona el mundo!',
+    activity: {
+      instructions: 'Mi presupuesto mensual: Ingresos $_____, Gastos $_____, Ahorro $_____.',
+      prompt: 'Crea tu presupuesto:'
+    }
+  });
+
+  // fl2b2 — Needs vs. Wants (Deeper) (dd)
+  merge('financial-literacy:fl2b2', {
+    intro: 'Renta, comida, ropa = NECESIDADES. Juegos, golosinas, juguetes = DESEOS. Cuando el dinero escasea, las necesidades van primero. ¡Cuando hay suficiente, puedes darte ambas!',
+    keyPoints: ['Las necesidades nos protegen','Los deseos hacen la vida divertida','Presupuesta primero las NECESIDADES','Los deseos vienen después','El equilibrio importa'],
+    funFact: '⚖️ ¡Los ricos también hacen presupuesto!',
+    activity: {
+      instructions: '¿NECESIDAD o DESEO?',
+      dragOptions: [{label:'Renta del hogar'},{label:'Videojuego'}],
+      dropTargets: [{label:'NECESIDAD'},{label:'DESEO'}]
+    }
+  });
+
+  // fl2b3 — Emergency Funds (mc)
+  merge('financial-literacy:fl2b3', {
+    intro: 'A veces pasan cosas inesperadas (teléfono roto, reparación del carro). Las personas inteligentes ahorran dinero para emergencias. ¡Cuando llega el problema, están bien!',
+    keyPoints: ['Ahorra para emergencias','Las cosas inesperadas pasan','Preparación = tranquilidad','Fondo para emergencias = seguridad','Mantente listo'],
+    funFact: '🆘 ¡Los ahorros para emergencias = seguridad financiera!',
+    activity: {
+      instructions: '¿Deberías tener ahorros para emergencias?',
+      choices: [
+        {text:'¡SÍ! Para gastos inesperados', explanation:'¡Por supuesto! ¡Prepárate!'},
+        {text:'No, solo la gente rica', explanation:'¡Todo el mundo necesita un fondo para emergencias!'},
+        {text:'Nunca', explanation:'¡Siempre es buena idea ahorrar para lo inesperado!'}
+      ]
+    }
+  });
+
+  // fl2c1 — How Banks Work (mt)
+  merge('financial-literacy:fl2c1', {
+    intro: 'Los bancos guardan tu dinero con seguridad. También lo ayudan a crecer (intereses). Depositas dinero y queda seguro. ¡Los bancos son confiables!',
+    keyPoints: ['Los bancos son seguros','Los intereses ayudan al dinero a crecer','Depósitos = ahorros','Los bancos sirven a todos','La confianza es importante'],
+    funFact: '🏦 ¡Los bancos han protegido el dinero durante más de 1,000 años!',
+    activity: {
+      instructions: '¿Qué hacen los bancos?',
+      matchPairs: [{left:'Guardan el dinero con seguridad',right:'Importante'},{left:'Lo ayudan a crecer',right:'Importante'},{left:'Dan préstamos',right:'Importante'}]
+    }
+  });
+
+  // fl2c2 — Interest and Growth (mc)
+  merge('financial-literacy:fl2c2', {
+    intro: 'Cuando depositas $100 en un banco, gana intereses (¡dinero extra!). Esto se llama interés compuesto — ¡el dinero ganando dinero! Con el tiempo, tus ahorros crecen más.',
+    keyPoints: ['Interés = dinero ganando dinero','Los depósitos crecen con el tiempo','La paciencia = riqueza','El interés compuesto = poderoso','Pequeños ahorros = gran crecimiento'],
+    funFact: '📈 ¡El dinero en los bancos crece como las plantas en un jardín!',
+    activity: {
+      instructions: '¿Crece el dinero en el banco?',
+      choices: [
+        {text:'Sí, a través de los intereses', explanation:'¡SÍ! ¡Los intereses son dinero gratis!'},
+        {text:'No, se queda igual', explanation:'¡El dinero en el banco SÍ crece gracias a los intereses!'},
+        {text:'Se reduce', explanation:'¡Al contrario, el dinero en el banco crece con el tiempo!'}
+      ]
+    }
+  });
+
+  // fl2c3 — Types of Bank Accounts (fb)
+  merge('financial-literacy:fl2c3', {
+    intro: 'Cuentas de ahorro (para el largo plazo), cuentas corrientes (para uso diario), cuentas de alto rendimiento (ganan más intereses). ¡Diferentes cuentas funcionan para diferentes metas!',
+    keyPoints: ['Cuenta de ahorro = ahorrar a largo plazo','Cuenta corriente = uso diario','Elige lo que más te conviene','Diferentes metas = diferentes cuentas','Elige con inteligencia'],
+    funFact: '🔐 ¡Encuentra la cuenta que funcione para TI!',
+    activity: {
+      instructions: '¡Pondría mi dinero en una cuenta _____ porque _____!',
+      prompt: '¿Qué tipo de cuenta?'
+    }
+  });
+
+  // fl2d1 — Many Ways to Earn (dd)
+  merge('financial-literacy:fl2d1', {
+    intro: 'Mesada, quehaceres, trabajos adicionales, vender cosas. ¡Hay muchas formas de ganar! Cuanto más ganas, más puedes ahorrar.',
+    keyPoints: ['Múltiples fuentes de ingresos','Los quehaceres generan dinero','Los trabajos adicionales generan dinero','Las ventas generan dinero','Más fuentes = más dinero'],
+    funFact: '💪 ¡Los millonarios tienen múltiples fuentes de ingresos!',
+    activity: {
+      instructions: '¡Relaciona la fuente de ingresos!',
+      dragOptions: [{label:'Quehaceres del hogar'},{label:'Vender cosas'}],
+      dropTargets: [{label:'Ganar dinero'}]
+    }
+  });
+
+  // fl2d2 — Skill Building = Higher Pay (mt)
+  merge('financial-literacy:fl2d2', {
+    intro: '¡Las personas que son muy buenas en algo ganan más! ¿Aprendes programación? ¡Gana mucho! ¿Aprendes arte? ¡Te pagan por encargos! Las habilidades = dinero.',
+    keyPoints: ['Las habilidades generan dinero','Aprender tiene recompensa','La especialización = mayor pago','Conviértete en experto','Invierte en ti mismo'],
+    funFact: '📚 ¡Los mejores que ganan son los mejores que aprenden!',
+    activity: {
+      instructions: '¡Relaciona la habilidad con la forma de ganar dinero!',
+      matchPairs: [{left:'Bueno en matemáticas',right:'Da clases a niños'},{left:'Bueno en arte',right:'Vende diseños'},{left:'Bueno en escritura',right:'Escribe historias'}]
+    }
+  });
+
+  // fl2d3 — Setting Earning Goals (fb)
+  merge('financial-literacy:fl2d3', {
+    intro: 'Quiero ganar $50 este verano. ¿Cómo? Haciendo quehaceres, paseando perros, vendiendo limonada. ¡Planifica tu estrategia de ingresos! Las metas = motivación.',
+    keyPoints: ['Las metas de ingresos = motivación','Haz un plan','Trabaja hacia él','Celebra los éxitos','Gana con intención'],
+    funFact: '🎯 ¡Ganar con un plan = más dinero!',
+    activity: {
+      instructions: '¡Mi meta es ganar $_____ haciendo _____!',
+      prompt: 'Establece una meta de ingresos:'
+    }
+  });
+
+  // fl2e1 — You're Financially Aware! (mc)
+  merge('financial-literacy:fl2e1', {
+    intro: 'Sabes sobre presupuestos, bancos, ingresos y ahorro. ¡Eso es avanzado! La mayoría de las personas no aprenden esto hasta ser adultas. ¡Estás ADELANTADO!',
+    keyPoints: ['Estás adelantado','Entiendes el dinero','Tomas decisiones inteligentes','Eres responsable','¡Siéntete orgulloso!'],
+    funFact: '🧠 ¡Ser consciente con el dinero = éxito en la vida!',
+    activity: {
+      instructions: '¿Estás orgulloso de lo que has aprendido?',
+      choices: [
+        {text:'¡SÍ! ¡Estoy emocionado con el dinero!', explanation:'¡DEBERÍAS estar orgulloso!'},
+        {text:'No mucho', explanation:'¡Aprender sobre el dinero es una habilidad increíble!'},
+        {text:'El dinero es aburrido', explanation:'¡El dinero es una herramienta para lograr tus sueños!'}
+      ]
+    }
+  });
+
+  // fl2e2 — Long-Term Money Thinking (fb)
+  merge('financial-literacy:fl2e2', {
+    intro: '¡Ahorrar $2/semana = $104/año = $1,040 en 10 años! Pensar a largo plazo demuestra sabiduría. ¡Tu futuro depende de las decisiones que tomes HOY!',
+    keyPoints: ['Pensar a largo plazo = éxito','Acciones pequeñas = grandes resultados','El efecto compuesto = poderoso','El futuro importa','Planifica con anticipación'],
+    funFact: '🔮 ¡Tu futuro es lo que ahorras HOY!',
+    activity: {
+      instructions: '¡En 10 años quiero tener $_____ porque _____!',
+      prompt: '¿Cuál es tu meta a 10 años?'
+    }
+  });
+
+  // fl2e3 — Money Is a Skill, Not Magic! (fb)
+  merge('financial-literacy:fl2e3', {
+    intro: 'El dinero no es magia — es una habilidad. Puedes aprenderla, dominarla y construir riqueza. ¡Sigue aprendiendo, sigue practicando, cree en ti mismo!',
+    keyPoints: ['Dinero = habilidad que se aprende','SÍ PUEDES hacerlo','La práctica = dominio','Cree en ti mismo','¡Tu futuro es BRILLANTE!'],
+    funFact: '✨ ¡Los mejores expertos en dinero empezaron igual que tú!',
+    activity: {
+      instructions: '¡Mi mayor logro con el dinero hasta ahora es _____!',
+      prompt: 'Celebra tus éxitos:'
+    }
+  });
+
+})();
+
 // ═══════════════════════════════════════════════════════════
 // AUTO-TRANSLATE ACTIVITY CONTENT for PK/K/1 across all subjects
 // Runs after manual LESSON_TRANSLATIONS_ES are merged — only fills in
