@@ -19724,6 +19724,1011 @@ Object.assign(LESSON_TRANSLATIONS_ES, {
   'social-studies:ss5E3': { title: 'La Reconstrucción', tagline: 'Reconstruir la nación después de la guerra' }
 });
 
+// ═══════════════════════════════════════════════════════════
+// PHASE 2 SESSION 4 (gap-fill) — Grade 5 per-lesson prose + activities
+// ═══════════════════════════════════════════════════════════
+(function(){
+  var L = LESSON_TRANSLATIONS_ES;
+  function merge(key, extra){ L[key] = Object.assign({}, L[key] || {}, extra); }
+
+  // ─── App Building Grade 5 — prose ───
+  merge('app-building:ab5a1', {
+    intro: 'El pensamiento de diseño es un proceso que inventores reales y compañías como Apple usan para crear productos increíbles. Tiene 5 pasos: Empatizar (entender a las personas), Definir (elegir un problema), Idear (generar soluciones), Prototipar (construir una versión de prueba) y Testear (recopilar retroalimentación).',
+    keyPoints: ['Empatizar: entiende los sentimientos y necesidades de tu usuario','Definir: plantea con claridad el problema que vas a resolver','Idear: genera la mayor cantidad posible de soluciones','Prototipar: construye rápidamente una versión de prueba','Testear: deja que personas reales lo prueben y te den sus opiniones'],
+    funFact: '🏢 Google, Apple y Nike usan el pensamiento de diseño. No es solo para tecnología — ¡es la forma en que se crean los mejores productos del mundo!'
+  });
+  merge('app-building:ab5a2', {
+    intro: 'Un "punto de dolor" es algo que frustra a las personas. ¿Filas largas en el almuerzo? Punto de dolor. ¿No encuentras tu tarea? Punto de dolor. ¿Tus papás siempre preguntan dónde estás? Punto de dolor. Cada punto de dolor es una oportunidad para construir algo que haga la vida más fácil — y posiblemente ganar dinero haciéndolo.',
+    keyPoints: ['Los puntos de dolor son problemas que la gente enfrenta con regularidad','Entre más personas compartan el problema, más grande es la oportunidad','Entrevista a amigos y familiares para descubrir puntos de dolor','Anota cada frustración que notes durante una semana','Las mejores apps eliminan el dolor de la vida de las personas'],
+    funFact: '💰 Uber existe porque Travis Kalanick no pudo encontrar un taxi en una noche fría en París. ¡Un momento frustrante = una empresa de $75 mil millones!'
+  });
+  merge('app-building:ab5a3', {
+    intro: 'Antes de pasar semanas construyendo una app, los emprendedores inteligentes VERIFICAN si las personas de verdad la quieren. A esto se le llama validación. Puedes validar preguntándole a 10 personas: "¿Usarías una app que hace X?" Si 7 o más dicen que sí, ¡puede que tengas un ganador! Si la mayoría dice que no, prueba una idea diferente.',
+    keyPoints: ['Validar significa comprobar si las personas quieren tu idea','Pregunta a por lo menos 10 personas si usarían tu app','Si la mayoría dice "sí" — ¡constrúyela!','Si la mayoría dice "no" — prueba una idea diferente','Esto te salva de construir algo que nadie quiere'],
+    funFact: '📊 El 90% de las nuevas empresas fracasan porque construyen algo que nadie quiere. La validación es la diferencia entre el éxito y el tiempo perdido.'
+  });
+  merge('app-building:ab5b1', {
+    intro: 'Un flujo de usuario es como un mapa de cómo alguien se mueve por tu app. Cuando la abre, ¿qué ve? ¿Dónde toca? ¿Qué pasa después? Planear esto ANTES de construir ahorra mucho tiempo y hace tu app MUCHO más fácil de usar.',
+    keyPoints: ['Comienza con la primera pantalla que ve el usuario','Dibuja flechas que muestren a dónde lleva cada botón','Mantén el camino CORTO — 3 toques máximo para hacer cualquier cosa','La función más importante debe ser la más fácil de encontrar','Prueba el flujo en papel antes de construirlo'],
+    funFact: '👆 Las investigaciones muestran que si los usuarios no pueden descubrir cómo hacer algo en 3 toques, el 70% de ellos se rinde y no regresa.'
+  });
+  merge('app-building:ab5b2', {
+    intro: 'Un wireframe es un boceto rápido de la pantalla de tu app. Usa cajas simples, líneas y etiquetas — sin colores, sin imágenes. Piensa en él como un plano. Hasta los diseñadores de Apple y Google hacen wireframes en papel antes de abrir cualquier programa. ¡Toma un lápiz y pruébalo!',
+    keyPoints: ['Usa rectángulos para imágenes','Usa líneas para texto','Usa círculos o rectángulos redondeados para botones','Etiqueta todo para que recuerdes qué es','Dibuja cada pantalla en una hoja de papel diferente'],
+    funFact: '📐 El equipo que diseñó el primer iPhone creó MILES de wireframes en papel. ¡Llenaron paredes enteras con bocetos!'
+  });
+  merge('app-building:ab5b3', {
+    intro: 'El diseño accesible significa hacer tu app utilizable para TODAS las personas, incluyendo quienes son ciegas, sordas o tienen otras discapacidades. ¿Sabías que 1 000 millones de personas en todo el mundo tienen alguna discapacidad? Si tu app no funciona para ellas, pierdes un grupo ENORME de usuarios.',
+    keyPoints: ['Usa texto grande y legible (al menos 16 px)','Asegúrate de que los colores tengan suficiente contraste','Agrega descripciones a las imágenes para lectores de pantalla','No dependas solo del color para mostrar información','Prueba tu app con personas distintas'],
+    funFact: '♿ Cuando Apple agregó VoiceOver al iPhone, se convirtió en el teléfono más popular entre los usuarios con discapacidad visual. ¡Accesibilidad = más usuarios = más éxito!'
+  });
+  merge('app-building:ab5c1', {
+    intro: 'Ya conoces los fundamentos de hablar con la IA. Ahora subamos de nivel. En lugar de solo describir lo que ves, describe lo que OCURRE. "Cuando el usuario toca el botón guardar, muestra una palomita verde y el mensaje Tu mascota fue guardada." Describir el comportamiento hace que la IA construya apps interactivas.',
+    keyPoints: ['Describe ACCIONES: "Cuando el usuario toca X, muestra Y"','Describe ESTADOS: "Si aún no hay mascotas, muestra un mensaje de vacío"','Describe ANIMACIONES: "Entra deslizándose desde abajo"','Describe CASOS DE ERROR: "Si el nombre está vacío, muestra una advertencia"','Construye una función a la vez y luego combínalas'],
+    funFact: '🧠 Los mejores ingenieros de prompts piensan en los CASOS EXTREMOS — qué pasa cuando algo sale mal. Eso es lo que separa las apps buenas de las excelentes.'
+  });
+  merge('app-building:ab5c2', {
+    intro: 'Al igual que los bloques de LEGO encajan para hacer cualquier cosa, las apps están hechas de bloques reutilizables llamados "componentes". Un botón es un componente. Una tarjeta es un componente. Una barra de navegación es un componente. Cuando le dices a la IA que agregue una "tarjeta" o una "lista", estás usando el pensamiento de componentes.',
+    keyPoints: ['Los botones, tarjetas, listas y encabezados son componentes','Los componentes se pueden reutilizar en diferentes pantallas','Dile a la IA que use componentes estándar: "agrega una tarjeta para cada artículo"','Los componentes consistentes hacen que tu app se vea profesional','Piensa en los componentes como bloques LEGO para apps'],
+    funFact: '🧱 El sistema de diseño de Airbnb tiene más de 300 componentes reutilizables. Al construir una pantalla nueva, no empiezan de cero — combinan piezas existentes.'
+  });
+  merge('app-building:ab5c3', {
+    intro: 'Un "bug" es cuando tu app hace algo inesperado o incorrecto. ¡Hasta las mejores apps tienen bugs! El proceso de encontrarlos y corregirlos se llama depuración. Al construir con IA, puedes describir el error y la IA te ayudará a corregirlo: "El botón no cambia de color cuando lo toco — por favor arréglalo."',
+    keyPoints: ['Un bug es un comportamiento inesperado en tu app','Describe el bug claramente: qué pasa vs. qué DEBERÍA pasar','Prueba todos los botones y pantallas para encontrar bugs','Corrige los bugs antes de mostrarle tu app a otras personas','"No funciona" no es útil — sé específico sobre qué está mal'],
+    funFact: '🐛 El término "bug" viene de 1947, cuando una polilla REAL fue encontrada dentro de una computadora causando errores. Grace Hopper la pegó en su cuaderno y la llamó "el primer bug real hallado".'
+  });
+  merge('app-building:ab5d1', {
+    intro: 'Para publicar una app en el App Store de Apple necesitas una Cuenta de Apple Developer. Cuesta $99 dólares al año. Puede sonar como mucho, ¡pero una vez que tu app esté en la tienda, MILLONES de personas pueden encontrarla y descargarla!',
+    keyPoints: ['La Cuenta de Apple Developer cuesta $99 al año','La necesitas para publicar apps en el App Store','También obtienes acceso a TestFlight para pruebas beta','Incluye herramientas, documentación y soporte','Si tienes menos de 18 años, necesitas que un padre o tutor te ayude a registrarte'],
+    funFact: '💵 $99 al año puede parecer mucho, pero la app promedio exitosa gana más de $5,000 al mes. ¡Eso es 60 veces tu inversión!'
+  });
+  merge('app-building:ab5d2', {
+    intro: 'Cuando alguien ve tu app en el App Store, las capturas de pantalla son lo que los convence de descargarla. Las buenas capturas muestran las MEJORES funciones de tu app con texto grande y claro que explica lo que ven. Las malas capturas son borrosas, confusas o aburridas.',
+    keyPoints: ['Muestra las mejores 3 a 5 funciones de tu app','Agrega texto grande y llamativo que explique cada captura','Usa los colores de tu app en los bordes de la captura','La primera captura es la más importante — ¡hazla increíble!','Muestra contenido real, no pantallas vacías'],
+    funFact: '📸 Las apps que actualizan sus capturas con regularidad obtienen un 30% más de descargas. ¡Las primeras impresiones importan!'
+  });
+  merge('app-building:ab5d3', {
+    intro: 'Cuando envías tu app, eliges una categoría (Juegos, Educación, Salud, etc.) y agregas palabras clave. Las palabras clave son palabras que las personas podrían buscar cuando quieren una app como la tuya. Si construyes un rastreador de tareas, tus palabras clave podrían ser: tarea, escuela, estudio, asignaciones, calificaciones.',
+    keyPoints: ['Elige la categoría correcta para tu app','Agrega de 5 a 10 palabras clave que describan tu app','Piensa en lo que la gente BUSCARÍA','Mira apps similares para ver qué palabras clave usan','Actualiza tus palabras clave según lo que funcione mejor'],
+    funFact: '🔍 El 70% de los visitantes del App Store usan la BÚSQUEDA para encontrar apps. ¡Si no tienes las palabras clave correctas, nadie encontrará tu app!'
+  });
+  merge('app-building:ab5e1', {
+    intro: 'Las redes sociales son la herramienta de marketing gratuita más poderosa que tienes. Haz publicaciones sobre tu app en TikTok, Instagram y YouTube. Muéstrale a la gente CÓMO funciona tu app, comparte el proceso de construcción y pide retroalimentación. ¡A la gente le encanta ver cómo se crean las cosas!',
+    keyPoints: ['TikTok: videos cortos que muestran tu app en acción','Instagram: capturas hermosas e Historias','YouTube: tutoriales más largos y contenido detrás de cámaras','Publica con regularidad — al menos 2 o 3 veces por semana','Responde los comentarios — ¡contesta a todos!'],
+    funFact: '📹 Un desarrollador publicó un TikTok construyendo su app en 24 horas. Tuvo 5 MILLONES de vistas y su app obtuvo 100,000 descargas en una semana.'
+  });
+  merge('app-building:ab5e2', {
+    intro: 'Esta es una verdad difícil: lograr que alguien descargue tu app es solo la mitad de la batalla. El VERDADERO indicador que importa son los "usuarios activos" — cuántas personas ABREN tu app con regularidad. Una app con 1,000 descargas y 800 usuarios activos es MUCHO mejor que una con 100,000 descargas y 200 usuarios activos.',
+    keyPoints: ['Descargas ≠ éxito (las personas pueden borrarla)','Usuarios Activos Diarios (DAU) = personas que abren tu app cada día','Usuarios Activos Mensuales (MAU) = personas que la abren al menos una vez al mes','Retención = qué porcentaje de usuarios regresa','Enfócate en mantener a los usuarios, no solo en conseguirlos'],
+    funFact: '📊 La app promedio pierde el 77% de sus usuarios en los primeros 3 días. Si tu app logra que la gente regrese después del día 3, ¡ya superas a la mayoría!'
+  });
+  merge('app-building:ab5e3', {
+    intro: 'Un pitch de elevador es una explicación muy corta de tu app que puedes dar en 30 segundos — aproximadamente el tiempo que compartirías un elevador con alguien. Debe cubrir: QUÉ hace tu app, PARA QUIÉN es y POR QUÉ es especial. ¡Practica hasta que puedas decirlo a la perfección!',
+    keyPoints: ['30 segundos máximo — corto y claro','Cubre: qué hace, para quién es y en qué se diferencia','Practica diciéndolo en voz alta 10 veces','Si un niño de 10 años lo entiende, va bien','Termina con algo que les dé ganas de verlo'],
+    funFact: '🏆 Todas las empresas en Shark Tank empiezan con un pitch. ¡Los emprendedores que lo practican consiguen mejores acuerdos!'
+  });
+
+  // ─── Financial Literacy Grade 5 — prose ───
+  merge('financial-literacy:5A1', {
+    intro: 'Del libro Padre Rico, Padre Pobre: este libro les enseñó a millones de personas que la MENTALIDAD lo es todo. Una persona pobre vende su tiempo. Una persona rica construye sistemas que generan dinero.',
+    keyPoints: ['Mentalidad pobre: cambiar tiempo por dinero','Mentalidad rica: tener sistemas que generen dinero','Tu mentalidad determina tu futuro financiero'],
+    funFact: 'Del libro Padre Rico, Padre Pobre, el autor Robert Kiyosaki pasó de ser pobre a millonario con solo cambiar su mentalidad sobre el dinero.'
+  });
+  merge('financial-literacy:5A2', {
+    intro: 'Asóciate con amigos para iniciar negocios más grandes. Dividen el trabajo y las ganancias. ¡Más personas = más posibilidades!',
+    keyPoints: ['Las sociedades permiten negocios más grandes','Divide el trabajo y divide las ganancias','Los socios multiplican tu poder'],
+    funFact: '¡Google empezó con dos amigos en un dormitorio universitario. Ahora es una empresa de un billón de dólares!'
+  });
+  merge('financial-literacy:5A3', {
+    intro: 'Empiezas con un puesto de limonada. Luego abres 5. Luego 50. Eso es escalar. ¡La fórmula funciona cada vez a mayor escala!',
+    keyPoints: ['Escalar significa hacer tu negocio más grande','Si algo funciona pequeño, funciona grande','Los grandes negocios son negocios pequeños que crecieron'],
+    funFact: '¡Starbucks empezó como una sola cafetería en Seattle. Ahora hay más de 35,000 en todo el mundo!'
+  });
+  merge('financial-literacy:5B1', {
+    intro: 'Un ingreso = vulnerable. Cinco ingresos = poderoso. Si uno desaparece, los otros cuatro siguen pagándote. ¡Así piensan las personas ricas!',
+    keyPoints: ['Los ingresos múltiples te protegen','Si un cliente se va, es solo el 20% si tienes 5 clientes','Los millonarios tienen en promedio 7 fuentes de ingreso'],
+    funFact: '¡Jeff Bezos tiene ingresos de Amazon, de bienes raíces, de inversiones y más!'
+  });
+  merge('financial-literacy:5B2', {
+    intro: 'Trabajas duro UNA VEZ para crear algo (escribir una canción, construir un sistema de negocio, crear un curso). ¡Luego te paga PARA SIEMPRE!',
+    keyPoints: ['Ingreso activo: trabajas = te pagan','Ingreso pasivo: trabajaste una vez = te pagan para siempre','Las personas ricas se enfocan en el ingreso pasivo'],
+    funFact: '¡Una canción escrita en 1999 podría seguir ganando miles de dólares al año en regalías!'
+  });
+  merge('financial-literacy:5B3', {
+    intro: 'Un servicio requiere que estés presente. Un producto puede venderse mientras duermes. ¡Por eso los productos son mejores para generar riqueza!',
+    keyPoints: ['Servicios = trabajas y te pagan (clases particulares, limpieza)','Productos = se crean una vez, se venden muchas veces (juguetes, apps, libros)','Los productos escalan infinitamente; los servicios están limitados por el tiempo'],
+    funFact: '¡Un videojuego se hace una sola vez pero se vende a millones! Un entrenador personal solo puede entrenar a una persona a la vez.'
+  });
+  merge('financial-literacy:5C1', {
+    intro: 'El interés compuesto es la octava maravilla del mundo — se dice que Einstein lo afirmó. Tu dinero crece de forma exponencial, no solo lineal.',
+    keyPoints: ['El interés compuesto crece cada vez más rápido','Es exponencial, no lineal','Cuanto más tiempo esperas, más mágico se vuelve'],
+    funFact: '¡Invierte $5,000 a los 20 años en un fondo indexado, no hagas nada, y a los 65 años valdrá más de $500,000!'
+  });
+  merge('financial-literacy:5C2', {
+    intro: 'Las cuentas de ahorro ganan del 4% al 5%. El mercado de valores promedia el 10%. ¡El mismo dinero, mejores resultados con invertir!',
+    keyPoints: ['Invertir significa comprar partes de empresas','Las acciones promedian un 10% de rendimiento históricamente','Las acciones superan a las cuentas de ahorro a largo plazo'],
+    funFact: '¡Warren Buffett compró su primera acción a los 11 años!'
+  });
+  merge('financial-literacy:5C3', {
+    intro: 'Un presupuesto te dice exactamente a dónde va tu dinero: cuánto ganar, cuánto ahorrar, cuánto gastar. ¡Esto es PODER!',
+    keyPoints: ['Un presupuesto es un plan de gastos','Te muestra de dónde viene y a dónde va el dinero','Los presupuestos te ayudan a controlar tu dinero'],
+    funFact: '¡Las personas con presupuesto ahorran un 25% más que las personas sin presupuesto!'
+  });
+  merge('financial-literacy:5D1', {
+    intro: 'Un puntaje de crédito (0-850) les dice a los prestamistas si devuelves el dinero. Puntaje alto = te prestan dinero a tasas bajas. Puntaje bajo = caro o imposible.',
+    keyPoints: ['Puntaje 300-600: bajo (pagas intereses altos)','Puntaje 600-700: regular','Puntaje 700-850: excelente (interés bajo)'],
+    funFact: '¡Una diferencia de 100 puntos en el puntaje de crédito puede ahorrarte $200,000 en una hipoteca!'
+  });
+  merge('financial-literacy:5D2', {
+    intro: 'Pides prestado $1,000 al 20% de interés. Si no lo pagas, deberás $1,200 en un año. Luego $1,440. Luego $1,728. ¡La deuda se dispara!',
+    keyPoints: ['El interés hace que la deuda crezca de forma exponencial','La deuda no pagada crece cada vez más rápido','Así es como la gente queda atrapada'],
+    funFact: '¡El estadounidense promedio carga con $6,200 de deuda en tarjetas de crédito!'
+  });
+  merge('financial-literacy:5D3', {
+    intro: 'Si necesitas dinero, un papá o mamá podría prestártelo sin intereses. ¡Una tarjeta de crédito cobra el 20%! Gran diferencia.',
+    keyPoints: ['Préstamos de papás: a menudo al 0% de interés','Tarjetas de crédito: del 15% al 25% de interés','La decisión inteligente es obvia'],
+    funFact: '¡Un préstamo de $5,000 de un papá es gratis. El mismo préstamo en una tarjeta de crédito cuesta más de $1,000 en intereses!'
+  });
+  merge('financial-literacy:5E1', {
+    intro: 'Propietario único: tú lo manejas solo. Sociedad: los socios lo comparten. Corporación: es una entidad legal separada. ¡Cada una tiene reglas diferentes!',
+    keyPoints: ['Propietario único: la más sencilla, un solo dueño','Sociedad: múltiples dueños comparten','Corporación: entidad legal separada'],
+    funFact: '¡Apple empezó como una sociedad de dos personas. Ahora es una corporación enorme!'
+  });
+  merge('financial-literacy:5E2', {
+    intro: 'Si tienes un negocio y gastas $1,000 en materiales, eso es una deducción. ¡Reduce tus impuestos!',
+    keyPoints: ['Las deducciones reducen el ingreso sobre el que pagas impuestos','Los gastos del negocio son deducibles','Los propietarios de negocios inteligentes rastrean sus deducciones'],
+    funFact: '¡Una deducción por oficina en casa puede ahorrar más de $2,500 al año en impuestos!'
+  });
+  merge('financial-literacy:5E3', {
+    intro: 'Un margen de ganancia del 50% significa que por cada dólar que ganas, te quedas con 50 centavos. Un margen del 10% significa que solo te quedas con 10 centavos.',
+    keyPoints: ['Margen de ganancia = ganancia ÷ ingresos','Margen alto = mejor negocio','Hasta pequeñas mejoras en el margen significan mucho dinero'],
+    funFact: '¡Apple tiene márgenes de ganancia de más del 40%. ¡La mayoría de los negocios tienen del 5% al 10%!'
+  });
+
+
+  // ─── Science Grade 5 — prose ───
+  merge('science:s5A1', {
+    intro: 'Las células son las unidades más pequeñas de la vida y todos los seres vivos están formados por una o más células. Las células vegetales tienen pared celular, cloroplastos para la fotosíntesis y vacuolas grandes para almacenamiento, mientras que las células animales carecen de esas estructuras. El núcleo contiene el ADN con las instrucciones genéticas, las mitocondrias producen energía mediante la respiración celular y los ribosomas fabrican proteínas.',
+    keyPoints: ['Las células son la unidad básica de la vida','Las células vegetales y animales son distintas','El núcleo controla la célula'],
+    funFact: '¡Tu cuerpo tiene aproximadamente 37 billones de células trabajando juntas!'
+  });
+  merge('science:s5A2', {
+    intro: 'La energía fluye por los ecosistemas desde el sol hasta los productores, como las plantas, y luego hasta los consumidores. Cerca del 90% de la energía se pierde como calor en cada nivel, por lo que los ecosistemas pueden sostener cada vez menos organismos en los niveles superiores. Los descomponedores como bacterias y hongos devuelven los nutrientes de los organismos muertos al suelo.',
+    keyPoints: ['La energía proviene del sol','La energía disminuye a medida que sube en la cadena alimentaria','Los descomponedores reciclan los nutrientes'],
+    funFact: '¡El océano absorbe alrededor del 25% del dióxido de carbono que los seres humanos liberan!'
+  });
+  merge('science:s5A3', {
+    intro: 'El cuerpo humano tiene diez sistemas de órganos principales: circulatorio, respiratorio, digestivo, nervioso, esquelético, muscular, tegumentario, endocrino, inmunitario y reproductor. El sistema circulatorio bombea sangre por los vasos para llevar oxígeno y nutrientes a las células. Estos sistemas trabajan juntos sin interrupciones y el fallo de uno afecta a todos los demás.',
+    keyPoints: ['Cada sistema tiene funciones específicas','Los sistemas cooperan entre sí','La salud depende del equilibrio entre los sistemas'],
+    funFact: '¡Tu corazón late unas 100,000 veces al día, bombeando sangre por más de 96,000 km de vasos sanguíneos!'
+  });
+  merge('science:s5B1', {
+    intro: 'El sistema solar está formado por el Sol en el centro y ocho planetas, sus lunas, asteroides y cometas, todos mantenidos en órbita por la gravedad. Los cuatro planetas rocosos interiores son pequeños y están cerca del Sol, mientras que los cuatro gigantes gaseosos exteriores son masivos y están lejos. El sistema solar se formó hace unos 4,600 millones de años a partir de una nube de gas y polvo.',
+    keyPoints: ['Ocho planetas orbitan alrededor del Sol','Los planetas interiores son rocosos','La gravedad mantiene estables las órbitas'],
+    funFact: '¡La Gran Mancha Roja de Júpiter es una tormenta más grande que la Tierra que lleva al menos 300 años activa!'
+  });
+  merge('science:s5B2', {
+    intro: 'Las estrellas son enormes bolas de gas caliente que producen luz y calor mediante fusión nuclear en su núcleo. Una galaxia es un conjunto de miles de millones de estrellas unidas por la gravedad. Nuestra Vía Láctea contiene 200,000 millones de estrellas y el Sol es solo una estrella promedio entre todas ellas.',
+    keyPoints: ['Las estrellas producen luz mediante fusión','Las galaxias contienen miles de millones de estrellas','El universo es de una vastedad incomprensible'],
+    funFact: '¡La estrella más cercana al Sol, Próxima Centauri, está a 4,24 años luz de distancia!'
+  });
+  merge('science:s5B3', {
+    intro: 'La Tierra rota sobre su eje inclinado una vez cada 24 horas, lo que provoca el día y la noche mientras distintas partes se orientan hacia el Sol o se alejan de él. La inclinación de 23.5 grados es responsable de las estaciones. La Tierra también orbita alrededor del Sol una vez cada 365 días.',
+    keyPoints: ['La rotación provoca el día y la noche','La inclinación provoca las estaciones','La órbita dura 365 días'],
+    funFact: '¡Sin la Luna para estabilizar su inclinación, el eje de la Tierra oscilaría de forma impredecible y las estaciones serían caóticas!'
+  });
+  merge('science:s5C1', {
+    intro: 'La materia existe en tres estados principales: los sólidos mantienen una forma y un volumen fijos, los líquidos mantienen el volumen pero toman la forma de su recipiente, y los gases se expanden para llenar el espacio disponible. Agregar energía térmica aumenta el movimiento de los átomos y puede causar cambios de estado.',
+    keyPoints: ['Existen tres estados principales de la materia','La temperatura provoca cambios de estado','Los átomos se comportan de manera distinta en cada estado'],
+    funFact: '¡Un solo material como el agua puede ser hielo, líquido o vapor, según su temperatura!'
+  });
+  merge('science:s5C2', {
+    intro: 'Un cambio químico ocurre cuando la materia se transforma en una o más sustancias nuevas con propiedades diferentes, a diferencia de los cambios físicos, que solo cambian la apariencia. La combustión, el herrumbre del hierro, la digestión de alimentos y la fotosíntesis son ejemplos de cambios químicos.',
+    keyPoints: ['Los cambios químicos crean sustancias nuevas','Las propiedades cambian','La combustión es un ejemplo de cambio químico'],
+    funFact: '¡Cuando la madera se quema, se combina con el oxígeno y produce ceniza y gases con propiedades completamente diferentes!'
+  });
+  merge('science:s5C3', {
+    intro: 'Una fuerza es un empuje o un jale que puede cambiar la velocidad, la dirección o la forma de un objeto. La primera ley de Newton establece que los objetos en movimiento permanecen en movimiento a menos que actúe una fuerza sobre ellos. La segunda ley indica que la aceleración depende de la masa y la fuerza aplicada. La fricción es una fuerza que se opone al movimiento entre superficies.',
+    keyPoints: ['Las fuerzas producen cambios en el movimiento','La fricción se opone al movimiento','Las leyes de Newton rigen el movimiento'],
+    funFact: '¡Cuanto más rápido lanzas una pelota, mayor es la fuerza que aplicas y más rápido acelera!'
+  });
+  merge('science:s5D1', {
+    intro: 'Un modelo científico es una representación simplificada de un sistema que ayuda a los científicos a visualizar, comprender y predecir cómo funciona algo. Los modelos pueden ser objetos físicos, ecuaciones matemáticas o simulaciones computacionales. Todos los modelos tienen limitaciones y son simplificaciones de la realidad.',
+    keyPoints: ['Los modelos simplifican sistemas complejos','Los modelos ayudan a predecir comportamientos','Los modelos tienen limitaciones'],
+    funFact: '¡Los modelos climáticos ayudan a los científicos a predecir el calentamiento de la Tierra y a orientar políticas que afectan a miles de millones de personas!'
+  });
+  merge('science:s5D2', {
+    intro: 'La revisión por pares es el proceso por el que otros científicos examinan el trabajo de un colega antes de que se publique, verificando errores, lógica defectuosa y métodos. Los revisores comprueban que las conclusiones se derivan de los datos, que la investigación es original y que los resultados son significativos.',
+    keyPoints: ['La revisión por pares detecta errores','Varios científicos evalúan el trabajo','La revisión mantiene la integridad científica'],
+    funFact: '¡Algunos grandes errores científicos han sido detectados gracias al proceso de revisión por pares!'
+  });
+  merge('science:s5D3', {
+    intro: 'La ética científica implica que los investigadores realicen trabajo honesto, traten a los sujetos humanos y a los animales con humanidad, sean transparentes sobre sus métodos e informen todos los resultados, incluidos los inesperados. Los científicos deben revelar los conflictos de interés que puedan sesgar su trabajo.',
+    keyPoints: ['La honestidad es lo más importante','Los sujetos merecen protección','Los resultados deben informarse con veracidad'],
+    funFact: '¡El experimento de Tuskegee mostró el daño de la investigación no ética y dio lugar a nuevas protecciones para los sujetos humanos!'
+  });
+  merge('science:s5E1', {
+    intro: 'La filtración del agua elimina impurezas como suciedad, bacterias y sustancias químicas para hacerla segura para beber o reutilizar. Distintos métodos de filtración funcionan para diferentes contaminantes: desde filtros simples de arena y grava que eliminan partículas, hasta carbón activado que elimina sustancias químicas.',
+    keyPoints: ['Los filtros eliminan diferentes contaminantes','Existen múltiples métodos de filtración','El agua limpia es vital'],
+    funFact: '¡Una persona puede vivir sin comida 30 días, pero solo 3 días sin agua!'
+  });
+  merge('science:s5E2', {
+    intro: 'Los puentes son estructuras de ingeniería diseñadas para cruzar obstáculos físicos como ríos o valles mientras soportan el tráfico y las fuerzas del entorno. Los diferentes tipos de puentes distribuyen las fuerzas de manera distinta y funcionan mejor en diferentes situaciones. Los ingenieros deben considerar la capacidad de carga, la longitud del tramo y los costos de construcción.',
+    keyPoints: ['Existen diferentes tipos de puentes','El diseño depende de las condiciones','La seguridad es fundamental'],
+    funFact: '¡El puente Golden Gate puede oscilar hasta 8 metros con vientos fuertes!'
+  });
+  merge('science:s5E3', {
+    intro: 'La programación consiste en escribir instrucciones para que las computadoras realicen tareas, usando lenguajes como Python, Java o bloques visuales. La robótica combina ingeniería mecánica, electrónica y programación para crear máquinas que realizan tareas de forma automática o controlada a distancia. Los robots simples usan sensores para detectar obstáculos.',
+    keyPoints: ['El código controla las computadoras','Los robots automatizan tareas','Los sensores proporcionan retroalimentación'],
+    funFact: '¡El primer robot fue creado en 1956 y podía aprender de las demostraciones humanas!'
+  });
+
+  // ─── English Grade 5 — prose ───
+  merge('english:e5A1', {
+    intro: 'El tema es la gran idea o mensaje que el autor quiere que los lectores comprendan. No es la trama (lo que ocurre) sino el significado más profundo. Por ejemplo, una historia puede narrar que una niña escala una montaña (trama), y el tema podría ser "Con determinación, puedes superar cualquier desafío." Los autores muestran el tema a través de lo que los personajes aprenden y las decisiones que toman.',
+    keyPoints: ['El tema es la lección o el mensaje','La trama es lo que ocurre; el tema es por qué importa','Los personajes aprenden el tema a través de los eventos'],
+    funFact: '¡El mismo tema puede aparecer en miles de historias diferentes!'
+  });
+  merge('english:e5A2', {
+    intro: 'Los autores organizan la información de diferentes maneras. El orden cronológico narra lo que pasó primero, después y al final. La causa y efecto explica por qué ocurrió algo y qué resultó. La comparación y contraste muestra en qué se parecen o diferencian las cosas. El problema y solución presenta un problema y cómo se resuelve.',
+    keyPoints: ['Orden cronológico: primero, luego, después, al final','Causa y efecto: por qué ocurrió algo','Comparación y contraste: semejanzas y diferencias','Problema y solución: problema y respuesta'],
+    funFact: '¡Un libro de cocina usa una estructura diferente a la de un libro de historia!'
+  });
+  merge('english:e5A3', {
+    intro: 'Un género es una categoría de escritura con ciertas características. La ficción narra historias inventadas; la no ficción presenta hechos reales. La poesía usa ritmo, rima e imágenes; el drama usa diálogos y acotaciones escénicas. La fantasía tiene magia y mundos imaginarios. El misterio tiene un enigma que resolver. Comprender los géneros te ayuda a saber qué esperar y cómo leer de manera diferente.',
+    keyPoints: ['La ficción es inventada; la no ficción es real','La poesía tiene ritmo y lenguaje figurado','El drama tiene diálogos y personajes'],
+    funFact: '¡El autor Stephen King escribe terror; podría hacerlo como novela, cuento o novela gráfica!'
+  });
+  merge('english:e5B1', {
+    intro: 'Un ensayo es una escritura organizada sobre un tema con una introducción, párrafos de desarrollo y una conclusión. La introducción engancha a los lectores con un hecho interesante o una pregunta, y plantea la idea principal en una tesis. Cada párrafo de desarrollo trata una idea principal con detalles y ejemplos de apoyo. La conclusión reafirma la idea principal y cierra con un pensamiento fuerte.',
+    keyPoints: ['La introducción tiene un gancho y la tesis','Cada párrafo de desarrollo tiene una idea principal','La conclusión reafirma tu punto central'],
+    funFact: '¡Los escritores profesionales dedican horas a organizar sus ideas antes de escribir!'
+  });
+  merge('english:e5B2', {
+    intro: 'La escritura persuasiva intenta convencer a los lectores de pensar o actuar de cierta manera. Una buena escritura persuasiva tiene una posición clara (lo que crees), razones sólidas (por qué) y evidencia (hechos, ejemplos, expertos). Se reconocen los puntos de vista opuestos y se explica por qué el tuyo es más sólido.',
+    keyPoints: ['Expresa tu posición con claridad','Da razones sólidas y evidencia','Reconoce los puntos de vista opuestos'],
+    funFact: '¡Los anunciantes invierten miles de millones en escritura persuasiva para convencerte de comprar!'
+  });
+  merge('english:e5B3', {
+    intro: 'La escritura creativa te permite usar la imaginación para contar historias, escribir poesía o crear mundos que nunca han existido. Desarrollas personajes interesantes, escenarios ricos y tramas envolventes. Usas lenguaje figurado, diálogos y detalles sensoriales para que los lectores sientan emociones.',
+    keyPoints: ['Desarrolla personajes interesantes','Usa detalles sensoriales y diálogos','Muestra, no cuentes: las emociones y acciones'],
+    funFact: '¡Todo famoso mundo de fantasía empezó como imaginación en la mente de un escritor!'
+  });
+  merge('english:e5C1', {
+    intro: 'El tiempo verbal indica cuándo ocurre una acción. El pasado muestra algo que ya sucedió. El presente muestra algo que ocurre ahora. El futuro muestra algo que ocurrirá. Los tiempos progresivos muestran una acción en curso y los tiempos perfectos muestran una acción completada. Mezclar tiempos confunde a los lectores.',
+    keyPoints: ['Los tiempos simples indican el tiempo básico','El progresivo muestra una acción en curso','El perfecto muestra una acción completada','Mantén el tiempo consistente dentro de la escritura'],
+    funFact: '¡Las historias de viajes en el tiempo suelen jugar con los tiempos verbales!'
+  });
+  merge('english:e5C2', {
+    intro: 'Las comas tienen muchos usos. Se usan para separar elementos en una lista, para separar cláusulas independientes unidas por "y", "pero" u "o", y después de palabras introductorias. También se usan alrededor de información adicional y en fechas y direcciones. El uso correcto de la coma hace la escritura más clara.',
+    keyPoints: ['Las listas necesitan comas entre los elementos','Las comas separan las cláusulas independientes','La información adicional va entre comas'],
+    funFact: 'Mark Twain dijo una vez que la coma había "nacido de un deseo inquieto de tener algo más que decir".'
+  });
+  merge('english:e5C3', {
+    intro: 'La escritura se vuelve aburrida cuando todas las oraciones tienen la misma estructura. Una oración simple tiene una cláusula independiente. Una oración compuesta une dos cláusulas independientes. Una oración compleja tiene una cláusula independiente y una dependiente. Variar también la longitud de las oraciones ayuda: oraciones cortas para la emoción, oraciones largas para el detalle.',
+    keyPoints: ['Oraciones simples: una idea','Oraciones compuestas: dos ideas independientes','Oraciones complejas: cláusula independiente y dependiente'],
+    funFact: '¡Mark Twain variaba magistralmente las oraciones en sus famosas novelas!'
+  });
+  merge('english:e5D1', {
+    intro: 'Cada palabra tiene una historia de origen. Algunas vienen de otros idiomas: "pizza" del italiano, "ballet" del francés. Algunas vienen de nombres de personas: "sándwich" viene del Conde de Sandwich. Algunas son palabras nuevas como "correo electrónico" o "hashtag". Entender el origen de las palabras te ayuda a recordar sus significados.',
+    keyPoints: ['Algunas palabras vienen de otros idiomas','Algunas vienen de nombres de personas','Algunas son palabras nuevas y combinadas'],
+    funFact: '¡La palabra "boicot" viene del nombre de Charles Boycott!'
+  });
+  merge('english:e5D2', {
+    intro: 'Un modismo es una frase que significa algo diferente de las palabras individuales. "Llover a cántaros" significa llover mucho, no que caigan cántaros. Un refrán es un dicho corto que enseña sabiduría: "Camarón que se duerme, se lo lleva la corriente" enseña sobre la diligencia. Los modismos y refranes son formas coloridas de expresar ideas.',
+    keyPoints: ['Los modismos significan algo diferente de las palabras literales','Los refranes enseñan sabiduría o lecciones','Ambos añaden colorido al lenguaje'],
+    funFact: '¡Diferentes culturas tienen modismos diferentes!'
+  });
+  merge('english:e5D3', {
+    intro: 'El vocabulario académico incluye palabras formales usadas en la escuela, los libros de texto y la escritura formal — como "analizar", "resumir", "concluir", "evidencia" y "significativo". Estas palabras aparecen en muchas materias. Entender el vocabulario académico te ayuda a tener éxito en la escuela porque los maestros y los libros las usan constantemente.',
+    keyPoints: ['Las palabras académicas son formales y específicas de cada materia','Aparecen en libros de texto y en la escritura escolar','Ayudan a mostrar relaciones entre ideas'],
+    funFact: '¡El vocabulario académico es la clave para entender los libros universitarios!'
+  });
+  merge('english:e5E1', {
+    intro: 'Un debate es una discusión formal en la que las personas presentan puntos de vista y argumentos opuestos. Cada parte prepara una posición y la evidencia que la apoya. Un buen debatiente escucha con atención a la otra parte y explica con respeto por qué su evidencia es débil o ha sido malinterpretada.',
+    keyPoints: ['Prepara tu posición y tu evidencia','Escucha los argumentos contrarios','Responde con respeto y lógica'],
+    funFact: '¡Las competencias de debate profesional tienen reglas estrictas y límites de tiempo!'
+  });
+  merge('english:e5E2', {
+    intro: 'Tomar apuntes consiste en anotar las ideas principales mientras alguien habla o mientras lees. Los buenos apuntes son breves y usan abreviaciones. Enfócate en las ideas clave, no en cada palabra. Organiza los apuntes con encabezados o viñetas. Los buenos apuntes te ayudan a recordar lo aprendido y a estudiar para los exámenes.',
+    keyPoints: ['Escribe las ideas principales, no cada palabra','Usa abreviaciones y tus propias palabras','Organiza con encabezados o viñetas'],
+    funFact: '¡Las abreviaciones y la taquigrafía hacen más rápida la toma de apuntes!'
+  });
+  merge('english:e5E3', {
+    intro: 'Una presentación multimedia combina diferentes medios — diapositivas, imágenes, video, audio y texto — para comunicar ideas. Las diapositivas deben tener texto grande, pocas palabras e imágenes claras. Los videos o fragmentos de audio agregan interés y enfatizan los puntos. Un buen multimedia apoya tu discurso sin reemplazarlo.',
+    keyPoints: ['Usa las diapositivas como apoyo, no como distracción','Incluye imágenes y variedad','Mantén el diseño simple y profesional'],
+    funFact: '¡Las charlas TED usan presentaciones multimedia para compartir ideas con millones de personas!'
+  });
+
+
+  // ─── History Grade 5 — prose ───
+  merge('history:h5A1', {
+    intro: 'Jamestown, fundada en Virginia en 1607, fue el primer asentamiento inglés permanente en América del Norte, establecido por la Compañía de Virginia de Londres. La vida en Jamestown fue extremadamente dura: los colonos sufrieron hambre, enfermedades y conflictos con los pueblos nativos. El liderazgo del capitán John Smith y el comercio de alimentos con el jefe Powhatan salvaron a la colonia. El cultivo del tabaco la hizo rentable.',
+    keyPoints: ['Jamestown fue fundada en 1607','La vida fue dura por enfermedades y hambre','El cultivo del tabaco hizo rentable la colonia'],
+    funFact: '¡Pocahontas, la hija del jefe Powhatan, desempeñó un papel en las relaciones tempranas entre colonos y pueblos nativos!'
+  });
+  merge('history:h5A2', {
+    intro: 'Los Peregrinos eran personas religiosas que navegaron en el Mayflower en 1620 buscando libertad para practicar su fe. Establecieron la Colonia de Plymouth en Massachusetts y crearon el Pacto del Mayflower, un acuerdo temprano sobre el autogobierno basado en la regla de la mayoría. Los nativos americanos como Squanto les enseñaron a cultivar maíz y pescar.',
+    keyPoints: ['Los Peregrinos llegaron buscando libertad religiosa','Fundaron Plymouth en 1620','Los nativos americanos los ayudaron a sobrevivir'],
+    funFact: '¡El primer invierno de los Peregrinos fue tan duro que casi la mitad murió!'
+  });
+  merge('history:h5A3', {
+    intro: 'Las trece colonias crecieron a lo largo de la costa atlántica y desarrollaron tres regiones distintas: las colonias de Nueva Inglaterra, basadas en pequeñas granjas y el comercio; las colonias del centro, con poblaciones diversas; y las colonias del sur, con grandes plantaciones trabajadas por africanos esclavizados. Todas estaban bajo el dominio británico.',
+    keyPoints: ['Las colonias del norte, centro y sur tenían economías diferentes','La esclavitud era significativa en el Sur','Las 13 colonias estaban bajo el dominio británico'],
+    funFact: '¡Pensilvania fue fundada por William Penn como un lugar de tolerancia religiosa!'
+  });
+  merge('history:h5B1', {
+    intro: 'La Declaración de Independencia (4 de julio de 1776), redactada principalmente por Thomas Jefferson, anunció que las trece colonias eran una nación libre e independiente, ya no bajo el dominio británico. La Declaración afirmó que todas las personas son creadas iguales y tienen derechos inalienables a la vida, la libertad y la búsqueda de la felicidad.',
+    keyPoints: ['La Declaración anunció la independencia en 1776','Afirmó que todas las personas tienen derechos iguales','Enumeró las quejas contra el rey'],
+    funFact: '¡La Declaración fue firmada por 56 valientes hombres que arriesgaron ser ejecutados por traición!'
+  });
+  merge('history:h5B2', {
+    intro: 'La Constitución de Estados Unidos (ratificada en 1788) es la ley suprema que establece cómo se organiza el gobierno federal con tres ramas — legislativa (el Congreso hace las leyes), ejecutiva (el presidente las hace cumplir) y judicial (los tribunales las interpretan) — que se controlan y equilibran mutuamente.',
+    keyPoints: ['La Constitución organiza las tres ramas del gobierno','Los controles y contrapesos evitan demasiado poder','La Constitución puede enmendarse'],
+    funFact: '¡La Constitución fue redactada en Filadelfia en unos pocos meses de verano!'
+  });
+  merge('history:h5B3', {
+    intro: 'La Carta de Derechos, las primeras diez enmiendas a la Constitución, protege libertades esenciales: la palabra, la religión, la prensa, la reunión y la petición (Primera Enmienda); el derecho a portar armas (Segunda Enmienda); y garantiza un trato justo en los tribunales. También prohíbe los castigos crueles y garantiza el debido proceso.',
+    keyPoints: ['La Carta de Derechos protege libertades clave','La libertad de expresión y de religión están protegidas','Se garantiza un trato justo en los tribunales'],
+    funFact: '¡James Madison es llamado el "Padre de la Constitución" por su papel clave en crearla!'
+  });
+  merge('history:h5C1', {
+    intro: 'La Guerra Civil estalló porque el Norte y el Sur habían desarrollado economías y valores completamente diferentes: el Norte se industrializó con trabajo libre, mientras que el Sur dependía de grandes plantaciones y de la esclavitud. Las disputas sobre si la esclavitud debía expandirse a los territorios del oeste y la elección de Abraham Lincoln empujaron a once estados del Sur a separarse.',
+    keyPoints: ['El Norte y el Sur tenían economías diferentes','La esclavitud fue el problema central','Once estados se separaron para crear la Confederación'],
+    funFact: '¡La elección de Abraham Lincoln en 1860 fue el detonante inmediato de la secesión del Sur!'
+  });
+  merge('history:h5C2', {
+    intro: 'La Guerra Civil (1861-1865) incluyó batallas en Fort Sumter (acción inicial), Gettysburg (victoria decisiva del Norte en Pennsylvania), Atlanta y Appomattox (rendición de Lee). El general Ulysses S. Grant lideró los ejércitos del Norte a la victoria con una estrategia agresiva y recursos superiores, mientras que el general Robert E. Lee comandó las fuerzas del Sur.',
+    keyPoints: ['Fort Sumter inició la guerra','Gettysburg fue el punto de inflexión','Lee se rindió en Appomattox'],
+    funFact: '¡La Batalla de Gettysburg duró tres días y tuvo más de 50,000 bajas!'
+  });
+  merge('history:h5C3', {
+    intro: 'La Reconstrucción (1865-1877) fue el difícil proceso de reunificar la nación y reconstruir el Sur tras la Guerra Civil. Las enmiendas 13, 14 y 15 abolieron la esclavitud, garantizaron la ciudadanía y la protección igualitaria, y aseguraron el derecho al voto sin importar la raza. Sin embargo, al retirarse las tropas federales, los estados del Sur reimponían la opresión racial.',
+    keyPoints: ['La Reconstrucción reunificó la nación','Tres enmiendas protegieron los derechos de los afroamericanos','Los estados del Sur resistieron la Reconstrucción'],
+    funFact: '¡Durante la Reconstrucción, hombres afroamericanos fueron elegidos al Congreso por primera vez!'
+  });
+  merge('history:h5D1', {
+    intro: 'La Isla Ellis, inaugurada en 1892 en el puerto de Nueva York, fue la principal estación de inmigración por la que pasaron más de 12 millones de personas al entrar a Estados Unidos. Los recién llegados se sometían a inspecciones de salud, respondían preguntas y, en su mayoría, eran admitidos. La Isla Ellis simbolizaba la oportunidad y la esperanza para los inmigrantes.',
+    keyPoints: ['La Isla Ellis fue la principal estación de inmigración','Pasaron más de 12 millones de inmigrantes','Los inmigrantes se sometían a inspecciones y procedimientos'],
+    funFact: '¡Algunos inmigrantes eran rechazados si estaban demasiado enfermos o no tenían dinero!'
+  });
+  merge('history:h5D2', {
+    intro: 'Los inmigrantes de Alemania, Irlanda, Italia, Polonia, China y otras naciones trajeron culturas, comidas, idiomas y tradiciones diversas que enriquecieron la sociedad y la economía estadounidenses. Los inmigrantes trabajaron en fábricas, construyeron ferrocarriles, abrieron negocios y crearon nuevos alimentos, música y arte.',
+    keyPoints: ['Los inmigrantes trajeron culturas y comidas diversas','Construyeron negocios y trabajaron en fábricas','La inmigración creó una América multicultural'],
+    funFact: '¡Los inmigrantes italianos introdujeron platos de pasta que se convirtieron en alimentos queridos en Estados Unidos!'
+  });
+  merge('history:h5D3', {
+    intro: 'El Sueño Americano es la creencia de que cualquier persona, sin importar su origen, puede triunfar mediante el trabajo duro, la determinación y la oportunidad. Los inmigrantes llegaron a Estados Unidos creyendo en el Sueño: que sus hijos tendrían una vida mejor, que el trabajo duro sería recompensado y que podrían tener propiedades y negocios.',
+    keyPoints: ['El Sueño Americano promete oportunidades mediante el trabajo duro','Los inmigrantes llegaron buscando el Sueño','No todos han tenido igualdad de oportunidades'],
+    funFact: '¡Muchas familias inmigrantes trabajaron en varios empleos para alcanzar el Sueño Americano!'
+  });
+  merge('history:h5E1', {
+    intro: 'La Primera Guerra Mundial (1914-1918) llevó a Estados Unidos a combatir junto a Gran Bretaña y Francia contra Alemania en 1917. La Segunda Guerra Mundial (1939-1945) obligó a Estados Unidos a pelear contra la Alemania nazi y el Japón imperial tras el ataque sorpresa a Pearl Harbor en 1941. Estos conflictos fueron los más grandes y mortíferos de la historia.',
+    keyPoints: ['La Primera Guerra Mundial llevó a Estados Unidos a combatir a Alemania','La Segunda Guerra Mundial comenzó para Estados Unidos tras Pearl Harbor','Estados Unidos se convirtió en una superpotencia mundial'],
+    funFact: '¡Durante la Segunda Guerra Mundial, las mujeres trabajaron en fábricas fabricando armas y suministros!'
+  });
+  merge('history:h5E2', {
+    intro: 'El Movimiento por los Derechos Civiles (décadas de 1950 y 1960) fue una lucha de los afroamericanos y sus aliados para poner fin a la discriminación racial, la segregación y la injusticia. Líderes como Martin Luther King Jr., Rosa Parks y Malcolm X protestaron las leyes de segregación y exigieron el derecho al voto. El movimiento logró victorias importantes con la Ley de Derechos Civiles (1964) y la Ley de Derecho al Voto (1965).',
+    keyPoints: ['El Movimiento luchó contra la segregación y la discriminación','Líderes como MLK pelearon por la igualdad','Se aprobaron leyes importantes que protegen los derechos'],
+    funFact: '¡Rosa Parks se negó a ceder su asiento en el autobús, lo que desencadenó el Boicot de Autobuses de Montgomery!'
+  });
+  merge('history:h5E3', {
+    intro: 'La Carrera Espacial (décadas de 1950 a 1970) fue una intensa competencia entre Estados Unidos y la Unión Soviética, que comenzó cuando los soviéticos lanzaron el Sputnik en 1957 y culminó cuando Estados Unidos aterrizó astronautas en la Luna en 1969. El presidente John F. Kennedy comprometió a Estados Unidos a llegar a la Luna antes de 1970.',
+    keyPoints: ['La Carrera Espacial compitió con la Unión Soviética','Kennedy se comprometió a llegar a la Luna antes de 1970','El alunizaje demostró el logro estadounidense'],
+    funFact: '¡Neil Armstrong se convirtió en la primera persona en caminar sobre la Luna en 1969!'
+  });
+
+  // ─── Social Studies Grade 5 — prose ───
+  merge('social-studies:ss5A1', {
+    intro: 'En 1607, un grupo de colonos ingleses estableció Jamestown en el actual estado de Virginia, convirtiéndola en el primer asentamiento inglés permanente en América del Norte. La vida fue extremadamente difícil: más de la mitad de los colonos originales murieron en el primer año a causa del hambre, las enfermedades y los conflictos. El cultivo del tabaco finalmente hizo rentable a Jamestown, pero requirió mano de obra esclavizada.',
+    keyPoints: ['Jamestown fue establecida en 1607 como la primera colonia inglesa permanente','La mayoría de los primeros colonos murieron de enfermedades y hambre','El cultivo del tabaco hizo rentable a Jamestown, pero requirió trabajo esclavizado'],
+    funFact: 'Pocahontas, una princesa powhatan, desempeñó un papel clave en el comercio temprano entre los colonos y los nativos americanos, ayudando a evitar la muerte por hambre de la colonia.'
+  });
+  merge('social-studies:ss5A2', {
+    intro: 'Las trece colonias británicas se desarrollaron en tres regiones distintas con economías y sociedades diferentes. Las colonias de Nueva Inglaterra se enfocaban en pequeñas granjas familiares, la pesca y el comercio. Las colonias del centro tenían suelo fértil e inmigrantes diversos. Las colonias del sur se enfocaban en grandes plantaciones que dependían del trabajo de africanos esclavizados.',
+    keyPoints: ['Las trece colonias desarrollaron tres sociedades regionales distintas','Nueva Inglaterra tenía pequeñas granjas y asambleas locales','Las colonias del sur desarrollaron sistemas de plantación que dependían de la esclavitud'],
+    funFact: 'La esclavitud se fue vinculando cada vez más a categorías raciales durante el período colonial; con el tiempo se convirtió en hereditaria y basada en la raza.'
+  });
+  merge('social-studies:ss5A3', {
+    intro: 'Para el siglo XVIII, las trece colonias habían desarrollado su propia identidad, gobiernos y economías separadas de Gran Bretaña. Sin embargo, el Parlamento británico buscaba controlar las colonias y recaudar dinero mediante impuestos sin consultar a los representantes coloniales. La Ley del Timbre (1765) enfureció a los colonos, quienes protestaron: "Sin representación, no hay impuestos."',
+    keyPoints: ['Las tensiones crecieron entre el gobierno británico y las colonias por los impuestos','Los colonos protestaron "Sin representación, no hay impuestos"','Eventos como el Motín del Té llevaron al conflicto abierto'],
+    funFact: 'El Motín del Té de Boston implicó que los colonos destruyeran 342 cajas de té — una carga que en la actualidad valdría cientos de miles de dólares.'
+  });
+  merge('social-studies:ss5B1', {
+    intro: 'La Revolución Americana fue el resultado de años de tensiones crecientes y quejas específicas. Los colonos creían que Gran Bretaña los trataba injustamente al cobrarles impuestos sin representación en el Parlamento. Las ideas ilustradas de John Locke — que las personas tienen derechos naturales y los gobiernos deben tener el consentimiento de los gobernados — inspiraron a los colonos a imaginar la independencia.',
+    keyPoints: ['Los colonos se oponían al control y los impuestos británicos sin representación','Las ideas ilustradas influyeron en el deseo de independencia','Incidentes específicos como el cierre del puerto de Boston impulsaron la guerra'],
+    funFact: 'El panfleto "Sentido Común" de Thomas Paine, publicado en 1776, fue enormemente popular y convenció a muchos colonos de la necesidad de la independencia.'
+  });
+  merge('social-studies:ss5B2', {
+    intro: 'El 4 de julio de 1776, el Congreso Continental adoptó la Declaración de Independencia en Filadelfia, declarando oficialmente independientes a las trece colonias. Thomas Jefferson fue el principal autor. La Declaración afirmó que "todos los hombres son creados iguales" con "derechos inalienables" que incluyen "la vida, la libertad y la búsqueda de la felicidad".',
+    keyPoints: ['La Declaración de Independencia fue adoptada el 4 de julio de 1776','Thomas Jefferson fue el principal autor','Proclamó el derecho de los colonos a la independencia y enumeró sus quejas'],
+    funFact: 'La Declaración fue leída públicamente en Filadelfia y las campanas de las iglesias repicaron por toda la ciudad para celebrar la independencia, aunque la guerra continuaría siete años más.'
+  });
+  merge('social-studies:ss5B3', {
+    intro: 'La Guerra de Independencia Americana duró ocho años (1775-1783) con muchas batallas y líderes importantes. George Washington, dueño de una plantación en Virginia, se convirtió en comandante del Ejército Continental. La Batalla de Saratoga en 1777 fue una gran victoria colonial que convenció a Francia de unirse a la guerra. El apoyo francés fue crucial para el éxito estadounidense.',
+    keyPoints: ['La Guerra Revolucionaria duró ocho años, de 1775 a 1783','George Washington lideró el Ejército Continental','Batallas clave como Saratoga convencieron a Francia de ayudar a las colonias'],
+    funFact: 'Valley Forge en el invierno de 1777-1778 fue el momento más bajo de Washington — miles de soldados sufrieron el frío y el hambre mientras acampaban cerca de Filadelfia.'
+  });
+  merge('social-studies:ss5C1', {
+    intro: 'Después de la Guerra Revolucionaria, los trece estados operaban bajo los Artículos de la Confederación, que resultaron débiles e ineficaces. En 1787, cincuenta y cinco delegados se reunieron en la Convención Constitucional de Filadelfia para fortalecer el gobierno nacional. James Madison, llamado el "Padre de la Constitución", propuso compromisos cruciales.',
+    keyPoints: ['La Convención Constitucional se reunió en Filadelfia en 1787','Los delegados debatieron asuntos importantes durante varios meses','Los compromisos resolvieron los conflictos entre estados grandes y pequeños'],
+    funFact: 'En el sofocante verano de 1787, los delegados de Filadelfia mantuvieron las ventanas cerradas durante los debates para evitar que los oyeran — imagina el calor mientras creaban los cimientos de América.'
+  });
+  merge('social-studies:ss5C2', {
+    intro: 'Muchos estados ratificaron la Constitución solo después de que se les prometió una Carta de Derechos. James Madison redactó las primeras diez enmiendas a la Constitución. La Primera Enmienda protege la libertad de expresión, de religión, de reunión y de petición. La Segunda Enmienda protege el derecho a portar armas.',
+    keyPoints: ['La Carta de Derechos consta de las primeras diez enmiendas a la Constitución','James Madison redactó la Carta de Derechos','La Carta de Derechos protege libertades fundamentales del poder del gobierno'],
+    funFact: 'La Carta de Derechos fue ratificada en 1791, solo cuatro años después de que se redactara la Constitución, lo que demuestra la importancia que los estadounidenses daban a proteger las libertades.'
+  });
+  merge('social-studies:ss5C3', {
+    intro: 'La Constitución divide el gobierno federal en tres ramas, cada una con poderes separados y la capacidad de frenar los poderes de las otras. La rama legislativa (el Congreso) hace las leyes. La rama ejecutiva, encabezada por el Presidente, hace cumplir las leyes. La rama judicial, encabezada por la Corte Suprema, interpreta las leyes.',
+    keyPoints: ['El gobierno tiene tres ramas con poderes separados','La rama legislativa hace las leyes','Los controles y contrapesos evitan que cualquier rama tenga demasiado poder'],
+    funFact: 'Si el Presidente y el Congreso aprobaran una ley que violara la Constitución, la Corte Suprema podría declararla inconstitucional y anularla — un poder crucial para proteger los derechos.'
+  });
+  merge('social-studies:ss5D1', {
+    intro: 'En 1803, el presidente Thomas Jefferson negoció la Compra de Luisiana, adquiriendo vastas tierras del oeste a Francia por 15 millones de dólares. Este territorio duplicó el tamaño de la nación. Jefferson encargó la Expedición de Lewis y Clark (1804-1806) para explorar las nuevas tierras, trazar la geografía, entrar en contacto con los nativos americanos y estudiar plantas y animales.',
+    keyPoints: ['La Compra de Luisiana en 1803 duplicó el tamaño de la nación','Napoleón vendió el territorio porque sus planes de imperio habían fracasado','La compra abrió tierras para la expansión y la exploración hacia el oeste'],
+    funFact: 'La Compra de Luisiana resultó en unos 3 centavos por acre — uno de los mejores tratos de la historia — aunque fue trágica para los nativos americanos cuyas tierras pasaron a ser territorio estadounidense.'
+  });
+  merge('social-studies:ss5D2', {
+    intro: 'A partir de la década de 1840, miles de colonos estadounidenses viajaron hacia el oeste por el Camino de Oregón, un agotador trayecto de 3,500 kilómetros desde Missouri hasta el Territorio de Oregón. Las familias empacaban carretas cubiertas con sus pertenencias y viajaban en caravanas. El viaje duraba de cinco a seis meses por terrenos difíciles y con escasos recursos.',
+    keyPoints: ['El Camino de Oregón era una ruta de migración de 3,500 km hacia el oeste','Las familias viajaban en caravanas de cinco a seis meses','La expansión hacia el oeste devastó a los pueblos y las tierras nativos americanos'],
+    funFact: 'Las carretas Conestoga usadas en el Camino de Oregón estaban diseñadas para flotar al cruzar ríos — los colonos sellaban temporalmente la carreta para hacerla flotar.'
+  });
+  merge('social-studies:ss5D3', {
+    intro: 'La expansión hacia el oeste tuvo consecuencias catastróficas para los nativos americanos. A medida que los colonos avanzaban, ocupaban las tierras de los pueblos indígenas y mataban la fauna de la que dependían. El gobierno de Estados Unidos forzó a los nativos americanos a reservas. La Ley de Remoción India (1830) obligó a miles de nativos, incluidos los cheroqui, a una marcha que se conoce como el Camino de las Lágrimas.',
+    keyPoints: ['La expansión hacia el oeste desplazó a los nativos americanos de sus tierras','La Ley de Remoción India forzó a miles a marchar en travesías mortales','Las enfermedades y los conflictos militares diezmaron a las poblaciones nativas americanas'],
+    funFact: 'El Camino de las Lágrimas (1838-1839) forzó a 16,000 cheroqui hacia el oeste; unos 4,000 murieron de enfermedades, hambre y frío durante el terrible viaje.'
+  });
+  merge('social-studies:ss5E1', {
+    intro: 'La Guerra Civil fue el resultado de décadas de conflicto sobre la esclavitud y diferentes visiones de América. El Norte desarrolló una economía industrial con trabajo libre; el Sur dependía de la agricultura de plantación con trabajo esclavizado. La elección del republicano Abraham Lincoln, quien se oponía a la expansión de la esclavitud, hizo que once estados del Sur se separaran en 1861.',
+    keyPoints: ['La esclavitud y la expansión hacia el oeste crearon un creciente conflicto entre regiones','El Norte y el Sur desarrollaron sistemas económicos diferentes','La secesión del Sur tras la elección de Lincoln desencadenó la Guerra Civil'],
+    funFact: 'Abraham Lincoln creía que la esclavitud estaba mal, pero dudaba en abolirla sin autoridad legal, temiendo que violara la Constitución hasta que la guerra le dio poderes de emergencia.'
+  });
+  merge('social-studies:ss5E2', {
+    intro: 'La Guerra Civil (1861-1865) fue la guerra más mortífera de Estados Unidos, con más de 620,000 soldados muertos y millones de heridos. Abraham Lincoln lideró el Norte (la Unión), decidido a preservar la nación. La Batalla de Gettysburg (1863) fue el punto de inflexión de la guerra. El general Grant lideró a los ejércitos de la Unión a la victoria con recursos superiores.',
+    keyPoints: ['La Guerra Civil mató a más de 620,000 soldados y millones resultaron heridos','Lincoln lideró el Norte; Jefferson Davis lideró el Sur','Las batallas clave de Gettysburg y Appomattox decidieron el desenlace de la guerra'],
+    funFact: 'La Batalla de Gettysburg duró tres días e involucró a unos 165,000 soldados; la Unión ganó, pero el costo fue enorme — más de 50,000 bajas.'
+  });
+  merge('social-studies:ss5E3', {
+    intro: 'Tras la rendición de Lee en 1865, la nación enfrentó el desafío de la Reconstrucción: reintegrar los estados del Sur y atender a las personas recién liberadas de la esclavitud. Las enmiendas 13, 14 y 15 abolieron la esclavitud, garantizaron la ciudadanía y la protección igualitaria, y protegieron el derecho al voto. Sin embargo, los blancos del Sur recuperaron el poder político e impusieron las leyes de Jim Crow.',
+    keyPoints: ['La Reconstrucción intentó reconstruir el Sur e integrar a los libertos','El Congreso impuso el gobierno militar y enmiendas constitucionales','Los blancos del Sur recuperaron el poder e impusieron la segregación en la década de 1870'],
+    funFact: 'La Decimocuarta Enmienda garantizó la ciudadanía a todas las personas nacidas en Estados Unidos (excepto inicialmente los nativos americanos), redefiniendo fundamentalmente la ciudadanía americana.'
+  });
+
+
+  // ─── App Building Grade 5 — activities ───
+  merge('app-building:ab5a1', { activity: {
+    instructions: '¡Pon los pasos del Pensamiento de Diseño en el orden correcto!',
+    sortItems: ['Testear: recibir retroalimentación de usuarios reales','Idear: generar muchas ideas','Empatizar: entender el problema del usuario','Prototipar: construir una versión rápida','Definir: plantear el problema exacto']
+  }});
+  merge('app-building:ab5a2', { activity: {
+    instructions: '¡Conecta cada punto de dolor con la posible solución de app!',
+    dragOptions: [{label:'Objetos perdidos'},{label:'Aburrido en el carro'},{label:'Olvidar los quehaceres'},{label:'Filas largas en el almuerzo'},{label:'No recuerda la tarea'}],
+    dropTargets: [{label:'App rastreadora con etiquetas Bluetooth'},{label:'App de trivia'},{label:'Lista de quehaceres en familia con recordatorios'},{label:'App para pedir el almuerzo por adelantado'},{label:'App de recordatorios de tarea con IA'}]
+  }});
+  merge('app-building:ab5a3', { activity: {
+    instructions: 'Tienes una idea de app. ¿Qué deberías hacer PRIMERO?',
+    choices: [
+      {text:'Pasar 6 meses construyéndola', explanation:'¡No la construyas todavía! Primero verifica si las personas de verdad la quieren.'},
+      {text:'Preguntar a 10 personas si usarían una app como esta', explanation:'¡INTELIGENTE! Validar tu idea primero ahorra mucho tiempo y esfuerzo.'},
+      {text:'Rendirse porque seguro alguien ya la hizo', explanation:'¡No te rindas! Aunque exista algo parecido, TU versión podría ser mejor.'},
+      {text:'Contratar 50 empleados de inmediato', explanation:'¡Muy precipitado! Valida primero, construye pequeño, luego crece.'}
+    ]
+  }});
+  merge('app-building:ab5b1', { activity: {
+    instructions: '¡Pon estos pasos del flujo de usuario para pedir comida en orden!',
+    sortItems: ['Ver confirmación: "¡Pedido realizado!"','Abrir la app y ver la lista de restaurantes','Agregar artículos al carrito','Tocar un restaurante para ver el menú','Ingresar el pago y confirmar el pedido']
+  }});
+  merge('app-building:ab5b2', { activity: {
+    instructions: '¿Qué es un wireframe?',
+    choices: [
+      {text:'Un diseño final y colorido de la app', explanation:'¡Los wireframes son básicos y simples — sin colores todavía!'},
+      {text:'Un boceto simple que muestra dónde va cada cosa en una pantalla', explanation:'¡Exacto! Los wireframes son planos que muestran el diseño antes de agregar el estilo.'},
+      {text:'El código que hace funcionar una app', explanation:'Los wireframes son bocetos visuales, no código.'},
+      {text:'Un marco de alambre alrededor de tu teléfono', explanation:'¡Es un término de diseño, no un marco físico!'}
+    ]
+  }});
+  merge('app-building:ab5b3', { activity: {
+    instructions: '¿Cuáles opciones de diseño son accesibles? ¡Arrastra al grupo correcto!',
+    dragOptions: [{label:'Botones grandes y claros'},{label:'Texto gris diminuto sobre fondo blanco'},{label:'Descripciones de imágenes'},{label:'Solo rojo/verde para Sí/No'},{label:'Texto oscuro sobre fondo claro'}],
+    dropTargets: [{label:'✅ Diseño Accesible'},{label:'✅ Diseño Accesible'},{label:'✅ Diseño Accesible'},{label:'❌ NO Accesible'},{label:'❌ NO Accesible'}]
+  }});
+  merge('app-building:ab5c1', { activity: {
+    instructions: '¡Construye una app del clima con interacciones! Describe qué pasa cuando los usuarios hacen cosas.'
+  }});
+  merge('app-building:ab5c2', { activity: {
+    instructions: '¡Conecta el componente con su descripción!',
+    matchPairs: [
+      {left:'Tarjeta', right:'Una caja con imagen, título y descripción'},
+      {left:'Botón', right:'Un elemento que se toca y realiza una acción'},
+      {left:'Barra de navegación', right:'Una barra en la parte inferior con íconos para cambiar de sección'},
+      {left:'Lista', right:'Artículos apilados verticalmente, a menudo con íconos'},
+      {left:'Modal', right:'Una ventana emergente que aparece sobre la pantalla actual'}
+    ]
+  }});
+  merge('app-building:ab5c3', { activity: {
+    instructions: 'El botón "Guardar" de tu app no hace nada cuando se toca. ¿Cuál es la MEJOR manera de decirle a la IA que lo corrija?',
+    choices: [
+      {text:'Está roto. Arréglalo.', explanation:'¡Muy vago! La IA no sabe qué es "eso" o qué está roto.'},
+      {text:'El botón Guardar en la pantalla de perfil no responde cuando se toca. Debería guardar el nombre del usuario y mostrar un mensaje verde de "¡Guardado!".', explanation:'¡PERFECTO! Describiste exactamente qué está mal y qué debería pasar. ¡Esto es depuración de nivel experto!'},
+      {text:'Mi app está horrible', explanation:'¡Eso no es retroalimentación útil! Sé específico sobre el problema.'},
+      {text:'Elimina el botón Guardar', explanation:'¡Eliminar el botón no lo arregla — necesitas la función de guardar!'}
+    ]
+  }});
+  merge('app-building:ab5d1', { activity: {
+    instructions: '¿Cuánto cuesta una Cuenta de Apple Developer al año?',
+    choices: [
+      {text:'Gratis', explanation:'Apple cobra por la cuenta de desarrollador.'},
+      {text:'$99', explanation:'¡Correcto! $99 al año te da acceso para publicar en el App Store.'},
+      {text:'$999', explanation:'¡Es mucho menos que eso! Solo $99 al año.'},
+      {text:'$1 millón', explanation:'¡Muy lejos! Solo $99 al año.'}
+    ]
+  }});
+  merge('app-building:ab5d2', { activity: {
+    instructions: '¡Ordena estas estrategias de capturas de pantalla de la PEOR a la MEJOR!',
+    sortItems: ['Foto borrosa de tu app en un escritorio','Mockup limpio que muestra la función principal de la app con texto en negrita','Captura de una pantalla de carga','Captura simple sin texto ni explicación','Mockup que muestra 3 funciones con etiquetas claras']
+  }});
+  merge('app-building:ab5d3', { activity: {
+    instructions: '¡Conecta la app con su mejor categoría en el App Store!',
+    matchPairs: [
+      {left:'Ayudante de Tarea', right:'Educación'},
+      {left:'Rastreador de Actividad Física', right:'Salud y Forma Física'},
+      {left:'Juego de Disparos Espaciales', right:'Juegos'},
+      {left:'Planificador de Presupuesto', right:'Finanzas'},
+      {left:'Editor de Fotos', right:'Fotos y Video'}
+    ]
+  }});
+  merge('app-building:ab5e1', { activity: {
+    instructions: '¿Qué tipo de publicación en redes sociales llamaría más la atención para tu app?',
+    choices: [
+      {text:'Un post de texto diciendo "Descarga mi app"', explanation:'¡Aburrido! Nadie interactúa con posts de texto sobre apps.'},
+      {text:'Un video de TikTok mostrando cómo construyes la app con IA y terminando con una demostración', explanation:'¡SÍ! A la gente le encanta el contenido detrás de cámaras. ¡Muestra el proceso!'},
+      {text:'Una foto de tu pantalla de computadora', explanation:'No es muy emocionante. Muestra la app misma y la historia detrás de ella.'},
+      {text:'Enviar el mismo mensaje por todas partes', explanation:'¡El spam molesta a la gente! Crea contenido genuine e interesante.'}
+    ]
+  }});
+  merge('app-building:ab5e2', { activity: {
+    instructions: '¡Ordena estas métricas de la MÁS importante a la MENOS importante!',
+    dragOptions: [{label:'Usuarios Activos Diarios (DAU)'},{label:'Descargas Totales'},{label:'Tasa de Retención'},{label:'Ingresos por Usuario'},{label:'Calificación en el App Store'}],
+    dropTargets: [{label:'🥇 Más Importante'},{label:'🥈 Muy Importante'},{label:'🥈 Muy Importante'},{label:'🥉 Importante pero no #1'},{label:'🥉 Importante pero no #1'}]
+  }});
+  merge('app-building:ab5e3', { activity: {
+    instructions: 'Completa este pitch de elevador: "Construí una app llamada _____ que ayuda a _____ a _____. Lo que la hace especial es _____."',
+    prompt: 'Completa la plantilla del pitch:'
+  }});
+
+  // ─── Financial Literacy Grade 5 — activities ───
+  merge('financial-literacy:5A1', { activity: {
+    instructions: '¿Cuál es la mentalidad rica?',
+    choices: [
+      {text:'Construir negocios que ganen dinero sin que trabajes', explanation:'¡Correcto! La mentalidad rica se trata de crear sistemas que trabajen por ti.'},
+      {text:'Conseguir un trabajo seguro', explanation:'Eso es mentalidad pobre — cambias tu tiempo por dinero.'},
+      {text:'Trabajar más duro para ganar más', explanation:'Trabajar más duro no es lo mismo que construir sistemas.'}
+    ]
+  }});
+  merge('financial-literacy:5A2', { activity: {
+    instructions: 'Matemáticas de sociedad:',
+    prompt: 'Tú y un amigo inician un negocio. Ganan $100 de ganancia. La dividen 50/50. Tú recibes $___'
+  }});
+  merge('financial-literacy:5A3', { activity: {
+    instructions: '¿Cómo escalas un negocio?',
+    choices: [
+      {text:'Tomar lo que funciona pequeño y hacerlo más grande', explanation:'¡Correcto! Escalar significa replicar lo que ya funciona.'},
+      {text:'Cambiar todo sobre tu negocio', explanation:'Cambiar todo no es escalar — es empezar de nuevo.'},
+      {text:'Parar y volver a empezar', explanation:'¡No! Escalar es hacer crecer lo que ya funciona.'}
+    ]
+  }});
+  merge('financial-literacy:5B1', { activity: {
+    instructions: '¡Crea 5 fuentes de ingreso para ti!',
+    dragOptionsStrings: ['1. Negocio principal','2. Proyecto adicional','3. Vender artículos','4. Enseñar a otros','5. Ingreso pasivo'],
+    dropTargetsStrings: ['Puesto de limonada','Comisiones por dibujos','Revender juguetes','Clases particulares','Intereses bancarios']
+  }});
+  merge('financial-literacy:5B2', { activity: {
+    instructions: '¿Cuál es ingreso pasivo?',
+    choices: [
+      {text:'Dinero de un libro que escribiste hace años', explanation:'¡Correcto! Creaste algo una vez y sigue generando dinero.'},
+      {text:'Dinero de tu trabajo', explanation:'Eso es ingreso activo — trabajas y te pagan.'},
+      {text:'Dinero de un proyecto de una sola vez', explanation:'Un proyecto de una sola vez no es pasivo — no se repite.'}
+    ]
+  }});
+  merge('financial-literacy:5B3', { activity: {
+    instructions: '¿Cuál es mejor para escalar?',
+    choices: [
+      {text:'Vender un producto que creaste', explanation:'¡Correcto! Los productos escalan sin límite.'},
+      {text:'Vender tu tiempo como servicio', explanation:'Los servicios están limitados por las horas del día.'},
+      {text:'Ambos son iguales', explanation:'¡No! Los productos escalan mucho mejor.'}
+    ]
+  }});
+  merge('financial-literacy:5C1', { activity: {
+    instructions: 'Ejemplo de interés compuesto:',
+    prompt: '$100 al 10% = $110. Al año siguiente, $110 al 10% = $121 (¡no $120!). Ese $1 extra es interés ___.'
+  }});
+  merge('financial-literacy:5C2', { activity: {
+    instructions: '¿Cuál crece más en 10 años?',
+    choices: [
+      {text:'Dinero en un fondo indexado de acciones (10% promedio)', explanation:'¡Correcto! El mercado de valores supera a las cuentas de ahorro a largo plazo.'},
+      {text:'Dinero en una cuenta de ahorro (4% de interés)', explanation:'El 4% es menor que el 10% del mercado de valores.'},
+      {text:'Son iguales', explanation:'¡No lo son! El 10% supera al 4% por mucho.'}
+    ]
+  }});
+  merge('financial-literacy:5C3', { activity: {
+    instructions: '¡Construye tu presupuesto! Ganas $100 al mes. ¿Cómo los repartirías?',
+    prompt: 'Si gano $100, ahorraría $_____, gastaría $_____ en necesidades y $_____ en gustos.'
+  }});
+  merge('financial-literacy:5D1', { activity: {
+    instructions: '¿Por qué es importante un puntaje de crédito alto?',
+    choices: [
+      {text:'Consigues préstamos a tasas de interés más bajas', explanation:'¡Correcto! Un buen puntaje te ahorra dinero en intereses.'},
+      {text:'Todos tienen el mismo puntaje de crédito', explanation:'¡No! Los puntajes varían mucho entre personas.'},
+      {text:'Los puntajes de crédito no importan', explanation:'¡Importan muchísimo para préstamos, hipotecas y más!'}
+    ]
+  }});
+  merge('financial-literacy:5D2', { activity: {
+    instructions: 'Matemáticas de la espiral de deuda:',
+    prompt: '$1,000 de deuda al 20% de interés. Después de un año, debes $1,000 × 1.20 = $___. Después de 2 años: $1,200 × 1.20 = $___'
+  }});
+  merge('financial-literacy:5D3', { activity: {
+    instructions: '¿A quién deberías pedirle prestado?',
+    choices: [
+      {text:'A papás o familiares que no cobren intereses', explanation:'¡Correcto! Pedir a la familia evita el costoso interés de las tarjetas.'},
+      {text:'A compañías de tarjetas de crédito al 20% de interés', explanation:'El 20% de interés hace que la deuda crezca rápidamente.'},
+      {text:'A cualquiera que ofrezca', explanation:'¡Siempre compara las condiciones antes de pedir prestado!'}
+    ]
+  }});
+  merge('financial-literacy:5E1', { activity: {
+    instructions: '¡Conecta el tipo de negocio con su descripción!',
+    dragOptionsStrings: ['Propietario único','Sociedad','Corporación'],
+    dropTargetsStrings: ['Una persona es dueña y maneja el negocio','Múltiples personas son dueñas y lo manejan juntas','Un negocio legal separado de sus dueños']
+  }});
+  merge('financial-literacy:5E2', { activity: {
+    instructions: '¿Qué es una deducción del negocio?',
+    choices: [
+      {text:'Dinero que gastaste en tu negocio (puede reducir impuestos)', explanation:'¡Correcto! Las deducciones reducen tu ingreso gravable.'},
+      {text:'Dinero que gastaste en cosas personales', explanation:'Los gastos personales generalmente no son deducibles.'},
+      {text:'Un requisito del gobierno', explanation:'Las deducciones son a tu favor, no en tu contra.'}
+    ]
+  }});
+  merge('financial-literacy:5E3', { activity: {
+    instructions: 'Calcula el margen de ganancia:',
+    prompt: 'Un negocio gana $1,000. La ganancia es $300. Margen de ganancia = $300 ÷ $1,000 = ___% (como decimal: 0.30 o 30%)'
+  }});
+
+
+  // ─── Science Grade 5 — activities (batch) ───
+  var sciG5 = {
+    's5A1': { q:'¿Qué organelo produce energía en una célula?', choices:[
+      {text:'Mitocondria',expl:'Las mitocondrias descomponen nutrientes para liberar energía para la célula.'},
+      {text:'Núcleo',expl:'El núcleo almacena información genética, no energía.'},
+      {text:'Pared celular',expl:'La pared celular da estructura, no energía.'}
+    ]},
+    's5A2': { q:'¿Qué porcentaje de energía está disponible para el siguiente nivel?', choices:[
+      {text:'Alrededor del 10%',expl:'Se pierde aproximadamente el 90%, quedando solo el 10% para el siguiente nivel.'},
+      {text:'Alrededor del 50%',expl:'La pérdida de energía es mucho mayor que el 50%.'},
+      {text:'Toda la energía',expl:'Los organismos usan energía para sus propios procesos vitales.'}
+    ]},
+    's5A3': { q:'¿Qué sistema lleva el oxígeno por todo el cuerpo?', choices:[
+      {text:'El circulatorio',expl:'La sangre del sistema circulatorio lleva oxígeno a todas las células.'},
+      {text:'El respiratorio',expl:'El sistema respiratorio obtiene el oxígeno, pero no lo distribuye.'},
+      {text:'El nervioso',expl:'El sistema nervioso controla las funciones, pero no transporta oxígeno.'}
+    ]},
+    's5B1': { q:'¿Cuáles planetas son gigantes gaseosos?', choices:[
+      {text:'Júpiter, Saturno, Urano, Neptuno',expl:'Los cuatro planetas exteriores son enormes bolas de gas.'},
+      {text:'Mercurio, Venus, Tierra, Marte',expl:'Estos planetas interiores son pequeños y rocosos.'},
+      {text:'Los ocho planetas',expl:'Solo los cuatro planetas exteriores son gigantes gaseosos.'}
+    ]},
+    's5B2': { q:'¿Qué es una galaxia?', choices:[
+      {text:'Un conjunto de miles de millones de estrellas',expl:'Las galaxias están unidas por la gravedad y contienen una enorme cantidad de estrellas.'},
+      {text:'Un sistema de una sola estrella',expl:'Las galaxias contienen mucho más que un solo sistema.'},
+      {text:'Una constelación',expl:'Las constelaciones son patrones visibles desde la Tierra, no galaxias completas.'}
+    ]},
+    's5B3': { q:'¿Por qué ocurren las estaciones?', choices:[
+      {text:'Por el eje inclinado de la Tierra',expl:'La inclinación cambia qué hemisferio apunta hacia el Sol.'},
+      {text:'Por la distancia de la Tierra al Sol',expl:'La distancia varía poco y no explica los patrones estacionales.'},
+      {text:'Por la velocidad de rotación de la Tierra',expl:'La velocidad de rotación determina el día y la noche, no las estaciones.'}
+    ]},
+    's5C1': { q:'¿Qué estado de la materia mantiene una forma fija?', choices:[
+      {text:'Sólido',expl:'Los sólidos mantienen su forma porque los átomos vibran en posiciones fijas.'},
+      {text:'Líquido',expl:'Los líquidos fluyen y toman la forma de su recipiente.'},
+      {text:'Gas',expl:'Los gases se expanden para llenar cualquier espacio disponible.'}
+    ]},
+    's5C2': { q:'¿Cuál es un cambio químico?', choices:[
+      {text:'El agua hirviendo hasta convertirse en vapor',expl:'Hervir es un cambio físico; las moléculas de agua no cambian.'},
+      {text:'El metal que se oxida',expl:'La oxidación es una sustancia nueva formada de hierro y oxígeno.'},
+      {text:'El hielo derritiéndose hasta convertirse en agua',expl:'Derretirse es un cambio de estado físico.'}
+    ]},
+    's5C3': { q:'¿Qué fuerza se opone al movimiento entre superficies?', choices:[
+      {text:'La fricción',expl:'La fricción es la fuerza de resistencia que actúa entre superficies en contacto.'},
+      {text:'La gravedad',expl:'La gravedad jala los objetos hacia abajo, no se opone al movimiento horizontal.'},
+      {text:'El magnetismo',expl:'El magnetismo no afecta a la mayoría de los objetos y no se opone al movimiento.'}
+    ]},
+    's5D1': { q:'¿Por qué usan los científicos los modelos?', choices:[
+      {text:'Para representar sistemas complejos de forma sencilla',expl:'Los modelos simplifican la realidad para revelar patrones importantes.'},
+      {text:'Porque los experimentos son muy caros',expl:'Los modelos y los experimentos tienen propósitos distintos.'},
+      {text:'Para evitar hacer ciencia real',expl:'Los modelos apoyan la investigación científica real.'}
+    ]},
+    's5D2': { q:'¿Cuál es el propósito principal de la revisión por pares?', choices:[
+      {text:'Garantizar la calidad y la precisión científica',expl:'La revisión por pares comprueba que la investigación sea sólida antes de publicarla.'},
+      {text:'Hacer la investigación más difícil',expl:'La revisión por pares mejora la investigación, no la dificulta.'},
+      {text:'Robar ideas científicas',expl:'La revisión por pares es colaborativa, no una competencia desleal.'}
+    ]},
+    's5D3': { q:'¿Qué se requiere para una investigación ética con seres humanos?', choices:[
+      {text:'El consentimiento informado de los participantes',expl:'Las personas deben entender el estudio y aceptar participar.'},
+      {text:'Mantener la investigación en secreto',expl:'La investigación ética es transparente, no secreta.'},
+      {text:'Usar muchos sujetos humanos',expl:'El número de sujetos importa menos que tratarlos éticamente.'}
+    ]},
+    's5E1': { q:'¿Qué elimina la filtración con arena?', choices:[
+      {text:'Sedimentos en partículas',expl:'Los filtros de arena atrapan partículas como tierra y desechos.'},
+      {text:'Todas las bacterias',expl:'La arena sola no elimina todas las bacterias.'},
+      {text:'Sustancias químicas disueltas',expl:'La eliminación de sustancias químicas requiere otros métodos como el carbón activado.'}
+    ]},
+    's5E2': { q:'¿Qué tipo de puente usa cables para apoyarse?', choices:[
+      {text:'El puente colgante',expl:'Los puentes colgantes quedan suspendidos de grandes cables.'},
+      {text:'El puente de viga',expl:'Los puentes de viga usan un apoyo horizontal simple.'},
+      {text:'El puente de arco',expl:'Los puentes de arco distribuyen la fuerza a través de arcos curvos.'}
+    ]},
+    's5E3': { q:'¿Qué hacen los sensores en los robots?', choices:[
+      {text:'Brindan información sobre el entorno',expl:'Los sensores detectan obstáculos, luz, calor y otras condiciones.'},
+      {text:'Mueven al robot',expl:'Los motores mueven a los robots; los sensores brindan información.'},
+      {text:'Escriben el código',expl:'Los programadores escriben el código; los sensores detectan condiciones.'}
+    ]}
+  };
+  Object.keys(sciG5).forEach(function(id){
+    var key='science:'+id; if(!L[key])L[key]={};
+    L[key].activity={instructions:sciG5[id].q,choices:sciG5[id].choices.map(function(c){return{text:c.text,explanation:c.expl};})};
+  });
+
+  // ─── English Grade 5 — activities (batch) ───
+  var engG5 = {
+    'e5A1': { q:'¿Cuál es el tema de una historia donde un niño solitario hace un amigo y se vuelve feliz?', choices:[
+      {text:'Un niño fue a la escuela',expl:'Eso es un detalle de la trama, no un tema.'},
+      {text:'La amistad trae felicidad y pone fin a la soledad',expl:'Este es el mensaje profundo sobre la vida que enseña la historia.'},
+      {text:'Alguien se mudó a un nuevo lugar',expl:'Eso es parte de la trama, no el tema.'}
+    ]},
+    'e5A2': { q:'¿Qué estructura de texto se usaría para explicar cómo crecen las plantas?', choices:[
+      {text:'Orden cronológico (primero, luego, al final)',expl:'El crecimiento de las plantas ocurre en etapas a lo largo del tiempo, así que el orden cronológico muestra el proceso.'},
+      {text:'Problema y solución',expl:'El crecimiento de las plantas no es un problema que resolver.'},
+      {text:'Comparación y contraste',expl:'Esto compararía plantas entre sí, no explicaría el crecimiento.'}
+    ]},
+    'e5A3': { q:'¿En qué género está "Charlotte\'s Web"?', choices:[
+      {text:'Pura fantasía porque las arañas no pueden hablar',expl:'Es más complejo que una sola etiqueta.'},
+      {text:'Ficción histórica ambientada en el pasado',expl:'No está ambientada en la historia real.'},
+      {text:'Ficción realista con personajes animales',expl:'Es una historia inventada que se siente real, aunque los animales hablen.'},
+      {text:'Misterio',expl:'No hay ningún enigma que resolver.'}
+    ]},
+    'e5B1': { q:'¿Qué va en la introducción de un ensayo?', choices:[
+      {text:'Toda tu evidencia y detalles',expl:'Eso va en los párrafos de desarrollo.'},
+      {text:'Un gancho para interesar al lector y tu tesis',expl:'La introducción engancha al lector y plantea la idea principal.'},
+      {text:'Una reafirmación de tu punto central',expl:'Eso va en la conclusión.'}
+    ]},
+    'e5B2': { q:'¿Cuál es un argumento persuasivo sólido?', choices:[
+      {text:'"Los videojuegos son lo mejor"',expl:'Eso es una opinión sin razones.'},
+      {text:'"Las escuelas deberían tener más recreo porque los estudiantes necesitan ejercicio y descanso mental para aprender mejor"',expl:'Da razones claras para la posición.'},
+      {text:'"Mi amigo está de acuerdo conmigo"',expl:'El acuerdo de un amigo no es evidencia.'}
+    ]},
+    'e5B3': { q:'¿Qué hace efectiva a la escritura creativa?', choices:[
+      {text:'Seguir todas las reglas gramaticales a la perfección',expl:'La gramática importa, pero eso no es lo que hace creativa a la escritura.'},
+      {text:'Decirles a los lectores exactamente lo que deben sentir',expl:'La buena escritura creativa muestra, no cuenta.'},
+      {text:'Usar detalles sensoriales y personajes interesantes',expl:'Estos hacen que las historias cobren vida y se sientan reales para los lectores.'}
+    ]},
+    'e5C1': { q:'¿Cuál oración mantiene el tiempo verbal correcto?', choices:[
+      {text:'"Ayer voy al parque y juego"',expl:'"Ayer" es pasado, así que usa "fui" y "jugué".'},
+      {text:'"Ayer fui al parque y jugué"',expl:'Ambos verbos están en tiempo pasado, concordando con "ayer".'},
+      {text:'"Mañana caminé a la tienda"',expl:'"Mañana" es futuro, así que usa "caminaré".'}
+    ]},
+    'e5C2': { q:'¿Dónde va la coma?', choices:[
+      {text:'"Me gusta la pizza pero a mi hermana le gustan los tacos"',expl:'Dos cláusulas independientes necesitan una coma antes de "pero".'},
+      {text:'"Me gusta la pizza, pero a mi hermana le gustan los tacos"',expl:'La coma separa dos cláusulas independientes.'},
+      {text:'"Me, gusta la pizza pero a mi hermana le gustan los tacos"',expl:'La coma está en el lugar equivocado.'}
+    ]},
+    'e5C3': { q:'¿Cuál párrafo tiene buena variedad en las oraciones?', choices:[
+      {text:'"El gato era pequeño. El gato era naranja. El gato era esponjoso. El gato era simpático."',expl:'Todas las oraciones tienen la misma estructura simple.'},
+      {text:'"El gato pequeño y naranja era esponjoso y simpático."',expl:'Combina las ideas, pero es solo una oración.'},
+      {text:'"El gato era pequeño y naranja. Como era esponjoso, queríamos acariciarlo."',expl:'Combina oraciones simples y complejas.'}
+    ]},
+    'e5D1': { q:'¿Por qué saber que "bicicleta" viene de "bi" (dos) y "ciclo" (rueda) te ayuda?', choices:[
+      {text:'Te ayuda a recordar que las bicicletas tienen dos ruedas',expl:'Entender las partes muestra el significado.'},
+      {text:'Te dice dónde comprar una bicicleta',expl:'Los orígenes de las palabras no te dicen dónde comprar cosas.'},
+      {text:'Cambia la forma en que montas una bicicleta',expl:'Los orígenes de las palabras no afectan cómo funcionan las cosas.'}
+    ]},
+    'e5D2': { q:'¿Qué significa el modismo "pan comido"?', choices:[
+      {text:'Estás comiendo pan',expl:'Ese es el significado literal, pero los modismos significan algo diferente.'},
+      {text:'Algo es muy fácil',expl:'Este modismo significa que una tarea no es difícil.'},
+      {text:'Deberías comer alimentos saludables',expl:'Eso no es lo que significa este modismo.'}
+    ]},
+    'e5D3': { q:'¿Cuál es vocabulario académico?', choices:[
+      {text:'"bonito"',expl:'Es vocabulario cotidiano.'},
+      {text:'"concluir"',expl:'"Concluir" es vocabulario formal que se usa en la escritura académica.'},
+      {text:'"bueno"',expl:'Es demasiado general para el uso académico.'}
+    ]},
+    'e5E1': { q:'¿Qué debes hacer cuando el otro lado hace un argumento?', choices:[
+      {text:'Ignorarlo y hacer tu propio argumento',expl:'Los buenos debatientes escuchan y responden.'},
+      {text:'Molestarte y discutir más fuerte',expl:'Los debates requieren respuestas respetuosas y lógicas.'},
+      {text:'Escuchar con atención y responder con un contraargumento',expl:'Esto demuestra buenas habilidades de debate.'}
+    ]},
+    'e5E2': { q:'¿Qué debes escribir en los apuntes de una clase?', choices:[
+      {text:'Cada palabra que dice el maestro',expl:'Eso es transcripción, no tomar apuntes.'},
+      {text:'Las ideas principales y los detalles de apoyo',expl:'Los buenos apuntes capturan la información clave de forma breve.'},
+      {text:'Solo lo que te parece interesante',expl:'Podrías perderte información importante.'}
+    ]},
+    'e5E3': { q:'¿Qué hace buena a una presentación multimedia?', choices:[
+      {text:'La mayor cantidad posible de animaciones y colores brillantes',expl:'Eso distrae, no es profesional.'},
+      {text:'Imágenes y texto simple que apoyan tu discurso',expl:'El multimedia refuerza pero no reemplaza tu presentación oral.'},
+      {text:'Leer tus diapositivas palabra por palabra',expl:'Eso aburre a tu audiencia.'}
+    ]}
+  };
+  Object.keys(engG5).forEach(function(id){
+    var key='english:'+id; if(!L[key])L[key]={};
+    L[key].activity={instructions:engG5[id].q,choices:engG5[id].choices.map(function(c){return{text:c.text,explanation:c.expl};})};
+  });
+
+  // ─── History Grade 5 — activities (batch) ───
+  var histG5 = {
+    'h5A1': { q:'¿Por qué fue importante Jamestown?', choices:[
+      {text:'Fue el primer asentamiento inglés permanente',expl:'Jamestown estableció la primera colonia inglesa exitosa.'},
+      {text:'Fue la capital de Estados Unidos',expl:'Era una sola colonia, no la capital.'},
+      {text:'Fue fundada por los Peregrinos',expl:'Los Peregrinos fundaron Plymouth.'}
+    ]},
+    'h5A2': { q:'¿Qué fue el Pacto del Mayflower?', choices:[
+      {text:'Un acuerdo de autogobierno basado en la regla de la mayoría',expl:'Estableció principios democráticos para la colonia.'},
+      {text:'Un barco que llevaba suministros',expl:'El Mayflower era el barco, no el pacto.'},
+      {text:'Un acuerdo comercial con los nativos americanos',expl:'El pacto era un acuerdo de gobierno.'}
+    ]},
+    'h5A3': { q:'¿Qué región tenía grandes plantaciones con trabajo esclavizado?', choices:[
+      {text:'Las colonias del Sur',expl:'Las colonias del Sur desarrollaron economías de plantación con esclavitud.'},
+      {text:'Las colonias de Nueva Inglaterra',expl:'Nueva Inglaterra tenía granjas más pequeñas y comercio.'},
+      {text:'Las colonias del centro',expl:'Las colonias del centro tenían agricultura diversa y comercio.'}
+    ]},
+    'h5B1': { q:'¿Qué significa "derechos inalienables"?', choices:[
+      {text:'Derechos que no se pueden quitar',expl:'Son derechos fundamentales que pertenecen a todas las personas.'},
+      {text:'Derechos que solo tienen los estadounidenses',expl:'La Declaración dijo que estos son derechos universales.'},
+      {text:'Derechos otorgados por el gobierno',expl:'Estos derechos existen antes del gobierno.'}
+    ]},
+    'h5B2': { q:'¿Qué hace la Constitución?', choices:[
+      {text:'Explica cómo funciona el gobierno de Estados Unidos',expl:'La Constitución es el plan del gobierno federal.'},
+      {text:'Lista todas las leyes de Estados Unidos',expl:'Es un marco, no una lista de leyes.'},
+      {text:'Describe la historia de Estados Unidos',expl:'Establece la estructura del gobierno.'}
+    ]},
+    'h5B3': { q:'¿Qué protege la Primera Enmienda?', choices:[
+      {text:'La expresión, la religión, la prensa, la reunión y la petición',expl:'Estas son las libertades clave de la Primera Enmienda.'},
+      {text:'El derecho a portar armas',expl:'Eso es la Segunda Enmienda.'},
+      {text:'El derecho al voto',expl:'Los derechos de votación vienen en enmiendas posteriores.'}
+    ]},
+    'h5C1': { q:'¿Cuál fue la causa principal de la Guerra Civil?', choices:[
+      {text:'El conflicto sobre la esclavitud y los derechos de los estados',expl:'La esclavitud y los distintos sistemas económicos causaron la guerra.'},
+      {text:'Un desacuerdo sobre impuestos',expl:'Aunque importante, la esclavitud era el problema central.'},
+      {text:'Peleas por los territorios del oeste para agricultura',expl:'La cuestión de la esclavitud era el tema central.'}
+    ]},
+    'h5C2': { q:'¿Cuál batalla fue el punto de inflexión de la Guerra Civil?', choices:[
+      {text:'Gettysburg',expl:'La victoria del Norte en Gettysburg cambió el curso de la guerra.'},
+      {text:'Fort Sumter',expl:'Fort Sumter inició la guerra, no fue el punto de inflexión.'},
+      {text:'Atlanta',expl:'Atlanta cayó después del punto de inflexión.'}
+    ]},
+    'h5C3': { q:'¿Qué hizo la Decimotercera Enmienda?', choices:[
+      {text:'Abolió la esclavitud',expl:'La Decimotercera Enmienda puso fin a la esclavitud en Estados Unidos.'},
+      {text:'Dio el derecho al voto a todos los hombres',expl:'Eso fue la Decimocuarta y la Decimoquinta Enmiendas.'},
+      {text:'Terminó la Guerra Civil',expl:'Las enmiendas cambian las leyes, no detienen las guerras.'}
+    ]},
+    'h5D1': { q:'¿Por qué vinieron los inmigrantes a Estados Unidos?', choices:[
+      {text:'En busca de mejores oportunidades y libertades',expl:'Los inmigrantes buscaban oportunidades económicas y libertad.'},
+      {text:'Porque fueron obligados a irse',expl:'La mayoría llegó voluntariamente, aunque algunos huían de la opresión.'},
+      {text:'Para comenzar guerras contra Europa',expl:'Los inmigrantes buscaban una nueva vida pacífica.'}
+    ]},
+    'h5D2': { q:'¿Qué aportaron los inmigrantes a Estados Unidos?', choices:[
+      {text:'Culturas diversas, comidas, negocios y tradiciones',expl:'Los inmigrantes enriquecieron a Estados Unidos cultural y económicamente.'},
+      {text:'Solo mano de obra y trabajo barato',expl:'Contribuyeron mucho más que solo trabajo.'},
+      {text:'Razones para pelearse entre sí',expl:'Construyeron comunidades juntos.'}
+    ]},
+    'h5D3': { q:'¿Qué es el Sueño Americano?', choices:[
+      {text:'La creencia de que el trabajo duro conduce al éxito y la prosperidad',expl:'El Sueño representa la oportunidad mediante el esfuerzo.'},
+      {text:'Una promesa del gobierno de dar dinero gratis',expl:'El Sueño se trata de oportunidades, no de dinero garantizado.'},
+      {text:'Un requisito de comprar una casa',expl:'El Sueño es más amplio que la propiedad de vivienda.'}
+    ]},
+    'h5E1': { q:'¿Cuál fue la razón principal por la que Estados Unidos entró en la Segunda Guerra Mundial?', choices:[
+      {text:'El ataque sorpresa de Japón a Pearl Harbor',expl:'El ataque a Pearl Harbor llevó a Estados Unidos a la guerra.'},
+      {text:'Para ayudar a Gran Bretaña de inmediato desde el principio',expl:'Estados Unidos fue neutral hasta Pearl Harbor.'},
+      {text:'Para detener a la Unión Soviética',expl:'Rusia era aliada, no la razón de la entrada.'}
+    ]},
+    'h5E2': { q:'¿Cuál fue el objetivo del Movimiento por los Derechos Civiles?', choices:[
+      {text:'Poner fin a la discriminación racial y la segregación',expl:'El movimiento luchó por la igualdad racial.'},
+      {text:'Dar derechos solo a ciertas personas',expl:'Luchó por la igualdad para todos.'},
+      {text:'Separar a las personas por raza',expl:'Luchó contra la separación.'}
+    ]},
+    'h5E3': { q:'¿Cuál fue el objetivo principal de la Carrera Espacial?', choices:[
+      {text:'Llegar a la Luna antes que la Unión Soviética',expl:'El alunizaje fue el objetivo definitorio.'},
+      {text:'Establecer bases militares en el espacio',expl:'El enfoque fue la exploración espacial civil.'},
+      {text:'Encontrar extraterrestres y nuevos planetas',expl:'El objetivo era un logro lunar específico.'}
+    ]}
+  };
+  Object.keys(histG5).forEach(function(id){
+    var key='history:'+id; if(!L[key])L[key]={};
+    L[key].activity={instructions:histG5[id].q,choices:histG5[id].choices.map(function(c){return{text:c.text,explanation:c.expl};})};
+  });
+
+  // ─── Social Studies Grade 5 — activities (batch) ───
+  var ssG5 = {
+    'ss5A1': { q:'¿Por qué estuvo a punto de fracasar Jamestown al principio?', choices:[
+      {text:'Los colonos enfrentaron hambre, enfermedades y conflictos',expl:'Los primeros colonos carecían de suministros, sufrieron enfermedades y tuvieron dificultades para establecerse.'},
+      {text:'Los nativos americanos se negaron a comerciar',expl:'En realidad, el comercio con los nativos americanos ayudó a salvar la colonia.'},
+      {text:'El clima era demasiado extremo',expl:'Aunque fue difícil, el clima no fue la causa principal de las muertes tempranas.'}
+    ]},
+    'ss5A2': { q:'¿Cuál fue la principal diferencia económica entre las colonias de Nueva Inglaterra y las del Sur?', choices:[
+      {text:'Nueva Inglaterra tenía pequeñas granjas; el Sur tenía grandes plantaciones',expl:'La geografía y los sistemas de trabajo dieron forma a estructuras económicas diferentes.'},
+      {text:'Nueva Inglaterra cultivaba tabaco; el Sur cultivaba maíz',expl:'El Sur cultivaba tabaco; Nueva Inglaterra era más diversa.'},
+      {text:'No había diferencia económica',expl:'Las regiones desarrollaron economías muy distintas.'}
+    ]},
+    'ss5A3': { q:'¿Por qué se oponían los colonos a los impuestos británicos?', choices:[
+      {text:'No tenían representación en el Parlamento que hacía las leyes',expl:'Los colonos exigían voz en las decisiones que los afectaban.'},
+      {text:'No querían pagar ningún impuesto',expl:'El problema era específicamente la imposición sin representación.'},
+      {text:'Gran Bretaña era demasiado pobre para necesitar el dinero',expl:'La situación financiera de Gran Bretaña no era la preocupación de los colonos.'}
+    ]},
+    'ss5B1': { q:'¿Qué idea ilustrada más inspiró la independencia americana?', choices:[
+      {text:'Las personas tienen derechos naturales y los gobiernos necesitan el consentimiento de los gobernados',expl:'Las ideas de John Locke influyeron directamente en la Declaración de Independencia.'},
+      {text:'Los gobiernos deben controlar todos los aspectos de la vida',expl:'Es lo opuesto a las ideas ilustradas.'},
+      {text:'Los reyes tienen derecho divino a gobernar',expl:'Los pensadores ilustrados rechazaron la teoría del derecho divino.'}
+    ]},
+    'ss5B2': { q:'¿Cuál fue el propósito principal de la Declaración de Independencia?', choices:[
+      {text:'Explicar por qué las colonias declaraban su independencia de Gran Bretaña',expl:'Anunció la independencia y justificó las acciones de las colonias.'},
+      {text:'Proponer negociaciones de paz con Gran Bretaña',expl:'La Declaración anunció la separación, no la negociación.'},
+      {text:'Pedir dinero a otros países',expl:'Ese no fue el propósito de la Declaración.'}
+    ]},
+    'ss5B3': { q:'¿Quién fue el comandante del Ejército Continental?', choices:[
+      {text:'George Washington',expl:'Washington lideró las fuerzas estadounidenses durante toda la Guerra Revolucionaria.'},
+      {text:'Thomas Jefferson',expl:'Jefferson fue un líder político, no un comandante militar.'},
+      {text:'Benjamin Franklin',expl:'Franklin fue diplomático e inventor, no un líder militar.'}
+    ]},
+    'ss5C1': { q:'¿Por qué se convocó a la Convención Constitucional?', choices:[
+      {text:'Los Artículos de la Confederación resultaron demasiado débiles',expl:'Se necesitaba un gobierno nacional más fuerte.'},
+      {text:'Los delegados querían continuar la Guerra Revolucionaria',expl:'La guerra ya había terminado.'},
+      {text:'Los estados querían separarse en países diferentes',expl:'Los delegados querían fortalecer la unidad.'}
+    ]},
+    'ss5C2': { q:'¿Qué enmienda protege la libertad de expresión y de religión?', choices:[
+      {text:'La Primera Enmienda',expl:'La Primera Enmienda es el fundamento de las libertades americanas.'},
+      {text:'La Cuarta Enmienda',expl:'La Cuarta Enmienda protege contra registros injustificados.'},
+      {text:'La Décima Enmienda',expl:'La Décima Enmienda reserva poderes a los estados y al pueblo.'}
+    ]},
+    'ss5C3': { q:'¿Qué rama tiene el poder de hacer las leyes?', choices:[
+      {text:'La rama legislativa (el Congreso)',expl:'El Congreso es responsable de crear las leyes federales.'},
+      {text:'El Presidente',expl:'El Presidente hace cumplir las leyes, pero el Congreso las crea.'},
+      {text:'La Corte Suprema',expl:'Los tribunales interpretan las leyes, no las crean.'}
+    ]},
+    'ss5D1': { q:'¿Por qué vendió Napoleón el Territorio de Luisiana a Estados Unidos?', choices:[
+      {text:'Sus planes de imperio en América del Norte habían fracasado',expl:'La Revolución Haitiana hizo imposibles sus ambiciones americanas.'},
+      {text:'Era muy generoso con Estados Unidos',expl:'Fue una transacción comercial impulsada por la necesidad.'},
+      {text:'Estados Unidos lo obligó a vender con amenazas',expl:'Fue una compra negociada.'}
+    ]},
+    'ss5D2': { q:'¿Cuál fue un peligro importante en el Camino de Oregón?', choices:[
+      {text:'Las enfermedades y las difíciles condiciones de viaje',expl:'La disentería y el cólera mataron a miles de viajeros.'},
+      {text:'Ataques constantes de los nativos americanos',expl:'Aunque hubo conflictos ocasionales, el comercio era más común.'},
+      {text:'Falta de suministros en Missouri para comenzar',expl:'Missouri era el punto de partida con suministros disponibles.'}
+    ]},
+    'ss5D3': { q:'¿Cuál fue una consecuencia importante de la expansión hacia el oeste para los nativos americanos?', choices:[
+      {text:'El desplazamiento de sus tierras y las reubicaciones forzosas a reservas',expl:'La expansión hacia el oeste devastó las tierras y poblaciones nativas.'},
+      {text:'Los nativos americanos se enriquecieron vendiendo sus tierras',expl:'Los nativos americanos fueron expulsados de sus tierras, no fueron compensados justamente.'},
+      {text:'Los nativos americanos y los colonos vivieron en paz',expl:'La historia real involucró conflictos devastadores y desplazamientos.'}
+    ]},
+    'ss5E1': { q:'¿Cuál fue la causa PRINCIPAL de la Guerra Civil?', choices:[
+      {text:'El conflicto sobre la esclavitud y los derechos de los estados',expl:'La esclavitud fue el problema fundamental que dividía al Norte y al Sur.'},
+      {text:'Los celos del Norte hacia la riqueza del Sur',expl:'Aunque existían diferencias económicas, la esclavitud era el problema central.'},
+      {text:'Disputas sobre aranceles y comercio',expl:'Aunque hubo disputas económicas, la esclavitud era más fundamental.'}
+    ]},
+    'ss5E2': { q:'¿Cuál batalla fue el punto de inflexión de la Guerra Civil?', choices:[
+      {text:'La Batalla de Gettysburg',expl:'Gettysburg en 1863 debilitó al Sur y aseguró la victoria del Norte.'},
+      {text:'La Batalla de Antietam',expl:'Antietam fue importante, pero no fue el punto de inflexión.'},
+      {text:'La Primera Batalla de Bull Run',expl:'Esa fue una victoria temprana del Sur, no un punto de inflexión.'}
+    ]},
+    'ss5E3': { q:'¿Qué pasó con las promesas de igualdad de la Reconstrucción?', choices:[
+      {text:'Los blancos del Sur recuperaron el poder e impusieron la segregación de Jim Crow',expl:'Los avances de la Reconstrucción se revirtieron en gran medida después de que las tropas federales se fueron.'},
+      {text:'Se implementaron plenamente y protegieron la igualdad de los afroamericanos',expl:'En realidad, ocurrió lo contrario.'},
+      {text:'La Reconstrucción nunca ocurrió de verdad',expl:'Ocurrió, pero fue interrumpida y sus avances fueron revertidos.'}
+    ]}
+  };
+  Object.keys(ssG5).forEach(function(id){
+    var key='social-studies:'+id; if(!L[key])L[key]={};
+    L[key].activity={instructions:ssG5[id].q,choices:ssG5[id].choices.map(function(c){return{text:c.text,explanation:c.expl};})};
+  });
+
+})();
+
 // Math Grade 5 (100 lessons) — templated translations by category
 (function(){
   const m = LESSON_TRANSLATIONS_ES;
