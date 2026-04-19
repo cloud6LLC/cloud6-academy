@@ -16581,6 +16581,553 @@ Object.assign(LESSON_TRANSLATIONS_ES, {
   'social-studies:ss3E3': { title: 'Comida Cultural', tagline: 'La comida cuenta historias de la cultura' }
 });
 
+// ═══════════════════════════════════════════════════════════
+// PHASE 2 SESSION 3 (gap-fill) — Grade 3 per-lesson prose
+// Adds intro/keyPoints/funFact to existing Grade 3 entries
+// for all non-Math subjects. Uses Object.assign to merge onto
+// existing title+tagline entries without overwriting them.
+// ═══════════════════════════════════════════════════════════
+(function(){
+  const L = LESSON_TRANSLATIONS_ES;
+  const merge = function(key, extra){
+    L[key] = Object.assign({}, L[key] || {}, extra);
+  };
+
+  // ─── English Grade 3 prose ───
+  merge('english:e3A1', {
+    intro: 'La idea principal es el punto más importante que un autor quiere que entiendas en un texto. A diferencia de los detalles, que son piezas pequeñas de información, la idea principal conecta todo. Para encontrarla, pregúntate: "¿De qué trata todo este texto?" La idea principal suele aparecer al inicio o al final de un párrafo. Encontrarla te ayuda a entender lo que lees más rápido y recordarlo mejor.',
+    keyPoints: ['La idea principal es el punto más importante','Es diferente a los detalles de apoyo','Suele estar al inicio o al final'],
+    funFact: '¡Muchas historias tienen más de un párrafo, pero todas comparten una sola idea principal!'
+  });
+  merge('english:e3A2', {
+    intro: 'Toda historia tiene partes clave que trabajan juntas. Los personajes son las personas o animales de la historia. El escenario es dónde y cuándo ocurre. La trama es lo que pasa: el principio, el medio y el final. Los autores eligen con cuidado estos elementos para que las historias sean interesantes. Cuando identificas estas partes, entiendes mejor el cuento y puedes predecir lo que va a pasar después.',
+    keyPoints: ['Los personajes mueven la historia','El escenario afecta lo que pueden hacer los personajes','La trama muestra cómo cambian los personajes'],
+    funFact: '¡El mismo personaje puede tener aventuras distintas en escenarios distintos!'
+  });
+  merge('english:e3A3', {
+    intro: 'Cuando comparas textos, observas en qué se parecen dos historias y en qué se diferencian. Las historias pueden tener los mismos personajes pero distintos escenarios, o tramas distintas con el mismo mensaje. Comparar te ayuda a ver que los autores pueden contar historias de muchas formas. También te ayuda a entender por qué un autor tomó ciertas decisiones. Te conviertes en mejor lector cuando piensas en varios textos a la vez.',
+    keyPoints: ['Los mismos personajes pueden vivir aventuras distintas','Textos diferentes pueden enseñar la misma lección','Comparar muestra las decisiones del autor'],
+    funFact: '¡Los cuentos folklóricos de países distintos muchas veces tienen la misma trama pero con personajes diferentes!'
+  });
+  merge('english:e3B1', {
+    intro: 'Un párrafo es un grupo de oraciones que hablan de una sola idea principal. La primera oración, llamada oración temática, dice de qué trata el párrafo. Las oraciones que siguen dan detalles que apoyan la oración temática. La última oración muchas veces cierra la idea. Cuando escribes en párrafos, tu escritura es más fácil de leer y entender. Usar bien los párrafos muestra a los lectores que estás organizado y que piensas con cuidado.',
+    keyPoints: ['La oración temática va primero','Cada oración apoya la idea principal','Los párrafos son como los bloques de construcción de la escritura'],
+    funFact: 'Un párrafo normalmente tiene de 3 a 5 oraciones.'
+  });
+  merge('english:e3B2', {
+    intro: 'La escritura descriptiva usa palabras que ayudan al lector a imaginar lo que describes. En lugar de decir "el perro era lindo", podrías escribir "el peludo perro dorado movía la cola lleno de alegría". Las palabras que describen cómo se ven, suenan, se sienten, saben y huelen las cosas se llaman palabras sensoriales o adjetivos. Cuando las usas, tu lector puede imaginar exactamente lo que quieres decir. La escritura descriptiva hace que tus historias y explicaciones cobren vida en la página.',
+    keyPoints: ['Los adjetivos describen a los sustantivos','Los detalles sensoriales hacen viva la escritura','Las palabras específicas son mejores que las generales'],
+    funFact: '¡Los grandes autores usan adjetivos como "crujiente", "resbaloso" y "brillante" en lugar de solo "lindo"!'
+  });
+  merge('english:e3B3', {
+    intro: 'Una carta amistosa es un mensaje que le escribes a alguien que conoces, como un amigo o un familiar. Tiene cinco partes: un saludo (Querido/a...), una introducción, el cuerpo (el mensaje principal), una despedida y tu firma. Las cartas amistosas son informales, lo que quiere decir que escribes como hablas: con calidez y de forma personal. Escribir cartas te ayuda a practicar ideas completas y a organizar lo que piensas. ¡Las cartas son una forma hermosa de mantener el lazo con las personas que quieres!',
+    keyPoints: ['Las cartas tienen cinco partes','Usa un tono amistoso y personal','Organiza tus ideas con claridad'],
+    funFact: '¡Aun en la era digital, las cartas escritas a mano se sienten especiales!'
+  });
+  merge('english:e3C1', {
+    intro: 'Toda oración necesita un sustantivo y un verbo para estar completa. Un sustantivo es una palabra que nombra a una persona, un lugar o una cosa, como "maestra", "escuela" o "lápiz". Un verbo es una palabra de acción que dice lo que alguien o algo hace, como "correr", "saltar" o "escribir". El sustantivo suele ser de quién o de qué trata la oración, y el verbo dice qué está pasando. Entender los sustantivos y los verbos es el primer paso para armar oraciones fuertes.',
+    keyPoints: ['Los sustantivos nombran personas, lugares o cosas','Los verbos muestran acción o movimiento','Toda oración debe tener ambos'],
+    funFact: '¡La misma palabra puede ser un sustantivo en una oración y formar parte de un verbo en otra!'
+  });
+  merge('english:e3C2', {
+    intro: 'Los adjetivos son palabras que describen a los sustantivos y los vuelven más específicos. Por ejemplo, "alto", "azul" y "feliz" son adjetivos. Los adverbios son palabras que describen a los verbos y dicen cómo pasa algo. Palabras como "rápidamente", "lentamente" y "con cuidado" son adverbios. Los adjetivos responden a "¿De qué tipo?", mientras que los adverbios responden a "¿Cómo?" o "¿De qué manera?". Usar adjetivos y adverbios hace tu escritura más clara e interesante. Ayudan al lector a saber exactamente lo que quieres decir.',
+    keyPoints: ['Los adjetivos describen a los sustantivos (¿de qué tipo?)','Los adverbios describen a los verbos (¿cómo?)','Ambos hacen la escritura más específica'],
+    funFact: '¡En español, muchos adverbios terminan en "-mente", pero no todos!'
+  });
+  merge('english:e3C3', {
+    intro: 'El sujeto y el verbo de una oración deben coincidir, o "concordar". Si el sujeto es singular, usas un verbo en singular. Si el sujeto es plural, usas un verbo en plural. Por ejemplo, "El perro corre" es correcto, pero "El perro corren" está mal. De la misma manera, "Los perros corren" está bien, pero "Los perros corre" no lo está. Aprender esta regla te ayuda a escribir oraciones que suenan correctas y que son más fáciles de entender.',
+    keyPoints: ['Los sujetos singulares necesitan verbos singulares','Los sujetos plurales necesitan verbos plurales','La concordancia hace que las oraciones suenen bien'],
+    funFact: '¡A veces lo más difícil es encontrar al sujeto que se esconde dentro de una oración larga!'
+  });
+  merge('english:e3D1', {
+    intro: 'Cuando ves una palabra que no conoces, puedes descubrir su significado observando las palabras que la rodean: el contexto. Si una oración dice "El gatito estaba jubiloso y saltaba de alegría", puedes adivinar que "jubiloso" significa feliz. Hay distintos tipos de pistas del contexto: pistas con sinónimos (palabras cercanas con el mismo significado), con opuestos y con explicaciones. Usar las pistas del contexto te ayuda a leer sin parar a buscar cada palabra nueva. Esto hace la lectura más rápida y divertida.',
+    keyPoints: ['Lee toda la oración en busca de pistas','Busca sinónimos u opuestos cercanos','Las pistas te ayudan a adivinar el significado'],
+    funFact: '¡Los buenos lectores usan pistas del contexto cientos de veces al día!'
+  });
+  merge('english:e3D2', {
+    intro: 'Un prefijo es una partecita que se agrega al inicio de una palabra y cambia su significado. El prefijo "in-" significa "no", así que "injusto" quiere decir "no justo". Un sufijo se agrega al final de una palabra. El sufijo "-oso" significa "lleno de", así que "alegroso" sería "lleno de alegría". Aprender prefijos y sufijos te ayuda a entender muchas palabras nuevas porque estas partecitas aparecen en cientos de palabras. Dividir una palabra larga en sus partes la vuelve menos intimidante y más fácil de entender.',
+    keyPoints: ['Los prefijos van al inicio','Los sufijos van al final','Estas partecitas cambian el significado de la palabra'],
+    funFact: '¡La palabra "indescriptiblemente" tiene un prefijo (in-) y un sufijo (-mente)!'
+  });
+  merge('english:e3D3', {
+    intro: 'Algunas palabras tienen más de un significado, dependiendo de cómo se usen. La palabra "banco" puede referirse a un lugar donde se guarda dinero o a un asiento largo. La palabra "cabo" puede ser un rango militar, una punta de tierra o el final de algo. Descubres cuál significado aplica mirando el contexto: las demás palabras de la oración. Leer con atención te ayuda a notar cuál significado tiene sentido. Entender los múltiples significados te ayuda a disfrutar los chistes y los juegos de palabras, y te hace un lector más astuto.',
+    keyPoints: ['El contexto te dice qué significado aplica','Misma escritura, distintos significados','Piensa en todos los significados que conoces'],
+    funFact: '¡Los juegos de palabras son chistes que usan palabras con varios significados!'
+  });
+  merge('english:e3E1', {
+    intro: 'Una presentación oral es cuando hablas ante un grupo de personas sobre un tema. Para dar una buena presentación, escoge un tema que conozcas, organiza tus ideas y practica en voz alta. Habla despacio y con claridad para que todos te escuchen. Mira a tu público y usa movimientos de las manos para que tus puntos sean interesantes. Las presentaciones te ayudan a practicar la confianza y las habilidades de comunicación que vas a usar toda tu vida.',
+    keyPoints: ['Organiza tus ideas antes de hablar','Practica en voz alta','Mira a los ojos a tu público'],
+    funFact: '¡Los grandes oradores hacen pausas entre ideas para que los que escuchan puedan pensar!'
+  });
+  merge('english:e3E2', {
+    intro: 'La escucha activa es cuando te enfocas por completo en lo que alguien está diciendo en vez de pensar en otras cosas. Miras a quien habla, mantienes el cuerpo quieto y piensas en sus palabras. Puedes asentir con la cabeza para mostrar que entiendes, y no interrumpes. Cuando termina, puedes hacer preguntas o repetir lo que dijo con tus palabras. Los buenos oyentes son respetados y aprenden más porque entienden lo que la gente realmente quiere decir. La escucha activa es una habilidad que mejora con la práctica.',
+    keyPoints: ['Enfócate por completo en quien habla','No interrumpas','Muestra con tu lenguaje corporal que estás escuchando'],
+    funFact: '¡Los buenos oyentes hacen que las personas se sientan escuchadas y valoradas!'
+  });
+  merge('english:e3E3', {
+    intro: 'Seguir indicaciones quiere decir que escuchas con atención y haces exactamente lo que se pide. Las buenas indicaciones son claras y paso a paso. Cuando sigues indicaciones, lee o escucha con cuidado, haz preguntas si algo no está claro y realiza los pasos en el orden correcto. Seguir indicaciones es importante en la escuela, en la casa y en toda la vida. Cuando las sigues con cuidado, haces las cosas bien desde la primera vez y no cometes errores.',
+    keyPoints: ['Escucha o lee toda la indicación primero','Haz los pasos en orden','Haz preguntas si te confundes'],
+    funFact: '¡Las recetas son como indicaciones: si te equivocas en el orden, la comida no va a salir bien!'
+  });
+
+  // ─── English Grade 3 activities ───
+  const engG3 = {
+    e3A1: { q:'¿Cuál es la idea principal de un cuento sobre una niña que aprende a andar en bicicleta?', choices:[
+      {text:'La niña aprende a andar en bicicleta', expl:'¡Correcto! Ese es el punto más importante del cuento.'},
+      {text:'La bicicleta es azul', expl:'Ese es un detalle, no la idea principal.'},
+      {text:'El cuento ocurre en el verano', expl:'Ese es el escenario, no la idea principal.'}] },
+    e3A2: { q:'En un cuento sobre pingüinos que viven en la Antártida, ¿cuál es el escenario?', choices:[
+      {text:'La Antártida', expl:'¡Sí! El escenario es dónde y cuándo ocurre la historia.'},
+      {text:'Los pingüinos', expl:'Esos son los personajes, no el escenario.'},
+      {text:'Lo que pasa en el cuento', expl:'Esa es la trama, no el escenario.'}] },
+    e3A3: { q:'¿Cómo podrían ser distintas dos historias sobre dragones?', choices:[
+      {text:'Podrían tener escenarios, tramas o tipos de dragón distintos', expl:'¡Correcto! Dos historias del mismo tema pueden diferir de muchas formas.'},
+      {text:'No podrían ser diferentes', expl:'¡Claro que sí! Los autores eligen muchas cosas distintas.'},
+      {text:'Tienen que ser exactamente iguales', expl:'No: los autores toman decisiones creativas diferentes.'}] },
+    e3B1: { q:'¿Cuál oración sería la mejor oración temática para un párrafo sobre la pizza?', choices:[
+      {text:'La pizza es uno de los platillos más populares del mundo.', expl:'¡Sí! Una buena oración temática presenta la idea principal con claridad.'},
+      {text:'A mí me gusta el pepperoni.', expl:'Eso es un detalle, no la idea principal.'},
+      {text:'Ayer comí pizza.', expl:'Eso es un detalle personal, no una idea general para el párrafo.'}] },
+    e3B2: { q:'¿Cuál oración es más descriptiva?', choices:[
+      {text:'El peludo gatito anaranjado ronroneaba suavemente en el sillón suave.', expl:'¡Correcto! Usa palabras sensoriales que te ayudan a imaginar la escena.'},
+      {text:'El gato estaba en el sillón.', expl:'Es cierta, pero le faltan detalles.'},
+      {text:'Había un gato.', expl:'Es muy general; no hay detalles.'}] },
+    e3B3: { q:'¿Cuál es el saludo correcto para una carta amistosa?', choices:[
+      {text:'Querida Abuela,', expl:'¡Sí! Los saludos amistosos son cálidos y personales, y llevan coma.'},
+      {text:'Oye abuela', expl:'Muy informal y le falta la puntuación adecuada.'},
+      {text:'A quien corresponda:', expl:'Ese saludo es para cartas formales, no amistosas.'}] },
+    e3C1: { q:'En la oración "El gato corre rápido", ¿cuál palabra es el verbo?', choices:[
+      {text:'corre', expl:'¡Correcto! "Corre" es la acción, así que es el verbo.'},
+      {text:'gato', expl:'"Gato" es un sustantivo; nombra a un animal.'},
+      {text:'rápido', expl:'"Rápido" describe cómo corre; es un adverbio.'}] },
+    e3C2: { q:'¿Cuál palabra es un adverbio en la oración "Ella cantó hermosamente"?', choices:[
+      {text:'hermosamente', expl:'¡Sí! Describe cómo cantó, así que es un adverbio.'},
+      {text:'ella', expl:'"Ella" es un pronombre.'},
+      {text:'cantó', expl:'"Cantó" es la acción, así que es el verbo.'}] },
+    e3C3: { q:'¿Cuál oración tiene concordancia correcta entre sujeto y verbo?', choices:[
+      {text:'Los perros corren rápido.', expl:'¡Correcto! Sujeto plural con verbo plural.'},
+      {text:'Los perros corre rápido.', expl:'Sujeto plural con verbo singular: no concuerda.'},
+      {text:'El perro corren rápido.', expl:'Sujeto singular con verbo plural: no concuerda.'}] },
+    e3D1: { q:'¿Qué significa "árido" en esta oración: "El desierto árido no tuvo lluvia durante meses"?', choices:[
+      {text:'Muy seco', expl:'¡Correcto! Las pistas "desierto" y "sin lluvia durante meses" indican que significa muy seco.'},
+      {text:'Muy húmedo', expl:'Las pistas del contexto apuntan a lo contrario: seco.'},
+      {text:'Muy frío', expl:'El contexto no habla de temperatura, sino de lluvia.'}] },
+    e3D2: { q:'¿Qué significa "reescribir"?', choices:[
+      {text:'Escribir de nuevo', expl:'¡Sí! El prefijo "re-" significa "de nuevo" o "otra vez".'},
+      {text:'Escribir por primera vez', expl:'El prefijo "re-" significa "de nuevo", no "por primera vez".'},
+      {text:'Dejar de escribir', expl:'El prefijo "re-" no significa "dejar de".'}] },
+    e3D3: { q:'En la oración "Por favor, tapa la hoguera para que arda toda la noche", ¿qué significa "tapa"?', choices:[
+      {text:'Cubrir parcialmente para reducir el fuego', expl:'¡Correcto! El contexto muestra que no significa "cubrir del todo".'},
+      {text:'La tapa de un frasco', expl:'Esa es otra palabra "tapa", pero no tiene sentido aquí.'},
+      {text:'Golpear con algo', expl:'Ese no es el significado que aplica en este contexto.'}] },
+    e3E1: { q:'¿Qué debes hacer para preparar una presentación oral?', choices:[
+      {text:'Organizar tus ideas y practicar en voz alta', expl:'¡Correcto! Practicar y organizar te ayudan a sentirte seguro.'},
+      {text:'Memorizar cada palabra exacta', expl:'Mejor conocer las ideas que repetir palabra por palabra.'},
+      {text:'Leer directamente del papel todo el tiempo', expl:'Eso hace que sea aburrido y que pierdas contacto visual.'}] },
+    e3E2: { q:'¿Cuál NO es una señal de escucha activa?', choices:[
+      {text:'Interrumpir constantemente a quien habla', expl:'¡Correcto! Interrumpir es lo opuesto a la escucha activa.'},
+      {text:'Mirar a los ojos', expl:'Sí es una señal de escucha activa.'},
+      {text:'Asentir con la cabeza para mostrar que entiendes', expl:'Sí es una señal de escucha activa.'}] },
+    e3E3: { q:'¿Qué debes hacer si no entiendes una indicación?', choices:[
+      {text:'Hacer una pregunta con respeto', expl:'¡Sí! Preguntar muestra que te importa seguir bien la indicación.'},
+      {text:'Adivinar qué hacer', expl:'Adivinar suele llevarte a errores; mejor pregunta.'},
+      {text:'Quedarte callado y no hacer nada', expl:'Si no entiendes y no preguntas, no vas a poder hacerlo bien.'}] }
+  };
+  Object.keys(engG3).forEach(function(id){
+    const key = 'english:' + id;
+    if(!L[key]) L[key] = {};
+    L[key].activity = {
+      instructions: engG3[id].q,
+      choices: engG3[id].choices.map(function(c){ return { text: c.text, explanation: c.expl }; })
+    };
+  });
+
+  // ─── History Grade 3 prose ───
+  merge('history:h3A1', {
+    intro: 'El gobierno local es el sistema de funcionarios electos y trabajadores de tu ciudad o pueblo que toman decisiones que afectan a tu comunidad. Estos funcionarios, como los alcaldes y los miembros del ayuntamiento, ayudan a organizar los servicios comunitarios, manejar los presupuestos y crear leyes para la seguridad y el orden. El gobierno local es el nivel de gobierno más cercano a tu casa y afecta tu vida diaria a través de las escuelas, la policía y los parques.',
+    keyPoints: ['El gobierno local toma decisiones para la comunidad','Los alcaldes y los ayuntamientos dirigen ciudades y pueblos','El gobierno local da servicios como la policía y las escuelas'],
+    funFact: '¿Sabías que algunos pueblos han sido gobernados por las mismas familias durante cientos de años?'
+  });
+  merge('history:h3A2', {
+    intro: 'Los ayudantes de la comunidad son profesionales capacitados que cumplen papeles importantes para que nuestros vecindarios funcionen sin problemas y con seguridad. Los bomberos, los policías, los maestros, los doctores y los bibliotecarios usan sus habilidades especiales para ayudarnos. Estos ayudantes trabajan en equipo: cada persona se encarga de necesidades distintas para que todos estemos sanos, seguros y bien informados.',
+    keyPoints: ['Los ayudantes de la comunidad tienen distintos trabajos','Cada ayudante usa un entrenamiento especial','Los ayudantes trabajan juntos'],
+    funFact: '¡Los ayudantes de la comunidad incluso tienen su propio día de agradecimiento cada año!'
+  });
+  merge('history:h3A3', {
+    intro: 'Las áreas urbanas son ciudades muy pobladas, con edificios altos, calles llenas de gente y mucha población viviendo cerca, con muchos servicios alrededor. Las áreas rurales son regiones del campo con poca población, con granjas, espacios abiertos y menos edificios, separados unos de otros. Tanto las comunidades urbanas como las rurales son importantes: las ciudades dan empleos y servicios, mientras que las áreas rurales cultivan alimentos y conservan los espacios naturales de los que todos dependemos.',
+    keyPoints: ['Las áreas urbanas son ciudades con mucha gente','Las áreas rurales son del campo con granjas','Ambas comunidades tienen papeles importantes'],
+    funFact: '¡Algunas personas viven en los suburbios, que están entre las ciudades y las granjas!'
+  });
+  merge('history:h3B1', {
+    intro: 'La bandera estadounidense es un símbolo poderoso que representa la historia, la libertad y la unidad de nuestro país, con 50 estrellas por los estados y 13 franjas por las colonias originales. Cuando recitamos el Juramento a la Bandera, prometemos lealtad y respeto a nuestro país y a sus valores de libertad y justicia. La bandera y el juramento nos ayudan a los estadounidenses a recordar lo que representamos juntos como nación.',
+    keyPoints: ['La bandera tiene estrellas y franjas','El Juramento a la Bandera es una promesa de lealtad','La bandera representa la libertad'],
+    funFact: '¡La bandera ha cambiado de diseño 27 veces conforme se han unido nuevos estados!'
+  });
+  merge('history:h3B2', {
+    intro: 'Los monumentos nacionales son edificios y lugares que honran a personas, eventos o valores importantes de la historia de Estados Unidos y se conservan para que todos puedan visitarlos. La Estatua de la Libertad da la bienvenida a los inmigrantes, el Monumento a Lincoln honra a un presidente muy importante y el Monumento a Washington se alza en la capital del país. Estos monumentos nos enseñan sobre nuestra historia y nos recuerdan los logros y los sueños del pueblo estadounidense.',
+    keyPoints: ['Los monumentos honran a personas y eventos importantes','Los monumentos se conservan para ser visitados','Nos enseñan sobre la historia de Estados Unidos'],
+    funFact: '¡La antorcha de la Estatua de la Libertad se puede ver a casi 40 kilómetros de distancia!'
+  });
+  merge('history:h3B3', {
+    intro: 'Los héroes estadounidenses son personas que mostraron valor, bondad y un carácter fuerte mientras hacían una diferencia positiva en la historia de nuestro país. Héroes como George Washington, Martin Luther King Jr. y Harriet Tubman arriesgaron su seguridad para luchar por la libertad, la igualdad y la justicia. Estudiamos a los héroes estadounidenses para aprender cómo se ven la valentía y la determinación, y para inspirarnos a hacer cosas buenas en nuestras propias comunidades.',
+    keyPoints: ['Los héroes estadounidenses mostraron gran valor','Trabajaron por la libertad y la justicia','Sus acciones cambiaron a nuestro país'],
+    funFact: '¡Algunos héroes estadounidenses trabajaron en secreto para ayudar a otras personas a escapar de la esclavitud!'
+  });
+  merge('history:h3C1', {
+    intro: 'Los mapas son dibujos planos que muestran dónde están los lugares en la Tierra, mientras que los globos terráqueos son modelos redondos que muestran la forma real y la geografía de nuestro planeta. Los mapas usan símbolos, colores y leyendas para ayudarnos a encontrar ciudades, montañas, ríos y carreteras. Los globos terráqueos y los mapas ayudan a exploradores, viajeros y estudiantes a entender dónde están los lugares y a planear sus viajes.',
+    keyPoints: ['Los mapas muestran lugares con símbolos','Los globos terráqueos muestran la forma redonda de la Tierra','Los mapas y los globos nos ayudan a orientarnos'],
+    funFact: '¡El mapa más antiguo que se conoce fue tallado en tablillas de barro hace más de 2,500 años!'
+  });
+  merge('history:h3C2', {
+    intro: 'Los continentes son las siete masas de tierra más grandes de la Tierra: América del Norte, América del Sur, Europa, África, Asia, Oceanía y la Antártida, cada uno con su geografía y su gente. Los cinco océanos —Atlántico, Pacífico, Índico, Ártico y Antártico— rodean los continentes y cubren la mayor parte de la superficie de la Tierra. Aprender sobre los continentes y los océanos nos ayuda a entender el mundo físico y cómo las distintas regiones han desarrollado culturas únicas.',
+    keyPoints: ['Hay siete continentes','Cinco océanos rodean los continentes','Cada continente tiene características únicas'],
+    funFact: '¡Asia es el continente más grande y en él vive el 60% de la gente del mundo!'
+  });
+  merge('history:h3C3', {
+    intro: 'Los accidentes geográficos son las formas naturales de la superficie de la Tierra, incluyendo montañas (picos altos), valles (zonas bajas entre montañas), llanuras (tierra plana) y mesetas (zonas altas y planas). Estos accidentes se forman a lo largo de millones de años por terremotos, erosión y otros procesos naturales que dan forma a nuestro planeta. Entender los accidentes geográficos nos ayuda a ver cómo la geografía influye en dónde vive la gente, qué trabajos hace y cómo viaja.',
+    keyPoints: ['Los accidentes geográficos son formas naturales del terreno','Las montañas, los valles y las llanuras son ejemplos','Los accidentes geográficos influyen en cómo vive la gente'],
+    funFact: '¡Algunas montañas son tan altas que la nieve se queda en su cima todo el año!'
+  });
+  merge('history:h3D1', {
+    intro: 'Los bienes son cosas físicas que podemos comprar, como juguetes, comida y ropa, que la gente fabrica y vende. Los servicios son acciones útiles que ofrecen las personas, como cortes de cabello, enseñar, reparaciones y entretenimiento, por los que pagamos. Tanto los bienes como los servicios son partes importantes de la economía porque la gente los hace, los vende y los compra todos los días para cubrir sus necesidades y sus deseos.',
+    keyPoints: ['Los bienes son cosas que podemos comprar','Los servicios son acciones que da la gente','Necesitamos tanto bienes como servicios'],
+    funFact: '¡Algunas personas tienen trabajos fabricando bienes, mientras otras tienen trabajos dando servicios!'
+  });
+  merge('history:h3D2', {
+    intro: 'Las necesidades son las cosas que debemos tener para sobrevivir y estar sanos, como comida, agua, refugio y ropa. Los deseos son cosas que nos gustaría tener pero que no necesitamos para sobrevivir, como juguetes, videojuegos, dulces y ropa cara. Entender la diferencia entre necesidades y deseos nos ayuda a tomar decisiones inteligentes con el dinero y a entender por qué algunas cosas son más importantes que otras.',
+    keyPoints: ['Las necesidades son cosas que requerimos para sobrevivir','Los deseos son cosas que nos gustan pero no necesitamos','Las buenas decisiones ponen primero las necesidades'],
+    funFact: '¡La gente de distintas partes del mundo tiene distintos deseos según su cultura!'
+  });
+  merge('history:h3D3', {
+    intro: 'Ahorrar dinero quiere decir que guardas una parte del dinero que recibes en vez de gastarlo todo de una vez, para poder usarlo después en algo importante o inesperado. Al ahorrar, puedes comprar cosas que de verdad quieres, enfrentar emergencias y aprender a manejar el dinero con responsabilidad. Ahorrar te enseña paciencia y te ayuda a entender que mientras más ahorres hoy, más opciones vas a tener en el futuro.',
+    keyPoints: ['Ahorrar es no gastar todo el dinero','El dinero ahorrado ayuda a comprar cosas importantes','Ahorrar enseña responsabilidad'],
+    funFact: '¡Algunas personas guardan su dinero en frascos especiales o alcancías!'
+  });
+  merge('history:h3E1', {
+    intro: 'Las reglas son guías que seguimos para mantenernos a nosotros y a los demás a salvo, y para que nuestras comunidades funcionen con orden y justicia. Hay reglas en la casa, en la escuela y en el pueblo, y cuando las reglas se hacen oficiales en el gobierno, se llaman leyes. Seguir las reglas muestra respeto por los demás y ayuda a crear orden para que todos podamos estar sanos, seguros y contentos juntos.',
+    keyPoints: ['Las reglas nos mantienen seguros','Las leyes son reglas oficiales para la comunidad','Todos debemos seguir las reglas'],
+    funFact: '¡Romper reglas importantes puede traer consecuencias, como tiempo fuera o perder privilegios!'
+  });
+  merge('history:h3E2', {
+    intro: 'Un buen ciudadano es alguien que respeta a los demás, sigue las reglas, ayuda a su comunidad, dice la verdad y trata a la gente con amabilidad y justicia. Los buenos ciudadanos participan en actividades escolares y comunitarias, cuidan los espacios compartidos y alzan la voz contra la injusticia. Cuando somos buenos ciudadanos, hacemos de nuestras familias, escuelas y comunidades lugares mejores para todos.',
+    keyPoints: ['Los buenos ciudadanos respetan y ayudan a los demás','Siguen las reglas, y las reglas son justas','La buena ciudadanía mejora a las comunidades'],
+    funFact: '¡Los buenos ciudadanos se ofrecen como voluntarios para ayudar a sus vecinos y a su comunidad!'
+  });
+  merge('history:h3E3', {
+    intro: 'Votar es el proceso en el que los ciudadanos toman decisiones sobre asuntos importantes marcando su preferencia, normalmente por líderes o temas clave. Cuando la gente vota, la voz de cada quien cuenta por igual, lo que hace que votar sea una forma justa de tomar decisiones en comunidad. Aunque los niños de 3er grado todavía no pueden votar, aprender sobre el voto nos ayuda a entender cómo funciona la democracia y nos prepara para ser votantes responsables cuando seamos mayores.',
+    keyPoints: ['Votar es como las comunidades toman decisiones','Cada voto cuenta por igual','Votar es justo y democrático'],
+    funFact: '¡En Estados Unidos, las mujeres no pudieron votar sino hasta 1920!'
+  });
+
+  // ─── Science Grade 3 prose ───
+  merge('science:s3A1', {
+    intro: 'Un ecosistema es una comunidad de seres vivos que interactúan con su ambiente físico, que incluye plantas, animales, suelo, agua y luz del sol. Cada organismo cumple un papel en su ecosistema, desde insectos diminutos que descomponen materia muerta hasta depredadores que controlan las poblaciones de animales. Los ecosistemas pueden ser tan pequeños como un estanque o tan grandes como una selva tropical, y todos están conectados por redes alimenticias y el flujo de energía. Entender los ecosistemas nos ayuda a ver cómo la naturaleza se equilibra y por qué proteger los distintos hábitats es importante para toda la vida en la Tierra.',
+    keyPoints: ['Los organismos dependen de su ambiente','Las cadenas alimenticias muestran el flujo de energía','Los hábitats dan alimento y refugio'],
+    funFact: '¡Las selvas tropicales cubren solo el 6% de la Tierra pero contienen el 50% de todas las especies!'
+  });
+  merge('science:s3A2', {
+    intro: 'Los rasgos heredados son características que los hijos reciben de sus padres a través de los genes, como el color de los ojos, la estatura y el tipo de cabello. Estos rasgos vienen tanto de mamá como de papá y se combinan de distintas formas para hacer a cada persona única. Los animales también heredan rasgos de sus padres: un cachorro puede heredar las orejas caídas de su papá perro, o un gatito puede heredar las rayas de su mamá. Algunos rasgos que vemos son heredados, mientras otros se aprenden o se forman por el ambiente y las experiencias.',
+    keyPoints: ['Los hijos heredan rasgos de sus padres','Los genes llevan la información heredada','Ambos padres aportan rasgos'],
+    funFact: '¡Tus genes son instrucciones escritas en un lenguaje llamado ADN!'
+  });
+  merge('science:s3A3', {
+    intro: 'Los fósiles son restos o huellas preservadas de organismos que vivieron hace millones de años, y se encuentran en las rocas y en las capas de sedimento. Nos muestran cómo se veían los animales y las plantas antiguas, cómo evolucionaron con el tiempo y cómo era la vida en la Tierra antigua. La extinción ocurre cuando todos los miembros de una especie mueren y ese organismo ya no existe en ninguna parte de la Tierra; eso les pasó a los dinosaurios, a los tigres dientes de sable y a muchas otras criaturas. Al estudiar los fósiles, los científicos entienden la historia de la Tierra y cómo la vida ha cambiado muchísimo a lo largo de miles de millones de años.',
+    keyPoints: ['Los fósiles preservan la vida antigua','La extinción es cuando una especie desaparece','Las capas cuentan la historia de la Tierra'],
+    funFact: '¡Algunos fósiles solo son huellas o madrigueras que dejaron los animales!'
+  });
+  merge('science:s3B1', {
+    intro: 'Las rocas están hechas de minerales, que son materiales naturales y sólidos con composiciones químicas y estructuras de cristal específicas. Los tres tipos principales de rocas son las rocas ígneas (formadas por lava enfriada), las rocas sedimentarias (hechas de capas de sedimento comprimido) y las rocas metamórficas (cambiadas por calor y presión muy profundas). Los minerales como el cuarzo, el feldespato y la mica son los bloques de construcción específicos que se combinan para formar distintos tipos de rocas. Aprender sobre rocas y minerales nos ayuda a entender cómo se formó la Tierra y cómo sigue cambiando.',
+    keyPoints: ['Las rocas están hechas de minerales','Existen tres tipos de rocas','Los minerales forman cristales'],
+    funFact: '¡Los diamantes son minerales hechos de carbono comprimido en las profundidades de la Tierra!'
+  });
+  merge('science:s3B2', {
+    intro: 'El suelo es una mezcla de partículas de roca desgastadas, materia orgánica, agua y aire que permite que las plantas crezcan. La capa superior, llamada capa vegetal, es oscura y rica en nutrientes y organismos descompuestos que las plantas necesitan. Debajo está el subsuelo, con menos materia orgánica y más partículas minerales, y la capa más profunda es, sobre todo, roca rota y sedimento. Cada capa del suelo tarda cientos de años en formarse, así que el suelo es un recurso natural valioso que debemos proteger.',
+    keyPoints: ['El suelo tiene varias capas','La capa vegetal es la más rica en nutrientes','El suelo tarda tiempo en formarse'],
+    funFact: '¡Un puñado de suelo saludable contiene más organismos que personas hay en la Tierra!'
+  });
+  merge('science:s3B3', {
+    intro: 'El estado del tiempo es la condición de la atmósfera de un día a otro, incluyendo la temperatura, la lluvia, el viento y la humedad en un lugar específico. Los patrones del tiempo se repiten por estaciones con cambios predecibles, como la nieve del invierno, la lluvia de la primavera, el calor del verano y el frescor del otoño. Los meteorólogos estudian el tiempo usando herramientas como termómetros, barómetros y radares para hacer pronósticos que nos ayudan a prepararnos y a estar seguros. Entender los patrones del tiempo ayuda a los agricultores a planear sus cultivos, a los viajeros a prepararse para las condiciones, y a todos a entender cómo el clima afecta nuestro mundo.',
+    keyPoints: ['El tiempo cambia día con día','Las estaciones tienen patrones','Hay herramientas que miden el tiempo'],
+    funFact: '¡Los tornados pueden girar a más de 320 kilómetros por hora!'
+  });
+  merge('science:s3C1', {
+    intro: 'La energía es la capacidad de hacer un trabajo y viene en muchas formas, incluyendo calor, luz, sonido, movimiento y electricidad. La energía térmica hace que las cosas se calienten y puede pasar de objetos calientes a objetos fríos por conducción, convección y radiación. La energía lumínica viaja en ondas y nos deja ver, mientras que la energía del sonido viaja por vibraciones en el aire y el agua. Cada proceso en el universo necesita energía, desde la fotosíntesis de las plantas hasta el movimiento de los animales y el calentamiento de nuestras casas.',
+    keyPoints: ['La energía no se crea ni se destruye','La energía tiene muchas formas','La energía hace funcionar todo'],
+    funFact: '¡El sol da casi toda la energía de la Tierra a través de la fotosíntesis!'
+  });
+  merge('science:s3C2', {
+    intro: 'El magnetismo es una fuerza invisible producida por electrones en movimiento que atrae o repele ciertos materiales como el hierro, el níquel y el cobalto. Cada imán tiene un polo norte y un polo sur, y los polos opuestos se atraen mientras que los polos iguales se repelen. La Tierra misma es un imán gigante con un campo magnético que nos protege de la radiación solar y ayuda a las brújulas a apuntar al norte. Los imanes son muy útiles en motores, generadores, máquinas de resonancia magnética y muchas otras tecnologías que usamos todos los días.',
+    keyPoints: ['Los imanes tienen dos polos','Los polos opuestos se atraen','La Tierra es magnética'],
+    funFact: '¡Algunos animales, como las aves, usan el campo magnético de la Tierra para orientarse durante la migración!'
+  });
+  merge('science:s3C3', {
+    intro: 'Las máquinas simples son aparatos que cambian la dirección o la magnitud de la fuerza para facilitar el trabajo; incluyen palancas, poleas, rampas, tornillos, cuñas y ruedas. Una palanca como un sube y baja usa un punto de apoyo para levantar objetos pesados con menos esfuerzo, mientras que una rampa reduce la fuerza necesaria para subir algo. Las poleas usan cuerdas y ruedas para levantar cargas pesadas, y los tornillos convierten el movimiento giratorio en movimiento hacia adelante. Todas las máquinas complejas son combinaciones de estas seis máquinas simples trabajando juntas.',
+    keyPoints: ['Las máquinas reducen el esfuerzo necesario','Existen seis tipos de máquinas simples','Las máquinas no crean energía'],
+    funFact: '¡Una rampa para silla de ruedas es una máquina simple llamada plano inclinado que hace más fácil la accesibilidad!'
+  });
+  merge('science:s3D1', {
+    intro: 'Una hipótesis es una suposición educada o una predicción sobre lo que va a pasar en un experimento, basada en conocimientos previos y en la observación. Las buenas hipótesis se pueden probar: podemos reunir datos para demostrar si son correctas o no a través de la experimentación. La hipótesis guía todo el experimento al predecir una relación entre variables, y los científicos diseñan pruebas específicas para ver si su hipótesis se apoya. Aun si una hipótesis resulta ser incorrecta, el experimento aporta información valiosa sobre cómo funciona la naturaleza.',
+    keyPoints: ['La hipótesis es una suposición educada','Las hipótesis deben poder probarse','Las respuestas equivocadas también nos enseñan'],
+    funFact: '¡La hipótesis de la famosa científica Marie Curie sobre la radiactividad cambió la medicina y la física!'
+  });
+  merge('science:s3D2', {
+    intro: 'Una variable es cualquier factor de un experimento que puede cambiar o ser cambiado, y los científicos controlan las variables con cuidado para determinar relaciones de causa y efecto. La variable independiente es el factor que la persona científica cambia a propósito para probar algo, mientras que la variable dependiente es lo que se mide como resultado. Las variables controladas se mantienen iguales durante todo el experimento para que no alteren los resultados. Al aislar las variables, los científicos pueden determinar con confianza cuál factor realmente causa el efecto observado.',
+    keyPoints: ['Las variables son factores que cambian','La variable independiente es la que cambia el científico','Las variables controladas se mantienen iguales'],
+    funFact: '¡En las pruebas de medicamentos, los científicos controlan todo menos la medicina que están probando!'
+  });
+  merge('science:s3D3', {
+    intro: 'Las gráficas son representaciones visuales de los datos que hacen más fácil ver y entender los patrones y las tendencias que mirar los números en una tabla. Las gráficas de barras comparan cantidades entre categorías, las gráficas de líneas muestran cómo algo cambia con el tiempo y las gráficas circulares muestran las partes de un todo. Crear gráficas con datos de un experimento ayuda a los científicos a identificar patrones, detectar errores y comunicar sus hallazgos con claridad. Las mejores gráficas tienen los ejes etiquetados, un título descriptivo y una leyenda que explique los símbolos que se usan.',
+    keyPoints: ['Las gráficas muestran los datos visualmente','Distintas gráficas muestran distintos patrones','Las etiquetas hacen claras a las gráficas'],
+    funFact: '¡Los científicos usan gráficas para seguir los datos del cambio climático que muestran que la Tierra se está calentando!'
+  });
+  merge('science:s3E1', {
+    intro: 'El clima severo incluye condiciones peligrosas como tormentas eléctricas, tornados, huracanes, ventiscas y granizo, que se forman cuando las condiciones atmosféricas crean inestabilidad. Los tornados se forman por columnas de aire que giran dentro de tormentas severas y son el clima más violento de la Tierra, mientras que los huracanes se forman sobre agua cálida del océano y traen vientos y lluvias destructivas. El clima severo puede causar daños a propiedades, cortes de luz y poner en peligro vidas, por eso los sistemas de alerta temprana y los refugios seguros son fundamentales. Entender qué causa el clima severo ayuda a los meteorólogos a predecirlo y a las comunidades a prepararse y estar a salvo.',
+    keyPoints: ['El clima severo es peligroso','Distintos tipos tienen distintas causas','Predecirlo ayuda a las comunidades'],
+    funFact: '¡El tornado más mortal en la historia de Estados Unidos mató a más de 600 personas en 1925!'
+  });
+  merge('science:s3E2', {
+    intro: 'El tiempo es la condición atmosférica de corto plazo en un lugar específico, y cambia día a día u hora a hora con la temperatura, la lluvia y el viento. El clima es el patrón promedio del tiempo a largo plazo en una región durante muchos años o décadas, como los climas tropicales que son calurosos y húmedos todo el año. Tu tiempo local cambia constantemente y es difícil de predecir más allá de una semana, pero los patrones del clima son relativamente estables y predecibles. Entender la diferencia nos ayuda a ver que un solo invierno frío no desmiente el cambio climático global, que se mide a lo largo de décadas.',
+    keyPoints: ['El tiempo cambia día con día','El clima es el promedio a largo plazo','Funcionan en escalas de tiempo distintas'],
+    funFact: '¡El clima de la Antártida es helado, pero el tiempo allí puede variar 20 grados en un solo día!'
+  });
+  merge('science:s3E3', {
+    intro: 'El diseño de ingeniería es un proceso en el que los ingenieros identifican problemas, proponen soluciones, crean prototipos, los prueban y los ajustan para resolver retos del mundo real. Un buen diseño considera la función (¿funciona?), la seguridad (¿puede dañar a las personas?), el costo (¿es accesible?) y el impacto ambiental (¿daña al planeta?). Los ingenieros prueban los prototipos varias veces, aprenden de los fallos para mejorar sus diseños, y colaboran con otros expertos para resolver problemas complejos. Cada herramienta, puente, edificio y tecnología a tu alrededor fue creada con un diseño de ingeniería cuidadoso.',
+    keyPoints: ['El diseño resuelve problemas reales','Probar mejora los diseños','Los ingenieros aprenden de los fallos'],
+    funFact: '¡Los ingenieros diseñaron la silla de ruedas para que las personas con movilidad reducida puedan participar plenamente en la vida!'
+  });
+
+  // ─── Social Studies Grade 3 prose ───
+  merge('social-studies:ss3A1', {
+    intro: 'Una comunidad es un grupo de personas que viven en la misma zona y comparten una conexión entre sí. Las comunidades pueden ser tan pequeñas como una cuadra de un vecindario o tan grandes como un pueblo entero. Cada miembro de una comunidad depende de otros de distintas maneras: algunos enseñan a los niños, otros nos mantienen a salvo, otros proveen comida y bienes. Las comunidades tienen lugares compartidos como parques, escuelas y bibliotecas donde la gente se reúne. La parte más importante de una comunidad es que sus integrantes trabajan juntos y se preocupan por el bienestar de los demás.',
+    keyPoints: ['Las comunidades son grupos de personas que viven en la misma zona','Los miembros de las comunidades dependen unos de otros','Las comunidades tienen espacios compartidos donde la gente se reúne'],
+    funFact: '¡Las comunidades más antiguas de Estados Unidos existen desde hace miles de años, cuando los pueblos indígenas se asentaron en estas tierras!'
+  });
+  merge('social-studies:ss3A2', {
+    intro: 'Las comunidades vienen en distintos tipos según cuánta gente vive ahí y qué tipo de terreno las rodea. Las comunidades urbanas son ciudades grandes con mucha gente, edificios altos y calles concurridas, todo junto. Las comunidades suburbanas son pueblos más pequeños en las afueras de las ciudades, con más espacio entre casas y menos gente. Las comunidades rurales están en el campo, con granjas, terreno abierto y poca población, muy separadas entre sí. Cada tipo tiene ventajas distintas: las ciudades ofrecen muchos empleos y servicios, los suburbios ofrecen una vida más tranquila con sentido de comunidad, y las áreas rurales ofrecen espacios abiertos y naturaleza.',
+    keyPoints: ['Las áreas urbanas tienen mucha población y muchos edificios','Las comunidades suburbanas son más tranquilas y con más espacio','Las áreas rurales tienen menos gente y más campo y granjas'],
+    funFact: '¡Las primeras ciudades estadounidenses se construyeron a lo largo de los ríos porque el agua era esencial para el transporte, la comida y la energía!'
+  });
+  merge('social-studies:ss3A3', {
+    intro: 'Cada comunidad tiene personas especiales cuyo trabajo es ayudar a los demás y mantener a todos sanos y seguros. Los bomberos entran corriendo a los edificios en llamas para salvar vidas y apagar incendios peligrosos. Los policías patrullan las calles para prevenir delitos y proteger a la gente. Los doctores y enfermeras trabajan en hospitales y clínicas para curar a los enfermos y heridos. Los maestros educan a los niños y los ayudan a aprender. Los trabajadores de limpieza mantienen los vecindarios limpios retirando la basura. Todos estos ayudantes son esenciales para que una comunidad funcione bien y para que la gente pueda vivir mejor.',
+    keyPoints: ['Los bomberos previenen incendios y salvan vidas','Los policías protegen a la gente y cuidan la seguridad','Muchos ayudantes distintos trabajan juntos para servir a la comunidad'],
+    funFact: '¡El primer cuerpo de bomberos organizado en Estados Unidos se fundó en Filadelfia en 1871!'
+  });
+  merge('social-studies:ss3B1', {
+    intro: 'Los mapas son dibujos que nos muestran cómo se ve una zona desde arriba, como si vieras un lugar desde un avión. Los mapas usan símbolos especiales para representar cosas reales: una iglesia se puede mostrar con una crucecita, una escuela con un edificio y un parque con un espacio verde. La clave o leyenda del mapa explica qué significa cada símbolo para que podamos leer bien el mapa. Los mapas nos muestran dónde están los lugares y nos ayudan a orientarnos. Aprender a leer mapas nos permite explorar lugares nuevos, entender la geografía y llegar a los destinos que queremos visitar.',
+    keyPoints: ['Los mapas muestran zonas desde arriba con símbolos y colores','Las leyendas explican qué representa cada símbolo','Los mapas nos ayudan a ubicar lugares y a entender la geografía'],
+    funFact: '¡El mapa más antiguo que se conoce fue hecho en una tablilla de barro en la antigua Babilonia hace más de 2,500 años!'
+  });
+  merge('social-studies:ss3B2', {
+    intro: 'Las direcciones nos ayudan a saber dónde están las cosas y cómo llegar de un lugar a otro. Las cuatro direcciones principales son Norte (arriba), Sur (abajo), Este (a la derecha) y Oeste (a la izquierda). En los mapas, el Norte siempre apunta hacia la parte de arriba, y casi siempre hay una rosa de los vientos que muestra estas direcciones. Muchas ciudades están construidas en forma de cuadrícula siguiendo los puntos cardinales, lo que hace más fácil moverse por las calles. Entender las direcciones ayuda a describir dónde están los lugares: un parque puede estar al norte de una escuela, o un río puede correr de norte a sur. Aprender a usar los puntos cardinales es una habilidad importante para leer mapas y explorar el mundo.',
+    keyPoints: ['Norte, Sur, Este y Oeste son los cuatro puntos cardinales','La rosa de los vientos muestra las direcciones en el mapa','Los puntos cardinales ayudan a ubicar lugares y a orientarnos'],
+    funFact: '¡La mayoría de las ciudades de Estados Unidos siguen un patrón de cuadrícula con calles de norte a sur y de este a oeste, lo que facilita la navegación!'
+  });
+  merge('social-studies:ss3B3', {
+    intro: 'La superficie de la Tierra tiene distintos tipos de tierra y agua que dan forma a cómo vive la gente y a dónde se desarrollan las comunidades. Las montañas son accidentes geográficos muy altos, difíciles de cruzar, pero que ofrecen recursos valiosos como minerales y bosques. Los valles son zonas bajas entre montañas donde muchas veces corren los ríos y donde la gente suele construir comunidades. Las llanuras son extensiones planas de tierra, fáciles de cultivar y de construir. Los ríos corren cuesta abajo llevando agua dulce a las comunidades y ayudando a transportar bienes. Los océanos y lagos dan comida, rutas de transporte y recreación. Entender estos accidentes geográficos nos ayuda a ver por qué las comunidades se construyen en ciertos lugares.',
+    keyPoints: ['Montañas, valles y llanuras son accidentes geográficos distintos','Los ríos dan agua y transporte a las comunidades','Los accidentes geográficos influyen en dónde decide vivir la gente'],
+    funFact: '¡Las Montañas Rocosas de América del Norte miden más de 4,800 kilómetros de largo y afectan los patrones del clima en todo el continente!'
+  });
+  merge('social-studies:ss3C1', {
+    intro: 'Las reglas y las leyes ayudan a que las comunidades funcionen bien y a mantener a la gente segura. Hay reglas en las familias, en las escuelas y en las comunidades porque sin ellas habría caos y la gente podría salir lastimada. En la escuela, reglas como levantar la mano o caminar en los pasillos mantienen las clases organizadas y evitan accidentes. En las comunidades, las leyes previenen los delitos, protegen la propiedad y aseguran un trato justo para todos. La gente acepta seguir las reglas porque entiende que las reglas ayudan a todos, incluyéndose a sí mismos. Cuando alguien rompe una regla, hay consecuencias para ayudarle a aprender y para proteger a la comunidad.',
+    keyPoints: ['Las reglas y las leyes mantienen seguras y ordenadas a las comunidades','Las reglas ayudan a la gente a llevarse bien y evitan conflictos','Romper reglas tiene consecuencias para proteger a las comunidades'],
+    funFact: '¡La Constitución de Estados Unidos, escrita en 1787, es la ley más alta del país y se ha seguido por más de 230 años!'
+  });
+  merge('social-studies:ss3C2', {
+    intro: 'Cada ciudad y pueblo tiene un gobierno formado por líderes y funcionarios que toman decisiones para la comunidad. Los alcaldes son líderes elegidos que dirigen las ciudades y toman decisiones importantes sobre servicios y desarrollo. Los ayuntamientos son grupos de personas electas que ayudan al alcalde y aprueban leyes locales. El gobierno local ofrece servicios como escuelas, policía, bomberos y reparación de calles. Estos líderes son elegidos por medio del voto: los ciudadanos adultos pueden votar por las personas que creen que tomarán las mejores decisiones. El gobierno local afecta la vida diaria porque controla cosas como el mantenimiento de los parques, el presupuesto de las escuelas y la seguridad de la comunidad.',
+    keyPoints: ['Los alcaldes y los ayuntamientos son líderes locales elegidos','El gobierno local da servicios esenciales a la comunidad','Los ciudadanos votan para elegir a sus líderes locales'],
+    funFact: '¡El primer alcalde electo en Estados Unidos fue Anthony Woodhouse, que dirigió Boston en 1822!'
+  });
+  merge('social-studies:ss3C3', {
+    intro: 'Votar es como los ciudadanos participan en el gobierno y ayudan a elegir a sus líderes. Cuando la gente vota, está eligiendo a quienes cree que tomarán las mejores decisiones para su comunidad. Los ciudadanos de 18 años o más pueden votar en elecciones para elegir alcaldes, miembros del ayuntamiento y líderes a nivel estatal y nacional. Votar es uno de los derechos más importantes en una democracia porque le da a la gente común una voz en el gobierno. Participar en tu comunidad también puede significar ir a reuniones del pueblo, ser voluntario o hablar sobre temas que importan. La democracia depende de que la gente se involucre y se preocupe por el futuro de su comunidad.',
+    keyPoints: ['El voto permite a los ciudadanos elegir a sus líderes','Solo los adultos de 18 años o más pueden votar','Participar en las decisiones de la comunidad es un derecho democrático'],
+    funFact: '¡En Estados Unidos, las mujeres no pudieron votar sino hasta 1920, cuando se ratificó la Enmienda 19 después de casi 100 años de lucha!'
+  });
+  merge('social-studies:ss3D1', {
+    intro: 'La economía se trata de hacer, comprar y vender las cosas que la gente necesita y quiere. Los bienes son cosas físicas que podemos tocar y comprar, como comida, ropa, juguetes y muebles. Los servicios son acciones que alguien hace para ayudarnos, como cortes de cabello, dar clases o arreglar un carro. Todos los días, la gente intercambia dinero por bienes y servicios. Cuando compras una manzana en la tienda, estás comprando un bien; cuando vas al doctor, estás pagando por un servicio. Tanto los bienes como los servicios son importantes para nuestra economía porque ayudan a la gente a obtener lo que necesita para vivir cómodamente.',
+    keyPoints: ['Los bienes son cosas físicas que la gente compra y usa','Los servicios son acciones que las personas hacen para ayudar a otros','La gente intercambia dinero por bienes y servicios'],
+    funFact: '¡El estadounidense promedio gasta alrededor del 40% de su dinero en bienes y el 60% en servicios como luz, salud y entretenimiento!'
+  });
+  merge('social-studies:ss3D2', {
+    intro: 'Los productores son personas y empresas que hacen bienes o dan servicios. Un agricultor produce verduras, una panadería produce pan y un plomero da servicios de plomería. Los consumidores son personas que compran y usan los bienes y servicios. Cada quien es productor (cuando trabaja y ofrece algo) y consumidor (cuando compra lo que necesita). Esto crea una economía en la que la gente trabaja para ganar dinero y luego gasta ese dinero en cosas que necesita y quiere. Cuando los productores crean lo que la gente quiere y los consumidores lo compran, ambos ganan: los productores reciben dinero y los consumidores obtienen lo que necesitan.',
+    keyPoints: ['Los productores hacen bienes o dan servicios','Los consumidores compran y usan bienes y servicios','Todos somos a la vez productores y consumidores'],
+    funFact: '¡En la época medieval, mucha gente era agricultora y producía su propia comida, así que eran a la vez productores y consumidores de la agricultura!'
+  });
+  merge('social-studies:ss3D3', {
+    intro: 'Ahorrar dinero es no gastar todo tu dinero de inmediato, sino guardar una parte para el futuro. Cuando recibes dinero como mesada o regalo, tienes una elección: gastarlo ya en algo que quieres, o ahorrarlo para algo más grande que quieras después. Ahorrar dinero te ayuda a alcanzar metas como comprar un videojuego, una bicicleta o ahorrar para la universidad. Los bancos son lugares donde la gente y las empresas guardan su dinero de forma segura y ganan intereses, lo que significa que el banco les paga un extra por dejar que usen sus ahorros. Aprender a ahorrar cuando eres joven te ayuda a formar buenos hábitos para manejar el dinero toda tu vida.',
+    keyPoints: ['Ahorrar es guardar dinero en lugar de gastarlo de inmediato','La gente ahorra para alcanzar metas y prepararse para el futuro','Los bancos son lugares seguros para guardar y hacer crecer tu dinero'],
+    funFact: '¡El estadounidense promedio ahorra entre el 3% y el 5% de sus ingresos, aunque los expertos recomiendan ahorrar entre el 10% y el 20% para emergencias y metas futuras!'
+  });
+  merge('social-studies:ss3E1', {
+    intro: 'Las tradiciones son actividades, costumbres o celebraciones que las familias repiten año tras año y transmiten entre generaciones. Muchas familias tienen tradiciones de fin de año, como decorar un árbol en Navidad o preparar comidas especiales en ciertas fechas. Algunas familias tienen tradiciones alrededor de los cumpleaños, los aniversarios o actividades semanales como una noche de juegos. Las tradiciones crean recuerdos especiales, acercan a los familiares y enseñan a los niños sobre los valores y la historia de su familia. Cada familia tiene tradiciones distintas según su cultura, su religión y sus creencias. Estas tradiciones hacen que las familias sean únicas y les dan a sus miembros algo que esperar y compartir.',
+    keyPoints: ['Las tradiciones son actividades que las familias comparten una y otra vez','Las tradiciones crean recuerdos y fortalecen los lazos familiares','Cada familia tiene tradiciones distintas según su cultura'],
+    funFact: '¡La tradición de dar regalos en Navidad viene de la historia de los Tres Reyes Magos, que trajeron regalos al niño Jesús según la tradición cristiana!'
+  });
+  merge('social-studies:ss3E2', {
+    intro: 'La gente de todo el mundo celebra fiestas y festivales que son especiales para sus culturas y religiones. En muchos países, la Navidad celebra el nacimiento de Jesús y se marca con decoraciones, regalos y reuniones familiares. Hanukkah, celebrado por la comunidad judía, es una fiesta de ocho días que recuerda una victoria histórica y la libertad religiosa. Diwali, celebrado en India y por personas de fe hindú, sij, jainista y budista, es el Festival de las Luces y celebra la victoria del bien sobre el mal. El Año Nuevo Chino, celebrado en toda Asia y por comunidades chinas en todo el mundo, marca el inicio del calendario lunar con desfiles, reuniones familiares y comidas especiales. Aprender sobre fiestas de distintas culturas nos ayuda a entender y respetar a personas diferentes a nosotros.',
+    keyPoints: ['Distintas culturas celebran distintas fiestas y festivales','Las fiestas suelen tener un significado religioso o histórico','Aprender sobre las fiestas del mundo nos ayuda a respetar otras culturas'],
+    funFact: '¡Hanukkah se celebra durante ocho días porque una pequeña cantidad de aceite mantuvo una lámpara del templo encendida durante ocho días durante la revuelta de los Macabeos en el antiguo Israel!'
+  });
+  merge('social-studies:ss3E3', {
+    intro: 'La comida que come la gente dice mucho sobre su cultura, su geografía y su historia. Distintas regiones cultivan distintos cultivos según su clima, así que la gente desarrolla recetas con lo que tiene disponible. En Italia, la pasta se volvió central porque allá crece bien el trigo. En Japón, el arroz es básico porque crece en su clima húmedo. En México, el maíz, los frijoles y los chiles son ingredientes tradicionales que vienen de las culturas indígenas. Cuando la gente de distintos países se muda a lugares nuevos, lleva consigo sus recetas tradicionales, lo que le ayuda a mantener su identidad cultural. La comida es una forma maravillosa de experimentar y apreciar otras culturas: probar comidas de todo el mundo nos ayuda a conocer a personas distintas.',
+    keyPoints: ['Distintas culturas tienen comidas tradicionales basadas en su geografía','La comida refleja la historia, el clima y los ingredientes de una cultura','Compartir comida es una forma de conocer otras culturas'],
+    funFact: '¡Las comidas que llamamos "italianas" como la pasta con salsa de tomate no son tradicionales: los tomates vienen de América y no llegaron a Italia sino hasta los años 1600!'
+  });
+
+  // ─── App Building Grade 3 prose ───
+  merge('app-building:ab3a1', {
+    intro: 'Una app es un programa en tu teléfono o tableta que te ayuda a hacer algo. Cuando juegas un juego, ves un video o le hablas a un amigo, ¡estás usando una app! Las apps las construyen personas comunes que tuvieron una gran idea.',
+    keyPoints: ['Las apps son herramientas que viven en teléfonos y tabletas','Alguien tuvo que CONSTRUIR cada app que usas','Los juegos, los videos y los mensajes son apps','¡TÚ también puedes aprender a construir apps!'],
+    funFact: '🤯 ¡Hay más de 1.8 MILLONES de apps en el App Store de Apple ahora mismo! Y cada una empezó como una IDEA en la cabeza de alguien.'
+  });
+  merge('app-building:ab3a2', {
+    intro: 'Cada app que amas empezó porque alguien tenía un PROBLEMA. ¿No encuentras un aventón? ¡Uber! ¿Quieres compartir fotos? ¡Instagram! ¿No te acuerdas de la tarea? ¡Una app para llevar la tarea! Mira a tu alrededor: los problemas están EN TODAS PARTES, y cada uno puede ser TU idea de app.',
+    keyPoints: ['Las mejores apps resuelven problemas reales','Mira lo que te molesta: eso es una idea de app','Los problemas en la escuela, en la casa o con los amigos son buenos puntos de partida','Problemas simples = apps simples = excelentes primeros proyectos'],
+    funFact: '💡 ¡Los fundadores de Airbnb no tenían dinero para la renta! Pusieron colchones inflables en su piso y los rentaron. Ese "problema" se convirtió en una empresa de 75 MIL MILLONES de dólares.'
+  });
+  merge('app-building:ab3a3', {
+    intro: 'Cierra los ojos y piensa: ¿qué es algo que te molesta? Tal vez pierdes tus juguetes, o se te olvida darle de comer a tu mascota, o no te decides qué juego jugar. ¡ESA frustración es la semilla de tu primera idea de app!',
+    keyPoints: ['Piensa en TU día a día: ¿qué te molesta?','Pregúntale a tus amigos qué apps les gustaría que existieran','Las mejores ideas se sienten obvias DESPUÉS de que alguien las construye','¡Escribe tus ideas para que no se te olviden!'],
+    funFact: '🚀 ¡Una niña de 7 años programó su primera app para ayudar a su abuela a recordar tomar su medicina! ¡Y ganó un premio! Nunca eres demasiado joven para construir algo increíble.'
+  });
+  merge('app-building:ab3b1', {
+    intro: 'Abre cualquier app de tu teléfono y vas a notar que todas tienen partes parecidas: un encabezado arriba con el nombre de la app, botones que puedes tocar, imágenes y texto en el medio, y casi siempre una barra abajo para moverte entre secciones.',
+    keyPoints: ['La parte de arriba de la app suele mostrar el nombre','El medio muestra el contenido principal','Los botones sirven para HACER cosas','La barra de abajo ayuda a moverte entre secciones'],
+    funFact: '✏️ ¡Los diseñadores de Apple hacen bocetos de las apps en PAPEL antes de tocar la computadora! Hasta las apps de miles de millones empiezan como dibujos a lápiz.'
+  });
+  merge('app-building:ab3b2', {
+    intro: '¿Sabías que los colores te hacen sentir emociones distintas? El azul hace que la gente se sienta tranquila y segura (¡por eso Facebook y Twitter son azules!). El rojo hace que la gente se sienta emocionada. El verde significa adelante o saludable. Cuando diseñes tu app, ¡los colores que elijas importan MUCHO!',
+    keyPoints: ['Azul = confianza, calma (Facebook, Twitter)','Rojo = emocionante, urgente (YouTube, Netflix)','Verde = saludable, adelante (Spotify, WhatsApp)','Amarillo = feliz, con energía (Snapchat)','Morado = creativo, realeza (Twitch)'],
+    funFact: '🎨 ¡McDonald\'s usa rojo y amarillo porque esos colores dan HAMBRE y hacen que la gente quiera comer RÁPIDO! Cada elección de color es a propósito.'
+  });
+  merge('app-building:ab3b3', {
+    intro: 'Antes de construir una app, los diseñadores hacen bocetos rápidos llamados wireframes. Un wireframe es como un plano: muestra dónde va cada cosa en la pantalla, sin preocuparse todavía por colores o imágenes. ¡Puedes dibujar uno ahora mismo en papel!',
+    keyPoints: ['Un wireframe es un boceto simple de la pantalla de la app','Usa cajas para las imágenes y líneas para el texto','Muestra dónde van los botones','No tienes que ser artista: los monitos de palitos son suficientes','Los diseñadores profesionales hacen esto para cada app'],
+    funFact: '📱 ¡El iPhone original se diseñó haciendo CIENTOS de bocetos en papel! Steve Jobs rechazó la mayoría. El que eligió cambió el mundo.'
+  });
+  merge('app-building:ab3c1', {
+    intro: 'El vibe coding es la forma más cool de construir apps. En vez de escribir código complicado, solo DESCRIBES lo que quieres en español normal, ¡y la IA lo construye por ti! Es como tener un ayudante mágico que convierte tus palabras en apps reales.',
+    keyPoints: ['El vibe coding es describirle a la IA lo que quieres','La IA entiende el lenguaje normal: no se necesita código','Entre mejor describas, mejor va a salir la app','Empresas reales están siendo construidas así AHORA MISMO'],
+    funFact: '⚡ ¡Jensen Huang, CEO de Nvidia (que vale más de 80 MIL MILLONES de dólares), dijo que la IA creará a los multimillonarios MÁS JÓVENES de la historia! Los niños como tú que aprenden a construir con IA ahora van a tener una enorme ventaja.'
+  });
+  merge('app-building:ab3c2', {
+    intro: 'Cuando le hablas a la IA para construir tu app, tienes que ser ESPECÍFICO. Decir "hazme una app" no va a funcionar bien. Pero decir "hazme una app azul para rastrear mascotas con un botón grande que diga Agregar Mi Mascota" — ¡eso da resultados increíbles! Piénsalo como pedir comida: "quiero comida" vs "quiero una pizza de queso con pepperoni".',
+    keyPoints: ['Sé específico sobre QUÉ hace la app','Dile a la IA qué colores quieres','Describe los botones y qué hacen','Di PARA QUIÉN es la app','¡Siempre puedes pedirle a la IA que cambie cosas!'],
+    funFact: '🧠 ¡La habilidad de hablarle a la IA se llama "prompt engineering" y las empresas pagan más de 100,000 dólares al año a la gente que es buena en esto! Estás aprendiendo una habilidad REAL de trabajo ahora mismo.'
+  });
+  merge('app-building:ab3c3', {
+    intro: '¡Es hora de que pase la magia! Vamos a usar nuestro constructor de apps con IA para crear una app simple de rastreo de mascotas. Vas a escribir lo que quieras y ver cómo aparece en la vista previa del teléfono. ¿Listo? ¡Vamos!',
+    keyPoints: ['Escribe tu descripción en la caja de chat','Observa cómo se actualiza la vista del teléfono','Puedes seguir mejorándola con más prompts','¡No hay respuesta incorrecta: sé creativo!'],
+    funFact: '🎮 ¡El juego Flappy Bird fue hecho por UNA sola persona y ganaba 50,000 dólares AL DÍA con anuncios! Las apps simples pueden generar dinero de verdad.'
+  });
+  merge('app-building:ab3d1', {
+    intro: 'El App Store es donde la gente va a descargar apps en sus iPhones e iPads. Es como un centro comercial gigante, pero en vez de ropa y juguetes, ¡está lleno de APPS! Cuando construyas una app, el App Store es donde la gente la va a encontrar y descargar.',
+    keyPoints: ['El App Store de Apple tiene más de 1.8 millones de apps','Google tiene el Play Store para los teléfonos Android','Algunas apps son gratis, otras cuestan dinero','La gente lee reseñas antes de descargar','¡El App Store abrió en 2008 con solo 500 apps!'],
+    funFact: '📱 ¡El primer App Store del iPhone tenía solo 500 apps! Ahora tiene 1.8 MILLONES. ¡Eso significa que todavía hay lugar para TU idea de app!'
+  });
+  merge('app-building:ab3d2', {
+    intro: '¿Alguna vez te preguntaste: si una app es gratis, cómo gana dinero la persona que la hizo? Hay formas SECRETAS (¡pero inteligentes!) en las que las apps gratis ganan dinero. Algunas muestran anuncios. Otras te dejan comprar cosas extra dentro de la app. Otras te dan una versión gratis pero cobran por las funciones geniales.',
+    keyPoints: ['Gratis + Anuncios: gratis de usar pero muestra publicidad','Freemium: versión básica gratis, pagas por funciones premium','Suscripción: pagas cada mes (como Netflix)','Compra única: pagas una sola vez para descargar','Compras dentro de la app: compras extras adentro (¡como las skins de Fortnite!)'],
+    funFact: '🎮 ¡Fortnite es GRATIS de descargar, pero gana más de 5 MIL MILLONES al año solo porque la gente compra skins y bailes adentro del juego! Gratis no significa que quien lo hizo no gane dinero.'
+  });
+  merge('app-building:ab3d3', {
+    intro: 'Cuando buscas una app, ¿qué es lo primero que revisas? ¡Las ESTRELLAS! Una app de 5 estrellas parece buenísima, y una de 1 estrella parece terrible. Las reseñas y las calificaciones son súper importantes porque ayudan a otros a decidir si tu app es buena.',
+    keyPoints: ['Las apps se califican de 1 a 5 estrellas','Más estrellas = más descargas','La gente escribe reseñas contando qué les gusta y qué no','Usuarios contentos = buenas reseñas = más descargas','¡Siempre debes tratar de que tu app llegue a las 5 estrellas!'],
+    funFact: '⭐ ¡Las apps con 4.5 estrellas o más tienen 4 veces más descargas que las de 3 estrellas! Una estrella extra puede significar MILLONES más de usuarios.'
+  });
+  merge('app-building:ab3e1', {
+    intro: 'Construiste una app increíble, pero ¿qué pasa si nadie la conoce? Ahí entra el MARKETING. Marketing solo quiere decir contarle a la gente sobre tu app y emocionarla para que la pruebe. ¿La forma más fácil? ¡Empieza con tus amigos y tu familia!',
+    keyPoints: ['Marketing = contarle a la gente sobre tu app','Empieza con tus amigos y tu familia','Muéstrales cómo tu app los ayuda','Haz un video divertido mostrando lo que hace','El boca a boca es el marketing más poderoso'],
+    funFact: '📱 ¡WhatsApp creció a 1,000 MILLONES de usuarios SIN UN SOLO anuncio! No gastaron ni un dólar en publicidad. La gente simplemente le contaba a sus amigos.'
+  });
+  merge('app-building:ab3e2', {
+    intro: '¿Qué suena mejor: "Aplicación Social para Compartir Fotos y Videos" o "Instagram"? El NOMBRE de tu app es lo primero que la gente ve. Un gran nombre es corto, pegajoso y da una pista de lo que hace la app. Instagram = Instant + Telegram. Snapchat = Snap + Chat. ¿Ves el patrón?',
+    keyPoints: ['Que sea corto: lo mejor es 1 o 2 palabras','Tu nombre debe dar una pista de lo que hace la app','Que sea fácil de escribir y recordar','Revisa que nadie más esté usando el nombre','Dilo en voz alta: ¿suena bien?'],
+    funFact: '🍎 ¡Steve Jobs casi llamó a Apple "Matrix Electronics"! Imagínate diciendo: "Necesito cargar mi Matrix". ¡Menos mal que se fueron con Apple!'
+  });
+  merge('app-building:ab3e3', {
+    intro: 'Imagínate que alguien te pregunta "¿qué hace tu app?" y solo tienes 10 segundos para responder. Esa explicación rápida se llama PITCH. Los mejores pitches son súper simples. El pitch de Uber era: "Aprieta un botón, obtén un aventón". ¡Solo 7 palabras!',
+    keyPoints: ['Un pitch explica tu app en una oración','Incluye QUÉ hace y PARA QUIÉN es','Practícalo en voz alta','Si tu abuela lo entiende, está bien','¡Si puedes, que sea de menos de 10 palabras!'],
+    funFact: '💡 ¡El pitch original de Airbnb era: "Reserva cuartos con gente local en vez de hoteles"! Solo 8 palabras describieron una empresa de 75 MIL MILLONES de dólares.'
+  });
+
+  // ─── Financial Literacy Grade 3 prose ───
+  merge('financial-literacy:3A1', {
+    intro: 'Igual que en las películas o en los cuentos, TÚ puedes estar a cargo de tu propio dinero. ¡Puedes empezar tu propio negocito y ser tu propio jefe!',
+    keyPoints: ['Un jefe es alguien que decide qué hacer y genera su propio dinero','Puedes empezar en pequeño con cosas que haces bien','Ser tu propio jefe se siente increíble porque el dinero es TODO tuyo'],
+    funFact: 'Mark Zuckerberg empezó Facebook en su cuarto de dormitorio del campus. ¡Ahora vale más de 100 mil millones de dólares!'
+  });
+  merge('financial-literacy:3A2', {
+    intro: 'Un puesto de limonada es el primer negocio perfecto. Compras limones, haces limonada y la vendes. ¡Cada dólar que ganas es pura ganancia!',
+    keyPoints: ['Un puesto de limonada casi no cuesta nada (tal vez 5 a 10 dólares)','Ganas dinero vendiendo algo que la gente quiere','Mientras MÁS vendas, MÁS dinero te queda'],
+    funFact: '¡Una niña en California tuvo un puesto de limonada y ganó 1,000 dólares en un verano!'
+  });
+  merge('financial-literacy:3A3', {
+    intro: 'Antes de que existiera el dinero, la gente intercambiaba cosas unos con otros. ¡Tú también puedes hacerlo! Intercambia algo que tengas por algo que alguien más tenga.',
+    keyPoints: ['Intercambiar quiere decir cambiar una cosa por otra','Puedes intercambiar juguetes, cartas o ayuda con los quehaceres','Intercambiar te enseña el valor de lo que tienes'],
+    funFact: 'En la antigüedad, ¡la gente intercambiaba especias por oro porque las especias eran súper valiosas!'
+  });
+  merge('financial-literacy:3B1', {
+    intro: 'Un quehacer es un trabajo que haces. Cuando haces quehaceres extra, puedes ganar dinero. ¡Igual que en un trabajo de verdad!',
+    keyPoints: ['Los quehaceres son trabajo por el que te pagan','Tú decides qué quehaceres hacer y cuántos','Más trabajo = más dinero en tu bolsillo'],
+    funFact: '¡Los niños que hacen quehaceres aprenden pronto la conexión entre el trabajo y el dinero, y se vuelven más exitosos con su dinero en la vida adulta!'
+  });
+  merge('financial-literacy:3B2', {
+    intro: 'Algunos niños reciben mesada (dinero solo porque sí). Otros niños GANAN dinero haciendo quehaceres. Cuando te lo ganas, se siente mejor Y estás aprendiendo.',
+    keyPoints: ['La mesada es dinero que te dan porque sí','El dinero ganado viene de hacer un trabajo','El dinero ganado te enseña que trabajo = dinero'],
+    funFact: '¡La mayoría de la gente exitosa dice que ganarse el dinero les enseñó más que recibirlo gratis!'
+  });
+  merge('financial-literacy:3B3', {
+    intro: 'Un "side hustle" es algo que TÚ haces para ganar dinero extra. Puede ser cualquier cosa: pasear perros, vender arte, hacer trabajo de jardín. ¡TÚ decides!',
+    keyPoints: ['Un "side hustle" es algo que haces aparte para ganar dinero','Eliges algo en lo que TÚ seas bueno','Te quedas con todo el dinero que ganas'],
+    funFact: '¡Muchas personas exitosas empezaron sus empresas de miles de millones como "side hustles" desde su recámara!'
+  });
+  merge('financial-literacy:3C1', {
+    intro: 'Una alcancía es linda, pero una cuenta de banco es MEJOR porque el banco TE PAGA por guardar ahí tu dinero.',
+    keyPoints: ['Los bancos te pagan intereses por el dinero que ahorras','El interés es dinero GRATIS solo por ahorrar','Un banco mantiene tu dinero seguro'],
+    funFact: 'Si ahorras 100 dólares y el banco te paga 5% de interés, ¡tendrías 105 dólares sin hacer nada!'
+  });
+  merge('financial-literacy:3C2', {
+    intro: 'El interés compuesto es MÁGICO. Es cuando tu interés empieza a ganar más interés. ¡Tu dinero crece cada vez más rápido!',
+    keyPoints: ['El interés es dinero que te da el banco','El interés compuesto es cuando tu interés gana MÁS interés','Entre más temprano empieces a ahorrar, más pasa la magia'],
+    funFact: 'Si inviertes 100 dólares al mes a los 15 años en un fondo indexado con un promedio del 10% anual, ¡tendrías 1.7 MILLONES de dólares para cuando tengas 65 años!'
+  });
+  merge('financial-literacy:3C3', {
+    intro: 'Ahorrar es aburrido si no tienes una meta. ¡Elige algo increíble que quieras y ahorra para eso!',
+    keyPoints: ['Una meta es algo para lo que estás ahorrando dinero','Elige algo que TÚ de verdad quieras','Ver tus ahorros crecer hacia tu meta se siente INCREÍBLE'],
+    funFact: '¡Los niños que se ponen metas de ahorro tienen más probabilidad de volverse adultos con mucho dinero!'
+  });
+  merge('financial-literacy:3D1', {
+    intro: 'Si le pides prestados 10 dólares a un amigo, normalmente le devuelves más. Ese extra se llama interés. Es el costo de pedir prestado.',
+    keyPoints: ['Pedir prestado es recibir algo ahora y pagarlo después','Siempre devuelves MÁS de lo que pediste prestado','El dinero extra se llama interés'],
+    funFact: '¡Los préstamos tipo "payday loan" pueden cobrar 400% de interés! Eso significa que si pides 100 dólares, ¡debes 500!'
+  });
+  merge('financial-literacy:3D2', {
+    intro: 'La deuda buena es pedir prestado para algo que te genera dinero (como la educación). La deuda mala es pedir prestado para cosas que pierden valor rápido.',
+    keyPoints: ['La deuda buena te ayuda a generar dinero después','La deuda mala es para cosas que no te ayudan a ganar','Debes evitar la deuda mala'],
+    funFact: '¡Los préstamos estudiantiles (deuda buena) te ayudan a ganar más! Las tarjetas de crédito usadas para comprar dulces (deuda mala) solo te dejan sin dinero.'
+  });
+  merge('financial-literacy:3D3', {
+    intro: 'Si pides prestado dinero a una tasa de interés ALTA, te puedes atascar. ¡Terminas pagando muchísimo más de lo que pediste prestado!',
+    keyPoints: ['Las tasas de interés altas son CARAS','Algunas personas se quedan atrapadas en deudas por el interés alto','Siempre intenta pedir prestado a un interés BAJO'],
+    funFact: '¡Las compañías de tarjetas de crédito cobran más del 20% de interés! Una compra de 1,000 dólares te podría costar 1,200 o más.'
+  });
+  merge('financial-literacy:3E1', {
+    intro: 'Gastas dinero en armar tu negocio y luego ganas dinero al vender. Lo que QUEDA es la ganancia. ¡Ese dinero es TUYO!',
+    keyPoints: ['La ganancia es el dinero que queda después de pagar los costos','Quieres ganar MÁS dinero y gastar MENOS','La ganancia es lo que TÚ te quedas'],
+    funFact: 'Un puesto de limonada puede costar 5 dólares en materiales pero generar 20. ¡Eso es 15 dólares de ganancia!'
+  });
+  merge('financial-literacy:3E2', {
+    intro: 'Cuando tienes tu puesto de limonada o tu servicio de paseo de perros, tienes costos. Esos se llaman gastos del negocio. ¡Te ayudan a generar dinero!',
+    keyPoints: ['Los gastos son los costos de tu negocio','Necesitas materiales y herramientas','Los gastos te ayudan a generar dinero'],
+    funFact: '¡Los negocios profesionales pueden deducir como gastos su carro, su teléfono, su internet, sus comidas y hasta su oficina en casa!'
+  });
+  merge('financial-literacy:3E3', {
+    intro: 'La gente de negocios exitosa anota todo lo que gana y lo que gasta. ¡Esto les ayuda a ver si están ganando o perdiendo dinero!',
+    keyPoints: ['Llevar un registro es anotar lo que ganas y lo que gastas','Te muestra si tu negocio es rentable','Puedes ver qué está funcionando y qué no'],
+    funFact: '¡Jeff Bezos empezó Amazon en su cochera! Llevaba cuenta de cada centavo para asegurarse de que fuera rentable.'
+  });
+})();
+
 // Math Grade 3 — 100 lessons, hand-translated titles with category templates
 (function(){
   const m = LESSON_TRANSLATIONS_ES;
