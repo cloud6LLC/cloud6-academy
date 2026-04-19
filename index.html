@@ -21882,6 +21882,90 @@ Object.assign(LESSON_TRANSLATIONS_ES, {
   });
 
 })();
+// Grade 6 — add missing activity.instructions to all translated entries
+(function(){
+  var L = LESSON_TRANSLATIONS_ES;
+  function ins(key, text){
+    var e = L[key];
+    if(e && e.activity) e.activity.instructions = text;
+  }
+  // ─── Financial Literacy 6 ───
+  ins('financial-literacy:6A1', '¿Cuál de los siguientes es un activo?');
+  ins('financial-literacy:6A2', '¿Cuál es el secreto de Warren Buffett para invertir?');
+  ins('financial-literacy:6B1', '¿Cuáles de estas son ideas de negocio reales?');
+  ins('financial-literacy:6B2', '¿Cuál de los siguientes generaría ingresos pasivos?');
+  ins('financial-literacy:6B3', '¿Qué es un buen sistema para generar dinero?');
+  ins('financial-literacy:6C1', '¿Qué significa ser dueño de una acción?');
+  ins('financial-literacy:6C2', '¿Cuál es la clave para invertir en acciones?');
+  ins('financial-literacy:6D1', '¿Cuál de los siguientes es un ejemplo de deuda buena?');
+  ins('financial-literacy:6D2', '¿Deuda buena o deuda mala? Clasifica cada préstamo.');
+  ins('financial-literacy:6E1', '¿Qué estructura empresarial es mejor para los impuestos?');
+  ins('financial-literacy:6E2', '¿Cuáles de estos gastos puedes deducir en tu negocio?');
+  // ─── Science 6 ───
+  ins('science:s6A1', '¿Qué organelo controla las actividades de la célula?');
+  ins('science:s6A2', '¿Qué produce la fotosíntesis?');
+  ins('science:s6A3', '¿En qué reino se clasifican los seres humanos?');
+  ins('science:s6B1', '¿Qué ocurre en los límites convergentes de placas?');
+  ins('science:s6B2', '¿Qué desencadena las erupciones volcánicas?');
+  ins('science:s6B3', '¿Qué impulsa las corrientes oceánicas?');
+  ins('science:s6C1', '¿Qué método de transferencia de calor requiere contacto directo?');
+  ins('science:s6C2', '¿Cuál de los siguientes tiene energía potencial?');
+  ins('science:s6C3', '¿Qué establece la segunda ley de Newton?');
+  ins('science:s6D1', '¿Para qué se usa un grupo de control en un experimento?');
+  ins('science:s6D2', '¿Cuál es la diferencia entre correlación y causalidad?');
+  ins('science:s6D3', '¿Por qué es importante la comunicación científica clara?');
+  ins('science:s6E1', '¿Qué significa "diseñar para el reciclaje"?');
+  ins('science:s6E2', '¿Qué es la ingeniería genética?');
+  ins('science:s6E3', '¿Cuál es el uso principal de los satélites de comunicaciones?');
+  // ─── English 6 ───
+  ins('english:e6A1', '¿Cuál es el propósito principal del autor al escribir un cómic?');
+  ins('english:e6A2', '¿Cuál de los siguientes es un argumento sólido?');
+  ins('english:e6A3', '¿Qué tipo de conflicto enfrenta un personaje que duda de sí mismo?');
+  ins('english:e6B1', '¿Qué debe incluir un texto argumentativo sólido?');
+  ins('english:e6B2', '¿Qué hace efectivo a un texto informativo?');
+  ins('english:e6B3', '¿Qué es un haiku?');
+  ins('english:e6C1', '¿Cuál de las siguientes es una cláusula independiente?');
+  ins('english:e6C2', '¿En qué oración va correctamente el punto y coma?');
+  ins('english:e6C3', '¿Cuál de las siguientes oraciones está en voz activa?');
+  ins('english:e6D1', '¿Qué palabra tiene una connotación más positiva?');
+  ins('english:e6D2', 'Analogía: El autor es al libro como _____ es a la canción.');
+  ins('english:e6D3', '¿Cuál es una palabra del dominio específico de las matemáticas?');
+  ins('english:e6E1', '¿Qué debes hacer para preparar una presentación formal?');
+  ins('english:e6E2', '¿Qué fuente sería más confiable para un ensayo?');
+  ins('english:e6E3', '¿Cómo debes responder a una buena idea en una discusión?');
+  // ─── History 6 ───
+  ins('history:h6A1', '¿Qué inventaron los mesopotámicos?');
+  ins('history:h6A2', '¿Por qué era importante el río Nilo para el Antiguo Egipto?');
+  ins('history:h6A3', '¿Qué sistema de gobierno creó Atenas?');
+  ins('history:h6B1', '¿Qué hizo fuerte al Imperio Romano?');
+  ins('history:h6B2', '¿Qué creó la Dinastía Han?');
+  ins('history:h6B3', '¿Qué religión fue central en el Imperio Bizantino?');
+  ins('history:h6C1', '¿En qué se basaba el sistema feudal?');
+  ins('history:h6C2', '¿Cuál era el objetivo principal de las Cruzadas?');
+  ins('history:h6C3', '¿Cómo cambió la Peste Negra a Europa?');
+  ins('history:h6D1', '¿Qué significa la palabra "Renacimiento"?');
+  ins('history:h6D2', '¿Cuál fue el impacto de la imprenta de Gutenberg?');
+  ins('history:h6D3', '¿Por qué navegaron los exploradores europeos por los océanos?');
+  ins('history:h6E1', '¿Cuál es el libro sagrado del judaísmo?');
+  ins('history:h6E2', '¿Quién fundó el Cristianismo?');
+  ins('history:h6E3', '¿Quién fundó el islam?');
+  // ─── Social Studies 6 ───
+  ins('social-studies:ss6A1', '¿Cuál fue un gran invento sumerio?');
+  ins('social-studies:ss6A2', '¿Qué hizo posible la civilización egipcia?');
+  ins('social-studies:ss6A3', '¿Cuál fue una gran contribución griega a la civilización?');
+  ins('social-studies:ss6B1', '¿Cuál es la religión con más seguidores en el mundo?');
+  ins('social-studies:ss6B2', '¿Qué ofrecen los textos sagrados a los creyentes?');
+  ins('social-studies:ss6B3', '¿Cómo ha dado forma la religión a la civilización?');
+  ins('social-studies:ss6C1', '¿Cuál fue la ciudad más importante del Imperio Mali?');
+  ins('social-studies:ss6C2', '¿Cuál fue una gran innovación de la civilización china?');
+  ins('social-studies:ss6C3', '¿Qué innovación matemática provino de la antigua India?');
+  ins('social-studies:ss6D1', '¿En qué consistía el sistema feudal medieval europeo?');
+  ins('social-studies:ss6D2', '¿Qué civilización mesoamericana construyó Tenochtitlan?');
+  ins('social-studies:ss6D3', '¿Cuál fue la principal consecuencia del contacto europeo con las Américas?');
+  ins('social-studies:ss6E1', '¿Qué se comerciaba PRINCIPALMENTE en la Ruta de la Seda?');
+  ins('social-studies:ss6E2', '¿Cómo ocurre la difusión cultural?');
+  ins('social-studies:ss6E3', '¿Por qué las personas han migrado a lo largo de la historia?');
+})();
 (function(){
   var L = LESSON_TRANSLATIONS_ES;
   function merge(key, extra){ L[key] = Object.assign({}, L[key]||{}, extra); }
