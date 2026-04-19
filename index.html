@@ -18351,6 +18351,1093 @@ Object.assign(LESSON_TRANSLATIONS_ES, {
   'social-studies:ss4E3': { title: 'Comercio entre Estados', tagline: 'Productos que se mueven por todo Estados Unidos' }
 });
 
+
+// ═══════════════════════════════════════════════════════════
+// PHASE 2 SESSION 3 (gap-fill) — Grade 4 per-lesson prose
+// Adds intro/keyPoints/funFact to existing Grade 4 entries
+// for all non-Math subjects. Uses Object.assign to merge.
+// ═══════════════════════════════════════════════════════════
+(function(){
+  const L = LESSON_TRANSLATIONS_ES;
+  const merge = function(key, extra){
+    L[key] = Object.assign({}, L[key] || {}, extra);
+  };
+
+  // ─── English Grade 4 prose ───
+  merge('english:e4A1', {
+    intro: 'La inferencia es cuando usas pistas del texto y lo que ya sabes para comprender algo que el autor no dijo directamente. Por ejemplo, si una historia dice "Maya se puso el abrigo y las botas y salió con su trineo", puedes inferir que hay nieve y hace frío. Los autores no siempre te dan toda la información; los buenos lectores captan las pistas. Hacer inferencias te ayuda a entender los sentimientos de los personajes y predecir lo que va a pasar. ¡Es como ser detective que usa pistas para resolver un misterio!',
+    keyPoints: ['Usa pistas del texto y tu propio conocimiento', 'Infiere sentimientos y razones', 'Predice lo que va a ocurrir después'],
+    funFact: '¡Sherlock Holmes es famoso por hacer inferencias a partir de pistas muy pequeñas!'
+  });
+  merge('english:e4A2', {
+    intro: 'Las características del texto son herramientas que los autores usan para ayudarte a navegar y entender mejor lo que lees. Los encabezados te dicen de qué trata cada sección. Los pies de foto explican las imágenes. Las gráficas y las tablas muestran información de forma visual. La tabla de contenidos te ayuda a encontrar temas rápidamente. Las palabras en negrita resaltan ideas importantes. Usar las características del texto te ayuda a encontrar información más rápido y a entenderla mejor. Los libros de no ficción las usan para que todo sea claro y organizado.',
+    keyPoints: ['Los encabezados organizan los temas', 'Las imágenes y los pies de foto dan ejemplos', 'Las gráficas muestran datos visualmente'],
+    funFact: '¡Los buenos lectores revisan las características del texto antes de leer el artículo completo!'
+  });
+  merge('english:e4A3', {
+    intro: 'El punto de vista es quién narra la historia. En el punto de vista en primera persona, el personaje usa "yo" y cuenta su propia historia. En el punto de vista en tercera persona, alguien de fuera de la historia usa "él", "ella" o "ellos" para describir los eventos. Diferentes puntos de vista muestran distintas perspectivas. Si la historia es narrada desde el punto de vista de un personaje, solo sabes lo que ese personaje sabe y siente. Entender el punto de vista te ayuda a comprender cómo el autor eligió contar la historia.',
+    keyPoints: ['La primera persona usa "yo"', 'La tercera persona usa "él/ella/ellos"', 'El punto de vista afecta lo que los lectores saben'],
+    funFact: '¡La misma historia narrada desde diferentes puntos de vista puede cambiar completamente!'
+  });
+  merge('english:e4B1', {
+    intro: 'La escritura de opinión es cuando expresas lo que crees y explicas por qué. Primero declaras tu opinión con claridad. Luego das razones y ejemplos que la apoyan. Tus razones deben ser sólidas y tener sentido. Respalda cada razón con detalles o ejemplos. Por último, escribe una conclusión que retome tu opinión. La buena escritura de opinión persuade a los lectores a pensar en tu idea, aunque no estén de acuerdo. Demuestra que has reflexionado profundamente sobre el tema.',
+    keyPoints: ['Comienza con una declaración de opinión clara', 'Aporta razones y ejemplos', 'Retoma tu opinión en la conclusión'],
+    funFact: '¡Los grandes escritores de opinión no solo dicen lo que piensan, sino que también explican el porqué!'
+  });
+  merge('english:e4B2', {
+    intro: 'La escritura narrativa cuenta una historia con eventos claros en orden. Una buena narración tiene un inicio que presenta al personaje y el escenario, un desarrollo con los eventos principales y el conflicto, y un desenlace que muestra cómo resultan las cosas. Las narraciones usan palabras descriptivas para que los lectores sientan que están dentro de la historia. Los diálogos hacen que los personajes cobren vida. Palabras de transición como "luego", "después" y "finalmente" ayudan a los lectores a seguir los eventos.',
+    keyPoints: ['El inicio presenta al personaje y el escenario', 'El desarrollo muestra el conflicto y la acción', 'El desenlace cuenta cómo resulta todo'],
+    funFact: '¡Las mejores narraciones hacen que los lectores sientan emociones junto con los personajes!'
+  });
+  merge('english:e4B3', {
+    intro: 'Un informe de investigación presenta datos e información sobre un tema que investigaste. Primero, eliges un tema y formulas preguntas de investigación. Luego reúnes información de fuentes como libros, sitios web y entrevistas. Organizas los datos en secciones con encabezados. Cada sección tiene una idea principal y datos de apoyo. Tu informe tiene una introducción, párrafos con información y una conclusión que resume lo que aprendiste. Los informes de investigación te enseñan a encontrar información confiable y a presentarla con claridad.',
+    keyPoints: ['Elige un tema y formula preguntas', 'Reúne datos de fuentes confiables', 'Organiza la información con encabezados'],
+    funFact: '¡Los científicos y periodistas reales escriben investigaciones para responder preguntas!'
+  });
+  merge('english:e4C1', {
+    intro: 'Una oración compleja tiene más de una idea conectada. Una cláusula independiente puede ser una oración completa por sí sola. Una cláusula dependiente no puede estar sola: necesita la cláusula independiente para tener sentido. Palabras como "porque", "cuando", "ya que", "después de" y "si" conectan las cláusulas. Por ejemplo: "Porque llovía, nos quedamos adentro." Las oraciones complejas te permiten mostrar cómo se relacionan las ideas y hacen tu escritura más interesante y variada.',
+    keyPoints: ['Las cláusulas independientes pueden estar solas', 'Las cláusulas dependientes comienzan con palabras conectoras', 'Las oraciones complejas muestran cómo se relacionan las ideas'],
+    funFact: '¡Muchos estudiantes escriben oraciones largas y confusas cuando no usan estas palabras conectoras!'
+  });
+  merge('english:e4C2', {
+    intro: 'Los signos de puntuación son señales que ayudan a los lectores a entender tu escritura. Los puntos terminan las oraciones. Las comas separan elementos en una lista o dividen ideas. Los signos de interrogación terminan las preguntas. Los signos de exclamación expresan sentimientos fuertes. Los apóstrofes muestran posesión o letras faltantes. Las comillas indican las palabras exactas de alguien. Usar la puntuación correctamente hace tu escritura clara y fácil de leer, y muestra que eres un escritor cuidadoso.',
+    keyPoints: ['Los puntos terminan las oraciones', 'Las comas separan elementos en una lista', 'Los apóstrofes indican posesión'],
+    funFact: '¡Imagínate leer una página sin ningún signo de puntuación — sería muy confuso!'
+  });
+  merge('english:e4C3', {
+    intro: 'Los pronombres son palabras que reemplazan a los sustantivos para no repetir la misma palabra una y otra vez. "Él" reemplaza el nombre de un chico, "ella" el de una chica, "eso" reemplaza una cosa, y "ellos/ellas" reemplaza a sustantivos en plural. Un pronombre debe coincidir con el sustantivo al que reemplaza. Si dices "Sara fue al parque. Ella se divirtió mucho", el pronombre "ella" se refiere a Sara. El uso correcto de los pronombres hace que tu escritura fluya sin confusión.',
+    keyPoints: ['Los pronombres reemplazan sustantivos', 'Deben coincidir en género y número', 'Los pronombres hacen la escritura menos repetitiva'],
+    funFact: '¡Sin pronombres, cada oración sonaría como: "Sam fue a la casa de Sam a hacer la tarea de Sam"!'
+  });
+  merge('english:e4D1', {
+    intro: 'Muchas palabras en español y en inglés provienen de raíces griegas y latinas. La raíz "geo" significa tierra, por eso "geografía" significa la descripción de la tierra. La raíz "foto" significa luz, por eso "fotografía" significa una imagen hecha con luz. La raíz "bio" significa vida, por eso "biología" es el estudio de la vida. Aprender las raíces te ayuda a entender cientos de palabras porque ves el patrón que se repite. Las raíces son como llaves que abren el significado de las palabras.',
+    keyPoints: ['Las raíces son el origen de las palabras', 'Una raíz aparece en muchas palabras', 'Conocer las raíces te ayuda a adivinar palabras nuevas'],
+    funFact: '¡Más del 60% de las palabras en inglés tienen raíces griegas o latinas!'
+  });
+  merge('english:e4D2', {
+    intro: 'El lenguaje figurado usa las palabras de maneras que no son literalmente ciertas para crear imágenes interesantes en la mente del lector. Un símil compara dos cosas usando "como": "valiente como un león". Una metáfora compara cosas diciendo que una cosa ES otra: "Su voz es música". La personificación le da cualidades humanas a cosas no humanas: "Los árboles bailaban con el viento". La hipérbole es una exageración extrema: "Te lo he dicho un millón de veces". El lenguaje figurado hace la escritura más interesante y memorable.',
+    keyPoints: ['Los símiles usan "como" para comparar', 'Las metáforas dicen que una cosa ES otra', 'La personificación da rasgos humanos a cosas'],
+    funFact: '¡La poesía está llena de lenguaje figurado!'
+  });
+  merge('english:e4D3', {
+    intro: 'Un diccionario es un libro o herramienta en línea que enumera las palabras en orden alfabético y da sus significados. Cada entrada muestra la ortografía de la palabra, su pronunciación, la categoría gramatical, la definición y, a menudo, una oración de ejemplo. Las palabras guía en la parte superior de cada página muestran la primera y la última palabra de esa página, lo que te ayuda a encontrar palabras rápidamente. Saber usar un diccionario te hace independiente cuando encuentras palabras desconocidas, y mejora tu ortografía y pronunciación.',
+    keyPoints: ['Las palabras están en orden alfabético', 'Las palabras guía ayudan a ubicar palabras rápido', 'Las entradas muestran el significado y ejemplos'],
+    funFact: '¡Los diccionarios modernos suelen tener audio para que puedas escuchar cómo se pronuncian las palabras!'
+  });
+  merge('english:e4E1', {
+    intro: 'Una discusión en grupo es cuando varias personas hablan sobre un tema juntas. Todos tienen turno para hablar y compartir sus ideas. Los buenos participantes escuchan con atención cuando otros hablan, no interrumpen y retoman lo que otros han dicho. Hacen preguntas para entender mejor y hablan con respeto incluso cuando no están de acuerdo. Las discusiones en grupo te ayudan a aprender de los demás, a ver distintos puntos de vista y a practicar habilidades de comunicación que usarás en la escuela y en el trabajo.',
+    keyPoints: ['Espera tu turno para hablar', 'Escucha las ideas de los demás', 'Retoma y responde lo que otros dijeron'],
+    funFact: '¡Las mejores discusiones incluyen personas que escuchan tanto como hablan!'
+  });
+  merge('english:e4E2', {
+    intro: 'Cuando resumes un discurso, dices las ideas más importantes de forma breve. Dejas de lado los detalles pequeños y te concentras en los puntos principales. Los buenos resúmenes son mucho más cortos que el discurso original, pero incluyen el mensaje clave. Puedes escribirlos o decirlos en voz alta. Resumir te ayuda a entender lo que escuchas y a recordarlo mejor. Es una habilidad muy útil en la escuela para tomar apuntes y en la vida cuando necesitas compartir información rápidamente.',
+    keyPoints: ['Concéntrate en las ideas principales, no en los detalles', 'Mantenlo mucho más corto que el original', 'Incluye el mensaje clave'],
+    funFact: '¡Los reporteros de noticias resumen historias para que el público las entienda rápidamente!'
+  });
+  merge('english:e4E3', {
+    intro: 'La retroalimentación son comentarios útiles que das para ayudar a alguien a mejorar su trabajo. La buena retroalimentación es amable y específica. En lugar de solo decir "Está bien", podrías decir "Me gustó cómo describiste el escenario porque me ayudó a imaginarlo". También puedes sugerir mejoras: "Agregar una pregunta al inicio llamaría la atención de los lectores". La retroalimentación ayuda a los escritores y oradores a mejorar su trabajo, y te convierte en un compañero o amigo más valioso.',
+    keyPoints: ['Sé específico y amable', 'Di qué funcionó bien', 'Sugiere una mejora concreta'],
+    funFact: '¡La buena retroalimentación empieza con "Me gustó..." o "Algo que podría ayudar..."!'
+  });
+
+  // ─── History Grade 4 prose ───
+  merge('history:h4A1', {
+    intro: 'El gobierno estatal es el sistema de líderes y organizaciones de cada estado que toman decisiones para las personas que viven ahí, siguiendo una estructura similar al gobierno federal: con un gobernador, una legislatura y tribunales. Cada estado tiene su propia constitución y sus propias leyes, lo que les permite manejar asuntos locales mientras el gobierno nacional maneja los temas de todo el país. Los estados administran la educación, las carreteras, los parques estatales y muchos servicios que afectan la vida diaria de las personas.',
+    keyPoints: ['Los estados tienen gobernadores que los dirigen', 'Los estados crean sus propias leyes', 'Los estados administran escuelas y carreteras'],
+    funFact: '¡Texas es el único estado que alguna vez fue un país independiente!'
+  });
+  merge('history:h4A2', {
+    intro: 'Cada estado tiene símbolos oficiales como la bandera estatal, el ave del estado, la flor del estado, el árbol del estado y el lema estatal, que representan la historia, la cultura y la identidad del estado. Estos símbolos fueron elegidos para honrar cosas importantes en el pasado del estado o en su entorno natural. Aprender sobre los símbolos estatales nos ayuda a apreciar lo que hace especial a cada estado y lo diferencia de los demás.',
+    keyPoints: ['Cada estado tiene símbolos oficiales', 'Los símbolos representan la identidad del estado', 'Los símbolos honran la historia y la naturaleza'],
+    funFact: '¡El sinsonte es el ave oficial de cinco estados diferentes!'
+  });
+  merge('history:h4A3', {
+    intro: 'Los estados se pueden dividir en regiones geográficas: el Noreste (montañas y ciudades), el Sur (clima cálido con plantaciones), el Medio Oeste (tierras planas y agrícolas), el Suroeste (desiertos y cañones) y el Oeste (montañas y bosques). Cada región tiene características naturales, climas e industrias distintas según su geografía. Entender las regiones nos ayuda a explicar por qué distintas partes de América se ven diferentes y por qué las personas que viven ahí tienen estilos de vida distintos.',
+    keyPoints: ['Las regiones tienen geografías diferentes', 'Las regiones tienen climas distintos', 'La geografía moldea la forma en que vive la gente'],
+    funFact: '¡Los desiertos del Suroeste albergan antiguas ruinas de los pueblos nativos americanos!'
+  });
+  merge('history:h4B1', {
+    intro: 'Los exploradores europeos como Colón, Cabot y Balboa cruzaron el Océano Atlántico a partir de 1492 buscando rutas comerciales hacia Asia, oro, nuevas tierras para sus países y la aventura. Estos exploradores no "descubrieron" América, ya que los nativos americanos llevaban miles de años viviendo aquí, pero sus viajes crearon conexiones entre Europa y las Américas. La exploración europea llevó a la llegada de colonizadores y cambió la vida de todos los que vivían en América del Norte.',
+    keyPoints: ['Los exploradores navegaron en busca de rutas comerciales y oro', 'Colón llegó en 1492', 'La exploración llevó a la colonización europea'],
+    funFact: '¡Colón pensaba que había llegado a Asia, pero en realidad había encontrado tierras nuevas para los europeos!'
+  });
+  merge('history:h4B2', {
+    intro: 'Los nativos americanos fueron los primeros habitantes de América, llegando miles de años antes que los europeos y desarrollando cientos de naciones, idiomas, culturas y formas de vida distintas, adaptadas a sus regiones. Diferentes grupos como los iroqueses, los cherokee, los indios de las praderas y los pueblos tenían sus propios gobiernos, creencias espirituales y habilidades de supervivencia. Los nativos americanos crearon sociedades complejas con agricultura, redes comerciales y arte mucho antes de que llegaran los europeos.',
+    keyPoints: ['Los nativos americanos llegaron primero', 'Existían muchas naciones diferentes', 'Cada grupo se adaptó a su región'],
+    funFact: '¡La Confederación Iroquesa influyó en el diseño de la Constitución de los Estados Unidos!'
+  });
+  merge('history:h4B3', {
+    intro: 'La vida colonial fue el período de la historia temprana de América cuando los colonizadores europeos establecieron 13 colonias en la costa este, creando comunidades con granjas, pueblos, escuelas e iglesias siguiendo las costumbres europeas. Los colonos vivían de la agricultura, el comercio, la pesca y los oficios, aunque su vida era difícil por los inviernos duros, las enfermedades y los suministros limitados. La sociedad colonial estaba dividida por clases, y los africanos esclavizados eran obligados a trabajar en las plantaciones del sur.',
+    keyPoints: ['Los colonos se establecieron en la costa este', 'La vida era difícil con la agricultura y el comercio', 'La esclavitud existía en las colonias'],
+    funFact: '¡Los primeros esclavos africanos llegaron a Virginia en 1619!'
+  });
+  merge('history:h4C1', {
+    intro: 'Los colonos americanos declararon su independencia porque creían que el rey Jorge III y el Parlamento británico los trataban injustamente: les cobraban impuestos sin darles voz en el gobierno, los obligaban a alojar soldados y controlaban su libertad. La frase "No hay impuestos sin representación" se convirtió en un grito de guerra, ya que los colonos no tenían representantes elegidos en el Parlamento. Líderes como Thomas Jefferson y Samuel Adams creían que los gobiernos deben respetar los derechos de las personas.',
+    keyPoints: ['Los colonos se sentían injustamente gravados con impuestos', 'No tenían representación en el Parlamento', 'Querían autogobernarse'],
+    funFact: '¡El Motín del Té de Boston fue una protesta donde los colonos arrojaron té británico al océano!'
+  });
+  merge('history:h4C2', {
+    intro: 'La Revolución Americana (1775-1783) incluyó batallas importantes como Lexington y Concord (donde comenzaron los combates), Saratoga (donde los americanos derrotaron al ejército británico) y Yorktown (la victoria final americana). El general George Washington dirigió el Ejército Continental a través de inviernos fríos, derrotas y victorias, manteniendo al ejército unido con determinación y estrategia. Estas batallas demostraron el valor americano e inspiraron a los colonos a seguir luchando por la independencia.',
+    keyPoints: ['Lexington y Concord iniciaron la revolución', 'Saratoga demostró que los americanos podían ganar', 'Yorktown fue la victoria final'],
+    funFact: '¡El ejército de Washington soportó un brutal invierno en Valley Forge con muy poca comida!'
+  });
+  merge('history:h4C3', {
+    intro: 'La Declaración de Independencia (1776) anunció que América ya no estaba bajo el dominio británico y explicó que todas las personas tienen derechos a "la vida, la libertad y la búsqueda de la felicidad". La Constitución (1787) es el plan escrito de cómo funciona el gobierno de los EE. UU., con tres poderes que comparten el mando para evitar que alguien acumule demasiado poder. La Declaración de Derechos añadió diez enmiendas que protegen libertades como la expresión, la religión y los juicios justos.',
+    keyPoints: ['La Declaración anunció la independencia en 1776', 'La Constitución establece la estructura del gobierno', 'La Declaración de Derechos protege las libertades'],
+    funFact: '¡Thomas Jefferson tardó seis semanas en escribir la Declaración de Independencia!'
+  });
+  merge('history:h4D1', {
+    intro: 'El presidente Thomas Jefferson envió a Meriwether Lewis y William Clark (1804-1806) a explorar el territorio de Louisiana, recién comprado, y a encontrar una ruta acuática hacia el Océano Pacífico. El Cuerpo de Descubrimiento de Lewis y Clark recorrió miles de millas por el río Missouri, las Montañas Rocosas y llegó hasta el Pacífico, trazando mapas de nuevas tierras y recopilando información científica sobre plantas, animales y nativos americanos. Una mujer shoshone llamada Sacagawea sirvió de intérprete y guía, ayudando a la expedición a atravesar montañas difíciles.',
+    keyPoints: ['Lewis y Clark exploraron las tierras del Oeste', 'Trazaron mapas y recopilaron información científica', 'Sacagawea los ayudó como guía'],
+    funFact: '¡Lewis y Clark llevaron diarios detallados anotando todo lo que vieron durante su viaje!'
+  });
+  merge('history:h4D2', {
+    intro: 'El Sendero de Oregón fue una ruta de 3,200 kilómetros que los colonos recorrían en carretas cubiertas desde Missouri hasta Oregón a partir de la década de 1840, buscando tierras gratuitas y nuevas oportunidades en el Oeste. Las familias enfrentaron dificultades: meses de viaje, enfermedades, cruce de ríos, clima severo y ataques de nativos americanos que defendían su territorio. Miles de colonos se mudaron al Oeste por el Sendero de Oregón, cambiando permanentemente el paisaje americano y las sociedades nativas.',
+    keyPoints: ['El Sendero de Oregón tenía más de 3,200 km de largo', 'Los colonos enfrentaron grandes dificultades', 'El sendero condujo a la colonización del Oeste'],
+    funFact: '¡Las carretas cubiertas podían descomponerse y las familias podían quedar varadas durante semanas!'
+  });
+  merge('history:h4D3', {
+    intro: 'La Fiebre del Oro de California (1848-1855) comenzó cuando se descubrió oro, y cientos de miles de personas se apresuraron al Oeste esperando enriquecerse. Aunque algunos mineros encontraron oro, la mayoría fracasó y en cambio trabajó para compañías mineras o se mudó a nuevos pueblos para vender suministros y servicios. La Fiebre del Oro trajo un rápido crecimiento de población a California, creó nuevas ciudades y destruyó comunidades nativas americanas, convirtiendo a América en una nación que se extendía del Atlántico al Pacífico.',
+    keyPoints: ['Se descubrió oro en California', 'Cientos de miles de personas se apresuraron al Oeste', 'La mayoría de los buscadores no encontraron oro'],
+    funFact: '¡San Francisco creció de un pequeño pueblo a una gran ciudad durante la Fiebre del Oro!'
+  });
+  merge('history:h4E1', {
+    intro: 'La Revolución Industrial (finales del siglo XVIII y el siglo XIX) fue un período de rápida innovación tecnológica en el que nuevas máquinas y fábricas transformaron a América de una sociedad agrícola en una sociedad industrial. Inventores crearon máquinas que producían bienes más rápido y más baratos, como la desmotadora de algodón, el motor de vapor y el telar mecánico, lo que hizo que la gente se trasladara de las granjas a las ciudades para trabajar en fábricas. La Revolución Industrial trajo prosperidad a algunos, pero también creó condiciones de trabajo muy duras.',
+    keyPoints: ['Las máquinas transformaron la agricultura en fabricación', 'Se construyeron fábricas en las ciudades', 'La Revolución Industrial trajo tanto progreso como problemas'],
+    funFact: '¡Niños de tan solo 5 años trabajaban en fábricas peligrosas durante la Revolución Industrial!'
+  });
+  merge('history:h4E2', {
+    intro: 'Inventos revolucionarios como la imprenta, el telescopio, la bombilla, el teléfono y el avión transformaron la sociedad humana al mejorar la comunicación, el transporte y la comprensión del mundo. Inventores como Thomas Edison, Alexander Graham Bell y los hermanos Wright se dedicaron a resolver problemas y crear nuevas tecnologías que facilitaron la vida y la hicieron más conectada. Los inventos difundieron el conocimiento, conectaron a personas distantes, movieron personas y mercancías más rápido y mejoraron en general la calidad de vida.',
+    keyPoints: ['Los inventos resolvieron problemas y mejoraron la vida', 'Los grandes inventores cambiaron el mundo', 'Los inventos tuvieron efectos tanto positivos como negativos'],
+    funFact: '¡Thomas Edison probó más de 3,000 materiales antes de perfeccionar la bombilla!'
+  });
+  merge('history:h4E3', {
+    intro: 'El transporte evolucionó desde caminar y andar a caballo hasta las carretas cubiertas, los trenes, los automóviles y los aviones, avanzando cada vez más la capacidad humana de viajar más rápido y más lejos. La locomotora de vapor revolucionó el transporte terrestre al jalar trenes por todo el país, conectando ciudades distantes y permitiendo transportar mercancías de manera eficiente. El mejor transporte conectó las regiones de América, extendió el comercio y la cultura, facilitó la migración al Oeste y creó los cimientos de la nación moderna e interconectada que existe hoy.',
+    keyPoints: ['El transporte mejoró de los caballos a los trenes', 'Los trenes conectaron ciudades lejanas', 'El mejor transporte ayudó a construir América'],
+    funFact: '¡El primer ferrocarril transcontinental se completó en 1869, conectando las costas del Atlántico y el Pacífico!'
+  });
+
+  // ─── Science Grade 4 prose ───
+  merge('science:s4A1', {
+    intro: 'Una cadena alimentaria muestra el flujo de energía a través de un ecosistema, empezando por las plantas (productoras) que capturan la luz solar, siguiendo con los herbívoros (consumidores primarios) que comen plantas, y terminando con los carnívoros (consumidores secundarios) que comen otros animales. Cada organismo en la cadena depende del anterior para obtener alimento y energía, y la energía disminuye en cada nivel porque los organismos la usan para sus propios procesos vitales. La mayoría de los ecosistemas tienen múltiples cadenas alimentarias que se interconectan en redes alimentarias.',
+    keyPoints: ['Las plantas inician las cadenas alimentarias', 'La energía fluye hacia los consumidores', 'Las cadenas alimentarias conectan a todos los seres vivos'],
+    funFact: '¡Cuando las abejas polinizan las plantas, hacen posible toda la cadena alimentaria que depende de ellas!'
+  });
+  merge('science:s4A2', {
+    intro: 'Las adaptaciones animales son características físicas o conductuales heredadas que ayudan a los organismos a sobrevivir y reproducirse en su entorno específico. Las adaptaciones físicas incluyen estructuras como el pelaje grueso para climas fríos, las garras afiladas para cazar o los dientes planos para moler plantas. Las adaptaciones conductuales son acciones que los animales aprenden o con las que nacen, como la migración para encontrar alimento, la hibernación para sobrevivir el invierno o el camuflaje para esconderse de los depredadores. A lo largo de muchas generaciones, las adaptaciones se desarrollan mediante la selección natural.',
+    keyPoints: ['Las adaptaciones mejoran la supervivencia', 'Existen tipos físicos y conductuales', 'La selección natural crea las adaptaciones'],
+    funFact: '¡El pelaje de la liebre ártica es blanco en la nieve y marrón en el verano, lo que le da el camuflaje perfecto durante todo el año!'
+  });
+  merge('science:s4A3', {
+    intro: 'Las plantas pasan por ciclos de vida completos que incluyen la germinación cuando brota una semilla, el crecimiento cuando la planta desarrolla hojas y tallos, la reproducción cuando se forman flores, y la senescencia cuando la planta se marchita y muere. Las semillas contienen una planta bebé (embrión) y alimento almacenado (cotiledón) que nutre a la planta hasta que desarrolla hojas para la fotosíntesis. Las plantas con flores atraen a polinizadores como las abejas y las mariposas que transfieren el polen entre las flores, lo que permite la fertilización y la formación de semillas.',
+    keyPoints: ['Las semillas inician la vida de la planta', 'Las plantas se reproducen mediante flores', 'Los ciclos de vida se repiten cada año'],
+    funFact: '¡Un girasol puede producir más de 1,000 semillas en una sola flor!'
+  });
+  merge('science:s4B1', {
+    intro: 'La meteorización es la descomposición de las rocas en pedazos más pequeños a través de procesos físicos (como los ciclos de congelación y deshielo) o químicos (como la lluvia ácida), mientras que la erosión es el movimiento del material meteorizado por el agua, el viento o el hielo. La erosión del agua da forma a cañones y valles a lo largo de millones de años, la erosión del viento crea dunas de arena en los desiertos y la erosión glacial esculpió valles en forma de U. La erosión del suelo es una gran preocupación porque elimina la capa fértil que los agricultores necesitan para cultivar.',
+    keyPoints: ['La meteorización rompe las rocas', 'La erosión mueve el material', 'Los seres humanos pueden controlar la erosión'],
+    funFact: '¡El Gran Cañón fue esculpido por la erosión del río a lo largo de 6 millones de años!'
+  });
+  merge('science:s4B2', {
+    intro: 'El ciclo del agua describe cómo el agua se mueve continuamente entre los océanos, la atmósfera y la tierra a través de la evaporación, la condensación, la precipitación y la acumulación. La evaporación ocurre cuando el agua de los océanos y los lagos se convierte en vapor de agua invisible y sube a la atmósfera, mientras que la condensación ocurre cuando ese vapor se enfría y forma gotitas de agua visibles como nubes. La precipitación cae como lluvia o nieve cuando las gotitas se combinan en las nubes y se vuelven pesadas, acumulándose en océanos, ríos, lagos y suelo para reiniciar el ciclo.',
+    keyPoints: ['El agua se mueve en un ciclo continuo', 'La evaporación y la condensación se alternan', 'Toda el agua es reciclada'],
+    funFact: '¡Aproximadamente el 97% del agua de la Tierra es agua salada en los océanos, no apta para beber!'
+  });
+  merge('science:s4B3', {
+    intro: 'La Tierra tiene capas distintas: la corteza (capa rocosa externa y delgada), el manto (roca caliente y gruesa debajo), el núcleo externo (hierro líquido) y el núcleo interno (centro de hierro sólido). La corteza es sobre la que vivimos y está formada por placas que se mueven lentamente, mientras que el manto es tan caliente que fluye como miel espesa a lo largo de eras geológicas. Los núcleos de hierro generan el campo magnético de la Tierra y crean un calor intenso, con temperaturas en el núcleo que alcanzan los 5,000 °C.',
+    keyPoints: ['La corteza es la capa delgada superior', 'El manto es grueso y caliente', 'El núcleo es de hierro y es magnético'],
+    funFact: '¡El viaje al núcleo de la Tierra te llevaría a través de capas cada vez más calientes!'
+  });
+  merge('science:s4C1', {
+    intro: 'Una onda es un patrón de perturbación que transfiere energía a través del espacio, y las ondas sonoras son creadas por objetos que vibran y empujan las moléculas de aire hacia adelante y hacia atrás. El sonido viaja más lento que la luz, por eso ves el relámpago antes de escuchar el trueno aunque ocurran al mismo tiempo. Diferentes materiales transmiten el sonido a diferentes velocidades; el sonido viaja más rápido a través de los sólidos que por el aire porque las moléculas están más cerca entre sí. El volumen mide qué tan fuerte es un sonido, mientras que el tono mide qué tan agudo o grave es.',
+    keyPoints: ['Las ondas transfieren energía', 'El sonido es una vibración', 'El tono y el volumen son diferentes'],
+    funFact: '¡El canto de una ballena azul puede viajar cientos de kilómetros bajo el agua a través de ondas sonoras!'
+  });
+  merge('science:s4C2', {
+    intro: 'La luz es radiación electromagnética que viaja en línea recta a una velocidad increíble y nos permite ver los objetos cuando rebota en ellos y llega a nuestros ojos. Las lentes son piezas curvas de material transparente que doblan los rayos de luz para ampliar o enfocar imágenes; se usan en microscopios, telescopios y lentes para los ojos. Los espejos reflejan la luz para crear imágenes: los planos crean reflejos perfectos y los curvos crean imágenes ampliadas o reducidas. Los colores son diferentes longitudes de onda de luz, visibles en los arcoíris.',
+    keyPoints: ['La luz viaja en línea recta', 'Las lentes doblan la luz', 'Los colores son longitudes de onda'],
+    funFact: '¡Los ojos humanos pueden ver la llama de una vela desde 48 km de distancia en una noche oscura!'
+  });
+  merge('science:s4C3', {
+    intro: 'La electricidad es el flujo de electrones a través de un conductor como el cobre, y alimenta las luces, las computadoras, los refrigeradores y casi toda la tecnología que usamos. Un circuito eléctrico es un lazo completo a través del cual fluyen los electrones, e incluye una fuente de energía (como una batería), conductores (alambres) y una carga (como una bombilla que usa la energía). Un interruptor rompe el circuito para detener el flujo de electricidad, mientras que un disyuntor se abre automáticamente para evitar daños por una corriente excesiva.',
+    keyPoints: ['La electricidad es el flujo de electrones', 'Los circuitos deben ser completos', 'Los interruptores controlan el flujo'],
+    funFact: '¡Un rayo es una descarga eléctrica masiva que contiene miles de millones de voltios!'
+  });
+  merge('science:s4D1', {
+    intro: 'Un experimento controlado es una prueba en la que los científicos cambian una variable independiente mientras mantienen todas las demás variables igual, lo que les permite determinar la causa y el efecto con confianza. Un grupo de control no recibe ningún tratamiento o recibe uno estándar, mientras que el grupo experimental recibe el tratamiento que se está probando, y al comparar los resultados se muestra el efecto de la variable. Por ejemplo, probar si la luz solar ayuda a crecer a las plantas requiere un grupo con luz solar y otro en oscuridad, con todas las demás condiciones idénticas.',
+    keyPoints: ['Los grupos de control y experimental difieren en una variable', 'Todas las demás variables permanecen igual', 'La comparación muestra el efecto'],
+    funFact: '¡Los primeros experimentos controlados probaron si la oración podía sanar huesos rotos!'
+  });
+  merge('science:s4D2', {
+    intro: 'El análisis de datos es examinar la información recopilada en un experimento para encontrar patrones, sacar conclusiones y determinar si los resultados apoyan la hipótesis. Los científicos organizan los datos en tablas, crean gráficas para visualizar patrones, calculan promedios para encontrar valores típicos e identifican valores atípicos que no encajan en el patrón. El análisis preciso de datos requiere mediciones cuidadosas, un registro claro y una presentación honesta de los resultados, incluyendo los que contradicen la hipótesis.',
+    keyPoints: ['Los datos organizados muestran patrones', 'Las gráficas visualizan los resultados', 'La presentación honesta es importante'],
+    funFact: '¡Los científicos pasan más tiempo analizando datos que realizando los experimentos!'
+  });
+  merge('science:s4D3', {
+    intro: 'Los proyectos de feria de ciencias son investigaciones independientes en las que los estudiantes eligen una pregunta, investigan el contexto, formulan una hipótesis, realizan experimentos, analizan los resultados y presentan sus hallazgos. Los buenos proyectos parten de una pregunta que genuinamente te interesa y que puede comprobarse mediante experimentos con los recursos y el tiempo disponibles. El tablero del proyecto debe mostrar claramente tu pregunta, hipótesis, métodos, resultados con gráficas y conclusiones. Las ferias de ciencias enseñan habilidades de investigación y comunicación científica.',
+    keyPoints: ['Los proyectos responden preguntas reales', 'El tablero comunica los hallazgos', 'Lo más importante es aprender'],
+    funFact: '¡El proyecto de feria de ciencias más antiguo que ganó fue creado por un estudiante que descubrió un nuevo tipo de bacteria!'
+  });
+  merge('science:s4E1', {
+    intro: 'La energía renovable proviene de fuentes naturales que se renuevan solas, como la energía solar del sol, la energía eólica del viento, la energía hidroeléctrica del agua en movimiento y la energía geotérmica del calor de la Tierra. A diferencia de los combustibles fósiles que eventualmente se agotarán y dañan el medio ambiente, las fuentes de energía renovable son sostenibles y producen electricidad con mínima contaminación. Los paneles solares convierten la luz solar directamente en electricidad, las turbinas eólicas giran con el viento para generar energía, y las represas aprovechan el agua en movimiento.',
+    keyPoints: ['Las fuentes renovables no se agotan', 'Existen múltiples tipos', 'La tecnología sigue mejorando'],
+    funFact: '¡Alemania genera el 50% de su electricidad de fuentes renovables como el viento y el sol!'
+  });
+  merge('science:s4E2', {
+    intro: 'Un circuito simple consiste en una fuente de energía como una batería, alambres conductores para llevar la electricidad y una carga como una bombilla que usa la electricidad para realizar un trabajo. Un circuito abierto tiene una ruptura que impide el flujo de electricidad, mientras que un circuito cerrado forma un lazo completo que permite que fluya la corriente. Agregar más baterías en serie (de extremo a extremo) aumenta el voltaje y el brillo, mientras que agregarlas en paralelo (lado a lado) aumenta cuánto tiempo duran.',
+    keyPoints: ['Los circuitos necesitan lazos completos', 'Las disposiciones en serie y en paralelo son distintas', 'La seguridad es importante'],
+    funFact: '¡Los primeros circuitos eléctricos fueron creados por Alessandro Volta en 1800!'
+  });
+  merge('science:s4E3', {
+    intro: 'El proceso de diseño de ingeniería incluye: identificar un problema, investigar soluciones, hacer lluvia de ideas, seleccionar la mejor opción, crear un prototipo, probarlo, analizar los resultados y rediseñar según lo aprendido. Cada iteración en este ciclo produce un mejor diseño, ya que los fracasos enseñan lecciones valiosas sobre qué funciona y qué no. Los diseños exitosos equilibran múltiples requisitos: funcionalidad, seguridad, costo, apariencia e impacto ambiental. Entender el proceso de diseño ayuda a los ingenieros a crear soluciones a problemas reales.',
+    keyPoints: ['El diseño es iterativo', 'Los fracasos enseñan lecciones', 'Las pruebas mejoran las soluciones'],
+    funFact: '¡La nota adhesiva se inventó mediante el proceso de diseño cuando un científico trató de crear un pegamento fuerte pero creó uno débil!'
+  });
+
+  // ─── Social Studies Grade 4 prose ───
+  merge('social-studies:ss4A1', {
+    intro: 'El Noreste es la región en la parte superior derecha de los Estados Unidos y fue el hogar de las primeras trece colonias establecidas por los europeos. Esta región incluye estados como Massachusetts, Nueva York, Pensilvania y Virginia. El Noreste es conocido por sus ciudades densas, sus monumentos históricos y sus excelentes puertos que lo hicieron ideal para el asentamiento colonial y el comercio. La región experimenta cuatro estaciones definidas con inviernos fríos y nevados y veranos cálidos. Ciudades como Nueva York, Boston y Filadelfia se desarrollaron como importantes centros de comercio, gobierno y cultura.',
+    keyPoints: ['El Noreste incluye las trece colonias originales', 'Ciudades importantes como Boston y Filadelfia están en el Noreste', 'La región tiene inviernos fríos y fue importante en la independencia americana'],
+    funFact: '¡El Puerto de Boston fue el escenario del Motín del Té en 1773, una protesta que ayudó a encender la Revolución Americana!'
+  });
+  merge('social-studies:ss4A2', {
+    intro: 'El Sureste es la región en la parte inferior derecha de los Estados Unidos, que incluye estados como Georgia, Carolina del Norte, Carolina del Sur y Misisipi. Esta región tiene un clima cálido con inviernos suaves y veranos calurosos, lo que la hace ideal para cultivar. El Sureste está cruzado por ríos importantes como el Misisipi y el Potomac, que fueron vitales para el transporte y el comercio. Históricamente, el Sureste desarrolló grandes plantaciones que cultivaban tabaco, arroz y algodón utilizando mano de obra africana esclavizada, lo que causó un inmenso sufrimiento humano.',
+    keyPoints: ['El Sureste tiene un clima cálido apto para la agricultura', 'Ríos como el Misisipi recorren la región', 'Históricamente se construyó sobre la agricultura de plantaciones'],
+    funFact: '¡El río Misisipi es el río más largo de América del Norte con 3,766 km, y fue llamado "El Padre de las Aguas" por los nativos americanos!'
+  });
+  merge('social-studies:ss4A3', {
+    intro: 'El Medio Oeste es la región central de los Estados Unidos, conocida por sus vastas llanuras, colinas onduladas y tierras de cultivo fértiles que la convierten en el granero de América. Estados como Illinois, Iowa, Kansas y Nebraska producen enormes cantidades de maíz, trigo y otros cultivos. El Oeste es la región más grande, que se extiende desde las Montañas Rocosas hasta el Océano Pacífico, e incluye paisajes dramáticos como montañas, desiertos, cañones y costas. Ambas regiones jugaron un papel importante en la expansión de América hacia el Oeste.',
+    keyPoints: ['El Medio Oeste es una región agrícola con llanuras fértiles', 'El Oeste incluye montañas, desiertos y costas', 'Ambas regiones fueron importantes en la expansión hacia el Oeste'],
+    funFact: '¡Las Montañas Rocosas forman parte de una cadena montañosa que se extiende más de 4,800 km desde Canadá hasta Nuevo México!'
+  });
+  merge('social-studies:ss4B1', {
+    intro: 'Cada uno de los cincuenta estados tiene una ciudad capital donde se ubica su gobierno y donde trabajan sus líderes. Las capitales estatales son centros políticos y administrativos importantes donde se reúnen las legislaturas estatales y trabajan los gobernadores. Algunos estados tienen como capital su ciudad más grande, como Austin (Texas) y Sacramento (California), mientras que otros tienen ciudades más pequeñas como Montpelier (Vermont) o Pierre (Dakota del Sur). Los gobiernos estatales son similares al gobierno federal, con un gobernador, una legislatura y tribunales.',
+    keyPoints: ['Cada estado tiene una ciudad capital donde se ubica el gobierno', 'Los gobiernos estatales tienen gobernadores, legislaturas y tribunales', 'Los gobiernos estatales crean leyes para sus estados'],
+    funFact: '¡Montpelier, la capital de Vermont, es la capital estatal menos poblada de los 48 estados continentales, con solo unos 8,000 habitantes!'
+  });
+  merge('social-studies:ss4B2', {
+    intro: 'Los gobiernos estatales, al igual que el gobierno federal, están divididos en tres poderes que equilibran el poder. El poder legislativo es la legislatura estatal (generalmente llamada Senado y Cámara de Representantes), que crea las leyes estatales. El poder ejecutivo está encabezado por el gobernador, quien hace cumplir las leyes y dirige el gobierno estatal. El poder judicial incluye los tribunales estatales y los jueces que interpretan las leyes y resuelven disputas. Esta división del poder garantiza que ninguna persona o poder se vuelva demasiado poderoso.',
+    keyPoints: ['Los gobiernos estatales tienen tres poderes como el gobierno federal', 'Los gobernadores dirigen el poder ejecutivo y hacen cumplir las leyes', 'Los tribunales estatales interpretan las leyes en el poder judicial'],
+    funFact: '¡Las primeras constituciones estatales fueron creadas por los trece estados originales en la década de 1770, antes de que se escribiera la Constitución de los EE. UU.!'
+  });
+  merge('social-studies:ss4B3', {
+    intro: 'Cada estado tiene símbolos oficiales que representan su identidad, historia y valores. Las banderas estatales tienen colores, diseños y símbolos significativos para el patrimonio de ese estado. Las aves, flores y árboles estatales se eligen para representar las características naturales del estado. Los sellos estatales son estampillas oficiales que se usan en documentos del gobierno. Algunos estados tienen lemas estatales. Estos símbolos ayudan a unir a los ciudadanos y les recuerdan qué hace especial a su estado.',
+    keyPoints: ['Cada estado tiene una bandera oficial con diseños únicos', 'Los estados eligen aves, flores y árboles como símbolos oficiales', 'Los símbolos estatales representan la identidad única de cada estado'],
+    funFact: '¡El ave del estado de Rhode Island es el Rhode Island Red, una raza de gallina desarrollada en ese estado famosa por poner huevos de color marrón!'
+  });
+  merge('social-studies:ss4C1', {
+    intro: 'Los nativos americanos fueron los primeros habitantes de América del Norte y del Sur, habiendo migrado desde Asia miles de años antes de que llegaran los europeos. La evidencia arqueológica muestra que había personas viviendo en América del Norte hace al menos 15,000 años. Los nativos americanos desarrollaron civilizaciones diversas, desde los pueblos del Suroeste hasta las culturas constructoras de montículos del río Misisipi. Se adaptaron a sus entornos, desarrollando prácticas de agricultura, caza, pesca y comercio adecuadas para sus tierras, y crearon sociedades con gobiernos, arte y sistemas de conocimiento complejos.',
+    keyPoints: ['Los nativos americanos fueron los primeros habitantes de las Américas', 'Llegaron miles de años antes de la colonización europea', 'Los nativos americanos desarrollaron civilizaciones y sociedades diversas'],
+    funFact: '¡Cahokia era una gran ciudad nativa americana cerca de lo que hoy es San Luis y tenía una población de 20,000 personas alrededor del año 1000 d. C. — más grande que Londres en esa época!'
+  });
+  merge('social-studies:ss4C2', {
+    intro: 'Los nativos americanos estaban divididos en cientos de tribus y naciones diferentes, cada una con su propio gobierno, idioma y cultura. En el Noreste, naciones como la Confederación Iroquesa formaron poderosas alianzas políticas. En las Grandes Llanuras, tribus como los sioux, los cheyenes y los comanches cazaban búfalos. En el Suroeste, los pueblos construyeron viviendas en los acantilados y practicaron la agricultura. Las tribus del Noroeste del Pacífico desarrollaron sociedades complejas basadas en la pesca. Cada nación desarrolló arte, vestimenta, comida y prácticas espirituales distintas.',
+    keyPoints: ['Los nativos americanos se organizaban en cientos de tribus y naciones', 'Cada nación tenía idiomas, gobiernos y culturas distintos', 'Las tribus se adaptaron a sus regiones específicas'],
+    funFact: '¡La Confederación Iroquesa, formada por el pueblo Haudenosaunee, fue considerada una de las democracias participativas más antiguas e influyó en la Constitución de los EE. UU.!'
+  });
+  merge('social-studies:ss4C3', {
+    intro: 'Los nativos americanos hicieron enormes contribuciones a la cultura y el conocimiento mundial que persisten hoy. Las contribuciones agrícolas incluyen la domesticación de cultivos como el maíz, los frijoles, las papas, los tomates y el chocolate: alimentos que ahora alimentan a miles de millones de personas en todo el mundo. La estructura democrática de la Confederación Iroquesa influyó en el marco del gobierno equilibrado de la Constitución de los EE. UU. Los nativos americanos desarrollaron un conocimiento sofisticado sobre plantas medicinales; muchos medicamentos modernos tienen su origen en plantas que ellos usaban.',
+    keyPoints: ['Los nativos americanos domesticaron cultivos que hoy se comen en todo el mundo', 'La Confederación Iroquesa influyó en la estructura del gobierno americano', 'El conocimiento medicinal nativo americano dio origen a medicamentos modernos'],
+    funFact: '¡Las papas, los tomates, el maíz y el chocolate, alimentos originarios de las Américas, representan aproximadamente el 60% del suministro mundial de alimentos!'
+  });
+  merge('social-studies:ss4D1', {
+    intro: 'La Era de la Exploración, que comenzó en la década de 1400, vio a los barcos europeos aventurarse por los océanos para explorar tierras desconocidas y establecer rutas comerciales. Los avances en el diseño de barcos, los instrumentos de navegación como la brújula y los mapas mejorados hicieron posibles los largos viajes oceánicos. Los países europeos competían por encontrar rutas marítimas hacia Asia para el lucrativo comercio de especias. En lugar de llegar a Asia, los exploradores se encontraron con las Américas. Este encuentro trajo enfermedades, colonización y un tremendo sufrimiento para los pueblos indígenas.',
+    keyPoints: ['La Era de la Exploración comenzó en la década de 1400 con viajes oceánicos europeos', 'Los exploradores buscaban rutas marítimas hacia Asia para el comercio', 'El contacto europeo con las Américas cambió profundamente la historia mundial'],
+    funFact: '¡El Príncipe Enrique el Navegante de Portugal financió misiones de exploración que establecieron puestos comerciales a lo largo de la costa africana!'
+  });
+  merge('social-studies:ss4D2', {
+    intro: 'En 1492, Cristóbal Colón, un explorador italiano que navegaba para España, llegó a las islas del Caribe tras cruzar el Océano Atlántico. Colón creía haber llegado a Asia, pero en realidad había llegado a islas en lo que los europeos llamarían el "Nuevo Mundo". El viaje de Colón es frecuentemente celebrado como el inicio de la exploración europea de las Américas. Sin embargo, los viajes de Colón tuvieron consecuencias catastróficas para los nativos americanos, incluyendo enfermedades, esclavitud y desplazamiento. Colón mismo esclavizó a personas nativas y las trató brutalmente.',
+    keyPoints: ['Colón navegó para España y llegó al Caribe en 1492', 'Los exploradores nórdicos habían llegado a América siglos antes que Colón', 'Los viajes de Colón llevaron a la colonización y al sufrimiento de los nativos americanos'],
+    funFact: '¡Colón murió en 1506 creyendo que había llegado a Asia — nunca supo que había encontrado un continente desconocido!'
+  });
+  merge('social-studies:ss4D3', {
+    intro: 'Muchos exploradores además de Colón contribuyeron a la comprensión europea del mundo durante la Era de la Exploración. Vasco da Gama navegó alrededor de África para llegar a la India, demostrando que existía una ruta oceánica hacia Asia. Fernando de Magallanes lideró la primera expedición en circunnavegar (rodear) todo el globo, demostrando el tamaño de la Tierra. Hernán Cortés exploró y conquistó México para España. John Cabot navegó para Inglaterra y exploró América del Norte. Jacques Cartier llegó a lo que hoy es Canadá. Estos exploradores ampliaron los mapas y el comercio europeos.',
+    keyPoints: ['Múltiples exploradores ampliaron el conocimiento europeo durante este período', 'La expedición de Magallanes fue la primera en circunnavegar el globo', 'La exploración llevó a la colonización de tierras con pueblos nativos existentes'],
+    funFact: '¡Magallanes murió en Filipinas en 1521 durante su viaje, así que nunca completó la circunnavegación — su tripulación terminó sin él!'
+  });
+  merge('social-studies:ss4E1', {
+    intro: 'Cada estado tiene industrias: sectores de la economía donde las personas trabajan para producir bienes o servicios. Algunos estados se enfocan en la agricultura; Iowa cultiva maíz y soja mientras que California cultiva verduras y frutas. Los estados manufactureros como Ohio y Míchigan producen automóviles y maquinaria. Texas y Alaska tienen importantes industrias de petróleo y energía. Florida y Hawái dependen en gran medida del turismo. La geografía, el clima y la historia de un estado influyen en qué industrias se desarrollaron ahí. Entender las industrias estatales nos muestra cómo las diferentes regiones contribuyen a la economía nacional.',
+    keyPoints: ['Diferentes estados se especializan en distintas industrias', 'Las industrias están determinadas en parte por la geografía y el clima', 'Los estados producen bienes y servicios que apoyan la economía'],
+    funFact: '¡La economía de California es tan grande que si fuera un país, sería la quinta economía más grande del mundo, por delante del Reino Unido o Francia!'
+  });
+  merge('social-studies:ss4E2', {
+    intro: 'Los recursos naturales son materiales de la Tierra que son útiles para las personas, incluyendo bosques, minerales, agua, suelo y fuentes de energía. Los estados con abundantes recursos naturales suelen desarrollar industrias basadas en esos recursos. Alaska tiene vastos bosques y peces; Texas tiene petróleo y ganado; Montana tiene minerales y madera. El agua es un recurso crucial. La calidad del suelo determina la productividad agrícola; las Grandes Llanuras tienen suelo fértil ideal para la agricultura. El carbón, el petróleo, el gas natural y los depósitos minerales impulsan industrias. Algunos recursos son renovables mientras que otros no.',
+    keyPoints: ['Los recursos naturales incluyen bosques, minerales, agua y fuentes de energía', 'Los recursos de un estado influyen en qué industrias se desarrollan', 'Los recursos pueden ser renovables o no renovables'],
+    funFact: '¡La región de los Apalaches contiene vastos depósitos de carbón que impulsaron la industria americana durante más de un siglo!'
+  });
+  merge('social-studies:ss4E3', {
+    intro: 'Los estados no producen todo lo que necesitan, por lo que intercambian bienes y servicios con otros estados. Texas produce petróleo que otros estados compran; Iowa cultiva maíz que alimenta animales en otros estados; California produce frutas y verduras que se venden en todo el país. Este comercio beneficia a todos: los estados se especializan en lo que hacen mejor e intercambian lo que necesitan. Los sistemas de transporte como carreteras, ferrocarriles y ríos trasladan los bienes entre estados. El comercio interestatal hace que la economía nacional sea más eficiente y proporciona variedad de productos.',
+    keyPoints: ['Los estados intercambian bienes y servicios entre sí', 'Los estados se especializan en industrias adecuadas para sus recursos', 'Las redes de comercio conectan los estados y generan beneficios económicos'],
+    funFact: '¡El Sistema de Autopistas Interestatales, iniciado en 1956, creó más de 77,000 km de carreteras que facilitan el comercio y los viajes entre estados!'
+  });
+
+  // ─── App Building Grade 4 prose ───
+  merge('app-building:ab4a1', {
+    intro: 'Las personas ricas y los emprendedores tienen algo en común: VEN problemas que otros ignoran y CONSTRUYEN soluciones. Cuando ves una fila larga en una tienda, eso es un problema. Cuando ves a tu mamá luchando por encontrar recetas, eso es un problema. ¡Cada problema es una oportunidad de negocio! El lema del emprendedor es "Ve la necesidad, llena la necesidad." Los problemas en la escuela son GRANDES ideas para apps. Entre más grande es el problema, más grande es la oportunidad.',
+    keyPoints: ['Los emprendedores buscan problemas en todas partes', '"Ve la necesidad, llena la necesidad" es el lema del emprendedor', 'Los problemas en la escuela son GRANDES ideas para apps'],
+    funFact: '¡En Shark Tank, los inversores siempre preguntan: "¿Qué problema resuelve esto?" Si no puedes responder eso, no invertirán!'
+  });
+  merge('app-building:ab4a2', {
+    intro: 'Antes de construir cualquier cosa, necesitas saber PARA QUIÉN la estás construyendo. Esta persona se llama tu "usuario objetivo". Una app de tareas para un estudiante de 3er grado se ve completamente diferente a una para un estudiante de preparatoria. Entre más entiendas a tu usuario, mejor será tu app. Piensa en su edad, en lo que le gusta, en lo que le frustra. Los mejores productos se sienten como si hubieran sido hechos exactamente para ti.',
+    keyPoints: ['Tu "usuario objetivo" es la persona que usará tu app', 'Piensa en su edad, gustos y frustraciones', 'Las mejores apps se sienten hechas especialmente para ti'],
+    funFact: '¡Cuando Snapchat se lanzó por primera vez, era SOLO para estudiantes universitarios. Ese enfoque tan específico fue lo que la hizo viral!'
+  });
+  merge('app-building:ab4a3', {
+    intro: 'He aquí un secreto: los mejores emprendedores no esperan la idea "perfecta". Hacen lluvia de ideas de MUCHAS ideas rápidamente y luego escogen la mejor. Pon un temporizador de 5 minutos y anota todas las ideas de apps que se te ocurran, ¡incluso las más locas! Siempre puedes mejorarlas después. La cantidad primero, la calidad después. Mira a tu alrededor para buscar inspiración y piensa en apps que te gustaría que existieran.',
+    keyPoints: ['Cantidad primero, calidad después — deja fluir las ideas', 'Ninguna idea es demasiado tonta durante la lluvia de ideas', 'Combina dos ideas existentes para crear algo nuevo'],
+    funFact: '¡James Dyson creó 5,127 prototipos antes de que su aspiradora funcionara. La primera idea rara vez es la definitiva!'
+  });
+  merge('app-building:ab4b1', {
+    intro: 'Piensa en tu app como una casa. La pantalla de inicio es la puerta principal: es lo primero que ve la gente. Las otras pantallas son como habitaciones: cada una hace algo diferente. Una buena app tiene entre 3 y 5 pantallas principales, igual que una casa tiene sala, cocina, recámara y baño. Los usuarios siempre deben saber dónde están dentro de la app. Un botón de "volver" es como caminar de regreso a la habitación anterior.',
+    keyPoints: ['Pantalla de inicio = puerta principal (¡primera impresión!)', 'Cada pantalla debe hacer UNA cosa principal', 'La mayoría de las apps tienen entre 3 y 5 pantallas principales'],
+    funFact: '¡Instagram solo tiene 5 pantallas principales: Feed, Buscar, Crear, Reels y Perfil. ¡Lo simple es poderoso!'
+  });
+  merge('app-building:ab4b2', {
+    intro: 'Un botón en tu app debe ser como un letrero en una puerta: debes saber qué pasa cuando lo tocas SIN necesidad de adivinar. "Guardar" te dice que guarda. "Eliminar" te dice que elimina. "Haz clic aquí" no te dice NADA. Las buenas etiquetas de botones son claras y cortas. Usa palabras de acción: Guardar, Agregar, Enviar, Compartir, Eliminar. Haz los botones importantes grandes y coloridos, y los menos importantes más pequeños.',
+    keyPoints: ['Los botones deben decir lo que HACEN', 'Usa palabras de acción: Guardar, Agregar, Enviar, Compartir', 'Los botones importantes deben ser grandes y coloridos'],
+    funFact: '¡El botón "Comprar en 1 clic" de Amazon vale MILES DE MILLONES. ¡Un simple botón cambió las compras en línea para siempre!'
+  });
+  merge('app-building:ab4b3', {
+    intro: 'UI significa Interfaz de Usuario: es cómo se VE tu app. Dos apps pueden hacer exactamente lo mismo, pero la más bonita obtendrá muchas más descargas. Usa solo 2 o 3 colores en tu app (¡no 10!). Asegúrate de que el texto sea fácil de leer. Deja espacio en blanco: no pongas todo junto. Las esquinas redondeadas se ven modernas y amigables. Los íconos ayudan a las personas a entender las cosas más rápido que las palabras.',
+    keyPoints: ['Usa solo 2 a 3 colores en tu app', 'Asegúrate de que el texto sea fácil de leer', 'El espacio en blanco hace la app más limpia'],
+    funFact: '¡Cuando Apple rediseñó sus apps con esquinas redondeadas y colores suaves, las descargas aumentaron un 30%!'
+  });
+  merge('app-building:ab4c1', {
+    intro: 'Cuando usas un creador de apps con IA como Lovable, escribes una descripción y la IA convierte tus palabras en una app real. Pero aquí está el truco: necesitas ser ESPECÍFICO. No digas solo "haz una app". Di "haz una app azul de seguimiento de mascotas llamada PawPal con un botón que diga Agregar mi mascota". Cuanto más detalle des, mejor. Puedes empezar con el nombre de la app, describir los colores y el estilo, listar las funciones principales y decir para quién es.',
+    keyPoints: ['Empieza con el NOMBRE de la app', 'Describe los COLORES y el estilo', 'Lista las funciones principales'],
+    funFact: '¡En 2024, un adolescente usó IA para construir y lanzar una app real en solo 3 HORAS. A los desarrolladores profesionales les tomaba 3 MESES hacer algo similar hace pocos años!'
+  });
+  merge('app-building:ab4c2', {
+    intro: 'Una de las cosas más geniales de construir con IA es que puedes seguir mejorando. ¿No te gusta el color? Di "cámbialo a morado". ¿Quieres un botón más grande? Di "haz el botón más grande". ¿Quieres agregar una función? ¡Solo descríbela! Es como tener una conversación con un constructor que hace exactamente lo que le pides. Sé específico: "haz el botón azul" es mejor que "mejora la apariencia". La IA recuerda lo que ya construyó, así que puedes ir agregando cosas.',
+    keyPoints: ['Siempre puedes decirle a la IA que cambie cosas', 'Sé específico: "haz el botón azul" en lugar de "mejora la apariencia"', 'Mientras más practiques, mejor te vuelves en los prompts'],
+    funFact: '¡Los desarrolladores reales en compañías como Google actualizan sus apps cada 2 SEMANAS. ¡Construir nunca está "terminado" — siempre se puede mejorar!'
+  });
+  merge('app-building:ab4c3', {
+    intro: 'Hasta ahora has construido pantallas individuales. Pero las apps reales tienen MÚLTIPLES pantallas que se conectan entre sí. Instagram tiene una pantalla de Feed, una de Búsqueda, una de Perfil y más. Cuando construyes con IA, puedes pedirle que cree pantallas adicionales y agregue navegación para moverte entre ellas. La barra de navegación en la parte inferior ayuda a cambiar de pantalla. Cada pantalla debe tener UN propósito principal. ¡La pantalla de inicio siempre es la más importante!',
+    keyPoints: ['La mayoría de las apps tienen entre 3 y 5 pantallas principales', 'Una barra de navegación en la parte inferior ayuda a cambiar de pantalla', 'Cada pantalla debe tener UN propósito principal'],
+    funFact: '¡El éxito de TikTok viene de tener solo UNA pantalla principal: el feed "Para ti". ¡A veces menos pantallas = mejor experiencia!'
+  });
+  merge('app-building:ab4d1', {
+    intro: 'Meter tu app en el App Store no es como publicar en redes sociales — no puedes simplemente subirla y ya aparece. Apple tiene un equipo de PERSONAS REALES que revisa cada app antes de que se permita en la tienda. Verifican que funcione correctamente, sea segura y cumpla con las reglas. El proceso de revisión tarda entre 1 y 3 días. Tu app debe seguir las pautas de Apple. Las apps que se cierran solas o tienen errores son rechazadas, pero puedes corregir los problemas y enviarla de nuevo.',
+    keyPoints: ['Apple revisa CADA app antes de publicarla', 'El proceso de revisión tarda entre 1 y 3 días', 'Tu app debe seguir las pautas de Apple'],
+    funFact: '¡Apple emplea a más de 500 personas cuyo ÚNICO trabajo es revisar apps todo el día. ¡Revisan unas 100,000 apps por SEMANA!'
+  });
+  merge('app-building:ab4d2', {
+    intro: 'Cuando alguien encuentra tu app en la tienda, ve tu página del App Store. Tiene el ícono de tu app, el nombre, capturas de pantalla, la descripción y las reseñas. Esta página tiene que convencer a las personas de tocar "Descargar". Si se ve aburrida o confusa, saltarán tu app. Tu ícono es lo primero que ven. Las capturas de pantalla muestran cómo se ve la app por dentro. La descripción explica qué hace. Las palabras clave ayudan a las personas a ENCONTRAR tu app cuando buscan.',
+    keyPoints: ['El ícono de tu app es lo primero que ve la gente', 'Las capturas de pantalla muestran cómo se ve la app por dentro', 'La descripción explica qué hace la app y por qué es genial'],
+    funFact: '¡Las apps con videos de vista previa en su página de tienda obtienen un 35% más de descargas que las apps con solo capturas de pantalla!'
+  });
+  merge('app-building:ab4d3', {
+    intro: 'Antes de que tu app salga al App Store para TODOS, puedes dejar que un pequeño grupo de amigos y familiares la pruebe primero usando TestFlight de Apple. Esto se llama prueba beta. Tus probadores encuentran errores y te dicen qué es confuso, para que puedas corregirlo antes de que todo el mundo la vea. Puedes invitar hasta 10,000 probadores. Cada app grande hace pruebas beta, ¡incluso Apple lo hace con sus propios productos!',
+    keyPoints: ['TestFlight es la herramienta de Apple para las pruebas beta', 'Puedes invitar hasta 10,000 probadores', 'Los probadores te dan retroalimentación sobre lo que funciona y lo que no'],
+    funFact: '¡Gmail estuvo en "prueba beta" durante CINCO AÑOS (2004-2009) antes de que Google dijera que estaba terminado oficialmente. ¡Las pruebas son muy importantes!'
+  });
+  merge('app-building:ab4e1', {
+    intro: 'El ícono de tu app es un cuadrado pequeño que debe lucir increíble en solo 2.5 cm. Es como la cara de tu app: ¡las personas deciden si tocarlo en menos de 1 segundo! Los mejores íconos son simples, usan 1 o 2 colores y muestran instantáneamente de qué trata la app. Evita los detalles diminutos que no se ven a tamaño pequeño. No uses palabras en el ícono (¡son demasiado pequeñas para leer). Mira los íconos de apps populares para inspirarte.',
+    keyPoints: ['Mantenlo simple — evita los detalles diminutos', 'Usa solo 1 o 2 colores principales', 'Debe reconocerse incluso a tamaño muy pequeño'],
+    funFact: '¡El ícono de Instagram fue rediseñado en 2016 y a la gente le disgustó al principio. Pero se convirtió en uno de los íconos más reconocidos del mundo!'
+  });
+  merge('app-building:ab4e2', {
+    intro: 'Cada app empieza con CERO usuarios. Tu objetivo es llegar a 100 usuarios reales lo más rápido posible. ¿Por qué 100? Porque si 100 personas usan tu app, aprenderás qué funciona, qué está roto y qué mejorar. ¡Estos primeros usuarios son invaluables! Cuéntale a todos los que conoces: amigos, familia, maestros. Publica en redes sociales. Pide a los usuarios retroalimentación honesta y corrige los problemas rápidamente. Los usuarios felices le cuentan a sus amigos.',
+    keyPoints: ['Cuéntale a todos los que conoces — amigos, familia, maestros', 'Publica en redes sociales', 'Los usuarios felices traen más usuarios (de boca en boca)'],
+    funFact: '¡Facebook comenzó solo con estudiantes de Harvard. Luego solo con universitarios. No se abrió a todos hasta tener millones de usuarios!'
+  });
+  merge('app-building:ab4e3', {
+    intro: 'Lograr que alguien descargue tu app es genial, pero lo que realmente importa es si la SIGUE usando. Si alguien descarga tu app y nunca la vuelve a abrir, eso es un problema. Las mejores apps le dan a la gente una razón para volver todos los días: como rachas, notificaciones o contenido nuevo. Las rachas ("¡Llevas 7 días seguidos usando esta app!") son una de las funciones más poderosas para mantener a los usuarios. Las notificaciones ("¡Tienes contenido nuevo!") también traen a la gente de regreso.',
+    keyPoints: ['Rachas: "¡Llevas X días seguidos usando la app!"', 'Notificaciones: "¡Tienes contenido nuevo esperándote!"', 'Recompensas: "¡Ganaste 50 puntos de experiencia hoy!"'],
+    funFact: '¡El búho de Duolingo te manda notificaciones diciendo "¡Olvidaste tu lección hoy!" Este simple recordatorio les ayudó a conseguir 500 MILLONES de usuarios!'
+  });
+
+  // ─── Financial Literacy Grade 4 prose ───
+  merge('financial-literacy:4A1', {
+    intro: 'Un empleado trabaja por dinero. Un dueño gana dinero con empleados que trabajan para él. ¡Los dueños siempre se enriquecen más rápido! Según el libro Padre Rico, Padre Pobre, las personas ricas no trabajan por dinero: hacen que el dinero trabaje para ellas. Cuando eres empleado, intercambias tu tiempo por dinero. Cuando eres dueño, construyes un negocio que genera dinero incluso cuando no estás trabajando. Esta diferencia en cómo piensas sobre el dinero puede cambiar toda tu vida financiera.',
+    keyPoints: ['Un empleado intercambia tiempo por dinero', 'Un dueño construye un negocio que genera dinero', 'Las personas ricas piensan como dueños, no como empleados'],
+    funFact: 'Del libro Padre Rico, Padre Pobre: "Los ricos no trabajan por dinero. Hacen que el dinero trabaje para ellos."'
+  });
+  merge('financial-literacy:4A2', {
+    intro: 'No necesitas mucho dinero para empezar un negocio. Escoge algo en lo que eres bueno, empieza de a poco y hazlo crecer. ¡Todos los grandes negocios empezaron siendo pequeños! Evan Spiegel empezó Snapchat en su cuarto de la universidad de Stanford. Puedes encontrar algo que te guste hacer, ofrecer ese servicio o producto a personas de tu comunidad y crecer paso a paso. Lo más importante es empezar con lo que tienes ahora mismo.',
+    keyPoints: ['Todos los grandes negocios empezaron siendo pequeños', 'Escoge algo en lo que eres bueno', 'Empieza con lo que tienes ahora mismo'],
+    funFact: '¡Evan Spiegel empezó Snapchat en su cuarto de la universidad de Stanford. Ahora vale más de 20 mil millones de dólares!'
+  });
+  merge('financial-literacy:4A3', {
+    intro: 'A algunas personas les gusta ahorrar. A otras les gusta gastar. A otras les gusta invertir. ¡Descubre TU personalidad con el dinero para tener éxito! Conocerse a uno mismo es la primera clave para tomar buenas decisiones financieras. No hay una personalidad correcta o incorrecta con el dinero, pero sí hay hábitos que te ayudan a crecer. Warren Buffett ha sido muy cuidadoso con sus gastos toda la vida, ¡incluso siendo una de las personas más ricas del mundo!',
+    keyPoints: ['Algunas personas son ahorradoras por naturaleza', 'Otras son naturalmente ganadoras o inversoras', 'Conocerte a ti mismo te ayuda a usar tu dinero mejor'],
+    funFact: '¡Warren Buffett ha sido muy cuidadoso con sus gastos toda su vida, aunque es una de las personas más ricas del mundo!'
+  });
+  merge('financial-literacy:4B1', {
+    intro: 'Tener un solo trabajo está bien, pero las personas exitosas ganan dinero de 5, 10 o más fuentes distintas. Cuando una disminuye, las otras siguen. Esto se llama tener múltiples fuentes de ingresos. ¡El promedio de un millonario es tener 7 fuentes de ingresos diferentes! Diversificar tus ingresos te protege cuando algo sale mal y te permite crecer más rápido. Puedes combinar trabajos, proyectos secundarios, vender artículos, enseñar a otros y generar ingresos pasivos.',
+    keyPoints: ['Las personas exitosas tienen múltiples fuentes de ingresos', 'Un trabajo = un cheque. Múltiples fuentes = múltiples cheques', 'Si un ingreso se detiene, todavía tienes los demás'],
+    funFact: '¡El promedio de un millonario es tener 7 fuentes de ingresos diferentes!'
+  });
+  merge('financial-literacy:4B2', {
+    intro: 'El ingreso activo es el dinero que ganas por hacer un trabajo. El ingreso pasivo es dinero que ganas mientras duermes. ¡El ingreso pasivo es la meta! Por ejemplo, si ahorras dinero en una cuenta bancaria, el banco te paga intereses sin que tengas que hacer nada. Si escribes una canción que suena en la radio, ganas ingresos pasivos cada vez que alguien la escucha. Las personas ricas se enfocan en construir fuentes de ingresos pasivos para no tener que trabajar por dinero el resto de su vida.',
+    keyPoints: ['Ingreso activo = intercambias tiempo por dinero', 'Ingreso pasivo = el dinero gana más sin tu esfuerzo', 'Las personas ricas se enfocan en el ingreso pasivo'],
+    funFact: '¡Si escribes una canción que suena en la radio para siempre, ganas ingresos pasivos cada vez que alguien la escucha!'
+  });
+  merge('financial-literacy:4B3', {
+    intro: 'Si te encanta dibujar, programar, cantar o el deporte, ¡puedes ganar dinero con eso! Convierte tu pasión en ganancias. Las personas pagarán por lo que haces bien, y lo que más disfrutas hacer es lo que harás mejor. Muchos YouTubers famosos empezaron haciendo videos como pasatiempo. ¡Ahora ganan millones! La clave es combinar lo que te gusta con lo que otros necesitan.',
+    keyPoints: ['Tu pasatiempo puede convertirse en ingresos', 'La gente pagará por lo que haces bien', 'Pasión + habilidad = dinero'],
+    funFact: '¡Muchos YouTubers famosos empezaron haciendo videos como pasatiempo. ¡Ahora ganan millones!'
+  });
+  merge('financial-literacy:4C1', {
+    intro: 'Cuando guardas dinero en una cuenta bancaria, ¡el banco te PAGA intereses! Es dinero gratis solo por dejarlos usar tu dinero. El interés simple se calcula multiplicando el dinero que tienes por la tasa de interés. Si tienes $100 y la tasa es del 5%, el banco te paga $5 al año. ¡Entre más ahorres, más intereses ganas! Algunas cuentas de ahorro de alto rendimiento pagan entre 4 y 5% de interés al año.',
+    keyPoints: ['El interés es lo que los bancos te pagan', 'Entre más ahorres, más intereses ganas', 'Ganas intereses solo por esperar'],
+    funFact: '¡Algunas cuentas de ahorro de alto rendimiento pagan entre 4 y 5% de interés al año!'
+  });
+  merge('financial-literacy:4C2', {
+    intro: 'Si empiezas a ahorrar a los 10 años en lugar de a los 20, tienes 10 años extra de interés compuesto. ¡Eso vale MILES de dólares! El tiempo es tu mayor ventaja cuando eres joven. Un niño que ahorra $1,000 al año desde los 10 hasta los 20 años tendrá más dinero a los 65 que una persona que ahorra $1,000 al año desde los 30 hasta los 60. ¡Empezar joven es la decisión financiera más importante que puedes tomar!',
+    keyPoints: ['El tiempo es tu mayor ventaja', 'Empezar joven significa más interés compuesto', 'Un dólar ahorrado a los 10 vale MUCHO más que uno ahorrado a los 20'],
+    funFact: '¡Un niño que ahorra $1,000 al año desde los 10 hasta los 20 años tendrá más dinero a los 65 que alguien que ahorra desde los 30 hasta los 60!'
+  });
+  merge('financial-literacy:4C3', {
+    intro: 'Las cuentas de ahorro regulares están bien, pero las cuentas de alto rendimiento son mejores. Las cuentas de mercado monetario son aún mejores para ahorros grandes. Es importante elegir la cuenta correcta según cuánto tienes y qué quieres lograr. Algunas cuentas cobran comisiones (¡malo!), otras no cobran nada (¡bueno!). Las cuentas de alto rendimiento pagan 10 veces más intereses que las cuentas de ahorro regulares. ¡Conocer tus opciones es parte de ser inteligente con tu dinero!',
+    keyPoints: ['Cuentas de ahorro regulares: interés aceptable', 'Cuentas de alto rendimiento: interés MEJOR', 'Algunas cuentas cobran comisiones (malo), otras no (bueno)'],
+    funFact: '¡Las cuentas de alto rendimiento pagan 10 veces más intereses que las cuentas de ahorro regulares!'
+  });
+  merge('financial-literacy:4D1', {
+    intro: 'Una necesidad es algo que DEBES tener: comida, refugio, ropa. Un deseo es algo que te gustaría tener. Las personas ricas compran primero las necesidades, luego algunos deseos con cuidado, y también invierten. Del libro Padre Rico, Padre Pobre: la diferencia entre las personas ricas y las pobres es que las ricas posponen los deseos para comprar inversiones. Saber distinguir entre necesidades y deseos te ayuda a tomar mejores decisiones financieras.',
+    keyPoints: ['Necesidades: comida, refugio, agua, ropa (no podrías vivir sin ellas)', 'Deseos: juguetes, dulces, juegos (estarías bien sin ellos)', 'Las personas ricas son disciplinadas con los deseos'],
+    funFact: '¡La diferencia entre los ricos y los pobres es que los ricos renuncian a los deseos para comprar inversiones!'
+  });
+  merge('financial-literacy:4D2', {
+    intro: 'Si debes dinero, un interés alto hace que crezca como un monstruo. $100 al 20% de interés se convierte en $120, luego en $144, luego en $173... ¡Debes CADA VEZ MÁS! Esta es la trampa de la deuda. Las tarjetas de crédito con 20% de interés duplican la deuda en menos de 4 años si no la pagas. Por eso es tan importante evitar deudas con intereses altos. El interés alto puede atraparte en deudas para siempre si no tienes cuidado.',
+    keyPoints: ['El interés es el costo de pedir dinero prestado', 'El interés alto crece MUY RÁPIDO', 'El interés alto puede atraparte en deudas para siempre'],
+    funFact: '¡La deuda de tarjeta de crédito al 20% de interés se duplica en menos de 4 años si no la pagas!'
+  });
+  merge('financial-literacy:4D3', {
+    intro: 'Cuando TÚ tienes el dinero y el banco te paga intereses, ¡eso es INCREÍBLE! Tu dinero crece sin hacer nada. Si ganas 5% de interés sobre $10,000, son $500 GRATIS al año. El interés a tu favor trabaja para ti mientras duermes, mientras juegas, mientras vas a la escuela. Esta es la razón por la que ahorrar es tan poderoso: no solo guardas dinero, sino que el dinero genera más dinero. ¡Es tu dinero trabajando para ti!',
+    keyPoints: ['El interés sobre TU dinero es dinero gratis', 'Entre más ahorres, más intereses ganas', 'El interés es tu dinero trabajando para ti'],
+    funFact: '¡Si ganas 5% de interés sobre $10,000, son $500 GRATIS al año!'
+  });
+  merge('financial-literacy:4E1', {
+    intro: 'Los ingresos son TODO el dinero que entra a tu negocio. La ganancia es lo que queda después de pagar los costos. ¡La ganancia es lo que importa! Un negocio puede ganar $100,000 en ingresos pero solo $10,000 de ganancia después de pagar todos los costos. Entender la diferencia entre ingresos y ganancia es fundamental para cualquier negocio. Los costos incluyen todo lo que gastas para hacer funcionar tu negocio: materiales, publicidad y más.',
+    keyPoints: ['Ingresos = total de dinero ganado', 'Costos/gastos = dinero que gastas para operar', 'Ganancia = ingresos menos costos'],
+    funFact: '¡Un negocio puede ganar $100,000 en ingresos pero solo $10,000 de ganancia después de pagar los costos!'
+  });
+  merge('financial-literacy:4E2', {
+    intro: 'Cuando ganas dinero, el gobierno toma una parte en forma de impuestos. ¡Es obligatorio! El gobierno usa los impuestos para pagar carreteras, escuelas, policía y otros servicios que todos usamos. Pero los negocios pueden reducir sus impuestos con deducciones. Las personas ricas usan deducciones de negocios para reducir legalmente lo que deben en impuestos. Entender para qué sirven los impuestos te ayuda a ver por qué son necesarios en la sociedad.',
+    keyPoints: ['Los impuestos son obligatorios cuando ganas dinero', 'El gobierno usa los impuestos para carreteras, escuelas, etc.', 'Las deducciones de negocios pueden reducir tus impuestos'],
+    funFact: '¡Las personas ricas usan deducciones de negocios para reducir legalmente lo que deben en impuestos!'
+  });
+  merge('financial-literacy:4E3', {
+    intro: 'Los dueños de negocios exitosos llevan registros detallados: cuánto ganan, cuánto gastan, cuándo y por qué. ¡Esos registros cuentan toda la historia del negocio! Jeff Bezos dijo que rastrear datos fue la clave para el éxito temprano de Amazon. Tener buenos registros te ayuda a tomar mejores decisiones, prepararte para los impuestos y ver si tu negocio está creciendo. Anota TODOS los ingresos y gastos, guarda los recibos y organiza todo en un cuaderno o una app.',
+    keyPoints: ['Registra todos los ingresos y gastos', 'Guarda los recibos de todo', 'Registros organizados = mejores decisiones'],
+    funFact: '¡Jeff Bezos dijo que rastrear datos fue la clave para el éxito temprano de Amazon!'
+  });
+
+
+  // ─── English Grade 4 activities ───
+  const engG4 = {
+    e4A1: { q:'En un cuento, los amigos de Tom se despiden pero no sonríen. ¿Qué puedes inferir?', choices:[
+      {text:'Tom se estaba mudando y sus amigos estaban tristes', expl:'La pista "no sonríen" sugiere tristeza por la despedida.'},
+      {text:'Los amigos estaban enojados con Tom', expl:'La tristeza y el enojo son diferentes; esta inferencia va demasiado lejos.'},
+      {text:'Tom no quería a sus amigos', expl:'El texto no apoya esta inferencia.'}] },
+    e4A2: { q:'¿Qué usarías para encontrar el número de página de "Hogares de Animales"?', choices:[
+      {text:'El glosario', expl:'El glosario define palabras, no indica páginas de temas.'},
+      {text:'La tabla de contenidos', expl:'¡Correcto! La tabla de contenidos lista los temas y sus números de página.'},
+      {text:'Un pie de foto', expl:'Los pies de foto explican imágenes, no indican páginas de temas.'}] },
+    e4A3: { q:'En la oración "Caminé a la escuela y me sentí emocionado", ¿cuál es el punto de vista?', choices:[
+      {text:'Tercera persona', expl:'Esta oración usa "yo/me", que es primera persona, no tercera.'},
+      {text:'Primera persona', expl:'¡Correcto! El personaje cuenta su historia usando "yo".'},
+      {text:'Segunda persona', expl:'La segunda persona usaría "tú".'}] },
+    e4B1: { q:'¿Cuál enunciado es la mejor opinión porque incluye una razón?', choices:[
+      {text:'"El recreo es el mejor momento del día"', expl:'Es una opinión, pero no da ninguna razón.'},
+      {text:'"El recreo es el mejor porque puedo jugar con mis amigos y me siento feliz"', expl:'¡Sí! Esta opinión incluye razones (jugar con amigos, sentirse feliz).'},
+      {text:'"El recreo es a las 2 PM"', expl:'Eso es un hecho, no una opinión.'}] },
+    e4B2: { q:'¿Cuál oración pertenece al "desarrollo" con la acción principal?', choices:[
+      {text:'"Érase una vez un valiente caballero"', expl:'Este es el inicio que presenta al personaje.'},
+      {text:'"El caballero luchó contra el dragón en la cueva oscura"', expl:'¡Sí! Esto muestra la acción y el conflicto principales.'},
+      {text:'"Y vivieron felices para siempre"', expl:'Este es el desenlace.'}] },
+    e4B3: { q:'¿Qué debes hacer antes de escribir un informe de investigación?', choices:[
+      {text:'Empezar a escribir de inmediato', expl:'Primero necesitas reunir información.'},
+      {text:'Reunir información de fuentes confiables', expl:'¡Correcto! La investigación significa que reúnes datos antes de escribir.'},
+      {text:'Decidir qué crees', expl:'Los informes son sobre hechos, no sobre creencias.'}] },
+    e4C1: { q:'¿Cuál es una oración compleja?', choices:[
+      {text:'"Jugamos afuera"', expl:'Esta es una oración simple con una sola idea.'},
+      {text:'"Jugamos afuera porque hacía sol"', expl:'¡Correcto! Tiene una cláusula independiente y una dependiente unidas por "porque".'},
+      {text:'"Jugamos y corrimos"', expl:'Esta es una oración compuesta unida por "y", no una oración compleja.'}] },
+    e4C2: { q:'¿Dónde va la coma en la lista?', choices:[
+      {text:'"Me gustan las manzanas las naranjas y los plátanos"', expl:'Los elementos de una lista necesitan comas entre ellos.'},
+      {text:'"Me gustan las manzanas, las naranjas y los plátanos"', expl:'¡Correcto! Las comas separan cada elemento de la lista.'},
+      {text:'"Me gustan, las manzanas las naranjas y los plátanos"', expl:'La coma está en el lugar equivocado.'}] },
+    e4C3: { q:'¿Cuál oración usa los pronombres correctamente?', choices:[
+      {text:'"Emma jugó con su pelota. Fue divertido"', expl:'¡Correcto! "Su" se refiere a Emma y "fue" se refiere a la acción correctamente.'},
+      {text:'"Emma jugó con la pelota de ellos"', expl:'"Ellos" es plural, pero Emma es singular.'},
+      {text:'"La pelota era morada y la pelota fue divertida"', expl:'Esto no usa pronombres; repite "la pelota".'}] },
+    e4D1: { q:'Si "aqua" significa agua, ¿qué significa "acuario"?', choices:[
+      {text:'Un recipiente de agua donde viven animales', expl:'¡Correcto! "Aqua" (agua) más el sufijo indica un lugar con agua.'},
+      {text:'Un tanque grande de hielo', expl:'"Aqua" significa agua, no hielo.'},
+      {text:'Un tipo de pez', expl:'"Acuario" es un lugar, no un tipo de pez.'}] },
+    e4D2: { q:'¿Cuál oración usa un símil?', choices:[
+      {text:'"El sol es una bola ardiente de fuego"', expl:'Esto es una metáfora, no un símil — no usa "como".'},
+      {text:'"La bailarina se movía como un cisne"', expl:'¡Correcto! Usa "como" para comparar a la bailarina con un cisne.'},
+      {text:'"Los árboles susurraban con el viento"', expl:'Esto es personificación, no un símil.'}] },
+    e4D3: { q:'Si las palabras guía son "jugo" y "junta", ¿qué palabra podría estar en esa página?', choices:[
+      {text:'"joya"', expl:'"Joya" empieza con "jo", que viene antes de "ju", así que aparecería antes de "jugo".'},
+      {text:'"juicio"', expl:'¡Correcto! "Juicio" cae alfabéticamente entre "jugo" y "junta".'},
+      {text:'"junto"', expl:'"Junto" viene después de "junta" alfabéticamente.'}] },
+    e4E1: { q:'¿Qué debes hacer durante una discusión en grupo?', choices:[
+      {text:'Esperar tu turno y hablar solo de tu propia idea', expl:'Las buenas discusiones implican responder a los demás, no solo esperar el turno.'},
+      {text:'Levantar la mano, escuchar con atención y responder a lo que dijeron los demás', expl:'¡Correcto! Esto muestra buenas habilidades para una discusión.'},
+      {text:'Interrumpir para agregar tu idea rápido', expl:'Interrumpir es una falta de respeto.'}] },
+    e4E2: { q:'¿Cuál es un buen resumen de un discurso sobre cómo salvar la Tierra?', choices:[
+      {text:'El orador habló durante 20 minutos', expl:'Esto no dice de qué trató el discurso.'},
+      {text:'Debemos reciclar, ahorrar agua y plantar árboles para ayudar a la Tierra', expl:'¡Correcto! Esto captura las ideas principales en un resumen breve.'},
+      {text:'El orador mencionó tres tipos de residuos plásticos', expl:'Esto es un detalle, no la idea principal.'}] },
+    e4E3: { q:'¿Cuál es retroalimentación útil para una presentación?', choices:[
+      {text:'"Eso fue aburrido"', expl:'Esto es descortés y no ayuda a la persona a mejorar.'},
+      {text:'"Entendí tus ideas porque usaste ejemplos, pero hablaste muy rápido"', expl:'¡Correcto! Esto elogia algo y da retroalimentación específica para mejorar.'},
+      {text:'"Hazlo mejor la próxima vez"', expl:'Esto no explica qué mejorar.'}] }
+  };
+  Object.keys(engG4).forEach(function(id){
+    const key = 'english:' + id;
+    if(!L[key]) L[key] = {};
+    L[key].activity = {
+      instructions: engG4[id].q,
+      choices: engG4[id].choices.map(function(c){ return { text: c.text, explanation: c.expl }; })
+    };
+  });
+
+  // ─── History Grade 4 activities ───
+  const histG4 = {
+    h4A1: { q:'¿Quién dirige el gobierno de un estado?', choices:[
+      {text:'El gobernador', expl:'¡Correcto! El gobernador es elegido para dirigir cada estado.'},
+      {text:'El alcalde', expl:'Los alcaldes dirigen ciudades, no estados.'},
+      {text:'El presidente', expl:'El presidente dirige la nación, no los estados individuales.'}] },
+    h4A2: { q:'¿Qué representa un símbolo estatal?', choices:[
+      {text:'La historia y la identidad del estado', expl:'¡Correcto! Los símbolos honran lo que hace único a cada estado.'},
+      {text:'Los edificios del gobierno del estado', expl:'Los símbolos representan identidad, no edificios.'},
+      {text:'La cantidad de dinero que tiene el estado', expl:'Los símbolos representan cultura e identidad, no finanzas.'}] },
+    h4A3: { q:'¿Cómo se describe la región del Medio Oeste?', choices:[
+      {text:'Tierras planas y agrícolas', expl:'¡Correcto! El Medio Oeste es conocido por su terreno plano y su agricultura.'},
+      {text:'Desiertos y cañones', expl:'Eso describe la región del Suroeste.'},
+      {text:'Playas tropicales', expl:'El Medio Oeste no tiene costas; está en el interior.'}] },
+    h4B1: { q:'¿Qué buscaban los exploradores europeos?', choices:[
+      {text:'Rutas comerciales, oro y nuevas tierras', expl:'¡Correcto! Los exploradores estaban motivados por el comercio y la expansión.'},
+      {text:'Libertad de sus países', expl:'Los exploradores trabajaban para sus gobiernos.'},
+      {text:'Escuelas y educación', expl:'Los exploradores buscaban recursos y rutas, no educación.'}] },
+    h4B2: { q:'¿Cuántas naciones nativas americanas existían?', choices:[
+      {text:'Cientos con diferentes idiomas y culturas', expl:'¡Correcto! América del Norte tenía cientos de grupos nativos americanos distintos.'},
+      {text:'Solo unos pocos grupos similares', expl:'Existían muchas naciones distintas.'},
+      {text:'Solo una nación grande', expl:'América nativa era muy diversa.'}] },
+    h4B3: { q:'¿Cuál era el trabajo principal en las colonias?', choices:[
+      {text:'La agricultura, el comercio y la pesca', expl:'¡Correcto! Las economías coloniales se basaban en la agricultura y el comercio.'},
+      {text:'Construir fábricas', expl:'Las fábricas llegaron más tarde, durante la industrialización.'},
+      {text:'Extraer oro', expl:'Aunque hubo algo de minería, la agricultura era lo principal.'}] },
+    h4C1: { q:'¿Qué significaba "No hay impuestos sin representación"?', choices:[
+      {text:'Nadie debería pagar impuestos sin voz en el gobierno', expl:'¡Correcto! Los colonos querían representación antes de pagar impuestos.'},
+      {text:'Los impuestos solo debían venir de Gran Bretaña', expl:'La frase expresaba la necesidad de representación.'},
+      {text:'Todos los impuestos debían eliminarse', expl:'Específicamente relacionaba los impuestos con la representación.'}] },
+    h4C2: { q:'¿Cuál fue la última batalla importante de la Revolución?', choices:[
+      {text:'Yorktown', expl:'¡Correcto! La victoria en Yorktown puso fin a la Guerra Revolucionaria.'},
+      {text:'Lexington y Concord', expl:'Esta fue la primera batalla, no la última.'},
+      {text:'Saratoga', expl:'Saratoga fue importante pero no fue la batalla final.'}] },
+    h4C3: { q:'¿Qué hace la Declaración de Independencia?', choices:[
+      {text:'Anuncia la independencia americana de Gran Bretaña', expl:'¡Correcto! Declaró que las colonias eran una nación libre.'},
+      {text:'Explica cómo debe funcionar el gobierno', expl:'La Constitución explica la estructura del gobierno.'},
+      {text:'Lista todas las leyes del país', expl:'La Declaración es una declaración de independencia, no una lista de leyes.'}] },
+    h4D1: { q:'¿Por qué el presidente Jefferson envió a Lewis y Clark?', choices:[
+      {text:'Para explorar el Oeste y trazar mapas del nuevo territorio', expl:'¡Correcto! Exploraron el Territorio de Louisiana.'},
+      {text:'Para encontrar oro para el gobierno', expl:'La exploración era el objetivo principal, aunque buscaban recursos.'},
+      {text:'Para establecer fuertes militares', expl:'La exploración era la misión principal.'}] },
+    h4D2: { q:'¿Por qué los colonos viajaban por el Sendero de Oregón?', choices:[
+      {text:'Por tierras gratuitas y nuevas oportunidades', expl:'¡Correcto! El gobierno ofrecía tierras gratuitas en el Oeste.'},
+      {text:'Por vacaciones y aventura', expl:'Era un viaje serio, no unas vacaciones.'},
+      {text:'Para encontrar oro rápidamente', expl:'Aunque se encontró oro, las tierras eran la principal motivación.'}] },
+    h4D3: { q:'¿Qué les pasó a la mayoría de los buscadores de oro?', choices:[
+      {text:'No encontraron mucho oro', expl:'¡Correcto! Aunque algunos encontraron oro, la mayoría fracasó.'},
+      {text:'Todos se enriquecieron con el oro', expl:'La mayoría de los buscadores en realidad perdió dinero.'},
+      {text:'Renunciaron y regresaron a casa de inmediato', expl:'Muchos se quedaron y trabajaron en otros empleos.'}] },
+    h4E1: { q:'¿Qué fue la Revolución Industrial?', choices:[
+      {text:'Un período de innovación tecnológica y desarrollo de fábricas', expl:'¡Correcto! Transformó la producción mediante máquinas y fábricas.'},
+      {text:'Una guerra entre naciones industriales', expl:'Se trató de tecnología, no de guerra.'},
+      {text:'Un movimiento para mejorar las condiciones laborales', expl:'En realidad, al principio empeoró las condiciones.'}] },
+    h4E2: { q:'¿Cuál invento mejoró la comunicación a larga distancia?', choices:[
+      {text:'El teléfono', expl:'¡Correcto! Los teléfonos permitían que las personas hablaran a distancia.'},
+      {text:'El automóvil', expl:'Los automóviles transportaban personas, no comunicación.'},
+      {text:'El motor de vapor', expl:'Los motores de vapor impulsaban máquinas y trenes.'}] },
+    h4E3: { q:'¿Cómo ayudaron las locomotoras de vapor al crecimiento de América?', choices:[
+      {text:'Conectando ciudades lejanas mediante un viaje más rápido', expl:'¡Correcto! Los trenes permitieron viajes y comercio eficientes a larga distancia.'},
+      {text:'Haciendo los barcos más rápidos', expl:'Las locomotoras eran vehículos terrestres, no marítimos.'},
+      {text:'Reemplazando por completo a los caballos', expl:'Los caballos coexistieron con los trenes durante un tiempo.'}] }
+  };
+  Object.keys(histG4).forEach(function(id){
+    const key = 'history:' + id;
+    if(!L[key]) L[key] = {};
+    L[key].activity = {
+      instructions: histG4[id].q,
+      choices: histG4[id].choices.map(function(c){ return { text: c.text, explanation: c.expl }; })
+    };
+  });
+
+  // ─── Science Grade 4 activities ───
+  const sciG4 = {
+    s4A1: { q:'¿Qué organismos producen su propio alimento?', choices:[
+      {text:'Las plantas (productores)', expl:'¡Correcto! Las plantas usan la luz solar para producir alimento mediante la fotosíntesis.'},
+      {text:'Los herbívoros', expl:'Los herbívoros comen plantas; no producen su propio alimento.'},
+      {text:'Los carnívoros', expl:'Los carnívoros comen otros animales; no producen su propio alimento.'}] },
+    s4A2: { q:'¿Cuál es una adaptación conductual?', choices:[
+      {text:'La migración de las aves', expl:'¡Correcto! La migración es una acción que las aves realizan para encontrar alimento y mejores condiciones.'},
+      {text:'Las plumas del pato', expl:'Las plumas son estructuras físicas, no conductuales.'},
+      {text:'Las escamas de un pez', expl:'Las escamas son protección física, no una conducta.'}] },
+    s4A3: { q:'¿Qué contiene una semilla?', choices:[
+      {text:'Un embrión y alimento almacenado', expl:'¡Correcto! Las semillas tienen una planta bebé y nutrientes para iniciar el crecimiento.'},
+      {text:'Solo una planta pequeña', expl:'Las semillas también contienen alimento almacenado para la planta en crecimiento.'},
+      {text:'Solo tierra', expl:'La tierra está fuera de la semilla, no dentro.'}] },
+    s4B1: { q:'¿Cuál es la diferencia entre meteorización y erosión?', choices:[
+      {text:'La meteorización rompe la roca; la erosión la mueve', expl:'¡Correcto! La meteorización descompone la roca y la erosión transporta los fragmentos.'},
+      {text:'La meteorización mueve la roca; la erosión la rompe', expl:'Eso es al revés de las definiciones correctas.'},
+      {text:'Son lo mismo', expl:'La meteorización y la erosión son procesos diferentes pero relacionados.'}] },
+    s4B2: { q:'¿Qué hace que el agua suba a la atmósfera?', choices:[
+      {text:'La evaporación', expl:'¡Correcto! La evaporación convierte el agua líquida en gas que sube a la atmósfera.'},
+      {text:'La precipitación', expl:'La precipitación es cuando el agua cae de la atmósfera.'},
+      {text:'La condensación', expl:'La condensación forma gotitas de agua pero no eleva el agua.'}] },
+    s4B3: { q:'¿Cuál capa de la Tierra es la más gruesa?', choices:[
+      {text:'El manto', expl:'¡Correcto! El manto es la capa más grande, que se extiende muy profundo dentro de la Tierra.'},
+      {text:'La corteza', expl:'La corteza es la capa más delgada.'},
+      {text:'El núcleo', expl:'El núcleo es más pequeño que el manto.'}] },
+    s4C1: { q:'¿Qué causa el sonido?', choices:[
+      {text:'Objetos que vibran', expl:'¡Correcto! El sonido se produce cuando los objetos vibran y empujan las moléculas de aire.'},
+      {text:'Solo la luz', expl:'La luz y el sonido son tipos diferentes de ondas.'},
+      {text:'Los imanes', expl:'Los imanes no crean directamente ondas sonoras.'}] },
+    s4C2: { q:'¿Qué hace una lente a la luz?', choices:[
+      {text:'La dobla', expl:'¡Correcto! Las lentes son curvas para doblar los rayos de luz y enfocarlos o ampliarlos.'},
+      {text:'La detiene', expl:'Las lentes son transparentes y dejan pasar la luz.'},
+      {text:'La crea', expl:'Las lentes no crean luz; doblan la luz existente.'}] },
+    s4C3: { q:'¿Qué se necesita para completar un circuito eléctrico?', choices:[
+      {text:'Un lazo cerrado con una fuente de energía', expl:'¡Correcto! Los circuitos necesitan una fuente de energía, conductores y un lazo completo.'},
+      {text:'Solo una batería', expl:'Una batería sola no es suficiente sin alambres y una carga.'},
+      {text:'Solo bombillas', expl:'Las bombillas son cargas, pero no son todo lo que se necesita.'}] },
+    s4D1: { q:'¿Qué es un grupo de control en un experimento?', choices:[
+      {text:'El grupo sin el tratamiento', expl:'¡Correcto! Los grupos de control no reciben tratamiento para compararse con el grupo experimental.'},
+      {text:'El grupo que está siendo probado', expl:'Ese es el grupo experimental, el que recibe el tratamiento.'},
+      {text:'Un gran número de sujetos', expl:'Un grupo de control se define por no recibir el tratamiento.'}] },
+    s4D2: { q:'¿Por qué crear una gráfica con los datos de un experimento?', choices:[
+      {text:'Para visualizar patrones con claridad', expl:'¡Correcto! Las gráficas hacen que los patrones y tendencias sean mucho más fáciles de ver que las tablas.'},
+      {text:'Para que se vea científico', expl:'Las gráficas tienen una función práctica, no solo de apariencia.'},
+      {text:'Porque es un requisito', expl:'Las gráficas son herramientas útiles, no solo un requisito obligatorio.'}] },
+    s4D3: { q:'¿Cuál es el primer paso en un proyecto de feria de ciencias?', choices:[
+      {text:'Elegir una pregunta que se pueda comprobar', expl:'¡Correcto! Los proyectos comienzan con una pregunta científica clara y verificable.'},
+      {text:'Construir el equipo', expl:'Primero investigas y planificas antes de construir cualquier cosa.'},
+      {text:'Presentar los resultados', expl:'Presentas después de completar todo el proyecto.'}] },
+    s4E1: { q:'¿Cuál es una fuente de energía renovable?', choices:[
+      {text:'La energía solar', expl:'¡Correcto! El sol brilla continuamente, lo que hace que la energía solar sea renovable.'},
+      {text:'El carbón', expl:'El carbón es un combustible fósil que se agota y contamina.'},
+      {text:'El gas natural', expl:'El gas natural es un combustible fósil que eventualmente se agotará.'}] },
+    s4E2: { q:'¿Cuándo fluye la electricidad en un circuito?', choices:[
+      {text:'Cuando el circuito está cerrado', expl:'¡Correcto! Los circuitos cerrados forman lazos completos que permiten que fluyan los electrones.'},
+      {text:'Cuando está abierto', expl:'Los circuitos abiertos tienen rupturas que impiden el flujo de corriente.'},
+      {text:'Sin ninguna trayectoria', expl:'La electricidad debe tener una trayectoria por la que fluir.'}] },
+    s4E3: { q:'¿Qué ocurre después de probar un prototipo?', choices:[
+      {text:'Rediseñar según los resultados', expl:'¡Correcto! Las pruebas revelan las mejoras necesarias para la siguiente versión.'},
+      {text:'Detenerse y declarar el éxito', expl:'La mayoría de los diseños necesitan mejoras después de las pruebas.'},
+      {text:'Venderlo de inmediato', expl:'Los productos generalmente necesitan mejoras después de las pruebas iniciales.'}] }
+  };
+  Object.keys(sciG4).forEach(function(id){
+    const key = 'science:' + id;
+    if(!L[key]) L[key] = {};
+    L[key].activity = {
+      instructions: sciG4[id].q,
+      choices: sciG4[id].choices.map(function(c){ return { text: c.text, explanation: c.expl }; })
+    };
+  });
+
+  // ─── Social Studies Grade 4 activities ───
+  const ssG4 = {
+    ss4A1: { q:'¿Qué región incluye las trece colonias originales?', choices:[
+      {text:'El Noreste', expl:'¡Correcto! Las trece colonias originales se establecieron en la región del Noreste.'},
+      {text:'El Sureste', expl:'Aunque algunas colonias del sur están en el Sureste, la mayoría estaban en el Noreste.'},
+      {text:'El Medio Oeste', expl:'El Medio Oeste se colonizó mucho más tarde.'}] },
+    ss4A2: { q:'¿Cómo es el clima en el Sureste?', choices:[
+      {text:'Cálido, con inviernos suaves y veranos calurosos', expl:'¡Correcto! El Sureste tiene un clima subtropical ideal para la agricultura.'},
+      {text:'Frío con inviernos largos y severos', expl:'Eso describe las regiones del norte como el Noreste.'},
+      {text:'Seco con poca lluvia', expl:'El Sureste recibe lluvia abundante durante todo el año.'}] },
+    ss4A3: { q:'¿Por qué es conocido el Medio Oeste?', choices:[
+      {text:'Por la producción agrícola y los cultivos', expl:'¡Correcto! Las llanuras fértiles del Medio Oeste lo convierten en el centro agrícola de América.'},
+      {text:'Por los puertos oceánicos y la pesca', expl:'Eso describe las regiones costeras.'},
+      {text:'Por la minería de oro y plata', expl:'Aunque hay minería, la agricultura es lo que hace famoso al Medio Oeste.'}] },
+    ss4B1: { q:'¿Qué ocurre en la capital de un estado?', choices:[
+      {text:'Los asuntos del gobierno estatal y la elaboración de leyes', expl:'¡Correcto! Las capitales estatales son donde trabajan los gobernadores y los legisladores.'},
+      {text:'Solo el gobernador estatal vive ahí', expl:'Muchos funcionarios y trabajadores del gobierno viven y trabajan en las capitales.'},
+      {text:'Se celebran reuniones del gobierno nacional', expl:'Esas ocurren en Washington, D.C., la capital nacional.'}] },
+    ss4B2: { q:'¿Quién dirige la rama ejecutiva del gobierno estatal?', choices:[
+      {text:'El gobernador', expl:'¡Correcto! Los gobernadores son los ejecutivos jefes de sus estados.'},
+      {text:'La legislatura estatal', expl:'La legislatura es la rama legislativa.'},
+      {text:'Los jueces estatales', expl:'Los jueces conforman la rama judicial.'}] },
+    ss4B3: { q:'¿Qué representan los símbolos estatales?', choices:[
+      {text:'La identidad, la historia y los valores de un estado', expl:'¡Correcto! Los símbolos se eligen para representar aspectos importantes del estado.'},
+      {text:'Los edificios del gobierno del estado', expl:'Los edificios no son lo mismo que los símbolos.'},
+      {text:'La cantidad de dinero que tiene un estado', expl:'Los símbolos son culturales, no financieros.'}] },
+    ss4C1: { q:'¿Cuándo llegaron los nativos americanos por primera vez a América del Norte?', choices:[
+      {text:'Miles de años antes de que llegaran los europeos', expl:'¡Correcto! La evidencia arqueológica muestra que los nativos americanos vivían en América hace al menos 15,000 años.'},
+      {text:'Alrededor de 1492 cuando llegó Colón', expl:'Los nativos americanos llegaron mucho antes que Colón.'},
+      {text:'Después de que los europeos construyeron colonias', expl:'Millones de nativos americanos vivían aquí antes de cualquier asentamiento europeo.'}] },
+    ss4C2: { q:'¿Qué diferenciaba a las distintas tribus nativas americanas?', choices:[
+      {text:'Cada una tenía su propio idioma, cultura y gobierno', expl:'¡Correcto! Los pueblos nativos americanos eran muy diversos, no eran todos iguales.'},
+      {text:'Todas vivían de la misma manera en todas partes', expl:'Las tribus se adaptaron de manera diferente a sus regiones específicas.'},
+      {text:'Solo existían unas pocas tribus en América', expl:'Cientos de naciones existían por toda América.'}] },
+    ss4C3: { q:'¿Cuál de estas es una contribución nativa americana al mundo?', choices:[
+      {text:'La domesticación del maíz y las papas', expl:'¡Correcto! Estos fueron desarrollados por los nativos americanos y ahora alimentan al mundo.'},
+      {text:'La invención de la rueda', expl:'La rueda se desarrolló en el Viejo Mundo.'},
+      {text:'El desarrollo de los alfabetos escritos', expl:'Los sistemas de escritura se desarrollaron en el Viejo Mundo.'}] },
+    ss4D1: { q:'¿Por qué los exploradores europeos surcaban los océanos?', choices:[
+      {text:'Para encontrar nuevas rutas comerciales hacia Asia', expl:'¡Correcto! El lucrativo comercio de especias motivó la exploración.'},
+      {text:'Para difundir su religión en todos los continentes', expl:'Aunque los misioneros llegaron después, la motivación inicial era el comercio.'},
+      {text:'Para demostrar que la Tierra era redonda', expl:'Los europeos educados ya sabían que la Tierra era redonda.'}] },
+    ss4D2: { q:'¿Cuál fue una consecuencia importante del viaje de Colón?', choices:[
+      {text:'La colonización europea y el sufrimiento de los nativos americanos', expl:'¡Correcto! Los viajes de Colón llevaron a la colonización y la tragedia para los pueblos indígenas.'},
+      {text:'Un intercambio cultural pacífico', expl:'El contacto fue en realidad devastador para los nativos americanos.'},
+      {text:'Rutas comerciales instantáneas hacia Asia', expl:'Colón no llegó realmente a Asia.'}] },
+    ss4D3: { q:'¿Qué explorador demostró que existía una ruta marítima hacia Asia?', choices:[
+      {text:'Vasco da Gama', expl:'¡Correcto! Da Gama navegó alrededor de África para llegar a la India y demostró la ruta oceánica.'},
+      {text:'Cristóbal Colón', expl:'Colón navegó hacia el oeste y llegó a las Américas en cambio.'},
+      {text:'Fernando de Magallanes', expl:'Magallanes circunnavegó el globo, pero no fue el primero en demostrar la ruta hacia Asia.'}] },
+    ss4E1: { q:'¿Qué determina qué industrias se desarrollan en un estado?', choices:[
+      {text:'La geografía, el clima y los recursos disponibles', expl:'¡Correcto! Las ventajas naturales de un estado dan forma a sus industrias.'},
+      {text:'Reglas del gobierno que impiden cambios', expl:'Aunque existen regulaciones, las industrias se desarrollan según las oportunidades.'},
+      {text:'El azar sin ningún patrón', expl:'Las industrias se desarrollan lógicamente según las ventajas regionales.'}] },
+    ss4E2: { q:'¿Cómo afectan los recursos naturales a la economía de un estado?', choices:[
+      {text:'Determinan qué industrias pueden desarrollarse', expl:'¡Correcto! Los recursos disponibles dan forma a las oportunidades económicas.'},
+      {text:'No afectan la economía en absoluto', expl:'Los recursos son cruciales para el desarrollo económico.'},
+      {text:'Solo importan para la agricultura', expl:'Los recursos apoyan muchas industrias diferentes.'}] },
+    ss4E3: { q:'¿Por qué los estados comercian entre sí?', choices:[
+      {text:'Porque cada estado se especializa en diferentes productos', expl:'¡Correcto! El comercio permite que los estados se beneficien de la especialización.'},
+      {text:'Porque el gobierno los obliga a hacerlo', expl:'El comercio ocurre naturalmente para beneficio mutuo.'},
+      {text:'Porque ningún estado puede producir nada por sí solo', expl:'Aunque eso es algo cierto, la razón principal es la eficiencia mediante la especialización.'}] }
+  };
+  Object.keys(ssG4).forEach(function(id){
+    const key = 'social-studies:' + id;
+    if(!L[key]) L[key] = {};
+    const src = ssG4[id];
+    L[key].activity = {
+      instructions: src.q,
+      choices: src.choices.map(function(c){ return { text: c.text, explanation: c.expl }; })
+    };
+  });
+
+  // ─── App Building Grade 4 activities ───
+  // ab4a1 mc
+  merge('app-building:ab4a1', { activity: {
+    instructions: 'Tu amigo siempre olvida su lonchera. ¿Cuál sería la idea de app correcta?',
+    choices: [
+      { text: 'Un juego sobre comida', explanation: '¡Divertido, pero no resuelve el problema de olvidar!' },
+      { text: 'Una app de recordatorios matutinos que verifica si tienes tu lonchera', explanation: '¡PERFECTO! Viste el problema (olvidar la lonchera) y lo resolviste (app de recordatorio).' },
+      { text: 'Una app de cocina con recetas', explanation: 'Es una app interesante, pero no soluciona el problema de olvidar.' },
+      { text: 'No existe ninguna app para eso', explanation: '¡Hay una app para TODO! Si no existe, ¡TÚ puedes crearla!' }
+    ]
+  }});
+  // ab4a2 dd
+  merge('app-building:ab4a2', { activity: {
+    instructions: '¡Empareja la función de la app con el usuario correcto!',
+    dragOptions: [
+      { label: 'Personajes de dibujos y stickers' },
+      { label: 'Calculadora de promedio escolar' },
+      { label: 'Temporizador de estudio' },
+      { label: 'Colores brillantes y botones grandes' },
+      { label: 'Panel de análisis de ventas' }
+    ],
+    dropTargets: [
+      { label: 'Niño de 7 años aprendiendo a leer' },
+      { label: 'Niño de 10 años que ama los juegos' },
+      { label: 'Joven de 13 años estudiando para exámenes' },
+      { label: 'Joven de 17 años aplicando a la universidad' },
+      { label: 'Dueño de negocio que controla ventas' }
+    ]
+  }});
+  // ab4a3 so
+  merge('app-building:ab4a3', { activity: {
+    instructions: '¡Pon estos pasos de lluvia de ideas en el orden correcto!',
+    sortItems: [
+      'Elige tu MEJOR idea de la lista',
+      'Escribe todas las ideas (¡incluso las más locas!)',
+      'Pon un temporizador de 5 minutos',
+      'Pregúntale a un amigo qué idea le gusta más',
+      'Piensa en problemas en la escuela, en casa y con tus amigos'
+    ]
+  }});
+  // ab4b1 mt
+  merge('app-building:ab4b1', { activity: {
+    instructions: '¡Empareja cada tipo de pantalla con lo que hace!',
+    matchPairs: [
+      { left: 'Pantalla de inicio', right: 'Lo primero que ven los usuarios — panel principal' },
+      { left: 'Pantalla de perfil', right: 'Muestra la información personal del usuario' },
+      { left: 'Pantalla de búsqueda', right: 'Ayuda a los usuarios a encontrar cosas' },
+      { left: 'Pantalla de configuración', right: 'Donde los usuarios cambian sus preferencias' },
+      { left: 'Pantalla de detalles', right: 'Muestra más información sobre un elemento' }
+    ]
+  }});
+  // ab4b2 dd
+  merge('app-building:ab4b2', { activity: {
+    instructions: '¡Arrastra las BUENAS etiquetas de botones a las acciones correctas!',
+    dragOptions: [
+      { label: '💾 Guardar cambios' },
+      { label: '📤 Compartir con amigos' },
+      { label: '➕ Agregar mascota' },
+      { label: '🗑️ Eliminar elemento' },
+      { label: '📨 Enviar mensaje' }
+    ],
+    dropTargets: [
+      { label: 'Guardar mi trabajo para no perderlo' },
+      { label: 'Dejar que un amigo también lo vea' },
+      { label: 'Poner una nueva mascota en mi rastreador' },
+      { label: 'Quitar algo que no quiero' },
+      { label: 'Hablar con alguien dentro de la app' }
+    ]
+  }});
+  // ab4b3 mc
+  merge('app-building:ab4b3', { activity: {
+    instructions: '¿Cuál regla de diseño de app es la MÁS importante?',
+    choices: [
+      { text: 'Usar la mayor cantidad de colores posible', explanation: '¡Demasiados colores lucen desordenados! Usa entre 2 y 3 colores.' },
+      { text: 'Mantenerla limpia, simple y fácil de leer', explanation: '¡SÍ! Lo limpio y simple siempre gana. Los usuarios nunca deben sentirse confundidos.' },
+      { text: 'Hacer el texto muy pequeño para que quepa más en la pantalla', explanation: '¡El texto pequeño es difícil de leer! Asegúrate de que sea cómodo de leer.' },
+      { text: 'Agregar la mayor cantidad de funciones posible a cada pantalla', explanation: 'Demasiadas funciones en una pantalla abruman. ¡Mantén cada pantalla enfocada!' }
+    ]
+  }});
+  // ab4c1 ai
+  merge('app-building:ab4c1', { activity: {
+    instructions: '¡Vamos a construir una app de seguimiento de tareas! Describe lo que quieres y mírala aparecer.',
+    prompt: 'Paso 1: Crea la pantalla de inicio. Describe un rastreador de tareas con el nombre de la app, las asignaciones de hoy y una forma de agregar tarea nueva.'
+  }});
+  // ab4c2 mc
+  merge('app-building:ab4c2', { activity: {
+    instructions: 'Tu app de IA se ve bien, pero los botones son muy pequeños. ¿Qué deberías decirle a la IA?',
+    choices: [
+      { text: 'Esto está mal. Arréglalo.', explanation: '¡La IA necesita saber QUÉ arreglar. ¡Sé específico!' },
+      { text: 'Haz los botones más grandes y agrega más espacio alrededor. Usa letra gruesa para el texto de los botones.', explanation: '¡PERFECTO! Le dijiste a la IA exactamente qué cambiar. Las instrucciones específicas dan los mejores resultados.' },
+      { text: 'No me gusta esto.', explanation: '¿Qué no te gusta? ¡La IA no puede leer tu mente — dile qué cambiar!' },
+      { text: 'Borra todo y empieza de nuevo', explanation: '¡No necesitas empezar de nuevo para cambios pequeños! Solo dile a la IA qué arreglar.' }
+    ]
+  }});
+  // ab4c3 so
+  merge('app-building:ab4c3', { activity: {
+    instructions: '¡Pon estas pantallas en el orden correcto para una app de entrega de comida!',
+    sortItems: [
+      'Confirmación — "¡Tu comida está en camino!"',
+      'Menú — explorar platillos de restaurantes',
+      'Inicio — ver restaurantes cercanos',
+      'Pago — ingresar dirección y pagar',
+      'Carrito — revisar tu pedido antes de pagar'
+    ]
+  }});
+  // ab4d1 so
+  merge('app-building:ab4d1', { activity: {
+    instructions: '¡Pon los pasos de publicación de la app en el orden correcto!',
+    sortItems: [
+      'Apple revisa tu app (1 a 3 días)',
+      'Construye y prueba tu app',
+      'Crea una página en el App Store con capturas de pantalla y descripción',
+      '¡Tu app aparece en el App Store para todos!',
+      'Crea una cuenta de Apple Developer'
+    ]
+  }});
+  // ab4d2 mt
+  merge('app-building:ab4d2', { activity: {
+    instructions: '¡Empareja cada elemento del App Store con la razón por la que importa!',
+    matchPairs: [
+      { left: 'Ícono de la app', right: 'Lo primero que ve la gente — debe destacar' },
+      { left: 'Capturas de pantalla', right: 'Muestra cómo se ve la app por dentro' },
+      { left: 'Descripción', right: 'Explica qué hace la app y por qué es genial' },
+      { left: 'Calificación con estrellas', right: 'Prueba social — a otras personas les gustó' },
+      { left: 'Nombre de la app', right: 'Debe ser atractivo e indicar qué hace' }
+    ]
+  }});
+  // ab4d3 mc
+  merge('app-building:ab4d3', { activity: {
+    instructions: '¿Por qué deberías usar TestFlight antes de lanzar tu app?',
+    choices: [
+      { text: 'Para encontrar errores y corregirlos antes de que todos vean tu app', explanation: '¡Exacto! TestFlight te permite encontrar y corregir problemas con la ayuda de testers reales.' },
+      { text: 'Porque Apple lo exige para todas las apps', explanation: 'TestFlight es opcional, ¡pero es muy inteligente usarlo!' },
+      { text: 'Para ganar dinero de los beta testers', explanation: 'TestFlight es gratis y no le cobras a los testers. Es para obtener retroalimentación.' },
+      { text: 'Para hacer tu app más lenta', explanation: 'TestFlight no afecta la velocidad — ¡te ayuda a mejorar tu app!' }
+    ]
+  }});
+  // ab4e1 dd
+  merge('app-building:ab4e1', { activity: {
+    instructions: '¿Qué íconos siguen las buenas reglas de diseño? ¡Arrastra los BUENOS íconos a la pila correcta!',
+    dragOptions: [
+      { label: 'Un color, forma simple de cámara' },
+      { label: '10 colores, texto diminuto, todo amontonado' },
+      { label: 'Letra en negrita con fondo degradado' },
+      { label: 'Foto detallada reducida a tamaño diminuto' },
+      { label: 'Forma limpia sobre color sólido' }
+    ],
+    dropTargets: [
+      { label: '✅ DISEÑO GENIAL de ícono' },
+      { label: '❌ MAL DISEÑO de ícono' }
+    ]
+  }});
+  // ab4e2 so
+  merge('app-building:ab4e2', { activity: {
+    instructions: '¡Pon estos pasos de crecimiento en el orden correcto!',
+    sortItems: [
+      'Expándete a amigos de amigos',
+      'Recibe retroalimentación y corrige problemas',
+      'Cuéntale a tus 10 amigos y familiares más cercanos',
+      'Publica en redes sociales para llegar a más personas',
+      '¡Celebra 100 usuarios y planifica llegar a 1,000!'
+    ]
+  }});
+  // ab4e3 mc
+  merge('app-building:ab4e3', { activity: {
+    instructions: '¿Qué función haría que los usuarios VOLVIERAN a tu app todos los días?',
+    choices: [
+      { text: 'Un contador de racha diaria que registra cuántos días seguidos han usado la app', explanation: '¡SÍ! Las rachas son una de las funciones más poderosas para mantener a los usuarios. ¡Nadie quiere romper una racha!' },
+      { text: 'Hacer la app muy difícil de usar', explanation: '¡Si es difícil, la borrarán!' },
+      { text: 'Solo actualizar la app una vez al año', explanation: '¡Los usuarios quieren contenido nuevo regularmente!' },
+      { text: 'Eliminar todas las funciones divertidas', explanation: '¡Las funciones divertidas son las que hacen que la gente regrese!' }
+    ]
+  }});
+
+  // ─── Financial Literacy Grade 4 activities ───
+  // 4A1 mc
+  merge('financial-literacy:4A1', { activity: {
+    instructions: '¿Quién gana más dinero?',
+    choices: [
+      { text: 'El dueño del negocio', explanation: '¡Correcto! Los dueños construyen sistemas que generan dinero con el tiempo.' },
+      { text: 'La persona que trabaja ahí', explanation: 'Los empleados ganan un salario, pero los dueños acumulan más riqueza.' },
+      { text: 'Ganan lo mismo', explanation: 'En general, los dueños ganan más porque el negocio crece con el tiempo.' }
+    ]
+  }});
+  // 4A2 dd
+  merge('financial-literacy:4A2', { activity: {
+    instructions: 'Empareja tu interés con un posible negocio:',
+    dragOptions: [
+      { label: 'Te encanta dibujar' },
+      { label: 'Se te dan bien los niños' },
+      { label: 'Te gusta ayudar en el jardín' },
+      { label: 'Eres hábil con la tecnología' }
+    ],
+    dropTargets: [
+      { label: 'Vende arte o haz encargos' },
+      { label: 'Cuida niños o da clases particulares' },
+      { label: 'Servicios de jardinería o plantas' },
+      { label: 'Ayuda técnica a vecinos' }
+    ]
+  }});
+  // 4A3 mc
+  merge('financial-literacy:4A3', { activity: {
+    instructions: '¿Cuál es una buena actitud respecto al dinero?',
+    choices: [
+      { text: 'Me gusta ganar e invertir', explanation: '¡Excelente! Ganar e invertir es una de las mejores combinaciones.' },
+      { text: 'Todas las personalidades con el dinero son diferentes y válidas', explanation: '¡Correcto! Lo importante es conocerte y usar eso a tu favor.' },
+      { text: 'Solo hay una forma correcta de relacionarse con el dinero', explanation: 'No es cierto — cada persona tiene su propia personalidad financiera.' }
+    ]
+  }});
+  // 4B1 fb
+  merge('financial-literacy:4B1', { activity: {
+    instructions: 'Nombra 3 maneras en que TÚ podrías ganar dinero:',
+    prompt: '1. ___ 2. ___ 3. ___'
+  }});
+  // 4B2 mc
+  merge('financial-literacy:4B2', { activity: {
+    instructions: '¿Cuál es un ejemplo de ingreso pasivo?',
+    choices: [
+      { text: 'Dinero de una cuenta de ahorros que genera intereses', explanation: '¡Correcto! El dinero crece sin que tengas que hacer nada.' },
+      { text: 'Dinero por hacer los quehaceres del hogar', explanation: 'Eso es ingreso activo — trabajas y te pagan.' },
+      { text: 'Dinero de un trabajo donde tienes que estar presente', explanation: 'Eso es ingreso activo — intercambias tiempo por dinero.' }
+    ]
+  }});
+  // 4B3 dd
+  merge('financial-literacy:4B3', { activity: {
+    instructions: 'Empareja pasatiempos con posibles ingresos:',
+    dragOptions: [
+      { label: 'Te encanta el arte' },
+      { label: 'Te encanta programar' },
+      { label: 'Te encanta el deporte' },
+      { label: 'Te encanta escribir' }
+    ],
+    dropTargets: [
+      { label: 'Vende arte, haz encargos, enseña arte' },
+      { label: 'Crea apps, ofrece ayuda técnica' },
+      { label: 'Entrena, da clases, ofrece lecciones' },
+      { label: 'Escribe y vende cuentos o artículos' }
+    ]
+  }});
+  // 4C1 fb
+  merge('financial-literacy:4C1', { activity: {
+    instructions: 'Matemáticas de interés simple:',
+    prompt: 'Si ahorras $100 y ganas 5% de interés, tendrás $100 + $5 = $___'
+  }});
+  // 4C2 mc
+  merge('financial-literacy:4C2', { activity: {
+    instructions: '¿Cuándo deberías empezar a ahorrar?',
+    choices: [
+      { text: '¡Lo antes posible! Incluso a los 10 años', explanation: '¡Correcto! Empezar joven es la mayor ventaja que tienes.' },
+      { text: 'Espera hasta que seas lo suficientemente mayor para trabajar', explanation: 'Si esperas, pierdes años de interés compuesto.' },
+      { text: 'Empieza cuando tengas mucho dinero', explanation: 'Puedes empezar a ahorrar incluso con cantidades pequeñas.' }
+    ]
+  }});
+  // 4C3 dd
+  merge('financial-literacy:4C3', { activity: {
+    instructions: 'Empareja el tipo de cuenta con su descripción:',
+    dragOptions: [
+      { label: 'Cuenta de alto rendimiento' },
+      { label: 'Cuenta de ahorro regular' },
+      { label: 'Cuenta corriente' }
+    ],
+    dropTargets: [
+      { label: 'Paga más intereses, ideal para ahorro a largo plazo' },
+      { label: 'Ahorro básico, interés aceptable' },
+      { label: 'Para dinero de gastos, generalmente sin intereses' }
+    ]
+  }});
+  // 4D1 mc
+  merge('financial-literacy:4D1', { activity: {
+    instructions: '¿Cuál es una NECESIDAD?',
+    choices: [
+      { text: 'Comida y refugio', explanation: '¡Correcto! Sin comida y refugio no podrías sobrevivir.' },
+      { text: 'Videojuegos', explanation: 'Los videojuegos son un deseo; puedes vivir sin ellos.' },
+      { text: 'Ropa de diseñador', explanation: 'La ropa de diseñador es un deseo; la ropa básica es una necesidad.' }
+    ]
+  }});
+  // 4D2 fb
+  merge('financial-literacy:4D2', { activity: {
+    instructions: 'Matemáticas del crecimiento del interés:',
+    prompt: 'Si debes $100 al 20% de interés, después de un año debes $100 + ($100 × 0.20) = $___'
+  }});
+  // 4D3 mc
+  merge('financial-literacy:4D3', { activity: {
+    instructions: '¿Qué es mejor?',
+    choices: [
+      { text: 'Ganar 5% de interés sobre el dinero que ahorraste', explanation: '¡Correcto! El interés a tu favor hace crecer tu dinero sin esfuerzo.' },
+      { text: 'Pagar 5% de interés sobre el dinero que pediste prestado', explanation: 'El interés en tu contra hace crecer tu deuda.' },
+      { text: 'Son lo mismo', explanation: 'No son iguales — ganar interés es muy diferente a pagarlo.' }
+    ]
+  }});
+  // 4E1 fb
+  merge('financial-literacy:4E1', { activity: {
+    instructions: 'Calcula la ganancia:',
+    prompt: 'Tu negocio gana $500 (ingresos). Los costos son $200. Ganancia = $___'
+  }});
+  // 4E2 mc
+  merge('financial-literacy:4E2', { activity: {
+    instructions: '¿Para qué sirven los impuestos?',
+    choices: [
+      { text: 'Carreteras, escuelas, policía y servicios del gobierno', explanation: '¡Correcto! Los impuestos financian los servicios públicos que todos usamos.' },
+      { text: 'Para que el gobierno se quede con todo el dinero', explanation: 'Los impuestos se usan para servicios públicos, no para enriquecer al gobierno.' },
+      { text: 'Como castigo por ganar dinero', explanation: 'Los impuestos son la forma en que todos contribuimos a los servicios comunes.' }
+    ]
+  }});
+  // 4E3 dd
+  merge('financial-literacy:4E3', { activity: {
+    instructions: '¿Qué deberías registrar en tu negocio?',
+    dragOptions: [
+      { label: 'Dinero ganado' },
+      { label: 'Dinero gastado en materiales del negocio' },
+      { label: 'Cuándo hiciste ventas' },
+      { label: 'Compras personales al azar' }
+    ],
+    dropTargets: [
+      { label: 'SÍ — ingresos del negocio' },
+      { label: 'SÍ — gastos del negocio' },
+      { label: 'SÍ — datos de tiempo' },
+      { label: 'NO — gasto personal' }
+    ]
+  }});
+
+})();
+
 // Math Grade 4 (100 lessons) — templated translations by category
 (function(){
   const m = LESSON_TRANSLATIONS_ES;
