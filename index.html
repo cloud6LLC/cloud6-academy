@@ -26088,6 +26088,8 @@ function renderAIBuilder(activity){
   aiChatHistory = [];
   window._aiBuilderIteration = 0;
   window._aiCurrentApp = null;
+  const es = currentLang === 'es';
+  const instrText = tf(activity, 'instructions') || (es ? "¡Hola! Soy tu constructor de apps con IA. ¡Descríbeme cualquier app y la construiré en vivo!" : "Hey! I'm your AI app builder. Describe any app and I'll build it live!");
   return `
     <div style="display:flex;gap:0;height:560px;border-radius:16px;overflow:hidden;border:2px solid #2d3436;box-shadow:0 8px 32px rgba(0,0,0,0.15)">
       <div style="flex:1;background:#0f0f23;display:flex;flex-direction:column;min-width:0">
@@ -26098,37 +26100,37 @@ function renderAIBuilder(activity){
         </div>
         <div id="ai-chat-messages" style="flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:10px">
           <div style="background:linear-gradient(135deg,#16213e,#1e2d4a);padding:14px 16px;border-radius:14px;color:#dfe6e9;font-size:13px;max-width:92%;line-height:1.6;border:1px solid rgba(0,184,148,0.2)">
-            <span style="font-size:16px">👋</span> ${activity.instructions || "Hey! I'm your AI app builder. Describe any app and I'll build it live!"}
+            <span style="font-size:16px">👋</span> ${instrText}
           </div>
           <div style="background:#16213e;padding:12px 16px;border-radius:14px;color:#b2bec3;font-size:12px;max-width:92%;line-height:1.6">
-            <strong style="color:#00b894">Pro tips for great prompts:</strong><br>
-            <span style="color:#fdcb6e">✦</span> Name your app: <em>"Build a fitness app called FitTrack"</em><br>
-            <span style="color:#fdcb6e">✦</span> Describe the look: <em>"with a dark theme and purple accents"</em><br>
-            <span style="color:#fdcb6e">✦</span> List features: <em>"show a dashboard, progress bar, daily goals"</em><br>
-            <span style="color:#fdcb6e">✦</span> After building, say <em>"add a settings page"</em> or <em>"change the color to blue"</em> to iterate!
+            <strong style="color:#00b894">${es ? 'Consejos para escribir buenos prompts:' : 'Pro tips for great prompts:'}</strong><br>
+            <span style="color:#fdcb6e">✦</span> ${es ? 'Ponle nombre a tu app:' : 'Name your app:'} <em>${es ? '"Crea una app de fitness llamada FitTrack"' : '"Build a fitness app called FitTrack"'}</em><br>
+            <span style="color:#fdcb6e">✦</span> ${es ? 'Describe el diseño:' : 'Describe the look:'} <em>${es ? '"con tema oscuro y detalles morados"' : '"with a dark theme and purple accents"'}</em><br>
+            <span style="color:#fdcb6e">✦</span> ${es ? 'Lista las funciones:' : 'List features:'} <em>${es ? '"muestra un panel, barra de progreso, metas diarias"' : '"show a dashboard, progress bar, daily goals"'}</em><br>
+            <span style="color:#fdcb6e">✦</span> ${es ? 'Después de construir, di' : 'After building, say'} <em>${es ? '"agrega una página de ajustes"' : '"add a settings page"'}</em> ${es ? 'o' : 'or'} <em>${es ? '"cambia el color a azul"' : '"change the color to blue"'}</em> ${es ? '¡para iterar!' : 'to iterate!'}
           </div>
           <div style="background:#16213e;padding:10px 14px;border-radius:14px;color:#636e72;font-size:11px;max-width:92%;display:flex;flex-wrap:wrap;gap:6px">
-            <span style="color:#b2bec3;width:100%;margin-bottom:4px;font-weight:600">Quick start ideas:</span>
-            <span onclick="document.getElementById('ai-chat-input').value=this.dataset.p;document.getElementById('ai-chat-input').focus()" data-p="Build a social media app called Vibe with a feed of posts, like buttons, stories at the top, and a dark purple gradient theme" style="cursor:pointer;background:rgba(0,184,148,0.15);color:#00b894;padding:4px 10px;border-radius:12px;font-size:11px;border:1px solid rgba(0,184,148,0.3)">📸 Social Media</span>
-            <span onclick="document.getElementById('ai-chat-input').value=this.dataset.p;document.getElementById('ai-chat-input').focus()" data-p="Create a food delivery app called QuickBite with restaurant cards, a search bar, cart icon with badge, and categories like Pizza, Sushi, Burgers" style="cursor:pointer;background:rgba(0,184,148,0.15);color:#00b894;padding:4px 10px;border-radius:12px;font-size:11px;border:1px solid rgba(0,184,148,0.3)">🍕 Food Delivery</span>
-            <span onclick="document.getElementById('ai-chat-input').value=this.dataset.p;document.getElementById('ai-chat-input').focus()" data-p="Make a fitness tracker called FitPulse with daily step count ring, calories burned, workout history list, and a motivational quote" style="cursor:pointer;background:rgba(0,184,148,0.15);color:#00b894;padding:4px 10px;border-radius:12px;font-size:11px;border:1px solid rgba(0,184,148,0.3)">💪 Fitness Tracker</span>
-            <span onclick="document.getElementById('ai-chat-input').value=this.dataset.p;document.getElementById('ai-chat-input').focus()" data-p="Build a music player called BeatDrop with album art, play/pause/skip buttons, a progress bar, playlist, and a gradient background" style="cursor:pointer;background:rgba(0,184,148,0.15);color:#00b894;padding:4px 10px;border-radius:12px;font-size:11px;border:1px solid rgba(0,184,148,0.3)">🎵 Music Player</span>
-            <span onclick="document.getElementById('ai-chat-input').value=this.dataset.p;document.getElementById('ai-chat-input').focus()" data-p="Create a weather app called SkyCast with animated sun, current temp, humidity, wind speed, 5-day forecast, and a blue sky gradient" style="cursor:pointer;background:rgba(0,184,148,0.15);color:#00b894;padding:4px 10px;border-radius:12px;font-size:11px;border:1px solid rgba(0,184,148,0.3)">🌤️ Weather</span>
-            <span onclick="document.getElementById('ai-chat-input').value=this.dataset.p;document.getElementById('ai-chat-input').focus()" data-p="Build a pet care app called PawPal with pet profiles, feeding schedule, vet appointments, a walk tracker, and cute paw print decorations" style="cursor:pointer;background:rgba(0,184,148,0.15);color:#00b894;padding:4px 10px;border-radius:12px;font-size:11px;border:1px solid rgba(0,184,148,0.3)">🐾 Pet Care</span>
+            <span style="color:#b2bec3;width:100%;margin-bottom:4px;font-weight:600">${es ? 'Ideas para comenzar:' : 'Quick start ideas:'}</span>
+            <span onclick="document.getElementById('ai-chat-input').value=this.dataset.p;document.getElementById('ai-chat-input').focus()" data-p="Build a social media app called Vibe with a feed of posts, like buttons, stories at the top, and a dark purple gradient theme" style="cursor:pointer;background:rgba(0,184,148,0.15);color:#00b894;padding:4px 10px;border-radius:12px;font-size:11px;border:1px solid rgba(0,184,148,0.3)">📸 ${es ? 'Redes Sociales' : 'Social Media'}</span>
+            <span onclick="document.getElementById('ai-chat-input').value=this.dataset.p;document.getElementById('ai-chat-input').focus()" data-p="Create a food delivery app called QuickBite with restaurant cards, a search bar, cart icon with badge, and categories like Pizza, Sushi, Burgers" style="cursor:pointer;background:rgba(0,184,148,0.15);color:#00b894;padding:4px 10px;border-radius:12px;font-size:11px;border:1px solid rgba(0,184,148,0.3)">🍕 ${es ? 'Comida a Domicilio' : 'Food Delivery'}</span>
+            <span onclick="document.getElementById('ai-chat-input').value=this.dataset.p;document.getElementById('ai-chat-input').focus()" data-p="Make a fitness tracker called FitPulse with daily step count ring, calories burned, workout history list, and a motivational quote" style="cursor:pointer;background:rgba(0,184,148,0.15);color:#00b894;padding:4px 10px;border-radius:12px;font-size:11px;border:1px solid rgba(0,184,148,0.3)">💪 ${es ? 'Rastreador de Fitness' : 'Fitness Tracker'}</span>
+            <span onclick="document.getElementById('ai-chat-input').value=this.dataset.p;document.getElementById('ai-chat-input').focus()" data-p="Build a music player called BeatDrop with album art, play/pause/skip buttons, a progress bar, playlist, and a gradient background" style="cursor:pointer;background:rgba(0,184,148,0.15);color:#00b894;padding:4px 10px;border-radius:12px;font-size:11px;border:1px solid rgba(0,184,148,0.3)">🎵 ${es ? 'Reproductor de Música' : 'Music Player'}</span>
+            <span onclick="document.getElementById('ai-chat-input').value=this.dataset.p;document.getElementById('ai-chat-input').focus()" data-p="Create a weather app called SkyCast with animated sun, current temp, humidity, wind speed, 5-day forecast, and a blue sky gradient" style="cursor:pointer;background:rgba(0,184,148,0.15);color:#00b894;padding:4px 10px;border-radius:12px;font-size:11px;border:1px solid rgba(0,184,148,0.3)">🌤️ ${es ? 'Clima' : 'Weather'}</span>
+            <span onclick="document.getElementById('ai-chat-input').value=this.dataset.p;document.getElementById('ai-chat-input').focus()" data-p="Build a pet care app called PawPal with pet profiles, feeding schedule, vet appointments, a walk tracker, and cute paw print decorations" style="cursor:pointer;background:rgba(0,184,148,0.15);color:#00b894;padding:4px 10px;border-radius:12px;font-size:11px;border:1px solid rgba(0,184,148,0.3)">🐾 ${es ? 'Cuidado de Mascotas' : 'Pet Care'}</span>
           </div>
         </div>
         <div style="padding:12px;border-top:1px solid #333;display:flex;gap:8px;background:#0f0f23">
-          <input type="text" id="ai-chat-input" placeholder="Describe your dream app..."
+          <input type="text" id="ai-chat-input" placeholder="${es ? 'Describe tu app ideal...' : 'Describe your dream app...'}"
                  style="flex:1;padding:12px 16px;border-radius:24px;border:1px solid #444;background:#16213e;color:#fff;font-size:13px;outline:none;transition:border-color 0.3s"
                  onfocus="this.style.borderColor='#00b894'" onblur="this.style.borderColor='#444'"
                  onkeypress="if(event.key==='Enter')sendAIMessage()">
-          <button onclick="sendAIMessage()" id="ai-send-btn" style="padding:12px 24px;background:linear-gradient(135deg,#00b894,#00cec9);color:#fff;border:none;border-radius:24px;cursor:pointer;font-weight:700;font-size:13px;transition:all 0.2s;white-space:nowrap" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">Build It ⚡</button>
+          <button onclick="sendAIMessage()" id="ai-send-btn" style="padding:12px 24px;background:linear-gradient(135deg,#00b894,#00cec9);color:#fff;border:none;border-radius:24px;cursor:pointer;font-weight:700;font-size:13px;transition:all 0.2s;white-space:nowrap" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">${es ? '¡Crear! ⚡' : 'Build It ⚡'}</button>
         </div>
       </div>
       <div style="flex:1;background:#f0f2f5;display:flex;flex-direction:column;min-width:0">
         <div style="padding:12px 18px;background:#fff;font-weight:700;font-size:13px;color:#2d3436;border-bottom:1px solid #e0e0e0;display:flex;align-items:center;gap:8px">
-          <span style="font-size:16px">📱</span> Live Preview
-          <span id="ai-preview-status" style="margin-left:auto;font-size:10px;color:#b2bec3;font-weight:400">Waiting for prompt...</span>
+          <span style="font-size:16px">📱</span> ${es ? 'Vista Previa en Vivo' : 'Live Preview'}
+          <span id="ai-preview-status" style="margin-left:auto;font-size:10px;color:#b2bec3;font-weight:400">${es ? 'Esperando tu prompt...' : 'Waiting for prompt...'}</span>
         </div>
         <div style="flex:1;display:flex;align-items:center;justify-content:center;padding:16px;background:radial-gradient(circle at center,#e8e8e8 0%,#f0f2f5 70%)">
           <div id="ai-phone-preview" style="width:280px;height:500px;border:3px solid #1a1a2e;border-radius:40px;overflow:hidden;background:#fff;position:relative;box-shadow:0 12px 40px rgba(0,0,0,0.2),inset 0 0 0 2px #333">
@@ -26137,21 +26139,21 @@ function renderAIBuilder(activity){
             <div id="phone-screen" style="width:100%;height:100%;overflow-y:auto;text-align:center;color:#636e72;position:relative">
               <div style="padding:32px 16px 16px;display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%">
                 <div style="font-size:48px;margin-bottom:16px;animation:float 3s ease-in-out infinite">📱</div>
-                <p style="font-size:16px;font-weight:700;color:#2d3436;margin-bottom:8px">Your App Appears Here</p>
-                <p style="font-size:12px;color:#636e72;max-width:200px;line-height:1.5">Type a description on the left and watch your app come to life instantly!</p>
+                <p style="font-size:16px;font-weight:700;color:#2d3436;margin-bottom:8px">${es ? 'Tu App Aparecerá Aquí' : 'Your App Appears Here'}</p>
+                <p style="font-size:12px;color:#636e72;max-width:200px;line-height:1.5">${es ? '¡Escribe una descripción a la izquierda y ve cómo tu app cobra vida al instante!' : 'Type a description on the left and watch your app come to life instantly!'}</p>
               </div>
             </div>
           </div>
         </div>
         <div id="ai-bottom-bar" style="padding:8px 16px;background:#fff;border-top:1px solid #e0e0e0;display:flex;align-items:center;gap:8px;font-size:11px;color:#636e72">
           <span id="ai-version-badge" style="background:#e8f8f0;color:#00b894;padding:3px 8px;border-radius:8px;font-weight:600;font-size:10px">v0.0</span>
-          <span id="ai-component-count">0 components</span>
-          <span style="margin-left:auto" id="ai-iteration-count">0 iterations</span>
+          <span id="ai-component-count">0 ${es ? 'componentes' : 'components'}</span>
+          <span style="margin-left:auto" id="ai-iteration-count">0 ${es ? 'iteraciones' : 'iterations'}</span>
         </div>
       </div>
     </div>
     <style>@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}@keyframes buildPulse{0%{opacity:0.3}50%{opacity:1}100%{opacity:0.3}}@keyframes slideUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}</style>
-    <button class="next-btn" style="margin-top:16px" onclick="showQuestion(${currentQuestionIndex+1})">Continue to Next Question →</button>
+    <button class="next-btn" style="margin-top:16px" onclick="showQuestion(${currentQuestionIndex+1})">${es ? 'Continuar a la Siguiente Pregunta →' : 'Continue to Next Question →'}</button>
   `;
 }
 
@@ -26464,7 +26466,8 @@ function sendAIMessage(){
   const promptCheck = ContentFilter.check(msg);
   if(!promptCheck.safe){
     const chatArea = document.getElementById('ai-chat-messages');
-    chatArea.innerHTML += `<div style="background:#d63031;padding:12px 16px;border-radius:14px;color:#fff;font-size:13px;max-width:82%">⚠️ Your prompt contains inappropriate language. Please describe your app idea using respectful, school-appropriate language.</div>`;
+    const _es = currentLang === 'es';
+    chatArea.innerHTML += `<div style="background:#d63031;padding:12px 16px;border-radius:14px;color:#fff;font-size:13px;max-width:82%">⚠️ ${_es ? 'Tu prompt contiene lenguaje inapropiado. Por favor describe tu app usando un lenguaje respetuoso y apropiado para la escuela.' : 'Your prompt contains inappropriate language. Please describe your app idea using respectful, school-appropriate language.'}</div>`;
     chatArea.scrollTop = chatArea.scrollHeight;
     input.value = '';
     return;
@@ -26480,20 +26483,23 @@ function sendAIMessage(){
   chatArea.innerHTML += `<div style="background:linear-gradient(135deg,#00b894,#00cec9);padding:12px 16px;border-radius:14px 14px 4px 14px;color:#fff;font-size:13px;max-width:82%;align-self:flex-end;box-shadow:0 2px 8px rgba(0,184,148,0.3);animation:slideUp 0.3s ease">${msg}</div>`;
   chatArea.scrollTop = chatArea.scrollHeight;
 
+  const _esMsg = currentLang === 'es';
   // Show "building" state
-  sendBtn.textContent = 'Building...';
+  sendBtn.textContent = _esMsg ? 'Creando...' : 'Building...';
   sendBtn.style.opacity = '0.6';
   sendBtn.disabled = true;
-  statusEl.textContent = '⚡ Building...';
+  statusEl.textContent = _esMsg ? '⚡ Creando...' : '⚡ Building...';
   statusEl.style.color = '#fdcb6e';
 
   // Add typing indicator
   const typingId = 'typing-' + Date.now();
-  chatArea.innerHTML += `<div id="${typingId}" style="background:#16213e;padding:12px 16px;border-radius:14px;color:#b2bec3;font-size:13px;max-width:80%;display:flex;align-items:center;gap:6px"><span style="animation:buildPulse 0.8s infinite">●</span><span style="animation:buildPulse 0.8s infinite 0.2s">●</span><span style="animation:buildPulse 0.8s infinite 0.4s">●</span><span style="margin-left:4px;font-size:11px">Analyzing your prompt...</span></div>`;
+  chatArea.innerHTML += `<div id="${typingId}" style="background:#16213e;padding:12px 16px;border-radius:14px;color:#b2bec3;font-size:13px;max-width:80%;display:flex;align-items:center;gap:6px"><span style="animation:buildPulse 0.8s infinite">●</span><span style="animation:buildPulse 0.8s infinite 0.2s">●</span><span style="animation:buildPulse 0.8s infinite 0.4s">●</span><span style="margin-left:4px;font-size:11px">${_esMsg ? 'Analizando tu prompt...' : 'Analyzing your prompt...'}</span></div>`;
   chatArea.scrollTop = chatArea.scrollHeight;
 
   // Simulate build process with stages
-  const stages = ['Analyzing your prompt...','Designing UI components...','Building screens...','Adding interactions...','Polishing design...'];
+  const stages = _esMsg
+    ? ['Analizando tu prompt...','Diseñando componentes de la UI...','Construyendo pantallas...','Agregando interacciones...','Puliendo el diseño...']
+    : ['Analyzing your prompt...','Designing UI components...','Building screens...','Adding interactions...','Polishing design...'];
   let stageIdx = 0;
   const stageInterval = setInterval(()=>{
     stageIdx++;
@@ -26526,7 +26532,15 @@ function sendAIMessage(){
       componentCount = (appHtml.match(/div style/g)||[]).length;
       const templateNames = {social:'social media',food:'food delivery',fitness:'fitness',music:'music player',weather:'weather',calculator:'calculator',todo:'task manager',pet:'pet care',game:'quiz game',ecommerce:'e-commerce',chat:'messenger',finance:'finance',booking:'travel booking'};
 
-      aiResponse = `<div style="line-height:1.6">
+      aiResponse = _esMsg ? `<div style="line-height:1.6">
+        <strong style="color:#00b894">✅ ¡Listo!</strong> Tu app <em>${style.name || templateNames[templateKey]}</em> está en vivo en la vista previa. <br><br>
+        <span style="color:#fdcb6e">📦 ${componentCount} componentes</span> · <span style="color:#a78bfa">v1.${iteration-1}</span><br><br>
+        <strong>¿Quieres iterar?</strong> Prueba:<br>
+        <span style="color:#636e72">• "Agrega un modo oscuro"</span><br>
+        <span style="color:#636e72">• "Cambia el color a morado"</span><br>
+        <span style="color:#636e72">• "Agrega una página de perfil"</span><br>
+        <span style="color:#636e72">• "Crea una app completamente diferente"</span>
+      </div>` : `<div style="line-height:1.6">
         <strong style="color:#00b894">✅ Built!</strong> Your ${style.name || templateNames[templateKey]} app is live in the preview! <br><br>
         <span style="color:#fdcb6e">📦 ${componentCount} components</span> · <span style="color:#a78bfa">v1.${iteration-1}</span><br><br>
         <strong>Want to iterate?</strong> Try:<br>
@@ -26540,7 +26554,11 @@ function sendAIMessage(){
       appHtml = buildGenericApp(style.name, msg);
       componentCount = (appHtml.match(/div style/g)||[]).length;
 
-      aiResponse = `<div style="line-height:1.6">
+      aiResponse = _esMsg ? `<div style="line-height:1.6">
+        <strong style="color:#00b894">✅ ¡Creada!</strong> Construí una app personalizada basada en tu descripción. ¡Revisa la vista previa!<br><br>
+        <span style="color:#fdcb6e">📦 ${componentCount} componentes</span> · <span style="color:#a78bfa">v1.${iteration-1}</span><br><br>
+        <strong>Refínala:</strong> ¡Describe los cambios y la actualizaré en vivo!
+      </div>` : `<div style="line-height:1.6">
         <strong style="color:#00b894">✅ Created!</strong> I built a custom app based on your description. Check the preview!<br><br>
         <span style="color:#fdcb6e">📦 ${componentCount} components</span> · <span style="color:#a78bfa">v1.${iteration-1}</span><br><br>
         <strong>Refine it:</strong> Describe changes and I'll update it live!
@@ -26563,16 +26581,16 @@ function sendAIMessage(){
     }, 200);
 
     // Update status bar
-    statusEl.textContent = '✅ Preview live';
+    statusEl.textContent = _esMsg ? '✅ Vista previa en vivo' : '✅ Preview live';
     statusEl.style.color = '#00b894';
-    sendBtn.textContent = 'Iterate ⚡';
+    sendBtn.textContent = _esMsg ? 'Iterar ⚡' : 'Iterate ⚡';
     sendBtn.style.opacity = '1';
     sendBtn.disabled = false;
 
     // Update bottom bar
     document.getElementById('ai-version-badge').textContent = `v1.${iteration-1}`;
-    document.getElementById('ai-component-count').textContent = `${componentCount} components`;
-    document.getElementById('ai-iteration-count').textContent = `${iteration} iteration${iteration>1?'s':''}`;
+    document.getElementById('ai-component-count').textContent = _esMsg ? `${componentCount} componentes` : `${componentCount} components`;
+    document.getElementById('ai-iteration-count').textContent = _esMsg ? `${iteration} iteraci${iteration>1?'ones':'ón'}` : `${iteration} iteration${iteration>1?'s':''}`;
 
     window._aiCurrentApp = templateKey;
 
