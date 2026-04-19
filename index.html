@@ -17826,6 +17826,96 @@ Object.assign(LESSON_TRANSLATIONS_ES, {
   });
 })();
 
+// Grade 1 Social Studies — add missing activity objects (s1A1–s1E3)
+(function(){
+  var L = LESSON_TRANSLATIONS_ES;
+  var ssG1 = {
+    's1A1': { q:'¿Qué hay en un vecindario?', choices:[
+      {text:'Casas, parques y tiendas', expl:'¡Los vecindarios tienen muchos tipos de edificios y servicios!'},
+      {text:'Solo edificios muy altos', expl:'¡Los vecindarios tienen muchas cosas distintas!'},
+      {text:'Solo granjas', expl:'¡Las granjas están en el campo, no en los vecindarios!'}
+    ]},
+    's1A2': { q:'¿Por qué tenemos reglas en la escuela?', choices:[
+      {text:'Para estar seguros y aprender mejor', expl:'¡Las reglas nos mantienen seguros y ayudan a todos!'},
+      {text:'Para molestar a los niños', expl:'¡Las reglas son para ayudar, no para molestar!'},
+      {text:'Porque son aburridas', expl:'¡Las reglas hacen que la escuela sea un buen lugar para aprender!'}
+    ]},
+    's1A3': { q:'¿Cómo se elige una opción al votar?', choices:[
+      {text:'La opción con más votos gana', expl:'¡Votar es justo porque todos participan y se cuenta cada voto!'},
+      {text:'La maestra decide sola', expl:'¡Al votar todos tienen voz, no solo una persona!'},
+      {text:'Siempre se escoge la primera opción', expl:'¡Se cuenta cada voto y gana la opción más elegida!'}
+    ]},
+    's1B1': { q:'¿Qué es un bien?', choices:[
+      {text:'Un artículo que se puede tocar y comprar', expl:'¡Los bienes son cosas como juguetes, comida y ropa!'},
+      {text:'Algo que alguien hace por ti', expl:'¡Eso es un servicio, no un bien!'},
+      {text:'Un tipo de trabajo', expl:'¡Los trabajos son servicios; los bienes son objetos que compramos!'}
+    ]},
+    's1B2': { q:'¿Cómo gana dinero la gente?', choices:[
+      {text:'Trabajando y ofreciendo sus habilidades', expl:'¡La gente cambia su tiempo y habilidades por dinero!'},
+      {text:'Encontrándolo en la calle', expl:'¡El dinero se gana trabajando!'},
+      {text:'Pidiéndoselo a todos', expl:'¡Las personas trabajan para ganar su dinero!'}
+    ]},
+    's1B3': { q:'¿Qué significa ahorrar dinero?', choices:[
+      {text:'Guardarlo para usarlo después', expl:'¡Ahorrar es guardar dinero para algo especial en el futuro!'},
+      {text:'Gastarlo de inmediato', expl:'¡Eso es gastar, no ahorrar!'},
+      {text:'Darlo todo a los demás', expl:'¡Ahorrar significa guardarlo para tus metas!'}
+    ]},
+    's1C1': { q:'¿Por qué las fiestas son distintas en el mundo?', choices:[
+      {text:'Diferentes culturas celebran cosas diferentes', expl:'¡Hay más de 1,000 fiestas distintas en todo el mundo!'},
+      {text:'Solo un país tiene fiestas', expl:'¡Todos los países del mundo celebran fiestas!'},
+      {text:'Las fiestas son todas iguales', expl:'¡Cada cultura tiene sus propias celebraciones especiales!'}
+    ]},
+    's1C2': { q:'¿Qué es una tradición familiar?', choices:[
+      {text:'Algo especial que la familia repite', expl:'¡Las tradiciones nos conectan y hacen a nuestra familia única!'},
+      {text:'Una regla del gobierno', expl:'¡Las tradiciones vienen de la familia, no del gobierno!'},
+      {text:'Un tipo de trabajo', expl:'¡Las tradiciones son actividades especiales que compartimos, no trabajos!'}
+    ]},
+    's1C3': { q:'¿Por qué la música es diferente en cada cultura?', choices:[
+      {text:'Cada cultura tiene sus propios instrumentos y estilos', expl:'¡La música refleja la historia y los sentimientos de cada pueblo!'},
+      {text:'Solo existe un tipo de música en el mundo', expl:'¡Hay música de todo tipo en cada parte del mundo!'},
+      {text:'La música no existe en otras culturas', expl:'¡Todas las culturas del mundo tienen su propia música especial!'}
+    ]},
+    's1D1': { q:'¿Qué son las noticias?', choices:[
+      {text:'Información sobre lo que pasa en el mundo', expl:'¡Las noticias nos mantienen informados sobre nuestra comunidad y el mundo!'},
+      {text:'Cuentos completamente inventados', expl:'¡Las noticias son sobre eventos reales, no historias inventadas!'},
+      {text:'Solo juegos y películas', expl:'¡Las noticias son información sobre lo que ocurre en el mundo real!'}
+    ]},
+    's1D2': { q:'¿Qué tipo de cosas pasan en el mundo ahora mismo?', choices:[
+      {text:'Personas trabajando, construyendo y aprendiendo', expl:'¡En este momento hay científicos, obreros y maestros haciendo cosas increíbles!'},
+      {text:'Nada, el mundo está quieto', expl:'¡El mundo está siempre activo con muchísimas personas haciendo cosas!'},
+      {text:'Solo eventos en tu ciudad', expl:'¡Están pasando cosas importantes en todo el mundo al mismo tiempo!'}
+    ]},
+    's1D3': { q:'¿Qué actividad va mejor con el verano?', choices:[
+      {text:'Nadar y jugar afuera', expl:'¡El verano es perfecto para nadar y divertirse afuera porque hace calor!'},
+      {text:'Saltar en las hojas caídas', expl:'¡Saltar en las hojas es una actividad de otoño!'},
+      {text:'Hacer un muñeco de nieve', expl:'¡Los muñecos de nieve se hacen en invierno cuando cae nieve!'}
+    ]},
+    's1E1': { q:'¿Qué describe mejor una ciudad?', choices:[
+      {text:'Un lugar grande con muchas personas y edificios', expl:'¡Las ciudades tienen edificios altos, calles llenas y millones de personas!'},
+      {text:'Un lugar con pocas personas y muchas granjas', expl:'¡Eso describe el campo, no una ciudad!'},
+      {text:'Un lugar solo para animales', expl:'¡Los hábitats son para animales; las ciudades son donde vive la gente!'}
+    ]},
+    's1E2': { q:'¿Qué muestra un mapa?', choices:[
+      {text:'Un lugar visto desde arriba con símbolos y colores', expl:'¡Los mapas muestran lugares desde arriba y usan símbolos para explicar dónde está todo!'},
+      {text:'Solo caminos y carreteras', expl:'¡Los mapas muestran mucho más: parques, ríos, ciudades y más!'},
+      {text:'La historia antigua de un lugar', expl:'¡Los mapas muestran cómo es un lugar, no solo su historia!'}
+    ]},
+    's1E3': { q:'¿Qué cubre la mayor parte de la Tierra?', choices:[
+      {text:'El agua de los océanos', expl:'¡El 71% de la Tierra está cubierto de agua!'},
+      {text:'La tierra donde vivimos', expl:'¡En realidad, hay más agua que tierra en nuestro planeta!'},
+      {text:'La nieve y el hielo', expl:'¡El agua líquida de los océanos cubre la mayor parte de la Tierra!'}
+    ]}
+  };
+  Object.keys(ssG1).forEach(function(id){
+    var key = 'social-studies:' + id;
+    if(!L[key]) L[key] = {};
+    L[key].activity = {
+      instructions: ssG1[id].q,
+      choices: ssG1[id].choices.map(function(c){ return { text: c.text, explanation: c.expl }; })
+    };
+  });
+})();
+
 // ═══════════════════════════════════════════════════════════
 // AUTO-TRANSLATE ACTIVITY CONTENT for PK/K/1 across all subjects
 // Runs after manual LESSON_TRANSLATIONS_ES are merged — only fills in
