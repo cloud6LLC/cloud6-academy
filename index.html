@@ -26450,6 +26450,12 @@ CATEGORY_TRANSLATIONS_ES['app-building.10.F'] = { name: 'Construye Tu App' };
   merge('app-building:ab10f2',Object.assign({title:'Diseñando sistemas escalables',tagline:'¡Cada crecimiento de 10x rompe algo nuevo!'},catF));
   merge('app-building:ab10f3',Object.assign({title:'¡Construye! App de suscripción FitPro',tagline:'¡Construye una app de fitness de suscripción real con niveles de precios!'},catF));
 })();
+// ── Grade 10 Ship Real Apps / Recommendations / Awards ──
+// Ship Real Apps: APP_BUILDING['ship'] is canonical for grades 6-12 and is
+// already translated by the Ship Real Apps IIFE below (uses ship-real-apps.6 key).
+// Recommendations & Awards are dynamic UI views with no grade-specific lesson content.
+// No additional translation entries required for Grade 10.
+GRADE_DATA_TRANSLATIONS_ES['ship-real-apps.10'] = GRADE_DATA_TRANSLATIONS_ES['ship-real-apps.6'] || { description: 'Aprende a construir y publicar apps reales con las herramientas que usan los profesionales: Lovable, GitHub, Supabase, Stripe y Claude.' };
 // Apply all Phase 2 translations after every curriculum has loaded.
 try { applyLessonTranslationsES(); } catch(e){ console.warn('Lesson translation merge skipped:', e); }
 try { autoTranslateActivitiesES(); } catch(e){ console.warn('Auto activity translator skipped:', e); }
