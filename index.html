@@ -23433,6 +23433,228 @@ Object.assign(LESSON_TRANSLATIONS_ES, {
     'Numérico','Los colores no son numéricos. Numérico sería "¿Cuántas horas...?". Esto es categórico.',
     'Ambos','Esta encuesta es solo categórica. Categórico = categorías descriptivas como los colores.');
 })();
+// ── Grade 7 Science ──
+GRADE_DATA_TRANSLATIONS_ES['science.7'] = { description: 'Genética y ADN, selección natural, ecosistemas, ciclo de las rocas, atmósfera, cambio climático, estructura atómica, reacciones químicas, espectro electromagnético e ingeniería verde.' };
+CATEGORY_TRANSLATIONS_ES['science.7.A'] = { name: 'Ciencias de la vida' };
+CATEGORY_TRANSLATIONS_ES['science.7.B'] = { name: 'Tierra y espacio' };
+CATEGORY_TRANSLATIONS_ES['science.7.C'] = { name: 'Ciencias físicas' };
+CATEGORY_TRANSLATIONS_ES['science.7.D'] = { name: 'Método científico' };
+CATEGORY_TRANSLATIONS_ES['science.7.E'] = { name: 'Ingeniería y tecnología' };
+(function(){
+  var L = LESSON_TRANSLATIONS_ES;
+  function merge(k,d){ L[k]=Object.assign({},L[k]||{},d); }
+  merge('science:s7A1',{
+    title:'Genética y ADN',tagline:'La herencia a nivel molecular',
+    intro:'El ADN es una molécula de doble hélice que contiene los genes que codifican las proteínas y determinan los rasgos de los organismos. Cada célula humana contiene aproximadamente 3 mil millones de pares de bases. El ADN tiene cuatro bases (adenina, timina, guanina, citosina) que se emparejan específicamente: A con T y G con C, formando el código genético. Los genes son secuencias específicas de ADN que codifican proteínas, y los organismos heredan dos copias de cada gen, una de cada progenitor, con algunos rasgos que muestran dominancia. El Proyecto Genoma Humano cartografió todos los 20,000 genes humanos, revelando que compartimos la mayoría de los genes con otros organismos.',
+    keyPoints:['El ADN contiene las instrucciones genéticas','El emparejamiento de bases es específico','Los genes codifican proteínas'],
+    funFact:'¡El ADN humano es 99.9% idéntico entre todas las personas, pero esa variación del 0.1% crea toda la diversidad!',
+    activity:{
+      instructions:'¿Para qué sirven los genes?',
+      choices:[
+        {text:'Para fabricar proteínas',explanation:'Los genes son secuencias de ADN con instrucciones para fabricar proteínas.'},
+        {text:'Para formar células',explanation:'Las células se forman a partir de proteínas y otras moléculas.'},
+        {text:'Para producir energía',explanation:'La energía proviene de los alimentos, no de los genes.'}
+      ]
+    }
+  });
+  merge('science:s7A2',{
+    title:'Selección natural',tagline:'La evolución a través de la presión del entorno',
+    intro:'La selección natural explica cómo los organismos con rasgos ventajosos sobreviven y se reproducen más que los que tienen rasgos desventajosos, cambiando gradualmente a las especies a lo largo de las generaciones. Con el tiempo, los rasgos ventajosos se vuelven más comunes y los desfavorables desaparecen. Las bacterias que desarrollan resistencia a los antibióticos demuestran la selección natural en tiempo real.',
+    keyPoints:['Los rasgos ventajosos aumentan su frecuencia','La presión de selección impulsa el cambio','Esto explica la evolución'],
+    funFact:'¡Las bacterias resistentes a los antibióticos muestran la selección natural en tiempo real, en cuestión de años!',
+    activity:{
+      instructions:'¿Qué es la selección natural?',
+      choices:[
+        {text:'La supervivencia y reproducción de los organismos con ventajas',explanation:'La selección natural favorece a los organismos con rasgos beneficiosos.'},
+        {text:'Cambios aleatorios en los organismos',explanation:'La selección natural no es aleatoria; está dirigida por el entorno.'},
+        {text:'Un proceso de diseño inteligente',explanation:'La selección natural es un proceso natural no dirigido.'}
+      ]
+    }
+  });
+  merge('science:s7A3',{
+    title:'Ecosistemas y biodiversidad',tagline:'Interacciones entre especies y diversidad',
+    intro:'La biodiversidad se refiere a la variedad de especies en un ecosistema, los tipos de ecosistemas en los biomas y la variación genética dentro de las especies. Los ecosistemas con alta biodiversidad, como las selvas tropicales, contienen millones de especies por hectárea. Las interdependencias entre especies significan que la pérdida de una especie afecta a las demás. Proteger la biodiversidad protege la estabilidad del ecosistema y nuestra propia supervivencia.',
+    keyPoints:['La biodiversidad aumenta la estabilidad','Las especies son interdependientes','Los seres humanos dependen de los ecosistemas'],
+    funFact:'¡Las selvas tropicales cubren el 6% de la Tierra pero contienen el 50% de las especies!',
+    activity:{
+      instructions:'¿Por qué es importante la biodiversidad?',
+      choices:[
+        {text:'Más especies = ecosistemas más estables',explanation:'Los ecosistemas diversos son más resistentes a los cambios ambientales.'},
+        {text:'Cada especie debe ser única',explanation:'La biodiversidad trata sobre cantidad y variedad, no solo sobre ser únicas.'},
+        {text:'La biodiversidad no tiene valor práctico',explanation:'La biodiversidad sustenta la supervivencia y el bienestar humanos.'}
+      ]
+    }
+  });
+  merge('science:s7B1',{
+    title:'El ciclo de las rocas',tagline:'El reciclaje de la corteza terrestre',
+    intro:'El ciclo de las rocas describe la transformación continua de las rocas a través del interior y la superficie de la Tierra: las rocas ígneas se forman al enfriarse el magma, las sedimentarias al compactarse el sedimento y las metamórficas al alterarse las rocas por calor y presión. El ciclo opera a lo largo de escalas de tiempo geológicas, reciclando constantemente los materiales de la corteza terrestre.',
+    keyPoints:['Los tres tipos de roca se transforman en un ciclo','El calor y la presión impulsan los cambios','El ciclo opera durante millones de años'],
+    funFact:'¡Un grano de arena en la arenisca puede haber pasado por el ciclo de las rocas varias veces!',
+    activity:{
+      instructions:'¿Cómo se forma la roca metamórfica?',
+      choices:[
+        {text:'A partir del calor y la presión sobre rocas existentes',explanation:'El calor y la presión en el subsuelo transforman las rocas en tipos metamórficos.'},
+        {text:'Al enfriarse el magma',explanation:'Así se forman las rocas ígneas.'},
+        {text:'Al compactarse el sedimento',explanation:'Así se forman las rocas sedimentarias.'}
+      ]
+    }
+  });
+  merge('science:s7B2',{
+    title:'Ciencias atmosféricas',tagline:'Composición y comportamiento del aire',
+    intro:'La atmósfera terrestre es un 78% nitrógeno, un 21% oxígeno y un 1% otros gases. Tiene capas distintas: la troposfera (donde ocurre el clima), la estratosfera (con la capa de ozono), la mesosfera, la termosfera y la exosfera. El efecto invernadero ocurre cuando gases como el dióxido de carbono atrapan el calor, evitando que la radiación escape al espacio.',
+    keyPoints:['La atmósfera tiene capas distintas','Los gases de efecto invernadero atrapan el calor','Los seres humanos afectan la atmósfera'],
+    funFact:'¡El agujero de ozono sobre la Antártida alcanza el tamaño de la propia Antártida cada primavera!',
+    activity:{
+      instructions:'¿Qué porcentaje de la atmósfera es oxígeno?',
+      choices:[
+        {text:'21%',explanation:'El oxígeno representa aproximadamente el 21% de la atmósfera terrestre.'},
+        {text:'78%',explanation:'El 78% corresponde al nitrógeno.'},
+        {text:'50%',explanation:'El oxígeno es mucho menos abundante.'}
+      ]
+    }
+  });
+  merge('science:s7B3',{
+    title:'Cambio climático',tagline:'La crisis del calentamiento de la Tierra',
+    intro:'El cambio climático se refiere a los cambios a largo plazo en la temperatura global y los patrones climáticos, causados principalmente por las emisiones humanas de gases de efecto invernadero. La temperatura promedio global ha aumentado alrededor de 1.1 grados Celsius desde la era preindustrial, causando deshielo, aumento del nivel del mar, tormentas más intensas y perturbación de los ecosistemas.',
+    keyPoints:['Los seres humanos causan la mayor parte del cambio climático','La temperatura está aumentando rápidamente','Existen soluciones si actuamos'],
+    funFact:'¡Si las tendencias actuales continúan, la Tierra podría calentarse entre 2 y 3 grados más para el año 2100!',
+    activity:{
+      instructions:'¿Qué causa el cambio climático?',
+      choices:[
+        {text:'Las emisiones humanas de gases de efecto invernadero',explanation:'La quema de combustibles fósiles libera dióxido de carbono, lo que provoca el calentamiento.'},
+        {text:'Solo la variación natural',explanation:'Aunque existen factores naturales, la actividad humana es la causa principal.'},
+        {text:'Los cambios en la radiación solar',explanation:'La radiación solar es relativamente estable; las emisiones humanas son el principal factor.'}
+      ]
+    }
+  });
+  merge('science:s7C1',{
+    title:'Estructura atómica',tagline:'Partículas subatómicas y elementos',
+    intro:'Los átomos consisten en un núcleo que contiene protones y neutrones, con electrones que orbitan en capas electrónicas. Los protones determinan el número atómico y la identidad del elemento, los neutrones determinan la variación de isótopos y los electrones determinan el comportamiento químico. La tabla periódica organiza los elementos por sus propiedades.',
+    keyPoints:['Los protones definen los elementos','Los electrones determinan la reactividad','La tabla periódica organiza los elementos'],
+    funFact:'¡Un átomo es un 99.9999999999999% espacio vacío!',
+    activity:{
+      instructions:'¿Qué partícula determina la identidad del elemento?',
+      choices:[
+        {text:'Los protones',explanation:'El número de protones define de qué elemento es un átomo.'},
+        {text:'Los neutrones',explanation:'Los neutrones afectan al isótopo, pero no a la identidad del elemento.'},
+        {text:'Los electrones',explanation:'Los electrones determinan el comportamiento químico, no la identidad.'}
+      ]
+    }
+  });
+  merge('science:s7C2',{
+    title:'Reacciones químicas',tagline:'Átomos que se reorganizan en nuevas sustancias',
+    intro:'Las reacciones químicas implican romper los enlaces de los reactivos y formar nuevos enlaces en los productos, creando nuevas sustancias con propiedades diferentes. Las reacciones exotérmicas liberan energía en forma de calor o luz, mientras que las endotérmicas absorben energía. Las velocidades de reacción dependen de la temperatura, la concentración, el área superficial y los catalizadores.',
+    keyPoints:['Las reacciones crean nuevas sustancias','Los enlaces se rompen y se forman','Se libera o se absorbe energía'],
+    funFact:'¡Los fuegos artificiales liberan energía tan rápidamente que la combustión crea luz y calor visibles!',
+    activity:{
+      instructions:'¿Qué ocurre en una reacción química?',
+      choices:[
+        {text:'Los enlaces se rompen y se forman nuevos enlaces',explanation:'Las reacciones químicas reorganizan los átomos al romper y formar enlaces.'},
+        {text:'Los átomos desaparecen',explanation:'Los átomos se conservan en las reacciones.'},
+        {text:'Solo cambia la temperatura',explanation:'La temperatura se ve afectada, pero las sustancias también cambian.'}
+      ]
+    }
+  });
+  merge('science:s7C3',{
+    title:'El espectro electromagnético',tagline:'El rango de la radiación electromagnética',
+    intro:'El espectro electromagnético abarca desde las ondas de radio de longitud de onda larga, pasando por las microondas, el infrarrojo, la luz visible, el ultravioleta, los rayos X, hasta los rayos gamma de longitud de onda corta. La luz visible, una pequeña parte del espectro, es lo que los ojos humanos detectan como colores. La radiación infrarroja se percibe como calor y la ultravioleta puede causar quemaduras solares y dañar el ADN.',
+    keyPoints:['El espectro va desde las ondas de radio hasta los rayos gamma','La luz visible es una parte muy pequeña','La longitud de onda determina las propiedades'],
+    funFact:'¡Los rayos gamma del espacio son peligrosos, pero la atmósfera y el campo magnético de la Tierra nos protegen!',
+    activity:{
+      instructions:'¿Qué tipo de radiación se percibe como calor?',
+      choices:[
+        {text:'El infrarrojo',explanation:'La radiación infrarroja tiene la longitud de onda adecuada para que las cosas se sientan calientes.'},
+        {text:'Las ondas de radio',explanation:'Las ondas de radio tienen longitudes de onda mucho más largas.'},
+        {text:'El ultravioleta',explanation:'El ultravioleta causa daño, no la sensación de calor.'}
+      ]
+    }
+  });
+  merge('science:s7D1',{
+    title:'Análisis estadístico',tagline:'Cuantificar la incertidumbre en los datos',
+    intro:'La estadística permite a los científicos resumir datos, determinar si los resultados son significativos y cuantificar la incertidumbre. Las medidas de tendencia central describen valores típicos, mientras que las medidas de dispersión describen la variación. Las pruebas de hipótesis estadísticas determinan si las diferencias observadas son probablemente reales o simplemente aleatorias.',
+    keyPoints:['La estadística resume los datos','La significancia indica efectos reales','El tamaño de la muestra importa'],
+    funFact:'¡Los tamaños de muestra grandes pueden mostrar efectos pequeños como estadísticamente significativos!',
+    activity:{
+      instructions:'¿Qué significa la significancia estadística?',
+      choices:[
+        {text:'Los resultados difícilmente se deben al azar',explanation:'La significancia indica que los efectos son probablemente reales, no accidentales.'},
+        {text:'Los resultados son prácticame importantes',explanation:'La significancia es estadística, no necesariamente práctica.'},
+        {text:'No existe error en los datos',explanation:'Todos los datos tienen algún error; la significancia indica que no es solo azar.'}
+      ]
+    }
+  });
+  merge('science:s7D2',{
+    title:'Modelar sistemas',tagline:'Simplificar para comprender la complejidad',
+    intro:'Los modelos ayudan a comprender sistemas complejos centrándose en los factores importantes e ignorando los detalles menores. Los modelos computacionales pueden simular sistemas complejos como el clima, los ecosistemas o la propagación de enfermedades, revelando patrones imposibles de ver en los datos sin procesar. Todos los modelos tienen supuestos y limitaciones.',
+    keyPoints:['Los modelos simplifican la complejidad','Los modelos computacionales ejecutan simulaciones','Las limitaciones deben reconocerse'],
+    funFact:'¡Los modelos climáticos predijeron el calentamiento global décadas antes de que se hiciera evidente!',
+    activity:{
+      instructions:'¿Por qué se usan modelos en ciencia?',
+      choices:[
+        {text:'Para comprender sistemas complejos',explanation:'Los modelos simplifican la realidad para revelar patrones importantes.'},
+        {text:'Para evitar experimentos',explanation:'Los modelos complementan los experimentos.'},
+        {text:'Para hacer que las predicciones parezcan más confiables',explanation:'Los modelos tienen limitaciones e incertidumbre.'}
+      ]
+    }
+  });
+  merge('science:s7D3',{
+    title:'Métodos de investigación',tagline:'Distintos enfoques para investigar',
+    intro:'Los estudios observacionales examinan fenómenos sin manipular variables, útiles para estudiar el comportamiento natural. Los estudios experimentales manipulan variables deliberadamente para probar causas, proporcionando evidencia más sólida de causalidad. El metaanálisis combina resultados de múltiples estudios para encontrar patrones generales.',
+    keyPoints:['Distintos métodos responden distintas preguntas','Los enfoques combinados son poderosos','Elige el método adecuado para cada pregunta'],
+    funFact:'¡La mejor investigación a menudo combina múltiples métodos para una comprensión integral!',
+    activity:{
+      instructions:'¿Qué método es el mejor para demostrar causalidad?',
+      choices:[
+        {text:'Experimentos con variables controladas',explanation:'Los experimentos aíslan variables para demostrar causa y efecto.'},
+        {text:'Estudios observacionales',explanation:'Las observaciones muestran patrones, pero no necesariamente causalidad.'},
+        {text:'Solo encuestas',explanation:'Las encuestas muestran asociaciones, no causalidad.'}
+      ]
+    }
+  });
+  merge('science:s7E1',{
+    title:'Ingeniería verde',tagline:'Diseñar en beneficio del medio ambiente',
+    intro:'La ingeniería verde diseña procesos y productos para minimizar el impacto ambiental mediante la prevención de la contaminación, la eficiencia en el uso de recursos y el reciclaje. Las innovaciones en ciencia de materiales crean alternativas resistentes y ligeras a los materiales que consumen muchos recursos. La ingeniería verde demuestra que la protección ambiental y la eficiencia económica pueden ir de la mano.',
+    keyPoints:['Prevenir la contaminación en la fuente','Usar los recursos de manera eficiente','Las ganancias y el planeta pueden alinearse'],
+    funFact:'¡El enfoque de Tesla en la ingeniería verde en la producción de baterías reduce el impacto ambiental!',
+    activity:{
+      instructions:'¿Cuál es la filosofía de la ingeniería verde?',
+      choices:[
+        {text:'Prevenir la contaminación en lugar de limpiarla después',explanation:'La ingeniería verde detiene los problemas en su origen.'},
+        {text:'Limpiar la contaminación después de la producción',explanation:'Eso es remediación, no ingeniería verde.'},
+        {text:'Aceptar toda la contaminación industrial',explanation:'La ingeniería verde minimiza el impacto.'}
+      ]
+    }
+  });
+  merge('science:s7E2',{
+    title:'Tecnología médica',tagline:'Tecnologías que salvan y mejoran vidas',
+    intro:'Las imágenes médicas mediante rayos X, ultrasonido, tomografías y resonancias magnéticas ayudan a los médicos a visualizar las estructuras internas sin cirugía. Las prótesis incorporan cada vez más motores e inteligencia artificial para restaurar la movilidad. Los órganos artificiales como las bombas cardíacas y las máquinas de diálisis sostienen la vida cuando los órganos fallan. La terapia génica modifica genes para tratar enfermedades genéticas.',
+    keyPoints:['La tecnología permite el diagnóstico','Las prótesis restauran la función','Los órganos artificiales salvan vidas'],
+    funFact:'¡La impresión 3D crea prótesis personalizadas a un costo mucho menor que los métodos tradicionales!',
+    activity:{
+      instructions:'¿Qué permite hacer a los médicos la imagen médica?',
+      choices:[
+        {text:'Ver el interior del cuerpo sin cirugía',explanation:'Las imágenes revelan estructuras internas sin procedimientos invasivos.'},
+        {text:'Reemplazar órganos',explanation:'Eso corresponde a los trasplantes o los órganos artificiales.'},
+        {text:'Curar todas las enfermedades',explanation:'Las imágenes ayudan al diagnóstico; la cura depende del tratamiento.'}
+      ]
+    }
+  });
+  merge('science:s7E3',{
+    title:'Innovación digital',tagline:'La computación que transforma la sociedad',
+    intro:'La inteligencia artificial basada en aprendizaje automático procesa grandes cantidades de datos para reconocer patrones y hacer predicciones, impulsando avances en medicina, transporte y comunicación. Internet conecta miles de millones de dispositivos a través de protocolos de transmisión de datos. La ciberseguridad protege los sistemas digitales de los ataques, volviéndose cada vez más importante.',
+    keyPoints:['La IA aprende de los datos','Internet conecta al mundo','La seguridad es esencial'],
+    funFact:'¡El aprendizaje automático en el ámbito de la salud diagnostica el cáncer a partir de imágenes mejor que los radiólogos expertos!',
+    activity:{
+      instructions:'¿Qué hace el aprendizaje automático?',
+      choices:[
+        {text:'Encuentra patrones en los datos para hacer predicciones',explanation:'El aprendizaje automático reconoce patrones para posibilitar predicciones.'},
+        {text:'Reemplaza todo el pensamiento humano',explanation:'El aprendizaje automático asiste a los humanos, no los reemplaza por completo.'},
+        {text:'Crea conciencia',explanation:'El aprendizaje automático resuelve problemas específicos, no crea conciencia.'}
+      ]
+    }
+  });
+})();
+
 // ── Grade 7 Math (100 lessons — templated) ──
 GRADE_DATA_TRANSLATIONS_ES['math.7'] = { description: 'Relaciones proporcionales, operaciones con racionales, expresiones y ecuaciones, geometría y estadística.' };
 CATEGORY_TRANSLATIONS_ES['math.7.A'] = { name: 'Relaciones proporcionales' };
