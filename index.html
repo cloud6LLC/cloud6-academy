@@ -23433,6 +23433,197 @@ Object.assign(LESSON_TRANSLATIONS_ES, {
     'Numérico','Los colores no son numéricos. Numérico sería "¿Cuántas horas...?". Esto es categórico.',
     'Ambos','Esta encuesta es solo categórica. Categórico = categorías descriptivas como los colores.');
 })();
+// ── Grade 7 Social Studies ──
+GRADE_DATA_TRANSLATIONS_ES['social-studies.7'] = { description: 'Educación cívica y gobierno: los fundamentos de la democracia, la Constitución, la ciudadanía, los sistemas políticos y el sistema de justicia.' };
+CATEGORY_TRANSLATIONS_ES['social-studies.7.A'] = { name: 'Fundamentos de la democracia' };
+CATEGORY_TRANSLATIONS_ES['social-studies.7.B'] = { name: 'La Constitución en profundidad' };
+CATEGORY_TRANSLATIONS_ES['social-studies.7.C'] = { name: 'Ciudadanía' };
+CATEGORY_TRANSLATIONS_ES['social-studies.7.D'] = { name: 'Sistemas políticos' };
+CATEGORY_TRANSLATIONS_ES['social-studies.7.E'] = { name: 'El sistema de justicia' };
+(function(){
+  var L = LESSON_TRANSLATIONS_ES;
+  function merge(k,d){ L[k]=Object.assign({},L[k]||{},d); }
+  merge('social-studies:ss7A1',{
+    title:'Ideas de la Ilustración',
+    tagline:'La filosofía que transformó el gobierno',
+    intro:'La Ilustración (siglos XVII-XVIII) fue un movimiento intelectual que enfatizaba la razón, la ciencia y los derechos individuales por encima de la tradición y la autoridad religiosa. Thomas Hobbes sostenía que el gobierno surgía de un contrato social en el que las personas cedían parte de su libertad a cambio de protección. John Locke argumentaba que las personas tienen derechos naturales a la vida, la libertad y la propiedad que los gobiernos deben proteger. Jean-Jacques Rousseau afirmaba que el gobierno legítimo refleja la voluntad general del pueblo. Montesquieu sostenía que los gobiernos debían dividir el poder entre distintas ramas para prevenir la tiranía. La filosofía ilustrada influyó directamente en la Revolución Americana, la Revolución Francesa y los movimientos democráticos de todo el mundo.',
+    keyPoints:['Los pensadores ilustrados enfatizaban la razón y los derechos individuales','La teoría de los derechos naturales de Locke influyó en la independencia estadounidense','La separación de poderes proviene de la filosofía ilustrada'],
+    funFact:'Antes de la Ilustración, la mayoría de las personas creía que los reyes gobernaban por derecho divino: que Dios los había designado para gobernar sin rendir cuentas.',
+    activity:{ instructions:'Según John Locke, ¿cuáles son los derechos naturales?', choices:[
+      {text:'La vida, la libertad y la propiedad',explanation:'Locke sostenía que las personas tienen estos derechos innatos que los gobiernos deben proteger.'},
+      {text:'Solo la riqueza y la propiedad',explanation:'Locke incluyó la vida y la libertad, no solo la propiedad.'},
+      {text:'Los que el gobierno concede a las personas',explanation:'Los derechos naturales existen antes del gobierno.'}
+    ]}
+  });
+  merge('social-studies:ss7A2',{
+    title:'El contrato social',
+    tagline:'El acuerdo entre el pueblo y el gobierno',
+    intro:'El contrato social es un acuerdo teórico en el que las personas ceden parte de su libertad individual a un gobierno a cambio de seguridad, orden y protección de sus derechos. Hobbes argumentó que sin gobierno la vida sería "desagradable, brutal y breve". Locke argumentó que si el gobierno viola los derechos naturales, el pueblo puede retirar su consentimiento y reemplazarlo. Rousseau sostenía que el contrato social representa la voluntad colectiva del pueblo. El contrato social otorga legitimidad teórica al gobierno: no es dominio por la fuerza, sino un acuerdo. La Declaración de Independencia apela al contrato social, argumentando que el rey británico violó los derechos de los colonos, por lo que tenían el derecho de crear un nuevo gobierno.',
+    keyPoints:['El contrato social es un acuerdo teórico entre el pueblo y el gobierno','Las personas consienten la autoridad gubernamental a cambio de protección','Los gobiernos que violan el contrato social pierden su legitimidad'],
+    funFact:'La Constitución de los Estados Unidos comienza con "Nosotros, el Pueblo", enfatizando que el poder del gobierno proviene del consentimiento del pueblo, no del gobierno mismo.',
+    activity:{ instructions:'¿Cuál es la idea principal del contrato social?', choices:[
+      {text:'Las personas aceptan la autoridad del gobierno a cambio de protección',explanation:'El contrato social proporciona la base teórica del gobierno legítimo.'},
+      {text:'El gobierno posee toda la propiedad y las personas sirven al Estado',explanation:'Eso describe la tiranía, no el contrato social.'},
+      {text:'Las personas y el gobierno son enemigos que deben luchar constantemente',explanation:'El contrato social busca terminar el conflicto mediante el acuerdo.'}
+    ]}
+  });
+  merge('social-studies:ss7A3',{
+    title:'Tipos de gobierno',
+    tagline:'Distintas formas de organizar el poder',
+    intro:'Los gobiernos pueden clasificarse según quién tiene el poder. La monarquía es el gobierno de una sola persona; la monarquía absoluta tiene poder ilimitado, mientras que la monarquía constitucional limita al monarca mediante una constitución. La oligarquía es el gobierno de un grupo pequeño. La democracia es el gobierno del pueblo mediante la votación; la democracia directa significa que los ciudadanos votan directamente sobre las leyes, mientras que la democracia representativa implica elegir representantes. La autocracia o dictadura es el gobierno de una sola persona con poder absoluto. La teocracia es el gobierno basado en leyes religiosas. La mayoría de los gobiernos a lo largo de la historia han sido monarquías o autocracias; la democracia es un desarrollo relativamente moderno.',
+    keyPoints:['Los gobiernos pueden clasificarse según quién tiene el poder','La democracia, la monarquía, la oligarquía y la dictadura son los tipos principales','El gobierno democrático es un desarrollo relativamente moderno'],
+    funFact:'Antes del siglo XX, solo unos pocos países tenían gobiernos democráticos; la democracia se ha extendido principalmente en el último siglo.',
+    activity:{ instructions:'¿Qué tipo de gobierno es el gobierno del pueblo mediante la votación?', choices:[
+      {text:'Democracia',explanation:'Democracia significa gobierno del pueblo.'},
+      {text:'Monarquía',explanation:'La monarquía es el gobierno de un rey o una reina.'},
+      {text:'Autocracia',explanation:'La autocracia es el gobierno de una sola persona sin procesos democráticos.'}
+    ]}
+  });
+  merge('social-studies:ss7B1',{
+    title:'El preámbulo y los artículos',
+    tagline:'El marco de la Constitución de los Estados Unidos',
+    intro:'La Constitución comienza con el Preámbulo, que expone sus objetivos: "formar una Unión más perfecta, establecer la Justicia, garantizar la Tranquilidad interior, proveer la Defensa común, promover el Bienestar general y asegurar los Beneficios de la Libertad." Los siete artículos que siguen establecen la estructura del gobierno. El Artículo I crea el Congreso (rama legislativa). El Artículo II crea al Presidente (rama ejecutiva). El Artículo III crea la Corte Suprema (rama judicial). El Artículo VI establece que la Constitución es la ley suprema. La Constitución es intencionalmente breve para proporcionar flexibilidad y permitir la interpretación de principios.',
+    keyPoints:['El Preámbulo expone los objetivos de la Constitución','Los siete artículos describen la estructura y los poderes del gobierno','La Constitución es intencionalmente breve para permitir una interpretación flexible'],
+    funFact:'La Constitución ha sido enmendada solo 27 veces en más de 230 años, lo que demuestra cuán difícil está previsto que sea el proceso de enmienda.',
+    activity:{ instructions:'¿Cuál artículo crea la rama legislativa?', choices:[
+      {text:'El Artículo I',explanation:'El Artículo I establece el Congreso y sus poderes.'},
+      {text:'El Artículo II',explanation:'El Artículo II crea la rama ejecutiva.'},
+      {text:'El Artículo III',explanation:'El Artículo III crea la rama judicial.'}
+    ]}
+  });
+  merge('social-studies:ss7B2',{
+    title:'Las enmiendas y el cambio',
+    tagline:'Cómo evoluciona la Constitución',
+    intro:'La Constitución puede enmendarse mediante un proceso difícil que garantiza que los cambios cuenten con un amplio respaldo. Una enmienda debe ser propuesta por una votación de dos tercios en ambas cámaras del Congreso y ratificada por tres cuartas partes de los estados. Este alto umbral previene cambios apresurados y garantiza que las enmiendas reflejen un consenso genuino. Se han adoptado 27 enmiendas. Las primeras diez (la Carta de Derechos) protegieron las libertades individuales. La Decimotercera abolió la esclavitud; la Decimocuarta garantizó la ciudadanía y la protección igualitaria; la Decimoquinta prohibió la discriminación racial en el voto; la Decimonovena prohibió la discriminación por género; la Vigesimosexta redujo la edad de voto a 18 años.',
+    keyPoints:['Las enmiendas requieren una mayoría de dos tercios del Congreso y ratificación de tres cuartas partes de los estados','27 enmiendas han ampliado derechos y modificado el gobierno','El proceso de enmienda garantiza que solo se produzcan cambios ampliamente respaldados'],
+    funFact:'La Decimoctava Enmienda (Prohibición) es la única que ha sido completamente derogada por otra enmienda (la Vigesimoprimera), lo que demuestra que el proceso puede corregir errores.',
+    activity:{ instructions:'¿Cuántos estados deben ratificar una enmienda para que sea aprobada?', choices:[
+      {text:'Tres cuartas partes (38 de 50 estados)',explanation:'Una supermayoría de estados debe ratificar las enmiendas.'},
+      {text:'Una mayoría simple (26 de 50 estados)',explanation:'Las enmiendas requieren más que una mayoría simple.'},
+      {text:'Aprobación unánime (los 50 estados)',explanation:'Aunque es difícil, la enmienda no requiere unanimidad.'}
+    ]}
+  });
+  merge('social-studies:ss7B3',{
+    title:'Casos de la Corte Suprema',
+    tagline:'Cómo los tribunales interpretan la Constitución',
+    intro:'La Corte Suprema es la autoridad final en la interpretación de la Constitución. Marbury v. Madison (1803) estableció la revisión judicial: el poder del tribunal para declarar leyes inconstitucionales. Brown v. Junta de Educación (1954) declaró inconstitucional la segregación escolar. Miranda v. Arizona (1966) estableció que la policía debe informar a los sospechosos sobre sus derechos antes de interrogarlos. Obergefell v. Hodges (2015) reconoció el derecho al matrimonio entre personas del mismo sexo. Estos casos muestran cómo la Corte Suprema interpreta los principios constitucionales en situaciones nuevas y amplía o restringe gradualmente los derechos.',
+    keyPoints:['La Corte Suprema interpreta el significado de la Constitución','La revisión judicial permite a los tribunales anular leyes inconstitucionales','Los casos históricos han ampliado derechos y modificado el significado constitucional'],
+    funFact:'El magistrado presidente John Marshall, en Marbury v. Madison, reclamó audazmente el poder del tribunal para revisar las leyes, aunque la Constitución no lo concede explícitamente.',
+    activity:{ instructions:'¿Qué estableció Marbury v. Madison?', choices:[
+      {text:'La revisión judicial: el poder del tribunal para declarar leyes inconstitucionales',explanation:'Este caso histórico le dio al tribunal el poder crucial de hacer cumplir la Constitución.'},
+      {text:'Que los estados pueden anular las leyes federales',explanation:'En realidad, el caso respaldó la autoridad federal sobre la estatal.'},
+      {text:'El derecho al matrimonio entre personas del mismo sexo',explanation:'Eso vino después, en Obergefell v. Hodges.'}
+    ]}
+  });
+  merge('social-studies:ss7C1',{
+    title:'Derechos y responsabilidades',
+    tagline:'Lo que significa la ciudadanía',
+    intro:'La ciudadanía es la pertenencia a un país con los derechos y responsabilidades asociados. Los derechos constitucionales protegen a los ciudadanos del abuso gubernamental e incluyen las libertades de expresión, religión, reunión y petición (Primera Enmienda); el debido proceso y la protección contra la autoincriminación (Quinta Enmienda); el derecho a juicio y representación legal (Sexta Enmienda). Los derechos no son absolutos: la libertad de expresión puede limitarse si incita a la violencia inminente. Los ciudadanos también tienen responsabilidades: respetar las leyes, pagar impuestos, servir en jurados y participar en la democracia. El equilibrio entre derechos y responsabilidades mantiene el orden social.',
+    keyPoints:['La ciudadanía incluye derechos constitucionales y estatutarios','Los ciudadanos tienen tanto derechos como responsabilidades','Responsabilidades como el voto y el servicio en jurados sostienen la democracia'],
+    funFact:'La Corte Suprema ha dictaminado que quemar la bandera como protesta política es libertad de expresión protegida, aunque a muchos les resulte ofensivo.',
+    activity:{ instructions:'¿Cuál es un derecho constitucional protegido por la Carta de Derechos?', choices:[
+      {text:'La libertad de expresión y de religión',explanation:'La Primera Enmienda protege estas libertades fundamentales.'},
+      {text:'El derecho a poseer un negocio',explanation:'Aunque los negocios funcionan, ese no es un derecho constitucional.'},
+      {text:'El derecho a viajar a cualquier lugar sin restricciones',explanation:'Aunque las personas pueden viajar, los gobiernos pueden restringir viajes peligrosos.'}
+    ]}
+  });
+  merge('social-studies:ss7C2',{
+    title:'Inmigración y naturalización',
+    tagline:'Cómo convertirse en ciudadano estadounidense',
+    intro:'La inmigración es el proceso de mudarse a un nuevo país, mientras que la naturalización es convertirse en ciudadano de un país diferente al de nacimiento. Las personas pueden inmigrar mediante el patrocinio familiar, el empleo, las visas de diversidad o buscando estatus de refugiado o asilo. Los inmigrantes legales reciben una tarjeta verde que les permite vivir y trabajar en el país. Después de vivir legalmente en Estados Unidos durante cinco años (tres si están casados con un ciudadano), los inmigrantes pueden solicitar la naturalización. La naturalización requiere aprobar un examen de educación cívica, dominar el inglés y demostrar buena conducta moral. Los ciudadanos naturalizados reciben todos los derechos de ciudadanía, iguales a los de los ciudadanos por nacimiento.',
+    keyPoints:['Inmigración es mudarse a un nuevo país; naturalización es convertirse en ciudadano','Los inmigrantes legales reciben una tarjeta verde para vivir y trabajar','La naturalización requiere conocimiento cívico, inglés y buena conducta'],
+    funFact:'Aproximadamente el 28 % de los estadounidenses son inmigrantes o tienen al menos un padre inmigrante, lo que hace que la inmigración sea central en la identidad estadounidense.',
+    activity:{ instructions:'¿Cuánto tiempo debe vivir un inmigrante legal en Estados Unidos antes de solicitar la naturalización?', choices:[
+      {text:'Generalmente cinco años (tres si está casado con un ciudadano)',explanation:'Los requisitos de tiempo garantizan el compromiso de convertirse en estadounidense.'},
+      {text:'Un año',explanation:'Cinco años es el requisito estándar.'},
+      {text:'Inmediatamente al llegar',explanation:'Se requiere un período de espera.'}
+    ]}
+  });
+  merge('social-studies:ss7C3',{
+    title:'Participación cívica',
+    tagline:'Ser un ciudadano activo',
+    intro:'La ciudadanía activa implica más que tener derechos; requiere participar en la democracia. El voto es la forma más directa. Pero la participación cívica incluye muchas otras actividades: servir en jurados, trabajar como voluntario en organizaciones comunitarias, prestar servicio militar, asistir a reuniones del ayuntamiento o de la junta escolar, defender causas en las que cree y comunicarse con los representantes electos. La desobediencia civil —infringir intencionalmente leyes consideradas injustas para protestar— se ha practicado a lo largo de la historia, desde los abolicionistas hasta los activistas de los derechos civiles. La democracia funciona mejor cuando los ciudadanos participan activamente en lugar de aceptar pasivamente las decisiones.',
+    keyPoints:['La participación cívica incluye el voto, el servicio en jurados y el voluntariado','Los ciudadanos pueden defender causas y comunicarse con sus representantes','La ciudadanía activa fortalece la democracia'],
+    funFact:'Durante el Movimiento por los Derechos Civiles, miles de personas practicaron la desobediencia civil sentándose en mostradores de almuerzo segregados, infringiendo pacíficamente las leyes de segregación.',
+    activity:{ instructions:'¿Qué es la participación cívica?', choices:[
+      {text:'La participación activa en la democracia mediante el voto, el servicio y la defensa de causas',explanation:'La participación cívica fortalece el gobierno democrático.'},
+      {text:'Solo votar en las elecciones',explanation:'El voto es importante, pero la participación cívica incluye mucho más.'},
+      {text:'Aceptar lo que el gobierno decide',explanation:'Los ciudadanos activos se involucran con el gobierno y defienden el cambio.'}
+    ]}
+  });
+  merge('social-studies:ss7D1',{
+    title:'Los partidos políticos',
+    tagline:'Demócratas y Republicanos',
+    intro:'Los partidos políticos son organizaciones de ciudadanos unidos por creencias políticas similares que trabajan para elegir candidatos que comparten su ideología. El Partido Demócrata, fundado en la década de 1820, ha enfatizado a los trabajadores, las minorías y el papel del gobierno para resolver los problemas sociales. El Partido Republicano, fundado en la década de 1850, ha enfatizado los negocios, los impuestos más bajos y el gobierno limitado. Existen terceros partidos como el Libertario y el Verde, pero rara vez ganan elecciones. Los partidos desempeñan funciones importantes: organizan a los votantes, forman a futuros líderes y proporcionan estabilidad.',
+    keyPoints:['Los partidos políticos organizan a los ciudadanos con creencias similares','Los Demócratas y los Republicanos son los dos grandes partidos de los Estados Unidos','Los terceros partidos existen, pero rara vez ganan elecciones'],
+    funFact:'Abraham Lincoln era Republicano en la década de 1860, pero si viviera hoy, algunas de sus posiciones se alinearían con los Demócratas modernos: los partidos cambian con el tiempo.',
+    activity:{ instructions:'¿Qué partido generalmente enfatiza el papel del gobierno para resolver los problemas sociales?', choices:[
+      {text:'El Partido Demócrata',explanation:'Los Demócratas generalmente apoyan una mayor participación del gobierno para abordar los problemas.'},
+      {text:'El Partido Republicano',explanation:'Los Republicanos generalmente favorecen el gobierno limitado y las soluciones del mercado.'},
+      {text:'El Partido Verde',explanation:'Aunque los Verdes abordan temas sociales, se centran en la protección del medio ambiente.'}
+    ]}
+  });
+  merge('social-studies:ss7D2',{
+    title:'Elecciones y campañas',
+    tagline:'Cómo el pueblo elige a sus líderes',
+    intro:'Las elecciones son el mecanismo fundamental de la democracia, que permite a los ciudadanos elegir a sus representantes. Las elecciones presidenciales se celebran cada cuatro años; las elecciones al Congreso se celebran cada dos años para la Cámara y cada seis para el Senado. Las campañas modernas incluyen anuncios de televisión, correo directo, redes sociales, mítines, debates y recaudación de fondos. El gasto en campañas ha aumentado drásticamente: los multimillonarios y las corporaciones gastan enormes sumas a través de los Super PAC. El colegio electoral, y no el voto popular, determina al ganador presidencial, lo que ocurrió en 1876, 1888, 2000 y 2016.',
+    keyPoints:['Las elecciones permiten a los ciudadanos elegir democráticamente a sus líderes','Las campañas incluyen publicidad, debates y recaudación de fondos','El gasto en campañas ha aumentado y sigue siendo controvertido'],
+    funFact:'En 2020, las elecciones presidenciales costaron aproximadamente 14 000 millones de dólares, convirtiéndolas en las elecciones más costosas de la historia de los Estados Unidos.',
+    activity:{ instructions:'¿Con qué frecuencia se celebran las elecciones presidenciales?', choices:[
+      {text:'Cada cuatro años',explanation:'Los presidentes de los Estados Unidos cumplen mandatos de cuatro años.'},
+      {text:'Cada dos años',explanation:'Ese es el ciclo de elecciones de la Cámara.'},
+      {text:'Cada seis años',explanation:'Ese es el ciclo de elecciones del Senado.'}
+    ]}
+  });
+  merge('social-studies:ss7D3',{
+    title:'Medios y política',
+    tagline:'Cómo los medios influyen en las elecciones',
+    intro:'Los medios de comunicación —periódicos, televisión, radio y especialmente las redes sociales— moldean el discurso político y las elecciones. Los medios cubren las campañas políticas, informan sobre las acciones del gobierno y establecen la agenda de los temas que la gente considera importantes. El sesgo en los medios es una preocupación importante. Los algoritmos de las redes sociales muestran a las personas contenido similar al que ya han visto, creando "cámaras de eco" en las que la gente escucha principalmente opiniones con las que ya concuerda. La verificación de datos se ha vuelto importante a medida que la desinformación se propaga rápidamente.',
+    keyPoints:['Los medios moldean el discurso político e influyen en las elecciones','Las cámaras de eco en las redes sociales refuerzan las creencias existentes','La alfabetización mediática ayuda a los ciudadanos a evaluar la información de manera crítica'],
+    funFact:'Los estudios muestran que las personas que se informan a través de múltiples fuentes de distintas orientaciones políticas tienen una comprensión más precisa de la realidad que quienes usan una sola fuente.',
+    activity:{ instructions:'¿Qué es una "cámara de eco" en las redes sociales?', choices:[
+      {text:'Cuando los algoritmos muestran a las personas opiniones similares a las que ya tienen',explanation:'Las cámaras de eco refuerzan las creencias existentes en lugar de cuestionarlas.'},
+      {text:'Un lugar donde los políticos dan discursos',explanation:'Eso es una ubicación física, no un concepto digital.'},
+      {text:'Una organización de noticias que cubre todos los puntos de vista por igual',explanation:'Eso es lo opuesto de una cámara de eco.'}
+    ]}
+  });
+  merge('social-studies:ss7E1',{
+    title:'Derecho penal frente a derecho civil',
+    tagline:'Dos sistemas legales distintos',
+    intro:'El sistema legal estadounidense incluye dos tipos distintos de leyes. El derecho penal aborda los delitos contra la sociedad: asesinato, robo, agresión y posesión de drogas. El gobierno procesa estos casos para proteger a la sociedad y sancionar a los infractores. La carga probatoria es "más allá de una duda razonable", un estándar muy alto. El derecho civil aborda las disputas entre personas u organizaciones, como disputas contractuales, lesiones personales y asuntos familiares. En los casos civiles, la carga probatoria es "preponderancia de la evidencia", un estándar más bajo. Los casos penales pueden resultar en encarcelamiento; los civiles resultan en daños monetarios u órdenes judiciales.',
+    keyPoints:['El derecho penal aborda los delitos contra la sociedad','El derecho civil aborda las disputas entre personas','Los casos penales tienen una carga probatoria mayor que los civiles'],
+    funFact:'O.J. Simpson fue absuelto en el tribunal penal, pero declarado responsable en el tribunal civil, lo que ilustra las distintas cargas probatorias.',
+    activity:{ instructions:'¿Qué carga probatoria se aplica en los casos penales?', choices:[
+      {text:'Más allá de una duda razonable',explanation:'Los casos penales exigen un estándar probatorio muy alto.'},
+      {text:'Preponderancia de la evidencia',explanation:'Ese es el estándar del derecho civil.'},
+      {text:'Prueba clara y convincente',explanation:'Ese es un estándar intermedio.'}
+    ]}
+  });
+  merge('social-studies:ss7E2',{
+    title:'El sistema de tribunales',
+    tagline:'Cómo fluye la justicia a través de los tribunales',
+    intro:'El sistema de tribunales de los Estados Unidos tiene múltiples niveles. Los tribunales de primera instancia reciben evidencia y determinan los hechos; los tribunales de distrito atienden los casos federales. Los tribunales de apelación revisan si los tribunales inferiores cometieron errores legales. La Corte Suprema es el tribunal más alto y atiende solo aproximadamente 70 casos al año de entre miles de solicitudes. Los casos generalmente avanzan hacia arriba: si no estás de acuerdo con la decisión de un tribunal inferior, puedes apelar ante un tribunal superior. Jueces y jurados desempeñan roles distintos: los jueces toman decisiones legales; los jurados determinan los hechos.',
+    keyPoints:['El sistema de tribunales tiene tribunales de primera instancia, tribunales de apelación y la Corte Suprema','Los tribunales de primera instancia determinan los hechos; los de apelación revisan los errores legales','Los jurados determinan los hechos tanto en casos penales como civiles'],
+    funFact:'La Corte Suprema recibe aproximadamente 10 000 solicitudes al año, pero atiende solo unos 70 casos: una tasa de aceptación del 0,7 %, lo que la hace muy selectiva.',
+    activity:{ instructions:'¿Cuál es el tribunal más alto de los Estados Unidos?', choices:[
+      {text:'La Corte Suprema',explanation:'La Corte Suprema es la autoridad final en la ley federal y la Constitución.'},
+      {text:'Los tribunales de circuito',explanation:'Los tribunales de circuito son tribunales de apelación, pero no los más altos.'},
+      {text:'Los tribunales de distrito',explanation:'Los tribunales de distrito son tribunales de primera instancia, no el nivel más alto.'}
+    ]}
+  });
+  merge('social-studies:ss7E3',{
+    title:'Casos históricos',
+    tagline:'Cómo los tribunales moldean la justicia',
+    intro:'Los casos históricos de la Corte Suprema han transformado el sistema de justicia y protegido los derechos de los ciudadanos. Gideon v. Wainwright (1963) estableció que los acusados tienen derecho a un abogado incluso si no pueden pagarlo. Miranda v. Arizona (1966) exigió que la policía informe a los sospechosos sobre sus derechos antes de interrogarlos. Furman v. Georgia (1972) suspendió temporalmente la pena capital por considerarla cruel e inusual. In re Gault (1967) extendió los derechos al debido proceso a los menores acusados. Estos casos muestran cómo la Corte Suprema interpreta las protecciones constitucionales y, en ocasiones, amplía los derechos para las personas vulnerables.',
+    keyPoints:['Los casos históricos establecen principios legales importantes','Gideon v. Wainwright estableció el derecho a un abogado','Las decisiones de la Corte Suprema moldean el funcionamiento del sistema de justicia'],
+    funFact:'Clarence Gideon, el acusado en Gideon v. Wainwright, era un hombre pobre acusado de robo; su caso dio lugar a sistemas de defensoría pública en todo el país.',
+    activity:{ instructions:'¿Qué estableció Gideon v. Wainwright?', choices:[
+      {text:'Los acusados de escasos recursos tienen derecho a un abogado',explanation:'Este caso histórico garantizó una representación justa para todos los acusados.'},
+      {text:'La pena capital es inconstitucional',explanation:'Gideon trató sobre la representación legal, no sobre la pena capital.'},
+      {text:'Los sospechosos deben ser informados de sus derechos',explanation:'Miranda v. Arizona estableció ese requisito.'}
+    ]}
+  });
+})();
 // ── Grade 7 History ──
 GRADE_DATA_TRANSLATIONS_ES['history.7'] = { description: 'La era de la exploración, las revoluciones modernas, el imperialismo, la Primera Guerra Mundial y el período de entreguerras.' };
 CATEGORY_TRANSLATIONS_ES['history.7.A'] = { name: 'La era de la exploración' };
