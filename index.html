@@ -25602,6 +25602,161 @@ CATEGORY_TRANSLATIONS_ES['app-building.7.F'] = { name: 'Construye tu app' };
   });
 })();
 
+// ── Grade 9 Financial Literacy ──
+GRADE_DATA_TRANSLATIONS_ES['financial-literacy.9'] = { description: 'Mecánica del mercado de valores, introducción al Roth IRA, cuentas de ahorro de alto rendimiento, estructuras empresariales y matemáticas del interés' };
+CATEGORY_TRANSLATIONS_ES['financial-literacy.9.A'] = { name: 'Mentalidad Financiera y Emprendimiento' };
+CATEGORY_TRANSLATIONS_ES['financial-literacy.9.B'] = { name: 'Ingresos y Fuentes de Ganancias' };
+CATEGORY_TRANSLATIONS_ES['financial-literacy.9.C'] = { name: 'Ahorro e Inversión' };
+CATEGORY_TRANSLATIONS_ES['financial-literacy.9.D'] = { name: 'Crédito, Deuda e Interés' };
+CATEGORY_TRANSLATIONS_ES['financial-literacy.9.E'] = { name: 'Negocios e Impuestos' };
+(function(){
+  var L = LESSON_TRANSLATIONS_ES;
+  function merge(k,d){ L[k]=Object.assign({},L[k]||{},d); }
+  merge('financial-literacy:9A1',{
+    title:'Pensamiento a Largo Plazo (La Ventaja del Interés Compuesto)',
+    tagline:'Piensa a 30 años, no a 30 días. La riqueza se construye a lo largo de décadas.',
+    intro:'Una decisión que tomas a los 14 años te afecta a los 44. El interés compuesto y las decisiones acumuladas construyen riqueza con el tiempo.',
+    keyPoints:['El pensamiento a largo plazo supera las ganancias a corto plazo','Las decisiones se multiplican a lo largo de décadas','Piensa en la ventaja a 30 años'],
+    funFact:'¡Comenzar a invertir a los 14 en lugar de a los 24 puede representar una diferencia de más de $500,000 para cuando tengas 65 años!',
+    activity:{ instructions:'¿Cuál es la mejor estrategia para construir riqueza?', choices:[
+      {text:'Pensar a más de 30 años y aprovechar las ventajas del interés compuesto'},
+      {text:'Ganar dinero rápido e inmediatamente'},
+      {text:'Seguir las tendencias del momento'}
+    ]}
+  });
+  merge('financial-literacy:9A2',{
+    title:'Costo de Oportunidad (¿A Qué Estás Renunciando?)',
+    tagline:'Cada decisión tiene un costo. Elige sabiamente.',
+    intro:'Si gastas $5,000 en un coche en lugar de invertirlo, renunciaste al crecimiento potencial. ¡Con un rendimiento del 10%, eso equivale a $20,000 en 30 años!',
+    keyPoints:['Cada decisión tiene un costo de oportunidad','El costo es lo que sacrificas','Piensa en el costo real'],
+    funFact:'¡Un café de $100 hoy cuesta $10,000 en crecimiento de inversión perdido en 30 años!',
+    activity:{ instructions:'Cálculo del costo de oportunidad: $1,000 gastados hoy en bienes en lugar de invertidos. Con un rendimiento anual del 10% durante 20 años = aproximadamente $___ en riqueza perdida' }
+  });
+  merge('financial-literacy:9A3',{
+    title:'Mentalidad de Oportunidad en la Recesión',
+    tagline:'Las recesiones dañan a los desprevenidos. Enriquecen a los preparados.',
+    intro:'Cuando otros entran en pánico, tú compras. Cuando otros venden, tú acumulas. ¡Así se hacen las fortunas!',
+    keyPoints:['Las recesiones asustan a la mayoría de las personas','Los multimillonarios compran durante las recesiones','Preparación + momento oportuno = riqueza'],
+    funFact:'¡Facebook fue fundado durante la recesión de 2008. Mal momento para empezar = grandes oportunidades!',
+    activity:{ instructions:'¿Oportunidad en la recesión?', choices:[
+      {text:'Comprar activos cuando todos están en pánico'},
+      {text:'Vender todo y guardar el dinero en efectivo'},
+      {text:'Quedarse al margen'}
+    ]}
+  });
+  merge('financial-literacy:9B1',{
+    title:'Monetiza Tu Pasión (Convierte Tus Hobbies en $100,000+)',
+    tagline:'Los mejores ingresos vienen de algo que amas hacer',
+    intro:'Si te apasionan los videojuegos, el streaming, la programación o la escritura, puedes construir un negocio alrededor de ello.',
+    keyPoints:['Pasión + monetización = ingresos sostenibles','Superas a todos en tu nicho','La pasión es más rentable a largo plazo'],
+    funFact:'¡Un adolescente gamer haciendo streaming en Twitch puede ganar más de $100,000 al año!',
+    activity:{ instructions:'Relaciona la pasión con los ingresos:', dragOptionsStrings:['Programación / tecnología','Arte y diseño','Videojuegos','Deportes'], dropTargetsStrings:['Desarrollo de apps, diseño web, enseñanza','Venta de arte, encargos, Etsy','Streaming, YouTube, esports','Entrenamiento personal, coaching, eventos'] }
+  });
+  merge('financial-literacy:9B2',{
+    title:'Creación de Fuentes de Ingreso Pasivo Escalables',
+    tagline:'Escalar significa: funciona para 10, funciona para 10,000',
+    intro:'Dar tutoría a 10 estudiantes = $2,000/mes. Crear un curso que 10,000 compren = $100,000/mes. ¡El mismo conocimiento, escala infinita!',
+    keyPoints:['Ingreso pasivo que escala infinitamente','Los productos son mejores que los servicios','Construye una vez, gana para siempre'],
+    funFact:'¡Un curso en línea de $20 vendido a 1,000 personas = $20,000 de ingreso pasivo!',
+    activity:{ instructions:'¿Cuál es el ingreso más escalable?', choices:[
+      {text:'Producto digital (curso en línea, aplicación, libro)'},
+      {text:'Tutoría presencial'},
+      {text:'Proyecto freelance puntual'}
+    ]}
+  });
+  merge('financial-literacy:9B3',{
+    title:'Encontrar Tu Ventaja Competitiva',
+    tagline:'No compitas por precio. Compite con tu ventaja única.',
+    intro:'¿Qué puedes hacer TÚ mejor que la competencia? ¿Mejor calidad? ¿Mejor servicio al cliente? ¿Más rápido? ¿Precio más bajo? ¡Encuentra tu ventaja!',
+    keyPoints:['Compite en algo en lo que eres excepcionalmente bueno','Competir por precio es una carrera hacia el fondo','Tu ventaja = tu barrera de protección'],
+    funFact:'¡La ventaja de Apple: diseño + ecosistema. No compiten por precio!',
+    activity:{ instructions:'¿Cuál es la mejor ventaja competitiva?', choices:[
+      {text:'Algo en lo que eres excepcionalmente bueno'},
+      {text:'El precio más bajo'},
+      {text:'El presupuesto publicitario más grande'}
+    ]}
+  });
+  merge('financial-literacy:9C1',{
+    title:'Introducción al Roth IRA (Crecimiento Libre de Impuestos PARA SIEMPRE)',
+    tagline:'Roth IRA: contribuye con dinero después de impuestos, crece libre de impuestos para siempre.',
+    intro:'Un Roth IRA es MAGIA. Puedes contribuir $7,000/año (a partir de 2024). Crece libre de impuestos. ¡Los retiros también son libres de impuestos!',
+    keyPoints:['Límite del Roth IRA: $7,000/año (2024)','Las contribuciones son después de impuestos','El crecimiento es libre de impuestos para siempre','Puedes retirar en cualquier momento sin impuestos ni penalización'],
+    funFact:'¡Un Roth IRA con $7,000/año desde los 14 hasta los 65 años = $3.5 MILLONES libres de impuestos!',
+    activity:{ instructions:'Cálculo del Roth IRA: Contribuyes $7,000 al Roth a los 14 años. Crece al 10% anual durante 50 años. Aproximadamente $___' }
+  });
+  merge('financial-literacy:9C2',{
+    title:'Cuentas de Ahorro de Alto Rendimiento (4-5% Sin Riesgo)',
+    tagline:'Mejor que el ahorro regular: 4-5% de interés en lugar del 0.01%',
+    intro:'El dinero guardado en un banco normal no genera nada. ¡Una cuenta de alto rendimiento gana $500/año sobre $10,000!',
+    keyPoints:['Ahorro de alto rendimiento: 4-5% APY','Asegurado por la FDIC (seguro)','Liquidez (acceso en cualquier momento)','Perfecto para el fondo de emergencia'],
+    funFact:'¡El ahorro de alto rendimiento te da 50 veces más intereses que el ahorro regular!',
+    activity:{ instructions:'¿Dónde colocar el fondo de emergencia?', choices:[
+      {text:'Cuenta de ahorro de alto rendimiento (4-5% de interés)'},
+      {text:'Ahorro regular (0.01% de interés)'},
+      {text:'Bajo el colchón'}
+    ]}
+  });
+  merge('financial-literacy:9C3',{
+    title:'La Regla del 4% (¿Cuánto Necesitas para la Independencia Financiera?)',
+    tagline:'Con un retiro anual del 4%, necesitas 25 veces tus gastos anuales',
+    intro:'Si gastas $40,000/año, necesitas $1 millón invertido (4% = $40,000). ¡Eso es independencia financiera!',
+    keyPoints:['La regla del 4% = sostenible indefinidamente','Necesitas 25 veces tus gastos anuales invertidos','Este es el número de FIRE (Independencia Financiera, Retiro Anticipado)'],
+    funFact:'¡La regla del 4% funciona: los multimillonarios viven del 4% de sus inversiones!',
+    activity:{ instructions:'Tu número de independencia financiera: Gastas $50,000/año. Necesitas $50,000 × 25 = $___' }
+  });
+  merge('financial-literacy:9D1',{
+    title:'Matemáticas de las Tasas de Interés (APR vs. APY)',
+    tagline:'El APY es lo que realmente ganas o pagas (incluye la capitalización). El APR es solo la tasa.',
+    intro:'El APY es la tasa REAL. Una tarjeta de crédito al 18% APR = 18% APY porque capitaliza mensualmente.',
+    keyPoints:['APR: tasa declarada','APY: tasa real (incluye capitalización)','Siempre observa el APY'],
+    funFact:'Las tarjetas de crédito capitalizan diariamente. Por eso el 18% APR = 18% APY.',
+    activity:{ instructions:'Interés de tarjeta de crédito: Si la tarjeta de crédito tiene 20% APY sobre un saldo de $5,000 (sin pagar), después de 1 año debes aproximadamente $___' }
+  });
+  merge('financial-literacy:9D2',{
+    title:'Tipos de Préstamos y Cómo Funcionan',
+    tagline:'Tasa fija: el pago no cambia. Tasa variable: el pago puede cambiar.',
+    intro:'La tasa fija es predecible. La tasa variable es riesgosa pero comienza más baja.',
+    keyPoints:['Tasa fija: predecible y segura','Tasa variable: riesgosa, comienza más baja','Siempre elige tasa fija cuando sea posible'],
+    funFact:'Cuando las tasas variables suben, los prestatarios no pueden pagar las cuotas.',
+    activity:{ instructions:'Relaciona el tipo de préstamo:', dragOptionsStrings:['Tu pago es siempre de $500/mes','El pago comienza en $300 y puede aumentar','La tasa de interés está fija por 30 años'], dropTargetsStrings:['Tasa fija','Tasa variable','Tasa fija'] }
+  });
+  merge('financial-literacy:9D3',{
+    title:'Calculadora de Interés Compuesto (Tu Herramienta para Deudas y Ahorros)',
+    tagline:'Usa las matemáticas. Comprende el crecimiento exponencial.',
+    intro:'Ya sea que estés ahorrando o pidiendo prestado, el interés compuesto es tu aliado o tu enemigo.',
+    keyPoints:['Ahorros: el interés compuesto te ayuda','Deudas: el interés compuesto te perjudica','Comprende las matemáticas'],
+    funFact:'La mayoría de las personas ignora el interés compuesto hasta que es demasiado tarde.',
+    activity:{ instructions:'Interés compuesto: $5,000 invertidos al 8% anual durante 10 años. Después de 10 años, tus $5,000 crecen hasta aproximadamente $_____. Eso son $_____ de interés GRATIS.' }
+  });
+  merge('financial-literacy:9E1',{
+    title:'Cuándo Formar una LLC (Y Cómo Hacerlo)',
+    tagline:'Forma una LLC cuando tengas un negocio serio',
+    intro:'Cuesta entre $50 y $500. Se hace en línea en un día. ¡Protege tus activos y crea oportunidades fiscales!',
+    keyPoints:['Formación de LLC: varía según el estado, $50-$500','Registro en línea: tarda 1-2 días','Protección legal inmediata'],
+    funFact:'La mayoría de los emprendedores adolescentes serios deberían formar una LLC.',
+    activity:{ instructions:'¿Cuándo formar una LLC?', choices:[
+      {text:'Cuando tengas un negocio serio y estés ganando dinero'},
+      {text:'Antes de comenzar cualquier cosa'},
+      {text:'Nunca, mejor seguir como persona física'}
+    ]}
+  });
+  merge('financial-literacy:9E2',{
+    title:'Deducciones Fiscales que Puedes Usar (Ejemplos Reales)',
+    tagline:'Suministros de negocio, parte del hogar, vehículo, comidas, educación, software, equipo',
+    intro:'Cada dólar deducido = ahorra aproximadamente 30 centavos en impuestos.',
+    keyPoints:['Oficina en casa: deducción proporcional','Vehículo: gastos reales o millaje estándar','Comidas: 50% deducibles','Equipo: deducible de inmediato o con depreciación'],
+    funFact:'Un negocio desde casa puede deducir más de $200 al mes en gastos de oficina.',
+    activity:{ instructions:'¿Deducible?', dragOptionsStrings:['Computadora para el negocio','Café que consumes en casa','Suscripción de software empresarial','Factura telefónica personal'], dropTargetsStrings:['SÍ — equipo de negocio','NO — consumo personal','SÍ — herramienta de negocio','PARCIAL — porción de negocio'] }
+  });
+  merge('financial-literacy:9E3',{
+    title:'Comprensión de Ganancia vs. Facturación (Análisis Más Profundo)',
+    tagline:'La facturación son los ingresos brutos. La ganancia es el ingreso neto. Los emprendedores inteligentes se obsesionan con la ganancia, no con la facturación.',
+    intro:'Un negocio con $100,000 en facturación pero $80,000 en costos solo genera $20,000 de ganancia (20%). ¡Eso es insuficiente!',
+    keyPoints:['Facturación (ingresos brutos): todo el dinero que entra','Gastos: todo el dinero que sale','Ganancia o utilidad: ingresos brutos menos gastos','Margen de ganancia: ganancia ÷ ingresos brutos'],
+    funFact:'Un negocio con un margen de ganancia del 50% es una verdadera máquina de generar dinero.',
+    activity:{ instructions:'Margen de ganancia: Facturación = $50,000, Gastos = $20,000. Ganancia = $50,000 - $20,000 = $_____. Margen de ganancia = $30,000 ÷ $50,000 = _____%. ' }
+  });
+})();
 
 // Apply all Phase 2 translations after every curriculum has loaded.
 try { applyLessonTranslationsES(); } catch(e){ console.warn('Lesson translation merge skipped:', e); }
