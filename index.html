@@ -23433,6 +23433,258 @@ Object.assign(LESSON_TRANSLATIONS_ES, {
     'Numérico','Los colores no son numéricos. Numérico sería "¿Cuántas horas...?". Esto es categórico.',
     'Ambos','Esta encuesta es solo categórica. Categórico = categorías descriptivas como los colores.');
 })();
+// ── Grade 7 App Building ──
+GRADE_DATA_TRANSLATIONS_ES['app-building.7'] = { description: 'Domina los prompts de IA, la navegación multi-pantalla y las metodologías de prueba con usuarios.' };
+CATEGORY_TRANSLATIONS_ES['app-building.7.A'] = { name: 'Lluvia de ideas e ideación' };
+CATEGORY_TRANSLATIONS_ES['app-building.7.B'] = { name: 'Diseño y experiencia de usuario' };
+CATEGORY_TRANSLATIONS_ES['app-building.7.C'] = { name: 'Crear con IA' };
+CATEGORY_TRANSLATIONS_ES['app-building.7.D'] = { name: 'App Store y publicación' };
+CATEGORY_TRANSLATIONS_ES['app-building.7.E'] = { name: 'Mercadeo y crecimiento' };
+CATEGORY_TRANSLATIONS_ES['app-building.7.F'] = { name: 'Construye tu app' };
+(function(){
+  var L = LESSON_TRANSLATIONS_ES;
+  function merge(k,d){ L[k]=Object.assign({},L[k]||{},d); }
+  merge('app-building:ab7a1',{
+    title:'Análisis de la competencia: aprende de los competidores',
+    tagline:'Estudia lo que otros construyeron para no repetir sus errores',
+    intro:'Antes de crear tu app, descarga y usa 5 apps de la competencia. ¿Qué hacen bien? ¿En qué fallan? ¿Qué les falta? Esto se llama análisis de la competencia. No estás copiando — estás aprendiendo. ¡Todos los grandes creadores de apps estudian a sus competidores de manera obsesiva!',
+    keyPoints:['Descarga las apps de la competencia y úsalas como usuario real','Haz una lista: ¿qué hacen BIEN? ¿Qué les FALTA?','Lee las reseñas en el App Store — ¿de qué se quejan los usuarios?','Encuentra la brecha: ¿qué NO hacen bien los competidores?','¡Esa brecha es tu oportunidad!'],
+    funFact:'🔍 Cuando Slack se estaba desarrollando, sus creadores estudiaron más de 50 herramientas de comunicación. Descubrieron que todas eran confusas. ¡Por eso Slack es tan sencillo!',
+    activity:{
+      instructions:'¡Ordena los pasos del análisis de la competencia!',
+      sortItems:['Anota qué falta o está roto en sus apps','Lee las reseñas de usuarios para ver de qué se quejan','Usa cada app de la competencia durante 30 minutos','Crea una tabla comparativa','Identifica la brecha que TÚ puedes llenar']
+    }
+  });
+  merge('app-building:ab7a2',{
+    title:'Resolver DIFERENTES problemas (¡No mejor, sino diferente!)',
+    tagline:'No tienes que ganarle a tus competidores — ¡solo atiende a usuarios distintos!',
+    intro:'Instagram y TikTok permiten compartir videos. Pero son diferentes. Instagram es para mostrar TUS mejores momentos. TikTok es para descubrir tendencias y entretenimiento. ¡Distintas apps, distintos usuarios, distintos problemas resueltos! No necesitas LA app MÁS GRANDE — necesitas la app CORRECTA para TUS usuarios.',
+    keyPoints:['No preguntes: "¿Cómo le gano a Instagram?"','Pregunta: "¿Qué problema tiene mi usuario objetivo que Instagram no resuelve?"','Sirve muy bien a un nicho (grupo específico)','Perfecto para 100 personas > más o menos para 1 millón','¡Puedes expandirte después de dominar tu nicho!'],
+    funFact:'🎯 BeReal es una app de fotos que compite con Instagram, pero resuelve un problema distinto: "Muestra tu vida REAL, no la perfecta." ¡Problema diferente = usuario diferente!',
+    activity:{
+      instructions:'¿Cuál es la forma inteligente de competir con Instagram?',
+      choices:[
+        {text:'Intentar ser mejor que Instagram en todo',explanation:'¡Imposible! Instagram tiene 2 mil millones de usuarios y recursos ilimitados.'},
+        {text:'Encontrar un problema específico que Instagram no resuelve para un grupo específico de personas',explanation:'¡SÍ! Así es como cada app exitosa supera a un gigante. Primero resuelve para TU nicho.'},
+        {text:'Rendirse porque Instagram es demasiado grande',explanation:'¡Cientos de apps superan a Instagram en cosas específicas!'},
+        {text:'Copiar Instagram exactamente',explanation:'Eso no es diferente — ¡eso es aburrido!'}
+      ]
+    }
+  });
+  merge('app-building:ab7a3',{
+    title:'Funciones nuevas vs. corrección de errores: estrategias de priorización',
+    tagline:'¿Construyes funciones nuevas o reparas los problemas actuales?',
+    intro:'Después de lanzar tu app, los usuarios pedirán nuevas funciones ("¡Agrega el modo oscuro!") y reportarán errores ("La app se cierra cuando..."). ¿En qué trabajas primero? En los errores. Una app rota sin funciones es inútil. Una app estable con pocas funciones es mejor que una app rota con muchas.',
+    keyPoints:['Los errores = máxima prioridad. Lo roto es peor que lo básico.','Cierres inesperados > errores graves > errores menores > solicitudes de funciones','Las funciones nuevas llegan DESPUÉS de la estabilidad','Registra los errores en un sistema (Jira, Trello, GitHub Issues)','Dile a los usuarios: "Ahora priorizamos la estabilidad, las funciones vienen después"'],
+    funFact:'🐛 ¡Facebook tuvo que pausar TODAS las funciones nuevas durante meses para corregir un grave error de privacidad. A veces la estabilidad importa más que las funciones nuevas!',
+    activity:{
+      instructions:'Al decidir en qué trabajar a continuación, siempre pregunta: "¿Corregir este problema hace que la app sea _____?"',
+      choices:[
+        {text:'mejor',explanation:''},
+        {text:'más estable',explanation:''},
+        {text:'más rápida',explanation:''},
+        {text:'más usable',explanation:''}
+      ]
+    }
+  });
+  merge('app-building:ab7b1',{
+    title:'Navegación multi-pantalla: planifica el recorrido',
+    tagline:'¡Cada pantalla debe fluir naturalmente hacia la siguiente!',
+    intro:'Las apps con 1 sola pantalla son aburridas. Las apps reales tienen 5 o más pantallas trabajando juntas. La manera en que los usuarios se mueven entre pantallas se llama flujo de navegación. Las buenas apps se sienten naturales — siempre sabes dónde tocar. Las malas apps se sienten confusas — te pierdes o te quedas atascado.',
+    keyPoints:['Diseña cada pantalla que necesites (haz un boceto de todas)','Dibuja flechas que muestren cómo los usuarios se mueven entre pantallas','Asegúrate de que siempre haya una forma de "regresar"','Evita callejones sin salida donde los usuarios se queden atascados','Prueba con personas reales para encontrar las partes confusas'],
+    funFact:'🗺️ ¡Pinterest tiene más de 50 pantallas pero se siente sencillo porque el flujo de navegación es tan natural! Les tomó SEMANAS diseñarlo.',
+    activity:{
+      instructions:'¿Qué orden de navegación tiene SENTIDO para una app de comercio electrónico? ¡Arrastra las pantallas al flujo correcto!',
+      dragOptions:[{label:'Pantalla de inicio'},{label:'Detalle del producto'},{label:'Carrito de compras'},{label:'Pago'},{label:'Confirmación del pedido'}],
+      dropTargets:[{label:'✅ FLUJO LÓGICO'},{label:'❌ CONFUSO'}]
+    }
+  });
+  merge('app-building:ab7b2',{
+    title:'Microinteracciones: ¡las pequeñas cosas que se sienten increíbles!',
+    tagline:'¡Las animaciones y la retroalimentación hacen que las apps se sientan pulidas!',
+    intro:'Cuando le das "me gusta" a una publicación en Instagram, el corazón no solo aparece — CRECE y REBOTA. Cuando deslizas para actualizar, hay una animación satisfactoria. Estos pequeños detalles se llaman microinteracciones. ¡Hacen que las apps se sientan elegantes y deliciosas en lugar de torpes!',
+    keyPoints:['Indicador de carga mientras se cargan los datos (muestra que algo está pasando)','Animación de éxito cuando una acción se completa','El botón cambia de color cuando lo tocas','Sutil animación de deslizamiento entre pantallas','Detalles pequeños = gran diferencia en la experiencia'],
+    funFact:'✨ ¡Apple pasa MESES diseñando microinteracciones. La animación de "deslizar para actualizar" es icónica porque es TAN satisfactoria!',
+    activity:{
+      instructions:'Estás creando una app de tareas. El usuario toca "Completar tarea". ¿Qué debería pasar?',
+      choices:[
+        {text:'Nada — solo eliminar la tarea al instante',explanation:'¡La app parece rota! No hay retroalimentación.'},
+        {text:'Mostrar una animación con marca de verificación, un leve rebote y un breve mensaje "¡Tarea completada!"',explanation:'¡SÍ! Los usuarios saben que la acción fue exitosa y se sienten satisfechos.'},
+        {text:'Hacer que toda la pantalla parpadee en rojo',explanation:'¡Eso es demasiado! Lo sutil es mejor.'},
+        {text:'Congelar la app 2 segundos para "guardar"',explanation:'¡Eso es molesto, no delicioso!'}
+      ]
+    }
+  });
+  merge('app-building:ab7b3',{
+    title:'Estados de error: qué mostrar cuando algo falla',
+    tagline:'¡Los usuarios necesitan entender qué salió mal Y cómo solucionarlo!',
+    intro:'A veces las apps fallan. La red falla. El usuario ingresa datos incorrectos. La cuenta se bloquea. Las buenas apps manejan los errores con GRACIA. Te dicen qué está mal en términos sencillos y cómo solucionarlo. ¡Las malas apps muestran "ERROR_CODE_504" y te dejan sin saber qué hacer!',
+    keyPoints:['Dile a los usuarios qué salió mal en términos simples','Explica CÓMO solucionarlo (recargar, verificar internet, intentar de nuevo)','Usa el color rojo con cuidado — es intimidante','Agrega un botón "Reintentar" o una sugerencia','Mantén los errores breves y amables, no robóticos'],
+    funFact:'⚠️ Cuando los servidores de Twitter se caen, muestran un emoji de perro ("Twitter está teniendo problemas") en lugar de un código de error aterrador. ¡Mismo problema, mejor experiencia de usuario!',
+    activity:{
+      instructions:'Al mostrar un error, siempre incluye: 1) qué salió mal, 2) por qué ocurrió y 3) cómo _____.',
+      choices:[
+        {text:'solucionarlo',explanation:''},
+        {text:'resolverlo',explanation:''},
+        {text:'intentarlo de nuevo',explanation:''},
+        {text:'recargar',explanation:''}
+      ]
+    }
+  });
+  merge('app-building:ab7c1',{
+    title:'Iteración de prompts: de "más o menos" a "increíble"',
+    tagline:'Tu primer prompt rara vez es perfecto — ¡refínalo!',
+    intro:'Paso 1: describes la app. La IA la construye. Está bien, pero no es excelente. Paso 2: le dices a la IA "Haz los botones más grandes y cambia el color a verde azulado." Paso 3: ¡Mejor! Paso 4: "El encabezado es muy alto, redúcelo." Paso 5: ¡Perfecto! Esto se llama iteración de prompts — refinas tu descripción hasta que la app sea exactamente lo que deseas.',
+    keyPoints:['Guarda tus prompts exitosos (¡puede que los uses de nuevo!)','Describe los cambios de manera incremental (uno o dos a la vez)','Usa retroalimentación específica: "más grande" o "azul" o "20px de margen"','Toma capturas de pantalla para comparar versiones','¡Celebra cuando coincida con tu visión!'],
+    funFact:'🔄 ¡Los diseñadores de productos reales iteran más de 20 veces antes de finalizar un diseño. ¡Crear tu app es igual!',
+    activity:{ instructions:'¡Construye una app del clima de manera iterativa!' }
+  });
+  merge('app-building:ab7c2',{
+    title:'Construir pantallas que se conectan (cableado de navegación)',
+    tagline:'¡Cada pantalla necesita saber cómo llegar a las demás!',
+    intro:'Una pantalla genial está bien. Pero las apps son múltiples pantallas CONECTADAS entre sí. Cuando tocas "Perfil" en la barra de navegación inferior, debe ir a la pantalla de Perfil. Cuando tocas una mascota, debe mostrar la pantalla de detalles de esa mascota. Esto es el cableado de navegación. Dile a la IA: "Cuando el usuario toca el botón X, ir a la pantalla Y."',
+    keyPoints:['Identifica todos los botones que deben navegar a algún lugar','Dile a la IA: "Tocar este botón abre la pantalla de Configuración"','Prueba cada botón para asegurarte de que la navegación funcione correctamente','Crea un flujo: Inicio → Detalles → Regresar a Inicio','Asegúrate de que cada pantalla tenga una forma de regresar'],
+    funFact:'🔗 ¡Las apps con navegación rota confunden a los usuarios! "Toqué esto pero no pasó nada" = el usuario se va.',
+    activity:{
+      instructions:'¡Ordena estas conexiones de navegación para una app de películas!',
+      sortItems:['Tocar una película muestra su pantalla de detalles','Tocar "Lista de seguimiento" navega a las películas guardadas','Tocar "Regresar" vuelve a la lista de películas','Tocar Inicio siempre regresa al feed principal','Tocar una película guardada abre sus detalles']
+    }
+  });
+  merge('app-building:ab7c3',{
+    title:'Actualizaciones en tiempo real: datos en vivo en tu app',
+    tagline:'¡Tu app no debe estar congelada — debe mantenerse actualizada!',
+    intro:'Imagina una app de chat donde los mensajes nuevos aparecen al instante sin que tú actualices. Eso es data en tiempo real. O una app deportiva que muestra puntajes en vivo actualizándose mientras se juega el partido. ¡Las actualizaciones en tiempo real hacen que las apps se sientan vivas! Esto requiere conectar tu app a una base de datos que envía datos nuevos de manera constante.',
+    keyPoints:['Tiempo real: los datos se actualizan sin que el usuario recargue','Ejemplos: mensajes de chat, notificaciones, puntajes deportivos en vivo','Requiere: base de datos en el servidor + conexión de transmisión','Difícil de construir, pero VALE MUCHO la pena por el compromiso del usuario','Los usuarios esperan que sus apps se mantengan actualizadas'],
+    funFact:'⚡ ¡Si iMessage tuviera que "actualizarse" para ver mensajes nuevos, nadie lo usaría! El tiempo real es lo que se espera ahora.',
+    activity:{
+      instructions:'Un usuario abre una app de precios de acciones. El precio de la acción debería actualizarse _____ ¡sin que el usuario haga nada!',
+      choices:[
+        {text:'nunca — tienen que actualizar manualmente',explanation:'¡Eso sería terrible! Los usuarios esperan datos en vivo.'},
+        {text:'cada vez que cierren y abran la app',explanation:'¡Demasiado trabajo y demasiado lento!'},
+        {text:'de manera continua en tiempo real a medida que los precios cambian',explanation:'¡SÍ! Los usuarios esperan ver precios de acciones en vivo sin recargar.'},
+        {text:'cada hora',explanation:'¡Para entonces, los precios ya están muy desactualizados!'}
+      ]
+    }
+  });
+  merge('app-building:ab7d1',{
+    title:'Capturas de pantalla convincentes para el App Store',
+    tagline:'¡Tienes 3 capturas de pantalla para convencer a alguien de que descargue tu app!',
+    intro:'La mayoría de las personas decide descargar una app basándose solo en las capturas de pantalla. 3 a 5 capturas de pantalla cuentan la HISTORIA de tu app. Captura 1: función principal. Captura 2: muestra el beneficio. Captura 3: cómo resuelve un problema. ¡Capturas de pantalla malas = pocas descargas!',
+    keyPoints:['Muestra el BENEFICIO, no solo la función','Usa subtítulos de texto: "Registra hábitos en segundos"','Muestra datos que parezcan reales (no texto de marcador de posición)','Haz que la acción principal sea evidente','Sigue las pautas de capturas de pantalla de Apple (tamaño, orientación)'],
+    funFact:'📸 ¡Las apps con vista previa en video + capturas de pantalla obtienen un 50% más de descargas que las que solo tienen capturas!',
+    activity:{
+      instructions:'¿Qué debe mostrar cada captura de pantalla? ¡Relaciona las capturas con su propósito!',
+      dragOptions:[{label:'Captura que muestra la función principal'},{label:'Captura que muestra el beneficio o resultado'},{label:'Captura que muestra cómo usarla'}],
+      dropTargets:[{label:'"Registra hábitos en 10 segundos"'},{label:'Vista de calendario con marcas de verificación'},{label:'Paso a paso: 1) Agrega hábito, 2) Marca cada día, 3) Ve tu racha'}]
+    }
+  });
+  merge('app-building:ab7d2',{
+    title:'Optimización en el App Store (ASO): el SEO de las apps',
+    tagline:'¡Ayuda a las personas a encontrar tu app usando las palabras clave correctas!',
+    intro:'Cuando las personas buscan "rastreador de hábitos" en el App Store, ¿aparece TU app? Eso depende de tus palabras clave. Esto se llama Optimización en el App Store (ASO). Es como el SEO de Google, pero para las tiendas de apps. ¡Las palabras clave correctas = más búsquedas = más descargas!',
+    keyPoints:['Enumera 10 a 15 palabras clave que la gente busque','Usa herramientas de investigación de palabras clave (observa por qué términos se posicionan los competidores)','Incluye tus palabras clave más importantes en el nombre de la app si es posible','Incluye palabras clave en tu descripción','Monitorea qué palabras clave te traen descargas'],
+    funFact:'🔍 ¡Una app de seguimiento de hábitos agregó la palabra clave "salud mental" y las descargas aumentaron un 300%! Una sola palabra lo cambió todo.',
+    activity:{
+      instructions:'Para ayudar a las personas a encontrar tu app, incluye _____ que describan qué hace tu app y para quién es.',
+      choices:[
+        {text:'palabras clave',explanation:''},
+        {text:'descripciones',explanation:''},
+        {text:'etiquetas',explanation:''},
+        {text:'términos de búsqueda',explanation:''}
+      ]
+    }
+  });
+  merge('app-building:ab7d3',{
+    title:'Cómo manejar los rechazos del App Store (¡puede suceder!)',
+    tagline:'Tu app podría ser rechazada — ¡así es como debes responder!',
+    intro:'Es normal. Aproximadamente el 40% de las apps enviadas son rechazadas en el primer intento. Razones comunes: cierres inesperados, propósito poco claro, monetización dudosa. ¡No es permanente! Lee la retroalimentación de Apple, corrige el problema, vuelve a enviar. La mayoría de los rechazos son totalmente solucionables.',
+    keyPoints:['Lee el correo de rechazo CUIDADOSAMENTE — Apple te dice exactamente qué está mal','Corrige el problema (¡prueba exhaustivamente antes de volver a enviar!)','Vuelve a enviar y espera 1 a 3 días','Lleva un registro de las causas de los rechazos (aprende para futuras apps)','No discutas con los revisores — solo corrige y vuelve a enviar'],
+    funFact:'🚫 ¡Incluso empresas grandes como Facebook y Google han tenido apps rechazadas! Es una parte normal del proceso.',
+    activity:{
+      instructions:'¡Ordena los pasos para manejar un rechazo del App Store!',
+      sortItems:['Vuelve a enviar tu app corregida','¡Celebra cuando sea aprobada!','Lee por qué fue rechazada tu app','Corrige el problema y pruébalo exhaustivamente','Espera 1 a 3 días para la revisión']
+    }
+  });
+  merge('app-building:ab7e1',{
+    title:'Entrevistas con usuarios: pregunta a personas reales qué piensan',
+    tagline:'¡Deja de suponer — empieza a preguntar!',
+    intro:'CREES que a los usuarios les encantará tu app. ¡Pero puede que estés totalmente equivocado! Las entrevistas con usuarios = sentarte con personas reales y hacerles preguntas detalladas. "Cuéntame sobre la última vez que tuviste este problema. ¿Cómo lo resolviste? ¿Qué te frustró?" ¡Sus respuestas te van a sorprender!',
+    keyPoints:['Entrevista de 5 a 10 usuarios reales de tu público objetivo','Haz preguntas abiertas, no de sí o no','Toma notas sobre los hallazgos sorprendentes','Escucha más de lo que hablas','Agradéceles su tiempo (¡invítales un café!)'],
+    funFact:'🎤 ¡Cuando los fundadores de Airbnb entrevistaron a sus usuarios, se dieron cuenta de que el mayor problema no era encontrar habitaciones — era la confianza entre extraños! Esta visión lo dio forma a todo.',
+    activity:{
+      instructions:'Estás entrevistando a un posible usuario de tu app de tareas escolares. ¿Cuál es la MEJOR pregunta?',
+      choices:[
+        {text:'¿Te gustan las apps de tareas escolares?',explanation:'Las preguntas de sí/no no te dicen mucho.'},
+        {text:'Cuéntame sobre la última vez que olvidaste una tarea. ¿Qué pasó después?',explanation:'¡PERFECTO! La pregunta abierta revela problemas reales.'},
+        {text:'¿Descargarías mi app?',explanation:'La gente dice que sí pero en realidad no descarga. ¡Las acciones valen más que las palabras!'},
+        {text:'¿Cuál es el problema con la app de mi competidor?',explanation:'¡Enfócate en el problema del usuario, no en los competidores!'}
+      ]
+    }
+  });
+  merge('app-building:ab7e2',{
+    title:'Construir una comunidad alrededor de tu app',
+    tagline:'¡Los fanáticos leales valen 100 veces más que los descargadores al azar!',
+    intro:'Algunas apps construyen comunidades enormes. Servidores de Discord, comunidades en Reddit, seguidores en TikTok. ¿Por qué? Porque a los usuarios les ENCANTA conectarse con otros que usan la misma app. Crea un Discord, comparte historias de usuarios, responde a los comentarios. ¡Comunidad = lealtad = recomendación boca a boca!',
+    keyPoints:['Crea una comunidad en Discord, Slack o WhatsApp','Comparte historias de éxito de usuarios públicamente','Responde rápido a los comentarios y preguntas','Destaca a tus mejores usuarios (hazlos sentir especiales)','Los miembros de la comunidad invitan amigos = crecimiento orgánico'],
+    funFact:'👥 ¡La comunidad de Roblox es TAN fuerte que los usuarios crean la mayor parte del contenido. ¡La app es solo la plataforma!',
+    activity:{
+      instructions:'Los usuarios más leales son los que se sienten _____ por la comunidad de la app.',
+      choices:[
+        {text:'incluidos',explanation:''},
+        {text:'escuchados',explanation:''},
+        {text:'valorados',explanation:''},
+        {text:'parte de algo especial',explanation:''}
+      ]
+    }
+  });
+  merge('app-building:ab7e3',{
+    title:'Prensa y publicidad: cómo lograr que hablen de tu app',
+    tagline:'¡Un solo artículo puede traer 100,000 descargas!',
+    intro:'Si un blog de tecnología escribe sobre tu app, miles de personas la ven. Si aparece en la portada del App Store, cientos de miles la ven. Conseguir publicidad es DIFÍCIL, pero el beneficio es enorme. Empieza con poco: foros de tecnología, Reddit, comunidades de apps independientes. ¡Si tu app es genuinamente buena, la noticia se difunde!',
+    keyPoints:['Contacta blogs de tecnología (preséntales tu app personalmente)','Sé noticia: "hecha por un estudiante de 12 años" o "resuelve un problema único"','Que te destaquen en el App Store (Apple elige las apps — muy competitivo)','Comparte tu lanzamiento en comunidades como Product Hunt y Hacker News','Sé honesto y auténtico — las personas notan la falta de sinceridad','Enfócate en lanzamientos genuinos, no en cebos de clics'],
+    funFact:'📰 ¡Flappy Bird obtuvo millones de descargas con CERO mercadeo! El juego era tan adictivo que la gente se lo contaba a sus amigos y se volvió viral.',
+    activity:{
+      instructions:'¡Ordena estos pasos de publicidad del MÁS FÁCIL al MÁS DIFÍCIL!',
+      sortItems:['Que te destaquen en el App Store de Apple (MUY difícil)','Publica en la comunidad independiente de Product Hunt','Contacta 5 blogs de tecnología','Comparte con una comunidad de tu nicho en Reddit','Presenta a una publicación tecnológica importante como TechCrunch']
+    }
+  });
+  merge('app-building:ab7f1',{
+    title:'De la idea al plano: convierte ideas vagas en planes claros',
+    tagline:'¡Convierte ideas vagas en planos claros para tu app!',
+    intro:'Una idea NO es un plan. "Quiero hacer un rastreador de hábitos" es una idea. Un plano dice: "Pantalla 1: Lista de hábitos diarios. Pantalla 2: Agregar nuevo hábito. Pantalla 3: Seguimiento de rachas. Pantalla 4: Configuración." ¡Los planos convierten los sueños en planes que se pueden construir!',
+    keyPoints:['Escribe tu idea de app en una sola oración','Enumera cada pantalla que necesita tu app','Dibuja cada pantalla con rectángulos y flechas','Numera las pantallas en el orden en que los usuarios las verán','Agrega notas sobre lo que hace cada botón'],
+    funFact:'📐 ¡Figma (valorada en 20 mil millones de dólares) comenzó como un boceto en papel. ¡Cada app millonaria comenzó con un plano simple!',
+    activity:{
+      instructions:'¡Ordena estos pasos de planificación de una app!',
+      sortItems:['Dibuja bocetos de cada pantalla','Escribe tu idea de app en una oración','Construye la primera versión','Enumera todas las pantallas que necesitas','Conecta las pantallas con flechas que muestren el flujo del usuario']
+    }
+  });
+  merge('app-building:ab7f2',{
+    title:'Diseño de apps multi-pantalla',
+    tagline:'¡Las apps reales tienen múltiples pantallas que fluyen juntas!',
+    intro:'Las apps de una sola pantalla son como casas de un solo cuarto — ¡muy limitadas! Las apps reales tienen Inicio, Detalles, Configuración, Perfil y más. La clave es asegurarse de que los usuarios puedan moverse entre pantallas de manera fluida. Cada pantalla debe responder: ¿Dónde estoy? ¿Qué puedo hacer? ¿Cómo regreso?',
+    keyPoints:['Pantalla de inicio = el punto de partida','Las pantallas de detalles muestran más información','La configuración permite que los usuarios personalicen','La navegación conecta todo','Siempre incluye una forma de regresar'],
+    funFact:'📱 ¡TikTok solo tiene 5 pantallas principales, pero se siente infinito porque la navegación entre ellas es perfecta!',
+    activity:{
+      instructions:'¿Cuál es la regla más importante para las apps multi-pantalla?',
+      choices:[
+        {text:'Cada pantalla debe tener un botón de regreso o una forma de navegar hacia afuera',explanation:'¡SÍ! Los usuarios nunca deben sentirse atascados o perdidos.'},
+        {text:'Más pantallas = mejor app',explanation:'¡La calidad sobre la cantidad! Solo agrega pantallas que tengan un propósito.'},
+        {text:'Todas las pantallas deben verse iguales',explanation:'Las pantallas deben ser consistentes pero servir a diferentes propósitos.'},
+        {text:'Oculta la navegación para ahorrar espacio',explanation:'¡Navegación oculta = usuarios confundidos!'}
+      ]
+    }
+  });
+  merge('app-building:ab7f3',{
+    title:'¡Constrúyela! Crea tu rastreador de hábitos',
+    tagline:'¡Construye un rastreador de hábitos multi-pantalla con IA!',
+    intro:'¡Hora de construir! Crearás una app de seguimiento de hábitos con múltiples pantallas: una pantalla de inicio con los hábitos diarios, una pantalla para agregar nuevos hábitos y un seguimiento de rachas. ¡Esta es una app REAL que podrías usar todos los días!',
+    keyPoints:['Empieza con la pantalla de inicio de hábitos diarios','Agrega una pantalla "Agregar hábito"','Construye una pantalla de seguimiento de rachas','Conecta todas las pantallas entre sí','Hazla verse limpia y motivadora'],
+    funFact:'🤖 ¡Las apps de seguimiento de hábitos valen más de 5 mil millones de dólares como industria! ¡Estás construyendo algo por lo que las personas realmente pagan!',
+    activity:{ instructions:'¡Construye una app de rastreador de hábitos!' }
+  });
+})();
+
 // Ship Real Apps — apply translations directly to APP_BUILDING['ship'] lesson objects
 (function(){
   var L = LESSON_TRANSLATIONS_ES;
