@@ -23436,10 +23436,18 @@ Object.assign(LESSON_TRANSLATIONS_ES, {
 // Ship Real Apps — apply translations directly to APP_BUILDING['ship'] lesson objects
 (function(){
   var L = LESSON_TRANSLATIONS_ES;
+  var C = CATEGORY_TRANSLATIONS_ES;
+  var G = GRADE_DATA_TRANSLATIONS_ES;
   var shipData = (typeof APP_BUILDING !== 'undefined') && APP_BUILDING['ship'];
   if(!shipData || !shipData.categories) return;
+  // Apply grade-level description (ship-real-apps.6 is canonical for all grades 6-12)
+  var gd = G['ship-real-apps.6'];
+  if(gd && gd.description != null) shipData.description_es = gd.description;
   Object.keys(shipData.categories).forEach(function(catKey){
     var cat = shipData.categories[catKey];
+    // Apply category name translation (grade-6 key is canonical — same content for 6-12)
+    var cKey = 'ship-real-apps.6.' + catKey;
+    if(C[cKey] && C[cKey].name != null) cat.name_es = C[cKey].name;
     var lessons = (cat && cat.lessons) || [];
     lessons.forEach(function(lesson){
       var key = 'ship-real-apps:' + lesson.id;
