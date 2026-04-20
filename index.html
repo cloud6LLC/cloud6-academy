@@ -511,18 +511,19 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 </div>
 
 <!-- TOP NAVIGATION BAR -->
-<div class="top-nav" style="background:#fff;border-bottom:2px solid #e8f5f0;display:flex;align-items:center;padding:0 20px;height:56px;gap:8px;box-shadow:0 2px 8px rgba(0,184,148,0.08)">
-  <!-- Logo + Language Toggle side-by-side -->
-  <div style="display:flex;align-items:center;gap:10px;flex-shrink:0;margin-right:4px">
-    <div style="font-size:20px;font-weight:800;color:#00b894;cursor:pointer;white-space:nowrap" onclick="showHome()">Cloud6 <span style="font-weight:400;color:#2d3436">Academy</span></div>
-    <div id="langToggle" class="lang-toggle" role="group" aria-label="Language / Idioma" title="Switch language / Cambiar idioma">
-      <span id="langOptEn" class="lang-opt active" onclick="setLanguage('en')" title="Switch to English">🇺🇸 EN</span>
-      <span id="langOptEs" class="lang-opt" onclick="setLanguage('es')" title="Cambiar a Español">🇲🇽 ES</span>
-    </div>
+<div class="top-nav" style="background:#fff;border-bottom:2px solid #e8f5f0;display:flex;align-items:center;padding:0 16px;height:56px;gap:0;box-shadow:0 2px 8px rgba(0,184,148,0.08);flex-wrap:nowrap;overflow:hidden">
+
+  <!-- FAR LEFT: Language Toggle -->
+  <div id="langToggle" class="lang-toggle" role="group" aria-label="Language / Idioma" title="Switch language / Cambiar idioma" style="flex-shrink:0;margin-right:16px">
+    <span id="langOptEn" class="lang-opt active" onclick="setLanguage('en')" title="Switch to English">🇺🇸 EN</span>
+    <span id="langOptEs" class="lang-opt" onclick="setLanguage('es')" title="Cambiar a Español">🇲🇽 ES</span>
   </div>
 
-  <!-- Nav Tabs - spread across full width -->
-  <nav style="display:flex;align-items:center;justify-content:space-between;flex:1;padding:0 16px">
+  <!-- LOGO -->
+  <div style="font-size:20px;font-weight:800;color:#00b894;cursor:pointer;white-space:nowrap;flex-shrink:0;margin-right:12px" onclick="showHome()">Cloud6 <span style="font-weight:400;color:#2d3436">Academy</span></div>
+
+  <!-- NAV TABS - scrollable middle section -->
+  <nav style="display:flex;align-items:center;gap:2px;flex:1;overflow-x:auto;padding:0 4px;scrollbar-width:none;-ms-overflow-style:none" onscroll="">
     <div class="nav-tab" id="nav-home" onclick="showHome()" style="padding:6px 12px;border-radius:8px;cursor:pointer;font-weight:600;font-size:13px;color:#00b894;background:rgba(0,184,148,0.08);white-space:nowrap;transition:all 0.2s" data-i18n="ui.navHome">🏠 Home</div>
     <div class="nav-tab" id="nav-academy" onclick="showAcademy()" style="padding:6px 12px;border-radius:8px;cursor:pointer;font-weight:600;font-size:13px;color:#636e72;background:transparent;white-space:nowrap;transition:all 0.2s" data-i18n="ui.navAcademy">📚 Academy</div>
     <div class="nav-tab" id="nav-learning" style="padding:6px 12px;border-radius:8px;cursor:pointer;font-weight:600;font-size:13px;color:#636e72;background:transparent;white-space:nowrap;transition:all 0.2s;position:relative" onclick="toggleLearningDropdown()">
@@ -543,11 +544,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
     <div class="nav-tab" id="nav-teacher" onclick="showTeacherDashboard()" style="padding:6px 12px;border-radius:8px;cursor:pointer;font-weight:600;font-size:13px;color:#636e72;background:transparent;white-space:nowrap;transition:all 0.2s;display:none" data-i18n="ui.navTeacher">👩‍🏫 Teacher</div>
   </nav>
 
-  <!-- Right side: Search + Login -->
-  <div style="display:flex;align-items:center;gap:8px;flex-shrink:0">
-    <input type="text" data-i18n-ph="ui.searchPlaceholder" placeholder="Search..." style="padding:6px 12px;border:1.5px solid #e0e0e0;border-radius:20px;font-size:12px;width:130px;outline:none;transition:border-color 0.2s" onfocus="this.style.borderColor='#00b894'" onblur="this.style.borderColor='#e0e0e0'">
-    <div id="userAvatar" onclick="showAuthScreen()" style="padding:7px 18px;border-radius:20px;background:linear-gradient(135deg,#00b894,#0984e3);color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;font-weight:700;font-size:13px;white-space:nowrap;box-shadow:0 2px 8px rgba(0,184,148,0.3)" data-i18n-title="ui.logInTitle" title="Log In"><span data-i18n="ui.logIn">🔐 Log In</span></div>
-  </div>
+  <!-- FAR RIGHT: Login -->
+  <div id="userAvatar" onclick="showAuthScreen()" style="flex-shrink:0;margin-left:12px;padding:7px 18px;border-radius:20px;background:linear-gradient(135deg,#00b894,#0984e3);color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;font-weight:700;font-size:13px;white-space:nowrap;box-shadow:0 2px 8px rgba(0,184,148,0.3)" data-i18n-title="ui.logInTitle" title="Log In"><span data-i18n="ui.logIn">🔐 Log In</span></div>
 </div>
 
 <!-- SUBJECT TABS BAR -->
