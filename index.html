@@ -23433,6 +23433,229 @@ Object.assign(LESSON_TRANSLATIONS_ES, {
     'Numérico','Los colores no son numéricos. Numérico sería "¿Cuántas horas...?". Esto es categórico.',
     'Ambos','Esta encuesta es solo categórica. Categórico = categorías descriptivas como los colores.');
 })();
+// ── Grade 8 App Building ──
+GRADE_DATA_TRANSLATIONS_ES['app-building.8'] = { description: 'Pensamiento MVP, análisis de la competencia, analítica de apps y modelos de negocio reales.' };
+CATEGORY_TRANSLATIONS_ES['app-building.8.A'] = { name: 'Lluvia de ideas e ideación' };
+CATEGORY_TRANSLATIONS_ES['app-building.8.B'] = { name: 'Diseño y experiencia de usuario' };
+CATEGORY_TRANSLATIONS_ES['app-building.8.C'] = { name: 'Crear con IA' };
+CATEGORY_TRANSLATIONS_ES['app-building.8.D'] = { name: 'App Store y publicación' };
+CATEGORY_TRANSLATIONS_ES['app-building.8.E'] = { name: 'Mercadeo y crecimiento' };
+CATEGORY_TRANSLATIONS_ES['app-building.8.F'] = { name: 'Construye tu app' };
+(function(){
+  var L = LESSON_TRANSLATIONS_ES;
+  function merge(k,d){ L[k]=Object.assign({},L[k]||{},d); }
+  merge('app-building:ab8a1',{
+    title:'MVP (Producto Mínimo Viable): lanza rápido, mejora siempre',
+    tagline:'¡Lo perfecto es enemigo de lo publicado!',
+    intro:'Tienes 100 funciones. Construye 5. Lanza. Recibe retroalimentación. Construye 5 más. Esto es el pensamiento MVP. Instagram no tenía Historias, Reels, Tienda ni mensajes directos el primer día. Solo fotos, feed y me gusta. Lanza de manera SIMPLE, escala DESPUÉS. Así se construyen los productos reales.',
+    keyPoints:['MVP = la versión más pequeña que resuelve el problema central','Lanza el MVP con 3-5 funciones (no 50)','Recoge retroalimentación de usuarios reales','Itera y mejora según lo que aprendes','Velocidad > Perfección al lanzar'],
+    funFact:'¡El MVP de Dropbox fue literalmente un video de 3 minutos que mostraba la sincronización de archivos. ¡Sin producto todavía! Ese video consiguió 75 000 registros y convenció a los inversionistas.',
+    activity:{ instructions:'¡Ordena estos pasos de primero a último!', sortItems:[
+      'Construir 20 funciones avanzadas',
+      'Lanzar el MVP con 3 funciones principales',
+      'Recopilar retroalimentación de los usuarios',
+      'Construir las siguientes 5 funciones según la retroalimentación',
+      'Planificar 100 funciones más para el futuro'
+    ]}
+  });
+  merge('app-building:ab8a2',{
+    title:'Mercado Total Disponible (TAM): ¿qué tan grande es tu mercado?',
+    tagline:'¡Conoce el tamaño de tu mercado antes de construir!',
+    intro:'¿Cuántas personas tienen tu problema? Si estás construyendo una app de hábitos para personas zurdas, quizás haya 10 millones de usuarios potenciales. El Mercado Total Disponible (TAM) = tu base máxima de clientes posible. ¡TAM grande = gran oportunidad!',
+    keyPoints:['Calcula cuántas personas tienen tu problema','Usa datos del censo, informes del sector y tendencias de búsqueda','TAM grande: más de 1000 millones (apps generales)','TAM mediano: 100 millones (países o edades específicos)','TAM pequeño: 1 millón (comunidad de nicho)'],
+    funFact:'¡Cuando Slack calculó su TAM, encontró que miles de millones de personas envían mensajes de trabajo. ¡Enorme mercado!',
+    activity:{ instructions:'Construyes una app para que los biólogos marinos rastreen la salud de los corales. ¿Cuál es tu TAM?', choices:[
+      {text:'Todas las personas en la Tierra (8 000 millones)',explanation:'¡No todos son biólogos marinos!'},
+      {text:'Aproximadamente 50 000 a 100 000 biólogos marinos en el mundo',explanation:'¡SÍ! Conoce el tamaño real de tu mercado objetivo.'},
+      {text:'Todos los que disfrutan del océano (500 millones)',explanation:'Ellos no son tu objetivo: los biólogos marinos lo son.'},
+      {text:'Es imposible saberlo',explanation:'¡Puedes investigar y estimar!'}
+    ]}
+  });
+  merge('app-building:ab8a3',{
+    title:'Adecuación fundador-mercado: ¿eres la persona indicada para construir esto?',
+    tagline:'¡Ser apasionado por un problema importa!',
+    intro:'Los mejores fundadores resuelven problemas que ellos mismos tienen. Steve Jobs quería tecnología elegante. Brian Chesky (Airbnb) tenía dificultades para pagar el alquiler. Evan Spiegel (Snapchat) quería privacidad. Si a TI no te importa tu problema, ¿por qué le importaría a los usuarios? Adecuación fundador-mercado = estás obsesionado.',
+    keyPoints:['¿TIENES este problema?','¿Estás dispuesto a dedicar 5 años a esto?','¿Tienes habilidades o conexiones relevantes?','¿Hay pasión detrás de la misión?','La pasión crea grandes productos; las ideas forzadas no'],
+    funFact:'¡El autor Robert Kiyosaki afirma que los emprendedores más ricos son aquellos obsesionados con resolver sus propios problemas!',
+    activity:{ instructions:'Los mejores emprendimientos son fundados por personas que están _____ por el problema que resuelven.' }
+  });
+  merge('app-building:ab8b1',{
+    title:'Métricas de comportamiento: mide lo que los usuarios hacen de verdad',
+    tagline:'Olvida las métricas de vanidad — rastrea el comportamiento real',
+    intro:'Las descargas no significan nada. Los usuarios activos semanales sí importan. La duración de la sesión importa. Que los usuarios paguen importa. Las métricas de comportamiento = lo que los usuarios HACEN en realidad, no lo que esperas que hagan. ¡Obsesiónate con rastrearlas!',
+    keyPoints:['Descargas (métrica de vanidad): fácil de inflar, no muestra interacción','Usuarios activos semanales: señal real de interacción','Duración promedio de sesión: tiempo que los usuarios pasan en la app','Tasa de conversión: % de usuarios que realizan una acción (como comprar)','Tasa de abandono: % de usuarios que se van — la métrica MÁS importante'],
+    funFact:'¡Cuando YouTube optimizó el "tiempo de visualización" en lugar de las "vistas", el algoritmo cambió por completo. ¡Un cambio de métrica = diferencia enorme!',
+    activity:{ instructions:'¡Relaciona la métrica con lo que REALMENTE muestra!', matchPairs:[
+      {left:'Descargas',right:'Cuántas personas instalaron la app (sin indicar si la usan)'},
+      {left:'UAD (Usuarios activos diarios)',right:'Cuántos la usan de manera consistente'},
+      {left:'Tiempo promedio de sesión',right:'Qué tan involucrados están los usuarios dentro de la app'},
+      {left:'Tasa de abandono',right:'Cuántos usuarios se están yendo'},
+      {left:'Tasa de conversión',right:'% que realiza la acción deseada (compra, registro)'}
+    ]}
+  });
+  merge('app-building:ab8b2',{
+    title:'Patrones oscuros: lo que NO debes hacer (la ética importa)',
+    tagline:'Engañar a los usuarios funciona a corto plazo, pero destruye la confianza',
+    intro:'Algunas apps usan trucos para que los usuarios hagan cosas: renovación automática oculta, difícil de cancelar, urgencia falsa ("¡Solo quedan 3!"), botones confusos. Estos se llaman patrones oscuros. Funcionan a corto plazo, pero destruyen la confianza a largo plazo. ¡Las grandes apps no engañan a sus usuarios!',
+    keyPoints:['Patrón oscuro: renovación automática difícil de cancelar (¡ahora es ilegal!)','Patrón oscuro: escasez falsa ("¡Solo queda 1 asiento por $50!")','Patrón oscuro: etiquetas de botones confusas ("Aceptar" vs. "Rechazar")','Patrón oscuro: notificaciones insistentes','Buenas apps: claras, honestas y respetan la elección del usuario'],
+    funFact:'¡Apple prohibió los patrones oscuros en iOS. Las apps que engañan a los usuarios ahora son rechazadas automáticamente!',
+    activity:{ instructions:'Tu app tiene una suscripción. La forma HONESTA de manejar la renovación automática es:', choices:[
+      {text:'Hacer de la renovación automática la opción predeterminada pero ocultar el botón de cancelación',explanation:'¡Eso es un patrón oscuro! Apple te rechazará.'},
+      {text:'Explicar claramente la renovación automática, hacer que cancelar sea FÁCIL (un toque) y enviar un recordatorio antes de cobrar',explanation:'¡SÍ! La honestidad genera confianza y clientes a largo plazo.'},
+      {text:'Activar la renovación automática y hacer que cancelar tome 10 pasos',explanation:'Patrón oscuro: ¡a los usuarios les encanta odiar esto!'},
+      {text:'No mencionar la renovación automática en absoluto',explanation:'¡Eso es fraude!'}
+    ]}
+  });
+  merge('app-building:ab8b3',{
+    title:'Sistemas de diseño: mantén la coherencia (¡para no volverte loco!)',
+    tagline:'Tener reglas de diseño evita el caos',
+    intro:'Las apps grandes tienen más de 100 pantallas. Sin reglas, cada pantalla se ve diferente — ¡caos! Los sistemas de diseño = reglas. "Todos los botones tienen este tamaño, este color, esta forma." "Todo el texto usa esta fuente y este tamaño." Seguir las reglas hace que el diseño sea más rápido Y que las apps se sientan profesionales.',
+    keyPoints:['Sistema de diseño = reglas y patrones de diseño documentados','Colores: define los colores primario, secundario y de alerta desde el inicio','Tipografía: familia tipográfica, tamaños y pesos en toda la app','Componentes: botones, tarjetas y modales lucen igual en todas partes','Velocidad: la coherencia = diseño más rápido','Profesionalismo: se siente como un producto unificado'],
+    funFact:'¡Apple tiene las "Human Interface Guidelines": un sistema de diseño de más de 100 páginas que TODAS las apps siguen!',
+    activity:{ instructions:'¡Ordena los pasos para establecer un sistema de diseño!', sortItems:[
+      'Implementar el sistema en todas las pantallas',
+      'Crear las reglas de diseño (colores, fuentes, tamaños)',
+      'Revisar los diseños existentes para verificar su coherencia',
+      'Documentar el sistema para los nuevos diseñadores',
+      'Monitorear y actualizar las reglas conforme la app evoluciona'
+    ]}
+  });
+  merge('app-building:ab8c1',{
+    title:'Dominar la ingeniería de prompts: la nueva superabilidad',
+    tagline:'¡Obtener exactamente lo que quieres requiere práctica!',
+    intro:'Estás aprendiendo una habilidad por la que las empresas pagan $150 000 al año. La ingeniería de prompts = el arte de hacerle las preguntas correctas a la IA para que construya exactamente lo que necesitas. Sé específico. Haz referencia a ejemplos existentes. Itera sin parar. Esta habilidad convierte a los constructores promedio en constructores excepcionales.',
+    keyPoints:['Sé brutalmente específico: no "bonito" sino "minimalista, solo 2 colores"','Referencia competidores: "como Figma pero más simple"','Describe el recorrido del usuario: "el usuario toca el botón, ve un modal, ingresa datos"','Usa referencias visuales: "bordes redondeados como en iOS"','Itera 10+ veces si es necesario — eso es NORMAL'],
+    funFact:'¡Jensen Huang (CEO de Nvidia) predice que los ingenieros de prompts estarán entre los trabajos mejor pagados en tecnología. ¡Estás adelantándote a la curva!',
+    activity:{ instructions:'¡Domina la construcción de apps con múltiples pantallas usando prompts detallados!' }
+  });
+  merge('app-building:ab8c2',{
+    title:'Bases de datos y persistencia: los datos viven para siempre',
+    tagline:'¡Tu app necesita memoria (literalmente)!',
+    intro:'Cuando los usuarios cierran tu app y la vuelven a abrir 3 días después, sus datos deben seguir ahí. ¿Cómo? ¡Bases de datos! Una base de datos es almacenamiento permanente. El usuario ingresa datos → se guardan en la base de datos → se recuperan la próxima vez que se abre la app. Sin bases de datos, cada vez que abres una app está vacía.',
+    keyPoints:['Base de datos = almacenamiento permanente (no RAM)','Guarda los datos del usuario cuando los ingresa','Recupera los datos cuando la app se inicia','Base de datos en la nube: los datos se sincronizan entre dispositivos','Base de datos local: los datos solo están en un dispositivo'],
+    funFact:'¡Facebook tiene bases de datos que almacenan EXABYTES de datos (1 millón de terabytes!). ¡Eso es escala!',
+    activity:{ instructions:'Sin una base de datos, cada vez que un usuario cierra y vuelve a abrir la app, vería _____.' }
+  });
+  merge('app-building:ab8c3',{
+    title:'Automatización de pruebas: ¡no puedes probar 1 millón de usuarios por tu cuenta!',
+    tagline:'Crea pruebas que verifiquen tu app automáticamente',
+    intro:'No puedes probar manualmente cada función en cada dispositivo. ¡Pero las pruebas automatizadas sí pueden! Escribes código que dice: "Cuando el usuario hace X, verifica que ocurra Y." Luego la computadora ejecuta esa prueba 1000 veces al instante. ¡Las pruebas automatizadas ahorran SEMANAS de clics manuales!',
+    keyPoints:['Pruebas automatizadas = código que prueba otro código','Prueba las funciones críticas automáticamente','Pruebas manuales = casos extremos y situaciones reales','Buena cobertura de pruebas = lanzamientos con confianza','Los errores detectados en las pruebas no llegan a los usuarios'],
+    funFact:'¡Google ejecuta MILES DE MILLONES de pruebas automatizadas cada día antes de lanzar software nuevo!',
+    activity:{ instructions:'¡Ordena la estrategia de pruebas!', sortItems:[
+      'Ejecutar las pruebas automatizadas (detecta errores al instante)',
+      'Escribir pruebas automatizadas para las funciones críticas',
+      'Probar manualmente los casos extremos y los flujos de usuario',
+      'Corregir los errores encontrados en las pruebas',
+      'Desplegar con confianza'
+    ]}
+  });
+  merge('app-building:ab8d1',{
+    title:'Analítica de apps: comprende a tus usuarios',
+    tagline:'Los datos te dicen lo que los usuarios quieren de verdad',
+    intro:'Puedes adivinar lo que los usuarios quieren. O puedes dejar que los DATOS te lo digan. Analítica = medir cómo los usuarios usan tu app. ¿Cuál función usan más? ¿Cuándo se van? ¿Dónde se quedan atascados? Estos datos guían tus próximas funciones.',
+    keyPoints:['Instala una herramienta de analítica (Firebase, Mixpanel, Amplitude)','Rastrea eventos clave: toques en botones, uso de funciones, errores','Identifica embudos: ¿dónde abandonan los usuarios?','Análisis de cohortes: compara diferentes grupos de usuarios','Decisiones basadas en datos > suposiciones'],
+    funFact:'¡Cuando Airbnb analizó sus datos, se dio cuenta de que la mayoría de las reservas las hacían "usuarios verificados". Esta información los llevó a centrarse en la confianza!',
+    activity:{ instructions:'¡Relaciona la métrica de analítica con la perspectiva de negocio!', matchPairs:[
+      {left:'Usuarios que abandonan en el pago',right:'El proceso de pago es demasiado complicado'},
+      {left:'Baja retención después del primer día',right:'La experiencia de incorporación es confusa'},
+      {left:'Uso intensivo de una sola función',right:'A los usuarios les encanta esa función — crea más de eso'},
+      {left:'Usuarios que se registran pero no regresan',right:'La app no aporta valor inmediato'},
+      {left:'Picos de uso en ciertos momentos',right:'Oportunidades según el horario (mañana, tarde, etc.)'}
+    ]}
+  });
+  merge('app-building:ab8d2',{
+    title:'Economía real del App Store: así fluye el dinero',
+    tagline:'Entender el flujo de dinero cambia las decisiones',
+    intro:'Cobras $9.99. Apple se queda con el 30 %. Tú recibes $6.99. Parece bien. ¿Pero qué pasa si añades anuncios? Las redes de anuncios también se quedan con el 30 %. ¿Y si haces una suscripción? Apple sigue cobrando el 30 %. ¿Y si haces compras dentro de la app? El mismo porcentaje. Entender el flujo de dinero = entender si tu negocio realmente funciona.',
+    keyPoints:['Suscripción: Apple cobra el 30 % el año 1 y el 15 % a partir del año 2','Compra de app: Apple cobra el 30 %','Compras dentro de la app: Apple cobra el 30 %','Anuncios: la red de anuncios + Apple cobran el 30 % combinado','Considera TODOS los costos: servidores, diseño, mercadeo e impuestos'],
+    funFact:'¡Una app exitosa que genera $100 000 al año solo conserva entre $50 000 y $70 000 después del porcentaje de Apple, los costos de servidores, etc.!',
+    activity:{ instructions:'Cobras $4.99 por tu app y obtienes $100 000 en ingresos. Después del 30 % de Apple te quedan $70 000. ¿Qué debes restar a continuación?', choices:[
+      {text:'Nada: ¡los $70 000 son tuyos!',explanation:'¡Todavía tienes costos!'},
+      {text:'Alojamiento de servidores, procesamiento de pagos, impuestos y quizás el salario de un desarrollador',explanation:'¡SÍ! Un negocio real tiene gastos reales.'},
+      {text:'Solo el porcentaje de Apple',explanation:'¡Hay otros costos más allá del porcentaje de Apple!'},
+      {text:'Reinvertir todo: aún no hay ganancias',explanation:'Puedes tener ganancias, pero debes tener en cuenta los costos reales.'}
+    ]}
+  });
+  merge('app-building:ab8d3',{
+    title:'Publicar tu primera app real',
+    tagline:'¡Este es el momento en que te conviertes en desarrollador publicado!',
+    intro:'Ya construiste, probaste y optimizaste. Ahora: crea una cuenta de desarrollador de Apple ($99/año). Prepara todos los activos (icono, capturas de pantalla, descripción). Envíala para revisión. Espera 1-3 días. Si es aprobada — ¡FELICIDADES, ya eres un desarrollador de apps publicado! ¡Esto es REAL!',
+    keyPoints:['Cuenta de Desarrollador de Apple: $99/año (¡obligatorio!)','Prepara: icono, capturas de pantalla, descripción y política de privacidad','Números de versión: número de compilación y número de versión de la app','Envía para revisión a través de App Store Connect','¿Aprobada? ¡Ya estás publicado! ¡Celébralo! 🎉'],
+    funFact:'¡Cuando tu app es aprobada, eres oficialmente parte del App Store junto con 1,8 MILLONES de otras apps!',
+    activity:{ instructions:'¡Ordena los pasos de publicación en la App Store!', sortItems:[
+      '¡Tu app es aprobada y aparece en el App Store!',
+      'Preparar todos los activos (icono, capturas de pantalla, etc.)',
+      'Crear una cuenta de Desarrollador de Apple ($99/año)',
+      'Enviar para revisión a través de App Store Connect',
+      'Esperar 1-3 días para la revisión del equipo de Apple'
+    ]}
+  });
+  merge('app-building:ab8e1',{
+    title:'Embudos de conversión: del clic en el anuncio al usuario fiel',
+    tagline:'Cada paso pierde usuarios — optimiza cada uno',
+    intro:'1000 personas ven tu anuncio. 100 hacen clic. 20 descargan la app. 10 la abren el día 7. 2 siguen usándola el día 30. Eso es un embudo de conversión — ¡y tiene fugas! Tu trabajo es tapar esas fugas: mejores anuncios (más clics), mejores capturas de pantalla (más descargas), mejor incorporación (más usuarios en el día 7).',
+    keyPoints:['Alcance del anuncio (1000 personas ven el anuncio)','Clic en el anuncio (100 hacen clic)','Instalación de la app (20 la descargan)','Primera apertura (18 la abren)','Retención día 1 (15 la vuelven a usar)','Retención día 7 (10 siguen usándola)','Retención día 30 (2 siguen usándola)'],
+    funFact:'¡Optimizar incluso un paso en tu embudo en un 10 % se multiplica en un crecimiento enorme!',
+    activity:{ instructions:'¡Ordena la optimización del embudo (corrige primero las fugas más grandes)!', sortItems:[
+      'Mejorar la incorporación (conseguir más retención al día 7)',
+      'Mejorar las capturas de pantalla de la app (conseguir más instalaciones)',
+      'Mejorar la calidad de la app (evitar los cierres inesperados que causan desinstalaciones)',
+      'Mejorar los anuncios (conseguir más clics)',
+      'Rastrear las métricas con obsesión para encontrar las fugas'
+    ]}
+  });
+  merge('app-building:ab8e2',{
+    title:'Estrategias de crecimiento orgánico (viralidad gratuita)',
+    tagline:'Los anuncios costosos no son la única forma de crecer',
+    intro:'Programas de referidos: "¡Invita a un amigo y ambos obtienen un beneficio!" Ciclos virales: cada acción del usuario expone la app a no usuarios. Alianzas: trabaja con creadores de contenido. Contenido: crea TikToks y videos de YouTube sobre tu app. Estas son estrategias de crecimiento orgánico — gratuitas, pero requieren creatividad.',
+    keyPoints:['Programa de referidos: los usuarios traen amigos y todos ganan','Ciclos virales: el uso crea efectos de red de forma natural','Mercadeo de contenidos: tus videos y publicaciones demuestran el valor','Alianzas: colaboraciones con apps o creadores complementarios','Comunidad: las comunidades sólidas crecen de boca en boca'],
+    funFact:'¡Cuando Zoom se lanzó, no gastó mucho en anuncios. En cambio, hizo que las videoconferencias fueran tan buenas que la gente las recomendaba!',
+    activity:{ instructions:'¿Cuál es la estrategia de crecimiento MÁS poderosa para una app de tareas?', choices:[
+      {text:'Anuncios costosos dirigidos a todos los padres',explanation:'¡Caro e impersonal!'},
+      {text:'Construir un sistema de referidos: "Invita a un amigo y ambos desbloquean una función"',explanation:'¡SÍ! Los estudiantes que invitan a sus amigos es auténtico y gratuito.'},
+      {text:'Publicar anuncios en todas las plataformas de redes sociales',explanation:'Desperdicia dinero con baja interacción.'},
+      {text:'Esperar y confiar en que la gente lo encontrará',explanation:'¡El crecimiento no ocurre por arte de magia!'}
+    ]}
+  });
+  merge('app-building:ab8e3',{
+    title:'Economía unitaria: costo de adquisición por usuario',
+    tagline:'Conocer tu economía unitaria determina si eres rentable',
+    intro:'Te cuesta $3 adquirir un usuario a través de anuncios. Tu app genera $1/usuario en anuncios. ¡Estás perdiendo $2 por usuario! La economía unitaria = la ganancia o pérdida a nivel micro. Si la entiendes, sabes qué canales de mercadeo funcionan y cuáles son un desperdicio de dinero.',
+    keyPoints:['Costo por adquisición (CPA): ¿cuánto cuesta conseguir un usuario?','Valor de vida del cliente (LTV): ¿cuánto gastará un usuario en total?','Rentable: LTV > CPA','No rentable: CPA > LTV','Rastrear esto con obsesión — determina la supervivencia del negocio'],
+    funFact:'¡Cuando Amazon empezó, tenía una economía unitaria terrible. No obtuvo ganancias durante 7 AÑOS. Pero Jeff Bezos confiaba en el largo plazo. Con el tiempo, la economía unitaria mejoró!',
+    activity:{ instructions:'Si adquirir un usuario cuesta $5, pero ese usuario genera $3 en ingresos de por vida, ese negocio está _____.' }
+  });
+  merge('app-building:ab8f1',{
+    title:'Investigación y análisis de la competencia',
+    tagline:'¡Conoce el panorama antes de construir!',
+    intro:'Los grandes constructores estudian lo que ya existe. Descarga 3-5 apps de la competencia. ¿Qué hacen bien? ¿Qué no hacen? Crea una hoja de cálculo comparando funciones, precios y reseñas de usuarios. Luego construye algo mejor. ¡Nunca construyas sin investigar!',
+    keyPoints:['Descarga y usa 3-5 apps de la competencia','Crea una hoja de cálculo comparativa: funciones, precios, fortalezas y debilidades','Lee las reseñas de los clientes para encontrar quejas','Identifica qué les FALTA a los competidores','Diseña tu app para resolver esas brechas'],
+    funFact:'¡Cuando los fundadores de Slack diseñaron su producto, estudiaron Skype, IRC y el correo electrónico. Encontraron la brecha: comunicación en tiempo real para equipos. Esa brecha se convirtió en una empresa de $30 000 millones!',
+    activity:{ instructions:'Antes de construir tu app, investiga _____ para entender el mercado y encontrar tu ángulo único.' }
+  });
+  merge('app-building:ab8f2',{
+    title:'Pensamiento MVP: menos es más',
+    tagline:'El arte de construir el MÍNIMO que importa',
+    intro:'Un MVP (Producto Mínimo Viable) es la versión más pequeña de tu app que aún resuelve el problema. No está a medias — está completamente terminada pero solo con las funciones esenciales. La primera versión de Instagram no tenía video, historias ni reels. Solo fotos y compartir simple. Ese MVP convenció a miles de personas de registrarse.',
+    keyPoints:['Define el UNO problema central que resuelve tu app','Lista solo 3-5 funciones esenciales','Elimina todo lo que sea "bueno tener"','Escribe métricas de éxito (cómo medirás si funciona)','Planifica tu cronograma de lanzamiento realista'],
+    funFact:'¡El MVP de Dropbox fue un video de 3 minutos que mostraba la sincronización de archivos. Consiguió 75 000 registros en una noche. ¡Sin código todavía!',
+    activity:{ instructions:'¿Cuál es un buen enfoque para un MVP?', choices:[
+      {text:'Construir todas las funciones que puedas imaginar',explanation:'Eso no es un MVP; es un producto inflado. ¡Tarda demasiado!'},
+      {text:'Resolver el problema central con solo las funciones esenciales',explanation:'¡SÍ! Rápido, enfocado y aprendes de usuarios reales.'},
+      {text:'Construirlo y esperar que a la gente le guste',explanation:'¡Necesitas probarlo con personas reales para saberlo!'},
+      {text:'Esperar hasta que sea perfecto antes de lanzar',explanation:'Lo perfecto es enemigo de lo terminado. ¡El MVP gana!'}
+    ]}
+  });
+  merge('app-building:ab8f3',{
+    title:'¡Constrúyela! Tu MVP de rastreador de presupuesto',
+    tagline:'¡Construye una app real que los estudiantes puedan usar!',
+    intro:'Es hora de aplicar todo. Construirás BudgetBuddy, un rastreador de presupuesto sencillo para que los estudiantes administren su mesada. La pantalla principal muestra el saldo y el gasto por categoría. La pantalla de agregar gasto es muy simple. El rastreador de racha muestra cuándo alcanzas tus metas de ahorro. Eso es todo — ¡MVP perfecto!',
+    keyPoints:['Diseña la pantalla principal con una vista general del saldo','Crea una pantalla para agregar gastos con categorías','Construye una pantalla de progreso para las metas de ahorro','Mantén cada pantalla enfocada y minimalista','Prueba la navegación entre todas las pantallas'],
+    funFact:'¡Algunas de las apps estudiantiles más exitosas (como Venmo, que empezó en una universidad) comenzaron como soluciones simples a un problema específico!',
+    activity:{ instructions:'¡Construye un MVP de rastreador de presupuesto!' }
+  });
+})();
 // ── Grade 7 Ship Real Apps / Recommendations / Awards ──
 // Ship Real Apps: APP_BUILDING['ship'] is canonical for grades 6-12 and is
 // already translated by the Ship Real Apps IIFE below (uses ship-real-apps.6 key).
