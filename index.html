@@ -26184,6 +26184,13 @@ CATEGORY_TRANSLATIONS_ES['app-building.9.F'] = { name: 'Construye tu app' };
   merge('app-building:ab9f3',Object.assign({title:'¡Constrúyelo! Crea una app de recetas',tagline:'App social completa con feed, compartir y comunidad'},catF));
 })();
 
+// ── Grade 9 Ship Real Apps / Recommendations / Awards ──
+// Ship Real Apps: APP_BUILDING['ship'] is canonical for grades 6-12 and is
+// already translated by the Ship Real Apps IIFE below (uses ship-real-apps.6 key).
+// Recommendations & Awards are dynamic UI views with no grade-specific lesson content.
+// No additional translation entries required for Grade 9.
+GRADE_DATA_TRANSLATIONS_ES['ship-real-apps.9'] = GRADE_DATA_TRANSLATIONS_ES['ship-real-apps.6'] || { description: 'Aprende a construir y publicar apps reales con las herramientas que usan los profesionales: Lovable, GitHub, Supabase, Stripe y Claude.' };
+
 // Apply all Phase 2 translations after every curriculum has loaded.
 try { applyLessonTranslationsES(); } catch(e){ console.warn('Lesson translation merge skipped:', e); }
 try { autoTranslateActivitiesES(); } catch(e){ console.warn('Auto activity translator skipped:', e); }
