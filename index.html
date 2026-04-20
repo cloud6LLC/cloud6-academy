@@ -37,9 +37,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 .header .user-area{display:flex;gap:12px;align-items:center;color:#fff;font-size:14px;font-weight:600}
 .header .xp-badge{background:rgba(255,255,255,0.2);padding:6px 14px;border-radius:20px;font-size:13px}
 /* LANGUAGE TOGGLE — styled like .xp-badge pill */
-.lang-toggle{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,0.2);padding:6px 14px;border-radius:20px;font-size:13px;font-weight:600;color:#2d3436;cursor:pointer;user-select:none;white-space:nowrap;border:1px solid rgba(0,184,148,0.25);background:rgba(0,184,148,0.1)}
-.lang-toggle .lang-opt{opacity:0.55;transition:opacity 0.15s,font-weight 0.15s;padding:0 2px}
-.lang-toggle .lang-opt.active{opacity:1;font-weight:800;color:#00b894}
+.lang-toggle{display:inline-flex;align-items:center;gap:4px;padding:5px 10px;border-radius:20px;font-size:13px;font-weight:600;color:#2d3436;cursor:pointer;user-select:none;white-space:nowrap;border:1.5px solid rgba(0,184,148,0.35);background:rgba(0,184,148,0.08)}
+.lang-toggle .lang-opt{opacity:0.45;transition:all 0.15s;padding:3px 8px;border-radius:14px;font-size:12px;font-weight:700;letter-spacing:0.3px}
+.lang-toggle .lang-opt.active{opacity:1;font-weight:800;color:#fff;background:#00b894;box-shadow:0 2px 6px rgba(0,184,148,0.4)}
 .lang-toggle .lang-sep{opacity:0.35;font-weight:400}
 /* SUBJECT TABS */
 .subject-bar{height:var(--subject-h);background:#fff;border-bottom:2px solid #e0e0e0;display:flex;align-items:center;padding:0 0 0 var(--sidebar-w);gap:0;overflow-x:auto}
@@ -540,10 +540,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
   <!-- Right side: Search + Lang + XP + Actions -->
   <div style="display:flex;align-items:center;gap:8px;flex-shrink:0">
     <input type="text" data-i18n-ph="ui.searchPlaceholder" placeholder="Search..." style="padding:6px 12px;border:1.5px solid #e0e0e0;border-radius:20px;font-size:12px;width:130px;outline:none;transition:border-color 0.2s" onfocus="this.style.borderColor='#00b894'" onblur="this.style.borderColor='#e0e0e0'">
-    <div id="langToggle" class="lang-toggle" role="group" aria-label="Language" title="Language / Idioma">
-      <span id="langOptEn" class="lang-opt active" onclick="setLanguage('en')">EN</span>
-      <span class="lang-sep">|</span>
-      <span id="langOptEs" class="lang-opt" onclick="setLanguage('es')">ES</span>
+    <div id="langToggle" class="lang-toggle" role="group" aria-label="Language / Idioma" title="Switch language / Cambiar idioma">
+      <span id="langOptEn" class="lang-opt active" onclick="setLanguage('en')" title="Switch to English">🇺🇸 English</span>
+      <span id="langOptEs" class="lang-opt" onclick="setLanguage('es')" title="Cambiar a Español">🇲🇽 Español</span>
     </div>
     <div id="userAvatar" onclick="showAuthScreen()" style="padding:7px 18px;border-radius:20px;background:linear-gradient(135deg,#00b894,#0984e3);color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;font-weight:700;font-size:13px;white-space:nowrap;box-shadow:0 2px 8px rgba(0,184,148,0.3)" data-i18n-title="ui.logInTitle" title="Log In"><span data-i18n="ui.logIn">🔐 Log In</span></div>
   </div>
