@@ -26456,6 +26456,125 @@ CATEGORY_TRANSLATIONS_ES['app-building.10.F'] = { name: 'Construye Tu App' };
 // Recommendations & Awards are dynamic UI views with no grade-specific lesson content.
 // No additional translation entries required for Grade 10.
 GRADE_DATA_TRANSLATIONS_ES['ship-real-apps.10'] = GRADE_DATA_TRANSLATIONS_ES['ship-real-apps.6'] || { description: 'Aprende a construir y publicar apps reales con las herramientas que usan los profesionales: Lovable, GitHub, Supabase, Stripe y Claude.' };
+// Grade 7 Math — activity translations (instructions + 3 choices each)
+(function(){
+  var L = LESSON_TRANSLATIONS_ES;
+  function mact(id, instr, c0t, c0e, c1t, c1e, c2t, c2e){
+    var key = 'math:' + id;
+    if(!L[key]) L[key] = {};
+    L[key].activity = { instructions: instr, choices: [
+      { text: c0t, explanation: c0e },
+      { text: c1t, explanation: c1e },
+      { text: c2t, explanation: c2e }
+    ]};
+  }
+  // Category A — Relaciones proporcionales
+  mact('m7A1','Un carro recorre 240 millas en 4 horas. ¿Cuál es la tasa unitaria en millas por hora?','60 mph','Divide 240 entre 4','244 mph','No sumes, divide','4 mph','Necesitas dividir, no invertir');
+  mact('m7A2','Si y=5 cuando x=2, ¿cuál es el valor de k?','2.5','5÷2=2.5','10','Eso es y×x, no y÷x','3','5−2=3, pero debes dividir');
+  mact('m7A3','Horas: 2, 3, 4; Dólares: 10, 15, 20. ¿La relación es proporcional?','Sí, la tasa es $5/hora','10÷2=5, 15÷3=5, 20÷4=5','No, las horas son diferentes','No importa que cambien las horas','No, se necesitan más datos','La tabla tiene suficiente información');
+  mact('m7A4','Puntos (0,0), (2,6) y (4,12). ¿Cuál es el valor de k?','3','La pendiente es 6÷2=3','6','Ese es el valor de y, no la tasa','4','Ese es el valor de x, no k');
+  mact('m7A5','Cuando x=3, y=12. Escribe la ecuación de la relación proporcional.','y=4x','k=12÷3=4','y=3x','3 es el valor de x, no k','y=12x','12 es el valor de y, no k');
+  mact('m7A6','¿Cuánto es el 30% de 250?','75','0.30×250=75','220','No restes 30 a 250','7.5','Corriges mal el decimal: 0.30, no 0.03');
+  mact('m7A7','Una camisa cuesta $40 y el impuesto es el 8%. ¿Cuál es el total?','$43.20','0.08×40=$3.20; $40+$3.20=$43.20','$48','El 8% de $40 es $3.20, no $8','$32','El impuesto se suma, no se resta');
+  mact('m7A8','La cuenta es $50 y la propina es del 20%. ¿Cuánto es la propina?','$10','0.20×$50=$10','$20','Eso sería el 40%, no el 20%','$5','Eso sería el 10%, no el 20%');
+  mact('m7A9','Una chaqueta cuesta $60 con 25% de descuento. ¿Cuál es el precio de oferta?','$45','0.25×60=$15; $60−$15=$45','$15','Ese es el descuento, no el precio final','$85','El descuento se resta, no se suma');
+  mact('m7A10','Una tienda compra un artículo en $8 y lo marca con el 50% de ganancia. ¿Cuál es el precio de venta?','$12','0.50×$8=$4; $8+$4=$12','$4','Ese es el margen de ganancia, no el precio','$50','No multipliques 50 por 8');
+  mact('m7A11','Se invierten $500 al 4% anual por 3 años. ¿Cuánto es el interés simple?','$60','$500×0.04×3=$60','$500','Eso es el capital, no el interés','$20','Eso sería solo 1 año de interés');
+  mact('m7A12','El precio sube de $80 a $100. ¿Cuál es el cambio porcentual?','25%','(20÷80)×100=25%','20%','20 es la cantidad de cambio, no el porcentaje','80%','Ese es el precio original, no el cambio');
+  mact('m7A13','La escala es 1 pulgada = 10 millas. Dos ciudades están a 3 pulgadas en el mapa. ¿Cuántas millas son?','30 millas','3×10=30 millas','10 millas','Esa es la escala, no la distancia real','13 millas','No sumes, multiplica');
+  mact('m7A14','Una figura se agranda de 4 cm a 12 cm. ¿Cuál es el factor de escala?','3','12÷4=3','8','12−4=8 es la diferencia, no el factor de escala','0.33','Eso sería una reducción, no un agrandamiento');
+  mact('m7A15','Dos triángulos similares tienen lados en proporción 3:9. Si un lado mide 4, ¿cuánto mide el lado correspondiente?','12','3/9=4/x; 3x=36; x=12','6','9−3=6 es la diferencia, no el lado correspondiente','9','Ese es el lado conocido del segundo triángulo');
+  mact('m7A16','La receta lleva 2 tazas de harina por 3 de azúcar. Con 6 tazas de harina, ¿cuántas de azúcar se necesitan?','9 tazas','2/3=6/x; 2x=18; x=9','6 tazas','La proporción no es 1:1','2 tazas','Esa es la cantidad original de harina');
+  mact('m7A17','Resuelve la proporción: 5/8 = x/16','10','5×16=8x; 80=8x; x=10','8','Ese es el denominador original, no x','2.5','5÷8=0.625, no 2.5');
+  mact('m7A18','y es proporcional a x. Cuando x=4, y=20. ¿Cuánto es y cuando x=10?','50','k=20÷4=5; y=5×10=50','200','No multipliques todos los valores juntos','2.5','10÷4 no es la forma correcta de calcularlo');
+  mact('m7A19','Una gráfica muestra de 0 a 180 millas en 3 horas. ¿Cuál es la tasa de velocidad?','60 mph','180÷3=60 millas por hora','3 mph','Ese es el tiempo, no la velocidad','180 mph','Esa es la distancia total, no la tasa');
+  mact('m7A20','Los puntos son (0,3), (2,7) y (4,11). ¿La relación es proporcional?','No, no pasa por el origen (0,0)','Una relación proporcional debe pasar por el origen','Sí, los puntos forman una línea','No toda línea es proporcional; debe pasar por el origen','Sí, porque 3+2=5','No se comprueba la proporcionalidad sumando así');
+  // Category B — Operaciones con racionales
+  mact('m7B21','¿Cuánto es −12 + (−8)?','−20','Suma los valores absolutos y conserva el signo negativo','20','El resultado es negativo, no positivo','−4','No restes, suma los negativos');
+  mact('m7B22','¿Cuánto es −5 − (−3)?','−2','Restar un negativo equivale a sumar: −5+3=−2','−8','No sumes los valores absolutos; cambia el signo','2','El resultado es negativo: −5+3=−2');
+  mact('m7B23','¿Cuánto es −6 × (−4)?','24','Negativo × negativo = positivo','−24','Cuando dos negativos se multiplican, el resultado es positivo','−2','Multiplica, no restes');
+  mact('m7B24','¿Cuánto es −36 ÷ 4?','−9','Signos distintos dan resultado negativo; 36÷4=9','9','Los signos son distintos, por lo que el resultado es negativo','−40','Divide, no restes');
+  mact('m7B25','¿Cuánto es 1/4 + 2/3?','11/12','MCM=12; 3/12+8/12=11/12','3/7','No sumes numeradores y denominadores por separado','5/4','Convierte primero a denominador común');
+  mact('m7B26','¿Cuánto es 3/4 − 1/6?','7/12','MCM=12; 9/12−2/12=7/12','2/2','No restes numeradores y denominadores directamente','2/12','Convierte correctamente: 9/12−2/12=7/12');
+  mact('m7B27','¿Cuánto es 2/3 × 3/5?','2/5','2×3=6 y 3×5=15; 6/15=2/5','6/15','Correcto pero sin simplificar','5/8','Multiplica numeradores entre sí y denominadores entre sí');
+  mact('m7B28','¿Cuánto es 3/4 ÷ 1/2?','3/2','3/4×2/1=6/4=3/2','3/8','Multiplica por el recíproco, no por la misma fracción','1/2','Usa el recíproco: 3/4×2/1');
+  mact('m7B29','¿Cuánto es 1½ + 2⅓?','3 5/6','3/2+7/3; MCM=6; 9/6+14/6=23/6=3 5/6','3 2/5','No sumes numeradores y denominadores por separado','3 1/2','Convierte a fracciones impropias y usa denominador común');
+  mact('m7B30','¿Qué fracción es igual a 0.555...?','5/9','Si x=0.555..., entonces 9x=5 y x=5/9','1/2','1/2=0.5, no 0.555...','5/10','5/10=0.5, no 0.555...');
+  mact('m7B31','¿Cuánto es |−8| − |3|?','5','|−8|=8 y |3|=3; 8−3=5','11','El valor absoluto quita el signo negativo; 8−3=5, no 8+3','−5','El resultado es positivo');
+  mact('m7B32','¿Cuánto es 10 − 2 × 3 + 4?','8','Primero la multiplicación: 10−6+4=8','24','Aplica el orden de operaciones: multiplica primero','12','Recuerda multiplicar antes de sumar o restar');
+  mact('m7B33','María tiene $12.50 y gasta $3.75. ¿Cuánto le queda?','$8.75','$12.50−$3.75=$8.75','$16.25','Resta, no sumes','$9.00','Verifica el cálculo: $12.50−$3.75=$8.75');
+  mact('m7B34','Ordena de menor a mayor: 1/2, 0.6, 2/3','1/2, 0.6, 2/3','0.5 < 0.6 < 0.667','0.6, 1/2, 2/3','1/2=0.5, que es menor que 0.6','2/3, 0.6, 1/2','Ese sería el orden de mayor a menor');
+  mact('m7B35','¿Cuál es el inverso aditivo de −7?','7','7+(−7)=0','−7','El inverso aditivo cambia el signo','1/7','Ese es el inverso multiplicativo, no el aditivo');
+  mact('m7B36','¿Cuál es el inverso multiplicativo de 4/5?','5/4','4/5×5/4=1','4/5','El inverso multiplicativo voltea la fracción','−4/5','El inverso multiplicativo no cambia el signo');
+  mact('m7B37','¿Cómo se aplica la propiedad distributiva a 3(2+5)?','3(2)+3(5)=6+15=21','Se distribuye el 3: 3×2+3×5=21','3+2+5=10','No sumes todos; distribuye el factor','3(2)+5=11','Debes multiplicar 3 por ambos términos');
+  mact('m7B38','Simplifica (2/3) ÷ (4/9)','3/2','2/3×9/4=18/12=3/2','2/3','Multiplica por el recíproco de 4/9','8/27','Usa el recíproco, no multipliques directamente');
+  mact('m7B39','¿Cuánto es 1/2 + 1/3 × 3?','3/2','Primero la multiplicación: 1/3×3=1; luego 1/2+1=3/2','5/3','Aplica el orden de operaciones: multiplica antes de sumar','1','Recuerda resolver la multiplicación antes de la suma');
+  mact('m7B40','¿Cuánto es (3/4 − 1/4) ÷ 1/2?','1','3/4−1/4=2/4=1/2; 1/2÷1/2=1','1/2','Recuerda dividir por 1/2 al final','2','Simplifica primero el paréntesis');
+  // Category C — Expresiones y ecuaciones
+  mact('m7C41','Simplifica 5x + 3 − 2x + 7','3x+10','Combina términos semejantes: 5x−2x=3x y 3+7=10','3x+3+7','Suma los términos constantes: 3+7=10','6x+10','5x−2x=3x, no 6x');
+  mact('m7C42','Expande 4(2x − 3)','8x−12','4×2x=8x y 4×3=12','8x−3','También debes multiplicar el 4 por −3','6x−12','4×2x=8x, no 6x');
+  mact('m7C43','Resuelve 3x − 7 = 14','7','3x−7+7=14+7; 3x=21; x=7','2','Suma 7 a ambos lados primero','21','Eso es 3x antes de dividir');
+  mact('m7C44','Resuelve 2x + 3x + 4 = 19','3','2x+3x=5x; 5x+4=19; 5x=15; x=3','15','Eso es 5x antes de dividir','5','Combina los términos con x primero');
+  mact('m7C45','Resuelve 4x = 2x + 6','3','4x−2x=6; 2x=6; x=3','6','Ese es el valor de 2x, no de x','2','Agrupa los términos con x en un lado');
+  mact('m7C46','Un número más 8 es igual a 20. ¿Cuál es el número?','12','x+8=20; x=20−8=12','28','Resta 8, no sumes','160','Suma, no multipliques');
+  mact('m7C47','Resuelve x − 4 < 6','x < 10','Suma 4 a ambos lados: x < 6+4=10','x > 10','El signo de desigualdad no cambia al sumar','x < 2','Suma 4 a ambos lados, no restes');
+  mact('m7C48','¿Cómo se grafica x ≥ 2 en la recta numérica?','Círculo cerrado en 2, sombreado a la derecha','El círculo cerrado incluye el 2; ≥ significa mayor o igual que','Círculo abierto a la derecha','El círculo cerrado se usa con ≥, no abierto','Círculo cerrado a la izquierda','La desigualdad se cumple para x≥2, ve a la derecha');
+  mact('m7C49','La temperatura es de máximo 85°F. ¿Qué desigualdad representa esto?','t ≤ 85','"Como máximo" significa menor o igual que','t ≥ 85','"Como máximo" no es mayor o igual que','t < 85','"Como máximo" incluye el valor 85');
+  mact('m7C50','Resuelve la desigualdad compuesta: 1 < x + 2 < 5','−1 < x < 3','Resta 2 de todas las partes: 1−2<x<5−2','1 < x < 5','Debes restar 2 de todas las partes','3 < x < 7','Resta 2, no sumes 2');
+  mact('m7C51','Dos ángulos son suplementarios. Uno mide 65°. ¿Cuánto mide el otro?','115°','Los ángulos suplementarios suman 180°; 180−65=115°','25°','Los ángulos complementarios suman 90°, no los suplementarios','65°','Los ángulos suplementarios no son iguales en este caso');
+  mact('m7C52','Dos ángulos son complementarios y uno es el doble del otro. ¿Cuánto miden?','30° y 60°','x+2x=90; 3x=90; x=30°','45° y 45°','45+45=90, pero uno no es el doble del otro','60° y 120°','Esos son suplementarios, no complementarios');
+  mact('m7C53','¿Pueden los lados 5, 6 y 10 formar un triángulo?','Sí','5+6=11>10 ✓; la desigualdad triangular se cumple','No, el lado 5 es muy pequeño','La suma de cualquier par de lados supera el tercero','No, se necesitan los ángulos','Solo se necesitan los lados para aplicar la desigualdad');
+  mact('m7C54','Un rectángulo tiene largo 2x y ancho 5. ¿Cuál es el perímetro?','4x+10','Perímetro=2(2x)+2(5)=4x+10','2x+5','El perímetro incluye todos los lados','10x','Usa la fórmula P=2l+2a');
+  mact('m7C55','El área de un rectángulo es 72 cm². Si el largo es 9 cm, ¿cuánto mide el ancho?','8 cm','72÷9=8 cm','81 cm','El área se divide, no se suma','63 cm','Divide el área entre el largo');
+  mact('m7C56','El perímetro de un cuadrado es 36 cm. ¿Cuánto mide cada lado?','9 cm','4s=36; s=9 cm','36 cm','El perímetro total es 36 cm, no cada lado','6 cm','Un cuadrado tiene 4 lados iguales; 36÷4=9');
+  mact('m7C57','El 25% de x es igual a 15. ¿Cuánto es x?','60','0.25x=15; x=15÷0.25=60','3.75','Divide, no multipliques','40','Despeja correctamente: divide 15 entre 0.25');
+  mact('m7C58','Un artículo cuesta $40 y se le aplica un 50% de margen de ganancia. ¿Cuál es el precio de venta?','$60','$40×1.50=$60','$20','El margen se suma, no se resta','$90','El 50% de $40 es $20, no $50');
+  mact('m7C59','Un vendedor gana el 8% de comisión y ganó $160. ¿Cuánto fueron las ventas totales?','$2000','0.08×ventas=160; ventas=$160÷0.08=$2000','$160','Eso es la comisión, no las ventas totales','$1280','Divide la comisión entre la tasa');
+  mact('m7C60','Resuelve 3(x − 2) + 4 = 13','5','3x−6+4=13; 3x−2=13; 3x=15; x=5','3','Distribuye el 3 primero','7','Verifica: 3(5−2)+4=13 ✓');
+  // Category D — Geometría
+  mact('m7D61','¿Cuál es el área de un círculo con radio 4 cm? Usa π=3.14','50.24 cm²','A=π×r²=3.14×16=50.24 cm²','25.12 cm²','Eso sería π×r, no π×r²','12.56 cm²','Eso es la circunferencia, no el área');
+  mact('m7D62','¿Cuál es la circunferencia de un círculo con diámetro 6 cm? Usa π=3.14','18.84 cm','C=π×d=3.14×6=18.84 cm','28.26 cm','Eso sería el área, no la circunferencia','9.42 cm','Eso es π×r; usa el diámetro completo');
+  mact('m7D63','Una figura en forma de L tiene una parte de 8×4 y otra de 6×3. ¿Cuál es el área total?','50 unidades²','8×4=32 y 6×3=18; 32+18=50','32 unidades²','Debes sumar las dos partes','18 unidades²','Debes sumar las dos partes');
+  mact('m7D64','¿Cuál es el área superficial de un prisma rectangular de 5×3×2?','62 unidades²','2(5×3+5×2+3×2)=2(15+10+6)=62','30 unidades²','Calcula el área superficial total, no solo el volumen','31 unidades²','Multiplica por 2, ya que hay 6 caras');
+  mact('m7D65','¿Cuál es el área superficial de una pirámide cuadrada con base 6 y altura inclinada 4?','84 unidades²','Base: 6²=36; Caras triangulares: 4×(1/2×6×4)=48; Total=84','36 unidades²','Incluye el área de las caras triangulares','48 unidades²','Incluye el área de la base');
+  mact('m7D66','¿Cuál es el volumen de un prisma rectangular de 4×6×3?','72 unidades³','V=4×6×3=72','13 unidades³','Multiplica los tres valores, no los sumes','36 unidades³','Incluye los tres valores: 4×6×3');
+  mact('m7D67','¿Cuál es el volumen de una pirámide con base cuadrada de lado 5 y altura 9?','75 unidades³','V=1/3×5²×9=1/3×25×9=75','225 unidades³','Recuerda multiplicar por 1/3','45 unidades³','Calcula la base al cuadrado: 5²=25');
+  mact('m7D68','¿Qué figura forma una sección transversal horizontal de un cubo?','Cuadrado','Un corte horizontal de un cubo da un cuadrado','Rectángulo','Un corte horizontal de un cubo perfecto da un cuadrado','Triángulo','Un corte horizontal de un cubo nunca da un triángulo');
+  mact('m7D69','Dos líneas se cruzan y forman un ángulo de 65°. ¿Cuánto miden los otros tres ángulos?','65°, 115°, 115°','El ángulo vertical también mide 65°; los adyacentes suman 180°','65°, 65°, 65°','Los ángulos adyacentes son suplementarios, no iguales','115°, 115°, 115°','El ángulo vertical al de 65° también mide 65°');
+  mact('m7D70','Dos líneas se cruzan. Un ángulo mide 40°. ¿Cuánto mide su ángulo vertical?','40°','Los ángulos verticales son iguales','140°','Los ángulos opuestos al vértice son iguales, no suplementarios','50°','Los ángulos verticales son iguales, no complementarios');
+  mact('m7D71','Dos ángulos adyacentes están sobre una línea recta. Uno mide 50°. ¿Cuánto mide el otro?','130°','Ángulos en una línea recta suman 180°; 180−50=130°','50°','Los ángulos no son iguales en este caso','90°','Solo suman 90° si son complementarios');
+  mact('m7D72','Dos líneas paralelas son cortadas por una transversal. Un ángulo mide 75°. ¿Cuánto mide el ángulo correspondiente?','75°','Los ángulos correspondientes son iguales cuando las líneas son paralelas','105°','105° sería el ángulo suplementario','15°','Los ángulos correspondientes son iguales, no complementarios');
+  mact('m7D73','Un triángulo tiene ángulos de 45°, 75° y x°. ¿Cuánto mide x?','60°','45+75+x=180; 120+x=180; x=60°','120°','Ese es 45+75; resta para encontrar x','30°','Suma ambos ángulos y luego resta de 180°');
+  mact('m7D74','La escala del dibujo es 1:25. Si el dibujo mide 4 cm, ¿cuánto mide la figura real?','100 cm','4×25=100 cm','29 cm','Multiplica, no sumes','0.16 cm','El objeto real es más grande, no más pequeño');
+  mact('m7D75','¿Pueden los lados 5, 6 y 12 formar un triángulo?','No, porque 5+6=11 no es mayor que 12','La desigualdad triangular no se cumple: 5+6=11 < 12','Sí, cualquier tres lados forman un triángulo','Los lados deben cumplir la desigualdad triangular','No, se necesitan los ángulos','Solo los lados determinan si forman un triángulo');
+  mact('m7D76','Dos triángulos similares tienen bases en proporción 3:6. Si la altura de uno es 4, ¿cuánto mide la del otro?','8','Factor de escala=6÷3=2; 4×2=8','12','La escala es 2, no 3','2','Multiplica por el factor de escala, no dividas');
+  mact('m7D77','Voltear una figura sobre una línea recta se llama...','Reflexión','Una reflexión voltea la figura sobre una línea','Traslación','Una traslación desliza la figura sin voltearla','Rotación','Una rotación gira la figura alrededor de un punto');
+  mact('m7D78','¿Cuál es la imagen del punto (3, 2) al reflejarlo sobre el eje y?','(−3, 2)','La reflexión sobre el eje y cambia el signo de x','(3, −2)','La reflexión sobre el eje y cambia x, no y','(−3, −2)','Solo cambia el signo de x al reflejar sobre el eje y');
+  mact('m7D79','Una figura se traslada 3 unidades a la derecha y 2 hacia arriba. ¿Adónde se mueve el punto (1, 4)?','(4, 6)','x: 1+3=4; y: 4+2=6','(4, 4)','Suma también 2 a la coordenada y','(1, 6)','Suma también 3 a la coordenada x');
+  mact('m7D80','¿Cuál es el volumen de un cilindro con radio 3 y altura 5? Usa π=3.14','141.3 unidades³','V=π×r²×h=3.14×9×5=141.3','47.1 unidades³','Recuerda elevar el radio al cuadrado: r²=9','9 unidades³','Usa la fórmula completa del volumen del cilindro');
+  // Category E — Estadística y probabilidad
+  mact('m7E81','Se encuestan compradores en un centro comercial. ¿Es una muestra aleatoria?','No, es sesgada hacia los visitantes del centro comercial','No representa a toda la población','Sí, 100 personas es una muestra grande','El tamaño no garantiza la aleatoriedad','Sí, se eligen al azar dentro del centro comercial','El lugar de muestreo causa sesgo');
+  mact('m7E82','En una escuela el 40% son niños. Una muestra tiene 20 niños y 5 niñas. ¿Es representativa?','No, la proporción es incorrecta','20/25=80% de niños, no el 40%','Sí, 25 personas es suficiente','El tamaño importa, pero la proporción también','Sí, incluye niños y niñas','La proporción debe reflejar la de la población');
+  mact('m7E83','El Grupo A tiene media 75 y el Grupo B tiene media 82. ¿Cuál tiene el rendimiento más alto?','Grupo B','82 > 75, por lo que B tiene el promedio más alto','Grupo A, porque el número más pequeño es mejor','Para puntajes, el número más alto es mejor','No se puede saber','La media sí permite comparar el rendimiento promedio');
+  mact('m7E84','Los datos son 2, 4, 6, 8 con media 5. ¿Cuál es la desviación media absoluta (DMA)?','2','|2−5|+|4−5|+|6−5|+|8−5|=3+1+1+3=8; 8÷4=2','5','Esa es la media, no la DMA','8','Divide la suma de las desviaciones entre 4');
+  mact('m7E85','Hay 3 bolas rojas y 7 azules. ¿Cuál es la probabilidad de sacar una roja?','0.3','3 rojas de 10 totales: 3÷10=0.3','0.7','Esa es la probabilidad de azul, no de roja','3','La probabilidad es una fracción o decimal entre 0 y 1');
+  mact('m7E86','Se lanza una moneda 50 veces y cae cara 28 veces. ¿Cuál es la probabilidad experimental?','0.56','28÷50=0.56','0.5','Esa es la probabilidad teórica, no la experimental','0.22','Divide los éxitos entre el total de intentos');
+  mact('m7E87','¿Cuál es la probabilidad de obtener un 2 al lanzar un dado justo?','1/6','Hay 1 resultado favorable de 6 posibles','1/2','Un dado tiene 6 caras, no 2','2/6','Solo hay un 2 en el dado; simplifica a 1/6');
+  mact('m7E88','Se lanzan dos monedas. ¿Cuál es la probabilidad de obtener dos caras?','0.25','P(cara)×P(cara)=0.5×0.5=0.25','0.5','Los eventos son independientes; multiplica las probabilidades','1','La probabilidad nunca puede ser mayor que 1');
+  mact('m7E89','¿Cuál es el espacio muestral de un girador con los números 1, 2 y 3?','{1, 2, 3}','Los resultados posibles son exactamente los sectores del girador','{1, 2}','El girador también incluye el 3','{1, 2, 3, 1, 2, 3}','No se repiten los resultados en el espacio muestral');
+  mact('m7E90','Un girador tiene 2 secciones y una moneda tiene 2 caras. ¿Cuántos resultados totales hay?','4','Principio de conteo: 2×2=4','2','Multiplica los resultados de cada evento','6','2×2=4, no 2+2+2');
+  mact('m7E91','¿Cuál es la mejor manera de simular si un estudiante aprueba una prueba con 50% de probabilidad?','Usar un girador con 50% de probabilidad','Simula los dos resultados igualmente probables','Dar la prueba real','Una simulación evita hacer la prueba real','Asumir el 50%','Una simulación genera datos, no solo supone');
+  mact('m7E92','¿Cuál es la probabilidad de obtener 2 o 4 al lanzar un dado justo?','1/3','P(2)+P(4)=1/6+1/6=2/6=1/3','2/6','Correcto pero sin simplificar','1/6','Hay dos resultados favorables: 2 y 4');
+  mact('m7E93','Hay 5 canicas rojas, 3 azules y 2 verdes. ¿Cuál es la probabilidad de sacar una verde?','1/5','2 verdes de 10 totales: 2/10=1/5','2/8','El total es 10, no 8','3/10','Esa es la probabilidad de azul, no de verde');
+  mact('m7E94','Conjunto A: {1,5,6,7,8}; Conjunto B: {4,5,6,7,8}. ¿Cuál tiene menos dispersión?','Conjunto B','Rango de B=8−4=4; Rango de A=8−1=7','Conjunto A','El rango de A (7) es mayor que el de B (4)','Son iguales','Los rangos son diferentes: 7 vs 4');
+  mact('m7E95','El 60% de los estudiantes prefiere pizza. En una escuela de 500 estudiantes, ¿cuántos prefieren pizza?','300','0.60×500=300','60','El 60% es la tasa, no la cantidad','200','El 40% prefiere otra cosa; 0.60×500=300');
+  mact('m7E96','Diagrama de puntos: 1 punto en 2, 3 puntos en 3 y 2 puntos en 4. ¿Cuál es la moda?','3','El 3 tiene más puntos (3), por lo tanto es la moda','2','El 2 tiene solo 1 punto','4','El 4 tiene 2 puntos, menos que el 3');
+  mact('m7E97','El diagrama de caja A tiene mediana 50 y el B tiene mediana 60. ¿Cuál tiene la mediana más alta?','B','60 > 50, por lo que B tiene la mediana más alta','A','La mediana de B (60) es mayor que la de A (50)','No se puede saber','La mediana se puede comparar directamente');
+  mact('m7E98','Los datos son 2, 3, 4, 5, 100. ¿Cuál es la mejor medida de tendencia central?','La mediana = 4','La mediana no se ve afectada por el valor atípico 100','La media = 22.8','La media es distorsionada por el valor atípico 100','La moda','No hay moda; no se repite ningún valor');
+  mact('m7E99','Conjunto 1: {1,2,3,4,5}; Conjunto 2: {1,1,3,5,5}. ¿Cuál tiene mayor rango?','Ambos tienen el mismo rango: 4','5−1=4 para ambos conjuntos','El primero tiene mayor rango','5−1=4 para el primero y 5−1=4 para el segundo','El segundo tiene mayor rango','El rango de ambos es 4');
+  mact('m7E100','Se obtuvieron 55 caras en 100 lanzamientos. ¿Cuál es la probabilidad experimental?','0.55','55÷100=0.55','0.5','Esa es la probabilidad teórica, no la experimental','55','La probabilidad es un decimal entre 0 y 1');
+})();
+
 // Apply all Phase 2 translations after every curriculum has loaded.
 try { applyLessonTranslationsES(); } catch(e){ console.warn('Lesson translation merge skipped:', e); }
 try { autoTranslateActivitiesES(); } catch(e){ console.warn('Auto activity translator skipped:', e); }
