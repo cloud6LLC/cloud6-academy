@@ -23433,6 +23433,138 @@ Object.assign(LESSON_TRANSLATIONS_ES, {
     'Numérico','Los colores no son numéricos. Numérico sería "¿Cuántas horas...?". Esto es categórico.',
     'Ambos','Esta encuesta es solo categórica. Categórico = categorías descriptivas como los colores.');
 })();
+// ── Grade 8 Math (100 lessons — templated) ──
+GRADE_DATA_TRANSLATIONS_ES['math.8'] = { description: 'Exponentes y notación científica, ecuaciones lineales y sistemas, funciones, teorema de Pitágoras, volúmenes y probabilidad estadística.' };
+CATEGORY_TRANSLATIONS_ES['math.8.A'] = { name: 'Sistema numérico y exponentes' };
+CATEGORY_TRANSLATIONS_ES['math.8.B'] = { name: 'Ecuaciones lineales' };
+CATEGORY_TRANSLATIONS_ES['math.8.C'] = { name: 'Funciones' };
+CATEGORY_TRANSLATIONS_ES['math.8.D'] = { name: 'Geometría' };
+CATEGORY_TRANSLATIONS_ES['math.8.E'] = { name: 'Estadística y probabilidad' };
+(function(){
+  const m = LESSON_TRANSLATIONS_ES;
+  const ns = 'math:';
+  const titles = {
+    // A: Sistema numérico y exponentes
+    'm8A1':'Comparar y ordenar enteros','m8A2':'Números racionales e irracionales',
+    'm8A3':'Raíces cuadradas de cuadrados perfectos','m8A4':'Raíces cúbicas',
+    'm8A5':'Aproximar raíces cuadradas','m8A6':'Regla del producto de exponentes',
+    'm8A7':'Regla del cociente de exponentes','m8A8':'Regla de la potencia de una potencia',
+    'm8A9':'Exponentes negativos','m8A10':'Exponente cero',
+    'm8A11':'Notación científica: conceptos básicos','m8A12':'Operaciones con notación científica',
+    'm8A13':'Comparar números en notación científica','m8A14':'Convertir desde notación científica',
+    'm8A15':'Reconocer cuadrados perfectos','m8A16':'Reconocer cubos perfectos',
+    'm8A17':'El sistema de números reales','m8A18':'La recta numérica con irracionales',
+    'm8A19':'Estimar raíces cuadradas','m8A20':'Repaso: reglas de exponentes',
+    // B: Ecuaciones lineales
+    'm8B21':'Resolver ecuaciones de un paso: suma y resta','m8B22':'Resolver ecuaciones de un paso: multiplicación y división',
+    'm8B23':'Resolver ecuaciones de dos pasos','m8B24':'Resolver ecuaciones de varios pasos',
+    'm8B25':'Ecuaciones con variables en ambos lados','m8B26':'Propiedad distributiva en ecuaciones',
+    'm8B27':'Ecuaciones con fracciones','m8B28':'Ecuaciones sin solución o con infinitas soluciones',
+    'm8B29':'Escribir ecuaciones lineales a partir de palabras','m8B30':'Pendiente desde una gráfica',
+    'm8B31':'Pendiente entre dos puntos','m8B32':'Forma pendiente-intercepto',
+    'm8B33':'Graficar ecuaciones lineales','m8B34':'Forma punto-pendiente',
+    'm8B35':'Pendientes paralelas y perpendiculares','m8B36':'Sistemas de ecuaciones: introducción a la graficación',
+    'm8B37':'Sistemas de ecuaciones: sustitución','m8B38':'Sistemas de ecuaciones: eliminación',
+    'm8B39':'Sistemas: problemas de palabras','m8B40':'Ecuaciones lineales vs. no lineales',
+    // C: Funciones
+    'm8C41':'Funciones: definición','m8C42':'Notación de funciones',
+    'm8C43':'Identificar funciones en tablas','m8C44':'Identificar funciones en gráficas',
+    'm8C45':'Funciones lineales vs. no lineales','m8C46':'Tasa de cambio',
+    'm8C47':'Valor inicial','m8C48':'Comparar funciones',
+    'm8C49':'Escribir reglas de funciones','m8C50':'Tablas de entrada-salida',
+    'm8C51':'Graficar funciones','m8C52':'Transformaciones de funciones: desplazamientos',
+    'm8C53':'Gráficas cualitativas (creciente/decreciente)','m8C54':'Sucesiones aritméticas',
+    'm8C55':'Sucesiones geométricas','m8C56':'Funciones: problemas de palabras',
+    'm8C57':'Dominio y rango','m8C58':'Intervalos crecientes y decrecientes',
+    'm8C59':'Relaciones vs. funciones','m8C60':'Repaso: funciones',
+    // D: Geometría
+    'm8D61':'Teorema de Pitágoras','m8D62':'Recíproco del teorema de Pitágoras',
+    'm8D63':'Distancia con el teorema de Pitágoras','m8D64':'Teorema de Pitágoras en 3D: introducción',
+    'm8D65':'Volumen de cilindros','m8D66':'Volumen de conos',
+    'm8D67':'Volumen de esferas','m8D68':'Área superficial de cilindros',
+    'm8D69':'Transformaciones: traslaciones','m8D70':'Transformaciones: reflexiones',
+    'm8D71':'Transformaciones: rotaciones','m8D72':'Dilataciones',
+    'm8D73':'Congruencia','m8D74':'Semejanza',
+    'm8D75':'Relaciones angulares con rectas paralelas','m8D76':'Ángulos exteriores de triángulos',
+    'm8D77':'Suma de ángulos en polígonos','m8D78':'Geometría de coordenadas: distancia y área',
+    'm8D79':'Volumen compuesto','m8D80':'Repaso: geometría',
+    // E: Estadística y probabilidad
+    'm8E81':'Diagramas de dispersión','m8E82':'Recta de mejor ajuste',
+    'm8E83':'Interpretar diagramas de dispersión','m8E84':'Tablas de doble entrada',
+    'm8E85':'Frecuencia relativa','m8E86':'Probabilidad de eventos compuestos',
+    'm8E87':'Probabilidad CON reemplazo','m8E88':'Probabilidad SIN reemplazo',
+    'm8E89':'Eventos independientes y dependientes','m8E90':'Principio fundamental de conteo',
+    'm8E91':'Probabilidad teórica vs. experimental','m8E92':'Simulaciones de probabilidad',
+    'm8E93':'Datos bivariados','m8E94':'Correlación',
+    'm8E95':'Causalidad vs. correlación','m8E96':'Representaciones de datos',
+    'm8E97':'Datos categóricos','m8E98':'Datos cuantitativos',
+    'm8E99':'Media, mediana, moda y rango','m8E100':'Repaso: estadística'
+  };
+  const taglines = {
+    'm8A1':'¿Cuál número es mayor?','m8A2':'¿Se repite o no termina nunca?',
+    'm8A3':'¿Qué número al cuadrado da 16?','m8A4':'¿Qué número al cubo da 27?',
+    'm8A5':'¿A qué valor se aproxima √50?','m8A6':'¿Cuánto es 2³ × 2⁴?',
+    'm8A7':'¿Cuánto es 5⁶ ÷ 5²?','m8A8':'¿Cuánto es (2³)⁴?',
+    'm8A9':'¿Qué valor tiene 2⁻³?','m8A10':'¿Cuánto es 8⁰?',
+    'm8A11':'Escribe 4,500 en notación científica.','m8A12':'¿Cuánto es (2 × 10³) × (3 × 10²)?',
+    'm8A13':'¿Cuál es mayor: 5 × 10⁴ o 3 × 10⁵?','m8A14':'¿Cuánto es 6.2 × 10² en forma estándar?',
+    'm8A15':'¿Es 121 un cuadrado perfecto?','m8A16':'¿Cuánto es ∛216?',
+    'm8A17':'¿En qué conjunto está √16?','m8A18':'¿Dónde va √10 en la recta numérica?',
+    'm8A19':'Estima √75 al entero más cercano.','m8A20':'Simplifica: (2³ × 2²) ÷ 2⁴',
+    'm8B21':'Resuelve: x + 5 = 12','m8B22':'Resuelve: 3x = 21',
+    'm8B23':'Resuelve: 2x + 3 = 11','m8B24':'Resuelve: 2x + 5 - x = 9',
+    'm8B25':'Resuelve: 3x + 2 = x + 8','m8B26':'Resuelve: 2(x + 3) = 10',
+    'm8B27':'Resuelve: x/2 + 3 = 7','m8B28':'Resuelve: 2x + 3 = 2x + 5',
+    'm8B29':'Escribe la ecuación: un número más 5 igual a 12','m8B30':'Encuentra la pendiente con rise/run en la gráfica.',
+    'm8B31':'Encuentra la pendiente entre (1, 2) y (4, 8).','m8B32':'¿Cuál es la pendiente en y = 3x - 5?',
+    'm8B33':'Grafica: y = 2x + 1','m8B34':'Escribe la ecuación con punto (2, 5) y pendiente 3.',
+    'm8B35':'Si la pendiente es 2/3, ¿cuál es la pendiente de una paralela?','m8B36':'Resuelve graficando: y = x + 1 y y = -x + 3',
+    'm8B37':'Resuelve: y = 2x y 3x + y = 10','m8B38':'Resuelve: 2x + y = 5 y x - y = 1',
+    'm8B39':'Dos números suman 10; uno es 4 más que el otro.','m8B40':'¿Es y = x² + 1 lineal o no lineal?',
+    'm8C41':'¿Es y = 2x + 1 una función? ¿Por qué?','m8C42':'Si f(x) = 2x + 3, ¿cuánto es f(5)?',
+    'm8C43':'¿Es esto una función? x: 1,2,3  y: 4,5,6','m8C44':'Usa la prueba de la recta vertical.',
+    'm8C45':'¿Es f(x) = 3x - 2 lineal o no lineal?','m8C46':'Tasa de cambio de (0,2) a (3,8)',
+    'm8C47':'En f(x) = 3x + 5, ¿cuál es el valor inicial?','m8C48':'¿Cuál crece más rápido: y = 2x o y = 3x?',
+    'm8C49':'Comienza en 2, aumenta 5 en cada paso','m8C50':'Completa si f(x) = 2x + 1: f(3) y f(5)',
+    'm8C51':'Grafica f(x) = 2x - 1 con una tabla de valores','m8C52':'¿Cómo se compara y = f(x) + 3 con y = f(x)?',
+    'm8C53':'¿y = x³ es creciente o decreciente?','m8C54':'Siguiente término: 2, 5, 8, 11, ___',
+    'm8C55':'Siguiente término: 2, 6, 18, 54, ___','m8C56':'Un taxi cobra $3 más $2/milla.',
+    'm8C57':'Para f(x) = 2x donde x ≥ 0, ¿cuál es el dominio?','m8C58':'¿Dónde es creciente f(x) = x² - 4x?',
+    'm8C59':'¿Es {(1,2), (1,3), (2,4)} una función?','m8C60':'Evalúa: si f(x) = 3x - 2, calcula f(-1)',
+    'm8D61':'En un triángulo rectángulo con a=3 y b=4, encuentra c.','m8D62':'¿Son 5, 12, 13 una terna pitagórica?',
+    'm8D63':'Distancia entre (0,0) y (3,4).','m8D64':'Diagonal de una caja: largo 3, ancho 4, alto 2.',
+    'm8D65':'Cilindro de radio 3 y altura 5.','m8D66':'Cono de radio 3 y altura 10.',
+    'm8D67':'Esfera de radio 3.','m8D68':'Cilindro de radio 2 y altura 5.',
+    'm8D69':'Traslada el triángulo dos unidades a la derecha y una arriba.','m8D70':'Refleja (3, 2) sobre el eje y.',
+    'm8D71':'Rota (2, 0) 90° en sentido antihorario.','m8D72':'Dilata (4, 6) con factor de escala 1/2.',
+    'm8D73':'¿Son congruentes si todos sus lados coinciden (LLL)?','m8D74':'¿Son semejantes si sus ángulos son iguales?',
+    'm8D75':'Ángulos alternos internos entre rectas paralelas','m8D76':'Ángulo exterior = suma de los dos ángulos no adyacentes.',
+    'm8D77':'¿Cuánto suman los ángulos interiores de un pentágono?','m8D78':'Área del triángulo con vértices (0,0), (4,0), (0,3).',
+    'm8D79':'Prisma rectangular con un cono removido.','m8D80':'Catetos 6 y 8: encuentra la hipotenusa y el área.',
+    'm8E81':'Describe el patrón: (1,2), (2,4), (3,6).','m8E82':'Recta de mejor ajuste para (1,1), (2,3), (3,5), (4,7).',
+    'm8E83':'Horas de estudio vs. calificación en el examen.','m8E84':'Tabla: Auto/Sin auto, Universidad/Sin universidad.',
+    'm8E85':'40 estudiantes, 24 prefieren pizza.','m8E86':'¿Probabilidad de número par Y cara?',
+    'm8E87':'Sacas una carta, la repones y sacas otra.','m8E88':'Sacas una carta sin reponerla.',
+    'm8E89':'¿Sacar un 6 y obtener cara son independientes?','m8E90':'Números de 2 dígitos con 1, 2, 3 sin repetir.',
+    'm8E91':'P(cara)=0.5. Lanzas 100 veces, obtienes 45 caras.','m8E92':'Simula 100 lanzamientos de dado para estimar P(6).',
+    'm8E93':'Dos variables: edad y estatura.','m8E94':'¿Qué significa correlación positiva fuerte?',
+    'm8E95':'Helados y ahogamientos aumentan en verano.','m8E96':'¿Barras, circular o línea de tiempo?',
+    'm8E97':'Color favorito: rojo, azul, verde.','m8E98':'Estaturas (cm), edades (años), temperaturas.',
+    'm8E99':'Datos: 5, 8, 3, 8, 2. Calcula media, mediana, moda y rango.','m8E100':'Analiza el conjunto: 12, 15, 18, 15, 20.'
+  };
+  const stdByCat = {
+    A: { intro:'Domina las reglas de los exponentes, las raíces cuadradas y cúbicas, y la notación científica para trabajar con números muy grandes o muy pequeños.', keyPoints:['Para multiplicar potencias de la misma base, suma los exponentes','La raíz cuadrada de un cuadrado perfecto siempre es un entero','La notación científica usa una potencia de 10 para representar números extremos'], funFact:'¡La notación científica se usa en astronomía: la distancia de la Tierra al Sol es 1.5 × 10¹¹ metros!' },
+    B: { intro:'Resuelve ecuaciones de uno o varios pasos, grafica rectas, calcula pendientes y aplica sistemas de ecuaciones lineales a situaciones reales.', keyPoints:['La forma pendiente-intercepto es y = mx + b','En un sistema, la solución es el punto de intersección de las rectas','Las rectas paralelas tienen la misma pendiente pero diferente intercepto'], funFact:'¡Los ingenieros usan ecuaciones lineales para diseñar puentes, calcular velocidades y planificar rutas!' },
+    C: { intro:'Comprende qué es una función, usa la notación f(x), analiza tasas de cambio, sucesiones y transformaciones de gráficas.', keyPoints:['Una función asigna exactamente un valor de salida a cada valor de entrada','La tasa de cambio de una función lineal es constante','Las sucesiones aritméticas aumentan en una cantidad fija en cada paso'], funFact:'¡Las funciones son el lenguaje de la programación: cada función en código transforma una entrada en una salida!' },
+    D: { intro:'Aplica el teorema de Pitágoras, calcula volúmenes de cilindros, conos y esferas, y ejecuta transformaciones geométricas en el plano.', keyPoints:['En todo triángulo rectángulo: a² + b² = c²','Volumen de cilindro = π × r² × h','Las transformaciones rígidas conservan la forma y el tamaño de la figura'], funFact:'¡El teorema de Pitágoras se usa en arquitectura, navegación GPS y hasta en el diseño de las pantallas de tus dispositivos!' },
+    E: { intro:'Analiza diagramas de dispersión, interpreta correlaciones, distingue causalidad de correlación y calcula probabilidades de eventos compuestos.', keyPoints:['La correlación positiva significa que ambas variables aumentan juntas','La correlación NO implica causalidad','La probabilidad de eventos independientes es el producto de sus probabilidades individuales'], funFact:'¡Los equipos deportivos, los médicos y los meteorólogos usan estadística y probabilidad en su trabajo diario!' }
+  };
+  Object.keys(titles).forEach(function(id){
+    const catMatch = id.match(/[A-E]/);
+    const cat = catMatch ? catMatch[0] : 'A';
+    m[ns+id] = Object.assign({ title: titles[id], tagline: taglines[id] || '' }, stdByCat[cat]);
+  });
+})();
 // ── Grade 8 Financial Literacy ──
 GRADE_DATA_TRANSLATIONS_ES['financial-literacy.8'] = { description: 'Puntaje de crédito en profundidad, deuda buena vs. mala, préstamos de auto y conceptos avanzados de Padre Rico.' };
 CATEGORY_TRANSLATIONS_ES['financial-literacy.8.A'] = { name: 'Mentalidad financiera y emprendimiento' };
