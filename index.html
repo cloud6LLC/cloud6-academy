@@ -25922,6 +25922,139 @@ CATEGORY_TRANSLATIONS_ES['financial-literacy.10.E'] = { name: 'Negocios e Impues
   });
 })();
 
+// ── Grade 9 Math ──
+GRADE_DATA_TRANSLATIONS_ES['math.9'] = { description: 'Álgebra 1: ecuaciones lineales, funciones, sistemas de ecuaciones, polinomios y cuadráticas' };
+CATEGORY_TRANSLATIONS_ES['math.9.A'] = { name: 'Ecuaciones e Inecuaciones Lineales' };
+CATEGORY_TRANSLATIONS_ES['math.9.B'] = { name: 'Funciones y Graficación' };
+CATEGORY_TRANSLATIONS_ES['math.9.C'] = { name: 'Sistemas de Ecuaciones' };
+CATEGORY_TRANSLATIONS_ES['math.9.D'] = { name: 'Polinomios y Factorización' };
+CATEGORY_TRANSLATIONS_ES['math.9.E'] = { name: 'Cuadráticas y Radicales' };
+(function(){
+  const m = LESSON_TRANSLATIONS_ES;
+  const ns = 'math:';
+  const titles = {
+    // A: Ecuaciones e Inecuaciones Lineales
+    'm9A1':'Ecuaciones de un paso: suma y resta','m9A2':'Ecuaciones de un paso: multiplicación y división',
+    'm9A3':'Ecuaciones de dos pasos','m9A4':'Ecuaciones de varios pasos: combinando términos semejantes',
+    'm9A5':'Ecuaciones con variables en ambos lados','m9A6':'Ecuaciones con paréntesis: propiedad distributiva',
+    'm9A7':'Ecuaciones literales: despejar una variable','m9A8':'Resolver proporciones',
+    'm9A9':'Ecuaciones de valor absoluto','m9A10':'Desigualdades de un paso',
+    'm9A11':'Desigualdades de dos pasos','m9A12':'Desigualdades con multiplicadores negativos',
+    'm9A13':'Desigualdades compuestas: Y (intersección)','m9A14':'Desigualdades compuestas: O (unión)',
+    'm9A15':'Desigualdades de valor absoluto','m9A16':'Escribir ecuaciones a partir de problemas verbales',
+    'm9A17':'Problemas de enteros consecutivos','m9A18':'Problemas de distancia, velocidad y tiempo',
+    'm9A19':'Ecuaciones de porcentaje','m9A20':'Problemas verbales de edad',
+    // B: Funciones y Graficación
+    'm9B21':'Notación de funciones: evaluar f(x)','m9B22':'Dominio y rango de funciones',
+    'm9B23':'Identificar funciones: prueba de la línea vertical','m9B24':'Funciones lineales vs. no lineales',
+    'm9B25':'Pendiente a partir de dos puntos','m9B26':'Pendiente a partir de la ecuación (y = mx + b)',
+    'm9B27':'Forma pendiente-intercepto (y = mx + b)','m9B28':'Forma estándar (Ax + By = C)',
+    'm9B29':'Forma punto-pendiente (y − y₁ = m(x − x₁))','m9B30':'Graficar ecuaciones lineales',
+    'm9B31':'Graficar desigualdades lineales','m9B32':'Encontrar los interceptos en x e y',
+    'm9B33':'Líneas horizontales y verticales','m9B34':'Líneas paralelas (misma pendiente)',
+    'm9B35':'Líneas perpendiculares (pendientes recíprocas negativas)','m9B36':'Escribir la ecuación de una línea desde una gráfica',
+    'm9B37':'Escribir la ecuación de una línea con dos puntos','m9B38':'Funciones por partes (introducción)',
+    'm9B39':'Tasa de cambio promedio','m9B40':'Repaso de funciones: práctica mixta',
+    // C: Sistemas de Ecuaciones
+    'm9C41':'Resolver sistemas graficando','m9C42':'Resolver sistemas por sustitución',
+    'm9C43':'Resolver sistemas por eliminación (suma/resta)','m9C44':'Problemas verbales de sistemas',
+    'm9C45':'Sistemas sin solución (líneas paralelas)','m9C46':'Sistemas con infinitas soluciones (misma línea)',
+    'm9C47':'Sistemas de desigualdades lineales','m9C48':'Programación lineal (introducción)',
+    'm9C49':'Sistemas de tres variables (introducción)','m9C50':'Clasificar sistemas: consistente, inconsistente, dependiente',
+    'm9C51':'Escribir sistemas a partir de problemas verbales','m9C52':'Problemas de punto de equilibrio',
+    'm9C53':'Oferta y demanda','m9C54':'Sistemas de mezcla',
+    'm9C55':'Sistemas de monedas','m9C56':'Problemas de inversión',
+    'm9C57':'Problemas de velocidad y corriente (movimiento relativo)','m9C58':'Problemas de dígitos',
+    'm9C59':'Sistemas con fracciones','m9C60':'Repaso de sistemas: práctica mixta',
+    // D: Polinomios y Factorización
+    'm9D61':'Sumar polinomios','m9D62':'Restar polinomios',
+    'm9D63':'Multiplicar monomios','m9D64':'Multiplicar binomios (método FOIL)',
+    'm9D65':'Multiplicar polinomios (general)','m9D66':'Productos especiales: (a + b)² = a² + 2ab + b²',
+    'm9D67':'Productos especiales: (a − b)² = a² − 2ab + b²','m9D68':'Diferencia de cuadrados: (a + b)(a − b) = a² − b²',
+    'm9D69':'Factorización por MCD','m9D70':'Factorizar trinomios: x² + bx + c',
+    'm9D71':'Factorizar trinomios: ax² + bx + c (a ≠ 1)','m9D72':'Factorización por agrupación',
+    'm9D73':'Factorizar completamente','m9D74':'Factorizar diferencia de cuadrados',
+    'm9D75':'Factorizar trinomios cuadrados perfectos','m9D76':'Problemas verbales con polinomios',
+    'm9D77':'Grado de polinomios','m9D78':'Clasificar polinomios por número de términos',
+    'm9D79':'Dividir polinomios (división larga)','m9D80':'Repaso de polinomios: práctica mixta',
+    // E: Cuadráticas y Radicales
+    'm9E81':'Resolver ecuaciones cuadráticas factorizando','m9E82':'Propiedad del producto cero',
+    'm9E83':'Método de la raíz cuadrada (resolver x² = k)','m9E84':'Completar el cuadrado',
+    'm9E85':'Fórmula cuadrática','m9E86':'Discriminante (b² − 4ac)',
+    'm9E87':'Graficar parábolas (y = ax² + bx + c)','m9E88':'Forma vértice (y = a(x − h)² + k)',
+    'm9E89':'Eje de simetría (x = −b/(2a))','m9E90':'Encontrar el vértice desde la forma estándar',
+    'm9E91':'Simplificar radicales','m9E92':'Sumar y restar radicales',
+    'm9E93':'Multiplicar radicales','m9E94':'Dividir radicales',
+    'm9E95':'Racionalizar denominadores','m9E96':'Ecuaciones radicales (resolver √x = k)',
+    'm9E97':'Aplicaciones del teorema de Pitágoras (a² + b² = c²)','m9E98':'Crecimiento exponencial',
+    'm9E99':'Decaimiento exponencial','m9E100':'Repaso de cuadráticas: dominio completo'
+  };
+  const taglines = {
+    'm9A1':'Despeja la variable','m9A2':'Multiplica o divide para despejar',
+    'm9A3':'Deshaz las operaciones en orden inverso','m9A4':'Simplifica antes de resolver',
+    'm9A5':'Mueve las variables a un solo lado','m9A6':'Distribuye antes de resolver',
+    'm9A7':'Trata las otras variables como constantes','m9A8':'Multiplica en cruz y resuelve',
+    'm9A9':'El valor absoluto crea dos casos','m9A10':'Las desigualdades son como ecuaciones con una variante',
+    'm9A11':'Resuelve como ecuaciones, ¡pero cuida la dirección!','m9A12':'¡Cambia el signo al dividir por un número negativo!',
+    'm9A13':'Ambas condiciones deben cumplirse','m9A14':'Al menos una condición debe cumplirse',
+    'm9A15':'El valor absoluto crea condiciones Y u O','m9A16':'Traduce palabras al lenguaje algebraico',
+    'm9A17':'Los enteros consecutivos difieren en 1','m9A18':'Distancia = Velocidad × Tiempo (d = vt)',
+    'm9A19':'Porcentaje significa por cien','m9A20':'Plantea ecuaciones con relaciones de edad',
+    'm9B21':'f(x) es otra forma de escribir y','m9B22':'El dominio es la entrada, el rango es la salida',
+    'm9B23':'Cada entrada tiene exactamente una salida','m9B24':'Lineal = línea recta, no lineal = curva',
+    'm9B25':'Aumento sobre avance: m = (y₂ − y₁)/(x₂ − x₁)','m9B26':'El coeficiente de x es la pendiente',
+    'm9B27':'La forma más útil de una línea','m9B28':'Convierte entre forma estándar y pendiente-intercepto',
+    'm9B29':'Escribe ecuaciones con un punto y la pendiente','m9B30':'Grafica puntos y traza la línea',
+    'm9B31':'Grafica la línea y sombrea la región correcta','m9B32':'Pon y = 0 para el intercepto en x, x = 0 para el de y',
+    'm9B33':'Horizontal: y = constante, Vertical: x = constante','m9B34':'Las líneas paralelas nunca se cruzan',
+    'm9B35':'Las líneas perpendiculares se cruzan en 90°','m9B36':'Lee el intercepto en y y la pendiente desde la gráfica',
+    'm9B37':'Halla la pendiente y usa la forma punto-pendiente','m9B38':'Distintas reglas para distintos intervalos de entrada',
+    'm9B39':'Cambio en y dividido entre cambio en x','m9B40':'Domina funciones y graficación',
+    'm9C41':'Grafica ambas líneas y halla el punto de intersección','m9C42':'Despeja una variable y sustitúyela en la otra ecuación',
+    'm9C43':'Elimina una variable sumando o restando las ecuaciones','m9C44':'Convierte situaciones en sistemas de ecuaciones',
+    'm9C45':'Las líneas paralelas nunca se cruzan','m9C46':'La misma línea tiene infinitos puntos en común',
+    'm9C47':'Halla la región que satisface ambas desigualdades','m9C48':'Maximiza o minimiza dentro de una región factible',
+    'm9C49':'Tres ecuaciones, tres incógnitas','m9C50':'Identifica el tipo de sistema y su solución',
+    'm9C51':'Dos condiciones, dos ecuaciones','m9C52':'¿Cuándo los ingresos igualan a los costos?',
+    'm9C53':'El equilibrio es donde se cruzan oferta y demanda','m9C54':'Combina dos mezclas con diferentes concentraciones',
+    'm9C55':'Cuenta monedas con dos ecuaciones','m9C56':'Distribuye el dinero entre dos cuentas',
+    'm9C57':'A favor o en contra de la corriente','m9C58':'El valor posicional crea el sistema',
+    'm9C59':'Elimina las fracciones antes de resolver','m9C60':'Domina todos los métodos para sistemas',
+    'm9D61':'Combina términos semejantes','m9D62':'Distribuye el negativo, luego combina',
+    'm9D63':'Suma los exponentes al multiplicar potencias iguales','m9D64':'Primero, Exterior, Interior, Último',
+    'm9D65':'Multiplica cada término por cada término','m9D66':'El trinomio cuadrado perfecto positivo',
+    'm9D67':'El trinomio cuadrado perfecto negativo','m9D68':'Dos términos: uno positivo y uno negativo',
+    'm9D69':'Saca el factor común a todos los términos','m9D70':'Halla dos números que sumen b y multipliquen c',
+    'm9D71':'Usa el método AC o por ensayo y error','m9D72':'Agrupa los términos para sacar el factor común',
+    'm9D73':'Aplica todos los métodos hasta factorizar por completo','m9D74':'a² − b² = (a + b)(a − b)',
+    'm9D75':'a² + 2ab + b² = (a + b)²','m9D76':'El área y el perímetro modelan polinomios',
+    'm9D77':'El grado es el mayor exponente','m9D78':'Monomio, binomio, trinomio, polinomio',
+    'm9D79':'Similar a la división larga de números enteros','m9D80':'Domina operaciones y factorización',
+    'm9E81':'Factoriza y usa la propiedad del producto cero','m9E82':'Si ab = 0, entonces a = 0 o b = 0',
+    'm9E83':'Despeja con la raíz cuadrada','m9E84':'Convierte a la forma de cuadrado perfecto',
+    'm9E85':'x = (−b ± √(b² − 4ac)) / (2a)','m9E86':'Determina el número y tipo de soluciones',
+    'm9E87':'La parábola se abre hacia arriba o hacia abajo','m9E88':'El vértice está en el punto (h, k)',
+    'm9E89':'La parábola es simétrica alrededor del eje','m9E90':'Halla x = −b/(2a), luego sustituye para encontrar y',
+    'm9E91':'Saca los factores perfectos de la raíz','m9E92':'Combina radicales semejantes',
+    'm9E93':'√a × √b = √(ab)','m9E94':'√a ÷ √b = √(a/b)',
+    'm9E95':'Elimina la raíz del denominador','m9E96':'Eleva al cuadrado para eliminar la raíz',
+    'm9E97':'Calcula lados en triángulos rectángulos','m9E98':'La cantidad aumenta por un factor constante',
+    'm9E99':'La cantidad disminuye por un factor constante','m9E100':'Domina cuadráticas y radicales'
+  };
+  const stdByCat = {
+    A: { intro:'Resuelve ecuaciones de uno y dos pasos, ecuaciones con variables en ambos lados, desigualdades compuestas y problemas verbales algebraicos.', keyPoints:['Las operaciones inversas deshacen las operaciones matemáticas','Mantén ambos lados de la ecuación en equilibrio','En las desigualdades, cambia el signo al multiplicar o dividir por un número negativo'], funFact:'¡Los babilonios resolvían ecuaciones hace más de 4,000 años sin usar letras como variables!' },
+    B: { intro:'Estudia funciones, notación f(x), pendiente, formas de ecuaciones lineales y graficación en el plano coordenado.', keyPoints:['La pendiente mide el cambio en y por cada unidad de cambio en x','y = mx + b es la forma más útil para graficar','Las funciones tienen exactamente una salida por cada entrada'], funFact:'¡La pendiente de carreteras, techos y rampas se calcula con la misma fórmula que usas en clase!' },
+    C: { intro:'Resuelve sistemas de ecuaciones lineales por graficación, sustitución y eliminación, aplicados a problemas del mundo real.', keyPoints:['Graficación: el punto de intersección es la solución','Sustitución: reemplaza una variable por su expresión equivalente','Eliminación: suma o resta ecuaciones para cancelar una variable'], funFact:'¡La programación lineal, usada en logística y economía, se basa directamente en sistemas de desigualdades!' },
+    D: { intro:'Opera con polinomios: suma, resta, multiplicación y división, y aprende todas las técnicas de factorización.', keyPoints:['Solo se combinan términos semejantes (mismo exponente)','FOIL: Primero, Exterior, Interior, Último para binomios','Factorizar es la operación inversa de multiplicar polinomios'], funFact:'¡Los ingenieros y arquitectos usan polinomios para modelar curvas, puentes y estructuras!' },
+    E: { intro:'Resuelve ecuaciones cuadráticas por factorización, raíz cuadrada, completar el cuadrado y la fórmula cuadrática; grafica parábolas y simplifica radicales.', keyPoints:['La fórmula cuadrática funciona para toda ecuación ax² + bx + c = 0','El discriminante b² − 4ac determina el número y tipo de soluciones','Para simplificar radicales, extrae los factores con cuadrado perfecto'], funFact:'¡La trayectoria de un balón de fútbol americano sigue una parábola: las cuadráticas están en todos los deportes!' }
+  };
+  Object.keys(titles).forEach(function(id){
+    const catMatch = id.match(/[A-E]/);
+    const cat = catMatch ? catMatch[0] : 'A';
+    m[ns+id] = Object.assign({ title: titles[id], tagline: taglines[id] || '' }, stdByCat[cat]);
+  });
+})();
+
 // Apply all Phase 2 translations after every curriculum has loaded.
 try { applyLessonTranslationsES(); } catch(e){ console.warn('Lesson translation merge skipped:', e); }
 try { autoTranslateActivitiesES(); } catch(e){ console.warn('Auto activity translator skipped:', e); }
