@@ -23433,6 +23433,225 @@ Object.assign(LESSON_TRANSLATIONS_ES, {
     'Numérico','Los colores no son numéricos. Numérico sería "¿Cuántas horas...?". Esto es categórico.',
     'Ambos','Esta encuesta es solo categórica. Categórico = categorías descriptivas como los colores.');
 })();
+// ── Grade 7 Financial Literacy ──
+GRADE_DATA_TRANSLATIONS_ES['financial-literacy.7'] = { description: 'Cuentas de inversión, oferta y demanda, creación de valor y construcción de activos más profunda.' };
+CATEGORY_TRANSLATIONS_ES['financial-literacy.7.A'] = { name: 'Mentalidad financiera y emprendimiento' };
+CATEGORY_TRANSLATIONS_ES['financial-literacy.7.B'] = { name: 'Ingresos y fuentes de dinero' };
+CATEGORY_TRANSLATIONS_ES['financial-literacy.7.C'] = { name: 'Ahorrar e invertir' };
+CATEGORY_TRANSLATIONS_ES['financial-literacy.7.D'] = { name: 'Crédito, deuda e intereses' };
+CATEGORY_TRANSLATIONS_ES['financial-literacy.7.E'] = { name: 'Negocios e impuestos' };
+(function(){
+  var L = LESSON_TRANSLATIONS_ES;
+  function merge(k,d){ L[k]=Object.assign({},L[k]||{},d); }
+  merge('financial-literacy:7A1',{
+    title:'Oferta y demanda (el secreto de la riqueza)',
+    tagline:'Algo escaso y valioso = ganancia',
+    intro:'Cuando la oferta es baja y la demanda es alta, los precios SUBEN. ¡Así piensan los ricos sobre sus negocios y productos!',
+    keyPoints:['La demanda es cuántas personas quieren algo','La oferta es cuántas unidades hay disponibles','Alta demanda + baja oferta = PRECIO ALTO'],
+    funFact:'¡El auge de la inteligencia artificial creó una enorme demanda! Los ingenieros de IA, antes comunes, ahora son escasos y ganan más de $500,000 al año.',
+    activity:{
+      instructions:'¿Cómo se gana dinero?',
+      choices:[
+        {text:'Crear algo que la gente demande y hacerlo escaso'},
+        {text:'Hacer algo que todos ya tienen'},
+        {text:'Esperar que los precios suban al azar'}
+      ]
+    }
+  });
+  merge('financial-literacy:7A2',{
+    title:'Crear valor (no creas cosas, resuelves problemas)',
+    tagline:'Los mejores negocios resuelven grandes problemas',
+    intro:'Netflix resolvió el problema de conseguir películas. Uber resolvió conseguir transporte. Airbnb resolvió encontrar alojamiento. ¡Problema resuelto = dinero!',
+    keyPoints:['Encuentra un problema que tenga la gente','Resuélvelo mejor que los demás','Cobra dinero por la solución'],
+    funFact:'¡Mark Zuckerberg vio el problema de conectar a las personas. Facebook lo resolvió. ¡Ahora vale más de 100 mil millones de dólares!',
+    activity:{
+      instructions:'Relaciona el problema con la solución:',
+      dragOptionsStrings:['La gente quiere ver películas','La gente necesita transporte','La gente quiere aprender nuevas habilidades','La gente necesita comida rápidamente'],
+      dropTargetsStrings:['Netflix - películas en streaming','Uber - servicio de transporte','Skillshare - cursos en línea','DoorDash - entrega de alimentos']
+    }
+  });
+  merge('financial-literacy:7A3',{
+    title:'La ventaja 10x (sé 10 veces mejor, no 1% mejor)',
+    tagline:'¡No intentes competir por precio! ¡Sé 10 veces mejor!',
+    intro:'Si eres 1% mejor, a nadie le importa. ¿Pero 10 veces mejor? ¡Todo el mundo lo quiere! Así empiezan las empresas que valen miles de millones.',
+    keyPoints:['Ser ligeramente mejor no ayuda','Ser 10 veces mejor lo cambia todo','Enfócate en mejoras enormes, no en pequeñas'],
+    funFact:'¡Tesla no es solo 1% mejor que los autos de gasolina! ¡Es 10 veces mejor (más rápido, más económico a largo plazo, más limpio)!',
+    activity:{
+      instructions:'¿Cuál es la estrategia?',
+      choices:[
+        {text:'Ser 10 veces mejor en algo importante'},
+        {text:'Ser 1% mejor que los competidores'},
+        {text:'Copiar a los competidores'}
+      ]
+    }
+  });
+  merge('financial-literacy:7B1',{
+    title:'De la actividad paralela al negocio principal',
+    tagline:'Convierte tus ingresos complementarios en tu ingreso principal',
+    intro:'Empieza a tiempo parcial mientras estás en la escuela. Hazlo crecer. Con el tiempo, se convierte en tu ingreso principal. ¡Entonces tendrás libertad!',
+    keyPoints:['Las actividades paralelas pueden convertirse en el ingreso principal','Crece despacio, sin apresurarte','Una vez rentable, puedes dedicarte a ello a tiempo completo'],
+    funFact:'¡Muchos emprendedores empezaron actividades paralelas en la preparatoria que se convirtieron en empresas millonarias!',
+    activity:{
+      instructions:'Escenario de crecimiento de ingresos: Ganas $200/mes con una actividad paralela. Lo escalas 5 veces. ¡Ahora ganas $___/mes! Aún pequeño, pero ¡creciendo!',
+      choices:[
+        {text:'1000',explanation:''}
+      ]
+    }
+  });
+  merge('financial-literacy:7B2',{
+    title:'La regla 80/20 (trabaja menos, gana más)',
+    tagline:'El 80% de los resultados proviene del 20% del esfuerzo',
+    intro:'No pierdas tiempo en actividades de bajo rendimiento. Enfócate en el 20% que genera el 80% del dinero. ¡Esto se llama apalancamiento!',
+    keyPoints:['La mayoría del esfuerzo produce resultados pequeños','Pocas cosas producen resultados enormes','Enfócate en las actividades de alto apalancamiento'],
+    funFact:'¡Un vendedor puede obtener el 80% de sus ventas del 20% de sus clientes! ¡Enfócate en ese 20%!',
+    activity:{
+      instructions:'¿De qué trata la regla 80/20?',
+      choices:[
+        {text:'Enfocar tu esfuerzo en lo que produce el 80% de los resultados'},
+        {text:'Distribuir el esfuerzo por igual en todos lados'},
+        {text:'Trabajar más duro todo el tiempo'}
+      ]
+    }
+  });
+  merge('financial-literacy:7B3',{
+    title:'Mentalidad emprendedora (piensa como un director general a los 12 años)',
+    tagline:'Un director general piensa en sistemas, no en tareas',
+    intro:'Un director general pregunta: "¿Cómo automatizo esto?" "¿Cómo delego esto?" "¿Cómo escalo esto?" ¡Esta mentalidad crea millonarios!',
+    keyPoints:['Piensa en sistemas, no en tareas','Automatiza en lugar de hacer tú mismo','Delega en lugar de hacerlo todo tú','Esta es la mentalidad de los millonarios'],
+    funFact:'¡Elon Musk construyó Tesla y SpaceX pensando en sistemas y automatización!',
+    activity:{
+      instructions:'La mentalidad de director general significa:',
+      choices:[
+        {text:'Pensar en cómo construir sistemas, no en hacer las tareas tú mismo'},
+        {text:'Hacer todo el trabajo tú mismo'},
+        {text:'Nunca automatizar nada'}
+      ]
+    }
+  });
+  merge('financial-literacy:7C1',{
+    title:'Introducción a las cuentas de inversión',
+    tagline:'Distintas cuentas para distintos objetivos',
+    intro:'Una cuenta de ahorro es para el corto plazo. Una cuenta de corretaje es para invertir. Una Roth IRA es para la jubilación. ¡Cada una tiene un propósito!',
+    keyPoints:['Cuenta de ahorro: corto plazo, bajo interés','Cuenta de corretaje: inversión, mediano plazo','Roth IRA: jubilación, largo plazo'],
+    funFact:'¡Las personas adineradas usan distintas cuentas de manera estratégica para minimizar impuestos y maximizar el crecimiento!',
+    activity:{
+      instructions:'Relaciona la cuenta con su propósito:',
+      dragOptionsStrings:['Dinero para un auto el próximo año','Dinero para la jubilación a los 65 años','Dinero para intentar superar al mercado'],
+      dropTargetsStrings:['Cuenta de ahorro - disponible','Roth IRA - crecimiento libre de impuestos','Cuenta de corretaje - flexibilidad']
+    }
+  });
+  merge('financial-literacy:7C2',{
+    title:'Promedio del costo en dólares (invierte de manera regular, no en suma global)',
+    tagline:'Invierte la misma cantidad regularmente, no todo de una vez',
+    intro:'Invierte $100 cada mes en lugar de $12,000 de una sola vez. Compras más acciones cuando los precios son bajos y menos cuando son altos. ¡Matemáticamente óptimo!',
+    keyPoints:['Las inversiones regulares = rendimientos más estables','Evitas intentar predecir el mercado','Matemáticamente, esto es lo óptimo'],
+    funFact:'¡Invertir $100 al mes promedia rendimientos mucho mejores que intentar predecir el momento ideal del mercado!',
+    activity:{
+      instructions:'¿Cuál es mejor?',
+      choices:[
+        {text:'Invertir $1,200 cada mes durante un año'},
+        {text:'Invertir $14,400 de una sola vez'},
+        {text:'Ambas son iguales'}
+      ]
+    }
+  });
+  merge('financial-literacy:7C3',{
+    title:'Inversión en dividendos (ganar dinero con dividendos)',
+    tagline:'Algunas acciones te pagan solo por tenerlas',
+    intro:'Las empresas obtienen ganancias. Comparten las ganancias con los accionistas como dividendos. ¡Ten acciones con altos dividendos y obtén ingresos pasivos!',
+    keyPoints:['Los dividendos son las ganancias de la empresa compartidas con los propietarios','Ganas dinero por tener las acciones','Acciones con dividendos = ingresos pasivos'],
+    funFact:'¡Una inversión de $100,000 en acciones con dividendos que pagan 4% = $4,000 de ingresos pasivos al año!',
+    activity:{
+      instructions:'Ingresos por dividendos: Tienes $10,000 en acciones con dividendos que pagan 5% anual. Tus ingresos por dividendos = $10,000 × 0.05 = $___',
+      choices:[
+        {text:'500',explanation:''}
+      ]
+    }
+  });
+  merge('financial-literacy:7D1',{
+    title:'Construir tu historial crediticio desde joven',
+    tagline:'Empieza a construir crédito a los 13 o 14 años con una tarjeta asegurada',
+    intro:'Obtén una tarjeta de crédito asegurada (respaldada por ahorros). Págala mensualmente. A los 25 años tendrás crédito perfecto. ¡El crédito perfecto te ahorra $200,000!',
+    keyPoints:['Tarjeta de crédito asegurada = respaldada por un depósito','Págala mensualmente','Construye el crédito gradualmente desde joven'],
+    funFact:'¡El crédito perfecto vs. el crédito malo puede costar más de $200,000 a lo largo de una vida!',
+    activity:{
+      instructions:'¿La mejor manera de construir crédito desde joven?',
+      choices:[
+        {text:'Usa una tarjeta asegurada y págala mensualmente'},
+        {text:'Obtén una tarjeta de crédito regular'},
+        {text:'Espera hasta la universidad'}
+      ]
+    }
+  });
+  merge('financial-literacy:7D2',{
+    title:'El cálculo de la espiral de deuda',
+    tagline:'Observa cómo la deuda crece con el interés compuesto',
+    intro:'La mayoría no se da cuenta: la deuda impaga crece como el interés compuesto en sentido inverso. ¡Se multiplica en tu contra!',
+    keyPoints:['La deuda impagada crece exponencialmente','El interés compuesto actúa en tu contra','Los pagos mínimos apenas cubren los intereses'],
+    funFact:'¡A las empresas de tarjetas de crédito les encantan quienes pagan el mínimo porque la deuda nunca termina!',
+    activity:{
+      instructions:'¡La trampa de la tarjeta de crédito! $5,000 al 20% de interés, con pagos mínimos de $100/mes. ¡Al 20% de interés, pagarías más de $_____ en intereses totales y tardarías alrededor de _____ meses en saldar la deuda!'
+    }
+  });
+  merge('financial-literacy:7D3',{
+    title:'Por qué pagar las deudas es la inversión de mayor rendimiento',
+    tagline:'Pagar una deuda al 20% de interés = rendimiento garantizado del 20%',
+    intro:'Si la deuda cobra un 20% de interés, pagarla es un rendimiento garantizado del 20%. ¡Mejor que CUALQUIER acción!',
+    keyPoints:['Pagar deuda = rendimiento garantizado','Deuda al 20% = rendimiento garantizado del 20%','Esto es mejor que las inversiones riesgosas'],
+    funFact:'¡El movimiento financiero más inteligente con deuda es pagarla todo de inmediato!',
+    activity:{
+      instructions:'¿Es bueno pagar una deuda al 20% de interés?',
+      choices:[
+        {text:'SÍ — rendimiento garantizado del 20% sobre tu dinero'},
+        {text:'No — las acciones dan mejores rendimientos'},
+        {text:'No importa'}
+      ]
+    }
+  });
+  merge('financial-literacy:7E1',{
+    title:'Introducción a la formación de una LLC',
+    tagline:'Una LLC cuesta entre $50 y $500 para formarse. ¡Te protege legalmente y ahorra impuestos!',
+    intro:'Una LLC es la estructura de negocio perfecta para adolescentes. Separa tus cosas personales de las del negocio. ¡Protección legal + beneficios fiscales!',
+    keyPoints:['Una LLC cuesta entre $50 y $500 según el estado','Separa la responsabilidad personal de la del negocio','Deducciones fiscales disponibles','Fácil de constituir'],
+    funFact:'¡Muchos emprendedores adolescentes exitosos forman LLCs para proteger sus activos y reducir impuestos!',
+    activity:{
+      instructions:'¿Beneficios de una LLC?',
+      choices:[
+        {text:'Protección legal, deducciones fiscales, separación de activos'},
+        {text:'Solo legal, sin beneficios fiscales'},
+        {text:'Complicada y cara'}
+      ]
+    }
+  });
+  merge('financial-literacy:7E2',{
+    title:'Gastos de negocio que reducen los impuestos',
+    tagline:'Cada dólar que gastas en el negocio = un dólar menos que pagas de impuestos',
+    intro:'¿Una computadora portátil para tu negocio? Deducible. ¿Un teléfono para tu negocio? Deducible. ¿Internet? ¡Deducible!',
+    keyPoints:['Los suministros de negocio son deducibles','El equipo es deducible','Un porcentaje del hogar y los servicios es deducible','Cada uno te ahorra dinero en impuestos'],
+    funFact:'¡Un dueño de negocio que deduce $10,000 en gastos ahorra $2,500 en impuestos (con una tasa del 25%)!',
+    activity:{
+      instructions:'¿Qué puedes deducir?',
+      dragOptionsStrings:['Computadora para tu negocio independiente','Dulces para ti mismo','Teléfono para llamadas de negocio','Internet personal'],
+      dropTargetsStrings:['SÍ — equipo de negocio','NO — consumo personal','SÍ — herramienta de negocio','PARCIAL — si se usa para el negocio']
+    }
+  });
+  merge('financial-literacy:7E3',{
+    title:'Construcción de riqueza con ventajas fiscales',
+    tagline:'Usa las leyes fiscales para conservar legalmente más dinero',
+    intro:'Las personas ricas usan las leyes fiscales para conservar legalmente más dinero. ¡Esto no es hacer trampa — es inteligencia financiera!',
+    keyPoints:['Las deducciones reducen los ingresos gravables','Las estrategias fiscales son legales','Las personas adineradas las usan','La ignorancia te cuesta dinero'],
+    funFact:'¡Un dueño de negocio que usa deducciones puede ahorrar más de $50,000 al año en impuestos!',
+    activity:{
+      instructions:'¿Usar deducciones fiscales es hacer trampa?',
+      choices:[
+        {text:'NO — es legal e inteligente'},
+        {text:'SÍ — siempre es hacer trampa'},
+        {text:'Tal vez, no está claro'}
+      ]
+    }
+  });
+})();
+
 // ── Grade 7 App Building ──
 GRADE_DATA_TRANSLATIONS_ES['app-building.7'] = { description: 'Domina los prompts de IA, la navegación multi-pantalla y las metodologías de prueba con usuarios.' };
 CATEGORY_TRANSLATIONS_ES['app-building.7.A'] = { name: 'Lluvia de ideas e ideación' };
