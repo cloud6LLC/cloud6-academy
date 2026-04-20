@@ -512,8 +512,14 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 
 <!-- TOP NAVIGATION BAR -->
 <div class="top-nav" style="background:#fff;border-bottom:2px solid #e8f5f0;display:flex;align-items:center;padding:0 20px;height:56px;gap:8px;box-shadow:0 2px 8px rgba(0,184,148,0.08)">
-  <!-- Logo -->
-  <div style="font-size:20px;font-weight:800;color:#00b894;cursor:pointer;white-space:nowrap;margin-right:8px" onclick="showHome()">Cloud6 <span style="font-weight:400;color:#2d3436">Academy</span></div>
+  <!-- Logo + Language Toggle side-by-side -->
+  <div style="display:flex;align-items:center;gap:10px;flex-shrink:0;margin-right:4px">
+    <div style="font-size:20px;font-weight:800;color:#00b894;cursor:pointer;white-space:nowrap" onclick="showHome()">Cloud6 <span style="font-weight:400;color:#2d3436">Academy</span></div>
+    <div id="langToggle" class="lang-toggle" role="group" aria-label="Language / Idioma" title="Switch language / Cambiar idioma">
+      <span id="langOptEn" class="lang-opt active" onclick="setLanguage('en')" title="Switch to English">🇺🇸 EN</span>
+      <span id="langOptEs" class="lang-opt" onclick="setLanguage('es')" title="Cambiar a Español">🇲🇽 ES</span>
+    </div>
+  </div>
 
   <!-- Nav Tabs - spread across full width -->
   <nav style="display:flex;align-items:center;justify-content:space-between;flex:1;padding:0 16px">
@@ -537,13 +543,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
     <div class="nav-tab" id="nav-teacher" onclick="showTeacherDashboard()" style="padding:6px 12px;border-radius:8px;cursor:pointer;font-weight:600;font-size:13px;color:#636e72;background:transparent;white-space:nowrap;transition:all 0.2s;display:none" data-i18n="ui.navTeacher">👩‍🏫 Teacher</div>
   </nav>
 
-  <!-- Right side: Search + Lang + XP + Actions -->
+  <!-- Right side: Search + Login -->
   <div style="display:flex;align-items:center;gap:8px;flex-shrink:0">
     <input type="text" data-i18n-ph="ui.searchPlaceholder" placeholder="Search..." style="padding:6px 12px;border:1.5px solid #e0e0e0;border-radius:20px;font-size:12px;width:130px;outline:none;transition:border-color 0.2s" onfocus="this.style.borderColor='#00b894'" onblur="this.style.borderColor='#e0e0e0'">
-    <div id="langToggle" class="lang-toggle" role="group" aria-label="Language / Idioma" title="Switch language / Cambiar idioma">
-      <span id="langOptEn" class="lang-opt active" onclick="setLanguage('en')" title="Switch to English">🇺🇸 English</span>
-      <span id="langOptEs" class="lang-opt" onclick="setLanguage('es')" title="Cambiar a Español">🇲🇽 Español</span>
-    </div>
     <div id="userAvatar" onclick="showAuthScreen()" style="padding:7px 18px;border-radius:20px;background:linear-gradient(135deg,#00b894,#0984e3);color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;font-weight:700;font-size:13px;white-space:nowrap;box-shadow:0 2px 8px rgba(0,184,148,0.3)" data-i18n-title="ui.logInTitle" title="Log In"><span data-i18n="ui.logIn">🔐 Log In</span></div>
   </div>
 </div>
