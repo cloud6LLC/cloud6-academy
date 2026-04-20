@@ -25592,6 +25592,23 @@ CATEGORY_TRANSLATIONS_ES['app-building.7.F'] = { name: 'Construye tu app' };
 try { applyLessonTranslationsES(); } catch(e){ console.warn('Lesson translation merge skipped:', e); }
 try { autoTranslateActivitiesES(); } catch(e){ console.warn('Auto activity translator skipped:', e); }
 
+// Post-processing: math lessons grades 4-12 — fall back to tagline_es as activity instruction hint
+(function(){
+  if(typeof MATH_CURRICULUM === 'undefined') return;
+  for(var g = 4; g <= 12; g++){
+    var gd = MATH_CURRICULUM[g];
+    if(!gd || !gd.categories) continue;
+    Object.keys(gd.categories).forEach(function(catKey){
+      var cat = gd.categories[catKey];
+      (cat.lessons||[]).forEach(function(lesson){
+        if(lesson.activity && !lesson.activity.instructions_es && lesson.tagline_es){
+          lesson.activity.instructions_es = lesson.tagline_es;
+        }
+      });
+    });
+  }
+})();
+
 function getSubjectData(subject, grade){
   // For App Building grades 6-12, always show Ship Real Apps curriculum
   if(subject === 'app-building' && (grade >= 6 || grade === '6' || grade === '7' || grade === '8' || grade === '9' || grade === '10' || grade === '11' || grade === '12' || [7,8,9,10,11,12].indexOf(grade) > -1)){
