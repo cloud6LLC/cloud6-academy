@@ -23433,6 +23433,173 @@ Object.assign(LESSON_TRANSLATIONS_ES, {
     'Numérico','Los colores no son numéricos. Numérico sería "¿Cuántas horas...?". Esto es categórico.',
     'Ambos','Esta encuesta es solo categórica. Categórico = categorías descriptivas como los colores.');
 })();
+// ── Grade 8 Financial Literacy ──
+GRADE_DATA_TRANSLATIONS_ES['financial-literacy.8'] = { description: 'Puntaje de crédito en profundidad, deuda buena vs. mala, préstamos de auto y conceptos avanzados de Padre Rico.' };
+CATEGORY_TRANSLATIONS_ES['financial-literacy.8.A'] = { name: 'Mentalidad financiera y emprendimiento' };
+CATEGORY_TRANSLATIONS_ES['financial-literacy.8.B'] = { name: 'Ingresos y fuentes de dinero' };
+CATEGORY_TRANSLATIONS_ES['financial-literacy.8.C'] = { name: 'Ahorrar e invertir' };
+CATEGORY_TRANSLATIONS_ES['financial-literacy.8.D'] = { name: 'Crédito, deuda e intereses' };
+CATEGORY_TRANSLATIONS_ES['financial-literacy.8.E'] = { name: 'Negocios e impuestos' };
+(function(){
+  var L = LESSON_TRANSLATIONS_ES;
+  function merge(k,d){ L[k]=Object.assign({},L[k]||{},d); }
+  merge('financial-literacy:8A1',{
+    title:'La trampa del empleo (por qué los trabajos son buenos, pero no el mayor objetivo)',
+    tagline:'Un trabajo es el camino más lento hacia la riqueza. Es el plan B, no el plan A.',
+    intro:'Los trabajos pagan de manera lineal (más tiempo = más dinero). Los negocios pagan de manera exponencial (construyes una vez, las ganancias crecen para siempre). ¡Elige lo exponencial!',
+    keyPoints:['Trabajo: crecimiento de ingresos lineal (1 año = pequeño aumento)','Negocios: crecimiento de ingresos exponencial (se multiplica solo)','Los trabajos son redes de seguridad, no constructores de riqueza'],
+    funFact:'Del libro Padre Rico, Padre Pobre: consigue un trabajo para pagar las cuentas, ¡pero construye un negocio para construir riqueza!',
+    activity:{ instructions:'¿Cuál es el camino para construir riqueza?', choices:[
+      {text:'Construir un negocio y usar trabajos para financiarlo al principio'},
+      {text:'Conseguir un trabajo y quedarse en él'},
+      {text:'Solo enriquecerse lentamente'}
+    ]}
+  });
+  merge('financial-literacy:8A2',{
+    title:'Apalancamiento (usa el dinero, el tiempo y los recursos de otros)',
+    tagline:'No tienes que hacerlo todo solo. ¡Usa el dinero, el tiempo y los empleados de otros!',
+    intro:'El apalancamiento multiplica tu poder. Un negocio con 10 empleados gana 10 veces más dinero. ¡Eso es apalancamiento!',
+    keyPoints:['Apalancamiento de dinero: pedir prestado para invertir','Apalancamiento de tiempo: contratar personas','Apalancamiento de tecnología: usar sistemas'],
+    funFact:'Mark Cuban dice: "El apalancamiento es el secreto de la riqueza de los multimillonarios."',
+    activity:{ instructions:'Tipos de apalancamiento:', dragOptionsStrings:['Pedir $50 000 prestados para iniciar un negocio','Contratar personas para que trabajen para ti','Crear software que se escale'], dropTargetsStrings:['Apalancamiento de dinero','Apalancamiento de tiempo','Apalancamiento tecnológico / de escala'] }
+  });
+  merge('financial-literacy:8A3',{
+    title:'Gratificación diferida (por qué los ricos dicen que no)',
+    tagline:'Gasta menos de lo que ganas e invierte la diferencia',
+    intro:'Una persona rica dice "no" a los deseos y los invierte. Una persona pobre dice "sí" a los deseos. ¡Este único hábito crea millonarios!',
+    keyPoints:['Gratificación diferida = ahorrar e invertir','Es el predictor número 1 de la riqueza','Separa a los ricos de los pobres'],
+    funFact:'Un estudio descubrió que los niños que retrasan la gratificación se convierten en millonarios. ¡Los que no lo hacen terminan con dificultades económicas!',
+    activity:{ instructions:'¿Qué significa la gratificación diferida?', choices:[
+      {text:'Renunciar a los deseos ahora para invertir y crear riqueza futura'},
+      {text:'Comprar todo lo que deseas'},
+      {text:'Nunca divertirse'}
+    ]}
+  });
+  merge('financial-literacy:8B1',{
+    title:'Trabajo independiente y negocios de servicios',
+    tagline:'Vende tus habilidades directamente a los clientes',
+    intro:'Trabajo independiente = recibe pago por tus habilidades sin un jefe. Escritura, programación, diseño, tutoría. ¡Tú controlas las tarifas y los horarios!',
+    keyPoints:['Trabajo independiente = tú eres el producto','Tarifas más altas que los trabajos de medio tiempo','Tú controlas tu horario','Con el tiempo, contrata a otros para escalar'],
+    funFact:'¡Un adolescente programador independiente puede ganar entre $50 y $100 por hora!',
+    activity:{ instructions:'Oportunidades de trabajo independiente para adolescentes:', dragOptionsStrings:['Bueno para escribir','Bueno en arte y diseño','Bueno dando clases','Bueno en tecnología'], dropTargetsStrings:['Escritura independiente, blogs','Diseño, encargos artísticos','Tutoría, cursos en línea','Soporte técnico, proyectos de programación'] }
+  });
+  merge('financial-literacy:8B2',{
+    title:'Productos digitales (crear una vez, vender para siempre)',
+    tagline:'Crea un producto que se venda mientras duermes',
+    intro:'Escribe un e-book, crea un curso, haz plantillas. Construye una vez, vende miles de veces. ¡Así es como los creadores ganan millones!',
+    keyPoints:['Los productos digitales escalan infinitamente','No se necesita inventario','Ganancia pura (sin costos por venta)'],
+    funFact:'¡Un curso en línea popular puede generar más de $100 000 al año con un esfuerzo mínimo continuo!',
+    activity:{ instructions:'¿El mejor producto digital para generar riqueza?', choices:[
+      {text:'Curso en línea sobre una habilidad que la gente desea'},
+      {text:'E-book corto'},
+      {text:'Contenido gratuito'}
+    ]}
+  });
+  merge('financial-literacy:8B3',{
+    title:'Construye tu marca personal',
+    tagline:'Tu reputación es un activo. Constrúyela de manera intencional.',
+    intro:'Sé conocido por algo valioso. En las redes sociales, en tu escuela, en tu comunidad. ¡Tu marca = tus ingresos!',
+    keyPoints:['Tu marca es tu reputación','Las marcas personales son valiosas','Constrúyela de manera consistente con el tiempo'],
+    funFact:'¡Kylie Jenner convirtió su marca personal en una empresa de $900 millones!',
+    activity:{ instructions:'¿Qué es una marca personal?', choices:[
+      {text:'Tu reputación y aquello por lo que te conocen'},
+      {text:'Seguidores en redes sociales'},
+      {text:'Cuántas personas conocen tu nombre'}
+    ]}
+  });
+  merge('financial-literacy:8C1',{
+    title:'Las caídas del mercado de valores son oportunidades de compra',
+    tagline:'Cuando los precios bajan, los inversores inteligentes compran MÁS',
+    intro:'Las caídas del mercado asustan a las personas. Los multimillonarios compran. ¡Precios más bajos = punto de entrada más barato!',
+    keyPoints:['Las caídas del mercado son normales','Las personas asustadas venden (malo)','Las personas inteligentes compran (bueno)'],
+    funFact:'¡Warren Buffett ganó miles de millones comprando durante las caídas del mercado!',
+    activity:{ instructions:'¿Cuál es el mejor momento para invertir?', choices:[
+      {text:'Durante una caída cuando los precios son bajos'},
+      {text:'Cuando los precios están altos'},
+      {text:'Solo cuando se siente seguro'}
+    ]}
+  });
+  merge('financial-literacy:8C2',{
+    title:'Ratios de gastos (por qué los fondos indexados de bajo costo ganan)',
+    tagline:'Las comisiones altas destruyen los rendimientos de inversión con el tiempo',
+    intro:'¡Un fondo que cobra el 1 % anual en lugar del 0,1 % te cuesta más de $150 000 al jubilarte!',
+    keyPoints:['Ratio de gastos = comisión anual','Las comisiones altas destruyen los rendimientos','Los fondos indexados tienen las comisiones más bajas'],
+    funFact:'¡Una diferencia de comisión del 0,5 % equivale a $250 000 menos en tu jubilación!',
+    activity:{ instructions:'Impacto del ratio de gastos: Inviertes $100 000. El Fondo A cobra una comisión del 0,1 % anual ($100). El Fondo B cobra una comisión del 1,0 % anual ($___). ¡Cada año, B te cuesta $900 más!' }
+  });
+  merge('financial-literacy:8C3',{
+    title:'Reequilibrar tu cartera',
+    tagline:'Mantén tus inversiones en la proporción correcta',
+    intro:'Tienes el 60 % en acciones y el 40 % en bonos. Las acciones suben. Ahora tienes el 70 % en acciones y el 30 % en bonos. Reequilibra a 60/40. ¡Esto es comprar barato de manera forzada!',
+    keyPoints:['El reequilibrio te mantiene disciplinado','Te obliga a comprar cuando los precios son bajos','Mantiene el nivel de riesgo adecuado'],
+    funFact:'¡El reequilibrio es el arma secreta que la mayoría de las personas no conoce!',
+    activity:{ instructions:'¿Por qué reequilibrar?', choices:[
+      {text:'Para mantener tu asignación objetivo y obligarte a comprar barato'},
+      {text:'Para comprar caro'},
+      {text:'No importa'}
+    ]}
+  });
+  merge('financial-literacy:8D1',{
+    title:'Cómo se calcula el puntaje de crédito',
+    tagline:'Historial de pagos (35 %), montos adeudados (30 %), antigüedad (15 %), nuevo crédito (10 %), tipos (10 %)',
+    intro:'Comprender qué constituye tu puntaje te ayuda a gestionarlo de manera estratégica.',
+    keyPoints:['Historial de pagos: el factor más importante','Montos adeudados: el segundo más importante','Paga a tiempo y mantén saldos bajos'],
+    funFact:'¡Un puntaje de crédito perfecto (850) puede ahorrarte más de $300 000 a lo largo de tu vida!',
+    activity:{ instructions:'Factores del puntaje de crédito:', dragOptionsStrings:['Pagar la tarjeta de crédito a tiempo','Cargar saldo en la tarjeta de crédito','Cerrar una tarjeta de crédito antigua','Pagar a tiempo el préstamo estudiantil'], dropTargetsStrings:['BUENO - historial de pagos','MALO - baja el puntaje','MALO - acorta el historial','BUENO - historial de pagos'] }
+  });
+  merge('financial-literacy:8D2',{
+    title:'Préstamos de auto: la peor deuda para la mayoría',
+    tagline:'Los autos pierden valor mientras los pagas',
+    intro:'Pides prestados $25 000 para un auto. Pagas por 5 años. El auto vale $10 000. ¡Estás en números rojos!',
+    keyPoints:['Los autos se deprecian (pierden valor)','A menudo debes más de lo que vale','Esta es una deuda mala','Mejor: compra autos usados con efectivo'],
+    funFact:'¡El préstamo promedio de auto cuesta más de $10 000 en intereses por un activo que se deprecia!',
+    activity:{ instructions:'¿La mejor estrategia para el auto?', choices:[
+      {text:'Ahorrar y comprar un auto usado con efectivo'},
+      {text:'Pedir un gran préstamo para un auto nuevo'},
+      {text:'Arrendar (pagar para siempre, nunca ser dueño)'}
+    ]}
+  });
+  merge('financial-literacy:8D3',{
+    title:'Hipotecas: deuda buena (generalmente)',
+    tagline:'Pedir prestado para bienes raíces suele ser buena deuda si se usa bien',
+    intro:'Una casa se aprecia (aumenta de valor). Las tasas hipotecarias son bajas. El alquiler sube de todos modos. ¡Mejor ser dueño!',
+    keyPoints:['Las casas se aprecian con el tiempo','Las tasas hipotecarias son históricamente bajas','Construir capital = construir riqueza'],
+    funFact:'¡Una casa de $300 000 comprada en 2010 vale más de $450 000 en 2024. ¡La hipoteca es una gran deuda!',
+    activity:{ instructions:'¿Es una hipoteca deuda buena?', choices:[
+      {text:'SÍ - para una residencia principal donde se construye capital'},
+      {text:'NO - siempre evita pedir prestado'},
+      {text:'Tal vez - no está claro'}
+    ]}
+  });
+  merge('financial-literacy:8E1',{
+    title:'1099 vs. W2 (empleado vs. contratista independiente)',
+    tagline:'W2: el empleador paga la mitad de los impuestos. 1099: tú pagas todos los impuestos (pero obtienes más deducciones)',
+    intro:'El W2 es estable pero con impuestos predecibles. El 1099 tiene más deducciones pero requiere disciplina.',
+    keyPoints:['W2: empleado (impuestos retenidos)','1099: contratista (tú gestionas los impuestos)','El 1099 tiene más deducciones'],
+    funFact:'¡Un trabajador independiente con 1099 que gana $50 000 podría pagar impuestos solo sobre $30 000 después de las deducciones!',
+    activity:{ instructions:'W2 vs. 1099:', dragOptionsStrings:['Sueldo consistente','Gestionar los impuestos propios','El empleador retiene los impuestos','Muchas deducciones disponibles'], dropTargetsStrings:['W2','1099','W2','1099'] }
+  });
+  merge('financial-literacy:8E2',{
+    title:'Comparación de estructuras empresariales (análisis profundo)',
+    tagline:'Empresa unipersonal: simple, sin protección. LLC: protección + deducciones. S-Corp: mejor para impuestos (si los ingresos son altos)',
+    intro:'Elige la estructura según el nivel de ingresos y la complejidad del negocio.',
+    keyPoints:['Negocio individual: empresa unipersonal está bien','$50 000 - $200 000: la LLC es la mejor opción','Más de $200 000: la S-Corp ahorra impuestos'],
+    funFact:'¡Una S-Corp rentable puede ahorrar más de $10 000 al año en impuestos de trabajo por cuenta propia!',
+    activity:{ instructions:'¿Qué estructura elegir para un negocio de $100 000?', choices:[
+      {text:'LLC por protección legal y deducciones'},
+      {text:'Empresa unipersonal (demasiado riesgo)'},
+      {text:'S-Corp (excesivo para este nivel de ingresos)'}
+    ]}
+  });
+  merge('financial-literacy:8E3',{
+    title:'Impuestos trimestrales (la trampa que la mayoría pasa por alto)',
+    tagline:'¿Trabaja por cuenta propia? Paga impuestos trimestralmente o enfrenta multas',
+    intro:'Si tienes un 1099, aparta el 30 % de tus ganancias para impuestos. Paga de forma trimestral. ¡No te sorprendas con una factura enorme!',
+    keyPoints:['Los trabajadores independientes deben pagar trimestralmente','Guarda el 30 % de las ganancias para impuestos','Los pagos trimestrales evitan multas'],
+    funFact:'¡Olvidar los impuestos trimestrales puede resultar en multas de más de $5 000!',
+    activity:{ instructions:'Impuestos trimestrales: Ganas $2 000 al mes. Guarda el 30 % = $___ al mes para impuestos. Por trimestre: $___' }
+  });
+})();
 // ── Grade 8 App Building ──
 GRADE_DATA_TRANSLATIONS_ES['app-building.8'] = { description: 'Pensamiento MVP, análisis de la competencia, analítica de apps y modelos de negocio reales.' };
 CATEGORY_TRANSLATIONS_ES['app-building.8.A'] = { name: 'Lluvia de ideas e ideación' };
