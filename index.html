@@ -23433,6 +23433,196 @@ Object.assign(LESSON_TRANSLATIONS_ES, {
     'Numérico','Los colores no son numéricos. Numérico sería "¿Cuántas horas...?". Esto es categórico.',
     'Ambos','Esta encuesta es solo categórica. Categórico = categorías descriptivas como los colores.');
 })();
+// ── Grade 7 English ──
+GRADE_DATA_TRANSLATIONS_ES['english.7'] = { description: 'Profundidad literaria, habilidades de investigación y expresión oral avanzada para estudiantes de 7.° grado.' };
+CATEGORY_TRANSLATIONS_ES['english.7.A'] = { name: 'Lectura' };
+CATEGORY_TRANSLATIONS_ES['english.7.B'] = { name: 'Escritura' };
+CATEGORY_TRANSLATIONS_ES['english.7.C'] = { name: 'Gramática' };
+CATEGORY_TRANSLATIONS_ES['english.7.D'] = { name: 'Vocabulario' };
+CATEGORY_TRANSLATIONS_ES['english.7.E'] = { name: 'Expresión oral y escucha' };
+(function(){
+  var L = LESSON_TRANSLATIONS_ES;
+  function merge(k,d){ L[k]=Object.assign({},L[k]||{},d); }
+  merge('english:e7A1',{
+    title:'Caracterización',
+    tagline:'Cómo los autores revelan la personalidad de los personajes',
+    intro:'La caracterización es la manera en que el autor desarrolla la personalidad y los rasgos de un personaje. La caracterización directa le dice al lector cómo es el personaje: "Maya era valiente y amable." La caracterización indirecta muestra los rasgos a través de las acciones, el diálogo y los pensamientos del personaje, sin afirmarlo explícitamente. Si Maya corre hacia el tráfico para salvar a un cachorro, deducimos que es valiente sin que nadie nos lo diga. Los personajes redondos son complejos y tienen muchos rasgos; los planos son más simples. Los personajes estáticos no cambian; los dinámicos crecen y evolucionan. Comprender la caracterización te ayuda a entender la motivación de los personajes y a evaluar qué tan realistas son.',
+    keyPoints:['La caracterización directa declara los rasgos; la indirecta los muestra','Los personajes redondos son complejos','Los personajes dinámicos cambian a lo largo de la historia'],
+    funFact:'¡Hamlet de Shakespeare es famoso por su complejidad psicológica!',
+    activity:{ instructions:'¿Qué significa que un personaje sea dinámico?', choices:[
+      {text:'El personaje es enérgico y divertido',explanation:'Dinámico se refiere a un cambio, no al tipo de personalidad.'},
+      {text:'El personaje se desarrolla y cambia a través de los eventos',explanation:'Los personajes dinámicos aprenden y crecen.'},
+      {text:'El personaje aparece en todos los capítulos',explanation:'Eso es frecuencia, no desarrollo del personaje.'}
+    ]}
+  });
+  merge('english:e7A2',{
+    title:'Simbolismo',
+    tagline:'Cuando los objetos representan ideas más grandes',
+    intro:'Un símbolo es algo que representa otra cosa. Una paloma blanca simboliza la paz. Una rosa roja simboliza el amor. Un espejo roto podría simbolizar esperanzas rotas. Los autores usan los símbolos para añadir capas más profundas de significado. Un personaje que enciende una vela podría simbolizar la esperanza en la oscuridad. Comprender el simbolismo te ayuda a leer con mayor profundidad y a apreciar el arte del autor. A veces los símbolos son evidentes; otras los descubres a través de referencias repetidas. Distintos lectores pueden interpretar los símbolos de manera diferente, y eso es parte de la riqueza de la literatura.',
+    keyPoints:['Los símbolos representan ideas más grandes','Pueden ser objetos, colores o acciones','Los símbolos repetidos sugieren importancia'],
+    funFact:'¡La letra escarlata en "La letra escarlata" es un poderoso símbolo de la vergüenza y el pecado!',
+    activity:{ instructions:'¿Qué podría simbolizar una llave en una historia?', choices:[
+      {text:'Solo una llave literal para abrir cerraduras',explanation:'Las llaves pueden tener significado simbólico más allá de su función.'},
+      {text:'Acceso, posibilidad o descubrir secretos',explanation:'Una llave simboliza abrir algo oculto o prohibido.'},
+      {text:'Que el personaje es cerrajero',explanation:'Eso es literal, no simbólico.'}
+    ]}
+  });
+  merge('english:e7A3',{
+    title:'Análisis de poesía',
+    tagline:'Estructura, dispositivos sonoros y significado en los poemas',
+    intro:'La poesía usa el lenguaje de manera intensiva para expresar ideas y emociones. Los dispositivos sonoros incluyen la rima (sonidos finales idénticos), el ritmo (patrón de acentos), la aliteración (sonidos iniciales repetidos) y la onomatopeya (palabras que imitan sonidos, como "zumbido"). Las estrofas son los párrafos de la poesía. Un soneto tiene 14 versos; un haiku tiene tres. La poesía a menudo significa más que sus palabras: los lectores interpretan el simbolismo y el lenguaje figurado. Analizar un poema implica observar tanto el sonido (cómo está escrito) como el significado (qué expresa). La poesía puede tener estructura fija o ser verso libre.',
+    keyPoints:['Dispositivos sonoros: rima, ritmo, aliteración','Las estrofas organizan los poemas','El significado surge de las palabras elegidas y las imágenes'],
+    funFact:'Robert Frost escribió: "La poesía es lo que se pierde en la traducción."',
+    activity:{ instructions:'¿Qué hace la aliteración en la poesía?', choices:[
+      {text:'Hace que el poema sea más largo',explanation:'La aliteración se trata del sonido, no de la extensión.'},
+      {text:'Crea ritmo y hace que el lenguaje sea musical',explanation:'Los sonidos repetidos hacen que la poesía sea agradable al leerla en voz alta.'},
+      {text:'Obliga al lector a ir más despacio',explanation:'Ese no es el propósito de la aliteración.'}
+    ]}
+  });
+  merge('english:e7B1',{
+    title:'Trabajos de investigación',
+    tagline:'Informes organizados que sintetizan múltiples fuentes',
+    intro:'Un trabajo de investigación estudia un tema sintetizando información de múltiples fuentes confiables. Eliges un tema, formulas una pregunta de investigación, buscas fuentes, tomas notas y organizas tus hallazgos. El trabajo tiene una introducción con tesis, párrafos de desarrollo que presentan evidencia y análisis, y una conclusión. Citas las fuentes usando el formato MLA, APA o Chicago, indicando de dónde proviene la información. Los trabajos de investigación te enseñan a evaluar fuentes, sintetizar información y pensar críticamente.',
+    keyPoints:['Desarrolla preguntas de investigación','Encuentra múltiples fuentes','Cita las fuentes con el formato requerido'],
+    funFact:'¡Los investigadores profesionales tardan meses en artículos que se publican en revistas especializadas!',
+    activity:{ instructions:'¿Por qué se deben citar las fuentes en un trabajo de investigación?', choices:[
+      {text:'Para que el trabajo sea más largo',explanation:'Las citas son sobre honestidad académica, no sobre extensión.'},
+      {text:'Para mostrar de dónde proviene la información y dar crédito',explanation:'Las citas reconocen tus fuentes y evitan el plagio.'},
+      {text:'Porque los maestros te obligan',explanation:'Las citas son sobre integridad académica.'}
+    ]}
+  });
+  merge('english:e7B2',{
+    title:'Narraciones personales',
+    tagline:'Escribe sobre eventos significativos de tu vida con reflexión y detalle',
+    intro:'Una narración personal cuenta una historia real de tu propia vida. A diferencia de la ficción creativa, se basa en eventos reales y en tu experiencia genuina. Las narraciones personales más efectivas usan detalles específicos, diálogo y lenguaje sensorial para que los lectores se sientan presentes. Reflexionas sobre lo que significó la experiencia: por qué importó, qué aprendiste. Las narraciones personales tienen un comienzo claro, una acción ascendente que genera tensión, un clímax o punto de inflexión, y una resolución que muestra el resultado y la reflexión. Las buenas narraciones son honestas sobre las emociones y muestran crecimiento.',
+    keyPoints:['Usa experiencias reales','Incluye detalles específicos y diálogo','Reflexiona sobre el significado y el crecimiento'],
+    funFact:'¡Muchas celebridades construyeron sus carreras en parte gracias a poderosas narraciones personales!',
+    activity:{ instructions:'¿Qué debe incluir una narración personal?', choices:[
+      {text:'Solo hechos, sin emoción ni reflexión',explanation:'Las narraciones personales deben mostrar tus sentimientos y lo que aprendiste.'},
+      {text:'Una historia verdadera con detalles, reflexión y lo que aprendiste',explanation:'Esto hace que la narración sea significativa.'},
+      {text:'Múltiples historias para llenar el espacio',explanation:'Una narración bien enfocada es mejor que correr a través de muchas.'}
+    ]}
+  });
+  merge('english:e7B3',{
+    title:'Análisis literario',
+    tagline:'Examina cómo los autores usan recursos literarios para crear significado',
+    intro:'El análisis literario examina CÓMO la literatura crea significado, no solo QUÉ dice. Analizas elementos como la caracterización, el simbolismo, las imágenes, el tono y el punto de vista para comprender el propósito y el efecto del autor. Apoyas tu análisis con evidencia textual específica: citas y ejemplos. Una tesis de análisis literario podría ser: "En Macbeth, Shakespeare usa imágenes de sangre para mostrar cómo la culpa consume la conciencia de Macbeth." El análisis literario enseña a pensar críticamente y a leer con cuidado.',
+    keyPoints:['Identifica recursos literarios','Analiza su efecto en los lectores','Apoya con evidencia textual'],
+    funFact:'¡Los críticos literarios escriben análisis extensos sobre una sola obra!',
+    activity:{ instructions:'¿Qué debe incluir un análisis literario?', choices:[
+      {text:'"El libro fue bueno porque la historia era interesante"',explanation:'Esto es una opinión, sin análisis de cómo el autor lo logró.'},
+      {text:'"El autor usa la anticipación cuando dice... Esto crea tensión porque..."',explanation:'Esto analiza el recurso y su efecto.'},
+      {text:'"Me gustaron los personajes"',explanation:'La respuesta personal no es análisis.'}
+    ]}
+  });
+  merge('english:e7C1',{
+    title:'Modificadores mal ubicados',
+    tagline:'Coloca los descriptores cerca de lo que modifican para evitar confusiones',
+    intro:'Un modificador es una palabra o frase que describe algo. "Hambriento" modifica "oso" en "el oso hambriento". Un modificador mal ubicado está demasiado lejos de lo que describe: "Vi un oso corriendo por el bosque con binoculares" sugiere que el oso tiene binoculares. Corrección: "Con binoculares, vi un oso corriendo por el bosque." Los modificadores colgantes no describen lo que se pretende: "Corriendo rápido, apareció la meta." ¿Quién está corriendo? No queda claro. Corrección: "Corriendo rápido, al fin llegamos a la meta." Corregir los modificadores mal ubicados hace que la escritura sea clara y evita el humor involuntario.',
+    keyPoints:['Coloca los modificadores cerca de lo que describen','Los modificadores colgantes carecen de un sustantivo claro','Los modificadores mal ubicados pueden cambiar el significado'],
+    funFact:'¡Los modificadores mal ubicados son la fuente de muchos titulares de periódico involuntariamente graciosos!',
+    activity:{ instructions:'¿Qué está mal en esta oración: "Empapado de agua, el jugador salió corriendo del campo"?', choices:[
+      {text:'Nada; está escrita correctamente',explanation:'"Empapado de agua" modifica claramente al jugador que corrió.'},
+      {text:'El modificador está mal ubicado',explanation:'En realidad, esta oración es correcta.'}
+    ]}
+  });
+  merge('english:e7C2',{
+    title:'Estructura paralela',
+    tagline:'Usa la misma forma gramatical para ideas similares y mejora la fluidez',
+    intro:'La estructura paralela significa usar la misma forma gramatical para los elementos de una lista o para ideas similares. No paralela: "A ella le gusta leer, nadar y hace senderismo." Paralela: "A ella le gusta leer, nadar y hacer senderismo." (todos infinitivos). No paralela: "La tienda es limpia, ordenada y tiene buen servicio." Paralela: "La tienda es limpia, ordenada y bien atendida." (todos adjetivos). La estructura paralela mejora la claridad y la fluidez. Es agradable de leer y demuestra un control sofisticado del lenguaje. Se usa en discursos famosos y en escritos importantes.',
+    keyPoints:['Usa la misma forma gramatical en las listas','Usa la misma forma para ideas similares','La estructura paralela mejora la fluidez y la claridad'],
+    funFact:'¡"Sangre, esfuerzo, lágrimas y sudor" de Churchill usa una poderosa estructura paralela!',
+    activity:{ instructions:'¿Cuál oración usa la estructura paralela correctamente?', choices:[
+      {text:'"Me gusta correr, nadar y jugando basquetbol"',explanation:'Mezcla infinitivo y gerundio; deben ser todos de la misma forma.'},
+      {text:'"Me gusta correr, nadar y jugar basquetbol"',explanation:'Las tres usan el verbo en infinitivo.'},
+      {text:'"Me gusta corriendo, nadar y jugar"',explanation:'Esta mezcla gerundios e infinitivos.'}
+    ]}
+  });
+  merge('english:e7C3',{
+    title:'Combinación de oraciones',
+    tagline:'Une ideas de oraciones simples en oraciones más complejas y sofisticadas',
+    intro:'La combinación de oraciones toma múltiples oraciones simples y las une en una sola más sofisticada. Original: "El cielo estaba oscuro. Llovía. Nos quedamos adentro." Combinada: "Porque el cielo estaba oscuro y llovía, nos quedamos adentro." La combinación mejora la fluidez y muestra las relaciones entre ideas. Puedes combinar usando conjunciones coordinantes (y, pero, o), conjunciones subordinantes (porque, aunque, mientras) y cláusulas relativas (que, quien, cuyo). Demasiadas oraciones cortas se sienten entrecortadas; combinarlas hace que la prosa sea fluida y profesional.',
+    keyPoints:['Usa conjunciones para combinar oraciones','Crea oraciones complejas a partir de oraciones simples','La combinación mejora la fluidez y la sofisticación'],
+    funFact:'¡Todo editor profesional enseña la combinación de oraciones!',
+    activity:{ instructions:'¿Cómo combinarías mejor: "El perro era viejo. El perro estaba cansado. El perro dormía todo el día"?', choices:[
+      {text:'"El perro era viejo, estaba cansado y dormía todo el día"',explanation:'La repetición del sujeto resulta incómoda.'},
+      {text:'"El viejo y cansado perro dormía todo el día"',explanation:'Usar adjetivos combina las ideas de manera fluida.'},
+      {text:'"El perro era viejo. El perro estaba cansado. El perro dormía todo el día"',explanation:'Estas oraciones deben combinarse.'}
+    ]}
+  });
+  merge('english:e7D1',{
+    title:'Etimología',
+    tagline:'El origen de las palabras para entender sus significados modernos',
+    intro:'La etimología es el estudio del origen de las palabras y de cómo cambian los significados con el tiempo. Comprender la etimología te ayuda a recordar palabras y a anticipar su significado. La palabra "aventura" proviene de "adventura", que significa "lo que ocurre por azar". "Desastre" viene de "dis" (malo) y "aster" (estrella), y originalmente significaba "alineación de estrellas desfavorable". "Nostalgia" combina el griego "nostos" (volver a casa) y "algia" (dolor). Muchas palabras en inglés combinan raíces griegas y latinas. Comprender el origen de las palabras demuestra que el lenguaje está vivo y en constante evolución.',
+    keyPoints:['Las palabras tienen historias de origen','Los significados a veces cambian con el tiempo','La etimología te ayuda a adivinar el significado de palabras nuevas'],
+    funFact:'¡La palabra "goodbye" en inglés viene de "God be with you" (Dios esté contigo)!',
+    activity:{ instructions:'¿Qué te ayuda a entender saber que "micro" significa "pequeño"?', choices:[
+      {text:'Que "microscopio" significa un instrumento para ver cosas pequeñas',explanation:'Conocer las raíces te ayuda a predecir el significado de palabras nuevas.'},
+      {text:'Cómo usar un microscopio',explanation:'La etimología ayuda con el significado, no con el uso.'},
+      {text:'Cuándo se inventaron los microscopios',explanation:'Eso es historia, no etimología.'}
+    ]}
+  });
+  merge('english:e7D2',{
+    title:'Palabras de tono y ambiente',
+    tagline:'Vocabulario que crea atmósfera emocional',
+    intro:'El tono es la actitud del autor hacia el tema: serio, sarcástico, esperanzador, enojado, juguetón. El ambiente es la atmósfera emocional creada para los lectores: suspenso, calma, oscuridad, alegría. La elección de palabras crea el tono y el ambiente. "Ella paseó por el parque" se siente tranquilo; "Ella arrastró los pies por el parque" se siente fatigado. "Las sombras se arrastraron por el cuarto" se siente siniestro; "La luz del sol llenó el cuarto" se siente cálido. Aprender el vocabulario de tono y ambiente te ayuda a comprender la intención del autor y a crear los efectos deseados en tu propia escritura.',
+    keyPoints:['El tono es la actitud del autor','El ambiente es la atmósfera emocional','La elección de palabras moldea el tono y el ambiente'],
+    funFact:'¡Los escritores de terror eligen vocabulario oscuro y siniestro; los comediantes eligen palabras ligeras y absurdas!',
+    activity:{ instructions:'¿Qué tono crea la expresión "solo el tiempo lo dirá"?', choices:[
+      {text:'Enojado y confrontacional',explanation:'Esta expresión es contemplativa, no enojada.'},
+      {text:'Misterioso e incierto',explanation:'Esta frase sugiere misterio y duda sobre el futuro.'},
+      {text:'Alegre y emocionado',explanation:'Esta frase tiene un carácter más serio.'}
+    ]}
+  });
+  merge('english:e7D3',{
+    title:'Vocabulario del SAT',
+    tagline:'Vocabulario sofisticado que aparece en los exámenes estandarizados',
+    intro:'El vocabulario del SAT incluye palabras sofisticadas y poco comunes que aparecen en los exámenes y en los textos universitarios. Ejemplos: "pragmático" (práctico), "efímero" (fugaz), "benévolo" (bondadoso), "condescender" (ceder con resignación), "erudito" (muy instruido), "lucrativo" (rentable). Aprender este vocabulario amplía tu capacidad de comunicarte con precisión. Comprender estas palabras te ayuda a escribir ensayos más sólidos y a entender textos complejos.',
+    keyPoints:['Aprende palabras con significados precisos','Comprende sus definiciones con exactitud','Úsalas en tu escritura para mayor impacto'],
+    funFact:'¡Los libros de texto universitarios usan vocabulario como erudito, ubicuo y paradigma!',
+    activity:{ instructions:'¿Qué significa "efímero"?', choices:[
+      {text:'Importante y significativo',explanation:'Ese no es el significado.'},
+      {text:'Temporal y fugaz',explanation:'"Efímero" describe algo que no dura.'},
+      {text:'Confuso y complicado',explanation:'Esa no es la definición.'}
+    ]}
+  });
+  merge('english:e7E1',{
+    title:'Discurso persuasivo',
+    tagline:'Usa el lenguaje y la entrega para convencer al público',
+    intro:'El discurso persuasivo usa la retórica: técnicas para influir en el pensamiento. El ethos apela a la credibilidad y la confianza. El pathos apela a las emociones. El logos apela a la lógica y la razón. Un orador persuasivo presenta una posición clara, la sustenta con evidencia, usa lenguaje vívido y habla con confianza. El tono, el contacto visual, la postura y los gestos refuerzan el mensaje. Puedes reconocer los puntos de vista opuestos antes de explicar por qué el tuyo es más sólido. El discurso persuasivo aparece en debates, presentaciones de ventas, activismo y defensa de causas.',
+    keyPoints:['Usa ethos, pathos y logos','Apoya con evidencia y lenguaje vívido','Habla con confianza y gestos apropiados'],
+    funFact:'¡Grandes oradores persuasivos como Malcolm X cambiaron la historia!',
+    activity:{ instructions:'¿Cuál apelación usa las emociones?', choices:[
+      {text:'Pathos',explanation:'El pathos apela a las emociones y los valores.'},
+      {text:'Ethos',explanation:'El ethos es la credibilidad y la confianza.'},
+      {text:'Logos',explanation:'El logos es la lógica y la razón.'}
+    ]}
+  });
+  merge('english:e7E2',{
+    title:'Alfabetización mediática',
+    tagline:'Analiza críticamente los mensajes en los medios de comunicación',
+    intro:'La alfabetización mediática significa comprender cómo los medios moldean el pensamiento y saber cómo cuestionar los mensajes. Los anuncios usan música, colores, celebridades y apelaciones emocionales para persuadir. Las noticias eligen qué información destacar y cuál omitir. El entretenimiento crea narrativas que influyen en las visiones del mundo. Las personas con alfabetización mediática preguntan: ¿Quién creó esto? ¿Cuál es el propósito? ¿Quién se beneficia? ¿Qué perspectiva falta? Comprender la alfabetización mediática es fundamental en el mundo actual, donde la información y la persuasión compiten constantemente por la atención.',
+    keyPoints:['Comprende las técnicas usadas en los medios','Reconoce el sesgo y la manipulación','Cuestiona las fuentes y las intenciones'],
+    funFact:'¡La alfabetización mediática se enseña ahora en escuelas de todo el mundo!',
+    activity:{ instructions:'Al analizar un anuncio, ¿qué es importante considerar?', choices:[
+      {text:'Solo si te gusta el producto',explanation:'La preferencia personal no es análisis de medios.'},
+      {text:'Quién está detrás, qué apelaciones usa y a quién va dirigido',explanation:'Este es el análisis de alfabetización mediática.'},
+      {text:'Si las celebridades son famosas',explanation:'Eso no es lo que examina la alfabetización mediática.'}
+    ]}
+  });
+  merge('english:e7E3',{
+    title:'Habilidades para entrevistas',
+    tagline:'Prepárate y conduce entrevistas para obtener información o demostrar preparación',
+    intro:'Las habilidades para entrevistas incluyen preparación, escucha activa, formular buenas preguntas y dar respuestas reflexivas. Antes de una entrevista, investiga a la persona o la organización, prepara preguntas y anticipa los temas que puedan surgir. Durante la entrevista, mantén contacto visual, escucha con atención, habla con claridad y haz preguntas de seguimiento basadas en las respuestas. Las habilidades para entrevistas son fundamentales para conseguir empleo, para la admisión universitaria y para el periodismo. Prepararse bien demuestra respeto y aumenta las posibilidades de éxito.',
+    keyPoints:['Investiga antes de la entrevista','Haz preguntas reflexivas y abiertas','Escucha activamente y realiza seguimiento'],
+    funFact:'¡Las entrevistas de trabajo frecuentemente determinan el rumbo de una carrera profesional!',
+    activity:{ instructions:'¿Qué debes hacer antes de una entrevista de trabajo?', choices:[
+      {text:'Solo presentarte y hablar de ti mismo',explanation:'La preparación es fundamental.'},
+      {text:'Investigar la empresa y preparar preguntas',explanation:'La preparación demuestra profesionalismo.'},
+      {text:'Memorizar respuestas con guion',explanation:'Estar preparado pero natural es mejor que un guion rígido.'}
+    ]}
+  });
+})();
 // ── Grade 7 Science ──
 GRADE_DATA_TRANSLATIONS_ES['science.7'] = { description: 'Genética y ADN, selección natural, ecosistemas, ciclo de las rocas, atmósfera, cambio climático, estructura atómica, reacciones químicas, espectro electromagnético e ingeniería verde.' };
 CATEGORY_TRANSLATIONS_ES['science.7.A'] = { name: 'Ciencias de la vida' };
