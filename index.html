@@ -26191,6 +26191,139 @@ CATEGORY_TRANSLATIONS_ES['app-building.9.F'] = { name: 'Construye tu app' };
 // No additional translation entries required for Grade 9.
 GRADE_DATA_TRANSLATIONS_ES['ship-real-apps.9'] = GRADE_DATA_TRANSLATIONS_ES['ship-real-apps.6'] || { description: 'Aprende a construir y publicar apps reales con las herramientas que usan los profesionales: Lovable, GitHub, Supabase, Stripe y Claude.' };
 
+// ── Grade 10 Math (Geometry) ──
+GRADE_DATA_TRANSLATIONS_ES['math.10'] = { description: 'Geometría: fundamentos, triángulos, semejanza, trigonometría, círculos, área, volumen y transformaciones' };
+CATEGORY_TRANSLATIONS_ES['math.10.A'] = { name: 'Fundamentos y Lógica' };
+CATEGORY_TRANSLATIONS_ES['math.10.B'] = { name: 'Triángulos y Congruencia' };
+CATEGORY_TRANSLATIONS_ES['math.10.C'] = { name: 'Semejanza y Trigonometría' };
+CATEGORY_TRANSLATIONS_ES['math.10.D'] = { name: 'Círculos' };
+CATEGORY_TRANSLATIONS_ES['math.10.E'] = { name: 'Área, Volumen y Transformaciones' };
+(function(){
+  const m = LESSON_TRANSLATIONS_ES;
+  const ns = 'math:';
+  const titles = {
+    // A: Fundamentos y Lógica
+    'm10A1':'Fórmula del punto medio','m10A2':'Fórmula de la distancia',
+    'm10A3':'Adición de segmentos','m10A4':'Medición de ángulos',
+    'm10A5':'Adición de ángulos','m10A6':'Ángulos complementarios',
+    'm10A7':'Ángulos suplementarios','m10A8':'Ángulos verticales',
+    'm10A9':'Par lineal','m10A10':'Líneas paralelas y transversal',
+    'm10A11':'Ángulos alternos internos','m10A12':'Ángulos alternos externos',
+    'm10A13':'Ángulos co-internos','m10A14':'Líneas perpendiculares',
+    'm10A15':'Pendiente de líneas paralelas','m10A16':'Pendiente de líneas perpendiculares',
+    'm10A17':'Demostraciones de geometría coordenada','m10A18':'Enunciados condicionales',
+    'm10A19':'Razonamiento deductivo','m10A20':'Teorema del bisector de ángulo',
+    // B: Triángulos y Congruencia
+    'm10B21':'Clasificar triángulos por lados','m10B22':'Clasificar triángulos por ángulos',
+    'm10B23':'Suma de ángulos del triángulo','m10B24':'Teorema del ángulo exterior',
+    'm10B25':'Teorema del triángulo isósceles','m10B26':'Triángulos equiláteros',
+    'm10B27':'Desigualdad triangular','m10B28':'Congruencia LLL (SSS)',
+    'm10B29':'Congruencia LAL (SAS)','m10B30':'Congruencia ALA (ASA)',
+    'm10B31':'Congruencia AAL (AAS)','m10B32':'Congruencia HI (HL)',
+    'm10B33':'CPCTC: partes correspondientes','m10B34':'Teorema del segmento medio',
+    'm10B35':'Mediatriz','m10B36':'Teorema del bisector del ángulo',
+    'm10B37':'Medianas y centroide','m10B38':'Alturas y ortocentro',
+    'm10B39':'Demostraciones de congruencia de triángulos','m10B40':'Repaso de congruencia de triángulos',
+    // C: Semejanza y Trigonometría
+    'm10C41':'Polígonos semejantes','m10C42':'Semejanza AA',
+    'm10C43':'Semejanza LLL (SSS)','m10C44':'Semejanza LAL (SAS)',
+    'm10C45':'Razones de semejanza','m10C46':'Proporciones en triángulos semejantes',
+    'm10C47':'Líneas paralelas y proporcionalidad','m10C48':'Media geométrica',
+    'm10C49':'Razones trigonométricas: seno','m10C50':'Razones trigonométricas: coseno',
+    'm10C51':'Razones trigonométricas: tangente','m10C52':'Hallar lados con trigonometría',
+    'm10C53':'Hallar ángulos con trigonometría','m10C54':'Ángulo de elevación',
+    'm10C55':'Ángulo de depresión','m10C56':'Introducción a la ley de los senos',
+    'm10C57':'Introducción a la ley de los cosenos','m10C58':'Triángulos especiales 45-45-90',
+    'm10C59':'Triángulos especiales 30-60-90','m10C60':'Repaso de trigonometría',
+    // D: Círculos
+    'm10D61':'Partes del círculo','m10D62':'Ángulos centrales',
+    'm10D63':'Ángulos inscritos','m10D64':'Longitud de arco',
+    'm10D65':'Medida de arco','m10D66':'Área del sector',
+    'm10D67':'Líneas tangentes','m10D68':'Líneas secantes',
+    'm10D69':'Propiedades de las cuerdas','m10D70':'Teorema del ángulo inscrito',
+    'm10D71':'Perpendiculares entre tangente y radio','m10D72':'Teorema de las dos tangentes',
+    'm10D73':'Ángulo secante-secante','m10D74':'Ángulo secante-tangente',
+    'm10D75':'Potencia de un punto','m10D76':'Ecuación del círculo',
+    'm10D77':'Graficar círculos','m10D78':'Círculo desde la forma general',
+    'm10D79':'Problemas de circunferencia','m10D80':'Repaso de círculos',
+    // E: Área, Volumen y Transformaciones
+    'm10E81':'Área de triángulos','m10E82':'Área de paralelogramos',
+    'm10E83':'Área de trapezoides','m10E84':'Área de polígonos regulares',
+    'm10E85':'Área de figuras compuestas','m10E86':'Área superficial de prismas',
+    'm10E87':'Área superficial de cilindros','m10E88':'Área superficial de pirámides y conos',
+    'm10E89':'Volumen de prismas','m10E90':'Volumen de cilindros',
+    'm10E91':'Volumen de pirámides','m10E92':'Volumen de conos',
+    'm10E93':'Volumen de esferas','m10E94':'Secciones transversales',
+    'm10E95':'Traslaciones','m10E96':'Reflexiones',
+    'm10E97':'Rotaciones','m10E98':'Dilataciones',
+    'm10E99':'Composición de transformaciones','m10E100':'Repaso final de geometría'
+  };
+  const taglines = {
+    'm10A1':'Encuentra el punto central entre dos puntos','m10A2':'Mide cualquier segmento en el plano',
+    'm10A3':'Los segmentos colineales se suman','m10A4':'Mide ángulos con precisión',
+    'm10A5':'Combina medidas de ángulos','m10A6':'Dos ángulos que suman 90°',
+    'm10A7':'Dos ángulos que suman 180°','m10A8':'Los ángulos opuestos al vértice son iguales',
+    'm10A9':'Dos ángulos adyacentes que forman una línea recta','m10A10':'Una transversal crea ocho ángulos con dos paralelas',
+    'm10A11':'Dentro de las paralelas, en lados opuestos','m10A12':'Fuera de las paralelas, en lados opuestos',
+    'm10A13':'En el mismo lado de la transversal, suman 180°','m10A14':'Se cruzan formando ángulos rectos',
+    'm10A15':'Las líneas paralelas tienen exactamente la misma pendiente','m10A16':'Las pendientes de líneas perpendiculares son recíprocas negativas',
+    'm10A17':'Prueba propiedades geométricas usando coordenadas','m10A18':'Si... entonces...',
+    'm10A19':'De reglas generales a conclusiones específicas','m10A20':'Divide el ángulo exactamente por la mitad',
+    'm10B21':'Escaleno, isósceles o equilátero','m10B22':'Acutángulo, rectángulo u obtusángulo',
+    'm10B23':'Los ángulos internos siempre suman 180°','m10B24':'El ángulo exterior = suma de los dos ángulos no adyacentes',
+    'm10B25':'Los ángulos de la base de un isósceles son iguales','m10B26':'Tres lados y tres ángulos iguales de 60°',
+    'm10B27':'La suma de dos lados siempre es mayor que el tercero','m10B28':'Tres lados correspondientes iguales',
+    'm10B29':'Dos lados y el ángulo entre ellos','m10B30':'Dos ángulos y el lado entre ellos',
+    'm10B31':'Dos ángulos y un lado no incluido','m10B32':'Hipotenusa e I en triángulos rectángulos',
+    'm10B33':'Partes correspondientes de triángulos congruentes son congruentes','m10B34':'El segmento medio es paralelo a la base y mide la mitad',
+    'm10B35':'Divide un segmento en dos partes iguales perpendicularmente','m10B36':'Divide el ángulo en dos partes iguales',
+    'm10B37':'El centroide divide la mediana en razón 2:1','m10B38':'Las alturas se intersectan en el ortocentro',
+    'm10B39':'Prueba congruencia con razonamiento lógico paso a paso','m10B40':'Domina todos los criterios de congruencia',
+    'm10C41':'Misma forma, diferente tamaño','m10C42':'Dos ángulos iguales determinan semejanza',
+    'm10C43':'Tres lados en la misma proporción','m10C44':'Dos lados proporcionales y el ángulo entre ellos',
+    'm10C45':'El cociente de lados correspondientes es constante','m10C46':'Los lados correspondientes son proporcionales',
+    'm10C47':'Las líneas paralelas dividen los lados proporcionalmente','m10C48':'√(ab) en triángulos rectángulos',
+    'm10C49':'Cateto opuesto / hipotenusa','m10C50':'Cateto adyacente / hipotenusa',
+    'm10C51':'Cateto opuesto / cateto adyacente','m10C52':'Usa sen, cos o tan para encontrar el lado desconocido',
+    'm10C53':'Usa arcsen, arccos o arctan para encontrar el ángulo','m10C54':'El ángulo medido desde el observador hacia arriba',
+    'm10C55':'El ángulo medido desde el observador hacia abajo','m10C56':'a/sen A = b/sen B = c/sen C',
+    'm10C57':'c² = a² + b² − 2ab·cos C','m10C58':'Los catetos son iguales; la hipotenusa = cateto × √2',
+    'm10C59':'Los lados están en razón 1:√3:2','m10C60':'Domina razones trigonométricas y semejanza',
+    'm10D61':'Radio, diámetro, cuerda, arco y sector','m10D62':'El vértice está en el centro del círculo',
+    'm10D63':'El vértice está en la circunferencia','m10D64':'Longitud de la porción de la circunferencia',
+    'm10D65':'Medida en grados de un arco','m10D66':'La porción del área entre dos radios',
+    'm10D67':'Tocan el círculo en exactamente un punto','m10D68':'Cruzan el círculo en dos puntos',
+    'm10D69':'Segmentos que unen dos puntos de la circunferencia','m10D70':'El ángulo inscrito mide la mitad del arco que abarca',
+    'm10D71':'La tangente y el radio son siempre perpendiculares','m10D72':'Dos tangentes desde el mismo punto son iguales',
+    'm10D73':'Ángulo = mitad de la diferencia de los arcos interceptados','m10D74':'Ángulo = mitad de la diferencia de los arcos interceptados',
+    'm10D75':'Producto de segmentos de cuerdas o secantes','m10D76':'(x − h)² + (y − k)² = r²',
+    'm10D77':'Localiza el centro y traza el radio','m10D78':'Completa el cuadrado para hallar centro y radio',
+    'm10D79':'C = 2πr o C = πd','m10D80':'Domina todas las propiedades de los círculos',
+    'm10E81':'A = (1/2) × base × altura','m10E82':'A = base × altura',
+    'm10E83':'A = (1/2)(b₁ + b₂) × h','m10E84':'A = (1/2) × apotema × perímetro',
+    'm10E85':'Divide en figuras simples y suma las áreas','m10E86':'Suma de las áreas de todas las caras',
+    'm10E87':'AS = 2πr² + 2πrh','m10E88':'Área de la base más área lateral',
+    'm10E89':'V = área de la base × altura','m10E90':'V = πr²h',
+    'm10E91':'V = (1/3) × área de la base × altura','m10E92':'V = (1/3)πr²h',
+    'm10E93':'V = (4/3)πr³','m10E94':'Figuras 2D creadas al cortar sólidos 3D',
+    'm10E95':'Desplazamiento sin rotación ni reflexión','m10E96':'Imagen espejo a través de una línea',
+    'm10E97':'Giro alrededor de un punto central','m10E98':'Ampliar o reducir por un factor de escala',
+    'm10E99':'Aplicar dos o más transformaciones sucesivamente','m10E100':'Domina toda la geometría de 10.° grado'
+  };
+  const stdByCat = {
+    A: { intro:'Domina los fundamentos de la geometría: puntos, segmentos, ángulos, líneas paralelas y razonamiento lógico con enunciados condicionales.', keyPoints:['El punto medio divide un segmento en dos partes iguales: M = ((x₁+x₂)/2, (y₁+y₂)/2)','Los ángulos alternos internos son iguales cuando las líneas son paralelas','El razonamiento deductivo parte de reglas generales para llegar a conclusiones específicas'], funFact:'¡La fórmula de la distancia es simplemente el teorema de Pitágoras aplicado al plano coordenado!' },
+    B: { intro:'Clasifica triángulos, aplica el teorema de la suma de ángulos y domina los cinco criterios de congruencia triangular: LLL, LAL, ALA, AAL e HI.', keyPoints:['Los ángulos internos de cualquier triángulo siempre suman 180°','SSS, SAS, ASA, AAS e HI son los cinco criterios de congruencia triangular','CPCTC: las partes correspondientes de triángulos congruentes son congruentes'], funFact:'¡Las estructuras triangulares son las más rígidas de la ingeniería: puentes, torres y grúas dependen de la geometría de los triángulos!' },
+    C: { intro:'Explora la semejanza de polígonos, las razones trigonométricas y resuelve triángulos usando seno, coseno, tangente y los triángulos rectángulos especiales.', keyPoints:['Dos triángulos son semejantes si tienen ángulos iguales (criterio AA)','sen = opuesto/hipotenusa; cos = adyacente/hipotenusa; tan = opuesto/adyacente','Los triángulos 45-45-90 y 30-60-90 tienen razones de lados fijas y predecibles'], funFact:'¡La trigonometría se usa para calcular distancias a estrellas, planificar rutas de vuelo y diseñar edificios!' },
+    D: { intro:'Estudia todas las propiedades de los círculos: ángulos, arcos, cuerdas, tangentes, secantes y la ecuación del círculo en el plano coordenado.', keyPoints:['El ángulo inscrito es la mitad del arco que abarca','La tangente y el radio son siempre perpendiculares en el punto de tangencia','La ecuación del círculo es (x − h)² + (y − k)² = r²'], funFact:'¡El número π aparece en la circunferencia, el área y el volumen de toda figura redonda del universo!' },
+    E: { intro:'Calcula áreas de polígonos, superficies y volúmenes de sólidos, y aplica las cuatro transformaciones geométricas: traslación, reflexión, rotación y dilatación.', keyPoints:['Volumen del cono y la pirámide = (1/3) × área de la base × altura','Las transformaciones isométricas (traslación, reflexión, rotación) conservan tamaño y forma','La dilatación amplía o reduce desde un punto central por un factor de escala'], funFact:'¡La geometría de transformaciones es la base de la animación por computadora y los efectos especiales en películas!' }
+  };
+  Object.keys(titles).forEach(function(id){
+    const catMatch = id.match(/[A-E]/);
+    const cat = catMatch ? catMatch[0] : 'A';
+    m[ns+id] = Object.assign({ title: titles[id], tagline: taglines[id] || '' }, stdByCat[cat]);
+  });
+})();
+
 // Apply all Phase 2 translations after every curriculum has loaded.
 try { applyLessonTranslationsES(); } catch(e){ console.warn('Lesson translation merge skipped:', e); }
 try { autoTranslateActivitiesES(); } catch(e){ console.warn('Auto activity translator skipped:', e); }
