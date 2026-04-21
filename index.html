@@ -31115,6 +31115,26 @@ function generateContentQuestion(lessonTitle, textSources, index){
   var fact = (typeof src === 'string') ? src : String(src);
   if(fact.length > 120) fact = fact.substring(0, 117) + '...';
 
+  if(currentLang === 'es'){
+    var tmplEs = [
+      {q: 'En la lección "'+lessonTitle+'", ¿cuál de estas afirmaciones es verdadera?', correct: fact, w1: 'Ninguna de estas opciones está cubierta en esta lección', w2: 'Este tema no ha sido estudiado todavía'},
+      {q: '¿Qué concepto es parte de "'+lessonTitle+'"?', correct: fact, w1: 'Esto proviene de un tema completamente diferente', w2: 'Esto no se relaciona con '+lessonTitle},
+      {q: '¿Qué aprendiste sobre '+lessonTitle.toLowerCase()+'?', correct: fact, w1: 'Nada — este tema no fue cubierto', w2: 'Solo información no relacionada'},
+      {q: 'Completa el espacio: Al estudiar '+lessonTitle.toLowerCase()+', aprendimos que...', correct: fact, w1: 'No aprendimos nada sobre esto', w2: 'Esto fue cubierto en una lección diferente'},
+      {q: '¿Cuál de estos datos proviene de "'+lessonTitle+'"?', correct: fact, w1: 'Este dato es de otra materia', w2: 'Todavía no hemos aprendido sobre esto'},
+    ];
+    var tmplEsItem = tmplEs[index % tmplEs.length];
+    return {
+      type: 'multiple-choice',
+      question: tmplEsItem.q,
+      choices: shuffleArray([
+        {text: tmplEsItem.correct, correct: true, explanation: '✅ ¡Correcto! Esto proviene de la lección sobre '+lessonTitle},
+        {text: tmplEsItem.w1, correct: false, explanation: 'No exactamente — la respuesta es: '+fact},
+        {text: tmplEsItem.w2, correct: false, explanation: 'No exactamente — la respuesta es: '+fact}
+      ])
+    };
+  }
+
   var templates = [
     {q: 'In the lesson "'+lessonTitle+'", which of these is true?', correct: fact, w1: 'None of these are covered in this lesson', w2: 'This topic has not been studied yet'},
     {q: 'Which concept is part of "'+lessonTitle+'"?', correct: fact, w1: 'This is from a completely different topic', w2: 'This doesn\'t relate to '+lessonTitle},
@@ -31123,14 +31143,14 @@ function generateContentQuestion(lessonTitle, textSources, index){
     {q: 'Which of these facts comes from "'+lessonTitle+'"?', correct: fact, w1: 'This fact is from a different subject', w2: 'We haven\'t learned about this yet'},
   ];
 
-  var t = templates[index % templates.length];
+  var tmpl = templates[index % templates.length];
   return {
     type: 'multiple-choice',
-    question: t.q,
+    question: tmpl.q,
     choices: shuffleArray([
-      {text: t.correct, correct: true, explanation: '✅ Correct! This is from the lesson on '+lessonTitle},
-      {text: t.w1, correct: false, explanation: 'Not quite — the answer is: '+fact},
-      {text: t.w2, correct: false, explanation: 'Not quite — the answer is: '+fact}
+      {text: tmpl.correct, correct: true, explanation: '✅ Correct! This is from the lesson on '+lessonTitle},
+      {text: tmpl.w1, correct: false, explanation: 'Not quite — the answer is: '+fact},
+      {text: tmpl.w2, correct: false, explanation: 'Not quite — the answer is: '+fact}
     ])
   };
 }
@@ -32480,7 +32500,7 @@ function placeDDOption(targetIdx){
     questionsAnswered++; totalQuestionsEverAnswered++;
     if(!currentUser && !guestPromptShown){ guestAnswersTotal++; if(guestAnswersTotal >= 5) setTimeout(function(){ showSaveProgressModal(); }, 1200); }
     document.getElementById('questions-count').textContent = questionsAnswered;
-    document.getElementById('dd-feedback').innerHTML = '<div class="answer-explanation correct">✅ Great job placing all the items!</div>';
+    document.getElementById('dd-feedback').innerHTML = '<div class="answer-explanation correct">' + (currentLang==='es' ? '✅ ¡Excelente trabajo colocando todos los elementos!' : '✅ Great job placing all the items!') + '</div>';
     document.getElementById('dd-next-btn').style.display = 'block';
     if(totalQuestionsEverAnswered % 25 === 0) earnAward();
   }
@@ -32525,18 +32545,19 @@ function checkFillBlank(qIndex, isOpenEnded){
   const correctAns = q.activity ? (q.activity.prompt || '') : '';
   const allCorrect = q.activity && Array.isArray(q.activity.correctAnswers) ? q.activity.correctAnswers : [];
   const isActuallyCorrect = answer.toLowerCase() === correctAns.toLowerCase() || allCorrect.some(function(a){return answer.toLowerCase() === String(a).toLowerCase()});
+  const _fbEs = currentLang === 'es';
   if(isOpenEnded){
     smartScore = Math.min(100, smartScore + 12);
-    fb.innerHTML = '<div class="answer-explanation correct">✅ Great answer! Your response has been recorded.</div>';
+    fb.innerHTML = '<div class="answer-explanation correct">' + (_fbEs ? '✅ ¡Excelente respuesta! Tu respuesta ha sido registrada.' : '✅ Great answer! Your response has been recorded.') + '</div>';
   } else if(correctAns && isActuallyCorrect){
     smartScore = Math.min(100, smartScore + 12);
-    fb.innerHTML = '<div class="answer-explanation correct">✅ Correct! The answer is: ' + correctAns + '</div>';
+    fb.innerHTML = '<div class="answer-explanation correct">' + (_fbEs ? '✅ ¡Correcto! La respuesta es: ' : '✅ Correct! The answer is: ') + correctAns + '</div>';
   } else if(correctAns){
     smartScore = Math.max(0, smartScore - 5);
-    fb.innerHTML = '<div class="answer-explanation wrong">❌ Not quite. The correct answer is: ' + correctAns + '</div>';
+    fb.innerHTML = '<div class="answer-explanation wrong">' + (_fbEs ? '❌ No exactamente. La respuesta correcta es: ' : '❌ Not quite. The correct answer is: ') + correctAns + '</div>';
   } else {
     smartScore = Math.min(100, smartScore + 12);
-    fb.innerHTML = '<div class="answer-explanation correct">✅ Great answer! Your response has been recorded.</div>';
+    fb.innerHTML = '<div class="answer-explanation correct">' + (_fbEs ? '✅ ¡Excelente respuesta! Tu respuesta ha sido registrada.' : '✅ Great answer! Your response has been recorded.') + '</div>';
   }
   fb.style.display = 'block';
   questionsAnswered++; totalQuestionsEverAnswered++;
@@ -32593,7 +32614,7 @@ function pickSortItem(idx){
     const qIndex = currentQuestionIndex;
     const fb = document.getElementById('sort-feedback');
     smartScore = Math.min(100, smartScore + 10);
-    fb.innerHTML = '<div class="answer-explanation correct">✅ Great job putting those in order!</div>';
+    fb.innerHTML = '<div class="answer-explanation correct">' + (currentLang==='es' ? '✅ ¡Excelente trabajo poniéndolos en orden!' : '✅ Great job putting those in order!') + '</div>';
     fb.style.display = 'block';
     questionsAnswered++; totalQuestionsEverAnswered++;
     if(!currentUser && !guestPromptShown){ guestAnswersTotal++; if(guestAnswersTotal >= 5) setTimeout(function(){ showSaveProgressModal(); }, 1200); }
