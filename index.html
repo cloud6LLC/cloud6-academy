@@ -27662,6 +27662,56 @@ try { autoTranslateActivitiesES(); } catch(e){ console.warn('Auto activity trans
   sa('e10E3','¿Qué hace que la evidencia sea creíble?','Provenir de una fuente que te agrada','La preferencia personal no determina la credibilidad.','Provenir de fuentes expertas y ser relevante para la afirmación','La credibilidad requiere experiencia y relevancia.','Respaldar tu propia creencia','La credibilidad es objetiva.');
 })();
 
+// ── Grade 10 History ──────────────────────────────────────────
+(function(){
+  if(typeof HISTORY_CURRICULUM==='undefined'||!HISTORY_CURRICULUM[10])return;
+  var gd=HISTORY_CURRICULUM[10];
+  gd.description_es='Grado 10 — Gobierno de los Estados Unidos, proceso político, libertades civiles, política exterior y economía y gobierno';
+  var cn={A:'Gobierno de los Estados Unidos',B:'Proceso político',C:'Libertades civiles',D:'Política exterior',E:'Economía y gobierno'};
+  Object.keys(cn).forEach(function(k){if(gd.categories[k])gd.categories[k].name_es=cn[k];});
+  var lm={};
+  Object.keys(gd.categories).forEach(function(ck){(gd.categories[ck].lessons||[]).forEach(function(l){lm[l.id]=l;});});
+  var tt={
+    'h10A1':['Principios constitucionales','¿Qué principios sustentan la Constitución de los Estados Unidos?'],
+    'h10A2':['Poderes del gobierno','¿Cómo trabajan juntas las tres ramas del poder?'],
+    'h10A3':['Federalismo','¿Cómo se divide el poder entre el gobierno federal y los estados?'],
+    'h10B1':['Elecciones','¿Cómo configuran las elecciones la política estadounidense?'],
+    'h10B2':['Partidos políticos','¿Qué roles desempeñan los partidos políticos?'],
+    'h10B3':['Medios de comunicación y política','¿Cómo influyen los medios de comunicación en la política?'],
+    'h10C1':['Primera Enmienda','¿Qué libertades protege la Primera Enmienda?'],
+    'h10C2':['Debido proceso','¿Qué protecciones ofrece el debido proceso?'],
+    'h10C3':['Protección igualitaria','¿Qué exige la protección igualitaria?'],
+    'h10D1':['Diplomacia','¿Cómo configura la diplomacia las relaciones internacionales?'],
+    'h10D2':['Organizaciones internacionales','¿Qué roles desempeñan las organizaciones internacionales?'],
+    'h10D3':['Conflictos globales','¿Cómo responden las naciones a los conflictos globales?'],
+    'h10E1':['Política fiscal','¿Cómo influyen el gasto público y los impuestos en la economía?'],
+    'h10E2':['Reserva Federal','¿Qué hace la Reserva Federal?'],
+    'h10E3':['Política comercial','¿Cómo gestionan las naciones el comercio internacional?']
+  };
+  Object.keys(tt).forEach(function(id){var l=lm[id];if(l){l.title_es=tt[id][0];l.tagline_es=tt[id][1];}});
+  function sa(id,instr,t0,e0,t1,e1,t2,e2){var l=lm[id];if(!l||!l.activity)return;l.activity.instructions_es=instr;var c=l.activity.choices;if(!c)return;if(c[0]){c[0].text_es=t0;if(e0)c[0].explanation_es=e0;}if(c[1]){c[1].text_es=t1;if(e1)c[1].explanation_es=e1;}if(c[2]){c[2].text_es=t2;if(e2)c[2].explanation_es=e2;}}
+  // A — Gobierno de los Estados Unidos
+  sa('h10A1','¿Cuál fue el objetivo principal de la Constitución?','Prevenir la tiranía mediante la separación de poderes y el sistema de controles y contrapesos','La estructura fue diseñada para limitar el poder.','Crear un gobierno central fuerte sin que los estados lo cuestionaran','El poder se divide entre el gobierno federal y los estados.','Eliminar todos los gobiernos estatales','La Constitución preservó el federalismo.');
+  sa('h10A2','¿Cómo se controlan mutuamente los poderes del gobierno?','Cada poder tiene la capacidad de limitar a los otros','Este es el sistema de controles y contrapesos.','Una rama es claramente superior a las demás','El poder está equilibrado entre los poderes.','Los poderes funcionan de manera completamente independiente sin superposición','Los poderes se superponen y se controlan mutuamente.');
+  sa('h10A3','¿Por qué el federalismo divide el poder entre los gobiernos?','Para prevenir la concentración del poder y permitir la innovación estatal','El federalismo equilibra el poder y permite la experimentación.','Porque los estados son más poderosos que el gobierno federal','El gobierno federal tiene un poder significativo.','Para eliminar toda coordinación entre el gobierno federal y los estados','El gobierno federal y los estados comparten muchas responsabilidades.');
+  // B — Proceso político
+  sa('h10B1','¿Qué factores influyen en los resultados electorales?','El financiamiento de campañas, la participación electoral, la manipulación de distritos y la cobertura mediática','Todos afectan significativamente a las elecciones.','Solo importan las posiciones de los candidatos en materia de políticas','El dinero, los medios y los mecanismos también importan.','Las preferencias de los votantes determinan directamente los resultados sin distorsión','El dinero y los mecanismos pueden distorsionar las preferencias de los votantes.');
+  sa('h10B2','¿Qué funciones cumplen los partidos políticos?','Reclutar candidatos, recaudar fondos, organizar a los votantes y coordinar los mensajes','Estas son las funciones centrales de los partidos.','Representar los intereses de todos los ciudadanos por igual','Los partidos representan a sus propios seguidores.','Eliminar la necesidad de elecciones','Los partidos trabajan dentro de los sistemas electorales.');
+  sa('h10B3','¿Cómo influyen los medios de comunicación en la política?','Al seleccionar la cobertura, enmarcar los temas y configurar la información de los votantes','Los medios tienen una influencia política significativa.','Los medios desempeñan un papel neutral al informar objetivamente los hechos','Los medios toman decisiones sobre la cobertura y el enfoque.','Las redes sociales son más confiables que las noticias tradicionales','Ambas fuentes tienen problemas de credibilidad y efectos de cámara de eco.');
+  // C — Libertades civiles
+  sa('h10C1','¿Qué protege la Primera Enmienda?','La libertad de expresión, religión, prensa, reunión y petición','Estas son las libertades fundamentales de la Primera Enmienda.','Libertad absoluta para decir cualquier cosa sin consecuencias','Existen algunos límites (incitación, amenazas reales, difamación).','Protección contra las restricciones a la libre expresión por parte de empresas privadas','La Primera Enmienda restringe al gobierno, no a las entidades privadas.');
+  sa('h10C2','¿Qué es el debido proceso?','Procedimientos justos y protección de los derechos fundamentales frente al gobierno','El debido proceso garantiza la justicia.','Garantiza que los acusados serán declarados inocentes','El debido proceso ofrece procedimientos justos, no resultados predeterminados.','Se aplica solo al gobierno federal, no a los estados','La Decimocuarta Enmienda extiende el debido proceso a los estados.');
+  sa('h10C3','¿Qué prohíbe la protección igualitaria?','La discriminación gubernamental basada en raza, género y otras categorías protegidas','Este es el requisito fundamental.','Todas las clasificaciones y distinciones entre personas','Algunas clasificaciones son permisibles si están justificadas.','La discriminación privada por parte de empresas e individuos','La protección igualitaria se aplica al gobierno, no a las entidades privadas.');
+  // D — Política exterior
+  sa('h10D1','¿Por qué es importante la diplomacia?','Gestiona las relaciones internacionales y resuelve disputas sin recurrir a la guerra','La diplomacia previene los conflictos.','Elimina la necesidad de fuerzas militares','La fuerza militar respalda las posiciones diplomáticas.','Exige que todas las partes renuncien por completo a sus intereses','La diplomacia requiere compromiso, no rendición.');
+  sa('h10D2','¿Qué pueden hacer las organizaciones internacionales?','Promover la cooperación, resolver disputas y prestar ayuda humanitaria','Estas son funciones centrales.','Obligar a las naciones poderosas a acatar sus decisiones','Las naciones mantienen la soberanía y pueden desafiar a las organizaciones.','Eliminar por completo la guerra y el conflicto','Las organizaciones reducen el conflicto pero no pueden eliminarlo.');
+  sa('h10D3','¿Qué enfoques utilizan las naciones en los conflictos globales?','Intervención militar, sanciones, diplomacia y ayuda humanitaria','Las naciones utilizan múltiples herramientas.','La intervención militar siempre resuelve los conflictos con éxito','Las intervenciones militares tienen resultados mixtos.','Las naciones nunca deben intervenir en los asuntos de otras naciones','Las naciones a veces consideran que la intervención está justificada.');
+  // E — Economía y gobierno
+  sa('h10E1','¿Cómo afecta la política fiscal a la economía?','El gasto público y los impuestos influyen en la demanda agregada, el empleo y el crecimiento','La política fiscal configura los resultados macroeconómicos.','El gasto público nunca afecta a la economía','El gobierno es una parte importante de las economías modernas.','El aumento del gasto público siempre genera inflación','Los efectos dependen de las condiciones económicas.');
+  sa('h10E2','¿Cuál es el papel de la Reserva Federal?','Controlar la oferta monetaria y las tasas de interés para promover la estabilidad económica','Esta es la responsabilidad principal de la Reserva Federal.','Recaudar impuestos y gestionar los fondos gubernamentales','Eso es política fiscal, responsabilidad de los funcionarios electos.','Regular y supervisar únicamente las cuentas del gobierno federal','La Reserva Federal regula todos los bancos e instituciones financieras.');
+  sa('h10E3','¿Qué hace la política comercial?','Regula las importaciones y exportaciones mediante aranceles, cuotas y acuerdos','Estas son herramientas de política.','Elimina todas las barreras al comercio internacional','La mayoría de las naciones protegen algunas industrias nacionales.','Siempre beneficia a todos por igual','La política comercial crea ganadores y perdedores.');
+})();
+
 function getSubjectData(subject, grade){
   // For App Building grades 6-12, always show Ship Real Apps curriculum
   if(subject === 'app-building' && (grade >= 6 || grade === '6' || grade === '7' || grade === '8' || grade === '9' || grade === '10' || grade === '11' || grade === '12' || [7,8,9,10,11,12].indexOf(grade) > -1)){
