@@ -27510,6 +27510,58 @@ try { autoTranslateActivitiesES(); } catch(e){ console.warn('Auto activity trans
   absi('ab9f3','¡Constrúyelo! Crea una app de recetas completa con feed, funciones de compartir y comunidad.',null);
 })();
 
+// ── Grade 10 Financial Literacy ──────────────────────────────
+(function(){
+  if(typeof FINANCIAL_LITERACY==='undefined'||!FINANCIAL_LITERACY[10])return;
+  var gd=FINANCIAL_LITERACY[10];
+  gd.description_es='Análisis profundo del 401k, W2 vs. 1099, formación de LLC, deducciones empresariales y estrategia fiscal';
+  var cn={A:'Mentalidad financiera y emprendimiento',B:'Ingresos y fuentes de ganancias',C:'Ahorro e inversión',D:'Crédito, deuda e intereses',E:'Negocios e impuestos'};
+  Object.keys(cn).forEach(function(k){if(gd.categories[k])gd.categories[k].name_es=cn[k];});
+  var lm={};
+  Object.keys(gd.categories).forEach(function(ck){(gd.categories[ck].lessons||[]).forEach(function(l){lm[l.id]=l;});});
+  var tt={
+    '10A1':['El plan del multimillonario (sistemas sobre esfuerzo)','Los multimillonarios no trabajan 100 veces más duro: construyen sistemas 100 veces mejores.'],
+    '10A2':['Efectos de red (tu red = tu patrimonio neto)','Tus conexiones multiplican tus oportunidades 100 veces.'],
+    '10A3':['Ventaja del primer movimiento (llega primero)','Ser el primero en un mercado puede valer miles de millones.'],
+    '10B1':['Marketing de afiliados (dinero sin crear productos)','Recomienda productos que te gusten y gana comisión.'],
+    '10B2':['Creación de contenido (YouTube, TikTok, blogs)','Crea contenido que la gente vea o lea y monetiza con anuncios, patrocinadores y afiliados.'],
+    '10B3':['Construir un foso personal (ventaja defensible)','Un foso hace tu negocio difícil de copiar y de superar.'],
+    '10C1':['Análisis profundo del 401k (el regalo de jubilación de tu empleador)','Si tu empleador ofrece 401k con igualación: maximízalo. ¡Es dinero gratis!'],
+    '10C2':['Roth IRA vs. IRA tradicional (¿cuál es mejor?)','Roth: paga impuestos ahora y crece libre de impuestos. Tradicional: deduce ahora y paga impuestos después.'],
+    '10C3':['Mega puerta trasera Roth (estrategia avanzada de riqueza)','Algunos planes 401k permiten contribuciones adicionales. ¡Avanzado pero muy poderoso!'],
+    '10D1':['W2 vs. 1099 (perspectiva fiscal y financiera)','W2: estable, impuestos retenidos, menos deducciones. 1099: flexible, gestiona impuestos, más deducciones.'],
+    '10D2':['La trampa del impuesto de trabajo independiente (y cómo evitarla)','Los trabajadores independientes 1099 pagan el 15,3 % de impuesto por cuenta propia.'],
+    '10D3':['Elección de S-Corp (ahorra miles en impuestos)','Cuando los ingresos 1099 superan los $60 000, elegir S-Corp puede ahorrar miles en impuestos.'],
+    '10E1':['Formar una LLC (paso a paso)','Elige el nombre, presenta los artículos de organización, obtén el EIN y abre una cuenta comercial.'],
+    '10E2':['Deducción por oficina en casa (ahorra $100–$300 al mes)','¿Usas parte de tu hogar para negocios? ¡Deduce un porcentaje de tus gastos!'],
+    '10E3':['Deducciones por vehículo comercial (auto, camión, motocicleta)','Vehículo comercial: deduce los gastos reales O el millaje estándar (69 ¢/milla en 2024).']
+  };
+  Object.keys(tt).forEach(function(id){var l=lm[id];if(l){l.title_es=tt[id][0];l.tagline_es=tt[id][1];}});
+  function mcfl(id,instr,t0,t1,t2){var l=lm[id];if(!l||!l.activity)return;l.activity.instructions_es=instr;var c=l.activity.choices;if(c){if(c[0])c[0].text_es=t0;if(c[1])c[1].text_es=t1;if(c[2])c[2].text_es=t2;}}
+  function ddfl(id,instr,left,right){var l=lm[id];if(!l||!l.activity)return;l.activity.instructions_es=instr;if(left)l.activity.dragOptions_es=left;if(right)l.activity.dropTargets_es=right;}
+  function fbfl(id,instr,prompt){var l=lm[id];if(!l||!l.activity)return;l.activity.instructions_es=instr;if(prompt)l.activity.prompt_es=prompt;}
+  // A — Mentalidad financiera y emprendimiento
+  mcfl('10A1','¿Cuál es la estrategia del multimillonario?','Construir sistemas escalables','Trabajar más duro','Tener suerte');
+  ddfl('10A2','Impacto de la red:',['Conocer a 1 inversionista','Conocer a 10 inversionistas','Conocer a 100 clientes potenciales'],['Puedes lograr que 1 inversionista revise tu negocio','Puedes hacer competir a 10 inversionistas entre sí','Puedes llegar a 100 clientes de inmediato']);
+  mcfl('10A3','¿Cuál es la ventaja de llegar primero?','Establecer el estándar y crecer antes que la competencia','Llegar tarde es igual de bueno','El momento no importa');
+  // B — Ingresos y fuentes de ganancias
+  mcfl('10B1','¿En qué consisten los ingresos de afiliado?','Recomendar productos y ganar comisión','Fabricar tus propios productos','Trabajar para empresas');
+  ddfl('10B2','Monetización de contenido:',['Video con 1 millón de vistas','Artículo de blog con 10 000 lectores mensuales','TikTok con 100 000 seguidores'],['$1 000–$5 000 en anuncios','$100–$500 en enlaces de afiliado','$1 000–$10 000 en acuerdos con marcas']);
+  mcfl('10B3','¿Cuál es un ejemplo de foso competitivo?','Un público fiel que te sigue y confía en ti','Un precio bajo (fácil de copiar)','Suerte aleatoria');
+  // C — Ahorro e inversión
+  fbfl('10C1','Matemáticas del 401k:','Contribuyes $5 000. El empleador iguala el 50 % = $___. ¡Dinero gratis!');
+  mcfl('10C2','¿Roth o IRA tradicional para un joven de 15 años?','Roth (ahora en tramo fiscal bajo, crece libre de impuestos)','Tradicional (paga impuestos en la jubilación)','Ambas son iguales');
+  mcfl('10C3','¿Cuál es el beneficio de la mega puerta trasera Roth?','Ahorrar $69 000 con impuesto diferido y que crezca libre de impuestos','Solo aplica el límite de $23 000','Está disponible para todos');
+  // D — Crédito, deuda e intereses
+  ddfl('10D1','Escenarios W2 vs. 1099:',['La nómina estable es importante','Quieres flexibilidad y deducciones','Tienes gastos constantes de negocio','Quieres escalar tu negocio'],['W2','1099','1099','1099']);
+  fbfl('10D2','Impuesto de trabajo por cuenta propia:','Trabajador 1099 con ingresos de $60 000. Impuesto = $60 000 × 0,153 = $___');
+  mcfl('10D3','¿Qué conviene hacer con $80 000 de ingresos 1099?','Elegir S-Corp para ahorrar impuestos de trabajo por cuenta propia','Permanecer como 1099','No importa');
+  // E — Negocios e impuestos
+  ddfl('10E1','Pasos para formar una LLC:',['Obtener ID federal','Presentar ante el estado','Elegir el nombre','Abrir cuenta bancaria'],['Solicitar el EIN','Presentar los artículos de organización','Verificar disponibilidad del nombre','Abrir cuenta bancaria exclusiva para el negocio']);
+  fbfl('10E2','Ahorro con la deducción por oficina en casa:','Tu oficina en casa tiene 200 pies cuadrados. Método simplificado = $5/pie² × 200 = $___ anuales. Con un tramo fiscal del 30 % = $___ ahorrados al año.');
+  mcfl('10E3','¿Cuál es la mejor estrategia de deducción por vehículo?','Registrar el millaje real y los gastos reales, y usar el que resulte mayor','Solo registrar el millaje','Estimar los gastos');
+})();
+
 function getSubjectData(subject, grade){
   // For App Building grades 6-12, always show Ship Real Apps curriculum
   if(subject === 'app-building' && (grade >= 6 || grade === '6' || grade === '7' || grade === '8' || grade === '9' || grade === '10' || grade === '11' || grade === '12' || [7,8,9,10,11,12].indexOf(grade) > -1)){
