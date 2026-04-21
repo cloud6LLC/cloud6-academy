@@ -28115,6 +28115,72 @@ try { autoTranslateActivitiesES(); } catch(e){ console.warn('Auto activity trans
   ct('m10E100','Repasa las 100 lecciones: fundamentos, triángulos, círculos, área/volumen, transformaciones y aplicaciones.',['100 conceptos de geometría','Aplicaciones del mundo real','Domina los teoremas fundamentales'],'¡La geometría es el fundamento de las matemáticas!');
 })();
 
+// ── Grade 11 Financial Literacy — translations ──
+(function(){
+  if(typeof FINANCIAL_LITERACY==='undefined'||!FINANCIAL_LITERACY[11])return;
+  var gd=FINANCIAL_LITERACY[11];
+  gd.description_es='Ventajas fiscales de S-Corp vs LLC, bienes raíces, construcción de sistemas de riqueza y límites de aportación Roth';
+  gd.categories.A.name_es='Mentalidad Financiera y Emprendimiento';
+  gd.categories.B.name_es='Ingresos y Fuentes de Dinero';
+  gd.categories.C.name_es='Ahorro e Inversión';
+  gd.categories.D.name_es='Crédito, Deudas e Intereses';
+  gd.categories.E.name_es='Negocios e Impuestos';
+  var lm={};
+  Object.keys(gd.categories).forEach(function(ck){
+    (gd.categories[ck].lessons||[]).forEach(function(l){lm[l.id]=l;});
+  });
+  function ct(id,intro,kp,ff){var l=lm[id];if(!l||!l.content)return;l.content.intro_es=intro;l.content.keyPoints_es=kp;l.content.funFact_es=ff;}
+  function tt(id,t,tg){var l=lm[id];if(!l)return;if(t)l.title_es=t;if(tg)l.tagline_es=tg;}
+  function mact(id,instr,c0t,c0e,c1t,c1e,c2t,c2e){var l=lm[id];if(!l||!l.activity)return;l.activity.instructions_es=instr;if(l.activity.choices){if(l.activity.choices[0]){l.activity.choices[0].text_es=c0t;l.activity.choices[0].explanation_es=c0e;}if(l.activity.choices[1]){l.activity.choices[1].text_es=c1t;l.activity.choices[1].explanation_es=c1e;}if(l.activity.choices[2]){l.activity.choices[2].text_es=c2t;l.activity.choices[2].explanation_es=c2e;}}}
+  function ddact(id,instr,items_es,targets_es){var l=lm[id];if(!l||!l.activity)return;l.activity.instructions_es=instr;if(items_es)l.activity.items_es=items_es;if(targets_es)l.activity.targets_es=targets_es;}
+  function fbact(id,label_es,prompt_es){var l=lm[id];if(!l||!l.activity)return;if(label_es)l.activity.label_es=label_es;if(prompt_es)l.activity.prompt_es=prompt_es;}
+  tt('11A1','Cómo Construir Tu Sistema de Riqueza (No un Plan para Hacerte Rico Rápido)','Lo aburrido es bueno. Lo aburrido supera a lo llamativo el 100% de las veces.');
+  tt('11A2','Cómo Reducir el Riesgo en Tu Vida (Construye Barreras y Opciones)','Múltiples fuentes de ingresos, múltiples habilidades, múltiples activos = estás protegido.');
+  tt('11A3','La Mentalidad del Inversionista (Piensa Como un Capitalista de Riesgo)','Tu negocio debe aspirar a: márgenes del 50%+, potencial de $1M+, gran equipo y mercado claro.');
+  tt('11B1','Mentalidad de Fundador vs. Freelancer (¿Cuál Camino Tomar?)','Los fundadores construyen negocios de $1M+. Los freelancers ganan $100k–200k como máximo. ¡Elige tu camino!');
+  tt('11B2','Presentación a Inversionistas y Financiamiento (Si Quieres Recaudar Dinero)','No necesitas financiamiento, pero si lo buscas: problema claro, mercado grande, equipo y tracción.');
+  tt('11B3','Cómo Contratar Tu Primer Contratista (Subcontratación para Crecer)','¡Paga $10/hora para contratar a 10 personas y obtén el trabajo de 10 empleados a bajo costo!');
+  tt('11C1','Fundamentos de Bienes Raíces (Un Verdadero Constructor de Riqueza)','Compra una casa con 20% de enganche, pide prestado el 80%. La propiedad se valoriza. Los inquilinos pagan la hipoteca. ¡Tú obtienes plusvalía!');
+  tt('11C2','REIT: Bienes Raíces Sin Comprar una Propiedad','¿No tienes $100k para comprar una casa? ¡Los REITs te dan acceso al mercado inmobiliario!');
+  tt('11C3','Rendimientos Ponderados por Dinero (Por Qué la Constancia Supera al Tiempo Perfecto)','¡Matemáticamente es óptimo invertir de forma constante!');
+  tt('11D1','Deuda Estratégica (Buena Deuda para Construir Riqueza)','¡Las personas inteligentes piden préstamos baratos e invierten ese dinero prestado!');
+  tt('11D2','HELOC: Línea de Crédito con Garantía Hipotecaria (El Arma Secreta)','¡Tu casa es un cajero automático de dinero barato!');
+  tt('11D3','Escalera Roth y Estrategias de Puerta Trasera','Escalera Roth: aporta a una IRA tradicional, conviértela de inmediato a Roth. ¡Accede a los fondos sin penalización después de los 59.5 años!');
+  tt('11E1','S-Corp vs. LLC: ¿Qué Estructura Elegir?','Con ingresos de $60k+, la S-Corp ahorra dinero. Por debajo de eso, la LLC es más sencilla.');
+  tt('11E2','Comidas de Negocios y Entretenimiento (75% Deducible)','¿Llevas a un cliente a almorzar? ¡Deduce el 75%!');
+  tt('11E3','Impuestos Estimados Trimestrales (No Te Agarren Desprevenido)','Abril, junio, septiembre, enero: ¡paga tus impuestos estimados!');
+  ct('11A1','La riqueza real es aburrida: un sistema diversificado y basado en el interés compuesto que crece durante 30 años.',['La riqueza real es aburrida','Los sistemas aburridos se acumulan durante décadas','Lo llamativo fracasa, lo aburrido gana'],'El sistema de Warren Buffett: compra buenas empresas barato, mantenlas para siempre. Aburrido. ¡Más de $100 mil millones!');
+  ct('11A2','No lo apuestes todo a una sola cosa. Construye opciones: múltiples caminos hacia adelante.',['Reduce el riesgo: disminuye la dependencia de un solo ingreso','Múltiples fuentes: si una falla, las demás siguen','Opcionalidad: muchos caminos por delante'],'Naval Ravikant: "La mejor forma de enriquecerse es eliminar el riesgo, no asumir más."');
+  ct('11A3','Los capitalistas de riesgo preguntan: ROI, escalabilidad, tamaño del mercado, equipo. ¡Tú debes preguntarte lo mismo sobre tu negocio!',['ROI: retorno sobre la inversión','Escalabilidad: ¿puede crecer 10 veces?','Tamaño del mercado: ¿es suficientemente grande?','Equipo: ¿pueden ejecutarlo?'],'¡El marco de un capitalista de riesgo para empresas de mil millones = tu fórmula para el éxito!');
+  ct('11B1','Fundador: construye un negocio y véndelo por millones. Freelancer: vende tu tiempo, gana $50–200 por hora.',['Fundador: apalancamiento, sistemas, millones','Freelancer: flexibilidad, ingresos estables, $100k–200k','Ambos son válidos, son caminos distintos'],'¡La mayoría de los multimillonarios eligieron el camino del fundador!');
+  ct('11B2','Pitch: presentación de un minuto a inversionistas sobre tu negocio.',['Ajuste problema-solución','Mercado direccionable grande','Tracción (clientes/usuarios)','Gran equipo'],'¡La mayoría de las empresas millonarias se financiaron de forma independiente, no con capital de riesgo!');
+  ct('11B3','No puedes hacerlo todo solo. Contrata freelancers por $5–50 por hora en Upwork, Fiverr.',['Contrata contratistas a bajo costo','Tú te enfocas en el trabajo de mayor valor','Se logra exponencialmente más'],'¡Un contratista a $10/hora hace el trabajo que tú harías a $50/hora. Eso es apalancamiento!');
+  ct('11C1','Bienes raíces: vive en uno, renta los demás. Apalancamiento + valorización = riqueza.',['Bienes raíces: apalancamiento (pide prestado el 80%)','Valorización: el valor de las propiedades crece','Ingreso por renta: los inquilinos pagan la hipoteca','Deducciones fiscales: intereses hipotecarios y depreciación'],'¡La mayoría de los millonarios construyeron su riqueza a través de bienes raíces!');
+  ct('11C2','REIT = Fideicomiso de Inversión en Bienes Raíces. ¡Sé propietario de partes de portafolios inmobiliarios!',['REIT: participación en una empresa de bienes raíces','Bienes raíces diversificados','Ingresos por dividendos','Líquido (fácil de vender)'],'¡Los REITs promedian retornos del 5–8% más dividendos!');
+  ct('11C3','Invertir $1,000 al mes supera a tratar de predecir el mercado con $12,000 de una sola vez.',['Invertir de forma constante promedia el costo','Compras más cuando los precios están bajos','Compras menos cuando los precios están altos','Matemáticamente superior'],'¡Un fondo indexado con promedio del costo en dólares supera al 90% de los operadores profesionales!');
+  ct('11D1','Pide prestado al 3–5%, invierte al 10%+. Tu diferencial = ganancia.',['Pide prestado a tasa baja (hipoteca, HELOC)','Invierte a tasa alta (mercado de valores ~10%)','Diferencial = tu ganancia'],'¡Compra una casa con hipoteca al 3%, réntatela al 8% de retorno y quédate con el 5%!');
+  ct('11D2','Pide prestado contra tu casa a tasas bajas (5–7%) para invertir en activos de alto rendimiento.',['HELOC: línea de crédito respaldada por tu casa','Tasas de interés: 5–7% (¡bajas!)','Puedes pedir prestado desde $50k hasta $500k+','Úsalo para invertir, no para gastar'],'¡Un HELOC al 6% para invertir en acciones con retorno del 10% = diferencial garantizado del 4%!');
+  ct('11D3','Convierte una IRA tradicional a Roth. Accede al dinero antes. ¡Avanzado pero poderoso!',['IRA tradicional: fácil de convertir por la puerta trasera','Convierte a Roth (paga algunos impuestos)','Espera 5 años, retira sin impuestos ni penalización'],'¡La escalera Roth = acceso anticipado al dinero de jubilación (después de una espera de 5 años)!');
+  ct('11E1','LLC: simple, algunas deducciones fiscales. S-Corp: compleja, ahorra en impuestos de trabajo por cuenta propia ($5k–15k al año con ingresos de $60k+).',['Menos de $60k: la LLC es lo mejor','$60k–200k: la S-Corp ahorra impuestos','$200k+: C-Corp para diferimiento fiscal'],'¡Una elección de S-Corp con $80k de ingresos ahorra más de $10,000 al año!');
+  ct('11E2','Comidas de negocios: 75% deducibles (antes era el 100%, se redujo al 80% y ahora está al 75%).',['Comidas de negocios: 75% deducibles','Debe tener un propósito de negocio','Guarda el recibo'],'¡Un almuerzo de negocios de $100 = $75 de deducción = $22.50 de ahorro fiscal!');
+  ct('11E3','¿Trabajas por cuenta propia? ¡Paga impuestos trimestrales o enfrenta penalizaciones!',['Fechas trimestrales: 15/4, 15/6, 15/9, 15/1','Paga un estimado de lo que debes','No pagar = penalizaciones'],'¡No pagar los impuestos trimestrales = penalizaciones de $2,500 o más!');
+  mact('11A1','¿Cuál es la mejor estrategia para construir riqueza?','Un sistema aburrido que genera interés compuesto durante 30 años',null,'Un plan emocionante para hacerse rico rápido',null,'Seguir las tendencias del momento',null);
+  ddact('11A2','Ejemplos de reducción de riesgo:',['Fuentes de ingresos diversificadas','Múltiples habilidades que generan dinero','Ingreso pasivo (3+ fuentes)','Relaciones y red de contactos'],['Si el empleo termina, los otros ingresos continúan','Si el mercado de una habilidad colapsa, las otras siguen generando dinero','Duerme tranquilo: ingresos sin trabajar','Obtén oportunidades gracias a tus relaciones']);
+  mact('11A3','¿Qué negocio tiene escala de capital de riesgo?','Márgenes altos, mercado enorme, escalable y gran equipo',null,'Márgenes bajos y mercado pequeño',null,'Depende de la suerte',null);
+  ddact('11B1','Comparación de caminos:',['Quiero hacerme rico (millones+)','Quiero ingresos cómodos','Quiero flexibilidad','Quiero apalancamiento'],['Camino del fundador','Camino del freelancer','Camino del freelancer','Camino del fundador']);
+  mact('11B2','¿Qué es lo mejor para recaudar fondos?','Tracción comprobada + crecimiento claro + equipo sólido',null,'Solo una idea',null,'No recaudes fondos, fináncialo tú mismo',null);
+  fbact('11B3','ROI de la subcontratación:','Ganas $100/hora. Contratas un contratista por $15/hora para hacer trabajo de $50/hora. Ganas $100 - $15 = $___ por hora por persona. ¿Contratas a 5? ¡Ganas $___ por hora!');
+  mact('11C1','¿Cuál es la ventaja de los bienes raíces?','Apalancamiento, valorización, ingreso por renta y deducciones',null,'Necesitas el 100% del dinero en efectivo para comprar',null,'Solo una casa donde vivir',null);
+  fbact('11C2','Ingresos por REIT:','Inviertes $10,000 en un REIT que paga un dividendo del 6%. Ingreso anual = $10,000 × 0.06 = $___');
+  mact('11C3','¿Cuál es la mejor estrategia de inversión?','Inversiones mensuales constantes (promedio del costo en dólares)',null,'Predecir el mercado a la perfección',null,'Invertir en una suma global cuando tengas efectivo',null);
+  fbact('11D1','Diferencial de deuda estratégica:','Pides prestado al 4% para invertir en acciones con retorno del 10%. Tu retorno neto = 10% - 4% = ___% de ganancia');
+  mact('11D2','¿Cuál es el mejor uso del HELOC?','Pedir prestado para invertir en activos que se aprecian',null,'Pedir prestado para unas vacaciones',null,'Pedir prestado para consumo',null);
+  mact('11D3','¿Para qué sirve la escalera Roth?','Acceder al dinero invertido anticipadamente con eficiencia fiscal',null,'Evitar impuestos para siempre',null,'Retirar dinero de inmediato',null);
+  ddact('11E1','Estructura de negocio según el nivel de ingresos:',['Ingresos de $30k','Ingresos de $80k','Ingresos de $250k'],['LLC','S-Corp','C-Corp o S-Corp']);
+  fbact('11E2','Deducción por comidas:','El almuerzo de negocios cuesta $100. Deducible = 75% = $___ de deducción. A una tasa fiscal del 30% = $___ de ahorro fiscal');
+  mact('11E3','¿Cómo manejar los ingresos del formulario 1099?','Reserva el 30% mensualmente y paga impuestos trimestrales',null,'No pagues hasta abril',null,'Paga cuando puedas',null);
+})();
+
 // ── Grade 11 Science — translations ──
 (function(){
   if(typeof SCIENCE_CURRICULUM==='undefined'||!SCIENCE_CURRICULUM[11])return;
