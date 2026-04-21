@@ -31211,19 +31211,24 @@ function generateContentQuestion(lessonTitle, textSources, index){
   if(fact.length > 120) fact = fact.substring(0, 117) + '...';
 
   if(currentLang === 'es'){
+    // Use Spanish lesson title if available
+    var displayTitle = lessonTitle;
+    if(typeof currentLessonData !== 'undefined' && currentLessonData && currentLessonData.title_es){
+      displayTitle = currentLessonData.title_es;
+    }
     var tmplEs = [
-      {q: 'En la lección "'+lessonTitle+'", ¿cuál de estas afirmaciones es verdadera?', correct: fact, w1: 'Ninguna de estas opciones está cubierta en esta lección', w2: 'Este tema no ha sido estudiado todavía'},
-      {q: '¿Qué concepto es parte de "'+lessonTitle+'"?', correct: fact, w1: 'Esto proviene de un tema completamente diferente', w2: 'Esto no se relaciona con '+lessonTitle},
-      {q: '¿Qué aprendiste sobre '+lessonTitle.toLowerCase()+'?', correct: fact, w1: 'Nada — este tema no fue cubierto', w2: 'Solo información no relacionada'},
-      {q: 'Completa el espacio: Al estudiar '+lessonTitle.toLowerCase()+', aprendimos que...', correct: fact, w1: 'No aprendimos nada sobre esto', w2: 'Esto fue cubierto en una lección diferente'},
-      {q: '¿Cuál de estos datos proviene de "'+lessonTitle+'"?', correct: fact, w1: 'Este dato es de otra materia', w2: 'Todavía no hemos aprendido sobre esto'},
+      {q: 'En la lección "'+displayTitle+'", ¿cuál de estas afirmaciones es verdadera?', correct: fact, w1: 'Ninguna de estas opciones está cubierta en esta lección', w2: 'Este tema no ha sido estudiado todavía'},
+      {q: '¿Qué concepto es parte de "'+displayTitle+'"?', correct: fact, w1: 'Esto proviene de un tema completamente diferente', w2: 'Esto no se relaciona con '+displayTitle},
+      {q: '¿Qué aprendiste sobre '+displayTitle.toLowerCase()+'?', correct: fact, w1: 'Nada — este tema no fue cubierto', w2: 'Solo información no relacionada'},
+      {q: 'Completa el espacio: Al estudiar '+displayTitle.toLowerCase()+', aprendimos que...', correct: fact, w1: 'No aprendimos nada sobre esto', w2: 'Esto fue cubierto en una lección diferente'},
+      {q: '¿Cuál de estos datos proviene de "'+displayTitle+'"?', correct: fact, w1: 'Este dato es de otra materia', w2: 'Todavía no hemos aprendido sobre esto'},
     ];
     var tmplEsItem = tmplEs[index % tmplEs.length];
     return {
       type: 'multiple-choice',
       question: tmplEsItem.q,
       choices: shuffleArray([
-        {text: tmplEsItem.correct, correct: true, explanation: '✅ ¡Correcto! Esto proviene de la lección sobre '+lessonTitle},
+        {text: tmplEsItem.correct, correct: true, explanation: '✅ ¡Correcto! Esto proviene de la lección sobre '+displayTitle},
         {text: tmplEsItem.w1, correct: false, explanation: 'No exactamente — la respuesta es: '+fact},
         {text: tmplEsItem.w2, correct: false, explanation: 'No exactamente — la respuesta es: '+fact}
       ])
