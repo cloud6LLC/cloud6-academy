@@ -27612,6 +27612,56 @@ try { autoTranslateActivitiesES(); } catch(e){ console.warn('Auto activity trans
   sa('s10E3','¿Cuál es el objetivo de la química verde?','Minimizar el impacto ambiental mientras se protege la economía','La química verde equilibra la sostenibilidad con las necesidades empresariales.','Eliminar toda la química','La química verde mejora la química, no la elimina.','Hacer que la química sea gratuita','La química verde trata de la sostenibilidad, no del costo.');
 })();
 
+// ── Grade 10 English ──────────────────────────────────────────
+(function(){
+  if(typeof ENGLISH_CURRICULUM==='undefined'||!ENGLISH_CURRICULUM[10])return;
+  var gd=ENGLISH_CURRICULUM[10];
+  gd.description_es='Grado 10 — Literatura mundial, análisis avanzado y comprensión intercultural';
+  var cn={A:'Lectura',B:'Escritura',C:'Gramática',D:'Vocabulario',E:'Expresión oral y comprensión auditiva'};
+  Object.keys(cn).forEach(function(k){if(gd.categories[k])gd.categories[k].name_es=cn[k];});
+  var lm={};
+  Object.keys(gd.categories).forEach(function(ck){(gd.categories[ck].lessons||[]).forEach(function(l){lm[l.id]=l;});});
+  var tt={
+    'e10A1':['Literatura mundial','Lectura de obras traducidas de diversas culturas para comprender experiencias humanas universales y particulares'],
+    'e10A2':['Sátira e ironía','Comprensión de las técnicas literarias que critican mediante el humor y la contradicción'],
+    'e10A3':['Análisis de no ficción','Examen de cómo los escritores usan los hechos, la estructura y la retórica para comunicar ideas'],
+    'e10B1':['Metodología de investigación','Desarrollo de enfoques rigurosos para encontrar, evaluar y sintetizar información'],
+    'e10B2':['Ensayos comparativos','Redacción de ensayos que examinan similitudes y diferencias entre dos textos o ideas'],
+    'e10B3':['Escritura técnica','Creación de documentos claros y organizados que explican procesos, sistemas o información para audiencias específicas'],
+    'e10C1':['Sintaxis avanzada','Comprensión de estructuras oracionales complejas y cómo manipularlas para lograr un efecto'],
+    'e10C2':['Edición y revisión','Mejora sistemática de borradores mediante múltiples revisiones enfocadas en diferentes elementos'],
+    'e10C3':['Formatos de citación','Comprensión de los estilos MLA, APA y Chicago para citar fuentes de manera coherente'],
+    'e10D1':['Influencias lingüísticas globales','Comprensión de cómo los idiomas han influido en el inglés y cómo el inglés influye en los demás'],
+    'e10D2':['Vocabulario retórico','Aprendizaje de palabras que describen técnicas de persuasión, argumentación y comunicación'],
+    'e10D3':['Términos del pensamiento crítico','Comprensión del vocabulario para analizar información, reconocer sesgos y pensar con lógica'],
+    'e10E1':['Oratoria','Pronunciar discursos persuasivos o informativos ante audiencias numerosas con técnicas profesionales'],
+    'e10E2':['Comunicación intercultural','Comprensión y gestión de la comunicación a través de diferencias culturales en valores y normas'],
+    'e10E3':['Evaluación de argumentos','Análisis sistemático de argumentos según su solidez lógica, calidad de la evidencia y posibles sesgos']
+  };
+  Object.keys(tt).forEach(function(id){var l=lm[id];if(l){l.title_es=tt[id][0];l.tagline_es=tt[id][1];}});
+  function sa(id,instr,t0,e0,t1,e1,t2,e2){var l=lm[id];if(!l||!l.activity)return;l.activity.instructions_es=instr;var c=l.activity.choices;if(!c)return;if(c[0]){c[0].text_es=t0;if(e0)c[0].explanation_es=e0;}if(c[1]){c[1].text_es=t1;if(e1)c[1].explanation_es=e1;}if(c[2]){c[2].text_es=t2;if(e2)c[2].explanation_es=e2;}}
+  // A — Lectura
+  sa('e10A1','¿Por qué es importante leer literatura mundial?','Para demostrar que la literatura en inglés es superior','Eso es etnocéntrico.','Para comprender perspectivas diversas y la humanidad universal','La literatura mundial amplía la perspectiva.','Para aprender otros idiomas','Lees traducciones; el idioma no es el punto.');
+  sa('e10A2','¿Cuál es el propósito de la sátira?','Ser cruel con las personas','La sátira critica, no acosa.','Ridiculizar la necedad o la corrupción e inspirar cambios','La sátira usa el humor para la crítica social.','Solo para ser gracioso','La sátira es una crítica intencional.');
+  sa('e10A3','¿Qué implica analizar la no ficción?','Simplemente verificar los hechos','El análisis incluye cómo los autores utilizan la estructura y la evidencia.','Examinar cómo la estructura, la evidencia y la retórica configuran la comprensión','El análisis de la no ficción es sofisticado.','Asumir que todo es verdad porque es no ficción','La no ficción sigue implicando la interpretación del autor.');
+  // B — Escritura
+  sa('e10B1','¿Qué es una fuente primaria?','Un libro de texto sobre historia','Eso es una fuente secundaria: interpreta fuentes primarias.','Un documento histórico original','Las fuentes primarias son evidencia original.','Cualquier fuente mencionada en primer lugar','El término «primaria» se refiere a lo original, no al orden.');
+  sa('e10B2','¿Qué debe evitar un ensayo comparativo?','Analizar ambos textos a lo largo del ensayo','Eso es exactamente lo que debes hacer.','Escribir la primera mitad sobre el texto A y la segunda sobre el texto B','Esta estructura debilita la comparación; intégralos a lo largo del ensayo.','Encontrar similitudes y diferencias significativas','Eso es fundamental.');
+  sa('e10B3','¿Qué es esencial en la escritura técnica?','Prosa bella y lenguaje florido','La claridad importa más que el estilo.','Organización clara y precisión','La escritura técnica tiene propósitos prácticos.','Impresionar a los lectores con el vocabulario','La claridad es el objetivo.');
+  // C — Gramática
+  sa('e10C1','¿Qué hace una oración periódica?','Enuncia la idea principal al comienzo','Eso es una oración acumulativa.','Retrasa la idea principal hasta el final para crear suspenso','Las oraciones periódicas construyen hacia una conclusión.','Usa vocabulario sofisticado','Eso no tiene que ver con la sintaxis.');
+  sa('e10C2','¿Cuál es la diferencia entre la revisión global y la corrección?','Son lo mismo','Cada una se enfoca en distintos niveles.','La revisión global aborda las ideas generales; la corrección se enfoca en las oraciones','Ambas son necesarias.','La corrección es más importante','Las dos son fundamentales.');
+  sa('e10C3','¿Por qué usamos formatos de citación?','Para hacer los trabajos más largos','Las citas cumplen propósitos importantes.','Para dar crédito y permitir a los lectores encontrar las fuentes','Las citas documentan tus fuentes.','Porque los maestros nos lo exigen','Las citas reflejan la integridad académica.');
+  // D — Vocabulario
+  sa('e10D1','¿Por qué el inglés incorporó palabras del francés?','Porque el francés es mejor','Razones históricas, no de superioridad.','Por la Conquista normanda y los gobernantes franceses','El contacto histórico generó el intercambio de vocabulario.','Los anglohablantes las robaron','El intercambio lingüístico es un proceso de contacto gradual.');
+  sa('e10D2','¿Qué es un argumento ad hominem?','Atacar a la persona en lugar de su argumento','Ad hominem significa «hacia la persona».','Demostrar que tu argumento es correcto','Eso no es lo que significa.','Ser amable con el oponente','Es lo contrario.');
+  sa('e10D3','¿Cuál es la diferencia entre correlación y causalidad?','Significan lo mismo','Son conceptos distintos.','La correlación indica que dos cosas varían juntas; la causalidad indica que una causa a la otra','Esta distinción es importante.','La causalidad es más importante','Comprender ambas es fundamental.');
+  // E — Expresión oral y comprensión auditiva
+  sa('e10E1','¿Qué es esencial para superar el nerviosismo al hablar en público?','Nunca estar nervioso','Todos se ponen nerviosos; lo que importa es manejarlo.','Una preparación exhaustiva y la práctica','La confianza proviene de estar bien preparado.','Esperar lo mejor','Eso no es una estrategia.');
+  sa('e10E2','¿Qué es esencial en la comunicación intercultural?','Asumir que todos se comunican como tú','Esto provoca malentendidos.','Reconocer las diferencias culturales y hacer preguntas aclaratorias','La consciencia y la curiosidad previenen los problemas.','Pensar que tu cultura es la correcta','Diferente no significa incorrecto; es simplemente diferente.');
+  sa('e10E3','¿Qué hace que la evidencia sea creíble?','Provenir de una fuente que te agrada','La preferencia personal no determina la credibilidad.','Provenir de fuentes expertas y ser relevante para la afirmación','La credibilidad requiere experiencia y relevancia.','Respaldar tu propia creencia','La credibilidad es objetiva.');
+})();
+
 function getSubjectData(subject, grade){
   // For App Building grades 6-12, always show Ship Real Apps curriculum
   if(subject === 'app-building' && (grade >= 6 || grade === '6' || grade === '7' || grade === '8' || grade === '9' || grade === '10' || grade === '11' || grade === '12' || [7,8,9,10,11,12].indexOf(grade) > -1)){
