@@ -528,16 +528,13 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 </div>
 
 <!-- TOP NAVIGATION BAR -->
-<div class="top-nav" style="background:#fff;border-bottom:2px solid #e8f5f0;box-shadow:0 2px 8px rgba(0,184,148,0.08);position:sticky;top:0;z-index:100">
+<div class="top-nav" style="background:#fff;border-bottom:2px solid #e8f5f0;box-shadow:0 2px 8px rgba(0,184,148,0.08);position:sticky;top:0;z-index:100;display:flex;flex-direction:row;align-items:center;flex-wrap:nowrap;padding:0 16px;gap:8px;height:52px">
 
-  <!-- HEADER ROW: logo only -->
-  <div class="nav-header-row" style="display:flex;align-items:center;flex-wrap:nowrap;height:56px;padding:0 20px;gap:12px">
-    <!-- Logo — far left -->
-    <div class="nav-logo" style="font-size:20px;font-weight:800;color:#00b894;cursor:pointer;white-space:nowrap;flex-shrink:0" onclick="showHome()">Cloud6 <span style="font-weight:400;color:#2d3436">Academy</span></div>
-  </div>
+  <!-- Logo — far left -->
+  <div class="nav-logo" style="font-size:20px;font-weight:800;color:#00b894;cursor:pointer;white-space:nowrap;flex-shrink:0" onclick="showHome()">Cloud6 <span style="font-weight:400;color:#2d3436">Academy</span></div>
 
-  <!-- NAV TABS ROW — scrollable, sits below the header row -->
-  <nav style="display:flex;align-items:center;gap:2px;padding:4px 16px 6px;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;border-top:1px solid #f0f0f0">
+  <!-- NAV TABS — scrollable, fills remaining space -->
+  <nav style="display:flex;align-items:center;gap:2px;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;flex:1">
     <div class="nav-tab" id="nav-home" onclick="showHome()" style="padding:6px 12px;border-radius:8px;cursor:pointer;font-weight:600;font-size:13px;color:#00b894;background:rgba(0,184,148,0.08);white-space:nowrap;transition:all 0.2s;flex-shrink:0" data-i18n="ui.navHome">🏠 Home</div>
     <div class="nav-tab" id="nav-academy" onclick="showAcademy()" style="padding:6px 12px;border-radius:8px;cursor:pointer;font-weight:600;font-size:13px;color:#636e72;background:transparent;white-space:nowrap;transition:all 0.2s;flex-shrink:0" data-i18n="ui.navAcademy">📚 Academy</div>
     <div class="nav-tab" id="nav-learning" style="padding:6px 12px;border-radius:8px;cursor:pointer;font-weight:600;font-size:13px;color:#636e72;background:transparent;white-space:nowrap;transition:all 0.2s;position:relative;flex-shrink:0" onclick="toggleLearningDropdown()">
