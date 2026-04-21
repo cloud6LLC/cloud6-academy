@@ -27002,6 +27002,519 @@ try { autoTranslateActivitiesES(); } catch(e){ console.warn('Auto activity trans
   mact7('m7E100','Se obtuvieron 55 caras en 100 lanzamientos. ¿Cuál es la probabilidad experimental?','0.55','55÷100=0.55','0.5','Esa es la probabilidad teórica, no la experimental','55','La probabilidad es un decimal entre 0 y 1');
 })();
 
+// ══════════════════════════════════════════════════════════════════════
+// Grade 9 — Direct _es field injection
+// Runs after autoTranslateActivitiesES() to override any English backfill.
+// ══════════════════════════════════════════════════════════════════════
+
+// ── Grade 9 Science ──
+(function(){
+  if(typeof SCIENCE_CURRICULUM==='undefined'||!SCIENCE_CURRICULUM[9])return;
+  var gd=SCIENCE_CURRICULUM[9];
+  gd.description_es='Biología: biología celular, genética, ecología, métodos científicos y aplicaciones de la biología';
+  var cn={A:'Biología Celular',B:'Genética',C:'Ecología',D:'Métodos Científicos',E:'Aplicaciones de la Biología'};
+  Object.keys(cn).forEach(function(k){if(gd.categories[k])gd.categories[k].name_es=cn[k];});
+  var lm={};
+  Object.keys(gd.categories).forEach(function(ck){(gd.categories[ck].lessons||[]).forEach(function(l){lm[l.id]=l;});});
+  var tt={
+    's9A1':['Células procariotas vs. eucariotas','Tipos fundamentales de células y sus diferencias'],
+    's9A2':['Transporte celular','Movimiento de sustancias a través de membranas celulares'],
+    's9A3':['División celular','Mitosis y meiosis'],
+    's9B1':['Genética mendeliana','Patrones de herencia descubiertos por Mendel'],
+    's9B2':['Genética molecular','Expresión génica: del ADN a la proteína'],
+    's9B3':['Genética de poblaciones','Variación genética en poblaciones'],
+    's9C1':['Ecología de poblaciones','Factores que controlan el tamaño de una población'],
+    's9C2':['Interacciones en la comunidad','Relaciones entre especies en los ecosistemas'],
+    's9C3':['Dinámica de ecosistemas','Flujo de energía y ciclo de nutrientes'],
+    's9D1':['Técnicas de laboratorio','Habilidades prácticas para la investigación biológica'],
+    's9D2':['Interpretación de datos','Extrayendo significado de datos biológicos'],
+    's9D3':['Diseño experimental','Planificar investigaciones biológicas rigurosas'],
+    's9E1':['Biotecnología','Usando la biología para resolver problemas'],
+    's9E2':['Bioética','Preguntas éticas en la biología'],
+    's9E3':['Aplicaciones ambientales','La biología aplicada a problemas ambientales']
+  };
+  Object.keys(tt).forEach(function(id){var l=lm[id];if(l){l.title_es=tt[id][0];l.tagline_es=tt[id][1];}});
+  function sa(id,instr,c0t,c0e,c1t,c1e,c2t,c2e){
+    var l=lm[id];if(!l||!l.activity)return;
+    l.activity.instructions_es=instr;
+    if(l.activity.choices){
+      if(l.activity.choices[0]){l.activity.choices[0].text_es=c0t;l.activity.choices[0].explanation_es=c0e;}
+      if(l.activity.choices[1]){l.activity.choices[1].text_es=c1t;l.activity.choices[1].explanation_es=c1e;}
+      if(l.activity.choices[2]){l.activity.choices[2].text_es=c2t;l.activity.choices[2].explanation_es=c2e;}
+    }
+  }
+  sa('s9A1','¿Qué tipo de célula tiene núcleo?','Eucariota','Las células eucariotas tienen un núcleo membranoso que contiene el ADN.','Procariota','Las células procariotas carecen de núcleo membranoso.','Ambos tipos','Solo las eucariotas poseen núcleo; las procariotas no.');
+  sa('s9A2','¿Cuál es la diferencia entre difusión y transporte activo?','La difusión es pasiva; el transporte activo usa energía','La difusión fluye a favor del gradiente de concentración; el transporte activo requiere ATP.','Ambos requieren energía','Solo el transporte activo requiere energía; la difusión es completamente pasiva.','La difusión mueve moléculas contra el gradiente','La difusión fluye a favor del gradiente, no en contra de él.');
+  sa('s9A3','¿Cuántas células hijas produce la meiosis?','Cuatro células haploides','La meiosis produce cuatro células genéticamente únicas con la mitad del número de cromosomas.','Dos células idénticas','Eso describe la mitosis, no la meiosis.','Una célula diploide','La meiosis produce cuatro células haploides, no una única célula diploide.');
+  sa('s9B1','¿Qué determina si aparece un rasgo recesivo?','Dos copias del alelo recesivo','Los rasgos recesivos solo se manifiestan cuando el organismo tiene dos alelos recesivos.','Un solo alelo recesivo','Un único alelo recesivo es enmascarado por el alelo dominante y no se expresa.','La presencia del alelo dominante','El alelo dominante enmascara al recesivo; no lo activa.');
+  sa('s9B2','¿Cuál es la relación entre el ADN, el ARN y las proteínas?','ADN → ARN → Proteína','El ADN se transcribe en ARN mensajero, que luego se traduce en proteínas.','Proteína → ARN → ADN','Ese es el orden inverso al proceso real de expresión génica.','El ADN fabrica proteínas directamente','El ARN es el intermediario necesario; sin él no se pueden sintetizar proteínas.');
+  sa('s9B3','¿Qué provoca que cambien las frecuencias de alelos?','La selección natural y otras fuerzas evolutivas','La evolución ocurre precisamente cuando las frecuencias de alelos cambian en una población.','Solo el azar','Aunque el azar desempeña un papel, la selección natural suele ser el factor más determinante.','Las frecuencias nunca cambian','Las frecuencias de alelos cambian regularmente a través de los procesos evolutivos.');
+  sa('s9C1','¿Qué limita el tamaño de una población en la capacidad de carga?','Los recursos y el espacio limitados','La capacidad de carga refleja los límites del ambiente: alimento, agua y espacio disponibles.','Solo las enfermedades','La limitación de recursos es el factor primario; las enfermedades son un factor secundario.','Nada limita las poblaciones','Todas las poblaciones tienen límites impuestos por el ambiente en que viven.');
+  sa('s9C2','¿Qué es el mutualismo?','Ambas especies se benefician','En el mutualismo, la relación simbiótica es beneficiosa para las dos especies involucradas.','Una especie se beneficia y la otra es perjudicada','Eso describe el parasitismo, no el mutualismo.','Una especie se beneficia y la otra no se ve afectada','Eso describe el comensalismo, no el mutualismo.');
+  sa('s9C3','¿Qué ocurre con la energía en un ecosistema?','Entra del sol y finalmente se disipa como calor','La energía fluye a través de los organismos y termina perdiéndose en forma de calor.','Se recicla como los nutrientes','La energía fluye en una sola dirección; son los nutrientes los que se reciclan.','Los organismos la crean','Los organismos no crean energía; esta proviene del sol.');
+  sa('s9D1','¿Qué hace la electroforesis en gel?','Separa el ADN por tamaño y carga','La electroforesis desplaza las moléculas a través del gel según sus propiedades físicas.','Amplifica el ADN','Eso lo realiza la PCR, no la electroforesis en gel.','Solo identifica especies','La electroforesis separa y caracteriza moléculas; no se limita a identificar especies.');
+  sa('s9D2','¿Qué indica que los resultados son estadísticamente significativos?','Es poco probable que se deban al azar','La significancia estadística indica que los patrones observados son probablemente reales y no accidentales.','El tamaño de la muestra es muy grande','Una muestra grande ayuda, pero no garantiza por sí sola la significancia estadística.','Los resultados difieren de lo esperado','Diferir de lo esperado es solo el primer paso; se requiere análisis estadístico para confirmar la significancia.');
+  sa('s9D3','¿Por qué se usan múltiples réplicas en la investigación biológica?','Para detectar patrones consistentes','La replicación demuestra si los resultados son fiables y se repiten de manera consistente.','Solo para aumentar el tamaño de la muestra','Eso es importante, pero la replicación también sirve para verificar la consistencia de los resultados.','Porque es un requisito formal','La replicación mejora la calidad real de la investigación; no es un mero trámite.');
+  sa('s9E1','¿Qué hace la PCR?','Amplifica fragmentos de ADN','La PCR crea millones de copias de ADN a partir de cantidades muy pequeñas de material genético.','Identifica la especie del organismo','La PCR amplifica el ADN; otras pruebas adicionales son las que identifican la especie.','Corta el ADN en fragmentos','Eso lo hacen las enzimas de restricción, no la PCR.');
+  sa('s9E2','¿Qué dilema ético plantea la ingeniería genética?','Modificar organismos y seres humanos de manera segura y equitativa','La ingeniería genética permite cambios poderosos que generan complejas preguntas éticas sobre seguridad y justicia.','El costo de los tratamientos','Aunque relevante, la ética de la ingeniería genética va mucho más allá del aspecto económico.','El desacuerdo religioso','Existen múltiples perspectivas, pero la bioética abarca dimensiones mucho más amplias.');
+  sa('s9E3','¿Qué es la biorremediación?','Usar organismos para eliminar contaminantes','La biorremediación aprovecha procesos biológicos para limpiar la contaminación del suelo y el agua.','Retirar organismos de zonas dañadas','Ese es el enfoque contrario: la biorremediación introduce organismos que ayudan a limpiar.','Crear organismos sintéticos nuevos','La biorremediación utiliza organismos naturales ya existentes, no crea organismos de laboratorio.');
+})();
+
+// ── Grade 9 English ──
+(function(){
+  if(typeof ENGLISH_CURRICULUM==='undefined'||!ENGLISH_CURRICULUM[9])return;
+  var gd=ENGLISH_CURRICULUM[9];
+  gd.description_es='Inglés de 9.° grado: literatura épica, análisis crítico y comunicación sofisticada';
+  var cn={A:'Lectura',B:'Escritura',C:'Gramática y Estilo',D:'Vocabulario',E:'Hablar y Escuchar'};
+  Object.keys(cn).forEach(function(k){if(gd.categories[k])gd.categories[k].name_es=cn[k];});
+  var lm={};
+  Object.keys(gd.categories).forEach(function(ck){(gd.categories[ck].lessons||[]).forEach(function(l){lm[l.id]=l;});});
+  var tt={
+    'e9A1':['Literatura épica','Grandes narrativas con héroes, temas míticos y luchas atemporales'],
+    'e9A2':['Análisis del cuento corto','Cómo los autores desarrollan narrativas completas en forma breve'],
+    'e9A3':['Drama y teatro','Cómo las obras teatrales difieren de las novelas y cómo la actuación interpreta el texto'],
+    'e9B1':['Ensayos analíticos','Ensayos sofisticados que examinan cómo la literatura crea significado'],
+    'e9B2':['Escritura para la universidad','Desarrollar habilidades de escritura para exámenes y solicitudes universitarias'],
+    'e9B3':['Periodismo','Escribir artículos de noticias, reportajes y artículos de opinión'],
+    'e9C1':['Estilo y voz','Desarrollar un estilo de escritura personal que distingue tu trabajo'],
+    'e9C2':['Figuras retóricas','Técnicas de persuasión: repetición, paralelismo y antítesis'],
+    'e9C3':['Gramática para escritores','La gramática como herramienta creativa, no solo como regla'],
+    'e9D1':['Alusiones clásicas','Referencias a la mitología y la literatura de Grecia y Roma'],
+    'e9D2':['Términos literarios','Vocabulario para analizar y discutir la literatura con precisión'],
+    'e9D3':['Raíces avanzadas','Raíces griegas y latinas en vocabulario sofisticado'],
+    'e9E1':['Seminarios socráticos','Discusión filosófica donde los estudiantes guían la conversación'],
+    'e9E2':['Redacción de discursos','Componer discursos con lenguaje poderoso para audiencias específicas'],
+    'e9E3':['Comunicación digital','Escribir para audiencias digitales: correo, redes sociales, mensajería']
+  };
+  Object.keys(tt).forEach(function(id){var l=lm[id];if(l){l.title_es=tt[id][0];l.tagline_es=tt[id][1];}});
+  function ea(id,instr,c0t,c0e,c1t,c1e,c2t,c2e){
+    var l=lm[id];if(!l||!l.activity)return;
+    l.activity.instructions_es=instr;
+    if(l.activity.choices){
+      if(l.activity.choices[0]){l.activity.choices[0].text_es=c0t;l.activity.choices[0].explanation_es=c0e;}
+      if(l.activity.choices[1]){l.activity.choices[1].text_es=c1t;l.activity.choices[1].explanation_es=c1e;}
+      if(l.activity.choices[2]){l.activity.choices[2].text_es=c2t;l.activity.choices[2].explanation_es=c2e;}
+    }
+  }
+  ea('e9A1','¿Qué distingue a una epopeya de una historia corriente?','Su mayor extensión','La longitud por sí sola no define a una epopeya.','Un héroe noble en un viaje grandioso con temas míticos','Las epopeyas son historias ambiciosas con temas universales que trascienden el tiempo.','Estar ambientada en tiempos antiguos','El escenario histórico no define a una epopeya; los temas sí lo hacen.');
+  ea('e9A2','¿Qué diferencia al cuento corto de la novela?','Es simplemente una versión más corta de una novela','El cuento corto es una forma literaria propia, no una novela en miniatura.','Su brevedad exige elegir las palabras con cuidado y mantener una trama enfocada','En el cuento corto, cada elemento debe servir a la historia con precisión.','Los cuentos cortos son menos importantes que las novelas','Ambas formas tienen el mismo valor literario y tradición.');
+  ea('e9A3','¿Cuál es una diferencia clave entre leer una obra teatral y leer una novela?','Las obras de teatro son siempre mejores que las novelas','Ambas formas literarias tienen sus propias fortalezas y valor.','Las novelas usan narración; las obras teatrales, diálogo y acotaciones','La forma condiciona cómo se cuenta la historia e invita a la interpretación.','Las novelas son más importantes en la literatura','Ambas formas son igualmente valiosas para la tradición literaria.');
+  ea('e9B1','¿En qué debe centrarse un ensayo analítico?','"Lo que pienso sobre el libro"','La opinión personal sola no constituye análisis literario.','"Cómo los elementos literarios crean significado y efecto"','El análisis examina la técnica y el efecto que produce en el lector.','"Resumir la trama"','El resumen de la trama no es análisis; el análisis va más allá de qué pasa.');
+  ea('e9B2','¿Qué es lo más importante en un ensayo de solicitud universitaria?','"Vocabulario impresionante y oraciones largas"','La voz auténtica importa mucho más que demostrar erudición.','"Tu historia genuina y lo que te hace único"','Las universidades quieren conocer quién eres de verdad, no una versión idealizada.','"Decirles a los evaluadores lo que crees que quieren escuchar"','La autenticidad es precisamente lo que las universidades valoran en este tipo de ensayo.');
+  ea('e9B3','¿Cuál es una diferencia clave entre el artículo de noticias y el artículo de opinión?','"Las noticias tienen hechos; la opinión son solo sentimientos"','El artículo de opinión también debe estar bien fundamentado con argumentos y evidencia.','"Las noticias reportan hechos imparcialmente; la opinión presenta argumentos sobre temas"','Son formas distintas con propósitos y enfoques diferentes.','"Las noticias son más importantes que la opinión"','Ambas formas tienen propósitos valiosos y distintos en la sociedad.');
+  ea('e9C1','¿Cómo se desarrolla el estilo de escritura?','Intentando imitar a autores famosos','La imitación puede ser un punto de partida, pero el estilo auténtico es el propio.','Leyendo ampliamente y escribiendo con frecuencia, tomando decisiones deliberadas','El estilo se forja con práctica constante y exposición a muchos tipos de escritura.','Siguiendo las reglas gramaticales al pie de la letra','El estilo va mucho más allá de la gramática; implica voz, ritmo y elecciones estéticas.');
+  ea('e9C2','¿Qué función cumple el paralelismo en la retórica?','Hace las oraciones más largas','El paralelismo se ocupa de la estructura, no de la extensión de las oraciones.','Crea ritmo y hace las ideas más memorables','La estructura paralela facilita la retención en la memoria y potencia la persuasión.','Confunde a la audiencia','Todo lo contrario: el paralelismo clarifica y enfatiza las ideas.');
+  ea('e9C3','¿Cuándo puede resultar efectivo usar una frase incompleta en la escritura?','"Nunca: las frases incompletas siempre son incorrectas"','Los escritores profesionales las usan de manera estratégica para lograr impacto.','"Cuando se busca énfasis o un efecto dramático"','Una frase incompleta puede ser muy poderosa en el contexto adecuado.','"Cuando no se conocen las reglas gramaticales"','Las frases incompletas deliberadas son muy distintas de los errores involuntarios.');
+  ea('e9D1','¿A qué alude la expresión "caballo de Troya"?','"Un caballo construido de madera"','Eso es una interpretación literal; las alusiones tienen un significado más profundo y simbólico.','"Algo que parece beneficioso pero oculta un peligro o engaño"','El caballo de Troya fue una trampa; la alusión advierte del peligro escondido tras una apariencia inofensiva.','"Un caballo de gran tamaño"','Esa sería una interpretación meramente literal, sin el valor alusivo.');
+  ea('e9D2','¿Qué es un personaje contraste (foil) en la literatura?','Un personaje que comete errores','Cometer errores no es lo que define específicamente a un personaje contraste.','Un personaje cuyas diferencias resaltan las cualidades de otro','Los personajes contraste revelan rasgos de otro personaje mediante el contraste deliberado.','El villano de la historia','Eso describe al antagonista, que es un concepto distinto del personaje contraste.');
+  ea('e9D3','Si "morfo" significa forma, ¿qué significa "amorfo"?','"Sin forma definida"','El prefijo "a-" significa "sin"; combinado con "morfo" (forma), amorfo significa sin forma.','"Que cambia de forma constantemente"','Ese significado correspondería más bien a "cambiante" o "transformándose".','"Que tiene muchas formas"','Eso describe algo "polimorfo", no "amorfo".');
+  ea('e9E1','¿Cuál es el propósito de un seminario socrático?','"El docente da las respuestas"','En el seminario socrático son los estudiantes quienes guían la conversación, no el docente.','"Los estudiantes exploran ideas a través de preguntas y debate"','El cuestionamiento socrático profundiza el pensamiento y abre nuevas perspectivas.','"Evaluar si los estudiantes conocen las respuestas"','El objetivo es desarrollar el pensamiento crítico, no evaluar conocimientos memorizados.');
+  ea('e9E2','¿En qué se diferencia la redacción de discursos de la escritura de ensayos?','"Los discursos son simplemente ensayos leídos en voz alta"','Los discursos se diseñan específicamente para ser escuchados y entregados en voz alta.','"Los discursos usan repetición y emoción; se escuchan, no se leen"','El sonido, el ritmo y la entrega son elementos cruciales que distinguen a los discursos de los ensayos.','"Los ensayos son más importantes que los discursos"','Ambas formas son poderosas; cada una cumple propósitos distintos.');
+  ea('e9E3','¿Qué tono es apropiado para un correo electrónico profesional?','"El mismo que usaría en un mensaje de texto a mis amigos"','La comunicación profesional requiere un registro muy distinto al de la mensajería casual.','"Formal y claro"','El correo profesional exige un tono apropiado al contexto laboral o académico.','"Lo más informal posible"','El contexto siempre determina el estilo; en ámbitos profesionales la informalidad puede ser contraproducente.');
+})();
+
+// ── Grade 9 History ──
+(function(){
+  if(typeof HISTORY_CURRICULUM==='undefined'||!HISTORY_CURRICULUM[9])return;
+  var gd=HISTORY_CURRICULUM[9];
+  gd.description_es='Historia de 9.° grado: Historia Mundial, Interacciones Globales, Revolución y Reforma, El Mundo Moderno y Temas Contemporáneos';
+  var cn={A:'Historia Mundial',B:'Interacciones Globales',C:'Revolución y Reforma',D:'El Mundo Moderno',E:'Temas Contemporáneos'};
+  Object.keys(cn).forEach(function(k){if(gd.categories[k])gd.categories[k].name_es=cn[k];});
+  var lm={};
+  Object.keys(gd.categories).forEach(function(ck){(gd.categories[ck].lessons||[]).forEach(function(l){lm[l.id]=l;});});
+  var tt={
+    'h9A1':['Civilizaciones de los valles fluviales','¿Cómo surgieron las primeras civilizaciones?'],
+    'h9A2':['Imperios clásicos','¿Qué hizo poderosos e influyentes a los imperios clásicos?'],
+    'h9A3':['Rutas comerciales','¿Cómo transformó el comercio a las sociedades antiguas?'],
+    'h9B1':['La Era de Exploración','¿Por qué los europeos exploraron y colonizaron el mundo?'],
+    'h9B2':['El Intercambio Colombino','¿Cómo transformó el mundo el Intercambio Colombino?'],
+    'h9B3':['El comercio de esclavos del Atlántico','¿Qué fue y por qué se desarrolló el comercio de esclavos del Atlántico?'],
+    'h9C1':['La Ilustración','¿Qué ideas cambiaron durante la Ilustración?'],
+    'h9C2':['Revoluciones políticas','¿Cómo transformaron los gobiernos las revoluciones políticas?'],
+    'h9C3':['El nacionalismo','¿Cómo remodeló el nacionalismo a Europa y el mundo?'],
+    'h9D1':['La Segunda Guerra Mundial','¿Por qué fue tan devastadora la Segunda Guerra Mundial?'],
+    'h9D2':['La Guerra Fría','¿Por qué las tensiones entre EE. UU. y la URSS moldearon al mundo?'],
+    'h9D3':['La descolonización','¿Cómo se convirtieron las colonias en naciones independientes?'],
+    'h9E1':['La globalización','¿Cómo ha transformado al mundo la globalización?'],
+    'h9E2':['El terrorismo','¿Qué es el terrorismo y cómo ha evolucionado?'],
+    'h9E3':['Los derechos humanos','¿Qué son los derechos humanos y por qué importan?']
+  };
+  Object.keys(tt).forEach(function(id){var l=lm[id];if(l){l.title_es=tt[id][0];l.tagline_es=tt[id][1];}});
+  function ha(id,instr,c0t,c0e,c1t,c1e,c2t,c2e){
+    var l=lm[id];if(!l||!l.activity)return;
+    l.activity.instructions_es=instr;
+    if(l.activity.choices){
+      if(l.activity.choices[0]){l.activity.choices[0].text_es=c0t;l.activity.choices[0].explanation_es=c0e;}
+      if(l.activity.choices[1]){l.activity.choices[1].text_es=c1t;l.activity.choices[1].explanation_es=c1e;}
+      if(l.activity.choices[2]){l.activity.choices[2].text_es=c2t;l.activity.choices[2].explanation_es=c2e;}
+    }
+  }
+  ha('h9A1','¿Por qué se desarrollaron las civilizaciones en los valles fluviales?','El suelo fértil de las inundaciones sostenía grandes poblaciones','Las llanuras aluviales ofrecían condiciones agrícolas ideales que permitieron el desarrollo de ciudades.','Los ríos servían para el entretenimiento y el ocio','Los ríos eran esenciales para la supervivencia y la agricultura, no para el entretenimiento.','Las montañas impedían el asentamiento en otros lugares','Fue el clima y la geografía fluvial en su conjunto, no las montañas, lo que determinó la ubicación.');
+  ha('h9A2','¿Qué permitió a los imperios clásicos gobernar vastos territorios?','El poder militar, sistemas burocráticos y cultura compartida','Estos mecanismos fueron los que lograron unificar a poblaciones diversas en un mismo imperio.','Barreras geográficas naturales que protegían sus fronteras','Los grandes imperios enfrentaban amenazas externas constantes; las barreras no bastaban.','La ausencia de conflictos o disidencia interna','Los imperios lidiaban permanentemente con desafíos internos que amenazaban su cohesión.');
+  ha('h9A3','¿Cuáles fueron los principales efectos de las rutas comerciales antiguas?','El intercambio de bienes, ideas, religiones y enfermedades','Las redes comerciales transformaron las sociedades de manera integral, en todos los ámbitos de la vida.','Solo las personas adineradas podían acceder a los bienes comerciales','Los productos comerciales llegaban, de distintas formas, a diversas clases sociales.','Las rutas comerciales unificaron al mundo bajo un solo gobierno','El comercio conectaba regiones, pero no creaba un gobierno unificado.');
+  ha('h9B1','¿Qué motivó la exploración europea?','El deseo de comercio, riqueza, conversión religiosa y poder','Estos fueron los motores primarios que impulsaron la exploración y posterior colonización.','La curiosidad científica por la geografía','Aunque presente, los motivos económicos y políticos dominaron claramente sobre la curiosidad científica.','Huir de la superpoblación en Europa','La presión demográfica no fue la causa principal de la exploración europea.');
+  ha('h9B2','¿Cuáles fueron las consecuencias del Intercambio Colombino?','Nuevos cultivos, enfermedades y la colonización de las Américas','Todas estas fueron consecuencias mayores y transformadoras del Intercambio Colombino.','Mayor aislamiento de los continentes del comercio global','El intercambio aumentó drásticamente la interacción global, no el aislamiento.','Beneficio inmediato para todas las poblaciones involucradas','Los pueblos indígenas sufrieron enfermedades devastadoras y explotación colonial.');
+  ha('h9B3','¿Por qué se desarrolló el comercio de esclavos del Atlántico?','La demanda de mano de obra en las plantaciones americanas y las justificaciones racistas','La demanda económica y la ideología racista fueron los factores que impulsaron el comercio esclavista.','Las sociedades africanas participaron voluntariamente en el comercio','Los africanos eran capturados por la fuerza; no hubo participación voluntaria en la esclavitud.','Los colonizadores europeos no tenían alternativas de mano de obra','Existían otras opciones, pero la esclavitud era la más rentable económicamente.');
+  ha('h9C1','¿Qué cuestionaron los filósofos de la Ilustración?','La monarquía absoluta, el derecho divino de los reyes y la autoridad religiosa','Estos fueron los blancos centrales de la crítica ilustrada que sentó las bases del pensamiento moderno.','El valor de la ciencia y la razón','La Ilustración, al contrario, defendió firmemente la ciencia y la razón como guías del conocimiento.','El comercio y la economía internacional','La Ilustración se enfocó en la filosofía política, no en el comercio.');
+  ha('h9C2','¿Qué lograron las revoluciones políticas?','Derrocaron monarquías y establecieron repúblicas y democracias','Las revoluciones produjeron una transformación fundamental en las formas de gobierno.','Eliminaron permanentemente todas las diferencias de clase','Las diferencias de clase persistieron incluso después de las revoluciones.','Extendieron la paz y la estabilidad por toda Europa','Las revoluciones trajeron frecuentemente violencia, guerra civil y conflictos prolongados.');
+  ha('h9C3','¿Qué logró el nacionalismo?','Motivó la independencia y la unificación de estados-nación','El nacionalismo fue la fuerza que moldeó el mapa político de la Europa moderna.','Eliminó todos los conflictos entre grupos étnicos','El nacionalismo, al contrario, intensificó frecuentemente los conflictos étnicos y territoriales.','Fortaleció los imperios universales y las monarquías','El nacionalismo reemplazó a los imperios con estados-nación más pequeños y homogéneos.');
+  ha('h9D1','¿Qué hizo a la Segunda Guerra Mundial especialmente destructiva?','Las armas industriales, la guerra total, el genocidio y las bombas atómicas','Todos estos factores combinados generaron una destrucción sin precedentes en la historia.','El combate fue solo entre soldados profesionales','Los civiles fueron objetivos principales y representaron una gran parte de las víctimas.','Su corta duración redujo las bajas','Duró seis años y causó decenas de millones de muertes.');
+  ha('h9D2','¿Por qué fue significativa la Guerra Fría?','Creó una carrera armamentista nuclear y dominó la política mundial durante 45 años','Estos fueron rasgos definitorios que moldearon la geopolítica de la segunda mitad del siglo XX.','Resolvió rápidamente las tensiones internacionales de forma pacífica','La Guerra Fría duró décadas y mantuvo tensiones muy elevadas de manera continua.','Unificó al mundo bajo una sola ideología','La Guerra Fría dividió al mundo en bloques opuestos, no lo unificó.');
+  ha('h9D3','¿Por qué se produjo la descolonización tras la Segunda Guerra Mundial?','Las potencias europeas se debilitaron, el nacionalismo creció y la Guerra Fría alentó la independencia','Múltiples factores convergieron para hacer posible la descolonización en ese período.','Los colonizadores concedieron la independencia voluntariamente por buena voluntad','La independencia fue ganada y, en muchos casos, arrancada con lucha y resistencia.','Los pueblos colonizados no estaban preparados para gobernarse','Las naciones descolonizadas desarrollaron gobiernos funcionales, a pesar de los desafíos heredados.');
+  ha('h9E1','¿Cuáles son los efectos de la globalización?','Interdependencia económica, intercambio cultural y aumento de la desigualdad','La globalización tiene múltiples efectos, tanto positivos como negativos, distribuidos de manera desigual.','La eliminación completa de los conflictos internacionales','La globalización no ha impedido los conflictos; en algunos casos los ha exacerbado.','Homogeneización cultural y pérdida total de tradiciones locales','Aunque hay cierta homogeneización, las culturas locales persisten y se adaptan.');
+  ha('h9E2','¿Por qué es difícil combatir el terrorismo moderno?','Los terroristas se ocultan entre civiles, usan ataques suicidas y siembran un miedo desproporcionado al daño causado','Estas características hacen que el terrorismo sea difícil de combatir con métodos militares convencionales.','Los terroristas controlan grandes territorios y ejércitos regulares','Los grupos terroristas generalmente carecen de territorio y de fuerzas militares formales.','Solo la fuerza militar puede hacer frente al terrorismo','Las respuestas exclusivamente militares tienen limitaciones serias y pueden generar nuevos agravios.');
+  ha('h9E3','¿Qué son los derechos humanos?','Protecciones universales a la vida, la libertad, la dignidad y el trato justo','Estos son los derechos humanos fundamentales que corresponden a toda persona por el simple hecho de serlo.','Derechos que los gobiernos otorgan a los ciudadanos obedientes','Los derechos humanos son universales e inalienables; no los otorga ningún gobierno.','Derechos que solo se aplican en las democracias','Los derechos humanos se aplican en todo el mundo y para toda persona, sin excepción.');
+})();
+
+// ── Grade 9 Social Studies ──
+(function(){
+  if(typeof SOCIAL_STUDIES_CURRICULUM==='undefined'||!SOCIAL_STUDIES_CURRICULUM[9])return;
+  var gd=SOCIAL_STUDIES_CURRICULUM[9];
+  gd.description_es='Historia Mundial de 9.° grado: desde las civilizaciones antiguas hasta la globalización moderna';
+  var cn={A:'El Mundo Antiguo',B:'El Mundo Medieval',C:'Renacimiento y Reforma',D:'La Era de las Revoluciones',E:'El Mundo Moderno'};
+  Object.keys(cn).forEach(function(k){if(gd.categories[k])gd.categories[k].name_es=cn[k];});
+  var lm={};
+  Object.keys(gd.categories).forEach(function(ck){(gd.categories[ck].lessons||[]).forEach(function(l){lm[l.id]=l;});});
+  var tt={
+    'ss9A1':['El surgimiento de la civilización y los primeros imperios','Cómo los humanos se organizaron en sociedades complejas'],
+    'ss9A2':['Los imperios clásicos: Grecia y Roma','Las civilizaciones que moldearon la cultura occidental'],
+    'ss9A3':['Rutas comerciales e intercambio cultural','El intercambio de bienes e ideas entre culturas distantes'],
+    'ss9B4':['El Imperio Bizantino y el islam','Dos grandes civilizaciones forjan el mundo medieval'],
+    'ss9B5':['El feudalismo y la sociedad medieval','La jerarquía, la tierra y los señores en la Europa medieval'],
+    'ss9B6':['Las Cruzadas y el Imperio Mongol','Las guerras religiosas y el mayor imperio contiguo de la historia'],
+    'ss9C7':['El arte y las ideas del Renacimiento','El redescubrimiento del saber clásico y el renacimiento cultural'],
+    'ss9C8':['La Reforma Protestante y el conflicto religioso','Desafíos religiosos a la autoridad de la Iglesia que remodelan Europa'],
+    'ss9C9':['La Revolución Científica','Nuevos métodos transforman la comprensión de la naturaleza'],
+    'ss9D10':['La Revolución Francesa y la Ilustración','Las ideas de igualdad y derechos transforman la sociedad'],
+    'ss9D11':['Los movimientos de independencia en América Latina','Las colonias americanas luchan por la independencia'],
+    'ss9D12':['La Revolución Industrial se extiende por el mundo','El sistema de fábricas y la tecnología transforman las economías del mundo'],
+    'ss9E13':['El imperialismo y la dominación global','Las naciones industriales dominan y colonizan el mundo'],
+    'ss9E14':['Las Guerras Mundiales y su impacto global','Los conflictos globales que cambiaron al mundo para siempre'],
+    'ss9E15':['La descolonización y la globalización','Las colonias obtienen la independencia en un mundo interconectado']
+  };
+  Object.keys(tt).forEach(function(id){var l=lm[id];if(l){l.title_es=tt[id][0];l.tagline_es=tt[id][1];}});
+  function ssa(id,instr,c0t,c0e,c1t,c1e,c2t,c2e){
+    var l=lm[id];if(!l||!l.activity)return;
+    l.activity.instructions_es=instr;
+    if(l.activity.choices){
+      if(l.activity.choices[0]){l.activity.choices[0].text_es=c0t;l.activity.choices[0].explanation_es=c0e;}
+      if(l.activity.choices[1]){l.activity.choices[1].text_es=c1t;l.activity.choices[1].explanation_es=c1e;}
+      if(l.activity.choices[2]){l.activity.choices[2].text_es=c2t;l.activity.choices[2].explanation_es=c2e;}
+    }
+  }
+  ssa('ss9A1','¿Cuál fue una gran ventaja de las civilizaciones de los valles fluviales?','La agricultura de irrigación sostenía grandes poblaciones permanentes','Los sistemas fluviales permitían el riego agrícola que alimentaba a las ciudades y sostenía su crecimiento.','Los ríos ofrecían protección naval frente a los enemigos','Los ríos podían ser transitados por invasores; la ventaja clave era la agricultura, no la defensa.','Los ríos creaban riqueza natural sin necesidad de trabajo','Las civilizaciones fluviales debían trabajar arduamente para aprovechar y domesticar los recursos del río.');
+  ssa('ss9A2','¿Cuál fue una contribución importante de la Antigua Grecia a la cultura occidental?','La filosofía, la democracia y la indagación científica','Los pensadores griegos desarrollaron la filosofía occidental y los ideales democráticos que perduran hasta hoy.','El monoteísmo religioso','La Antigua Grecia era politeísta; el monoteísmo proviene de otras tradiciones religiosas.','La tecnología de manufactura industrial','La Grecia antigua era preindustrial; su legado fue intelectual y político, no tecnológico-industrial.');
+  ssa('ss9A3','¿Cuál fue un impacto importante de las rutas comerciales antiguas?','La difusión de bienes, ideas, religiones y enfermedades por los continentes','Las rutas comerciales fueron el principal medio de intercambio cultural y biológico entre civilizaciones.','Las civilizaciones se volvieron más independientes al aislarse','Las rutas comerciales aumentaron la interconexión entre regiones, no el aislamiento.','La conquista militar se volvió innecesaria','El comercio coexistía con los conflictos militares; no los eliminó.');
+  ssa('ss9B4','¿Cuál fue un gran logro de la civilización islámica?','Preservó el saber griego y romano e hizo avances en ciencias','Los académicos islámicos realizaron contribuciones fundamentales a las matemáticas, la astronomía y la medicina.','Inventó la imprenta','La imprenta fue inventada en Europa siglos después; no es un logro de la civilización islámica.','Unificó toda Europa bajo un solo gobierno','La civilización islámica nunca controló la totalidad del continente europeo.');
+  ssa('ss9B5','¿Cuál fue una característica principal de la sociedad feudal?','Una jerarquía basada en la posesión de tierras con obligaciones de lealtad y servicio','El feudalismo organizó la sociedad mediante relaciones de posesión de tierras y lealtad recíproca.','Un gobierno democrático con representantes elegidos','El feudalismo era profundamente jerárquico; no era ni democrático ni representativo.','Una distribución igualitaria de la riqueza entre todos los ciudadanos','El feudalismo era un sistema extremadamente desigual, basado en privilegios hereditarios.');
+  ssa('ss9B6','¿Cuál fue una consecuencia importante de las Cruzadas?','Crearon una tensión religiosa duradera entre cristianos y musulmanes','Las Cruzadas sembraron un profundo resentimiento que condicionó las relaciones de Oriente Medio durante siglos.','Resultaron en el control europeo permanente de Jerusalén','Los musulmanes recuperaron Jerusalén después de las Cruzadas; el control europeo no fue permanente.','Unificaron toda Europa en un solo imperio','Las Cruzadas involucaron reinos europeos desunidos; no crearon ningún imperio europeo unificado.');
+  ssa('ss9C7','¿Cuál fue una característica clave del pensamiento renacentista?','El énfasis en el potencial humano, el saber clásico y el arte realista','El Renacimiento valoró el logro humano y la representación realista de la naturaleza y el cuerpo.','Una concentración exclusiva en los temas religiosos','Aunque la religión seguía siendo importante, los pensadores renacentistas ampliaron su mirada mucho más allá de la teología.','El rechazo de las matemáticas y la ciencia','Los pensadores renacentistas fueron pioneros de la investigación científica; no la rechazaron.');
+  ssa('ss9C8','¿Cuál fue la crítica principal de Martín Lutero a la Iglesia Católica?','La corrupción, incluida la venta de indulgencias para el perdón de los pecados','Lutero se opuso a que la Iglesia cobrara dinero a cambio del perdón espiritual.','Que la Iglesia debería tener más poder','Lutero quería reducir la corrupción y el poder excesivo de la Iglesia, no ampliarlo.','Que no debería haber sacerdotes','Lutero propuso una reforma profunda, no la eliminación del sacerdocio.');
+  ssa('ss9C9','¿Qué demostró Copérnico sobre el sistema solar?','El sol, y no la Tierra, estaba en el centro del sistema solar','El heliocentrismo contradecía la doctrina de la Iglesia, pero coincidía con las observaciones astronómicas.','La Tierra era el centro del universo','Esa era la creencia medieval incorrecta que Copérnico refutó con sus observaciones.','El sistema solar no tiene un centro','Copérnico identificó al sol como el centro del sistema solar, no propuso que carecía de centro.');
+  ssa('ss9D10','¿Qué ideas de la Ilustración influyeron en la Revolución Francesa?','Los derechos humanos, la separación de poderes y el gobierno democrático','Los filósofos ilustrados proporcionaron el fundamento intelectual de los ideales revolucionarios.','El derecho divino de los reyes y la autoridad absoluta','La Revolución se opuso precisamente a estas ideas; las Luces las cuestionaban.','El feudalismo y la autoridad religiosa','La Revolución rechazó estos sistemas; no los promovió.');
+  ssa('ss9D11','¿Qué inspiró los movimientos de independencia en América Latina?','Las ideas ilustradas y el ejemplo de la Revolución Americana','Los ideales revolucionarios europeos y el ejemplo estadounidense inspiraron los movimientos latinoamericanos.','La prosperidad económica generada por el colonialismo','El colonialismo extraía riqueza de las colonias en beneficio de las metrópolis, no de los colonizados.','El deseo de fortalecer los vínculos coloniales','Los movimientos de independencia se opusieron al colonialismo; no buscaban reforzarlo.');
+  ssa('ss9D12','¿Cuál fue una consecuencia importante de la expansión global de la Revolución Industrial?','Las naciones industriales usaron su poder para colonizar y explotar a las regiones no industrializadas','El poder industrial posibilitó el imperialismo y la dominación económica de vastas regiones del mundo.','Todas las naciones se desarrollaron de igual manera','La industrialización creó una profunda desigualdad global entre naciones industrializadas y no industrializadas.','El colonialismo terminó de inmediato','La industrialización, paradójicamente, amplió y fortaleció el colonialismo.');
+  ssa('ss9E13','¿Cuál fue un motivo principal del imperialismo europeo?','El acceso a recursos naturales, mercados y prestigio nacional','Las naciones industriales competían por colonias para explotar recursos y ampliar sus mercados.','Ayudar a los pueblos colonizados a desarrollarse','Aunque los colonizadores lo proclamaban, la explotación fue el objetivo real del imperialismo.','Difundir la democracia y la libertad','Los colonizadores impusieron regímenes autoritarios, no democráticos, en las colonias.');
+  ssa('ss9E14','¿Cuál fue una consecuencia importante de la Segunda Guerra Mundial?','El surgimiento de dos superpotencias (EE. UU. y la URSS) y la creación de la ONU','La guerra puso fin a la hegemonía europea y dio paso a instituciones para la cooperación internacional.','Los imperios europeos se fortalecieron','La guerra agotó a las potencias europeas y aceleró el proceso de descolonización.','La Alemania nazi alcanzó sus objetivos','Alemania fue derrotada militarmente y ocupada por las potencias aliadas.');
+  ssa('ss9E15','¿Cuál fue una consecuencia importante de la descolonización?','Las nuevas naciones se independizaron pero frecuentemente lucharon con fronteras y estructuras creadas por los colonizadores','La independencia no borró los problemas heredados del colonialismo: fronteras artificiales y estructuras de extracción.','Las naciones africanas y asiáticas se enriquecieron de inmediato','Muchas antiguas colonias enfrentaron graves dificultades económicas tras la independencia.','Los problemas coloniales terminaron de inmediato','El legado colonial persistió mucho tiempo después de lograda la independencia formal.');
+})();
+
+// ── Grade 9 Math (Álgebra 1) — direct _es injection ──
+(function(){
+  if(typeof MATH_CURRICULUM==='undefined'||!MATH_CURRICULUM[9])return;
+  var gd=MATH_CURRICULUM[9];
+  gd.description_es='Álgebra 1: ecuaciones lineales, funciones, sistemas, polinomios y cuadráticas';
+  var cn={A:'Ecuaciones e Inecuaciones Lineales',B:'Funciones y Graficación',C:'Sistemas de Ecuaciones',D:'Polinomios y Factorización',E:'Cuadráticas y Radicales'};
+  Object.keys(cn).forEach(function(k){if(gd.categories[k])gd.categories[k].name_es=cn[k];});
+  var lm={};
+  Object.keys(gd.categories).forEach(function(ck){(gd.categories[ck].lessons||[]).forEach(function(l){lm[l.id]=l;});});
+  var titles={
+    'm9A1':'Ecuaciones de un paso: suma y resta','m9A2':'Ecuaciones de un paso: multiplicación y división',
+    'm9A3':'Ecuaciones de dos pasos','m9A4':'Ecuaciones de varios pasos: combinando términos semejantes',
+    'm9A5':'Ecuaciones con variables en ambos lados','m9A6':'Ecuaciones con paréntesis: propiedad distributiva',
+    'm9A7':'Ecuaciones literales: despejar una variable','m9A8':'Resolver proporciones',
+    'm9A9':'Ecuaciones de valor absoluto','m9A10':'Desigualdades de un paso',
+    'm9A11':'Desigualdades de dos pasos','m9A12':'Desigualdades con multiplicadores negativos',
+    'm9A13':'Desigualdades compuestas: Y (intersección)','m9A14':'Desigualdades compuestas: O (unión)',
+    'm9A15':'Desigualdades de valor absoluto','m9A16':'Escribir ecuaciones a partir de problemas verbales',
+    'm9A17':'Problemas de enteros consecutivos','m9A18':'Problemas de distancia, velocidad y tiempo',
+    'm9A19':'Ecuaciones de porcentaje','m9A20':'Problemas verbales de edad',
+    'm9B21':'Notación de funciones: evaluar f(x)','m9B22':'Dominio y rango de funciones',
+    'm9B23':'Identificar funciones: prueba de la línea vertical','m9B24':'Funciones lineales vs. no lineales',
+    'm9B25':'Pendiente a partir de dos puntos','m9B26':'Pendiente a partir de la ecuación (y = mx + b)',
+    'm9B27':'Forma pendiente-intercepto (y = mx + b)','m9B28':'Forma estándar (Ax + By = C)',
+    'm9B29':'Forma punto-pendiente (y − y₁ = m(x − x₁))','m9B30':'Graficar ecuaciones lineales',
+    'm9B31':'Graficar desigualdades lineales','m9B32':'Encontrar los interceptos en x e y',
+    'm9B33':'Líneas horizontales y verticales','m9B34':'Líneas paralelas (misma pendiente)',
+    'm9B35':'Líneas perpendiculares (pendientes recíprocas negativas)','m9B36':'Escribir la ecuación de una línea desde una gráfica',
+    'm9B37':'Escribir la ecuación de una línea con dos puntos','m9B38':'Funciones por partes (introducción)',
+    'm9B39':'Tasa de cambio promedio','m9B40':'Repaso de funciones: práctica mixta',
+    'm9C41':'Resolver sistemas graficando','m9C42':'Resolver sistemas por sustitución',
+    'm9C43':'Resolver sistemas por eliminación (suma/resta)','m9C44':'Problemas verbales de sistemas',
+    'm9C45':'Sistemas sin solución (líneas paralelas)','m9C46':'Sistemas con infinitas soluciones (misma línea)',
+    'm9C47':'Sistemas de desigualdades lineales','m9C48':'Programación lineal (introducción)',
+    'm9C49':'Sistemas de tres variables (introducción)','m9C50':'Clasificar sistemas: consistente, inconsistente, dependiente',
+    'm9C51':'Escribir sistemas a partir de problemas verbales','m9C52':'Problemas de punto de equilibrio',
+    'm9C53':'Oferta y demanda','m9C54':'Sistemas de mezcla',
+    'm9C55':'Sistemas de monedas','m9C56':'Problemas de inversión',
+    'm9C57':'Problemas de velocidad y corriente (movimiento relativo)','m9C58':'Problemas de dígitos',
+    'm9C59':'Sistemas con fracciones','m9C60':'Repaso de sistemas: práctica mixta',
+    'm9D61':'Sumar polinomios','m9D62':'Restar polinomios',
+    'm9D63':'Multiplicar monomios','m9D64':'Multiplicar binomios (método FOIL)',
+    'm9D65':'Multiplicar polinomios (general)','m9D66':'Productos especiales: (a + b)²',
+    'm9D67':'Productos especiales: (a − b)²','m9D68':'Diferencia de cuadrados: (a + b)(a − b)',
+    'm9D69':'Factorización por MCD','m9D70':'Factorizar trinomios: x² + bx + c',
+    'm9D71':'Factorizar trinomios: ax² + bx + c (a ≠ 1)','m9D72':'Factorización por agrupación',
+    'm9D73':'Factorizar completamente','m9D74':'Factorizar diferencia de cuadrados',
+    'm9D75':'Factorizar trinomios cuadrados perfectos','m9D76':'Problemas verbales con polinomios',
+    'm9D77':'Grado de polinomios','m9D78':'Clasificar polinomios por número de términos',
+    'm9D79':'Dividir polinomios (división larga)','m9D80':'Repaso de polinomios: práctica mixta',
+    'm9E81':'Resolver ecuaciones cuadráticas factorizando','m9E82':'Propiedad del producto cero',
+    'm9E83':'Método de la raíz cuadrada (resolver x² = k)','m9E84':'Completar el cuadrado',
+    'm9E85':'Fórmula cuadrática','m9E86':'Discriminante (b² − 4ac)',
+    'm9E87':'Graficar parábolas (y = ax² + bx + c)','m9E88':'Forma vértice (y = a(x − h)² + k)',
+    'm9E89':'Eje de simetría (x = −b/(2a))','m9E90':'Encontrar el vértice desde la forma estándar',
+    'm9E91':'Simplificar radicales','m9E92':'Sumar y restar radicales',
+    'm9E93':'Multiplicar radicales','m9E94':'Dividir radicales',
+    'm9E95':'Racionalizar denominadores','m9E96':'Ecuaciones radicales (resolver √x = k)',
+    'm9E97':'Aplicaciones del teorema de Pitágoras','m9E98':'Crecimiento exponencial',
+    'm9E99':'Decaimiento exponencial','m9E100':'Repaso de cuadráticas: dominio completo'
+  };
+  var taglines={
+    'm9A1':'Despeja la variable','m9A2':'Multiplica o divide para despejar',
+    'm9A3':'Deshaz las operaciones en orden inverso','m9A4':'Simplifica antes de resolver',
+    'm9A5':'Mueve las variables a un solo lado','m9A6':'Distribuye antes de resolver',
+    'm9A7':'Trata las otras variables como constantes','m9A8':'Multiplica en cruz y resuelve',
+    'm9A9':'El valor absoluto crea dos casos','m9A10':'Las desigualdades son como ecuaciones con una variante',
+    'm9A11':'Resuelve como ecuaciones, ¡pero cuida la dirección!','m9A12':'¡Cambia el signo al dividir por un número negativo!',
+    'm9A13':'Ambas condiciones deben cumplirse','m9A14':'Al menos una condición debe cumplirse',
+    'm9A15':'El valor absoluto crea condiciones Y u O','m9A16':'Traduce palabras al lenguaje algebraico',
+    'm9A17':'Los enteros consecutivos difieren en 1','m9A18':'Distancia = Velocidad × Tiempo (d = vt)',
+    'm9A19':'Porcentaje significa por cien','m9A20':'Plantea ecuaciones con relaciones de edad',
+    'm9B21':'f(x) es otra forma de escribir y','m9B22':'El dominio es la entrada, el rango es la salida',
+    'm9B23':'Cada entrada tiene exactamente una salida','m9B24':'Lineal = línea recta, no lineal = curva',
+    'm9B25':'Aumento sobre avance: m = (y₂ − y₁)/(x₂ − x₁)','m9B26':'El coeficiente de x es la pendiente',
+    'm9B27':'La forma más útil de una línea','m9B28':'Convierte entre forma estándar y pendiente-intercepto',
+    'm9B29':'Escribe ecuaciones con un punto y la pendiente','m9B30':'Grafica puntos y traza la línea',
+    'm9B31':'Grafica la línea y sombrea la región correcta','m9B32':'Pon y = 0 para el intercepto en x, x = 0 para el de y',
+    'm9B33':'Horizontal: y = constante, Vertical: x = constante','m9B34':'Las líneas paralelas nunca se cruzan',
+    'm9B35':'Las líneas perpendiculares se cruzan en 90°','m9B36':'Lee el intercepto en y y la pendiente desde la gráfica',
+    'm9B37':'Halla la pendiente y usa la forma punto-pendiente','m9B38':'Distintas reglas para distintos intervalos de entrada',
+    'm9B39':'Cambio en y dividido entre cambio en x','m9B40':'Domina funciones y graficación',
+    'm9C41':'Grafica ambas líneas y halla el punto de intersección','m9C42':'Despeja una variable y sustitúyela en la otra ecuación',
+    'm9C43':'Elimina una variable sumando o restando las ecuaciones','m9C44':'Convierte situaciones en sistemas de ecuaciones',
+    'm9C45':'Las líneas paralelas nunca se cruzan','m9C46':'La misma línea tiene infinitos puntos en común',
+    'm9C47':'Halla la región que satisface ambas desigualdades','m9C48':'Maximiza o minimiza dentro de una región factible',
+    'm9C49':'Tres ecuaciones, tres incógnitas','m9C50':'Identifica el tipo de sistema y su solución',
+    'm9C51':'Dos condiciones, dos ecuaciones','m9C52':'¿Cuándo los ingresos igualan a los costos?',
+    'm9C53':'El equilibrio es donde se cruzan oferta y demanda','m9C54':'Combina dos mezclas con diferentes concentraciones',
+    'm9C55':'Cuenta monedas con dos ecuaciones','m9C56':'Distribuye el dinero entre dos cuentas',
+    'm9C57':'A favor o en contra de la corriente','m9C58':'El valor posicional crea el sistema',
+    'm9C59':'Elimina las fracciones antes de resolver','m9C60':'Domina todos los métodos para sistemas',
+    'm9D61':'Combina términos semejantes','m9D62':'Distribuye el negativo, luego combina',
+    'm9D63':'Suma los exponentes al multiplicar potencias iguales','m9D64':'Primero, Exterior, Interior, Último',
+    'm9D65':'Multiplica cada término por cada término','m9D66':'El trinomio cuadrado perfecto positivo',
+    'm9D67':'El trinomio cuadrado perfecto negativo','m9D68':'Dos términos: uno positivo y uno negativo',
+    'm9D69':'Saca el factor común a todos los términos','m9D70':'Halla dos números que sumen b y multipliquen c',
+    'm9D71':'Usa el método AC o por ensayo y error','m9D72':'Agrupa los términos para sacar el factor común',
+    'm9D73':'Aplica todos los métodos hasta factorizar por completo','m9D74':'a² − b² = (a + b)(a − b)',
+    'm9D75':'a² + 2ab + b² = (a + b)²','m9D76':'El área y el perímetro modelan polinomios',
+    'm9D77':'El grado es el mayor exponente','m9D78':'Monomio, binomio, trinomio, polinomio',
+    'm9D79':'Similar a la división larga de números enteros','m9D80':'Domina operaciones y factorización',
+    'm9E81':'Factoriza y usa la propiedad del producto cero','m9E82':'Si ab = 0, entonces a = 0 o b = 0',
+    'm9E83':'Despeja con la raíz cuadrada','m9E84':'Convierte a la forma de cuadrado perfecto',
+    'm9E85':'x = (−b ± √(b² − 4ac)) / (2a)','m9E86':'Determina el número y tipo de soluciones',
+    'm9E87':'La parábola se abre hacia arriba o hacia abajo','m9E88':'El vértice está en el punto (h, k)',
+    'm9E89':'La parábola es simétrica alrededor del eje','m9E90':'Halla x = −b/(2a), luego sustituye para encontrar y',
+    'm9E91':'Saca los factores perfectos de la raíz','m9E92':'Combina radicales semejantes',
+    'm9E93':'√a × √b = √(ab)','m9E94':'√a ÷ √b = √(a/b)',
+    'm9E95':'Elimina la raíz del denominador','m9E96':'Eleva al cuadrado para eliminar la raíz',
+    'm9E97':'Calcula lados en triángulos rectángulos','m9E98':'La cantidad aumenta por un factor constante',
+    'm9E99':'La cantidad disminuye por un factor constante','m9E100':'Domina cuadráticas y radicales'
+  };
+  Object.keys(lm).forEach(function(id){
+    var l=lm[id];
+    if(titles[id])l.title_es=titles[id];
+    if(taglines[id])l.tagline_es=taglines[id];
+  });
+  function ma(id,instr,c0t,c0e,c1t,c1e,c2t,c2e){
+    var l=lm[id];if(!l||!l.activity)return;
+    l.activity.instructions_es=instr;
+    if(l.activity.choices){
+      if(l.activity.choices[0]){l.activity.choices[0].text_es=c0t;l.activity.choices[0].explanation_es=c0e;}
+      if(l.activity.choices[1]){l.activity.choices[1].text_es=c1t;l.activity.choices[1].explanation_es=c1e;}
+      if(l.activity.choices[2]){l.activity.choices[2].text_es=c2t;l.activity.choices[2].explanation_es=c2e;}
+    }
+  }
+  ma('m9A1','Resuelve: x + 5 = 12','x = 7','Resta 5 de ambos lados: x = 12 − 5 = 7.','x = 17','Sumaste en lugar de restar. Resta 5 de ambos lados.','x = 2','Solo restaste 5 del lado derecho. Aplica la operación a ambos lados.');
+  ma('m9A2','Resuelve: 3x = 18','x = 6','Divide ambos lados entre 3: 3x ÷ 3 = 18 ÷ 3, entonces x = 6.','x = 15','Restaste 3 en lugar de dividir. La división es la inversa de la multiplicación.','x = 54','Multiplicaste por 3 en lugar de dividir. Usa la operación inversa.');
+  ma('m9A3','Resuelve: 2x + 3 = 11','x = 4','Resta 3: 2x = 8. Divide entre 2: x = 4.','x = 7','¿Restaste 3 solo de 11 y no de 2x? Aplica la operación a ambos lados.','x = 5.5','Verifica: 2(4) + 3 = 11. ¿Dividiste correctamente entre 2?');
+  ma('m9A4','Resuelve: 2x + 5x − 7 = 35','x = 6','Combina: 7x − 7 = 35. Suma 7: 7x = 42. Divide entre 7: x = 6.','x = 42','Dividiste 35 entre 7 pero olvidaste la constante −7.','x = 5','¿Combinaste los términos semejantes? 2x + 5x = 7x, no 7.');
+  ma('m9A5','Resuelve: 3x + 2 = x + 10','x = 4','Resta x de ambos lados: 2x + 2 = 10. Resta 2: 2x = 8. Divide entre 2: x = 4.','x = 8','Verifica: 3x − x = 2x. Revisa cada paso.','x = 12','Verifica tu resta: 10 − 2 = 8, no 12.');
+  ma('m9A6','Resuelve: 2(x + 5) = 16','x = 3','Distribuye: 2x + 10 = 16. Resta 10: 2x = 6. Divide entre 2: x = 3.','x = 6','Encontraste 2x = 6 pero dividiste mal. 6 ÷ 2 = 3, no 6.','x = 8','¿Distribuiste bien? 2(x + 5) = 2x + 10, no 2x + 5.');
+  ma('m9A7','Despeja h en A = bh','h = A/b','Divide ambos lados entre b: A/b = bh/b, entonces h = A/b.','h = A − b','Necesitas deshacer la multiplicación, no la suma. Divide entre b.','h = Ab','Multiplicar no despeja h. Usa la división para aislar h.');
+  ma('m9A8','Resuelve: 3/4 = x/12','x = 9','Multiplicación cruzada: 3 × 12 = 4x → 36 = 4x → x = 9.','x = 16','Aplica bien la multiplicación cruzada: 3 × 12 = 36, luego 36 ÷ 4 = 9.','x = 4','Verifica: 3 × 12 = 36 y 36 ÷ 4 = 9, no 4.');
+  ma('m9A9','Resuelve: |x − 3| = 5','x = 8 o x = −2','Caso 1: x − 3 = 5 → x = 8. Caso 2: x − 3 = −5 → x = −2.','Solo x = 8','Las ecuaciones con valor absoluto tienen DOS soluciones. No olvides el caso negativo.','x = 5 o x = −5','Encontraste el valor absoluto, pero no despejaste x correctamente.');
+  ma('m9A10','Resuelve: x + 4 > 9','x > 5','Resta 4 de ambos lados: x + 4 − 4 > 9 − 4, entonces x > 5.','x > 13','Sumaste 4 en lugar de restar. Resta para deshacer la suma.','x < 5','La dirección es >. Solo se invierte al multiplicar o dividir entre negativos.');
+  ma('m9A11','Resuelve: 2x − 5 < 7','x < 6','Suma 5: 2x < 12. Divide entre 2 (positivo, no se invierte): x < 6.','x > 6','La dirección es incorrecta. Solo se invierte al dividir entre negativos.','x < 12','Divide 12 entre 2 para terminar: x < 6, no x < 12.');
+  ma('m9A12','Resuelve: −3x + 2 > 8','x < −2','Resta 2: −3x > 6. Divide entre −3 e invierte la desigualdad: x < −2.','x > −2','Olvidaste invertir la desigualdad al dividir entre −3. Debe quedar x < −2.','x < 2','Al dividir entre −3 se obtiene −2, no 2. Además hay que invertir la desigualdad.');
+  ma('m9A13','Resuelve: x > 2 Y x < 8','2 < x < 8','x debe ser mayor que 2 Y menor que 8: todos los números en ese intervalo.','x > 2 O x < 8','O significa unión. Necesitamos Y (intersección): valores que cumplen ambas condiciones.','x > 8','x debe satisfacer AMBAS: mayor que 2 Y menor que 8.');
+  ma('m9A14','Resuelve: x < −1 O x > 5','x < −1 o x > 5','x es menor que −1 O mayor que 5: dos regiones separadas en la recta numérica.','−1 < x < 5','Eso es una condición Y (intersección). O da DOS regiones distintas.','x > 5','x también puede ser menor que −1. Solución completa: x < −1 O x > 5.');
+  ma('m9A15','Resuelve: |x| < 4','−4 < x < 4','La distancia de x al 0 es menor que 4, es decir x > −4 Y x < 4.','x < −4 o x > 4','Eso corresponde a |x| > 4. Para |x| < 4 usa Y: −4 < x < 4.','x < 4','x también debe ser mayor que −4. Solución completa: −4 < x < 4.');
+  ma('m9A16','Jake tiene 3 veces las canicas de Emma. Juntos tienen 48. Escribe una ecuación.','3x + x = 48','Sea x las canicas de Emma. Jake tiene 3x. Juntos: 3x + x = 4x = 48.','3x = 48','Solo cuentas las de Jake. No olvides las de Emma: 3x + x = 48.','x + 3 = 48','"3 veces más" significa multiplicar por 3, no sumar 3. Usa 3x.');
+  ma('m9A17','La suma de tres enteros consecutivos es 45. Encuéntralos.','14, 15, 16','Sea n el primero: n + (n+1) + (n+2) = 45 → 3n + 3 = 45 → n = 14.','13, 14, 15','Verifica: 13 + 14 + 15 = 42 ≠ 45. Tu primer número es uno menor de lo correcto.','15, 16, 17','Verifica: 15 + 16 + 17 = 48 ≠ 45. Prueba con n = 14.');
+  ma('m9A18','Un auto viaja a 60 mph durante 3 horas. ¿Qué distancia recorre?','180 millas','d = vt = 60 × 3 = 180 millas.','20 millas','60 ÷ 3 = 20, pero la operación es incorrecta. Multiplica: 60 × 3 = 180.','63 millas','Sumar 60 + 3 = 63 no corresponde a d = vt. Multiplica la velocidad por el tiempo.');
+  ma('m9A19','¿Cuánto es el 25% de 80?','20','0.25 × 80 = 20. También: (25/100) × 80 = 20.','80','Eso es el 100% de 80. El 25% equivale a 1/4 de 80 = 20.','105','80 + 25 = 105 no es un porcentaje. Porcentaje implica multiplicar: 0.25 × 80 = 20.');
+  ma('m9A20','Maya es 3 años mayor que su hermano. En 5 años tendrá el doble de su edad. ¿Cuántos años tiene Maya?','7 años','Con la relación dada se verifica que Maya tiene actualmente 7 años y su hermano 4.','5 años','Si Maya tuviera 5, su hermano tendría 2. En 5 años: 10 y 7. 10 no es el doble de 7.','10 años','Si Maya tiene 10, su hermano tiene 7. En 5 años: 15 y 12. 15 no es el doble de 12.');
+  ma('m9B21','Si f(x) = 2x + 3, calcula f(5)','13','f(5) = 2(5) + 3 = 10 + 3 = 13.','15','Sumaste 5 en lugar de multiplicar por 2. f(5) = 2(5) + 3 = 13.','8','2(5) = 10, no 3. Luego 10 + 3 = 13.');
+  ma('m9B22','¿Cuál es el dominio de f(x) = 1/(x − 2)?','Todos los reales excepto 2','El denominador x − 2 no puede ser 0, entonces x ≠ 2.','Todos los números reales','No se puede dividir entre cero. x = 2 debe excluirse del dominio.','Solo los números positivos','La función no se limita a positivos; únicamente excluye x = 2.');
+  {var l23=lm['m9B23'];if(l23&&l23.activity){l23.activity.instructions_es='¿Representa x² + y² = 25 una función?';if(l23.activity.choices){if(l23.activity.choices[0]){l23.activity.choices[0].text_es='No';l23.activity.choices[0].explanation_es='Es una circunferencia. Las rectas verticales la cortan en dos puntos. No supera la prueba de la recta vertical.';}if(l23.activity.choices[1]){l23.activity.choices[1].text_es='Sí';l23.activity.choices[1].explanation_es='Una circunferencia no supera la prueba de la recta vertical. La mayoría de los valores de x tienen dos imágenes.';}}}}
+  ma('m9B24','¿Cuál de estas funciones es no lineal?','f(x) = x²','x² genera una parábola (curva), no una recta. Es no lineal.','f(x) = 3x − 2','Tiene la forma y = mx + b: es una función lineal (recta).','f(x) = −2x + 5','Es lineal (pendiente = −2). Las funciones no lineales tienen potencias como x² o √x.');
+  ma('m9B25','Calcula la pendiente por (2, 5) y (6, 13)','2','m = (13 − 5) / (6 − 2) = 8 / 4 = 2.','4','Restaste bien (8 y 4), pero dividiste mal. 8 ÷ 4 = 2, no 4.','1.5','Verifica: (13−5)=8 y (6−2)=4, entonces 8/4 = 2, no 1.5.');
+  ma('m9B26','¿Cuál es la pendiente de y = −3x + 7?','−3','En y = mx + b, m = −3. La pendiente es −3.','7','7 es la ordenada al origen (b), no la pendiente. La pendiente es el coeficiente de x: −3.','3','La pendiente es −3, no +3. Presta atención al signo.');
+  ma('m9B27','Escribe la ecuación con pendiente 4 y ordenada al origen −2','y = 4x − 2','m = 4 y b = −2. En y = mx + b: y = 4x − 2.','y = −2x + 4','Intercambiaste m y b. m = 4 y b = −2, entonces y = 4x − 2.','y = 4x + 2','b = −2, no +2. La ecuación es y = 4x − 2.');
+  ma('m9B28','Reescribe 3x + 4y = 12 en forma pendiente-intersección','y = −3/4 x + 3','4y = −3x + 12. Divide entre 4: y = −3/4 x + 3.','y = 3/4 x + 3','Al restar 3x obtienes −3x (negativo). Entonces y = −3/4 x + 3.','y = −3/4 x − 3','12 ÷ 4 = 3 (positivo), no −3. La ecuación es y = −3/4 x + 3.');
+  ma('m9B29','Escribe la ecuación por (3, 5) con pendiente 2','y − 5 = 2(x − 3)','Usando y − y₁ = m(x − x₁): y − 5 = 2(x − 3).','y + 5 = 2(x + 3)','Los signos son incorrectos. Con (3, 5) se usa (x − 3) y (y − 5).','y = 2x + 5','Esa es la forma pendiente-intersección. La forma punto-pendiente es y − 5 = 2(x − 3).');
+  ma('m9B30','¿Cuál es la ordenada al origen de y = 2x − 5?','−5','En y = mx + b, b = −5. La recta cruza el eje y en (0, −5).','2','2 es la pendiente (m), no la ordenada al origen. La ordenada al origen es −5.','5','La ordenada al origen es −5 (negativa), no +5. Revisa la ecuación.');
+  ma('m9B31','¿Qué lado de y = x + 2 se sombrea para y > x + 2?','Encima de la recta','y > x + 2 indica puntos sobre la recta. Prueba (0,5): 5 > 2 ✓. Sombrea arriba.','Debajo de la recta','y > significa arriba. Sombrear debajo corresponde a y < x + 2.','Sobre la recta misma','Las soluciones a y > x + 2 están sobre la recta, no en ella. Se usa región sombreada.');
+  ma('m9B32','Halla la intersección con el eje x de 2x + 3y = 6','3','Con y = 0: 2x = 6, entonces x = 3. La intersección con x es (3, 0).','2','Pusiste x = 0 en vez de y = 0. Con y = 0: 2x = 6, x = 3.','6','6 está en el lado derecho. Con y = 0: 2x = 6, así x = 3, no 6.');
+  ma('m9B33','¿Cuál es la pendiente de x = 5?','Indefinida','Las rectas verticales tienen pendiente indefinida. No se puede calcular avance/corrida.','0','Pendiente 0 es para rectas horizontales. x = 5 es vertical: pendiente indefinida.','5','El número de la ecuación no es la pendiente. x = 5 es vertical, pendiente indefinida.');
+  ma('m9B34','¿Son paralelas y = 2x + 3 e y = 2x − 5?','Sí','Ambas tienen pendiente 2 y distintas ordenadas al origen: son paralelas.','No','Tienen la misma pendiente (2), por lo que SÍ son paralelas.','Son la misma recta','Misma pendiente pero distintas ordenadas al origen (3 y −5): son paralelas pero distintas.');
+  ma('m9B35','¿Cuál es la pendiente perpendicular a y = 2x + 5?','−1/2','La pendiente perpendicular es la recíproca negativa: −1/2. Verifica: 2 × (−1/2) = −1 ✓.','2','2 es la pendiente original. La perpendicular es su recíproca negativa: −1/2.','1/2','Es la recíproca, pero no la negativa. Para perpendicularidad se necesita −1/2.');
+  ma('m9B36','La recta pasa por (0, 3) y (2, 7). Escribe la ecuación.','y = 2x + 3','b = 3. Pendiente m = (7−3)/(2−0) = 2. Ecuación: y = 2x + 3.','y = 2x + 7','(2, 7) está en la recta pero no es la ordenada al origen. b = 3.','y = 3x + 2','Pendiente: (7−3)/(2−0) = 2, no 3. La ecuación es y = 2x + 3.');
+  ma('m9B37','Escribe la ecuación por (−1, 2) y (3, 10)','y = 2x + 4','m = (10−2)/(3−(−1)) = 8/4 = 2. Con (3,10): b = 10 − 6 = 4. Ecuación: y = 2x + 4.','y = 2x − 1','m = 2 correcto, pero b es incorrecto. Sustituye (3,10): 10 = 6 + b, entonces b = 4.','y = −2x + 4','La pendiente es +2, no −2. m = (10−2)/(3−(−1)) = 8/4 = 2.');
+  ma('m9B38','Evalúa f(x) = {2x si x<2; x+3 si x≥2} en x = 3','6','Como 3 ≥ 2, se aplica la segunda regla: f(3) = 3 + 3 = 6.','5','Como 3 ≥ 2, usa x + 3, no 2x. f(3) = 3 + 3 = 6.','3','Aplica la regla correcta: x ≥ 2, entonces f(x) = x + 3 y f(3) = 6.');
+  ma('m9B39','Un auto va del km 0 al 120 en 2 horas. ¿Cuál es la tasa de cambio promedio?','60 mph','Tasa = (120 − 0) / (2 − 0) = 120 / 2 = 60 mph.','120 mph','120 millas es la distancia. Velocidad = distancia ÷ tiempo = 120 ÷ 2 = 60 mph.','58 mph','120 ÷ 2 = 60, no 58. La tasa de cambio promedio es exactamente 60 mph.');
+  ma('m9B40','Si f(x) = −2x + 5, encuentra x cuando f(x) = 1','x = 2','1 = −2x + 5 → −4 = −2x → x = 2.','x = 3','−2x = −4 → x = 2, no 3. Verifica: f(2) = −2(2) + 5 = 1 ✓.','x = −2','−2x = −4 → x = +2, no −2. Divide ambos lados entre −2.');
+  ma('m9C41','Resuelve graficando: y = x + 2 e y = −x + 4','(1, 3)','Iguala: x + 2 = −x + 4 → 2x = 2 → x = 1. Luego y = 1 + 2 = 3.','(2, 4)','Comprueba: −2 + 4 = 2 ≠ 4. No satisface la segunda ecuación.','(0, 2)','Comprueba: −0 + 4 = 4 ≠ 2. No satisface la segunda ecuación. Intenta (1, 3).');
+  ma('m9C42','Resuelve: y = 2x y x + y = 9','x = 3, y = 6','Sustituye y = 2x: x + 2x = 9 → 3x = 9 → x = 3 y y = 6.','x = 6, y = 3','Puede que los hayas intercambiado. Verifica: y = 2x → 3 = 2(6)? No. Es x = 3, y = 6.','x = 2, y = 7','Si x = 2, entonces y = 4, no 7. Resuelve: 3x = 9, x = 3 y y = 6.');
+  ma('m9C43','Resuelve: 2x + y = 5 y x − y = 1','x = 2, y = 1','Suma las ecuaciones: 3x = 6 → x = 2. Sustituye: 2 − y = 1 → y = 1.','x = 1, y = 2','Verifica: 2(1) + 2 = 4 ≠ 5. La solución correcta es x = 2, y = 1.','x = 3, y = −1','Verifica: 3 − (−1) = 4 ≠ 1. Intenta x = 2, y = 1.');
+  ma('m9C44','Dos números suman 13. Uno es 3 más que el otro. Encuéntralos.','5 y 8','x + y = 13 y x = y + 3 → (y+3) + y = 13 → 2y = 10 → y = 5, x = 8.','6 y 7','6 + 7 = 13 ✓, pero 7 − 6 = 1, no 3. Prueba con 5 y 8.','4 y 9','4 + 9 = 13 ✓, pero 9 − 4 = 5, no 3. Resuelve: 2y = 10.');
+  ma('m9C45','¿Tiene solución el sistema y = 2x + 1 e y = 2x − 3?','No','Ambas rectas tienen pendiente 2: son paralelas y nunca se cortan.','Sí','Tienen la misma pendiente (son paralelas); nunca se cortan. No existe solución.','Infinitas soluciones','Las soluciones infinitas ocurren cuando las rectas son idénticas. Estas son paralelas distintas.');
+  ma('m9C46','¿Tiene el sistema 2x + 4y = 8 y x + 2y = 4 infinitas soluciones?','Sí','Divide la primera entre 2: x + 2y = 4. Coincide exactamente con la segunda.','No','Simplifica la primera: 2x + 4y = 8 → x + 2y = 4, que ES la segunda ecuación.','Sin solución','Estas ecuaciones son equivalentes: representan la misma recta. Hay infinitas soluciones.');
+  ma('m9C47','¿Qué región satisface tanto y > x como y < 4?','Encima de y = x Y debajo de y = 4','y > x: sobre esa recta. y < 4: bajo la horizontal. Ambas condiciones deben cumplirse.','Debajo de y = x Y encima de y = 4','y > significa arriba e y < significa abajo. Intercambiaste las desigualdades.','Solo y = 4','Necesitamos la región donde AMBAS se cumplen: y > x y y < 4 al mismo tiempo.');
+  ma('m9C48','Maximiza P = 3x + 2y sujeto a x ≥ 0, y ≥ 0, x + y ≤ 5. ¿Cuál es el máximo de P?','15','Vértices: (0,0), (5,0), (0,5). En (5,0): P = 15; en (0,5): P = 10. El máximo es 15.','10','P = 10 en (0,5), pero en (5,0): P = 3(5) + 2(0) = 15. El máximo es 15.','5','5 es la restricción, no P. Evalúa P en los vértices: el máximo es 15 en (5,0).');
+  ma('m9C49','Resuelve: x + y + z = 6, x − y = 2, y + z = 4','x = 2, y = 0, z = 4','De x − y = 2: x = y + 2. De y + z = 4: z = 4 − y. Sustituyendo: y = 0, x = 2, z = 4.','x = 4, y = 2, z = 2','Verifica: 4 + 2 + 2 = 8 ≠ 6. Resuelve metódicamente.','x = 3, y = 1, z = 3','Verifica: 3 + 1 + 3 = 7 ≠ 6. Resuelve metódicamente usando las ecuaciones dadas.');
+  ma('m9C50','¿Qué tipo de sistema forman y = 2x + 1 e y = 2x − 3?','Inconsistente','Misma pendiente, distintas ordenadas al origen: rectas paralelas, sin intersección.','Consistente y dependiente','Dependiente implica infinitas soluciones (misma recta). Estas son paralelas distintas: inconsistente.','Consistente e independiente','Independiente implica solución única. Estas rectas paralelas no se cortan: inconsistente.');
+  ma('m9C51','El largo de un rectángulo supera al ancho en 5 pulg. El perímetro es 50 pulg. Escribe el sistema.','l = a + 5 y 2l + 2a = 50','Sea l el largo y a el ancho. Relación: l = a + 5. Perímetro: 2l + 2a = 50.','l = a − 5 y 2l + 2a = 50','"5 más que" significa +5, no −5. Usa l = a + 5.','l + a = 50 y l = a + 5','El perímetro no es l + a. La ecuación correcta del perímetro es 2l + 2a = 50.');
+  ma('m9C52','Artículo: $20 c/u. Costo fijo: $500. Variable: $5/u. ¿Cuántas unidades son el punto de equilibrio?','34 (redondeando)','R = 20x, C = 500 + 5x. Equilibrio: 20x = 500 + 5x → 15x = 500 → x ≈ 33.3, entonces 34 unidades.','25','15x = 500 → x = 500/15 ≈ 33.3, no 25.','100','Verifica: 20(100) = 2000, pero 500 + 5(100) = 1000. No son iguales. Resuelve: 15x = 500.');
+  ma('m9C53','Oferta: p = q + 10. Demanda: p = 50 − q. Halla el precio de equilibrio.','p = 30','Iguala: q + 10 = 50 − q → 2q = 40 → q = 20. Entonces p = 20 + 10 = 30.','p = 50','2q = 40 → q = 20, entonces p = 30, no 50.','p = 40','q + 10 = 50 − q → 2q = 40 → q = 20 → p = 30, no 40.');
+  ma('m9C54','¿Cuántos litros de soluciones al 30% y 70% se necesitan para 10 litros al 50%?','5 litros de cada una','x + y = 10 y 0.3x + 0.7y = 5. Con y = 10 − x: −0.4x = −2 → x = 5, y = 5.','3 y 7','Verifica: 0.3(3) + 0.7(7) = 5.8 ≠ 5. La respuesta es 5 litros de cada una.','4 y 6','Verifica: 0.3(4) + 0.7(6) = 5.4 ≠ 5. Resuelve: −0.4x = −2.');
+  ma('m9C55','Tienes 30 monedas de 10 y 25 centavos que valen $4.50. ¿Cuántas de cada tipo?','20 de 10 ¢ y 10 de 25 ¢','d + c = 30 y 10d + 25c = 450. Con d = 30 − c: 15c = 150 → c = 10, d = 20.','15 de cada tipo','Verifica: 10(15) + 25(15) = 525 ≠ 450. La respuesta es 20 de 10¢ y 10 de 25¢.','25 de 10 ¢ y 5 de 25 ¢','Verifica: 10(25) + 25(5) = 375 ≠ 450. Resuelve: 15c = 150.');
+  ma('m9C56','Inviertes $5,000 al 3% y el resto al 5% (total $10,000). Interés total $400. ¿Cuánto en cada tasa?','$5,000 al 3% y $5,000 al 5%','0.03x + 0.05(10,000 − x) = 400 → −0.02x = −100 → x = 5,000.','$3,000 al 3% y $7,000 al 5%','Verifica: 0.03(3000) + 0.05(7000) = 440 ≠ 400.','$7,000 al 3% y $3,000 al 5%','Verifica: 0.03(7000) + 0.05(3000) = 360 ≠ 400.');
+  ma('m9C57','Bote a 10 mph, corriente 2 mph. 30 millas en cada dirección, tiempo total 6.5 h. Plantea el sistema.','30/(10−2) + 30/(10+2) = 6.5','Corriente arriba: 30/8. Corriente abajo: 30/12. Total: 30/8 + 30/12 = 6.5 h.','30/10 + 30/10 = 6','Esto ignora la corriente. Corriente arriba: 30/(10−2); corriente abajo: 30/(10+2).','(30+30)/(10+2) = 5','No se suman distancias y velocidades así. Cada tramo tiene velocidad diferente.');
+  ma('m9C58','Los dígitos de un número de dos cifras suman 10 y es 4 veces el dígito de las decenas. Encuéntralo.','28','Decenas = 2, unidades = 2 × 4 = 8. Suma: 2 + 8 = 10 ✓. El número es 28.','37','3 + 7 = 10 ✓, pero 4 × 3 = 12 ≠ 7. No cumple la segunda condición.','46','4 + 6 = 10 ✓, pero 4 × 4 = 16 ≠ 6. La respuesta es 28.');
+  ma('m9C59','Resuelve: x/2 + y/3 = 5 y x − y = 0','x = 6, y = 6','De x = y, sustituye: x/2 + x/3 = 5. Multiplica por 6: 5x = 30 → x = 6, y = 6.','x = 5, y = 5','Verifica: 5/2 + 5/3 ≈ 4.17 ≠ 5. Resuelve: 5x = 30 → x = 6.','x = 3, y = 3','Verifica: 3/2 + 3/3 = 2.5 ≠ 5. Resuelve: 5x = 30 → x = 6.');
+  ma('m9C60','Resuelve: 2x − 3y = 1 y 4x + y = 11','x = 2, y = 1','Usando sustitución desde la segunda ecuación, la solución es x = 2, y = 1.','x = 3, y = 1','Verifica: 2(3) − 3(1) = 3 ≠ 1. No satisface la primera ecuación.','x = 1, y = −1/3','Verifica en 4x + y = 11: 4 − 1/3 ≠ 11. Resuelve con eliminación o sustitución.');
+  ma('m9D61','Suma: (3x² + 2x − 5) + (x² − 4x + 3)','4x² − 2x − 2','Combina: x²: 3+1=4. x: 2+(−4)=−2. Const: −5+3=−2. Resultado: 4x² − 2x − 2.','4x² + 6x − 8','Verifica los x: 2x + (−4x) = −2x, no +6x.','3x² − 2x − 2','Combina los x²: 3x² + x² = 4x², no 3x².');
+  ma('m9D62','Resta: (5x² − 3x + 2) − (2x² + x − 4)','3x² − 4x + 6','Distribuye el negativo: + (−2x² − x + 4). Combina: 3x² − 4x + 6.','3x² − 2x + 6','Los términos en x: −3x − x = −4x, no −2x.','7x² − 4x − 2','No sumes al restar x²: 5x² − 2x² = 3x², no 7x². Distribuye el signo negativo.');
+  ma('m9D63','Multiplica: (2x³)(−5x²)','−10x⁵','Coeficiente: 2 × (−5) = −10. Exponente: 3 + 2 = 5. Resultado: −10x⁵.','−10x⁶','Los exponentes se SUMAN: 3 + 2 = 5, no 6.','−3x⁵','Coeficiente: 2 × (−5) = −10, no −3.');
+  ma('m9D64','Multiplica: (x + 3)(x + 5)','x² + 8x + 15','P: x·x = x². E: x·5 = 5x. I: 3·x = 3x. Ú: 3·5 = 15. Combina: x² + 8x + 15.','x² + 15x + 15','5x + 3x = 8x, no 15x.','x² + 8x + 8','Último: 3 × 5 = 15, no 8.');
+  ma('m9D65','Multiplica: (x + 2)(x² + 3x − 1)','x³ + 5x² + 5x − 2','x(x²+3x−1)+2(x²+3x−1) = x³+3x²−x+2x²+6x−2 = x³+5x²+5x−2.','x³ + 3x² + 5x − 2','Combina x²: 3x² + 2x² = 5x², no 3x².','x³ + 5x² + 6x − 1','Constante: (−1)×2 = −2, no −1.');
+  ma('m9D66','Expande: (x + 4)²','x² + 8x + 16','(x+4)² = x² + 2(x)(4) + 4² = x² + 8x + 16.','x² + 16','Falta el término medio 2ab = 8x. Resultado: x² + 8x + 16.','x² + 8x + 8','Último término: 4² = 16, no 8.');
+  ma('m9D67','Expande: (2x − 3)²','4x² − 12x + 9','(2x−3)² = (2x)² − 2(2x)(3) + 3² = 4x² − 12x + 9.','4x² + 12x + 9','El término medio es negativo: −2(2x)(3) = −12x, no +12x.','4x² − 12x + 6','Último: 3² = 9, no 6.');
+  ma('m9D68','Expande: (x + 7)(x − 7)','x² − 49','(x+7)(x−7) = x² − 7² = x² − 49.','x² + 49','Los términos medios se cancelan; resultado es x² − 49, no x² + 49.','x² − 14x − 49','Producto especial: los términos medios se cancelan. Resultado: x² − 49.');
+  ma('m9D69','Factoriza: 4x³ + 8x² − 12x','4x(x² + 2x − 3)','MCD de 4x³, 8x² y 12x es 4x. Factoriza: 4x(x² + 2x − 3).','4(x³ + 2x² − 3x)','El MCD incluye x, no solo 4. MCD = 4x.','x(4x² + 8x − 12)','Puedes factorizar más. El MCD es 4x, no solo x.');
+  ma('m9D70','Factoriza: x² + 7x + 12','(x + 3)(x + 4)','3 × 4 = 12 y 3 + 4 = 7 ✓. Respuesta: (x + 3)(x + 4).','(x + 2)(x + 6)','2 × 6 = 12 ✓, pero 2 + 6 = 8 ≠ 7. Prueba 3 y 4.','(x + 1)(x + 12)','1 + 12 = 13 ≠ 7. Busca dos números cuya suma sea 7 y producto 12: 3 y 4.');
+  ma('m9D71','Factoriza: 2x² + 7x + 3','(2x + 1)(x + 3)','ac = 6. Factores de 6 con suma 7: 1 y 6. Reagrupa: x(2x+1)+3(2x+1) = (2x+1)(x+3).','(x + 1)(2x + 3)','Verifica: (x+1)(2x+3) = 2x²+5x+3 ≠ 2x²+7x+3.','(2x + 3)(x + 1)','Es lo mismo que la opción anterior: 2x²+5x+3 ≠ 2x²+7x+3.');
+  ma('m9D72','Factoriza por agrupación: x³ + 3x² + 2x + 6','(x + 3)(x² + 2)','Agrupa: x²(x+3)+2(x+3) = (x+3)(x²+2).','(x² + 2)(x + 3)','Es la misma respuesta en diferente orden: correcto.','(x + 2)(x² + 3)','Verifica: (x+2)(x²+3) ≠ expresión original. La factorización es (x+3)(x²+2).');
+  ma('m9D73','Factoriza completamente: 2x³ − 8x','2x(x − 2)(x + 2)','MCD = 2x. Queda x² − 4 = (x−2)(x+2). Resultado: 2x(x−2)(x+2).','2x(x² − 4)','x² − 4 es diferencia de cuadrados. Factoriza: (x−2)(x+2). Resultado: 2x(x−2)(x+2).','2(x³ − 4x)','El MCD debe ser 2x, no solo 2. Factoriza 2x: 2x(x²−4) = 2x(x−2)(x+2).');
+  ma('m9D74','Factoriza completamente: x⁴ − 16','(x² + 4)(x − 2)(x + 2)','x⁴−16 = (x²+4)(x²−4) = (x²+4)(x−2)(x+2). Factorización completa.','(x² + 4)(x² − 4)','x² − 4 también es diferencia de cuadrados. Factoriza más: (x²+4)(x−2)(x+2).','(x + 2)(x − 2)(x² + 4)','Es el mismo resultado en diferente orden: correcto.');
+  ma('m9D75','Factoriza: 4x² − 12x + 9','(2x − 3)²','(2x)²=4x², 3²=9, −2(2x)(3)=−12x. Patrón (a−b)²: (2x−3)².','(2x + 3)²','El término medio es negativo: corresponde a (a−b)², no (a+b)². Usa (2x−3)².','(4x − 9)²','El primer término es (2x)², no (4x)². Resultado: (2x−3)².');
+  ma('m9D76','Un rectángulo tiene largo (2x + 3) y ancho (x − 1). ¿Cuál es su área?','2x² + x − 3','Área = (2x+3)(x−1) = 2x²−2x+3x−3 = 2x²+x−3.','3x + 2','Sumaste largo y ancho en lugar de multiplicarlos. Multiplica: 2x²+x−3.','2x² − 3','Verifica el término medio: −2x+3x = x. Resultado correcto: 2x²+x−3.');
+  ma('m9D77','¿Cuál es el grado de 3x⁴ − 2x² + x − 7?','4','Términos con grados 4, 2, 1, 0. El mayor es 4: ese es el grado del polinomio.','3','3 es el coeficiente, no el grado. El grado es la potencia más alta: x⁴ → grado 4.','0','Ese es el grado de la constante −7. El polinomio completo tiene grado 4.');
+  ma('m9D78','Clasifica: 5x³ − 2x + 1','Trinomio','Tres términos: 5x³, −2x y 1. Es un trinomio.','Binomio','Los binomios tienen 2 términos. Este tiene 3: es un trinomio.','Polinomio','"Polinomio" suele indicar 4 o más términos. Este específicamente es un trinomio.');
+  ma('m9D79','Divide: (x² + 5x + 6) ÷ (x + 2)','x + 3','x² ÷ x = x. Mult: x(x+2)=x²+2x. Resta: 3x+6. Luego 3x÷x=3. Cociente: x+3.','x + 4','Verifica: (x+4)(x+2) = x²+6x+8 ≠ x²+5x+6. El cociente es x+3.','x² + 3','Esa no es la forma correcta. El cociente de esta división es x+3.');
+  ma('m9D80','Factoriza: 6x² − 13x + 5','(2x − 1)(3x − 5)','ac=30. Factores con suma −13: −10 y −3. Reagrupa: (2x−1)(3x−5).','(3x − 5)(2x − 1)','Es la misma respuesta en diferente orden: correcto.','(6x − 5)(x − 1)','Verifica: (6x−5)(x−1) = 6x²−11x+5 ≠ 6x²−13x+5.');
+  ma('m9E81','Resuelve factorizando: x² + 5x + 6 = 0','x = −2 o x = −3','Factoriza: (x+2)(x+3) = 0 → x = −2 o x = −3.','x = 2 o x = 3','Los signos son incorrectos. (x+2)(x+3) = 0 da x = −2 y x = −3.','x = 6','Las cuadráticas suelen tener dos soluciones. Factoriza: x = −2 o x = −3.');
+  ma('m9E82','Si (x − 4)(x + 7) = 0, ¿cuáles son las soluciones?','x = 4 o x = −7','Propiedad del producto nulo: x − 4 = 0 → x = 4; x + 7 = 0 → x = −7.','x = 4 o x = 7','Segundo factor: x + 7 = 0 → x = −7 (negativo), no 7.','x = −4 o x = 7','Primer factor: x − 4 = 0 → x = 4 (positivo), no −4.');
+  ma('m9E83','Resuelve: x² = 25','x = 5 o x = −5','√25 = 5, entonces x = ±5. Ambas funcionan: 5² = 25 y (−5)² = 25.','x = 5','No olvides la solución negativa. Las ecuaciones x² = k tienen dos soluciones: x = ±5.','x = 25','25 es el resultado de 5². Estamos despejando x: x = ±5.');
+  ma('m9E84','Resuelve completando el cuadrado: x² + 6x − 7 = 0','x = 1 o x = −7','x²+6x=7. Suma 9: (x+3)²=16. Raíz: x+3=±4. Entonces x=1 o x=−7.','x = −1 o x = 7','De (x+3)²=16: x+3=±4 → x=1 o x=−7, no −1 y 7.','x = 3 ± 4','Forma intermedia. Simplifica: x=−3±4, es decir x=1 o x=−7.');
+  ma('m9E85','Resuelve con la fórmula cuadrática: 2x² − 5x + 2 = 0','x = 2 o x = 1/2','a=2,b=−5,c=2. x=(5±√(25−16))/4=(5±3)/4. x=8/4=2 o x=2/4=1/2.','x = −2 o x = −1/2','−b = +5 (positivo). x=(5±3)/4 da x=2 o x=1/2 (ambos positivos).','x = 1 o x = 2','Casi: (5+3)/4=2 y (5−3)/4=1/2, no 1. Verifica la división.');
+  ma('m9E86','¿Qué indica el discriminante de x² − 4x + 4 = 0?','Una raíz real (raíz doble)','b²−4ac = 16−16 = 0. Discriminante = 0 indica una raíz doble (x = 2).','Dos raíces reales distintas','Para dos raíces se requiere discriminante > 0. Aquí es 0: solo una raíz doble.','Ninguna raíz real','Sin raíces reales: discriminante < 0. Aquí = 0, así que SÍ hay raíz real.');
+  ma('m9E87','¿Abre hacia arriba o hacia abajo y = −2x² + 8x − 5?','Hacia abajo','a = −2 < 0: la parábola se abre hacia abajo.','Hacia arriba','a = −2 es negativo → abre hacia abajo. a positivo → arriba; a negativo → abajo.','Hacia los lados','Las parábolas no abren hacia los lados. a < 0 → abre hacia abajo.');
+  ma('m9E88','¿Cuál es el vértice de y = 2(x − 3)² + 5?','(3, 5)','En y = a(x−h)²+k el vértice es (h, k). Aquí h=3, k=5: vértice (3, 5).','(−3, 5)','Cuidado con el signo: (x−3) indica h=3, no −3.','(3, −5)','k=5 (positivo), no −5. El vértice es (3, 5).');
+  ma('m9E89','¿Cuál es el eje de simetría de y = x² + 4x + 3?','x = −2','x = −b/(2a) = −4/(2·1) = −2.','x = 2','x = −b/(2a), no b/(2a). Con b=4: x=−4/2=−2.','x = 4','b=4, pero x=−b/(2a)=−4/2=−2, no 4.');
+  ma('m9E90','Halla el vértice de y = x² − 6x + 5','(3, −4)','x = 6/2 = 3. y = 9 − 18 + 5 = −4. Vértice: (3, −4).','(−3, −4)','x = −b/(2a) = −(−6)/2 = +3, no −3.','(3, 4)','y = 9 − 18 + 5 = −4 (negativo), no 4.');
+  ma('m9E91','Simplifica: √50','5√2','50 = 25·2. Entonces √50 = √25·√2 = 5√2.','√50','No está simplificado. Factoriza 50 = 25·2, entonces √50 = 5√2.','10√5','50 ≠ 100·5. Correcto: 50 = 25·2, así √50 = 5√2.');
+  ma('m9E92','Simplifica: 3√2 + 5√2 − √2','7√2','Todos tienen √2. Combina coeficientes: 3+5−1=7. Resultado: 7√2.','8√2','3+5=8, pero debes restar 1: 8−1=7. Respuesta: 7√2.','√2','Suma todos los coeficientes: 3+5−1=7. Resultado: 7√2.');
+  ma('m9E93','Simplifica: √3 · √12','6','√3 · √12 = √(3·12) = √36 = 6.','√36','Simplifica √36 = 6, no lo dejes como √36.','2√9','2√9 = 2·3 = 6, pero la forma simplificada es simplemente 6.');
+  ma('m9E94','Simplifica: √12 ÷ √3','2','√12 ÷ √3 = √(12/3) = √4 = 2.','√12/√3','Divide los radicandos: √(12/3) = √4 = 2.','4','√4 = 2, no 4. Verifica: 2² = 4.');
+  ma('m9E95','Racionaliza: 3 / √2','(3√2) / 2','Multiplica por √2/√2: (3/√2)(√2/√2) = 3√2/2.','3√2','Multiplicaste por √2, pero no rationalizaste el denominador. La respuesta es (3√2)/2.','3 / (2√2)','Aún tiene √2 en el denominador. Multiplica por √2/√2: resultado es (3√2)/2.');
+  ma('m9E96','Resuelve: √(x + 3) = 5','x = 22','Eleva al cuadrado: x+3=25. Entonces x=22. Verifica: √25=5 ✓.','x = 2','√(2+3)=√5≠5. Eleva al cuadrado: x+3=25, entonces x=22.','x = 25','x+3=25 da x=22, no 25.');
+  ma('m9E97','Un triángulo rectángulo tiene catetos 3 y 4. ¿Cuánto mide la hipotenusa?','5','c² = 3²+4² = 9+16 = 25. Entonces c = √25 = 5.','7','3+4=7, pero usa el teorema: c²=9+16=25, c=5.','12','3·4=12, pero el teorema de Pitágoras no funciona así. c²=9+16=25, c=5.');
+  ma('m9E98','Un cultivo bacteriano empieza con 100 y se duplica cada hora. ¿Cuántas hay en 3 horas?','800','A = 100·2³ = 100·8 = 800.','300','100·3=300, pero las bacterias se duplican. Después de 3 horas: 100·2³=800.','600','El factor de crecimiento es 2, no 6. A = 100·8 = 800.');
+  ma('m9E99','Un auto se deprecia al 80% por año. Cuesta $20,000. ¿Cuánto valdrá en 2 años?','$12,800','A = 20,000·(0.8)² = 20,000·0.64 = 12,800.','$16,000','20,000·0.8=16,000 es después de 1 año. En 2 años: 20,000·0.64=12,800.','$12,000','0.8²=0.64, entonces 20,000·0.64=12,800, no 12,000.');
+  ma('m9E100','Se lanza una pelota con h(t) = 64t − 16t². ¿Cuándo toca el suelo de nuevo (h = 0)?','t = 4 segundos','0 = 64t−16t² = 16t(4−t). Entonces t=0 (lanzamiento) o t=4 (aterrizaje).','t = 2 segundos','t=2 es el instante de máxima altura. El aterrizaje ocurre en t=4.','t = 64 segundos','16t(4−t)=0 da t=0 o t=4, no 64. La pelota aterriza a los 4 segundos.');
+})();
+
+// ── Grade 9 App Building — direct _es injection ──
+(function(){
+  if(typeof APP_BUILDING==='undefined'||!APP_BUILDING[9])return;
+  var gd=APP_BUILDING[9];
+  if(gd.description!==undefined)gd.description_es='Creación de apps avanzada con IA: bases de datos, APIs, publicación en el App Store y embudos de marketing';
+  var cn={A:'Lluvia de ideas e ideación',B:'Diseño y experiencia de usuario',C:'Crear con IA',D:'App Store y publicación',E:'Marketing y crecimiento',F:'Construye tu app'};
+  if(gd.categories)Object.keys(cn).forEach(function(k){if(gd.categories[k])gd.categories[k].name_es=cn[k];});
+  var lm={};
+  if(gd.categories)Object.keys(gd.categories).forEach(function(ck){(gd.categories[ck].lessons||[]).forEach(function(l){lm[l.id]=l;});});
+  var tt={
+    'ab9a1':['TAM-SAM-SOM: Comprendiendo tu oportunidad de mercado','Mercados totales, atendibles y obtenibles'],
+    'ab9a2':['El pivote: cuando tu idea original no funciona','Ser flexible con tu idea (pero no con tu misión)'],
+    'ab9a3':['Estrategia de distribución: ¿cómo encontrarán tu app los usuarios?','¿Cómo encontrará la gente realmente tu app?'],
+    'ab9b1':['Diseño de API: haciendo tus datos accesibles','Las APIs son puertas que dan acceso a tus datos'],
+    'ab9b2':['Casos extremos: situaciones inesperadas que debes prever','El 1% de las situaciones causa el 90% de los problemas de soporte'],
+    'ab9b3':['Diseño asíncrono: apps que funcionan aunque los datos sean lentos','¡Los usuarios no deberían esperar 10 segundos para cargar!'],
+    'ab9c1':['Conectar bases de datos a apps creadas con IA','Tu app necesita bases de datos para recordar las cosas'],
+    'ab9c2':['Autenticación y seguridad: protegiendo los datos de los usuarios','Las contraseñas y la seguridad de datos no son opcionales'],
+    'ab9c3':['Escalabilidad: ¿qué pasa cuando llegan 1 millón de usuarios?','¿Qué pasa cuando aparecen 1 millón de usuarios de golpe?'],
+    'ab9d1':['El proceso completo de publicación en el App Store','Paso a paso: de la app terminada al App Store'],
+    'ab9d2':['TestFlight: pruebas beta con 10,000 testers antes del lanzamiento','¡Deja que usuarios reales encuentren errores ANTES del lanzamiento!'],
+    'ab9d3':['Guías de revisión y cómo superar a los revisores de Apple','Conoce las reglas antes de enviar tu app'],
+    'ab9e1':['Métricas de conversión que importan: midiendo tu embudo','Rastrea los números correctos o perderás dinero en marketing'],
+    'ab9e2':['Hacerse viral: efectos de red y bucles virales','Cada acción de usuario que trae más usuarios es algo viral'],
+    'ab9e3':['Embudos de marketing: del extraño al cliente de pago','Cada etapa necesita optimización o los usuarios se van'],
+    'ab9f1':['Diseñar para bases de datos y APIs','La arquitectura lo es todo cuando escalas'],
+    'ab9f2':['Flujo de usuario y diseño de producto','Cada punto de contacto con el usuario importa'],
+    'ab9f3':['¡Constrúyelo! Crea una app de recetas','App social completa con feed, compartir y comunidad']
+  };
+  Object.keys(tt).forEach(function(id){var l=lm[id];if(l){l.title_es=tt[id][0];l.tagline_es=tt[id][1];}});
+  // Helper for choice activities (up to 4 choices)
+  function abc(id,instr,choices_es){
+    var l=lm[id];if(!l||!l.activity)return;
+    l.activity.instructions_es=instr;
+    if(l.activity.choices&&choices_es){
+      for(var i=0;i<choices_es.length&&i<l.activity.choices.length;i++){
+        l.activity.choices[i].text_es=choices_es[i][0];
+        if(choices_es[i][1]!==undefined)l.activity.choices[i].explanation_es=choices_es[i][1];
+      }
+    }
+  }
+  // Helper for sort/fill activities
+  function absi(id,instr,sortItems_es){
+    var l=lm[id];if(!l||!l.activity)return;
+    l.activity.instructions_es=instr;
+    if(sortItems_es&&l.activity.sortItems)l.activity.sortItems_es=sortItems_es;
+  }
+  absi('ab9a1','¡Ordena los tamaños de mercado de MAYOR a MENOR!',['SOM: 100,000 personas que puedes alcanzar realísticamente en los próximos 5 años','TAM: 2,000 millones de personas en el mundo que necesitan comunicación','SAM: 500 millones de personas en países de habla inglesa con internet']);
+  abc('ab9a2','Tu app es rechazada por los usuarios. Tuviste 1,000 beta testers y 900 la desinstalaron el primer día. ¿Qué debes hacer?',[['Ignorar los datos y seguir construyendo tu visión original','¡Eso es terquedad, no emprendimiento!'],['Entrevistar a los usuarios para entender POR QUÉ se fueron y pivotar si los datos lo justifican','¡Exacto! Escucha a los usuarios y ten la flexibilidad de cambiar.'],['Rendirse por completo','¡Los datos sugieren cambios, no rendirse!'],['Culpar a los usuarios por no entender tu visión','¡Si los usuarios no lo entienden, TÚ no lo construiste bien!']]);
+  absi('ab9a3','La mejor estrategia de distribución para tu app es aquella que llega a tus _____ de manera económica y orgánica.',null);
+  absi('ab9b1','¡Ordena los pasos del diseño de API!',['Las apps comienzan a usar tu API (¡efectos de red!)','Escribe documentación clara de la API','Establece reglas de seguridad (autenticación, límites de peticiones)','Lanza la API con un sandbox (entorno de pruebas)','Monitorea el uso y el rendimiento']);
+  abc('ab9b2','Un usuario inicia un pago pero cierra la app a mitad de la transacción. ¿Qué debería ocurrir?',[['Cobrarle de todas formas (¡ya lo inició!)','¡Eso es ilegal! Cobra solo cuando la transacción esté completa.'],['No cobrarle nada y mostrar "Pago fallido"','¡Exacto! Cobra solo cuando la transacción esté completa y muestra el estado claramente.'],['Seguir cobrando hasta que vuelva a abrir la app','¡Eso hará que tu app sea rechazada con toda seguridad!'],['Ignorar la transacción incompleta','Necesitas mostrarles el estado y permitirles reintentar el pago.']]);
+  absi('ab9b3','¡Ordena los principios del diseño asíncrono (de mejor a peor UX)!',['Muestra un indicador de carga (el usuario sabe que algo está ocurriendo)','Usa datos en caché para mostrar algo de inmediato','Envía la petición al servidor en segundo plano','Obtén datos nuevos manteniendo la app responsiva','Muestra los datos nuevos cuando lleguen']);
+  absi('ab9c1','¡Crea con IA una app social que necesite persistencia de base de datos!',null);
+  abc('ab9c2','Estás construyendo una app de seguimiento de salud. ¿Cómo deben guardarse las contraseñas de los usuarios?',[['En texto plano (texto legible sin cifrar)','¡NUNCA! Si la app es hackeada, los atacantes tendrán todas las contraseñas.'],['Cifradas (codificadas para que solo la app pueda leerlas)','¡Exacto! Incluso si la base de datos es vulnerada, las contraseñas estarán protegidas.'],['Enviadas por correo a los usuarios para que las vean','¡Nunca transmitas contraseñas por correo electrónico!'],['Guardadas en el código de la app','Los atacantes pueden leer el código — ¡es un desastre de seguridad!']]);
+  absi('ab9c3','¡Ordena los retos de escalabilidad según cuándo aparecen!',['La app se ralentiza con 1M de usuarios (base de datos saturada)','Los costos del servidor se disparan (más de $10,000 al mes)','Las consultas a la base de datos se agotan (recuperación de datos muy lenta)','La app funciona bien con 100 usuarios','No puede gestionar 10M de usuarios sin una reestructuración completa']);
+  absi('ab9d1','¡Ordena el proceso de envío al App Store de manera exacta!',['Establece una fecha de lanzamiento y publica (si es aprobada)','Sube el binario y los metadatos al App Store Connect','Crea la ficha de la app en el App Store con todos los detalles','Crea tu cuenta de desarrollador de Apple y configura tu equipo','Envía para revisión desde App Store Connect','Espera la aprobación (normalmente entre 24 y 72 horas)','¡Celébralo! ¡Ya estás en el App Store! 🎉']);
+  abc('ab9d2','Estás a punto de enviar tu app al App Store. ¿Deberías hacer primero las pruebas con TestFlight?',[['No, envíala directamente al App Store (es más rápido)','¡Arriesgado! Encontrarás errores en el lanzamiento público y perderás usuarios.'],['Sí, prueba con más de 1,000 testers en TestFlight, corrige los errores y LUEGO envía al App Store','¡Exacto! Es la práctica profesional. Encuentra y corrige los errores antes del lanzamiento público.'],['Solo TestFlight y nunca al App Store público','Eventualmente necesitas el App Store público — ¿por qué quedarse siempre en fase beta?'],['TestFlight es solo para grandes empresas','¡Todo desarrollador independiente debería usar TestFlight!']]);
+  absi('ab9d3','¡Ordena los pasos para preparar la revisión de tu app!',['Envía para revisión desde App Store Connect','Lee detenidamente las más de 90 directrices de Apple','Prueba tu app en un dispositivo real (detecta fallos)','¡Obtén la aprobación y publica en el App Store!','Crea la ficha de la app siguiendo las directrices al pie de la letra']);
+  absi('ab9e1','La métrica de conversión más importante para un negocio de apps es _____ porque demuestra la viabilidad a largo plazo.',null);
+  absi('ab9e2','¡Ordena los mecanismos de crecimiento viral de mayor a menor impacto!',['Programa de referidos (invita amigos, ambos reciben un beneficio)','Boca a boca (los usuarios recomiendan la app de forma natural)','Efectos de red (más usuarios = más valor)','Contenido viral (la viralidad está integrada en la app)','Integración con redes sociales (compartir fácilmente)']);
+  absi('ab9e3','¡Ordena las etapas del embudo y su optimización!',['Mejor servicio al cliente → convierte usuarios en promotores','Mejores anuncios → más personas te conocen','Mejor propuesta → más decisiones de compra','Mejor página de aterrizaje → más interés','Mejores testimonios → superar las objeciones']);
+  absi('ab9f1','¡Ordena los pasos para diseñar una base de datos!',['Despliega en la nube (AWS, Firebase, etc.)','Escribe los endpoints de API para el frontend','Diseña el esquema de la base de datos (tablas, campos, relaciones)','Prueba con 1M de usuarios simulados','Documenta qué datos van a dónde']);
+  abc('ab9f2','¿Por qué importa tanto el diseño del flujo de usuario?',[['Porque se ve bien','Lo estético no importa si los usuarios están confundidos.'],['Guía a los usuarios hacia el éxito y corrige los cuellos de botella','¡Exacto! Una pantalla confusa puede eliminar al 50% de los usuarios.'],['Lo exige el App Store de Apple','No existe tal requisito por parte de Apple.'],['En realidad no importa tanto','¡Es la diferencia entre 1,000 descargas y 1 millón!']]);
+  absi('ab9f3','¡Constrúyelo! Crea una app de recetas completa con feed, funciones de compartir y comunidad.',null);
+})();
+
 function getSubjectData(subject, grade){
   // For App Building grades 6-12, always show Ship Real Apps curriculum
   if(subject === 'app-building' && (grade >= 6 || grade === '6' || grade === '7' || grade === '8' || grade === '9' || grade === '10' || grade === '11' || grade === '12' || [7,8,9,10,11,12].indexOf(grade) > -1)){
