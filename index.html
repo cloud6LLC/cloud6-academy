@@ -530,19 +530,19 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 <!-- TOP NAVIGATION BAR -->
 <div class="top-nav" style="background:#fff;border-bottom:2px solid #e8f5f0;box-shadow:0 2px 8px rgba(0,184,148,0.08);position:sticky;top:0;z-index:100">
 
-  <!-- HEADER ROW: logo · spacer · lang-toggle · login — all on one line -->
+  <!-- HEADER ROW: logo · lang-toggle · login · spacer — all on one line -->
   <div class="nav-header-row" style="display:flex;align-items:center;flex-wrap:nowrap;height:56px;padding:0 20px;gap:12px">
-    <!-- Logo -->
+    <!-- Logo — far left -->
     <div class="nav-logo" style="font-size:20px;font-weight:800;color:#00b894;cursor:pointer;white-space:nowrap;flex-shrink:0" onclick="showHome()">Cloud6 <span style="font-weight:400;color:#2d3436">Academy</span></div>
-    <!-- Spacer pushes right items to far right -->
-    <div class="nav-spacer" style="flex:1"></div>
-    <!-- Language toggle — far right, own tile, next to login -->
+    <!-- Language toggle — left, own tile, right after logo -->
     <div id="langToggle" class="lang-toggle" role="group" aria-label="Language / Idioma" title="Switch language / Cambiar idioma" style="flex-shrink:0">
       <span id="langOptEn" class="lang-opt active" onclick="setLanguage('en')">🇺🇸 EN</span>
       <span id="langOptEs" class="lang-opt" onclick="setLanguage('es')">🇲🇽 ES</span>
     </div>
-    <!-- Login — far right -->
+    <!-- Login — left, right after toggle -->
     <div id="userAvatar" onclick="showAuthScreen()" style="flex-shrink:0;padding:7px 18px;border-radius:20px;background:linear-gradient(135deg,#00b894,#0984e3);color:#fff;display:flex;align-items:center;cursor:pointer;font-weight:700;font-size:13px;white-space:nowrap;box-shadow:0 2px 8px rgba(0,184,148,0.3)" data-i18n-title="ui.logInTitle" title="Log In"><span data-i18n="ui.logIn">🔐 Log In</span></div>
+    <!-- Spacer fills remaining space to the right -->
+    <div class="nav-spacer" style="flex:1"></div>
   </div>
 
   <!-- NAV TABS ROW — scrollable, sits below the header row -->
