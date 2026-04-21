@@ -27762,6 +27762,226 @@ try { autoTranslateActivitiesES(); } catch(e){ console.warn('Auto activity trans
   sa('ss10E15','¿Cuál de estos es un ejemplo de amenaza de seguridad transnacional?','El terrorismo, las pandemias y los ciberataques que afectan a múltiples naciones','Estos desafíos trascienden las fronteras y requieren respuestas internacionales.','Los conflictos militares tradicionales entre países vecinos','Las guerras tradicionales son asuntos de seguridad nacional.','La delincuencia interna dentro de un solo país','Transnacional significa que cruza fronteras.');
 })();
 
+// ── Grade 10 Math (Geometry) ──────────────────────────────────
+(function(){
+  if(typeof MATH_CURRICULUM==='undefined'||!MATH_CURRICULUM[10])return;
+  var gd=MATH_CURRICULUM[10];
+  gd.description_es='Grado 10 Geometría — Fundamentos, triángulos, similitud, círculos y área/volumen';
+  var cn={A:'Fundamentos y lógica',B:'Triángulos y congruencia',C:'Similitud y trigonometría',D:'Círculos',E:'Área, volumen y transformaciones'};
+  Object.keys(cn).forEach(function(k){if(gd.categories[k])gd.categories[k].name_es=cn[k];});
+  var lm={};
+  Object.keys(gd.categories).forEach(function(ck){(gd.categories[ck].lessons||[]).forEach(function(l){lm[l.id]=l;});});
+  var tt={
+    'm10A1':['Fórmula del punto medio','Halla el punto central'],
+    'm10A2':['Fórmula de la distancia','Mide cualquier segmento'],
+    'm10A3':['Adición de segmentos','Suma segmentos'],
+    'm10A4':['Medición de ángulos','Mide ángulos con precisión'],
+    'm10A5':['Adición de ángulos','Combina medidas de ángulos'],
+    'm10A6':['Ángulos complementarios','Suman 90 grados'],
+    'm10A7':['Ángulos suplementarios','Suman 180 grados'],
+    'm10A8':['Ángulos verticales','Los ángulos opuestos por el vértice son iguales'],
+    'm10A9':['Par lineal','Ángulos adyacentes sobre una línea'],
+    'm10A10':['Líneas paralelas y transversal','Corta líneas paralelas con una recta'],
+    'm10A11':['Ángulos alternos internos','Ángulos en lados opuestos, entre las paralelas'],
+    'm10A12':['Ángulos alternos externos','Ángulos en lados opuestos, fuera de las paralelas'],
+    'm10A13':['Ángulos co-internos','Ángulos del mismo lado interior'],
+    'm10A14':['Líneas perpendiculares','Líneas que se encuentran en 90 grados'],
+    'm10A15':['Pendiente de líneas paralelas','Igual pendiente significa paralelas'],
+    'm10A16':['Pendiente de líneas perpendiculares','Pendientes recíprocas negativas'],
+    'm10A17':['Demostraciones en geometría coordenada','Usa coordenadas para probar teoremas'],
+    'm10A18':['Enunciados condicionales','Enunciados si-entonces en geometría'],
+    'm10A19':['Razonamiento deductivo','Usa la lógica para llegar a conclusiones'],
+    'm10A20':['Teorema de la bisectriz de un ángulo','Rayo que divide ángulos en partes iguales'],
+    'm10B21':['Clasificar triángulos por lados','Equilátero, isósceles, escaleno'],
+    'm10B22':['Clasificar triángulos por ángulos','Acutángulo, rectángulo, obtusángulo'],
+    'm10B23':['Suma de ángulos de un triángulo','Todos los ángulos suman 180°'],
+    'm10B24':['Teorema del ángulo exterior','El ángulo exterior iguala la suma de los interiores no adyacentes'],
+    'm10B25':['Teorema del triángulo isósceles','Lados iguales significan ángulos opuestos iguales'],
+    'm10B26':['Triángulos equiláteros','Todos los lados iguales, todos los ángulos de 60°'],
+    'm10B27':['Desigualdad triangular','La suma de dos lados es mayor que el tercer lado'],
+    'm10B28':['Congruencia LLL','Tres lados congruentes implica triángulos congruentes'],
+    'm10B29':['Congruencia LAL','Dos lados y ángulo comprendido congruentes'],
+    'm10B30':['Congruencia ALA','Dos ángulos y lado comprendido congruentes'],
+    'm10B31':['Congruencia AAL','Dos ángulos y lado no comprendido congruentes'],
+    'm10B32':['Congruencia HiCa','Hipotenusa-cateto para triángulos rectángulos'],
+    'm10B33':['PCCT','Partes correspondientes de triángulos congruentes son congruentes'],
+    'm10B34':['Teorema del segmento medio','El segmento que une los puntos medios es paralelo y mide la mitad'],
+    'm10B35':['Mediatriz','Línea perpendicular al segmento en su punto medio'],
+    'm10B36':['Teorema de la bisectriz del ángulo','La bisectriz divide el lado opuesto proporcionalmente'],
+    'm10B37':['Medianas y centroides','La mediana conecta el vértice con el punto medio; el centroide está a 2/3 del vértice'],
+    'm10B38':['Alturas y ortocentros','La altura va del vértice perpendicular al lado opuesto; su intersección es el ortocentro'],
+    'm10B39':['Demostraciones de congruencia','Usa postulados para probar la congruencia'],
+    'm10B40':['Repaso de congruencia de triángulos','Aplica todos los métodos de congruencia'],
+    'm10C41':['Polígonos similares','Misma forma, lados proporcionales'],
+    'm10C42':['Similitud AA','Dos ángulos congruentes implica similitud'],
+    'm10C43':['Similitud LLL~','Todos los lados proporcionales implica similitud'],
+    'm10C44':['Similitud LAL~','Dos lados proporcionales y ángulo comprendido congruente'],
+    'm10C45':['Razones de similitud','Razón de longitudes correspondientes'],
+    'm10C46':['Proporciones en triángulos similares','Plantea y resuelve proporciones'],
+    'm10C47':['Líneas paralelas y proporcionalidad','Las líneas paralelas dividen los lados proporcionalmente'],
+    'm10C48':['Media geométrica','Raíz cuadrada del producto de dos números'],
+    'm10C49':['Razones trig: seno','Cateto opuesto sobre hipotenusa'],
+    'm10C50':['Razones trig: coseno','Cateto adyacente sobre hipotenusa'],
+    'm10C51':['Razones trig: tangente','Cateto opuesto sobre cateto adyacente'],
+    'm10C52':['Hallar lados con trigonometría','Usa razones trigonométricas para hallar lados desconocidos'],
+    'm10C53':['Hallar ángulos con trigonometría','Usa trigonometría inversa para hallar ángulos'],
+    'm10C54':['Ángulo de elevación','Ángulo por encima de la horizontal'],
+    'm10C55':['Ángulo de depresión','Ángulo por debajo de la horizontal'],
+    'm10C56':['Introducción a la Ley de los Senos','Lados divididos por los senos de los ángulos opuestos'],
+    'm10C57':['Introducción a la Ley de los Cosenos','c² = a² + b² − 2ab·cos(C)'],
+    'm10C58':['Triángulos especiales 45-45-90','Lados en proporción 1:1:√2'],
+    'm10C59':['Triángulos especiales 30-60-90','Lados en proporción 1:√3:2'],
+    'm10C60':['Repaso de trigonometría','Aplica todos los conceptos trigonométricos'],
+    'm10D61':['Partes de un círculo','Radio, diámetro, cuerda'],
+    'm10D62':['Ángulos centrales','El ángulo en el centro iguala la medida del arco'],
+    'm10D63':['Ángulos inscritos','El ángulo en la circunferencia es la mitad del arco'],
+    'm10D64':['Longitud de arco','Longitud de la parte curva del círculo'],
+    'm10D65':['Medida de arco','Medida angular del arco en grados'],
+    'm10D66':['Área del sector','Área de la región en forma de sector circular'],
+    'm10D67':['Tangentes','La recta toca el círculo en exactamente un punto'],
+    'm10D68':['Secantes','La recta intersecta el círculo en dos puntos'],
+    'm10D69':['Propiedades de las cuerdas','Cuerdas iguales, distancias iguales, arcos iguales'],
+    'm10D70':['Teorema del ángulo inscrito','Ángulo inscrito = 1/2 del ángulo central'],
+    'm10D71':['Perpendicularidad tangente-radio','La tangente es perpendicular al radio'],
+    'm10D72':['Teorema de las dos tangentes','Las tangentes desde un punto externo son iguales'],
+    'm10D73':['Ángulo secante-secante','Ángulo formado por dos secantes'],
+    'm10D74':['Ángulo secante-tangente','Ángulo formado por secante y tangente'],
+    'm10D75':['Potencia de un punto','El producto de los segmentos es constante'],
+    'm10D76':['Ecuación del círculo','La forma estándar relaciona el centro y el radio'],
+    'm10D77':['Graficar círculos','Trazar círculos en el plano de coordenadas'],
+    'm10D78':['Círculo desde la forma general','Convertir de forma general a forma estándar'],
+    'm10D79':['Problemas de circunferencia','Calcula la circunferencia y resuelve'],
+    'm10D80':['Repaso de círculos','Aplica todos los conceptos sobre círculos'],
+    'm10E81':['Área de triángulos','Base por altura dividida entre 2'],
+    'm10E82':['Área de paralelogramos','Base por altura'],
+    'm10E83':['Área de trapecios','Promedio de las bases por la altura'],
+    'm10E84':['Área de polígonos regulares','Apotema por perímetro dividido entre 2'],
+    'm10E85':['Área de figuras compuestas','Divide en figuras más simples'],
+    'm10E86':['Área superficial de prismas','Suma de las áreas de todas las caras'],
+    'm10E87':['Área superficial de cilindros','Dos círculos más un rectángulo'],
+    'm10E88':['Área superficial de pirámides y conos','Base más caras laterales'],
+    'm10E89':['Volumen de prismas','Área de la base por la altura'],
+    'm10E90':['Volumen de cilindros','Base circular por la altura'],
+    'm10E91':['Volumen de pirámides','Un tercio de la base por la altura'],
+    'm10E92':['Volumen de conos','Un tercio de la base circular por la altura'],
+    'm10E93':['Volumen de esferas','Cuatro tercios pi r al cubo'],
+    'm10E94':['Secciones transversales','Cortes a través de figuras tridimensionales'],
+    'm10E95':['Traslaciones','Deslizar sin rotar'],
+    'm10E96':['Reflexiones','Espejo respecto a una línea'],
+    'm10E97':['Rotaciones','Girar alrededor de un punto central'],
+    'm10E98':['Dilataciones','Ampliar o reducir desde un centro'],
+    'm10E99':['Composición de transformaciones','Aplicar múltiples transformaciones en secuencia'],
+    'm10E100':['Repaso final de geometría','Sintetiza todos los conceptos de geometría']
+  };
+  Object.keys(tt).forEach(function(id){var l=lm[id];if(l){l.title_es=tt[id][0];l.tagline_es=tt[id][1];}});
+  function sa(id,instr,t0,e0,t1,e1,t2,e2){var l=lm[id];if(!l||!l.activity)return;l.activity.instructions_es=instr;var c=l.activity.choices;if(!c)return;if(c[0]){c[0].text_es=t0;if(e0)c[0].explanation_es=e0;}if(c[1]){c[1].text_es=t1;if(e1)c[1].explanation_es=e1;}if(c[2]){c[2].text_es=t2;if(e2)c[2].explanation_es=e2;}}
+  // A — Fundamentos y lógica
+  sa('m10A1','¿Cuál es el punto medio del segmento de (2,4) a (8,10)?','(5, 7)','(2+8)/2=5, (4+10)/2=7','(5, 6)','Cálculo incorrecto de la coordenada y','(6, 7)','Cálculo incorrecto de la coordenada x');
+  sa('m10A2','¿Cuál es la distancia entre (1,2) y (4,6)?','5','√((4-1)²+(6-2)²)=√(9+16)=√25=5','4','Olvidaste elevar al cuadrado las diferencias','10','Sumaste en lugar de usar la raíz cuadrada');
+  sa('m10A3','Si AB=8, BC=5 y A, B, C son colineales, ¿cuánto mide AC?','13','AC=AB+BC=8+5=13','3','Restaste en lugar de sumar','40','Multiplicaste los segmentos');
+  sa('m10A4','Si un ángulo mide 125°, ¿cuánto mide su suplemento?','55°','Suplemento=180°-125°=55°','65°','Olvidaste la fórmula correcta','235°','Ese es el ángulo reflexo');
+  sa('m10A5','Si un ángulo de 140° es dividido por un rayo en 60° y x°, ¿cuánto vale x?','80°','60°+x°=140°, entonces x=80°','200°','Sumaste los ángulos incorrectamente','70°','Error de cálculo');
+  sa('m10A6','Si un ángulo mide 37°, ¿cuánto mide su complemento?','53°','90°-37°=53°','143°','Ese es el suplemento','327°','Cálculo incorrecto');
+  sa('m10A7','Dos ángulos suplementarios están en proporción 2:3. Halla el ángulo mayor.','108°','2x+3x=180°, x=36°, mayor=3(36°)=108°','120°','Cálculo de proporción incorrecto','72°','Ese es el ángulo menor');
+  sa('m10A8','Dos líneas se intersectan. Si un ángulo mide 73°, ¿cuánto mide el opuesto?','73°','Los ángulos opuestos por el vértice son congruentes','107°','Ese es el ángulo suplementario','146°','Eso es la suma de dos ángulos');
+  sa('m10A9','Dos ángulos adyacentes forman un par lineal. Si uno mide 42°, ¿cuánto mide el otro?','138°','180°-42°=138°','48°','Error de cálculo','84°','Duplicaste el ángulo');
+  sa('m10A10','Una transversal cruza dos líneas paralelas. Si un ángulo mide 65°, ¿cuánto mide el correspondiente?','65°','Los ángulos correspondientes son congruentes','115°','Ese es el ángulo suplementario','130°','Lo duplicaste');
+  sa('m10A11','Dos paralelas cortadas por una transversal. Si un ángulo alterno interno mide 58°, ¿cuánto mide su par?','58°','Los ángulos alternos internos son congruentes','122°','Ese es el ángulo suplementario','29°','Dividiste en lugar de igualar');
+  sa('m10A12','Ángulos alternos externos: (3x)° y (2x+25)°. Halla x.','25','3x=2x+25, entonces x=25','50','Error de cálculo','15','Planteamiento algebraico incorrecto');
+  sa('m10A13','Paralelas cortadas por transversal. Si un ángulo co-interno mide 71°, ¿cuánto mide el otro?','109°','71°+x=180°, entonces x=109°','71°','Estos ángulos no son iguales','19°','Cálculo incorrecto');
+  sa('m10A14','Si una línea tiene pendiente 3, ¿cuál es la pendiente de una línea perpendicular?','-1/3','Las pendientes perpendiculares se multiplican por -1: 3×(-1/3)=-1','3','Eso es paralela, no perpendicular','-3','Fórmula de perpendicular incorrecta');
+  sa('m10A15','La línea A tiene pendiente 4/5. ¿Cuál es la pendiente de una línea paralela a A?','4/5','Las líneas paralelas tienen pendientes idénticas','-5/4','Eso es perpendicular','5/4','Valor de pendiente incorrecto');
+  sa('m10A16','Si una línea tiene pendiente -2/3, ¿cuál es la pendiente de una línea perpendicular?','3/2','El recíproco negativo de -2/3 es 3/2','-2/3','Esa es la misma pendiente','-3/2','No es el recíproco correcto');
+  sa('m10A17','Halla la longitud del segmento de (-3,1) a (5,7) con la fórmula de la distancia.','10','√((5-(-3))²+(7-1)²)=√(64+36)=√100=10','8','Cálculo incompleto','12','Aritmética incorrecta');
+  sa('m10A18','«Si dos ángulos son opuestos por el vértice, entonces son congruentes.» ¿Cuál es la hipótesis?','Dos ángulos son opuestos por el vértice','La hipótesis es la parte del «si» del enunciado','Son congruentes','Esa es la conclusión','Los ángulos existen','No es la hipótesis');
+  sa('m10A19','Todos los rectángulos tienen cuatro ángulos rectos. ABCD es un rectángulo. ¿Cuántos ángulos rectos tiene?','4','Por razonamiento deductivo: rectángulo → 4 ángulos rectos; ABCD es rectángulo → ABCD tiene 4','2','Solo aplica a algunas figuras','6','Aplicación incorrecta de la lógica');
+  sa('m10A20','Un ángulo de 86° es bisectado. ¿Cuánto mide cada ángulo resultante?','43°','86°÷2=43°','86°','Ese es el ángulo original','172°','Eso es el doble');
+  // B — Triángulos y congruencia
+  sa('m10B21','Un triángulo tiene lados 5, 5 y 7. ¿Cómo se clasifica?','Isósceles','Dos lados son iguales (5 y 5)','Equilátero','No todos los lados son iguales','Escaleno','Dos lados son iguales');
+  sa('m10B22','Un triángulo tiene ángulos 35°, 55° y 90°. ¿Cómo se clasifica?','Rectángulo','Un ángulo mide 90°','Acutángulo','Un ángulo es 90°, no es acutángulo','Obtusángulo','Un ángulo es 90°, no es obtusángulo');
+  sa('m10B23','Dos ángulos de un triángulo miden 62° y 55°. ¿Cuánto mide el tercero?','63°','62°+55°+x=180°, entonces x=63°','117°','Restaste de 180° solo una vez','127°','Cálculo incorrecto');
+  sa('m10B24','Un triángulo tiene ángulos interiores de 38° y 79°. ¿Cuánto mide el ángulo exterior en el tercer vértice?','117°','Ángulo exterior=38°+79°=117°','63°','Ese es el ángulo interior','101°','Aplicación incorrecta');
+  sa('m10B25','Triángulo isósceles con dos lados de 8. Si el ángulo entre ellos es 50°, ¿cuánto mide cada ángulo de la base?','65°','180°-50°=130°, cada ángulo base=130°/2=65°','50°','No todos los ángulos son iguales','90°','Cálculo incorrecto');
+  sa('m10B26','¿Cuánto mide cada ángulo de un triángulo equilátero?','60°','Todos los ángulos del triángulo equilátero miden 60° (180°/3)','90°','Ese es un triángulo rectángulo','120°','Cálculo incorrecto');
+  sa('m10B27','¿Pueden los lados 3, 4 y 8 formar un triángulo?','No','3+4=7, que NO es >8, por lo tanto no forman un triángulo','Sí','La desigualdad no se cumple','Tal vez','Las desigualdades tienen respuestas definitivas');
+  sa('m10B28','Triángulo ABC con lados 5,12,13. Triángulo DEF con lados 12,13,5. ¿Son congruentes por LLL?','Sí','Los tres lados correspondientes son iguales','No','Los lados coinciden perfectamente','Se necesita más información','LLL es suficiente');
+  sa('m10B29','Triángulo ABC: AB=6, ángulo A=45°, AC=8. Triángulo DEF: DE=6, ángulo D=45°, DF=8. ¿Congruentes por LAL?','Sí','Dos lados y el ángulo comprendido coinciden','No','LAL está satisfecho','Se necesitan medidas de ángulos','Tenemos el ángulo');
+  sa('m10B30','Triángulo ABC: ángulo A=50°, BC=7, ángulo C=60°. Triángulo DEF: ángulo D=50°, EF=7, ángulo F=60°. ¿Por ALA?','Sí','Dos ángulos y el lado comprendido coinciden','No','Las condiciones de ALA están cumplidas','Se necesitan longitudes de lados','Tenemos el lado comprendido');
+  sa('m10B31','Triángulo ABC: ángulo A=40°, ángulo B=70°, AB=5. Triángulo DEF: ángulo D=40°, ángulo E=70°, DE=5. ¿Por AAL?','Sí','Dos ángulos y un lado no comprendido coinciden','No','Las condiciones de AAL están satisfechas','Solo ALA funciona','Tanto ALA como AAL funcionan aquí');
+  sa('m10B32','Triángulo rectángulo ABC: hipotenusa 13, cateto 5. Triángulo DEF: hipotenusa 13, cateto 5. ¿Por HiCa?','Sí','La hipotenusa y un cateto de cada uno son congruentes','No','HiCa aplica aquí','Se necesita el otro cateto','HiCa no requiere el segundo cateto');
+  sa('m10B33','Triángulo ABC ≅ DEF por LLL. Ángulo A=55°. ¿Cuánto mide el ángulo D?','55°','Por PCCT, los ángulos correspondientes son congruentes','125°','No es el ángulo correspondiente','90°','Ángulo incorrecto');
+  sa('m10B34','En el triángulo ABC, el segmento medio que une los puntos medios de AB y AC mide 6 cm. ¿Cuánto mide BC?','12 cm','Segmento medio=(1/2)BC, entonces BC=2×6=12 cm','6 cm','El segmento medio es la mitad del tercer lado','3 cm','Relación incorrecta');
+  sa('m10B35','P está sobre la mediatriz de AB donde A=(0,0) y B=(6,0). Si PA=5, ¿cuánto mide PB?','5','Todo punto sobre la mediatriz es equidistante de los extremos','6','Eso no es equidistante','3','Distancia incorrecta');
+  sa('m10B36','En triángulo ABC, la bisectriz desde A corta BC en D. AB=6, AC=9, BD=4. ¿Cuánto mide DC?','6','BD/DC=AB/AC, entonces 4/DC=6/9, DC=6','4','Los segmentos no son iguales','5','Cálculo de proporción incorrecto');
+  sa('m10B37','Una mediana del triángulo ABC desde A hasta M (punto medio de BC) mide 9. ¿A qué distancia está el centroide de A?','6','El centroide está a 2/3 del camino de A a M: (2/3)×9=6','4.5','Eso es la mitad','3','Eso es 1/3 del camino');
+  sa('m10B38','En el triángulo ABC, la altura desde A hasta BC mide 8 y BC=5. ¿Cuál es el área del triángulo?','20','Área=(1/2)×base×altura=(1/2)×5×8=20','40','No dividiste entre 2','13','Fórmula incorrecta');
+  sa('m10B39','Para probar congruencia de triángulos con LAL, ¿qué debes mostrar?','Dos lados y el ángulo comprendido','LAL requiere dos lados y el ángulo comprendido','Dos ángulos y el lado comprendido','Eso es ALA','Tres lados','Eso es LLL');
+  sa('m10B40','Triángulo ABC: AB=7, AC=9, ángulo A=50°. Triángulo DEF: DE=7, DF=9, ángulo D=50°. ¿Qué postulado prueba la congruencia?','LAL','Dos lados y el ángulo comprendido son congruentes','LLL','No tenemos tres lados','ALA','No tenemos dos ángulos');
+  // C — Similitud y trigonometría
+  sa('m10C41','Rectángulo ABCD similar a EFGH con factor 3:2. Si AB=12, ¿cuánto mide EF?','8','EF=AB×(2/3)=12×(2/3)=8','18','Escalaste hacia arriba en lugar de hacia abajo','10','Aplicación de proporción incorrecta');
+  sa('m10C42','Triángulo ABC: ángulos 60° y 70°. Triángulo DEF: ángulos 60° y 50°. ¿Son similares por AA?','No','Los terceros ángulos son 50° y 70°, no coinciden todos','Sí','Los ángulos no se corresponden todos','Se necesita más información','Tenemos suficiente información de ángulos');
+  sa('m10C43','Triángulo ABC: lados 4,6,8. Triángulo DEF: lados 6,9,12. ¿Son similares por LLL~?','Sí','4:6=6:9=8:12=2:3 (todos en la misma proporción)','No','Todas las proporciones son iguales','Se necesitan ángulos','LLL~ no necesita ángulos');
+  sa('m10C44','Triángulo ABC: AB=4, AC=6, ángulo A=40°. Triángulo DEF: DE=6, DF=9, ángulo D=40°. ¿Por LAL~?','Sí','DE/AB=6/4=3/2 y DF/AC=9/6=3/2, más ángulo A=ángulo D','No','Las proporciones y el ángulo coinciden','Se necesita el tercer lado','LAL~ es suficiente');
+  sa('m10C45','Dos triángulos similares con razón 3:5. Si el lado del menor mide 6, ¿cuánto mide el correspondiente del mayor?','10','6/x=3/5, entonces x=(6×5)/3=10','9','Proporción incorrecta','3.6','Escalaste hacia abajo');
+  sa('m10C46','Triángulos ABC y DEF similares. AB=8, BC=10, DE=12. Halla EF.','15','AB/DE=BC/EF, entonces 8/12=10/EF, EF=15','20','Planteamiento de proporción incorrecto','7.5','Cálculo incorrecto');
+  sa('m10C47','En triángulo ABC, DE∥BC con D en AB y E en AC. AD=6, DB=4, AE=9. Halla EC.','6','AD/DB=AE/EC, entonces 6/4=9/EC, EC=6','13.5','Proporción incorrecta','12','Error de cálculo');
+  sa('m10C48','¿Cuál es la media geométrica de 4 y 9?','6','√(4×9)=√36=6','6.5','Esa es la media aritmética','13','Esa es su suma');
+  sa('m10C49','Triángulo rectángulo ABC (ángulo recto en C): AB=13 (hipotenusa), BC=5 (opuesto a A). ¿Cuánto es sin(A)?','5/13','sin(A)=cateto opuesto/hipotenusa=BC/AB=5/13','12/13','Esa es la proporción del cateto adyacente','13/5','Orientación de proporción incorrecta');
+  sa('m10C50','Triángulo rectángulo ABC (ángulo recto en C): AB=10, AC=8 (adyacente a A). ¿Cuánto es cos(A)?','0,8 o 4/5','cos(A)=cateto adyacente/hipotenusa=AC/AB=8/10=4/5','0,6 o 3/5','Eso sería con un triángulo diferente','1,25','El coseno no puede superar 1');
+  sa('m10C51','Triángulo rectángulo ABC (ángulo recto en C): BC=7 (opuesto a A), AC=5 (adyacente). ¿Cuánto es tan(A)?','7/5 o 1,4','tan(A)=cateto opuesto/cateto adyacente=BC/AC=7/5','5/7','Ese es el recíproco','7/12','Proporción incorrecta');
+  sa('m10C52','Triángulo rectángulo ABC (ángulo recto en C): ángulo A=35°, AC=10. Halla BC con la tangente.','BC ≈ 7,0','tan(35°)=BC/10, entonces BC=10×tan(35°)≈7,0','BC ≈ 12,2','Cálculo trigonométrico incorrecto','BC ≈ 14,3','Aplicación incorrecta de la tangente');
+  sa('m10C53','Triángulo rectángulo ABC (ángulo recto en C): BC=8, AB=10. Halla el ángulo A.','∠A ≈ 53,1°','sin(A)=8/10, entonces A=sin⁻¹(0,8)≈53,1°','∠A ≈ 36,9°','Ese es un ángulo diferente','∠A ≈ 60°','Cálculo inverso incorrecto');
+  sa('m10C54','Desde un punto a 50 pies de un edificio, el ángulo de elevación es 30°. ¿Cuál es la altura?','50/√3 ≈ 28,9 pies','tan(30°)=altura/50, entonces altura=50×tan(30°)≈28,9 pies','50 pies','Relación diferente','100 pies','Cálculo incorrecto');
+  sa('m10C55','Desde la cima de una torre de 60 pies, el ángulo de depresión a un punto es 40°. ¿A qué distancia está?','60/tan(40°) ≈ 71,5 pies','tan(40°)=60/distancia, entonces distancia≈71,5 pies','60×tan(40°) ≈ 50,3 pies','Fórmula incorrecta','60 pies','Cálculo incorrecto');
+  sa('m10C56','En triángulo ABC: ángulo A=40°, a=8, ángulo B=65°. Halla el lado b.','b ≈ 12,0','a/sin(A)=b/sin(B), entonces 8/sin(40°)=b/sin(65°), b≈12,0','b ≈ 5,2','Cálculo incorrecto','b ≈ 8','Los lados no son iguales');
+  sa('m10C57','En triángulo ABC: a=5, b=7, ángulo C=45°. Halla el lado c.','c ≈ 5,0','c²=5²+7²-2(5)(7)cos(45°)≈25, entonces c≈5,0','c ≈ 8,5','Aplicación incorrecta del coseno','c ≈ 12','Cálculo incorrecto');
+  sa('m10C58','En un triángulo 45-45-90, cada cateto mide 6. ¿Cuánto mide la hipotenusa?','6√2','En 45-45-90: hipotenusa=cateto×√2=6√2','6','La hipotenusa es más larga que los catetos','12','Fórmula incorrecta');
+  sa('m10C59','En un triángulo 30-60-90, el cateto corto mide 5. ¿Cuánto mide la hipotenusa?','10','En 30-60-90: hipotenusa=2×cateto corto=2×5=10','5√3','Ese es el cateto largo','5√2','Triángulo especial incorrecto');
+  sa('m10C60','¿Qué razón trigonométrica usarías para encontrar el cateto adyacente a un ángulo conocido?','Coseno','cos=cateto adyacente/hipotenusa','Seno','sin=cateto opuesto/hipotenusa','Tangente','tan=cateto opuesto/cateto adyacente');
+  // D — Círculos
+  sa('m10D61','Si un círculo tiene radio 7, ¿cuánto mide su diámetro?','14','Diámetro=2×radio=2×7=14','7','Ese es el radio','49','Ese es un componente del área');
+  sa('m10D62','Un ángulo central mide 75°. ¿Cuánto mide el arco interceptado?','75°','La medida del ángulo central = la medida del arco interceptado','105°','Ese es el suplemento','150°','Ese es el doble');
+  sa('m10D63','Un ángulo inscrito intercepta un arco de 120°. ¿Cuánto mide el ángulo?','60°','Ángulo inscrito=1/2×arco=1/2×120°=60°','120°','Ese es el arco, no el ángulo','240°','Relación incorrecta');
+  sa('m10D64','Círculo de radio 5. Halla la longitud del arco de 72°.','2π','Longitud=(72/360)×2π(5)=(1/5)×10π=2π','5π','Cálculo de fracción incorrecto','10π','Esa es la circunferencia completa');
+  sa('m10D65','Un diámetro divide un círculo en dos arcos. Si uno mide 130°, ¿cuánto mide el otro?','230°','130°+230°=360°','50°','Cálculo incorrecto','260°','Eso es el doble de uno de ellos');
+  sa('m10D66','Círculo de radio 6. Halla el área del sector de 90°.','9π','Área=(90/360)×π(6)²=(1/4)×36π=9π','36π','Ese es el área del círculo completo','18π','Aplicación de fracción incorrecta');
+  sa('m10D67','Un radio de longitud 8 encuentra una tangente. ¿Cuál es el ángulo entre ellos?','90°','El radio y la tangente son siempre perpendiculares','45°','Siempre son perpendiculares','180°','Relación incorrecta');
+  sa('m10D68','Una secante intersecta un círculo en A y B, donde AB=10 y el radio=8. ¿Es esto posible?','Sí','Una cuerda puede tener cualquier longitud hasta el diámetro (16)','No','Una cuerda de longitud 10 es válida','Se necesita más información','Esta información es suficiente');
+  sa('m10D69','Dos cuerdas están equidistantes del centro. ¿Qué puedes concluir?','Las cuerdas tienen igual longitud','Las cuerdas equidistantes del centro son congruentes','Las cuerdas se intersectan','La distancia no determina si se intersectan','Una de ellas es un diámetro','No necesariamente');
+  sa('m10D70','Ángulo central e inscrito interceptan el mismo arco. Ángulo central=140°. Halla el inscrito.','70°','Inscrito=1/2×Central=1/2×140°=70°','140°','El inscrito es la mitad del central','280°','Dirección incorrecta');
+  sa('m10D71','Una tangente toca el círculo en P y el radio a P mide 6. ¿Cuál es el ángulo entre tangente y radio?','90°','Tangente⊥radio (siempre perpendiculares)','60°','Siempre son perpendiculares','45°','Ángulo incorrecto');
+  sa('m10D72','Desde el punto externo P, dos tangentes tocan el círculo en A y B. Si PA=8, ¿cuánto mide PB?','8','Los segmentos tangentes desde un punto externo son congruentes','16','Cada tangente mide 8','4','Relación incorrecta');
+  sa('m10D73','Dos secantes desde P externo interceptan arcos de 90° y 30°. Halla el ángulo P.','30°','Ángulo P=1/2|90°-30°|=1/2(60°)=30°','60°','Esa es la diferencia, no la mitad','120°','Cálculo incorrecto');
+  sa('m10D74','Secante y tangente desde P externo interceptan arcos de 120° y 40°. Halla el ángulo P.','40°','Ángulo P=1/2|120°-40°|=1/2(80°)=40°','80°','Esa es la diferencia, no la mitad','160°','Aritmética incorrecta');
+  sa('m10D75','Desde P externo, secante intersecta en A y B con PA=3, AB=5. Otra secante tiene PC=2. Halla CD.','10','PA×PB=PC×PD, entonces 3×8=2×PD, PD=12, CD=10','4','Cálculo incorrecto','6','Aplicación incorrecta del poder de un punto');
+  sa('m10D76','Círculo con centro (3,5) y radio 7. ¿Cuál es su ecuación?','(x-3)²+(y-5)²=49','Forma estándar: (x-3)²+(y-5)²=7²=49','(x+3)²+(y+5)²=49','Los signos están invertidos','(x-3)²+(y-5)²=7','El radio debe estar elevado al cuadrado');
+  sa('m10D77','Para el círculo (x+2)²+(y-1)²=9, ¿cuál es el centro?','(-2, 1)','(x-(-2))²+(y-1)²=r², entonces h=-2, k=1','(2, -1)','Los signos están invertidos','(-2, -1)','Signos incorrectos');
+  sa('m10D78','Para x²+y²-6x+4y-12=0, halla el centro.','(3, -2)','Completar el cuadrado: (x-3)²+(y+2)²=25, centro=(3,-2)','(-3, 2)','Los signos son incorrectos','(6, -4)','Completación del cuadrado incompleta');
+  sa('m10D79','Un círculo tiene circunferencia 31,4. ¿Cuánto mide su radio? (π≈3,14)','5','C=2πr, entonces 31,4=2(3,14)r, r=5','10','Ese es el diámetro','15,7','Cálculo incorrecto');
+  sa('m10D80','¿Qué propiedad establece que una tangente es perpendicular al radio?','Perpendicularidad tangente-radio','Esta es la propiedad fundamental de la tangente','Teorema del ángulo inscrito','Ese trata sobre los ángulos inscritos','Potencia de un punto','Ese trata sobre secantes y tangentes desde puntos');
+  // E — Área, volumen y transformaciones
+  sa('m10E81','Un triángulo tiene base 10 y altura 8. ¿Cuál es su área?','40','A=1/2×10×8=40','80','Olvidaste dividir entre 2','18','Cálculo incorrecto');
+  sa('m10E82','Un paralelogramo tiene base 7 y altura perpendicular 5. ¿Cuál es su área?','35','A=7×5=35','24','Cálculo incorrecto','12','Fórmula incorrecta');
+  sa('m10E83','Un trapecio tiene bases 6 y 10, altura 4. ¿Cuál es su área?','32','A=1/2(6+10)(4)=1/2(16)(4)=32','40','Olvidaste el 1/2','64','Cálculo incorrecto');
+  sa('m10E84','Hexágono regular con apotema 5 y perímetro 24. Halla el área.','60','A=1/2×5×24=60','120','Olvidaste dividir entre 2','29','Cálculo incorrecto');
+  sa('m10E85','Figura compuesta: rectángulo 10×5 con triángulo encima (base 10, altura 3). Halla el área total.','65','Rectángulo: 10×5=50, Triángulo: 1/2×10×3=15, Total: 65','50','Olvidaste el triángulo','80','Cálculo incorrecto');
+  sa('m10E86','Prisma rectangular: longitud 8, ancho 5, altura 6. Halla el área superficial.','236','AS=2(8×5)+2(8×6)+2(5×6)=80+96+60=236','240','Cerca pero incorrecto','480','Eso es el volumen multiplicado por algo');
+  sa('m10E87','Cilindro con radio 4 y altura 10. Halla el área superficial.','112π','AS=2π(4)²+2π(4)(10)=32π+80π=112π','80π','Olvidaste las bases','96π','Cálculo incorrecto');
+  sa('m10E88','Cono con radio de base 3 y altura inclinada 5. Halla el área superficial.','24π','AS=π(3)²+π(3)(5)=9π+15π=24π','45π','Falta la base','15π','Incompleto');
+  sa('m10E89','Prisma con área de la base 20 y altura 8. Halla el volumen.','160','V=20×8=160','80','Dividiste incorrectamente','28','Fórmula incorrecta');
+  sa('m10E90','Cilindro con radio 5 y altura 10. Halla el volumen.','250π','V=π(5)²(10)=π(25)(10)=250π','100π','Cálculo incorrecto','50π','Aplicación incorrecta de la fórmula');
+  sa('m10E91','Pirámide con área de la base 30 y altura 9. Halla el volumen.','90','V=1/3×30×9=1/3×270=90','270','Olvidaste el 1/3','45','Error de cálculo');
+  sa('m10E92','Cono con radio 6 y altura 12. Halla el volumen.','144π','V=1/3×π(6)²×12=1/3×36π×12=144π','432π','Olvidaste el 1/3','72π','Cálculo incorrecto');
+  sa('m10E93','Esfera con radio 3. Halla el volumen.','36π','V=4/3×π×3³=4/3×π×27=36π','27π','Olvidaste el 4/3','12π','Cálculo incorrecto');
+  sa('m10E94','Un plano corta un cono paralelo a la base. ¿Qué forma tiene la sección transversal?','Círculo','Un plano paralelo a la base circular crea un círculo','Triángulo','Esa no es la sección transversal','Elipse','Solo si el plano está inclinado');
+  sa('m10E95','El punto A(2,3) se traslada 4 unidades a la derecha y 2 hacia abajo. ¿Cuál es A\'?','(6, 1)','A\'=(2+4, 3-2)=(6,1)','(2, 3)','La traslación mueve el punto','(-2, 5)','Dirección incorrecta');
+  sa('m10E96','El punto A(3,4) se refleja respecto al eje x. ¿Cuál es A\'?','(3, -4)','Reflexión respecto al eje x: (x,y)→(x,-y)','(-3, 4)','Eso es reflexión respecto al eje y','(4, 3)','Eso no es reflexión');
+  sa('m10E97','El punto A(1,2) se rota 90° en sentido antihorario alrededor del origen. ¿Cuál es A\'?','(-2, 1)','Rotación 90° antihorario: (x,y)→(-y,x), entonces (1,2)→(-2,1)','(2, 1)','Fórmula de rotación incorrecta','(-1, -2)','Eso es 180°');
+  sa('m10E98','Una figura con lado 5 se dilata con factor de escala 2. ¿Cuánto mide el nuevo lado?','10','Nueva longitud=original×factor=5×2=10','5','El factor de escala cambia el tamaño','2.5','Dirección incorrecta');
+  sa('m10E99','A(2,1) se traslada 3 unidades a la derecha y luego se refleja respecto al eje y. ¿Cuál es A\'\'?','(-5, 1)','Tras traslación: (5,1). Tras reflexión: (-5,1)','(5, 1)','Olvidaste la reflexión','(-2, 1)','Transformaciones incompletas');
+  sa('m10E100','¿Cuál de estas expresiones mide la longitud de un arco?','Longitud de arco=(θ/360°)×2πr','Esta fórmula calcula la distancia a lo largo del arco','Área=πr²','Ese es el área del círculo completo','Circunferencia=2πr','Esa es la circunferencia completa del círculo');
+})();
+
 function getSubjectData(subject, grade){
   // For App Building grades 6-12, always show Ship Real Apps curriculum
   if(subject === 'app-building' && (grade >= 6 || grade === '6' || grade === '7' || grade === '8' || grade === '9' || grade === '10' || grade === '11' || grade === '12' || [7,8,9,10,11,12].indexOf(grade) > -1)){
