@@ -28763,18 +28763,20 @@ function generateTopicQuestion(grade, title, seed){
 
   // ═══ CIRCUMFERENCE ═══
   if(title.match(/circumfer/i)){
+    var _es=(typeof currentLang!=='undefined'&&currentLang==='es');
     var r=rInt(2,12); var type=rInt(0,1);
-    if(type===0){ var ans=Math.round(2*3.14*r*100)/100; q='Circumference of circle with radius '+r+'? (π≈3.14)'; correct=String(ans); w1=String(Math.round(3.14*r*r*100)/100); w2=String(Math.round(3.14*r*100)/100); expl='C = 2πr = 2 × 3.14 × '+r+' = '+ans; }
-    else { var d=r*2; var ans=Math.round(3.14*d*100)/100; q='Circumference of circle with diameter '+d+'? (π≈3.14)'; correct=String(ans); w1=String(Math.round(3.14*d*d*100)/100); w2=String(Math.round(d/2*100)/100); expl='C = πd = 3.14 × '+d+' = '+ans; }
+    if(type===0){ var ans=Math.round(2*3.14*r*100)/100; q=_es?'¿Circunferencia del círculo con radio '+r+'? (π≈3.14)':'Circumference of circle with radius '+r+'? (π≈3.14)'; correct=String(ans); w1=String(Math.round(3.14*r*r*100)/100); w2=String(Math.round(3.14*r*100)/100); expl=_es?'C = 2πr = 2 × 3.14 × '+r+' = '+ans:'C = 2πr = 2 × 3.14 × '+r+' = '+ans; }
+    else { var d=r*2; var ans=Math.round(3.14*d*100)/100; q=_es?'¿Circunferencia del círculo con diámetro '+d+'? (π≈3.14)':'Circumference of circle with diameter '+d+'? (π≈3.14)'; correct=String(ans); w1=String(Math.round(3.14*d*d*100)/100); w2=String(Math.round(d/2*100)/100); expl=_es?'C = πd = 3.14 × '+d+' = '+ans:'C = πd = 3.14 × '+d+' = '+ans; }
     return mcQ(q,correct,w1,w2,expl);
   }
 
   // ═══ SURFACE AREA ═══
   if(title.match(/surface area/i)){
+    var _es=(typeof currentLang!=='undefined'&&currentLang==='es');
     var l=rInt(2,8),w=rInt(2,8),h=rInt(2,8); var ans=2*(l*w+l*h+w*h);
-    q='Surface area of box: l='+l+', w='+w+', h='+h;
+    q=_es?'Área superficial de la caja: l='+l+', a='+w+', h='+h:'Surface area of box: l='+l+', w='+w+', h='+h;
     correct=String(ans); w1=String(l*w*h); w2=String(2*l*w);
-    expl='SA = 2(lw + lh + wh) = 2('+l*w+' + '+l*h+' + '+w*h+') = '+ans;
+    expl=_es?'AS = 2(la + lh + ah) = 2('+l*w+' + '+l*h+' + '+w*h+') = '+ans:'SA = 2(lw + lh + wh) = 2('+l*w+' + '+l*h+' + '+w*h+') = '+ans;
     return mcQ(q,correct,w1,w2,expl);
   }
 
