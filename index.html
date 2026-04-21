@@ -27562,6 +27562,56 @@ try { autoTranslateActivitiesES(); } catch(e){ console.warn('Auto activity trans
   mcfl('10E3','¿Cuál es la mejor estrategia de deducción por vehículo?','Registrar el millaje real y los gastos reales, y usar el que resulte mayor','Solo registrar el millaje','Estimar los gastos');
 })();
 
+// ── Grade 10 Science (Chemistry) ─────────────────────────────
+(function(){
+  if(typeof SCIENCE_CURRICULUM==='undefined'||!SCIENCE_CURRICULUM[10])return;
+  var gd=SCIENCE_CURRICULUM[10];
+  gd.description_es='Grado 10 (Química): Estructura atómica, tabla periódica, enlace químico, reacciones químicas, estequiometría, leyes de los gases, soluciones y mezclas, ácidos y bases, electroquímica, seguridad e instrumentos de laboratorio, análisis cuantitativo, análisis de errores, química orgánica, química nuclear y química verde';
+  var cn={A:'Estructura de la materia',B:'Enlace químico',C:'Reacciones y ecuaciones',D:'Habilidades de laboratorio',E:'Temas avanzados'};
+  Object.keys(cn).forEach(function(k){if(gd.categories[k])gd.categories[k].name_es=cn[k];});
+  var lm={};
+  Object.keys(gd.categories).forEach(function(ck){(gd.categories[ck].lessons||[]).forEach(function(l){lm[l.id]=l;});});
+  var tt={
+    's10A1':['Modelos atómicos','Evolución de la teoría atómica'],
+    's10A2':['Configuración electrónica','Distribución de los electrones en los átomos'],
+    's10A3':['Tendencias periódicas','Patrones en las propiedades de los elementos'],
+    's10B1':['Enlaces iónicos y covalentes','Cómo se combinan los átomos'],
+    's10B2':['Geometría molecular','Forma tridimensional de las moléculas'],
+    's10B3':['Propiedades de los compuestos','Cómo el enlace determina las características'],
+    's10C1':['Ecuaciones químicas','Representación de reacciones'],
+    's10C2':['Estequiometría','Cálculo de cantidades en reacciones'],
+    's10C3':['Tipos de reacciones','Clasificación de los cambios químicos'],
+    's10D1':['Seguridad en el laboratorio','Protegerse a uno mismo y a los demás'],
+    's10D2':['Análisis cuantitativo','Medir y calcular con precisión'],
+    's10D3':['Análisis de errores','Identificar y minimizar errores'],
+    's10E1':['Química orgánica','Química de los compuestos de carbono'],
+    's10E2':['Química nuclear','Reacciones en los núcleos atómicos'],
+    's10E3':['Química verde','Química para la sostenibilidad']
+  };
+  Object.keys(tt).forEach(function(id){var l=lm[id];if(l){l.title_es=tt[id][0];l.tagline_es=tt[id][1];}});
+  function sa(id,instr,t0,e0,t1,e1,t2,e2){var l=lm[id];if(!l||!l.activity)return;l.activity.instructions_es=instr;var c=l.activity.choices;if(!c)return;if(c[0]){c[0].text_es=t0;if(e0)c[0].explanation_es=e0;}if(c[1]){c[1].text_es=t1;if(e1)c[1].explanation_es=e1;}if(c[2]){c[2].text_es=t2;if(e2)c[2].explanation_es=e2;}}
+  // A — Estructura de la materia
+  sa('s10A1','¿Qué revelaron los experimentos de Thomson?','Los electrones existen dentro de los átomos','Los rayos catódicos de Thomson mostraron partículas dentro de los átomos.','El núcleo existe','Rutherford descubrió el núcleo.','Los átomos son indivisibles','Eso lo propuso Dalton; Thomson demostró que los átomos tienen partes.');
+  sa('s10A2','¿Qué determina las propiedades químicas de un elemento?','Los electrones de valencia','Los electrones más externos determinan cómo los átomos se enlazan y reaccionan.','El número total de electrones','Solo los electrones de valencia afectan significativamente la reactividad.','La masa atómica','Los electrones importan más que la masa en la química.');
+  sa('s10A3','¿Qué elemento tiene la mayor electronegatividad?','El flúor','El flúor, en la esquina superior derecha de la tabla periódica, es el más electronegativo.','El sodio','El sodio es muy electropositivo (baja electronegatividad).','El oxígeno','El oxígeno tiene alta electronegatividad, pero no la más alta.');
+  // B — Enlace químico
+  sa('s10B1','¿Entre quiénes se forman los enlaces iónicos?','Un metal y un no metal','Los enlaces iónicos se forman entre metales y no metales mediante transferencia de electrones.','Dos no metales','Dos no metales forman enlaces covalentes.','Dos metales','Los metales no forman enlaces iónicos entre sí.');
+  sa('s10B2','¿Qué determina la geometría molecular?','La repulsión de pares de electrones','RPECV: los pares de electrones se repelen para maximizar la distancia entre sí.','La fuerza del enlace','La fuerza del enlace no determina la geometría.','El tamaño atómico','La repulsión de pares de electrones determina la geometría.');
+  sa('s10B3','¿Por qué los compuestos iónicos tienen puntos de fusión elevados?','La fuerte atracción electrostática entre los iones','Los enlaces iónicos requieren una gran cantidad de energía para romperse.','Los enlaces covalentes dentro de los iones','Eso no explica el elevado punto de fusión.','Los electrones son compartidos','Los compuestos iónicos implican transferencia de electrones, no compartición.');
+  // C — Reacciones y ecuaciones
+  sa('s10C1','¿Por qué deben equilibrarse las ecuaciones químicas?','Para mostrar la conservación de los átomos','Los átomos no pueden crearse ni destruirse durante las reacciones.','Para que las ecuaciones se vean ordenadas','El equilibrio es un requisito de la conservación, no una cuestión estética.','Para que las reacciones sean más rápidas','El equilibrio de la ecuación no afecta la velocidad de la reacción.');
+  sa('s10C2','¿Qué es un reactivo limitante?','El reactivo que se agota primero','El reactivo limitante controla la cantidad de producto que se forma.','El elemento más raro','La rareza no determina cuál es el reactivo limitante.','El catalizador','Los catalizadores no se consumen en las reacciones.');
+  sa('s10C3','¿Qué es una reacción de síntesis?','Dos reactivos se combinan para formar un producto','La síntesis crea productos más complejos a partir de reactivos más simples.','Un reactivo se descompone en dos productos','Eso es una reacción de descomposición.','Los reactivos intercambian elementos','Eso es una reacción de sustitución.');
+  // D — Habilidades de laboratorio
+  sa('s10D1','¿Por qué se deben usar gafas protectoras en el laboratorio?','Para proteger los ojos de derrames y salpicaduras','Las gafas protectoras previenen la exposición de los ojos a productos químicos.','Para ver mejor','Esa no es la razón principal.','Porque es obligatorio','La seguridad es la razón por la que es obligatorio.');
+  sa('s10D2','¿Qué es la molaridad?','Moles de soluto por litro de solución','La molaridad (M) es la unidad estándar de concentración en química.','Gramos por litro','Esa es una unidad de concentración diferente.','Porcentaje en masa','Esa es otra unidad de concentración.');
+  sa('s10D3','¿Qué tipo de error proviene de instrumentos mal calibrados?','Error sistemático','Los errores sistemáticos provienen de problemas constantes en el procedimiento.','Error aleatorio','Los errores aleatorios varían de manera impredecible.','Ambos por igual','Tienen diferentes fuentes.');
+  // E — Temas avanzados
+  sa('s10E1','¿Qué define a un compuesto orgánico?','Contiene átomos de carbono','La química orgánica es la química de los compuestos de carbono.','Proviene de organismos vivos','Los compuestos orgánicos sintéticos no provienen de seres vivos.','Contiene solo carbono e hidrógeno','Los compuestos orgánicos también pueden contener otros elementos.');
+  sa('s10E2','¿Qué es la vida media?','El tiempo para que la mitad de la muestra se desintegre','La vida media es el tiempo en que queda el 50 % del material radiactivo.','La tasa de desintegración','La vida media es un tiempo, no una tasa.','La edad de una muestra','La vida media ayuda a determinar la edad, pero no es la edad en sí.');
+  sa('s10E3','¿Cuál es el objetivo de la química verde?','Minimizar el impacto ambiental mientras se protege la economía','La química verde equilibra la sostenibilidad con las necesidades empresariales.','Eliminar toda la química','La química verde mejora la química, no la elimina.','Hacer que la química sea gratuita','La química verde trata de la sostenibilidad, no del costo.');
+})();
+
 function getSubjectData(subject, grade){
   // For App Building grades 6-12, always show Ship Real Apps curriculum
   if(subject === 'app-building' && (grade >= 6 || grade === '6' || grade === '7' || grade === '8' || grade === '9' || grade === '10' || grade === '11' || grade === '12' || [7,8,9,10,11,12].indexOf(grade) > -1)){
