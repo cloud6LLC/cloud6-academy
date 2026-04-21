@@ -28513,14 +28513,27 @@ function generateLessonQuestions(lesson){
   } else {
     // Non-math subjects: generate subject-relevant questions from lesson content
     var textSources = [];
-    keyPoints.forEach(function(kp){
-      if(typeof kp === 'string') textSources.push(kp);
-      else if(kp && (kp.x || kp.text)) textSources.push(kp.x || kp.text);
-    });
-    if(lesson.activity && typeof lesson.activity === 'string') textSources.push(lesson.activity);
-    if(lesson.tagline) textSources.push(lesson.tagline);
-    if(typeof rawIntro === 'string') textSources.push(rawIntro);
-    if(lesson.content.funFact) textSources.push(lesson.content.funFact);
+    var _esMode = (typeof currentLang !== 'undefined' && currentLang === 'es');
+    if(_esMode && lesson.content.keyPoints_es){
+      // Use Spanish content fields for textSources when in ES mode
+      var kpEs = lesson.content.keyPoints_es;
+      var kpEsArr = Array.isArray(kpEs) ? kpEs : (kpEs ? [kpEs] : []);
+      kpEsArr.forEach(function(kp){ if(typeof kp === 'string') textSources.push(kp); });
+      if(lesson.tagline_es) textSources.push(lesson.tagline_es);
+      if(typeof lesson.content.intro_es === 'string') textSources.push(lesson.content.intro_es);
+      if(lesson.content.funFact_es) textSources.push(lesson.content.funFact_es);
+    }
+    if(textSources.length === 0){
+      // Fallback to English content fields
+      keyPoints.forEach(function(kp){
+        if(typeof kp === 'string') textSources.push(kp);
+        else if(kp && (kp.x || kp.text)) textSources.push(kp.x || kp.text);
+      });
+      if(lesson.activity && typeof lesson.activity === 'string') textSources.push(lesson.activity);
+      if(lesson.tagline) textSources.push(lesson.tagline);
+      if(typeof rawIntro === 'string') textSources.push(rawIntro);
+      if(lesson.content.funFact) textSources.push(lesson.content.funFact);
+    }
 
     for(var i = 0; i < needed; i++){
       questions.push(generateSubjectQuestion(lesson.title, textSources, i));
@@ -28694,28 +28707,39 @@ function generateTopicQuestion(grade, title, seed){
 
   // ═══ COORDINATE PLANE / GRAPHING ═══
   if(title.match(/coordinate|ordered pair|graph|plot point|x.axis|y.axis|quadrant/i)){
+    var _es=(typeof currentLang!=='undefined'&&currentLang==='es');
     var type=rInt(0,3);
-    if(type===0){ var x=rInt(-8,8),y=rInt(-8,8); var quad=x>0&&y>0?'I':x<0&&y>0?'II':x<0&&y<0?'III':'IV'; q='The point ('+x+', '+y+') is in which quadrant?'; correct='Quadrant '+quad; w1='Quadrant '+(quad==='I'?'III':'I'); w2='Quadrant '+(quad==='II'?'IV':'II'); expl='('+x+', '+y+'): '+(x>0?'positive':'negative')+' x, '+(y>0?'positive':'negative')+' y → Quadrant '+quad; }
-    else if(type===1){ q='What is the origin on a coordinate plane?'; correct='(0, 0)'; w1='(1, 1)'; w2='(0, 1)'; expl='The origin is where the x and y axes cross, at (0, 0)'; }
-    else if(type===2){ var x=rInt(1,10),y=rInt(1,10); q='Name the ordered pair: right '+x+', up '+y; correct='('+x+', '+y+')'; w1='('+y+', '+x+')'; w2='(-'+x+', '+y+')'; expl='Right = positive x, up = positive y → ('+x+', '+y+')'; }
-    else { q='Which axis runs horizontally (left to right)?'; correct='The x-axis'; w1='The y-axis'; w2='The z-axis'; expl='The x-axis is horizontal, the y-axis is vertical'; }
+    if(type===0){ var x=rInt(-8,8),y=rInt(-8,8); var quad=x>0&&y>0?'I':x<0&&y>0?'II':x<0&&y<0?'III':'IV'; var qWord=_es?'Cuadrante':'Quadrant'; q=_es?'¿En qué cuadrante está el punto ('+x+', '+y+')?':'The point ('+x+', '+y+') is in which quadrant?'; correct=qWord+' '+quad; w1=qWord+' '+(quad==='I'?'III':'I'); w2=qWord+' '+(quad==='II'?'IV':'II'); expl=_es?'('+x+', '+y+'): x '+(x>0?'positivo':'negativo')+', y '+(y>0?'positivo':'negativo')+' → Cuadrante '+quad:'('+x+', '+y+'): '+(x>0?'positive':'negative')+' x, '+(y>0?'positive':'negative')+' y → Quadrant '+quad; }
+    else if(type===1){ q=_es?'¿Qué es el origen en un plano cartesiano?':'What is the origin on a coordinate plane?'; correct='(0, 0)'; w1='(1, 1)'; w2='(0, 1)'; expl=_es?'El origen es donde los ejes x e y se cruzan, en (0, 0)':'The origin is where the x and y axes cross, at (0, 0)'; }
+    else if(type===2){ var x=rInt(1,10),y=rInt(1,10); q=_es?'Nombra el par ordenado: derecha '+x+', arriba '+y:'Name the ordered pair: right '+x+', up '+y; correct='('+x+', '+y+')'; w1='('+y+', '+x+')'; w2='(-'+x+', '+y+')'; expl=_es?'Derecha = x positiva, arriba = y positiva → ('+x+', '+y+')':'Right = positive x, up = positive y → ('+x+', '+y+')'; }
+    else { q=_es?'¿Qué eje va horizontalmente (de izquierda a derecha)?':'Which axis runs horizontally (left to right)?'; correct=_es?'El eje x':'The x-axis'; w1=_es?'El eje y':'The y-axis'; w2=_es?'El eje z':'The z-axis'; expl=_es?'El eje x es horizontal, el eje y es vertical':'The x-axis is horizontal, the y-axis is vertical'; }
     return mcQ(q,correct,w1,w2,expl);
   }
 
   // ═══ ANGLES ═══
   if(title.match(/angle|acute|obtuse|right angle|supplement|complement|protractor/i)){
+    var _es=(typeof currentLang!=='undefined'&&currentLang==='es');
     var type=rInt(0,4);
-    if(type===0){ var a=rInt(10,80); q='An angle measures '+a+'°. What type is it?'; correct='Acute'; w1='Obtuse'; w2='Right'; expl='Acute angles are less than 90°. '+a+'° < 90°'; }
-    else if(type===1){ var a=rInt(91,170); q='An angle measures '+a+'°. What type is it?'; correct='Obtuse'; w1='Acute'; w2='Right'; expl='Obtuse angles are between 90° and 180°. '+a+'° is obtuse'; }
-    else if(type===2){ var a=rInt(20,80); var comp=90-a; q='Two angles are complementary. One is '+a+'°. What is the other?'; correct=comp+'°'; w1=(180-a)+'°'; w2=(a+10)+'°'; expl='Complementary angles add to 90°: 90 - '+a+' = '+comp+'°'; }
-    else if(type===3){ var a=rInt(30,150); var supp=180-a; q='Two angles are supplementary. One is '+a+'°. What is the other?'; correct=supp+'°'; w1=(90-a>0?(90-a):a)+'°'; w2=(a+10)+'°'; expl='Supplementary angles add to 180°: 180 - '+a+' = '+supp+'°'; }
-    else { var a=rInt(30,70),b=rInt(30,70); while(a+b>=180){a=rInt(30,60);b=rInt(30,60);} var c=180-a-b; q='Triangle angles: '+a+'° and '+b+'°. Find the third.'; correct=c+'°'; w1=(c+10)+'°'; w2=(c-10)+'°'; expl='Triangle angles sum to 180°: 180 - '+a+' - '+b+' = '+c+'°'; }
+    if(type===0){ var a=rInt(10,80); q=_es?'¿Un ángulo mide '+a+'°? ¿Qué tipo es?':'An angle measures '+a+'°. What type is it?'; correct=_es?'Agudo':'Acute'; w1=_es?'Obtuso':'Obtuse'; w2=_es?'Recto':'Right'; expl=_es?'Los ángulos agudos miden menos de 90°. '+a+'° < 90°':'Acute angles are less than 90°. '+a+'° < 90°'; }
+    else if(type===1){ var a=rInt(91,170); q=_es?'¿Un ángulo mide '+a+'°? ¿Qué tipo es?':'An angle measures '+a+'°. What type is it?'; correct=_es?'Obtuso':'Obtuse'; w1=_es?'Agudo':'Acute'; w2=_es?'Recto':'Right'; expl=_es?'Los ángulos obtusos miden entre 90° y 180°. '+a+'° es obtuso':'Obtuse angles are between 90° and 180°. '+a+'° is obtuse'; }
+    else if(type===2){ var a=rInt(20,80); var comp=90-a; q=_es?'Dos ángulos son complementarios. Uno mide '+a+'°. ¿Cuánto mide el otro?':'Two angles are complementary. One is '+a+'°. What is the other?'; correct=comp+'°'; w1=(180-a)+'°'; w2=(a+10)+'°'; expl=_es?'Los ángulos complementarios suman 90°: 90 - '+a+' = '+comp+'°':'Complementary angles add to 90°: 90 - '+a+' = '+comp+'°'; }
+    else if(type===3){ var a=rInt(30,150); var supp=180-a; q=_es?'Dos ángulos son suplementarios. Uno mide '+a+'°. ¿Cuánto mide el otro?':'Two angles are supplementary. One is '+a+'°. What is the other?'; correct=supp+'°'; w1=(90-a>0?(90-a):a)+'°'; w2=(a+10)+'°'; expl=_es?'Los ángulos suplementarios suman 180°: 180 - '+a+' = '+supp+'°':'Supplementary angles add to 180°: 180 - '+a+' = '+supp+'°'; }
+    else { var a=rInt(30,70),b=rInt(30,70); while(a+b>=180){a=rInt(30,60);b=rInt(30,60);} var c=180-a-b; q=_es?'Ángulos del triángulo: '+a+'° y '+b+'°. Encuentra el tercero.':'Triangle angles: '+a+'° and '+b+'°. Find the third.'; correct=c+'°'; w1=(c+10)+'°'; w2=(c-10)+'°'; expl=_es?'Los ángulos de un triángulo suman 180°: 180 - '+a+' - '+b+' = '+c+'°':'Triangle angles sum to 180°: 180 - '+a+' - '+b+' = '+c+'°'; }
     return mcQ(q,correct,w1,w2,expl);
   }
 
   // ═══ TRANSFORMATIONS ═══
   if(title.match(/transform|reflect|rotat|translat|symmetry|congruent|similar/i)){
-    var types=[
+    var _es=(typeof currentLang!=='undefined'&&currentLang==='es');
+    var types=_es?[
+      {q:'Una figura es volteada sobre una línea. ¿Qué transformación es esta?',c:'Reflexión',w1:'Rotación',w2:'Traslación',e:'Voltear sobre una línea es una reflexión'},
+      {q:'Una figura se desliza a una nueva posición sin girar. ¿Qué es esto?',c:'Traslación',w1:'Rotación',w2:'Reflexión',e:'Deslizarse sin girar es una traslación'},
+      {q:'Una figura gira alrededor de un punto. ¿Qué transformación es?',c:'Rotación',w1:'Traslación',w2:'Reflexión',e:'Girar alrededor de un punto central es una rotación'},
+      {q:'¿Qué transformación cambia el tamaño de una figura?',c:'Dilatación',w1:'Reflexión',w2:'Traslación',e:'La dilatación agranda o encoge figuras manteniendo la misma forma'},
+      {q:'Una línea de simetría divide una figura en dos mitades que son:',c:'Imágenes especulares una de otra',w1:'De tamaños diferentes',w2:'De formas diferentes',e:'Las líneas de simetría crean mitades que son imágenes especulares'},
+      {q:'Dos figuras son congruentes si tienen:',c:'La misma forma Y el mismo tamaño',w1:'Solo la misma forma',w2:'Solo el mismo tamaño',e:'Congruente = misma forma + mismo tamaño'},
+      {q:'Dos figuras son semejantes si tienen:',c:'La misma forma pero pueden tener diferente tamaño',w1:'El mismo tamaño pero diferente forma',w2:'Nada en común',e:'Las figuras semejantes tienen lados proporcionales y ángulos iguales'}
+    ]:[
       {q:'A shape is flipped over a line. What transformation is this?',c:'Reflection',w1:'Rotation',w2:'Translation',e:'A flip over a line is a reflection'},
       {q:'A shape slides to a new position without turning. What is this?',c:'Translation',w1:'Rotation',w2:'Reflection',e:'Sliding without turning is a translation'},
       {q:'A shape is turned around a point. What transformation?',c:'Rotation',w1:'Translation',w2:'Reflection',e:'Turning around a center point is a rotation'},
@@ -30430,6 +30454,75 @@ Object.assign(POOL_ES_BY_Q, {
     { q:'¿Qué es la voz activa?', c:'Cuando el sujeto hace la acción', w1:'Cuando el sujeto recibe la acción', w2:'Una palabra muy fuerte', e:'"El niño pateó el balón" es voz activa' },
   'What is passive voice?':
     { q:'¿Qué es la voz pasiva?', c:'Cuando el sujeto recibe la acción', w1:'Cuando el sujeto hace la acción', w2:'Una palabra débil', e:'"El balón fue pateado por el niño" es voz pasiva' }
+});
+// ── Grade 10 FL pool translations (tax, business/LLC, marketing, net worth) ──
+Object.assign(POOL_ES_BY_Q, {
+  // TAX pool
+  'A business laptop costs $800. If you deduct it as a business expense at a 25% tax rate, how much do you save on taxes?':
+    { q:'Una laptop de trabajo cuesta $800. Si la deduces como gasto de negocio al 25% de tasa fiscal, ¿cuánto ahorras en impuestos?', c:'$200', w1:'$800', w2:'$400', e:'El 25% de $800 = $200 de ahorro en impuestos' },
+  'Which of these is a valid business tax deduction?':
+    { q:'¿Cuál de estas es una deducción fiscal de negocio válida?', c:'Suministros de oficina usados para tu negocio', w1:'Comestibles para tu familia', w2:'Boletos de cine para diversión', e:'Los suministros de negocio son deducibles — los gastos personales no' },
+  'Your home office is 10% of your home. If rent is $1,200/month, what is your monthly home office deduction?':
+    { q:'Tu oficina en casa ocupa el 10% de tu hogar. Si la renta es $1,200/mes, ¿cuánto puedes deducir mensualmente?', c:'$120', w1:'$1,200', w2:'$12', e:'10% de $1,200 = $120' },
+  'What does "tax deduction" mean?':
+    { q:'¿Qué significa "deducción fiscal"?', c:'Un gasto que reduce tu ingreso gravable', w1:'Dinero gratuito que te da el gobierno', w2:'Una multa por no pagar impuestos', e:'Las deducciones reducen el ingreso sobre el que pagas impuestos' },
+  'You earned $5,000 from your business and had $1,000 in deductions. What is your taxable income?':
+    { q:'Ganaste $5,000 de tu negocio y tuviste $1,000 en deducciones. ¿Cuál es tu ingreso gravable?', c:'$4,000', w1:'$5,000', w2:'$6,000', e:'$5,000 - $1,000 en deducciones = $4,000 gravable' },
+  'Which expense can a kid entrepreneur deduct?':
+    { q:'¿Qué gasto puede deducir un joven emprendedor?', c:'Materiales de arte usados para hacer productos para vender', w1:'Dulces comprados en la tienda', w2:'Un juguete para uso personal', e:'Los materiales usados para tu negocio son deducibles' },
+  'If your tax rate is 20% and you owe $3,000 in taxes, what was your taxable income?':
+    { q:'Si tu tasa fiscal es 20% y debes $3,000 en impuestos, ¿cuál fue tu ingreso gravable?', c:'$15,000', w1:'$3,000', w2:'$6,000', e:'$3,000 ÷ 0.20 = $15,000' },
+  'What is the purpose of filing taxes?':
+    { q:'¿Para qué sirve declarar impuestos?', c:'Para reportar tus ingresos y pagar lo que le debes al gobierno', w1:'Para recibir un cheque gratuito del gobierno', w2:'Para cerrar tu negocio', e:'Declarar impuestos reporta tus ganancias y calcula lo que debes' },
+  'You spent $50 on business cards and $30 on website hosting. What is your total deductible amount?':
+    { q:'Gastaste $50 en tarjetas de negocio y $30 en hosting de sitio web. ¿Cuánto puedes deducir en total?', c:'$80', w1:'$50', w2:'$30', e:'$50 + $30 = $80 en deducciones' },
+  'An LLC home office deduction can save over how much per year?':
+    { q:'La deducción de oficina en casa de una LLC puede ahorrar más de ¿cuánto al año?', c:'$3,000+', w1:'$50', w2:'$10', e:'¡Las deducciones de oficina en casa pueden ahorrar $3,000+ al año en impuestos!' },
+  // BUSINESS / LLC pool
+  'You sell lemonade for $3 a cup. Supplies cost $0.75 per cup. What is your profit per cup?':
+    { q:'Vendes limonada a $3 el vaso. Los suministros cuestan $0.75 por vaso. ¿Cuál es tu ganancia por vaso?', c:'$2.25', w1:'$3.00', w2:'$0.75', e:'$3.00 - $0.75 = $2.25 de ganancia' },
+  'What is the difference between revenue and profit?':
+    { q:'¿Cuál es la diferencia entre ingresos y ganancia?', c:'Los ingresos son ventas totales; la ganancia es lo que queda después de gastos', w1:'Son lo mismo', w2:'La ganancia siempre es mayor que los ingresos', e:'Ganancia = Ingresos menos Gastos' },
+  'Which business structure protects your personal assets?':
+    { q:'¿Qué estructura empresarial protege tus bienes personales?', c:'LLC (Sociedad de Responsabilidad Limitada)', w1:'Empresa unipersonal', w2:'Hacer negocios sin estructura', e:'Una LLC separa tus bienes personales y empresariales' },
+  'You made $2,000 in sales and spent $800 on expenses. What is your profit?':
+    { q:'Hiciste $2,000 en ventas y gastaste $800 en gastos. ¿Cuál es tu ganancia?', c:'$1,200', w1:'$2,800', w2:'$800', e:'$2,000 - $800 = $1,200 de ganancia' },
+  'What does LLC stand for?':
+    { q:'¿Qué significa LLC?', c:'Sociedad de Responsabilidad Limitada', w1:'Corporación de Préstamos Legales', w2:'Compañía de Bajo Nivel', e:'LLC = Limited Liability Company (Sociedad de Responsabilidad Limitada)' },
+  'If you sell 50 items at $10 each, what is your revenue?':
+    { q:'Si vendes 50 artículos a $10 cada uno, ¿cuánto son tus ingresos?', c:'$500', w1:'$50', w2:'$10', e:'50 × $10 = $500 de ingresos' },
+  'Why might a kid start a business?':
+    { q:'¿Por qué podría un joven iniciar un negocio?', c:'Para aprender habilidades, ganar dinero y resolver problemas', w1:'Porque la escuela se lo dijo', w2:'Para evitar hacer tarea', e:'El emprendimiento enseña dinero real y habilidades de resolución de problemas' },
+  'Your business earned $5,000 this month. Expenses were $3,200. What is net income?':
+    { q:'Tu negocio ganó $5,000 este mes. Los gastos fueron $3,200. ¿Cuál es el ingreso neto?', c:'$1,800', w1:'$5,000', w2:'$8,200', e:'$5,000 - $3,200 = $1,800 de ingreso neto' },
+  'What is a sole proprietorship?':
+    { q:'¿Qué es una empresa unipersonal?', c:'Un negocio propiedad de una persona sin separación legal', w1:'Una empresa con 100+ empleados', w2:'Una organización gubernamental', e:'Empresa unipersonal = un dueño, sin entidad legal separada' },
+  'You invest $500 to start a business and earn $1,500 in the first year. What is your return on investment?':
+    { q:'Inviertes $500 para iniciar un negocio y ganas $1,500 el primer año. ¿Cuál es tu retorno de inversión?', c:'200%', w1:'100%', w2:'$1,000', e:'($1,500 - $500) / $500 = 200% de ROI' },
+  // MARKETING pool
+  'What is marketing?':
+    { q:'¿Qué es el marketing?', c:'Promover y vender productos o servicios a clientes potenciales', w1:'Fabricar productos en una fábrica', w2:'Contratar empleados', e:'El marketing incluye publicidad, marca y llegar a tu audiencia objetivo' },
+  'What is a target audience?':
+    { q:'¿Qué es una audiencia objetivo?', c:'El grupo específico de personas con más probabilidad de comprar tu producto', w1:'Todos en el mundo', w2:'Solo tus amigos', e:'El enfoque en un objetivo te ayuda a concentrar tu marketing en quienes realmente quieren tu producto' },
+  'What is a brand?':
+    { q:'¿Qué es una marca?', c:'La identidad de un negocio incluyendo su nombre, logo y reputación', w1:'Solo el logo de una empresa', w2:'El precio de un producto', e:'Una marca es la impresión total que los clientes tienen de tu negocio' },
+  'Why is social media important for businesses?':
+    { q:'¿Por qué son importantes las redes sociales para los negocios?', c:'Ayudan a llegar a clientes, construir reconocimiento de marca y aumentar ventas', w1:'No son importantes para los negocios', w2:'Solo para entretenimiento', e:'Las redes sociales son una herramienta poderosa y a menudo gratuita para conectar con clientes' },
+  'What is a USP (Unique Selling Proposition)?':
+    { q:'¿Qué es una propuesta única de venta (USP)?', c:'Lo que hace diferente y mejor a tu producto frente a los competidores', w1:'Un tipo de método de envío', w2:'Una regulación gubernamental', e:'Tu USP le dice a los clientes por qué elegirte a TI sobre la competencia' },
+  'What is ROI in marketing?':
+    { q:'¿Qué es el ROI en marketing?', c:'Retorno de inversión — cuánta ganancia obtuviste en comparación con lo gastado', w1:'Tasa de interés', w2:'Índice de solo ingresos', e:'Si gastas $100 en anuncios y ganas $500, tu ROI es del 400%' },
+  // NET WORTH pool
+  'What is net worth?':
+    { q:'¿Qué es el patrimonio neto?', c:'Activos totales menos pasivos totales', w1:'Cuánto ganas por año', w2:'Solo el saldo de tu cuenta bancaria', e:'Patrimonio neto = lo que TIENES (activos) - lo que DEBES (pasivos)' },
+  'What is an asset?':
+    { q:'¿Qué es un activo?', c:'Algo de valor que posees (dinero, propiedad, inversiones)', w1:'Algo por lo que debes dinero', w2:'Una factura mensual', e:'Los activos incluyen ahorros, inversiones, propiedades y posesiones valiosas' },
+  'What is a liability?':
+    { q:'¿Qué es un pasivo?', c:'Una deuda o algo que debes (préstamos, saldo de tarjeta de crédito)', w1:'Algo valioso que posees', w2:'Ingresos de un trabajo', e:'Los pasivos son obligaciones financieras — lo que necesitas pagar' },
+  'Your assets total $50,000 and liabilities total $20,000. What is your net worth?':
+    { q:'Tus activos totalizan $50,000 y tus pasivos $20,000. ¿Cuál es tu patrimonio neto?', c:'$30,000', w1:'$70,000', w2:'$50,000', e:'$50,000 (activos) - $20,000 (pasivos) = $30,000 de patrimonio neto' },
+  'Which of these is an asset?':
+    { q:'¿Cuál de estos es un activo?', c:'Una cuenta de ahorros con $5,000', w1:'Un saldo de tarjeta de crédito de $2,000', w2:'Un préstamo estudiantil de $10,000', e:'Las cuentas de ahorro son activos (algo que posees con valor)' }
 });
 function localizeQPool(p){
   const es = currentLang === 'es';
