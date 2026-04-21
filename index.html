@@ -27712,6 +27712,56 @@ try { autoTranslateActivitiesES(); } catch(e){ console.warn('Auto activity trans
   sa('h10E3','¿Qué hace la política comercial?','Regula las importaciones y exportaciones mediante aranceles, cuotas y acuerdos','Estas son herramientas de política.','Elimina todas las barreras al comercio internacional','La mayoría de las naciones protegen algunas industrias nacionales.','Siempre beneficia a todos por igual','La política comercial crea ganadores y perdedores.');
 })();
 
+// ── Grade 10 Social Studies ───────────────────────────────────
+(function(){
+  if(typeof SOCIAL_STUDIES_CURRICULUM==='undefined'||!SOCIAL_STUDIES_CURRICULUM[10])return;
+  var gd=SOCIAL_STUDIES_CURRICULUM[10];
+  gd.description_es='Gobierno y política: teoría política, estructura del gobierno de los EE. UU., libertades civiles, política pública y relaciones internacionales';
+  var cn={A:'Teoría política',B:'Estructura del gobierno de los Estados Unidos',C:'Libertades civiles',D:'Política pública',E:'Relaciones internacionales'};
+  Object.keys(cn).forEach(function(k){if(gd.categories[k])gd.categories[k].name_es=cn[k];});
+  var lm={};
+  Object.keys(gd.categories).forEach(function(ck){(gd.categories[ck].lessons||[]).forEach(function(l){lm[l.id]=l;});});
+  var tt={
+    'ss10A1':['Filosofías y sistemas políticos','Ideas sobre el poder, la gobernanza y la justicia'],
+    'ss10A2':['Democracia vs. autoritarismo','Sistemas de gobierno contrastantes'],
+    'ss10A3':['Federalismo y separación de poderes','División de la autoridad entre los niveles y las ramas del gobierno'],
+    'ss10B4':['El poder legislativo y la elaboración de leyes','El Congreso crea leyes y controla el gasto federal'],
+    'ss10B5':['El poder ejecutivo y la autoridad presidencial','El presidente lidera el gobierno y hace cumplir las leyes'],
+    'ss10B6':['El poder judicial y el control constitucional','Los tribunales interpretan las leyes y protegen los derechos constitucionales'],
+    'ss10C7':['Libertades de la Primera Enmienda','Derechos de expresión, religión, reunión y petición'],
+    'ss10C8':['Debido proceso y protección igualitaria','Procedimientos justos e igualdad ante la ley'],
+    'ss10C9':['Privacidad y derechos digitales','Protección de la privacidad individual en la era digital'],
+    'ss10D10':['El proceso de elaboración de políticas','Cómo los problemas gubernamentales se convierten en soluciones de política'],
+    'ss10D11':['Política económica y federalismo fiscal','Gasto público, impuestos y disputas presupuestarias'],
+    'ss10D12':['Política social y el Estado de bienestar','Programas gubernamentales para atender la pobreza, la salud y las necesidades sociales'],
+    'ss10E13':['Política exterior y diplomacia','Las relaciones de los Estados Unidos con otras naciones'],
+    'ss10E14':['Organizaciones internacionales y tratados','Instituciones para la cooperación global y el derecho internacional'],
+    'ss10E15':['Desafíos de seguridad global','Terrorismo, armas nucleares y amenazas transnacionales']
+  };
+  Object.keys(tt).forEach(function(id){var l=lm[id];if(l){l.title_es=tt[id][0];l.tagline_es=tt[id][1];}});
+  function sa(id,instr,t0,e0,t1,e1,t2,e2){var l=lm[id];if(!l||!l.activity)return;l.activity.instructions_es=instr;var c=l.activity.choices;if(!c)return;if(c[0]){c[0].text_es=t0;if(e0)c[0].explanation_es=e0;}if(c[1]){c[1].text_es=t1;if(e1)c[1].explanation_es=e1;}if(c[2]){c[2].text_es=t2;if(e2)c[2].explanation_es=e2;}}
+  // A — Teoría política
+  sa('ss10A1','¿Qué argumentó John Locke sobre la legitimidad del gobierno?','El gobierno requiere el consentimiento de los gobernados y debe respetar los derechos naturales','Locke creía que el gobierno legítimo protege los derechos naturales de las personas.','La autoridad absoluta previene el caos y el desorden','Fue Hobbes quien argumentó esto, no Locke.','El poder debe recaer enteramente en los ricos','Locke se opuso a la concentración aristocrática del poder.');
+  sa('ss10A2','¿Qué caracteriza a un sistema democrático?','Múltiples partidos, elecciones libres, libertades civiles y estado de derecho','Estas instituciones distribuyen el poder y protegen los derechos individuales.','Un líder único que toma todas las decisiones','Esto describe el autoritarismo.','Poder gubernamental limitado sobre los ciudadanos','Aunque es importante, la democracia es más que solo un gobierno limitado.');
+  sa('ss10A3','¿Cómo distribuye el federalismo el poder gubernamental?','Entre el gobierno central y los gobiernos estatales o provinciales','El federalismo divide la autoridad en múltiples niveles.','Solo al gobierno central','Eso sería un gobierno unitario.','Solo a los gobiernos estatales','El federalismo requiere ambos niveles.');
+  // B — Estructura del gobierno de los Estados Unidos
+  sa('ss10B4','¿Qué poder del gobierno controla el gasto federal?','El Congreso, mediante su poder sobre el presupuesto','El Congreso debe aprobar todos los gastos federales.','El presidente, mediante órdenes ejecutivas','El presidente no puede gastar fondos federales de manera unilateral.','La Corte Suprema, mediante la revisión constitucional','Los tribunales interpretan la ley, pero no controlan el gasto.');
+  sa('ss10B5','¿Cuál es el papel principal del presidente en la aplicación de la ley?','Hacer cumplir las leyes aprobadas por el Congreso','El poder ejecutivo se centra en hacer cumplir las leyes.','Crear nuevas leyes de manera independiente','Solo el Congreso puede crear leyes.','Actuar como juez principal de la Corte Suprema','El presidente nombra a los jueces, pero no es juez.');
+  sa('ss10B6','¿Qué es la revisión judicial?','El poder de los tribunales para declarar leyes inconstitucionales','La revisión judicial convierte a los tribunales en guardianes de los límites constitucionales del gobierno.','El proceso que usa el Congreso para evaluar las decisiones judiciales','Eso no es lo que significa la revisión judicial.','El poder de la Corte Suprema para crear nuevas leyes','Los tribunales interpretan las leyes, no las crean.');
+  // C — Libertades civiles
+  sa('ss10C7','¿Qué protege la Primera Enmienda?','La expresión, la religión, la prensa, la reunión y la petición','La Primera Enmienda protege estas libertades fundamentales de la democracia.','Toda forma de expresión sin ningún límite','Incluso los derechos de la Primera Enmienda tienen algunos límites.','Solo la expresión con la que el gobierno está de acuerdo','La Primera Enmienda protege la expresión controvertida.');
+  sa('ss10C8','¿Cuál es el propósito de la protección del debido proceso?','Garantizar procedimientos justos antes de que el gobierno prive de libertad o propiedad','El debido proceso protege contra la acción arbitraria del gobierno.','Garantizar resultados iguales para todos los ciudadanos','La protección igualitaria aborda la discriminación, no los resultados iguales.','Prevenir toda acción del gobierno','El debido proceso permite la acción gubernamental siempre que se sigan procedimientos justos.');
+  sa('ss10C9','¿Qué enmienda constitucional protege principalmente los derechos de privacidad?','La Cuarta Enmienda, que protege contra registros injustificados','La Cuarta Enmienda protege la privacidad frente a la intrusión gubernamental.','La Primera Enmienda, que protege la libertad de expresión','La libertad de expresión está protegida, pero no se trata principalmente de privacidad.','La Decimocuarta Enmienda, que garantiza el debido proceso','El debido proceso se refiere a procedimientos justos, no principalmente a la privacidad.');
+  // D — Política pública
+  sa('ss10D10','¿Cuál es la primera etapa de la elaboración de políticas públicas?','La identificación del problema y la fijación de la agenda','Las políticas comienzan cuando alguien identifica un problema que requiere acción.','La votación legislativa de los proyectos de ley','Eso ocurre en una etapa posterior del proceso.','Las decisiones judiciales que declaran leyes inconstitucionales','Los tribunales evalúan, pero no inician políticas.');
+  sa('ss10D11','¿Cuál es el objetivo principal de la política fiscal?','Usar el gasto público y la tributación para influir en la economía','La política fiscal intenta gestionar el crecimiento económico y el empleo.','Eliminar todo el gasto público','Ese no es un objetivo político realista ni probable.','Maximizar los ingresos del gobierno','Los ingresos son un medio para lograr los objetivos de política, no el objetivo principal.');
+  sa('ss10D12','¿Cuál es un objetivo principal de los programas de política social?','Reducir la pobreza y brindar seguridad económica a las poblaciones vulnerables','Los programas sociales abordan la pobreza y brindan protección contra las adversidades.','Eliminar toda la empresa privada','La política social no elimina los mercados.','Proporcionar igualdad universal de riqueza','La política social reduce la pobreza, pero no crea igualdad.');
+  // E — Relaciones internacionales
+  sa('ss10E13','¿Qué incluye la política exterior?','Diplomacia, herramientas económicas, fuerza militar e intercambio cultural con otras naciones','La política exterior usa múltiples herramientas para promover los intereses nacionales.','Solo fuerza militar contra otras naciones','La diplomacia y la economía suelen ser más efectivas que la fuerza militar.','Solo acuerdos comerciales entre países','El comercio es una herramienta entre muchas.');
+  sa('ss10E14','¿Cuál es una función principal de las organizaciones internacionales?','Facilitar la cooperación entre naciones en problemas comunes','Las instituciones internacionales facilitan la coordinación y la resolución de disputas.','Imponer leyes a todas las naciones sin importar su consentimiento','Las organizaciones internacionales dependen de la cooperación de los estados miembros.','Eliminar la soberanía y la independencia nacional','Las naciones conservan su soberanía mientras cooperan.');
+  sa('ss10E15','¿Cuál de estos es un ejemplo de amenaza de seguridad transnacional?','El terrorismo, las pandemias y los ciberataques que afectan a múltiples naciones','Estos desafíos trascienden las fronteras y requieren respuestas internacionales.','Los conflictos militares tradicionales entre países vecinos','Las guerras tradicionales son asuntos de seguridad nacional.','La delincuencia interna dentro de un solo país','Transnacional significa que cruza fronteras.');
+})();
+
 function getSubjectData(subject, grade){
   // For App Building grades 6-12, always show Ship Real Apps curriculum
   if(subject === 'app-building' && (grade >= 6 || grade === '6' || grade === '7' || grade === '8' || grade === '9' || grade === '10' || grade === '11' || grade === '12' || [7,8,9,10,11,12].indexOf(grade) > -1)){
