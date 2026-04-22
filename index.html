@@ -28115,6 +28115,72 @@ try { autoTranslateActivitiesES(); } catch(e){ console.warn('Auto activity trans
   ct('m10E100','Repasa las 100 lecciones: fundamentos, triángulos, círculos, área/volumen, transformaciones y aplicaciones.',['100 conceptos de geometría','Aplicaciones del mundo real','Domina los teoremas fundamentales'],'¡La geometría es el fundamento de las matemáticas!');
 })();
 
+// ── Grade 12 Financial Literacy — translations ──
+(function(){
+  if(typeof FINANCIAL_LITERACY==='undefined'||!FINANCIAL_LITERACY[12])return;
+  var gd=FINANCIAL_LITERACY[12];
+  gd.description_es='Comparación completa de entidades, estrategias fiscales avanzadas, Roth vs IRA Tradicional, planificación de independencia financiera y pitches a inversionistas';
+  gd.categories.A.name_es='Mentalidad Financiera y Emprendimiento';
+  gd.categories.B.name_es='Ingresos y Fuentes de Dinero';
+  gd.categories.C.name_es='Ahorro e Inversión';
+  gd.categories.D.name_es='Crédito, Deudas e Intereses';
+  gd.categories.E.name_es='Negocios e Impuestos';
+  var lm={};
+  Object.keys(gd.categories).forEach(function(ck){
+    (gd.categories[ck].lessons||[]).forEach(function(l){lm[l.id]=l;});
+  });
+  function ct(id,intro,kp,ff){var l=lm[id];if(!l||!l.content)return;l.content.intro_es=intro;l.content.keyPoints_es=kp;l.content.funFact_es=ff;}
+  function tt(id,t,tg){var l=lm[id];if(!l)return;if(t)l.title_es=t;if(tg)l.tagline_es=tg;}
+  function mact(id,instr,c0t,c0e,c1t,c1e,c2t,c2e){var l=lm[id];if(!l||!l.activity)return;l.activity.instructions_es=instr;var c=l.activity.choices;if(c){if(c[0]){c[0].text_es=c0t;c[0].explanation_es=c0e;}if(c[1]){c[1].text_es=c1t;c[1].explanation_es=c1e;}if(c[2]){c[2].text_es=c2t;c[2].explanation_es=c2e;}}}
+  function ddact(id,instr,opts_es,tgts_es){var l=lm[id];if(!l||!l.activity)return;l.activity.instructions_es=instr;if(opts_es)l.activity.dragOptionsStrings_es=opts_es;if(tgts_es)l.activity.dropTargetsStrings_es=tgts_es;}
+  function fbact(id,instr_es,prompt_es){var l=lm[id];if(!l||!l.activity)return;if(instr_es)l.activity.instructions_es=instr_es;if(prompt_es)l.activity.prompt_es=prompt_es;}
+  tt('12A1','Tu Plan de Vida Empresarial (Visión de 5 y 10 Años)','📋 ¿Dónde quieres estar? ¡Diseña tu plan de 5 y 10 años AHORA!');
+  tt('12A2','Auditoría de Escalabilidad (¿Puede tu Negocio Crecer 10x?)','📈 ¿Puede tu negocio pasar de $100k a $1M? ¡Si no puede, corrígelo!');
+  tt('12A3','Tu Número Personal de Independencia Financiera (Número de IF)','🎯 Calcula EXACTAMENTE lo que necesitas. Sin adivinar.');
+  tt('12B1','Construir Múltiples Fuentes de Ingresos a Escala','🌳 A los 18 años, apunta a tener 3+ fuentes de ingresos que generen $1k+/mes en total');
+  tt('12B2','Posicionarte para Ingresos de $100k+','💼 Especialízate en algo valioso. Sé el mejor. ¡Exige $100k+!');
+  tt('12B3','Prepararte para Hacer Pitches a Inversionistas (Si Buscas Financiamiento)','🎤 Elevator pitch: 60 segundos. ¡Problema, solución, mercado, equipo, solicitud!');
+  tt('12C1','Asignación de Activos para tu Edad (Regla de 110)','⚖️ Tu edad = % en bonos. El resto en acciones. ¡A los 18: 18% bonos, 82% acciones!');
+  tt('12C2','Roth vs. IRA Tradicional (Recomendación Final)','📊 La Roth casi siempre gana para menores de 30 años. ¡Las tasas fiscales están en mínimos históricos!');
+  tt('12C3','Construir tu Declaración de Política de Inversión','📋 Plan escrito: asignación de activos, calendario de rebalanceo, horizonte temporal');
+  tt('12D1','Vida Sin Deudas (O Deuda Estratégica)','🆓 Opción A: pagar en efectivo (sin intereses, crecimiento lento). Opción B: endeudamiento estratégico (crecer más rápido)');
+  tt('12D2','Mantenimiento de Puntaje de Crédito Perfecto (Club 850)','⭐ Mantén crédito perfecto de por vida: paga a tiempo, mantén saldos <10%, ¡no cierres tarjetas antiguas!');
+  tt('12D3','Entender tu Reporte de Crédito (Busca Errores)','📋 Revisa anualmente en AnnualCreditReport.com. ¡Disputa los errores!');
+  tt('12E1','LLC vs. S-Corp vs. C-Corp: Comparación Completa','⚖️ LLC: flexibilidad. S-Corp: ahorro fiscal. C-Corp: diferimiento. ¡Elige según tu nivel de ingresos!');
+  tt('12E2','Estrategias Fiscales Avanzadas (Reducir Impuestos Legalmente)','💰 ¡Donaciones benéficas, gastos de negocio, aportaciones a jubilación, cosecha de pérdidas!');
+  tt('12E3','Tu Sistema Financiero Personal (Construcción de Riqueza de por Vida)','🎯 Sistema: generación de ingresos + estrategia fiscal + inversiones + estilo de vida = RIQUEZA');
+  ct('12A1','¡La mayoría de las personas van a la deriva. Diseña tu vida con intención!',['Visión de 5 años: ¿qué ingresos, qué libertad?','Visión de 10 años: ¿cuál es tu vida ideal?','Trabaja hacia atrás: ¿qué necesitas construir?'],'¡Las personas con planes escritos logran 5 veces más que las que no tienen!');
+  ct('12A2','¡Negocios escalables: crecimiento ilimitado. No escalables: atascados en el techo de $100k-200k!',['Escalable: servicio por participación (eres dueño de %, no solo trabajas)','Escalable: productos (escalan infinitamente)','No escalable: intercambiar tiempo por dinero'],'¡La mayoría de los freelancers llegan al techo de $100k y no pueden crecer más!');
+  ct('12A3','¡Gasto anual × 25 = tu número de IF. ¡Trabaja hacia atrás!',['Calcula tu gasto mensual','Multiplica por 12 = gasto anual','Multiplica por 25 = activos necesarios','Ese es tu número de libertad'],'¡Si necesitas $50k al año, necesitas $1.25 millones invertidos para ser libre!');
+  ct('12B1','¡3 fuentes de $500 cada una = $18k/año. 6 fuentes = $36k/año. ¡Este es el camino del millonario!',['3+ fuentes de ingresos: diversificación','$500-1000+ cada una: ingresos significativos','Crecimiento exponencial: cada fuente crece'],'¡La mayoría de los millonarios tienen 7+ fuentes de ingresos!');
+  ct('12B2','¡Los generalistas ganan $50k. Los especialistas ganan $200k+!',['Especialización = precios premium','Sé el mejor en tu nicho','Posicionamiento premium = $100k+ alcanzable'],'¡Un consultor especializado gana $10k/mes. Un generalista gana $3k/mes!');
+  ct('12B3','¡La mayoría de los pitches fracasan. Los grandes pitches financian negocios!',['Problema: punto de dolor claro','Solución: tu respuesta','Mercado: ¿qué tan grande?','Equipo: ¿por qué pueden hacerlo?','Solicitud: cuánto dinero + uso'],'¡Un gran pitch puede recaudar $1M+!');
+  ct('12C1','¡Tu edad te permite asumir riesgos. ¡Úsalo a tu favor!',['100 - (tu edad) = % en acciones','Tu edad = % en bonos','Ajusta conforme envejeces'],'¡A los 18 años, deberías tener 82% en acciones, aprovechando al máximo el crecimiento!');
+  ct('12C2','¡Si crees que los impuestos aumentarán (probable), la Roth ahora = ahorros masivos!',['Roth: paga impuestos ahora (tasa baja), crece libre de impuestos','Tradicional: deduce ahora, paga impuestos después (tasa más alta)','La Roth es mejor a edades jóvenes'],'¡Si estás en el tramo del 24% ahora y en el 37% al jubilarte, la Roth te ahorra $50k+!');
+  ct('12C3','¡La disciplina escrita supera las decisiones emocionales el 100% de las veces!',['Asignación de activos (80/20, 70/30, etc.)','Calendario de rebalanceo (trimestral, anual)','Horizonte temporal (30+ años a los 18)','Reglas: no vender por pánico, mantener el rumbo'],'¡Warren Buffett tiene una declaración de política de inversión por escrito!');
+  ct('12D1','¡Ambas son válidas. ¡Elige tu camino!',['Sin deuda: aburrido, seguro, riqueza más lenta','Deuda estratégica: emocionante, riqueza más rápida, requiere disciplina','Elige tu nivel de comodidad'],'¡Algunos multimillonarios no tienen deudas. Otros usan deuda estratégica. ¡Los dos ganan!');
+  ct('12D2','¡Crédito perfecto = tasas de interés más bajas = ahorra $300k+ en tu vida!',['Historial de pagos: paga siempre a tiempo','Utilización del crédito: mantén <10%','Antigüedad de cuentas: conserva tus tarjetas antiguas','Consultas duras: minimízalas'],'¡Un puntaje de crédito de 850 te ahorra $300,000+ en intereses durante toda tu vida!');
+  ct('12D3','¡Hasta los errores pequeños pueden costarte $10,000+ en intereses más altos!',['Obtén tu reporte gratuito anualmente','Revisa si hay errores','Disputa las inexactitudes','Monitorea posibles fraudes'],'¡Un error en tu reporte de crédito puede costarte $150,000+ en tasas hipotecarias más altas!');
+  ct('12E1','¡La mayoría: LLC o S-Corp. ¡Pocos necesitan C-Corp!',['LLC ($50k-500k): simplicidad + algunos beneficios fiscales','S-Corp ($60k+): ahorra 15% de impuesto sobre trabajo por cuenta propia','C-Corp ($500k+): diferimiento fiscal + más flexibilidad'],'¡Un negocio de $200k: la LLC es simple y buena. La S-Corp ahorraría $20k+ en impuestos!');
+  ct('12E2','¡Los ricos reducen legalmente los impuestos en 50%+ mediante planificación inteligente!',['Donaciones benéficas: deducibles','Gastos de negocio: todos deducibles','Aportaciones a jubilación: deducibles','Cosecha de pérdidas: compensar ganancias'],'¡Un empresario que dona $10k a una organización benéfica ahorra $3,000 en impuestos!');
+  ct('12E3','¡Tu vida es un negocio. ¡Adminístrala como Amazon administra el suyo!',['Ingresos: múltiples fuentes (meta de $100k+)','Impuestos: optimizados (S-Corp, deducciones)','Inversiones: diversificadas (acciones, bienes raíces)','Estilo de vida: controlado (gasta <50% de tus ingresos)','Resultado: la riqueza se multiplica hasta millones'],'¡Un sistema que gana $100k, paga $20k en impuestos (vs $25k sin optimizar), invierte $30k/año = multimillonario a los 65!');
+  mact('12A1','¿Cuál es el mejor enfoque?','Escribe un plan financiero claro para 5 y 10 años',null,'Deja que la vida decida por ti',null,'Espera a ser rico para planear',null);
+  ddact('12A2','¡Opciones de escalabilidad!',['Tú dando tutoría a 10 niños (máximo)','Curso en línea vendido a 10k estudiantes','App vendida a 1M de usuarios'],['Techo no escalable','Infinitamente escalable','Infinitamente escalable']);
+  fbact('12A3','¡Número de Independencia Financiera! Con la regla del 4%: Número de IF = Gasto Anual × 25.','Si quieres gastar $40,000 al año para siempre, necesitas $40,000 × 25 = $_____ invertidos.');
+  ddact('12B1','¡Ideas de fuentes de ingresos!',['Servicio freelance','Producto digital','Links de afiliados','Creación de contenido'],['$500-1000/mes','$500-2000/mes','$200-500/mes','$500-5000+/mes']);
+  mact('12B2','¿Camino hacia $100k+?','Especializarte en un nicho valioso y ser el mejor',null,'Ser aceptable en todo',null,'Competir por precio',null);
+  mact('12B3','¿Cuál es la mejor estructura de pitch?','Problema, solución, mercado, equipo, solicitud',null,'Solo hablar de tu idea',null,'Solo pedir dinero',null);
+  fbact('12C1','Asignación de activos a los 18 años:','A los 18 años: 18% bonos + _____% acciones = 100%');
+  mact('12C2','¿Roth vs IRA Tradicional a los 18 años?','Roth (tasa impositiva baja ahora, probablemente mayor después)',null,'Tradicional (pagar impuestos después)',null,'Son lo mismo',null);
+  mact('12C3','¿Clave para los rendimientos a largo plazo?','Un plan escrito al que te adhieras',null,'Cambiar la estrategia constantemente',null,'Seguir las emociones',null);
+  mact('12D1','¿Cuál es válida?','Ambas: sin deuda Y deuda estratégica (elige tu camino)',null,'Solo sin deuda es correcto',null,'Solo la deuda estratégica es correcta',null);
+  ddact('12D2','¡Construye crédito para llegar a 850!',['Paga a tiempo','Usa <10% de tu límite de crédito','Conserva tus tarjetas antiguas','Minimiza nuevas solicitudes'],['Historial de pagos 100% a tiempo','Baja utilización','Historial de crédito largo','Pocas consultas duras']);
+  mact('12D3','¿Cuál es la mejor práctica para el reporte de crédito?','Revisarlo anualmente y disputar errores',null,'Nunca revisarlo',null,'Solo revisarlo si algo parece incorrecto',null);
+  fbact('12E1','¡Ahorro fiscal con S-Corp! Impuesto sobre trabajo por cuenta propia = 15.3%. Con $100,000 de ingresos:','Como LLC, pagas 15.3% sobre TODOS los $100k = $_____ en impuesto SE. Como S-Corp pagándote un salario de $50k, solo pagas impuesto SE sobre $50k = $_____. ¡Ahorro = $_____!');
+  ddact('12E2','¡Estrategias de reducción fiscal!',['Donar $10,000 a una organización benéfica','Deducir $15,000 en gastos de negocio','Aportar $20,000 a 401k/SEP'],['Ahorra $3,000 en impuestos (tasa del 30%)','Ahorra $4,500 en impuestos','Ahorra $6,000 en impuestos']);
+  mact('12E3','¿Cuál es el mejor sistema para construir riqueza?','Múltiples fuentes de ingresos + optimización fiscal + inversión disciplinada',null,'Un solo empleo',null,'La suerte',null);
+})();
+
 // ── Grade 12 App Building — translations ──
 (function(){
   if(typeof APP_BUILDING==='undefined'||!APP_BUILDING[12])return;
