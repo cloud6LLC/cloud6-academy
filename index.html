@@ -1808,6 +1808,7 @@ function setLanguage(lang){
   try {
     if(document.getElementById('appBuilderScreen') && document.getElementById('appBuilderScreen').style.display !== 'none' && typeof refreshBuilderNamePages === 'function') refreshBuilderNamePages();
   } catch(e){}
+  try { if(typeof refreshTeacherDashboard === 'function') refreshTeacherDashboard(); } catch(e){}
 }
 
 // ═══════════════════════════════════════════════════════════
@@ -37085,6 +37086,21 @@ let currentClassId = null;
 let currentClassRoster = [];
 let currentStudentProgress = {};
 let teacherDashboardState = 'stats'; // 'stats', 'classes', 'roster', 'progress', 'assignments'
+function dashT(en,es){return(typeof currentLang!=='undefined'&&currentLang==='es')?es:en;}
+function refreshTeacherDashboard(){
+  var screen=document.getElementById('teacherDashboardScreen');
+  if(!screen||screen.style.display==='none')return;
+  var name=currentUser?currentUser.name||currentUser.username:'';
+  screen.innerHTML=`<div style="padding:20px;background-color:#f5f5f5;min-height:100vh;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;"><h1 style="color:#333;margin-bottom:10px;">${dashT('Teacher Dashboard','Panel del Maestro')}</h1><p style="color:#666;margin-bottom:20px;">${dashT('Welcome','Bienvenido/a')}, ${name}</p><div style="display:flex;gap:10px;margin-bottom:20px;border-bottom:2px solid #ddd;"><button id="dashTab-stats" style="padding:10px 20px;background-color:transparent;border:none;border-bottom:3px solid transparent;color:#666;cursor:pointer;font-size:14px;font-weight:600;">${dashT('Quick Stats','Estadísticas')}</button><button id="dashTab-classes" style="padding:10px 20px;background-color:transparent;border:none;border-bottom:3px solid transparent;color:#666;cursor:pointer;font-size:14px;font-weight:600;">${dashT('Classes','Clases')}</button><button id="dashTab-progress" style="padding:10px 20px;background-color:transparent;border:none;border-bottom:3px solid transparent;color:#666;cursor:pointer;font-size:14px;font-weight:600;">${dashT('Progress','Progreso')}</button><button id="dashTab-assignments" style="padding:10px 20px;background-color:transparent;border:none;border-bottom:3px solid transparent;color:#666;cursor:pointer;font-size:14px;font-weight:600;">${dashT('Assignments','Tareas')}</button></div><div id="dashContent" style="background-color:white;border-radius:16px;box-shadow:0 2px 8px rgba(0,0,0,0.1);padding:20px;"></div></div>`;
+  document.getElementById('dashTab-stats').addEventListener('click',()=>renderStatsTab());
+  document.getElementById('dashTab-classes').addEventListener('click',()=>renderClassesTab());
+  document.getElementById('dashTab-progress').addEventListener('click',()=>renderProgressTab());
+  document.getElementById('dashTab-assignments').addEventListener('click',()=>renderAssignmentsTab());
+  if(teacherDashboardState==='classes')renderClassesTab();
+  else if(teacherDashboardState==='progress')renderProgressTab();
+  else if(teacherDashboardState==='assignments')renderAssignmentsTab();
+  else renderStatsTab();
+}
 
 // ===== TEACHER CODE VALIDATION =====
 async function validateTeacherCode(code) {
@@ -37635,15 +37651,15 @@ async function showTeacherDashboard() {
   // Build dashboard HTML
   const html = `
     <div style="padding: 20px; background-color: #f5f5f5; min-height: 100vh; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
-      <h1 style="color: #333; margin-bottom: 10px;">Teacher Dashboard</h1>
-      <p style="color: #666; margin-bottom: 20px;">Welcome, ${currentUser.name || currentUser.username}</p>
+      <h1 style="color: #333; margin-bottom: 10px;">${dashT('Teacher Dashboard','Panel del Maestro')}</h1>
+      <p style="color: #666; margin-bottom: 20px;">${dashT('Welcome','Bienvenido/a')}, ${currentUser.name || currentUser.username}</p>
 
       <!-- Tab Navigation -->
       <div style="display: flex; gap: 10px; margin-bottom: 20px; border-bottom: 2px solid #ddd;">
-        <button id="dashTab-stats" style="padding: 10px 20px; background-color: transparent; border: none; border-bottom: 3px solid #00b894; color: #00b894; cursor: pointer; font-size: 14px; font-weight: 600;">Quick Stats</button>
-        <button id="dashTab-classes" style="padding: 10px 20px; background-color: transparent; border: none; border-bottom: 3px solid transparent; color: #666; cursor: pointer; font-size: 14px; font-weight: 600;">Classes</button>
-        <button id="dashTab-progress" style="padding: 10px 20px; background-color: transparent; border: none; border-bottom: 3px solid transparent; color: #666; cursor: pointer; font-size: 14px; font-weight: 600;">Progress</button>
-        <button id="dashTab-assignments" style="padding: 10px 20px; background-color: transparent; border: none; border-bottom: 3px solid transparent; color: #666; cursor: pointer; font-size: 14px; font-weight: 600;">Assignments</button>
+        <button id="dashTab-stats" style="padding: 10px 20px; background-color: transparent; border: none; border-bottom: 3px solid #00b894; color: #00b894; cursor: pointer; font-size: 14px; font-weight: 600;">${dashT('Quick Stats','Estadísticas')}</button>
+        <button id="dashTab-classes" style="padding: 10px 20px; background-color: transparent; border: none; border-bottom: 3px solid transparent; color: #666; cursor: pointer; font-size: 14px; font-weight: 600;">${dashT('Classes','Clases')}</button>
+        <button id="dashTab-progress" style="padding: 10px 20px; background-color: transparent; border: none; border-bottom: 3px solid transparent; color: #666; cursor: pointer; font-size: 14px; font-weight: 600;">${dashT('Progress','Progreso')}</button>
+        <button id="dashTab-assignments" style="padding: 10px 20px; background-color: transparent; border: none; border-bottom: 3px solid transparent; color: #666; cursor: pointer; font-size: 14px; font-weight: 600;">${dashT('Assignments','Tareas')}</button>
       </div>
 
       <!-- Tab Content Container -->
@@ -37693,37 +37709,37 @@ async function renderStatsTab() {
   const html = `
     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-bottom: 30px;">
       <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 20px; border-radius: 12px; box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);">
-        <p style="margin: 0; font-size: 12px; opacity: 0.9; text-transform: uppercase; letter-spacing: 1px;">Total Students</p>
+        <p style="margin: 0; font-size: 12px; opacity: 0.9; text-transform: uppercase; letter-spacing: 1px;">${dashT('Total Students','Total de Alumnos')}</p>
         <p style="margin: 10px 0 0 0; font-size: 32px; font-weight: 700;">${totalStudents}</p>
       </div>
 
       <div style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white; padding: 20px; border-radius: 12px; box-shadow: 0 4px 12px rgba(245, 87, 108, 0.3);">
-        <p style="margin: 0; font-size: 12px; opacity: 0.9; text-transform: uppercase; letter-spacing: 1px;">Total Classes</p>
+        <p style="margin: 0; font-size: 12px; opacity: 0.9; text-transform: uppercase; letter-spacing: 1px;">${dashT('Total Classes','Total de Clases')}</p>
         <p style="margin: 10px 0 0 0; font-size: 32px; font-weight: 700;">${totalClasses}</p>
       </div>
 
       <div style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); color: white; padding: 20px; border-radius: 12px; box-shadow: 0 4px 12px rgba(79, 172, 254, 0.3);">
-        <p style="margin: 0; font-size: 12px; opacity: 0.9; text-transform: uppercase; letter-spacing: 1px;">Avg XP per Student</p>
+        <p style="margin: 0; font-size: 12px; opacity: 0.9; text-transform: uppercase; letter-spacing: 1px;">${dashT('Avg XP per Student','XP Promedio por Alumno')}</p>
         <p style="margin: 10px 0 0 0; font-size: 32px; font-weight: 700;">${avgXp}</p>
       </div>
 
       <div style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); color: white; padding: 20px; border-radius: 12px; box-shadow: 0 4px 12px rgba(67, 233, 123, 0.3);">
-        <p style="margin: 0; font-size: 12px; opacity: 0.9; text-transform: uppercase; letter-spacing: 1px;">Most Active Class</p>
+        <p style="margin: 0; font-size: 12px; opacity: 0.9; text-transform: uppercase; letter-spacing: 1px;">${dashT('Most Active Class','Clase Más Activa')}</p>
         <p style="margin: 10px 0 0 0; font-size: 24px; font-weight: 700;">${mostActiveClass.name}</p>
-        <p style="margin: 5px 0 0 0; font-size: 14px; opacity: 0.9;">${mostActiveClass.students} students</p>
+        <p style="margin: 5px 0 0 0; font-size: 14px; opacity: 0.9;">${mostActiveClass.students} ${dashT('students','alumnos')}</p>
       </div>
     </div>
 
-    <h3 style="color: #333; margin-top: 30px; margin-bottom: 15px;">Your Classes</h3>
+    <h3 style="color: #333; margin-top: 30px; margin-bottom: 15px;">${dashT('Your Classes','Tus Clases')}</h3>
     <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 15px;">
-      ${teacherClasses.length === 0 ? '<p style="color: #999; grid-column: 1/-1;">No classes yet. Create one to get started!</p>' : ''}
+      ${teacherClasses.length === 0 ? `<p style="color: #999; grid-column: 1/-1;">${dashT('No classes yet. Create one to get started!','Aún no tienes clases. ¡Crea una para empezar!')}</p>` : ''}
       ${teacherClasses.map(cls => `
         <div style="background: #f9f9f9; border: 1px solid #e0e0e0; border-radius: 12px; padding: 15px;">
           <h4 style="margin: 0 0 10px 0; color: #333;">${cls.name}</h4>
-          <p style="margin: 5px 0; color: #666; font-size: 13px;"><strong>Grade:</strong> ${cls.grade}</p>
-          <p style="margin: 5px 0; color: #666; font-size: 13px;"><strong>Subject:</strong> ${cls.subject}</p>
-          <p style="margin: 5px 0; color: #666; font-size: 13px;"><strong>Code:</strong> <code style="background-color: #e8e8e8; padding: 3px 6px; border-radius: 4px; font-family: monospace;">${cls.class_code}</code></p>
-          <p style="margin: 5px 0; color: #666; font-size: 13px;"><strong>Students:</strong> ${cls.class_students?.[0]?.count || 0}</p>
+          <p style="margin: 5px 0; color: #666; font-size: 13px;"><strong>${dashT('Grade','Grado')}:</strong> ${cls.grade}</p>
+          <p style="margin: 5px 0; color: #666; font-size: 13px;"><strong>${dashT('Subject','Materia')}:</strong> ${cls.subject}</p>
+          <p style="margin: 5px 0; color: #666; font-size: 13px;"><strong>${dashT('Code','Código')}:</strong> <code style="background-color: #e8e8e8; padding: 3px 6px; border-radius: 4px; font-family: monospace;">${cls.class_code}</code></p>
+          <p style="margin: 5px 0; color: #666; font-size: 13px;"><strong>${dashT('Students','Alumnos')}:</strong> ${cls.class_students?.[0]?.count || 0}</p>
         </div>
       `).join('')}
     </div>
@@ -37740,31 +37756,31 @@ async function renderClassesTab() {
 
   const html = `
     <div>
-      <h3 style="color: #333; margin-top: 0; margin-bottom: 20px;">Manage Classes</h3>
+      <h3 style="color: #333; margin-top: 0; margin-bottom: 20px;">${dashT('Manage Classes','Gestionar Clases')}</h3>
 
       <div style="background-color: #f0f7ff; padding: 15px; border-radius: 12px; margin-bottom: 20px; border-left: 4px solid #0984e3;">
-        <h4 style="margin: 0 0 15px 0; color: #333;">Create New Class</h4>
+        <h4 style="margin: 0 0 15px 0; color: #333;">${dashT('Create New Class','Crear Nueva Clase')}</h4>
         <form id="createClassForm" style="display: grid; gap: 10px;">
-          <input type="text" id="className" placeholder="Class Name (e.g., Biology 101)" style="padding: 10px; border: 1px solid #ddd; border-radius: 8px; font-size: 14px;">
-          <input type="text" id="classGrade" placeholder="Grade Level (e.g., 9th)" style="padding: 10px; border: 1px solid #ddd; border-radius: 8px; font-size: 14px;">
-          <input type="text" id="classSubject" placeholder="Subject (e.g., Biology)" style="padding: 10px; border: 1px solid #ddd; border-radius: 8px; font-size: 14px;">
-          <button type="submit" style="padding: 10px 20px; background-color: #00b894; color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 14px;">Create Class</button>
+          <input type="text" id="className" placeholder="${dashT('Class Name (e.g., Biology 101)','Nombre de Clase (ej., Biología 101)')}" style="padding: 10px; border: 1px solid #ddd; border-radius: 8px; font-size: 14px;">
+          <input type="text" id="classGrade" placeholder="${dashT('Grade Level (e.g., 9th)','Nivel de Grado (ej., 9°)')}" style="padding: 10px; border: 1px solid #ddd; border-radius: 8px; font-size: 14px;">
+          <input type="text" id="classSubject" placeholder="${dashT('Subject (e.g., Biology)','Materia (ej., Biología)')}" style="padding: 10px; border: 1px solid #ddd; border-radius: 8px; font-size: 14px;">
+          <button type="submit" style="padding: 10px 20px; background-color: #00b894; color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 14px;">${dashT('Create Class','Crear Clase')}</button>
         </form>
       </div>
 
-      <h4 style="color: #333; margin-bottom: 15px;">Your Classes</h4>
+      <h4 style="color: #333; margin-bottom: 15px;">${dashT('Your Classes','Tus Clases')}</h4>
       <div id="classList" style="display: grid; gap: 12px;">
-        ${teacherClasses.length === 0 ? '<p style="color: #999;">No classes yet.</p>' : ''}
+        ${teacherClasses.length === 0 ? `<p style="color: #999;">${dashT('No classes yet.','Aún no tienes clases.')}</p>` : ''}
         ${teacherClasses.map(cls => `
           <div style="background: #f9f9f9; border: 1px solid #e0e0e0; border-radius: 12px; padding: 15px; display: flex; justify-content: space-between; align-items: center;">
             <div>
               <h5 style="margin: 0 0 8px 0; color: #333;">${cls.name}</h5>
-              <p style="margin: 3px 0; color: #666; font-size: 13px;">Grade: ${cls.grade} | Subject: ${cls.subject} | Code: <code style="background-color: #e8e8e8; padding: 2px 5px; border-radius: 3px; font-family: monospace;">${cls.class_code}</code></p>
-              <p style="margin: 3px 0; color: #666; font-size: 13px;">Students: ${cls.class_students?.[0]?.count || 0}</p>
+              <p style="margin: 3px 0; color: #666; font-size: 13px;">${dashT('Grade','Grado')}: ${cls.grade} | ${dashT('Subject','Materia')}: ${cls.subject} | ${dashT('Code','Código')}: <code style="background-color: #e8e8e8; padding: 2px 5px; border-radius: 3px; font-family: monospace;">${cls.class_code}</code></p>
+              <p style="margin: 3px 0; color: #666; font-size: 13px;">${dashT('Students','Alumnos')}: ${cls.class_students?.[0]?.count || 0}</p>
             </div>
             <div style="display: flex; gap: 8px;">
-              <button class="classViewBtn" data-class-id="${cls.id}" style="padding: 8px 12px; background-color: #0984e3; color: white; border: none; border-radius: 8px; cursor: pointer; font-size: 12px;">View</button>
-              <button class="classDeleteBtn" data-class-id="${cls.id}" style="padding: 8px 12px; background-color: #d63031; color: white; border: none; border-radius: 8px; cursor: pointer; font-size: 12px;">Delete</button>
+              <button class="classViewBtn" data-class-id="${cls.id}" style="padding: 8px 12px; background-color: #0984e3; color: white; border: none; border-radius: 8px; cursor: pointer; font-size: 12px;">${dashT('View','Ver')}</button>
+              <button class="classDeleteBtn" data-class-id="${cls.id}" style="padding: 8px 12px; background-color: #d63031; color: white; border: none; border-radius: 8px; cursor: pointer; font-size: 12px;">${dashT('Delete','Eliminar')}</button>
             </div>
           </div>
         `).join('')}
@@ -37782,16 +37798,16 @@ async function renderClassesTab() {
     const subject = document.getElementById('classSubject').value.trim();
 
     if (!name || !grade || !subject) {
-      alert('Please fill in all fields');
+      alert(dashT('Please fill in all fields','Por favor completa todos los campos'));
       return;
     }
 
     const result = await createClass(name, grade, subject);
     if (result) {
-      alert('Class created successfully!');
+      alert(dashT('Class created successfully!','¡Clase creada exitosamente!'));
       await renderClassesTab();
     } else {
-      alert('Failed to create class');
+      alert(dashT('Failed to create class','No se pudo crear la clase'));
     }
   });
 
@@ -37806,13 +37822,13 @@ async function renderClassesTab() {
   document.querySelectorAll('.classDeleteBtn').forEach(btn => {
     btn.addEventListener('click', async (e) => {
       const classId = e.target.dataset.classId;
-      if (confirm('Are you sure you want to delete this class?')) {
+      if (confirm(dashT('Are you sure you want to delete this class?','¿Seguro que quieres eliminar esta clase?'))) {
         const result = await deleteClass(classId);
         if (result) {
-          alert('Class deleted');
+          alert(dashT('Class deleted','Clase eliminada'));
           await renderClassesTab();
         } else {
-          alert('Failed to delete class');
+          alert(dashT('Failed to delete class','No se pudo eliminar la clase'));
         }
       }
     });
@@ -37827,22 +37843,22 @@ async function renderRosterTab(classId) {
 
   const html = `
     <div>
-      <button id="backBtn" style="padding: 8px 16px; background-color: #e0e0e0; color: #333; border: none; border-radius: 8px; cursor: pointer; margin-bottom: 20px; font-size: 14px;">← Back to Classes</button>
+      <button id="backBtn" style="padding: 8px 16px; background-color: #e0e0e0; color: #333; border: none; border-radius: 8px; cursor: pointer; margin-bottom: 20px; font-size: 14px;">${dashT('← Back to Classes','← Volver a Clases')}</button>
 
-      <h3 style="color: #333; margin-top: 0; margin-bottom: 10px;">Class: ${currentClass?.name || 'Unknown'}</h3>
-      <p style="color: #666; margin-bottom: 20px;">Code: <code style="background-color: #e8e8e8; padding: 2px 5px; border-radius: 3px; font-family: monospace;">${currentClass?.class_code}</code></p>
+      <h3 style="color: #333; margin-top: 0; margin-bottom: 10px;">${dashT('Class','Clase')}: ${currentClass?.name || dashT('Unknown','Desconocido')}</h3>
+      <p style="color: #666; margin-bottom: 20px;">${dashT('Code','Código')}: <code style="background-color: #e8e8e8; padding: 2px 5px; border-radius: 3px; font-family: monospace;">${currentClass?.class_code}</code></p>
 
-      <h4 style="color: #333; margin-bottom: 15px;">Enrolled Students (${currentClassRoster.length})</h4>
+      <h4 style="color: #333; margin-bottom: 15px;">${dashT('Enrolled Students','Alumnos Inscritos')} (${currentClassRoster.length})</h4>
       <div id="rosterList" style="display: grid; gap: 10px;">
-        ${currentClassRoster.length === 0 ? '<p style="color: #999;">No students enrolled yet.</p>' : ''}
+        ${currentClassRoster.length === 0 ? `<p style="color: #999;">${dashT('No students enrolled yet.','Aún no hay alumnos inscritos.')}</p>` : ''}
         ${currentClassRoster.map(student => `
           <div style="background: #f9f9f9; border: 1px solid #e0e0e0; border-radius: 12px; padding: 15px; display: flex; justify-content: space-between; align-items: center;">
             <div>
               <h5 style="margin: 0 0 5px 0; color: #333;">${student.profiles?.full_name || 'Unknown'}</h5>
               <p style="margin: 3px 0; color: #666; font-size: 13px;">@${student.profiles?.username || 'N/A'} | ${student.profiles?.email || 'N/A'}</p>
-              <p style="margin: 3px 0; color: #666; font-size: 13px;">Total XP: <strong>${student.xp_summary?.[0]?.total_xp || 0}</strong> | Lessons: <strong>${student.xp_summary?.[0]?.lessons_completed || 0}</strong> | Last Active: ${student.xp_summary?.[0]?.last_activity ? new Date(student.xp_summary[0].last_activity).toLocaleDateString() : 'Never'}</p>
+              <p style="margin: 3px 0; color: #666; font-size: 13px;">${dashT('Total XP','XP Total')}: <strong>${student.xp_summary?.[0]?.total_xp || 0}</strong> | ${dashT('Lessons','Lecciones')}: <strong>${student.xp_summary?.[0]?.lessons_completed || 0}</strong> | ${dashT('Last Active','Última Actividad')}: ${student.xp_summary?.[0]?.last_activity ? new Date(student.xp_summary[0].last_activity).toLocaleDateString() : dashT('Never','Nunca')}</p>
             </div>
-            <button class="removeStudentBtn" data-student-id="${student.student_id}" style="padding: 8px 12px; background-color: #d63031; color: white; border: none; border-radius: 8px; cursor: pointer; font-size: 12px;">Remove</button>
+            <button class="removeStudentBtn" data-student-id="${student.student_id}" style="padding: 8px 12px; background-color: #d63031; color: white; border: none; border-radius: 8px; cursor: pointer; font-size: 12px;">${dashT('Remove','Eliminar')}</button>
           </div>
         `).join('')}
       </div>
@@ -37856,14 +37872,14 @@ async function renderRosterTab(classId) {
   document.querySelectorAll('.removeStudentBtn').forEach(btn => {
     btn.addEventListener('click', async (e) => {
       const studentId = e.target.dataset.studentId;
-      if (confirm('Remove this student from the class?')) {
+      if (confirm(dashT('Remove this student from the class?','¿Eliminar este alumno de la clase?'))) {
         const result = await removeStudent(classId, studentId);
         if (result) {
-          alert('Student removed');
+          alert(dashT('Student removed','Alumno eliminado'));
           await loadClassRoster(classId);
           await renderRosterTab(classId);
         } else {
-          alert('Failed to remove student');
+          alert(dashT('Failed to remove student','No se pudo eliminar al alumno'));
         }
       }
     });
@@ -37875,22 +37891,22 @@ async function renderProgressTab() {
 
   const html = `
     <div>
-      <h3 style="color: #333; margin-top: 0; margin-bottom: 20px;">Progress Reports</h3>
+      <h3 style="color: #333; margin-top: 0; margin-bottom: 20px;">${dashT('Progress Reports','Informes de Progreso')}</h3>
 
       <div style="background-color: #f0f7ff; padding: 15px; border-radius: 12px; margin-bottom: 20px; border-left: 4px solid #0984e3;">
-        <label style="display: block; margin-bottom: 10px; color: #333; font-weight: 600;">Select a Class:</label>
+        <label style="display: block; margin-bottom: 10px; color: #333; font-weight: 600;">${dashT('Select a Class:','Selecciona una Clase:')}</label>
         <select id="classSelectProgress" style="padding: 10px; border: 1px solid #ddd; border-radius: 8px; width: 100%; max-width: 300px; font-size: 14px;">
-          <option value="">Choose a class...</option>
+          <option value="">${dashT('Choose a class...','Elige una clase...')}</option>
           ${teacherClasses.map(cls => `<option value="${cls.id}">${cls.name}</option>`).join('')}
         </select>
       </div>
 
       <div id="progressContent" style="display: none;">
-        <h4 style="color: #333; margin-bottom: 15px;">Subject Completion Breakdown</h4>
+        <h4 style="color: #333; margin-bottom: 15px;">${dashT('Subject Completion Breakdown','Desglose de Avance por Materia')}</h4>
         <div id="progressCharts" style="display: grid; gap: 20px; margin-bottom: 30px;"></div>
 
         <div style="display: flex; gap: 10px; margin-bottom: 20px;">
-          <button id="exportProgressBtn" style="padding: 10px 20px; background-color: #00b894; color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 14px;">Export to CSV</button>
+          <button id="exportProgressBtn" style="padding: 10px 20px; background-color: #00b894; color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 14px;">${dashT('Export to CSV','Exportar a CSV')}</button>
         </div>
       </div>
     </div>
@@ -37921,13 +37937,13 @@ async function renderProgressTab() {
           <div style="background-color: #e8e8e8; height: 20px; border-radius: 10px; overflow: hidden;">
             <div style="background-color: #00b894; height: 100%; width: ${percentage}%; transition: width 0.3s ease;"></div>
           </div>
-          <p style="margin: 10px 0 0 0; color: #666; font-size: 13px;">${data.completed} / ${data.total} lessons completed</p>
+          <p style="margin: 10px 0 0 0; color: #666; font-size: 13px;">${data.completed} / ${data.total} ${dashT('lessons completed','lecciones completadas')}</p>
         </div>
       `;
     }
 
     if (Object.keys(progress).length === 0) {
-      chartsHtml = '<p style="color: #999;">No progress data available for this class.</p>';
+      chartsHtml = `<p style="color: #999;">${dashT('No progress data available for this class.','No hay datos de progreso para esta clase.')}</p>`;
     }
 
     chartsDiv.innerHTML = chartsHtml;
@@ -37946,27 +37962,27 @@ async function renderAssignmentsTab() {
 
   const html = `
     <div>
-      <h3 style="color: #333; margin-top: 0; margin-bottom: 20px;">Manage Assignments</h3>
+      <h3 style="color: #333; margin-top: 0; margin-bottom: 20px;">${dashT('Manage Assignments','Gestionar Tareas')}</h3>
 
       <div style="background-color: #f0f7ff; padding: 15px; border-radius: 12px; margin-bottom: 20px; border-left: 4px solid #0984e3;">
-        <h4 style="margin: 0 0 15px 0; color: #333;">Create Assignment</h4>
+        <h4 style="margin: 0 0 15px 0; color: #333;">${dashT('Create Assignment','Crear Tarea')}</h4>
         <form id="createAssignmentForm" style="display: grid; gap: 10px;">
           <select id="assignClass" style="padding: 10px; border: 1px solid #ddd; border-radius: 8px; font-size: 14px;">
-            <option value="">Select a class...</option>
+            <option value="">${dashT('Select a class...','Selecciona una clase...')}</option>
             ${teacherClasses.map(cls => `<option value="${cls.id}">${cls.name}</option>`).join('')}
           </select>
-          <input type="text" id="assignTitle" placeholder="Assignment Title" style="padding: 10px; border: 1px solid #ddd; border-radius: 8px; font-size: 14px;">
-          <input type="text" id="assignSubject" placeholder="Subject" style="padding: 10px; border: 1px solid #ddd; border-radius: 8px; font-size: 14px;">
-          <input type="text" id="assignGrade" placeholder="Grade Level" style="padding: 10px; border: 1px solid #ddd; border-radius: 8px; font-size: 14px;">
+          <input type="text" id="assignTitle" placeholder="${dashT('Assignment Title','Título de la Tarea')}" style="padding: 10px; border: 1px solid #ddd; border-radius: 8px; font-size: 14px;">
+          <input type="text" id="assignSubject" placeholder="${dashT('Subject','Materia')}" style="padding: 10px; border: 1px solid #ddd; border-radius: 8px; font-size: 14px;">
+          <input type="text" id="assignGrade" placeholder="${dashT('Grade Level','Nivel de Grado')}" style="padding: 10px; border: 1px solid #ddd; border-radius: 8px; font-size: 14px;">
           <input type="date" id="assignDueDate" style="padding: 10px; border: 1px solid #ddd; border-radius: 8px; font-size: 14px;">
-          <textarea id="assignLessonIds" placeholder="Lesson IDs (comma-separated, e.g., m9A1, m9A2)" style="padding: 10px; border: 1px solid #ddd; border-radius: 8px; font-size: 14px; font-family: monospace; min-height: 80px;"></textarea>
-          <button type="submit" style="padding: 10px 20px; background-color: #00b894; color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 14px;">Create Assignment</button>
+          <textarea id="assignLessonIds" placeholder="${dashT('Lesson IDs (comma-separated, e.g., m9A1, m9A2)','IDs de Lecciones (separados por coma, ej., m9A1, m9A2)')}" style="padding: 10px; border: 1px solid #ddd; border-radius: 8px; font-size: 14px; font-family: monospace; min-height: 80px;"></textarea>
+          <button type="submit" style="padding: 10px 20px; background-color: #00b894; color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 14px;">${dashT('Create Assignment','Crear Tarea')}</button>
         </form>
       </div>
 
-      <h4 style="color: #333; margin-bottom: 15px;">View Assignments by Class</h4>
+      <h4 style="color: #333; margin-bottom: 15px;">${dashT('View Assignments by Class','Ver Tareas por Clase')}</h4>
       <select id="viewAssignClass" style="padding: 10px; border: 1px solid #ddd; border-radius: 8px; margin-bottom: 20px; font-size: 14px;">
-        <option value="">Select a class...</option>
+        <option value="">${dashT('Select a class...','Selecciona una clase...')}</option>
         ${teacherClasses.map(cls => `<option value="${cls.id}">${cls.name}</option>`).join('')}
       </select>
 
@@ -37986,7 +38002,7 @@ async function renderAssignmentsTab() {
     const lessonIdsStr = document.getElementById('assignLessonIds').value.trim();
 
     if (!classId || !title || !subject || !grade || !lessonIdsStr) {
-      alert('Please fill in all required fields');
+      alert(dashT('Please fill in all required fields','Por favor completa todos los campos requeridos'));
       return;
     }
 
@@ -37994,13 +38010,13 @@ async function renderAssignmentsTab() {
 
     const result = await createAssignment(classId, title, lessonIds, subject, grade, dueDate || null);
     if (result) {
-      alert('Assignment created successfully!');
+      alert(dashT('Assignment created successfully!','¡Tarea creada exitosamente!'));
       document.getElementById('createAssignmentForm').reset();
       if (document.getElementById('viewAssignClass').value === classId) {
         await loadAndDisplayAssignments(classId);
       }
     } else {
-      alert('Failed to create assignment');
+      alert(dashT('Failed to create assignment','No se pudo crear la tarea'));
     }
   });
 
@@ -38017,16 +38033,16 @@ async function renderAssignmentsTab() {
     const listDiv = document.getElementById('assignmentsList');
 
     if (assignments.length === 0) {
-      listDiv.innerHTML = '<p style="color: #999;">No assignments for this class.</p>';
+      listDiv.innerHTML = `<p style="color: #999;">${dashT('No assignments for this class.','No hay tareas para esta clase.')}</p>`;
       return;
     }
 
     const html = assignments.map(assign => `
       <div style="background: #f9f9f9; border: 1px solid #e0e0e0; border-radius: 12px; padding: 15px;">
         <h5 style="margin: 0 0 8px 0; color: #333;">${assign.title}</h5>
-        <p style="margin: 3px 0; color: #666; font-size: 13px;"><strong>Subject:</strong> ${assign.subject} | <strong>Grade:</strong> ${assign.grade}</p>
-        <p style="margin: 3px 0; color: #666; font-size: 13px;"><strong>Due:</strong> ${assign.due_date ? new Date(assign.due_date).toLocaleDateString() : 'No due date'}</p>
-        <p style="margin: 8px 0 0 0; color: #666; font-size: 13px;"><strong>Lessons:</strong> ${assign.lesson_ids.join(', ')}</p>
+        <p style="margin: 3px 0; color: #666; font-size: 13px;"><strong>${dashT('Subject','Materia')}:</strong> ${assign.subject} | <strong>${dashT('Grade','Grado')}:</strong> ${assign.grade}</p>
+        <p style="margin: 3px 0; color: #666; font-size: 13px;"><strong>${dashT('Due','Fecha Límite')}:</strong> ${assign.due_date ? new Date(assign.due_date).toLocaleDateString() : dashT('No due date','Sin fecha límite')}</p>
+        <p style="margin: 8px 0 0 0; color: #666; font-size: 13px;"><strong>${dashT('Lessons','Lecciones')}:</strong> ${assign.lesson_ids.join(', ')}</p>
       </div>
     `).join('');
 
@@ -38037,6 +38053,7 @@ async function renderAssignmentsTab() {
 }
 
 function updateTabButtons(active) {
+  teacherDashboardState = active;
   document.querySelectorAll('[id^="dashTab-"]').forEach(btn => {
     const isActive = btn.id === `dashTab-${active}`;
     btn.style.borderBottomColor = isActive ? '#00b894' : 'transparent';
