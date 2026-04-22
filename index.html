@@ -1816,8 +1816,8 @@ function setLanguage(lang){
 const SUPABASE_URL = 'https://ugfglcetltxlncmorlif.supabase.co';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVnZmdsY2V0bHR4bG5jbW9ybGlmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ2NzEyNTMsImV4cCI6MjA5MDI0NzI1M30.jIAnaWUvO6mRf__Pq__O748dv-kA7aXFDgOZRczAsZI';
 const AI_PROXY_URL = 'https://ugfglcetltxlncmorlif.supabase.co/functions/v1/ai-proxy'; // Supabase Edge Function — keeps API key server-side
-let supabase = null;
-let _supabaseReady = false;
+var supabase = null;
+var _supabaseReady = false;
 // Supabase loads async via dynamic script loader above — check if already loaded
 try {
   if(window._supabaseClient){
