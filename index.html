@@ -28115,6 +28115,70 @@ try { autoTranslateActivitiesES(); } catch(e){ console.warn('Auto activity trans
   ct('m10E100','Repasa las 100 lecciones: fundamentos, triángulos, círculos, área/volumen, transformaciones y aplicaciones.',['100 conceptos de geometría','Aplicaciones del mundo real','Domina los teoremas fundamentales'],'¡La geometría es el fundamento de las matemáticas!');
 })();
 
+// ── Grade 12 Science — translations ──
+(function(){
+  if(typeof SCIENCE_CURRICULUM==='undefined'||!SCIENCE_CURRICULUM[12])return;
+  var gd=SCIENCE_CURRICULUM[12];
+  gd.description_es='Grado 12 (Ciencias AP): Biología molecular, bioquímica, genética avanzada, termodinámica, cinética, equilibrio, mecánica avanzada, electromagnetismo avanzado, óptica, diseño de investigación, métodos estadísticos, escritura científica, nanotecnología, inteligencia artificial en ciencias y el futuro de la ciencia';
+  gd.categories.A.name_es='Biología Avanzada';
+  gd.categories.B.name_es='Química Avanzada';
+  gd.categories.C.name_es='Física Avanzada';
+  gd.categories.D.name_es='Métodos de Investigación';
+  gd.categories.E.name_es='Fronteras de la Ciencia';
+  var lm={};
+  Object.keys(gd.categories).forEach(function(ck){
+    (gd.categories[ck].lessons||[]).forEach(function(l){lm[l.id]=l;});
+  });
+  function ct(id,intro,kp,ff){var l=lm[id];if(!l||!l.content)return;l.content.intro_es=intro;l.content.keyPoints_es=kp;l.content.funFact_es=ff;}
+  function tt(id,t,tg){var l=lm[id];if(!l)return;if(t)l.title_es=t;if(tg)l.tagline_es=tg;}
+  function mact(id,instr,c0t,c0e,c1t,c1e,c2t,c2e){var l=lm[id];if(!l||!l.activity)return;l.activity.instructions_es=instr;var c=l.activity.choices;if(c){if(c[0]){c[0].text_es=c0t;c[0].explanation_es=c0e;}if(c[1]){c[1].text_es=c1t;c[1].explanation_es=c1e;}if(c[2]){c[2].text_es=c2t;c[2].explanation_es=c2e;}}}
+  tt('s12A1','Biología Molecular','La vida a escala molecular');
+  tt('s12A2','Bioquímica','La química de los sistemas vivos');
+  tt('s12A3','Genética Avanzada','Patrones de herencia complejos y genética de poblaciones');
+  tt('s12B1','Termodinámica','Energía y espontaneidad de las reacciones');
+  tt('s12B2','Cinética Química','Velocidades de reacción y mecanismos');
+  tt('s12B3','Equilibrio Químico','Balance dinámico en las reacciones');
+  tt('s12C1','Mecánica Avanzada','Movimiento complejo bajo fuerzas');
+  tt('s12C2','Electromagnetismo Avanzado','Comprensión profunda del electromagnetismo');
+  tt('s12C3','Óptica Avanzada','Fenómenos sofisticados de la luz');
+  tt('s12D1','Diseño de Investigación','Planificación de investigaciones científicas');
+  tt('s12D2','Métodos Estadísticos','Técnicas avanzadas de análisis de datos');
+  tt('s12D3','Escritura Científica','Comunicar la investigación de manera efectiva');
+  tt('s12E1','Nanotecnología','Ciencia y tecnología a escala atómica');
+  tt('s12E2','IA en las Ciencias','La inteligencia artificial avanza la investigación');
+  tt('s12E3','El Futuro de la Ciencia','Oportunidades y desafíos emergentes');
+  ct('s12A1','La biología molecular estudia la replicación del DNA, la transcripción y la traducción a nivel químico, revelando cómo la información genética se convierte en proteínas.',['La replicación del DNA es semiconservativa','La transcripción crea mRNA','La traducción crea proteínas'],'¡La replicación del DNA utiliza un mecanismo semiconservativo descubierto mediante experimentos brillantes!');
+  ct('s12A2','El metabolismo abarca todas las reacciones químicas del organismo: el catabolismo descompone moléculas para obtener energía y el anabolismo construye moléculas más grandes.',['El metabolismo tiene dos direcciones','La respiración extrae energía de la glucosa','La fotosíntesis captura la energía solar'],'¡Una persona promedio usa cerca de 100,000 moléculas de ATP por segundo!');
+  ct('s12A3','La epistasia ocurre cuando un gen afecta la expresión de otro, creando proporciones no mendelianas y revelando interacciones génicas.',['Las interacciones génicas crean complejidad','Las relaciones de dominancia varían','Las poblaciones revelan fuerzas evolutivas'],'¡La estatura humana involucra cientos de genes más factores ambientales!');
+  ct('s12B1','La entalpía mide el calor absorbido o liberado en las reacciones; la entropía mide el desorden; la energía libre de Gibbs combina ambas para predecir la espontaneidad.',['La entalpía mide el calor','La entropía mide el desorden','La energía de Gibbs predice la espontaneidad'],'¡El hielo se derrite espontáneamente porque el aumento de entropía supera el proceso endotérmico!');
+  ct('s12B2','Las velocidades de reacción dependen de la concentración, la temperatura y los catalizadores; las leyes de velocidad se determinan experimentalmente.',['Las velocidades siguen leyes cinéticas experimentales','La energía de activación puede reducirse','Los catalizadores aceleran las reacciones sin consumirse'],'¡Las enzimas son catalizadores biológicos que aceleran las reacciones bioquímicas!');
+  ct('s12B3','El equilibrio ocurre cuando las velocidades de la reacción directa e inversa son iguales; el principio de Le Chatelier predice cómo los sistemas responden al estrés.',['El equilibrio es dinámico','Le Chatelier predice los desplazamientos','Las constantes cuantifican el equilibrio'],'¡La mayoría de los procesos industriales explotan los principios del equilibrio para su eficiencia!');
+  ct('s12C1','La mecánica lagrangiana usa energía cinética y potencial para abordar problemas complicados; la teoría del caos muestra que sistemas deterministas pueden ser impredecibles.',['El enfoque lagrangiano es elegante','La mecánica hamiltoniana trata igual posición y momento','Los sistemas caóticos son sensibles'],'¡El clima es caótico: pequeñas diferencias en las condiciones iniciales producen resultados diferentes!');
+  ct('s12C2','Las ecuaciones de Maxwell unifican la electricidad y el magnetismo, demostrando que la luz es una onda electromagnética.',['Las ecuaciones de Maxwell unifican E&M','La luz son ondas electromagnéticas','Las cargas aceleradas emiten radiación'],'¡Las ondas de radio son radiación electromagnética como la luz visible, solo de diferente longitud de onda!');
+  ct('s12C3','La interferencia de fuentes múltiples crea patrones constructivos y destructivos; la difracción dobla la luz alrededor de obstáculos revelando su naturaleza ondulatoria.',['La interferencia crea patrones','La difracción revela la naturaleza ondulatoria','La polarización es filtrado direccional'],'¡La holografía usa patrones de interferencia para almacenar imágenes tridimensionales!');
+  ct('s12D1','Las buenas preguntas de investigación son específicas, respondibles mediante la investigación e importantes para responder.',['Las preguntas guían el diseño','La revisión de literatura revela vacíos','El diseño debe coincidir con el tipo de pregunta'],'¡La investigación innovadora suele surgir de formular preguntas nuevas!');
+  ct('s12D2','Las pruebas de hipótesis determinan si las diferencias observadas son probablemente reales o por azar; los valores p muestran la probabilidad de los datos si la hipótesis nula es cierta.',['Las pruebas de hipótesis evalúan la significancia','Los intervalos de confianza muestran la incertidumbre','La regresión múltiple maneja la complejidad'],'¡El metaanálisis que combina miles de estudios revela patrones ocultos en estudios individuales!');
+  ct('s12D3','Los artículos de investigación tienen estructura estándar: introducción, métodos, resultados y discusión; la escritura académica es objetiva y precisa.',['La estructura guía a los lectores','La objetividad mantiene la credibilidad','Las citas establecen las fuentes'],'¡Una gran ciencia comunicada deficientemente tiene poco impacto!');
+  ct('s12E1','La nanotecnología manipula átomos y moléculas individuales para crear nuevos materiales y dispositivos con propiedades imposibles a escalas mayores.',['La nanoescala muestra nuevas propiedades','Los átomos se manipulan directamente','Las aplicaciones están en crecimiento'],'¡Los puntos cuánticos brillan con colores según su tamaño y se usan en pantallas!');
+  ct('s12E2','El aprendizaje automático identifica patrones en grandes volúmenes de datos, descubriendo relaciones que los humanos podrían pasar por alto en sistemas complejos.',['La IA encuentra patrones en grandes datos','Las redes neuronales reconocen imágenes','La IA acelera el descubrimiento'],'¡AlphaFold usa IA para predecir estructuras de proteínas, avanzando la comprensión biológica!');
+  ct('s12E3','La biología sintética diseña organismos para funciones deseadas; las computadoras cuánticas pueden resolver problemas imposibles para las computadoras clásicas.',['La biología sintética diseña organismos','La computación cuántica abre nuevas soluciones','La ciencia orienta las políticas públicas'],'¡Los impulsos génicos podrían erradicar la malaria modificando los mosquitos!');
+  mact('s12A1','¿Qué es la replicación semiconservativa?','Las hebras originales se separan; cada una sirve de molde para una nueva hebra','Cada molécula hija de DNA tiene una hebra original y una nueva.','Ambas hebras son nuevas','Eso crearía copias idénticas.','Las hebras no se separan','Las hebras deben separarse para la replicación.');
+  mact('s12A2','¿Qué es el ATP?','Moneda energética universal en las células','El ATP almacena y transfiere energía en toda la célula.','Una proteína','El ATP es un nucleótido, no una proteína.','Parte del DNA','El ATP es una molécula aparte.');
+  mact('s12A3','¿Qué es la epistasia?','Un gen afecta la expresión de otro','Las interacciones epistáticas enmascaran las proporciones mendelianas esperadas.','Genes en el mismo cromosoma','Eso es ligamiento genético.','Solo rasgos recesivos','La epistasia involucra interacciones entre genes.');
+  mact('s12B1','¿Cuándo es espontánea una reacción?','Cuando la energía libre de Gibbs es negativa','ΔG negativa indica reacciones espontáneas.','Cuando es endotérmica','Algunas reacciones espontáneas son endotérmicas.','Cuando la entropía disminuye','Los procesos espontáneos generalmente aumentan la entropía.');
+  mact('s12B2','¿Qué hace un catalizador?','Reduce la energía de activación','Los catalizadores permiten que las reacciones ocurran más rápido.','Aporta energía a las reacciones','La energía proviene de los reactivos.','Desplaza el equilibrio','Los catalizadores no afectan el equilibrio.');
+  mact('s12B3','¿Qué predice el principio de Le Chatelier?','Los sistemas se desplazan para contrarrestar el estrés','Los sistemas en equilibrio responden a las perturbaciones.','Las reacciones siempre van al término','Muchas reacciones alcanzan el equilibrio.','La temperatura no afecta las reacciones','Le Chatelier contempla los cambios de temperatura.');
+  mact('s12C1','¿Cuál es la ventaja de la mecánica lagrangiana?','Un enfoque elegante que usa la energía','La mecánica lagrangiana simplifica problemas complejos.','Siempre es más fácil que las leyes de Newton','Depende del problema.','Solo aplica a sistemas simples','La mecánica lagrangiana maneja muy bien sistemas complejos.');
+  mact('s12C2','¿Qué revelaron las ecuaciones de Maxwell?','La luz son ondas electromagnéticas','Maxwell unificó la electricidad, el magnetismo y la luz.','Las cargas siempre se repelen','Las cargas se atraen o repelen según sus signos.','Los campos magnéticos ralentizan la luz','Los campos magnéticos no afectan la velocidad de la luz.');
+  mact('s12C3','¿Qué causa los patrones de difracción?','La luz se dobla alrededor de los obstáculos','La difracción muestra la naturaleza ondulatoria de la luz.','El reflejo en las superficies','Eso es reflexión, no difracción.','La refracción en las lentes','La difracción es diferente de la refracción.');
+  mact('s12D1','¿Qué establece la revisión de literatura?','El contexto e identifica los vacíos','La revisión de literatura muestra lo que se conoce y lo que no.','Respuestas definitivas','Las revisiones muestran el conocimiento actual, no respuestas finales.','Que tu pregunta es única','La revisión ayuda a garantizar la originalidad.');
+  mact('s12D2','¿Qué indica un valor p?','La probabilidad de los datos si la hipótesis nula es cierta','El valor p muestra la probabilidad de la observación bajo la hipótesis nula.','La probabilidad de que la hipótesis alternativa sea cierta','El valor p se refiere a la hipótesis nula, no a la alternativa.','La magnitud del tamaño del efecto','El valor p y el tamaño del efecto son diferentes.');
+  mact('s12D3','¿Qué debe incluir la sección de métodos?','Suficiente detalle para replicar el estudio','Los métodos permiten la verificación independiente.','Solo los procedimientos exitosos','Los métodos deben ser completos y honestos.','Las opiniones del autor','Los métodos son objetivos, no subjetivos.');
+  mact('s12E1','¿Qué hace posible la nanotecnología?','Manipular átomos y moléculas individuales','La nanotecnología trabaja a escala atómica y molecular.','Hacer las cosas muy pequeñas','El tamaño solo no define la nanotecnología.','Usar microscopios','Los microscopios observan; la nanotecnología manipula.');
+  mact('s12E2','¿Cómo ayuda el aprendizaje automático a la ciencia?','Identifica patrones en datos complejos','La IA encuentra relaciones que los humanos podrían pasar por alto.','Reemplaza a los científicos humanos','La IA complementa a los científicos, no los reemplaza.','Hace la ciencia más fácil','La IA posibilita nueva ciencia, no solo ciencia más sencilla.');
+  mact('s12E3','¿Qué es la biología sintética?','Diseñar organismos para funciones deseadas','La biología sintética diseña sistemas vivos.','Solo estudiar biología','La biología sintética es ingeniería de la vida.','Crear organismos artificiales','La biología sintética modifica organismos existentes.');
+})();
+
 // ── Grade 12 Math — translations ──
 (function(){
   if(typeof MATH_CURRICULUM==='undefined'||!MATH_CURRICULUM[12])return;
