@@ -28115,6 +28115,70 @@ try { autoTranslateActivitiesES(); } catch(e){ console.warn('Auto activity trans
   ct('m10E100','Repasa las 100 lecciones: fundamentos, triángulos, círculos, área/volumen, transformaciones y aplicaciones.',['100 conceptos de geometría','Aplicaciones del mundo real','Domina los teoremas fundamentales'],'¡La geometría es el fundamento de las matemáticas!');
 })();
 
+// ── Grade 12 English — translations ──
+(function(){
+  if(typeof ENGLISH_CURRICULUM==='undefined'||!ENGLISH_CURRICULUM[12])return;
+  var gd=ENGLISH_CURRICULUM[12];
+  gd.description_es='Grado 12 - Literatura Británica, Estudios Poscoloniales y Comunicación Integradora';
+  gd.categories.A.name_es='Lectura';
+  gd.categories.B.name_es='Escritura';
+  gd.categories.C.name_es='Gramática';
+  gd.categories.D.name_es='Vocabulario';
+  gd.categories.E.name_es='Expresión Oral y Comprensión Auditiva';
+  var lm={};
+  Object.keys(gd.categories).forEach(function(ck){
+    (gd.categories[ck].lessons||[]).forEach(function(l){lm[l.id]=l;});
+  });
+  function ct(id,intro,kp,ff){var l=lm[id];if(!l||!l.content)return;l.content.intro_es=intro;l.content.keyPoints_es=kp;l.content.funFact_es=ff;}
+  function tt(id,t,tg){var l=lm[id];if(!l)return;if(t)l.title_es=t;if(tg)l.tagline_es=tg;}
+  function mact(id,instr,c0t,c0e,c1t,c1e,c2t,c2e){var l=lm[id];if(!l||!l.activity)return;l.activity.instructions_es=instr;var c=l.activity.choices;if(c){if(c[0]){c[0].text_es=c0t;c[0].explanation_es=c0e;}if(c[1]){c[1].text_es=c1t;c[1].explanation_es=c1e;}if(c[2]){c[2].text_es=c2t;c[2].explanation_es=c2e;}}}
+  tt('e12A1','Literatura Británica','Textos canónicos desde la Edad Media hasta la época contemporánea y su influencia global');
+  tt('e12A2','Literatura Poscolonial','Análisis de la literatura de naciones antes colonizadas y el legado del colonialismo');
+  tt('e12A3','Ficción Contemporánea','Lectura de literatura actual que aborda temas modernos, formas experimentales y perspectivas diversas');
+  tt('e12B1','Tesis de Último Año','Redacción de un proyecto ampliado de investigación y argumentación que demuestra conocimiento y habilidad analítica');
+  tt('e12B2','Portafolio Creativo','Compilación de una colección de trabajos creativos originales —poesía, ficción, ensayos— con reflexión');
+  tt('e12B3','Escritura Profesional','Creación de documentos para el entorno laboral —informes, propuestas, memorandos, correspondencia— con pulcritud y claridad');
+  tt('e12C1','Estándares de Publicación','Comprensión de los requisitos para publicar en revistas, revistas especializadas y otros medios');
+  tt('e12C2','Convenciones de Escritura Académica','Comprensión de cómo escriben los académicos: tono formal, argumentos basados en evidencia y citas correctas');
+  tt('e12C3','Corrección de Pruebas','Revisión cuidadosa de los borradores finales para corregir errores y pulir antes de entregar o publicar');
+  tt('e12D1','Vocabulario de Nivel Posgrado','Aprendizaje de palabras sofisticadas que aparecen en textos de posgrado y escritura profesional');
+  tt('e12D2','Terminología Específica por Disciplina','Comprensión del vocabulario especializado de diversas áreas académicas y profesionales');
+  tt('e12D3','Análisis Lingüístico','Comprensión de cómo funciona el lenguaje —fonética, semántica, sintaxis— y análisis crítico del lenguaje');
+  tt('e12E1','Charlas Estilo TED','Creación y presentación de exposiciones convincentes que comparten ideas de importancia');
+  tt('e12E2','Comunicación en el Entorno Laboral','Comprensión de la comunicación profesional en reuniones, presentaciones y correspondencia escrita');
+  tt('e12E3','Presentaciones Finales Integradoras','Presentación de proyectos finales que sintetizan el aprendizaje, demuestran crecimiento y comparten logros');
+  ct('e12A1','La literatura británica abarca siglos, comenzando con el inglés antiguo e incluyendo obras que moldearon la literatura mundial.',['Va desde la Edad Media hasta la época contemporánea','Moldeó la literatura mundial','Muestra las tradiciones literarias'],'¡Shakespeare es el autor más estudiado en todo el mundo!');
+  ct('e12A2','La literatura poscolonial está escrita por autores de naciones antes colonizadas que abordan la experiencia colonial y sus secuelas.',['Centra las voces marginadas','Desafía las narrativas coloniales','Examina los impactos persistentes'],'¡La literatura poscolonial frecuentemente gana premios literarios de prestigio!');
+  ct('e12A3','La ficción contemporánea (siglo XXI) aborda la vida moderna: tecnología, cambio climático, justicia social, pandemias.',['Aborda temas actuales','Experimenta con la forma','Voces y perspectivas diversas'],'¡La literatura contemporánea aborda los temas urgentes del siglo XXI!');
+  ct('e12B1','Una tesis de último año es un importante proyecto de investigación y escritura que demuestra dominio de un tema.',['Elige un tema significativo','Investiga de manera exhaustiva y original','Desarrolla y sustenta un argumento'],'¡La tesis de último año suele ser la mejor experiencia de aprendizaje de la preparatoria!');
+  ct('e12B2','Un portafolio creativo exhibe trabajos originales que tú has escrito.',['Selecciona los mejores trabajos','Revisa cuidadosamente','Reflexiona sobre las elecciones y el crecimiento'],'¡Los portafolios creativos frecuentemente abren las puertas a prestigiosos programas de escritura!');
+  ct('e12B3','La escritura profesional incluye documentos del entorno laboral: informes, propuestas, memorandos, correos y correspondencia.',['Clara, organizada y pulcra','Mecánica impecable','Tono y formato apropiados'],'¡El éxito profesional depende en parte de la habilidad de escritura profesional!');
+  ct('e12C1','Los estándares de publicación varían según el medio, pero generalmente incluyen requisitos de formato, extensión, estilo y proceso.',['Sigue los requisitos de formato específicos','Cumple las especificaciones de extensión y estilo','Comprende el proceso de envío'],'¡Publicar como estudiante de preparatoria es impresionante!');
+  ct('e12C2','La escritura académica tiene convenciones: tono formal, perspectiva en tercera persona, argumentos basados en evidencia y citas.',['Tono formal y perspectiva en tercera persona','Argumentos basados en evidencia','Citas correctas y reconocimiento de fuentes'],'¡La escritura académica se practica hasta volverse natural!');
+  ct('e12C3','La corrección de pruebas es la revisión final que comprueba errores: erratas, gramática, ortografía y formato.',['Lee varias veces','Revisa todos los tipos de error','Toma descansos para tener una perspectiva fresca'],'¡Los correctores profesionales detectan los errores que los escritores pasan por alto!');
+  ct('e12D1','El vocabulario de nivel posgrado incluye palabras sofisticadas que aparecen en estudios de posgrado y escritura profesional.',['Aprende el significado de las palabras en profundidad','Úsalas en la escritura y el habla','Reconócelas en textos sofisticados'],'¡Los estudiantes de posgrado y los profesionales usan este vocabulario constantemente!');
+  ct('e12D2','Cada disciplina académica tiene vocabulario especializado.',['Cada campo tiene terminología única','Demuestra experiencia y compromiso','Necesario para la comunicación profesional'],'¡Los profesionales se conectan en parte a través del lenguaje especializado compartido!');
+  ct('e12D3','El análisis lingüístico examina la estructura y la función del lenguaje.',['Fonética, morfología, sintaxis','Semántica y pragmática','El lenguaje crea significado'],'¡Los lingüistas estudian cómo el lenguaje moldea el pensamiento y la cultura!');
+  ct('e12E1','Las charlas TED son presentaciones que comparten ideas que vale la pena difundir.',['Desarrolla una idea clara y significativa','Genera conexión emocional','Presenta con pulcritud y seguridad'],'¡Las grandes charlas TED inspiran a millones de espectadores!');
+  ct('e12E2','La comunicación en el entorno laboral incluye reuniones, presentaciones, correos electrónicos, informes y conversaciones.',['Escucha activamente en las reuniones','Escribe correos de manera profesional y concisa','Presenta con pulcritud'],'¡Las habilidades de comunicación en el entorno laboral suelen determinar el avance profesional!');
+  ct('e12E3','Las presentaciones integradoras son proyectos finales que muestran la culminación del aprendizaje.',['Sintetiza el aprendizaje y el crecimiento','Presenta de manera profesional','Demuestra los logros alcanzados'],'¡Las presentaciones integradoras suelen conmover profundamente a la audiencia!');
+  mact('e12A1','¿Por qué se estudia ampliamente la literatura británica?','"Porque es la única buena literatura"','Se estudia por su influencia, no por ser exclusivamente buena.','"Porque moldeó las tradiciones literarias a nivel mundial"','La literatura británica tiene una inmensa influencia.','"Porque es más fácil que otras literaturas"','La dificultad no es el motivo.');
+  mact('e12A2','¿Qué examina la literatura poscolonial?','"Solo cosas negativas sobre las antiguas colonias"','Es compleja y matizada.','"La experiencia colonial y sus impactos duraderos"','Estos son los temas centrales.','"Solo los aspectos positivos"','Aborda la complejidad.');
+  mact('e12A3','¿Qué caracteriza a la ficción contemporánea?','"Ignorar los temas actuales"','La literatura contemporánea se involucra con las preocupaciones del presente.','"Abordar la vida moderna y formas experimentales"','La literatura contemporánea es innovadora y comprometida.','"Solo temas serios y deprimentes"','La ficción contemporánea es diversa en tono.');
+  mact('e12B1','¿Qué hace fuerte a una tesis de último año?','"Un argumento original basado en investigación"','Esto es lo que distingue a las mejores tesis.','"Repetir lo que otros dijeron"','Las tesis requieren pensamiento original.','"Ser lo más larga posible"','La extensión no equivale a calidad.');
+  mact('e12B2','¿Qué debe incluir un portafolio creativo?','"Todo lo que has escrito alguna vez"','Los portafolios exhiben los mejores trabajos, no todo.','"Los mejores trabajos, cuidadosamente revisados, con reflexión"','La calidad y la reflexión importan.','"Solo un tipo de escritura"','La diversidad es valiosa.');
+  mact('e12B3','¿Qué importa más en la escritura profesional?','"Impresionar con lenguaje rebuscado"','La claridad importa más que el estilo.','"Comunicación clara que logra el propósito"','La escritura profesional está orientada a resultados.','"Ser creativo y único"','La escritura profesional valora la claridad sobre la creatividad.');
+  mact('e12C1','¿Por qué las publicaciones tienen estándares?','"Para hacer las cosas más difíciles"','Los estándares cumplen propósitos importantes.','"Para garantizar consistencia y profesionalismo"','Los estándares mantienen la calidad.','"Porque los editores son exigentes"','Los estándares son una práctica profesional.');
+  mact('e12C2','¿Qué caracteriza a la escritura académica?','"Narración en primera persona"','La escritura académica generalmente evita la primera persona.','"Tono formal, argumentos basados en evidencia y citas correctas"','Estas son las convenciones académicas.','"Narración creativa"','La escritura académica prioriza la claridad.');
+  mact('e12C3','¿Cuál es la diferencia entre corrección de pruebas y edición?','"Son lo mismo"','Son etapas diferentes.','"La edición mejora el significado; la corrección arregla los errores"','Etapas diferentes, propósitos diferentes.','"La corrección es más importante"','Ambas son esenciales.');
+  mact('e12D1','¿Qué significa "ubicuo"?','"Raro y especial"','Significa lo contrario.','"Presente en todas partes"','Ubicuo significa omnipresente.','"Fácil de romper"','Ese no es el significado.');
+  mact('e12D2','¿Por qué es importante aprender terminología específica por disciplina?','"Solo para presumir"','Permite la comunicación.','"Te permite participar y comprender tu campo"','El vocabulario es esencial para la comunicación profesional.','"Solo para los expertos"','Los estudiantes que aprenden el campo también la necesitan.');
+  mact('e12D3','¿Qué estudia la pragmática?','"El sonido del lenguaje"','Eso es la fonética.','"Cómo el contexto afecta el significado"','La pragmática trata el significado en contexto.','"La estructura de las palabras"','Eso es la morfología.');
+  mact('e12E1','¿Qué hace efectiva una charla TED?','"Exhibir conocimiento sofisticado"','Las charlas TED hacen las ideas accesibles.','"Idea clara, presentación atractiva y conexión emocional"','Estas son las características de las grandes charlas.','"Ser lo más técnica posible"','La accesibilidad importa.');
+  mact('e12E2','¿Qué es importante en los correos electrónicos del entorno laboral?','"Ser tan informal como los mensajes de texto"','Los correos profesionales difieren de los mensajes de texto.','"Ser claro, respetuoso y profesional"','Estos son los elementos clave.','"Ser lo más largo posible"','La brevedad es valorada.');
+  mact('e12E3','¿Qué debe mostrar una presentación final integradora?','"Solo un resumen de hechos"','Las presentaciones integradoras muestran crecimiento y significado.','"Aprendizaje, crecimiento y logros"','Las presentaciones integradoras demuestran síntesis.','"Solo los mejores trabajos"','Las presentaciones integradoras muestran el recorrido.');
+})();
+
 // ── Grade 12 Science — translations ──
 (function(){
   if(typeof SCIENCE_CURRICULUM==='undefined'||!SCIENCE_CURRICULUM[12])return;
