@@ -2429,9 +2429,9 @@ function isPremiumSubject(subject){
 function isAdmin(){
   try {
     if(!currentUser) return false;
-    // Primary: in-memory role (set by _fetchUserRole)
+    // Primary: in-memory role (set by _fetchUserRole or metadata cache)
     if(currentUser.role === 'admin') return true;
-    // Fallback: localStorage cache (available immediately on session restore)
+    // Fallback 1: localStorage cache
     var users = getUsers();
     var u = users[currentUser.username];
     if(u && u.role === 'admin') return true;
@@ -2457,7 +2457,12 @@ function _fetchUserRole(supabaseId){
           saveUsers(us);
         }
       } catch(e){}
-      updateUserDisplay(); // refresh badge (OWNER pill appears for admin, Pro button for others)
+      // Cache role in Supabase user metadata so next login has it instantly
+      // (avoids the race condition between page load and DB query)
+      try {
+        supabase.auth.updateUser({ data: { cloud6_role: role } }).catch(function(){});
+      } catch(e){}
+      updateUserDisplay(); // refresh badge
     })
     .catch(function(e){
       console.warn('[cloud6] _fetchUserRole failed:', e);
@@ -2483,9 +2488,9 @@ function _onSupabaseReady(){
     if((event === 'SIGNED_IN' || event === 'INITIAL_SESSION') && session && session.user){
       var u = session.user;
       var wasGuest = !currentUser;
+      var meta = u.user_metadata || {};
 
       if(!currentUser){
-        var meta = u.user_metadata || {};
         var uname = (meta.preferred_username || meta.full_name || u.email.split('@')[0]).toLowerCase().replace(/\s+/g,'_');
         currentUser = { username: uname, name: meta.full_name || '', email: u.email, supabaseId: u.id };
         setCurrentSession(uname);
@@ -2500,7 +2505,18 @@ function _onSupabaseReady(){
         }
       }
 
-      // Always re-fetch role so badge and gates are correct
+      // ── Fast role restore from cached metadata (no DB round-trip) ──
+      // Set immediately so gates don't fire before DB query returns
+      if(meta.cloud6_role && currentUser && !currentUser.role){
+        currentUser.role = meta.cloud6_role;
+        try {
+          var us2 = getUsers();
+          if(us2[currentUser.username]){ us2[currentUser.username].role = meta.cloud6_role; saveUsers(us2); }
+        } catch(e){}
+        updateUserDisplay();
+      }
+
+      // DB fetch to verify/update role (also writes back to metadata)
       _fetchUserRole(u.id)
         .then(function(){ if(wasGuest) enterApp(); else updateUserDisplay(); })
         .catch(function(){ if(wasGuest) enterApp(); else updateUserDisplay(); });
