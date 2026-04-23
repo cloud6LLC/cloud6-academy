@@ -2769,8 +2769,15 @@ function doLogin(){
     const loginBtn = document.querySelector('#loginForm button[onclick="doLogin()"]') || document.querySelector('#loginForm button');
     if(loginBtn){ loginBtn.textContent = 'Signing in...'; loginBtn.disabled = true; }
 
+    // Safety timeout — if Supabase never responds in 10s, unblock the button
+    var _loginTimeout = setTimeout(function(){
+      if(loginBtn){ loginBtn.textContent = 'Sign In'; loginBtn.disabled = false; }
+      showAuthError('loginError', 'Sign-in timed out. Try again or use Google sign-in.');
+    }, 10000);
+
     supabase.auth.signInWithPassword({ email: input, password: pw })
     .then(function(result){
+      clearTimeout(_loginTimeout);
       if(loginBtn){ loginBtn.textContent = 'Sign In'; loginBtn.disabled = false; }
       if(result.error){
         // If Supabase says invalid, try local fallback
@@ -2807,6 +2814,7 @@ function doLogin(){
         .then(function(){ enterApp(); })
         .catch(function(){ enterApp(); }); // always enter even if role fetch fails
     }).catch(function(e){
+      clearTimeout(_loginTimeout);
       if(loginBtn){ loginBtn.textContent = 'Sign In'; loginBtn.disabled = false; }
       doLoginLocal(input, pw);
     });
