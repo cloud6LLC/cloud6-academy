@@ -1868,6 +1868,7 @@ const AI_PROXY_URL = 'https://ugfglcetltxlncmorlif.supabase.co/functions/v1/ai-p
 var supabase = null;
 var _supabaseReady = false;
 var _supabaseAuthInitialized = false; // prevents double-init when CDN loads after initApp
+var _roleFetchPromise = Promise.resolve(); // updated each time _fetchUserRole runs; gates await this
 // Supabase loads async via dynamic script loader above — check if already loaded
 try {
   if(window._supabaseClient){
@@ -2445,7 +2446,7 @@ function isOwner(){ return isAdmin(); } // alias — either name works throughou
 // On ANY query failure, role stays at whatever was cached — fail safe for admins.
 function _fetchUserRole(supabaseId){
   if(!supabase || !_supabaseReady || !supabaseId) return Promise.resolve();
-  return supabase.from('profiles').select('role').eq('id', supabaseId).single()
+  _roleFetchPromise = supabase.from('profiles').select('role').eq('id', supabaseId).single()
     .then(function(res){
       var role = (res && res.data && res.data.role) ? res.data.role : 'student';
       if(currentUser){ currentUser.role = role; }
@@ -2462,6 +2463,7 @@ function _fetchUserRole(supabaseId){
       console.warn('[cloud6] _fetchUserRole failed:', e);
       // Do NOT overwrite a cached admin role on error — fail safe
     });
+  return _roleFetchPromise;
 }
 // ─────────────────────────────────────────────────────────────
 
@@ -14439,7 +14441,12 @@ function showWorkedExample(){
 function openLesson(lessonId){
   stopSpeech();
   // Gate premium subjects (owner bypasses all gates)
-  if(!isOwner() && isPremiumSubject(currentSubject) && !isPremiumUser()){
+  if(isPremiumSubject(currentSubject) && !isOwner() && !isPremiumUser()){
+    if(currentUser && !currentUser.role){
+      // Role still loading — wait then retry
+      _roleFetchPromise.then(function(){ openLesson(lessonId); }).catch(function(){ showPremiumGate(); });
+      return;
+    }
     showPremiumGate();
     return;
   }
@@ -29843,7 +29850,12 @@ function switchSubject(subject){
   stopSpeech();
   if(typeof timerInterval !== 'undefined' && timerInterval){ clearInterval(timerInterval); timerInterval = null; }
   // Gate premium subjects behind payment (owner bypasses all gates)
-  if(!isOwner() && isPremiumSubject(subject) && !isPremiumUser()){
+  if(isPremiumSubject(subject) && !isOwner() && !isPremiumUser()){
+    if(currentUser && !currentUser.role){
+      // Role still loading from Supabase — wait for it, then retry once
+      _roleFetchPromise.then(function(){ switchSubject(subject); }).catch(function(){ showPremiumGate(); });
+      return;
+    }
     showPremiumGate();
     return;
   }
