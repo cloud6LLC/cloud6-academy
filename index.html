@@ -385,6 +385,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
         if(typeof supabase !== 'undefined') supabase = window._supabaseClient;
         _supabaseReady = true;
         console.log('☁️ Cloud6 Academy connected to Supabase');
+        // If initApp already ran before Supabase was ready, catch up now
+        if(typeof _onSupabaseReady === 'function') _onSupabaseReady();
       }
     } catch(e){ console.warn('Supabase init failed:', e); }
   };
@@ -1865,6 +1867,7 @@ const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
 const AI_PROXY_URL = 'https://ugfglcetltxlncmorlif.supabase.co/functions/v1/ai-proxy'; // Supabase Edge Function — keeps API key server-side
 var supabase = null;
 var _supabaseReady = false;
+var _supabaseAuthInitialized = false; // prevents double-init when CDN loads after initApp
 // Supabase loads async via dynamic script loader above — check if already loaded
 try {
   if(window._supabaseClient){
@@ -2461,6 +2464,53 @@ function _fetchUserRole(supabaseId){
     });
 }
 // ─────────────────────────────────────────────────────────────
+
+// Called by s.onload when Supabase CDN finishes loading AFTER initApp() already ran.
+// Also called by initApp() itself when Supabase is already ready.
+// Guards with _supabaseAuthInitialized so it only runs once per page load.
+function _onSupabaseReady(){
+  if(_supabaseAuthInitialized || !supabase || !_supabaseReady) return;
+  _supabaseAuthInitialized = true;
+
+  // Listen for PASSWORD_RECOVERY and session events
+  supabase.auth.onAuthStateChange(function(event, session){
+    if(event === 'PASSWORD_RECOVERY'){ showAuthScreen(); showResetForm(); return; }
+  });
+
+  // Handle OAuth redirect hash if initApp missed it (Supabase wasn't ready yet)
+  var _h = window.location.hash;
+  if(_h.includes('access_token') && !_h.includes('type=recovery') && !currentUser){
+    handleOAuthCallback();
+    return;
+  }
+
+  // Restore Supabase session for returning users
+  supabase.auth.getSession().then(function(result){
+    var session = result && result.data && result.data.session;
+    if(!session) return;
+    var u = session.user;
+    var wasGuest = !currentUser;
+
+    if(!currentUser){
+      // Build user object the same way as handleOAuthCallback
+      var meta = u.user_metadata || {};
+      var uname = (meta.preferred_username || meta.full_name || u.email.split('@')[0]).toLowerCase().replace(/\s+/g,'_');
+      currentUser = { username: uname, name: meta.full_name || '', email: u.email, supabaseId: u.id };
+      setCurrentSession(uname);
+      var users = getUsers();
+      if(!users[uname]){
+        users[uname] = { name: currentUser.name, email: u.email, supabaseId: u.id, createdAt: Date.now() };
+        saveUsers(users);
+      }
+    }
+
+    // Fetch role — then enter app (if guest) or just refresh the badge
+    _fetchUserRole(u.id)
+      .then(function(){ if(wasGuest) enterApp(); else updateUserDisplay(); })
+      .catch(function(){ if(wasGuest) enterApp(); else updateUserDisplay(); });
+  }).catch(function(){});
+}
+
 
 // Show premium upgrade modal when user tries to access paid content
 function showPremiumGate(){
@@ -30144,6 +30194,7 @@ function initApp(){
 
   // Handle Supabase OAuth or password reset redirect
   if(_supabaseReady && supabase){
+    _supabaseAuthInitialized = true; // mark as handled so _onSupabaseReady won't double-run
     // ── Early listener for PKCE-style recovery (Supabase v2) ──
     supabase.auth.onAuthStateChange(function(event, session){
       if(event === 'PASSWORD_RECOVERY'){
