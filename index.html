@@ -2474,43 +2474,44 @@ function _onSupabaseReady(){
   if(_supabaseAuthInitialized || !supabase || !_supabaseReady) return;
   _supabaseAuthInitialized = true;
 
-  // Listen for PASSWORD_RECOVERY and session events
+  // ── Central auth state handler ──────────────────────────────────────────────
+  // Handles PKCE OAuth callbacks (SIGNED_IN), session restore (INITIAL_SESSION),
+  // and password recovery. This is the single source of truth for session events.
   supabase.auth.onAuthStateChange(function(event, session){
     if(event === 'PASSWORD_RECOVERY'){ showAuthScreen(); showResetForm(); return; }
+
+    if((event === 'SIGNED_IN' || event === 'INITIAL_SESSION') && session && session.user){
+      var u = session.user;
+      var wasGuest = !currentUser;
+
+      if(!currentUser){
+        var meta = u.user_metadata || {};
+        var uname = (meta.preferred_username || meta.full_name || u.email.split('@')[0]).toLowerCase().replace(/\s+/g,'_');
+        currentUser = { username: uname, name: meta.full_name || '', email: u.email, supabaseId: u.id };
+        setCurrentSession(uname);
+        var users = getUsers();
+        if(!users[uname]){
+          users[uname] = { name: currentUser.name, email: u.email, supabaseId: u.id, createdAt: Date.now() };
+          saveUsers(users);
+        }
+        // Clean any OAuth params/hash from URL
+        if(window.location.hash || window.location.search.includes('code=')){
+          window.history.replaceState(null, '', window.location.pathname);
+        }
+      }
+
+      // Always re-fetch role so badge and gates are correct
+      _fetchUserRole(u.id)
+        .then(function(){ if(wasGuest) enterApp(); else updateUserDisplay(); })
+        .catch(function(){ if(wasGuest) enterApp(); else updateUserDisplay(); });
+    }
   });
 
-  // Handle OAuth redirect hash if initApp missed it (Supabase wasn't ready yet)
+  // Also handle legacy implicit-flow hash callbacks just in case
   var _h = window.location.hash;
   if(_h.includes('access_token') && !_h.includes('type=recovery') && !currentUser){
     handleOAuthCallback();
-    return;
   }
-
-  // Restore Supabase session for returning users
-  supabase.auth.getSession().then(function(result){
-    var session = result && result.data && result.data.session;
-    if(!session) return;
-    var u = session.user;
-    var wasGuest = !currentUser;
-
-    if(!currentUser){
-      // Build user object the same way as handleOAuthCallback
-      var meta = u.user_metadata || {};
-      var uname = (meta.preferred_username || meta.full_name || u.email.split('@')[0]).toLowerCase().replace(/\s+/g,'_');
-      currentUser = { username: uname, name: meta.full_name || '', email: u.email, supabaseId: u.id };
-      setCurrentSession(uname);
-      var users = getUsers();
-      if(!users[uname]){
-        users[uname] = { name: currentUser.name, email: u.email, supabaseId: u.id, createdAt: Date.now() };
-        saveUsers(users);
-      }
-    }
-
-    // Fetch role — then enter app (if guest) or just refresh the badge
-    _fetchUserRole(u.id)
-      .then(function(){ if(wasGuest) enterApp(); else updateUserDisplay(); })
-      .catch(function(){ if(wasGuest) enterApp(); else updateUserDisplay(); });
-  }).catch(function(){});
 }
 
 
@@ -2755,7 +2756,19 @@ function doSignupLocal(name, username, email, pw){
 // Google OAuth Login
 function doGoogleLogin(){
   if(!_supabaseReady || !supabase){
-    alert('Google Sign-In requires an internet connection. Please check your connection and try again.');
+    // Supabase CDN still loading — wait up to 6s then retry
+    const btn = document.getElementById('googleLoginBtn');
+    if(btn){ btn.style.opacity = '0.6'; btn.style.pointerEvents = 'none'; }
+    var waited = 0;
+    var waitInterval = setInterval(function(){
+      waited += 200;
+      if(_supabaseReady && supabase){ clearInterval(waitInterval); doGoogleLogin(); }
+      else if(waited >= 6000){
+        clearInterval(waitInterval);
+        if(btn){ btn.style.opacity = '1'; btn.style.pointerEvents = 'auto'; }
+        showAuthError('loginError', 'Could not connect to Google Sign-In. Please check your connection.');
+      }
+    }, 200);
     return;
   }
   const btn = document.getElementById('googleLoginBtn');
@@ -30206,14 +30219,9 @@ function initApp(){
 
   // Handle Supabase OAuth or password reset redirect
   if(_supabaseReady && supabase){
-    _supabaseAuthInitialized = true; // mark as handled so _onSupabaseReady won't double-run
-    // ── Early listener for PKCE-style recovery (Supabase v2) ──
-    supabase.auth.onAuthStateChange(function(event, session){
-      if(event === 'PASSWORD_RECOVERY'){
-        showAuthScreen();
-        showResetForm();
-      }
-    });
+    // Delegate to the same central handler used by the s.onload path.
+    // _onSupabaseReady sets _supabaseAuthInitialized itself so it only runs once.
+    _onSupabaseReady();
 
     // Check for Google OAuth callback first
     if(handleOAuthCallback()) return;
