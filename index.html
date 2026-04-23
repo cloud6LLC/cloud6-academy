@@ -963,10 +963,25 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
   <div style="background:#fff;border-radius:16px;padding:40px;max-width:400px;width:90%;margin:auto;position:relative;top:50%;transform:translateY(-50%)">
     <h2 style="color:#2d3436;margin-bottom:24px;text-align:center" data-i18n="ui.adminTitle">🔐 Admin / Teacher Login</h2>
     <div style="display:flex;flex-direction:column;gap:12px">
-      <input type="email" placeholder="Email address" data-i18n-ph="ui.adminEmailPh" style="padding:12px 16px;border:1px solid #e0e0e0;border-radius:8px;font-size:14px">
-      <input type="password" placeholder="Password" data-i18n-ph="ui.adminPasswordPh" style="padding:12px 16px;border:1px solid #e0e0e0;border-radius:8px;font-size:14px">
+      <!-- Google sign-in (recommended — uses the same account as Google OAuth) -->
+      <button id="adminModalGoogleBtn" onclick="doAdminGoogleLogin()" style="display:flex;align-items:center;justify-content:center;gap:10px;padding:12px 16px;border:1.5px solid #dadce0;border-radius:8px;background:#fff;font-size:14px;font-weight:600;color:#3c4043;cursor:pointer;width:100%">
+        <svg width="18" height="18" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>
+        Sign in with Google
+      </button>
+      <!-- Divider -->
+      <div style="display:flex;align-items:center;gap:10px;margin:2px 0">
+        <div style="flex:1;height:1px;background:#e0e0e0"></div>
+        <span style="font-size:12px;color:#b2bec3">or use email</span>
+        <div style="flex:1;height:1px;background:#e0e0e0"></div>
+      </div>
+      <input id="adminModalEmail" type="email" placeholder="Email address" data-i18n-ph="ui.adminEmailPh" onkeydown="if(event.key==='Enter')document.getElementById('adminModalPassword').focus()" style="padding:12px 16px;border:1px solid #e0e0e0;border-radius:8px;font-size:14px">
+      <div style="position:relative">
+        <input id="adminModalPassword" type="password" placeholder="Password" data-i18n-ph="ui.adminPasswordPh" onkeydown="if(event.key==='Enter')doAdminLogin()" style="padding:12px 16px;border:1px solid #e0e0e0;border-radius:8px;font-size:14px;width:100%;box-sizing:border-box;padding-right:44px">
+        <button type="button" onclick="(function(){var p=document.getElementById('adminModalPassword');var e=document.getElementById('adminModalEyeIcon');p.type=p.type==='password'?'text':'password';e.textContent=p.type==='password'?'👁':'🙈';})()" style="position:absolute;right:10px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;font-size:18px;padding:0;line-height:1" tabindex="-1"><span id="adminModalEyeIcon">👁</span></button>
+      </div>
+      <div id="adminModalError" style="color:#e17055;font-size:13px;margin-top:2px;min-height:18px"></div>
       <div style="display:flex;gap:8px">
-        <button onclick="alert(t('ui.alertAdminComingSoon'))" style="flex:1;padding:12px;background:#00b894;color:#fff;border:none;border-radius:8px;font-weight:700;cursor:pointer" data-i18n="ui.adminSignIn">Sign In</button>
+        <button id="adminModalSignInBtn" onclick="doAdminLogin()" style="flex:1;padding:12px;background:#00b894;color:#fff;border:none;border-radius:8px;font-weight:700;cursor:pointer" data-i18n="ui.adminSignIn">Sign In</button>
         <button onclick="document.getElementById(&#39;adminModal&#39;).style.display=&#39;none&#39;" style="flex:1;padding:12px;background:#e0e0e0;color:#636e72;border:none;border-radius:8px;font-weight:700;cursor:pointer" data-i18n="ui.adminCancel">Cancel</button>
       </div>
       <p style="font-size:11px;color:#636e72;text-align:center" data-i18n="ui.adminDesc">Teachers and administrators can manage student accounts, view progress, and assign skills.</p>
@@ -1869,6 +1884,8 @@ var supabase = null;
 var _supabaseReady = false;
 var _supabaseAuthInitialized = false; // prevents double-init when CDN loads after initApp
 var _roleFetchPromise = Promise.resolve(); // updated each time _fetchUserRole runs; gates await this
+var _roleLoaded = false;   // true after _fetchUserRole resolves (success OR failure) — prevents infinite gate loops
+var _loggingOut = false;   // set true during logout to block any stale auth events from re-logging in
 // Supabase loads async via dynamic script loader above — check if already loaded
 try {
   if(window._supabaseClient){
@@ -2446,27 +2463,58 @@ function isOwner(){ return isAdmin(); } // alias — either name works throughou
 // On ANY query failure, role stays at whatever was cached — fail safe for admins.
 function _fetchUserRole(supabaseId){
   if(!supabase || !_supabaseReady || !supabaseId) return Promise.resolve();
+
+  // Helper: read best available cached role from localStorage
+  function _cachedRole(){
+    try {
+      var uc = getUsers();
+      if(currentUser && uc[currentUser.username] && uc[currentUser.username].role)
+        return uc[currentUser.username].role;
+    } catch(e2){}
+    return null;
+  }
+
   _roleFetchPromise = supabase.from('profiles').select('role').eq('id', supabaseId).single()
     .then(function(res){
-      var role = (res && res.data && res.data.role) ? res.data.role : 'student';
-      if(currentUser){ currentUser.role = role; }
-      try {
-        var us = getUsers();
-        if(currentUser && us[currentUser.username]){
-          us[currentUser.username].role = role;
-          saveUsers(us);
-        }
-      } catch(e){}
-      // Cache role in Supabase user metadata so next login has it instantly
-      // (avoids the race condition between page load and DB query)
-      try {
-        supabase.auth.updateUser({ data: { cloud6_role: role } }).catch(function(){});
-      } catch(e){}
-      updateUserDisplay(); // refresh badge
+      var role = null;
+
+      if(res && res.error){
+        // DB error (RLS blocked, row missing, network…) — fall back to localStorage cache
+        console.warn('[cloud6] _fetchUserRole DB error:', res.error.message || res.error);
+        role = _cachedRole();
+      } else {
+        role = (res && res.data && res.data.role) ? res.data.role : _cachedRole();
+      }
+
+      // CRITICAL: always set currentUser.role so gate code never enters an infinite wait loop.
+      // Priority: DB result → localStorage cache → 'student' (safest fallback).
+      if(currentUser){
+        currentUser.role = role || currentUser.role || 'student';
+      }
+
+      // Persist to localStorage only when we got a clean DB result
+      if(role && !(res && res.error)){
+        try {
+          var us = getUsers();
+          if(currentUser && us[currentUser.username]){
+            us[currentUser.username].role = role;
+            saveUsers(us);
+          }
+        } catch(e){}
+      }
+
+      _roleLoaded = true; // unblock gate code — role is now definitively known
+      console.log('[ADMIN DEBUG] role loaded — currentUser:', JSON.stringify({username: currentUser && currentUser.username, role: currentUser && currentUser.role}), '| isAdmin():', isAdmin());
+      updateUserDisplay();
     })
     .catch(function(e){
-      console.warn('[cloud6] _fetchUserRole failed:', e);
-      // Do NOT overwrite a cached admin role on error — fail safe
+      console.warn('[cloud6] _fetchUserRole network error:', e);
+      // Network hard-fail: use cache or 'student' — never leave role undefined
+      if(currentUser && !currentUser.role){
+        currentUser.role = _cachedRole() || 'student';
+      }
+      _roleLoaded = true;
+      updateUserDisplay();
     });
   return _roleFetchPromise;
 }
@@ -2484,13 +2532,16 @@ function _onSupabaseReady(){
   // and password recovery. This is the single source of truth for session events.
   supabase.auth.onAuthStateChange(function(event, session){
     if(event === 'PASSWORD_RECOVERY'){ showAuthScreen(); showResetForm(); return; }
+    if(_loggingOut) return; // ignore ALL auth events while logout is in progress
 
     if((event === 'SIGNED_IN' || event === 'INITIAL_SESSION') && session && session.user){
       var u = session.user;
-      var wasGuest = !currentUser;
       var meta = u.user_metadata || {};
+      // Supabase session wins when: no local user, OR local user's supabaseId doesn't match.
+      var supabaseMatches = currentUser && currentUser.supabaseId === u.id;
+      var wasGuest = !supabaseMatches;
 
-      if(!currentUser){
+      if(!supabaseMatches){
         var uname = (meta.preferred_username || meta.full_name || u.email.split('@')[0]).toLowerCase().replace(/\s+/g,'_');
         currentUser = { username: uname, name: meta.full_name || '', email: u.email, supabaseId: u.id };
         setCurrentSession(uname);
@@ -2533,6 +2584,7 @@ function _onSupabaseReady(){
 
 // Show premium upgrade modal when user tries to access paid content
 function showPremiumGate(){
+  if(isAdmin()) return; // founder/admin always has full access — never show paywall
   var existing = document.getElementById('premiumGateModal');
   if(existing) existing.remove();
   var modal = document.createElement('div');
@@ -3105,6 +3157,122 @@ function enterApp(){
   hideLoader();
 }
 
+// Admin modal — Google OAuth (recommended path; existing onAuthStateChange handles role check)
+function doAdminGoogleLogin(){
+  var btn = document.getElementById('adminModalGoogleBtn');
+  var errEl = document.getElementById('adminModalError');
+  if(errEl) errEl.textContent = '';
+  if(!_supabaseReady || !supabase){
+    if(errEl) errEl.textContent = 'Authentication not ready — please refresh.';
+    return;
+  }
+  if(btn){ btn.disabled = true; btn.style.opacity = '0.7'; btn.childNodes[btn.childNodes.length-1].textContent = ' Connecting to Google…'; }
+  supabase.auth.signInWithOAuth({
+    provider: 'google',
+    options: { redirectTo: window.location.origin + window.location.pathname }
+  }).catch(function(){
+    if(btn){ btn.disabled = false; btn.style.opacity = '1'; }
+    if(errEl) errEl.textContent = 'Google sign-in failed. Please try again.';
+  });
+}
+
+// Admin / Teacher modal login — real Supabase auth
+async function doAdminLogin(){
+  var emailEl = document.getElementById('adminModalEmail');
+  var passEl  = document.getElementById('adminModalPassword');
+  var errEl   = document.getElementById('adminModalError');
+  var btn     = document.getElementById('adminModalSignInBtn');
+  if(!emailEl || !passEl || !errEl || !btn) return;
+
+  var email    = (emailEl.value || '').trim();
+  var password = (passEl.value  || '');
+  errEl.textContent = '';
+
+  if(!email || !password){
+    errEl.textContent = 'Please enter your email and password.';
+    return;
+  }
+  if(!supabase || !_supabaseReady){
+    errEl.textContent = 'Authentication not ready — please refresh the page.';
+    return;
+  }
+
+  var origText = btn.textContent;
+  btn.disabled = true;
+  btn.textContent = 'Signing in…';
+
+  try {
+    // 1. Supabase auth
+    var authRes = await supabase.auth.signInWithPassword({ email: email, password: password });
+    if(authRes.error){
+      errEl.textContent = 'Invalid email or password.';
+      btn.disabled = false; btn.textContent = origText;
+      return;
+    }
+
+    var userId = authRes.data.user.id;
+    var authMeta = authRes.data.user.user_metadata || {};
+    var role = null;
+    var uname    = (authMeta.preferred_username || authMeta.full_name || email.split('@')[0]).toLowerCase().replace(/\s+/g,'_');
+    var fullName = authMeta.full_name || authMeta.name || uname;
+
+    // 2a. Try profiles table by UUID
+    var profRes = await supabase.from('profiles').select('role').eq('id', userId).single();
+    if(!profRes.error && profRes.data && profRes.data.role){
+      role = profRes.data.role;
+    } else {
+      // Log actual error so we can diagnose (visible in browser console)
+      console.warn('[cloud6] doAdminLogin profiles query result:', JSON.stringify({ error: profRes.error, data: profRes.data }));
+
+      // 2b. Fallback — email/password UUID may differ from Google OAuth UUID.
+      // Check localStorage cache populated by a prior Google sign-in for the same email.
+      var allUsers = getUsers();
+      Object.keys(allUsers).forEach(function(k){
+        if(!role && allUsers[k].email === email && (allUsers[k].role === 'admin' || allUsers[k].role === 'teacher')){
+          role = allUsers[k].role;
+          uname = k;
+          fullName = allUsers[k].name || uname;
+        }
+      });
+    }
+
+    if(role !== 'admin' && role !== 'teacher'){
+      await supabase.auth.signOut();
+      errEl.textContent = role
+        ? 'This login is for administrators and teachers only.'
+        : 'No admin profile found. Try signing in with Google instead.';
+      btn.disabled = false; btn.textContent = origText;
+      return;
+    }
+    var users = getUsers();
+    if(!users[uname]) users[uname] = {};
+    users[uname].name       = fullName;
+    users[uname].email      = email;
+    users[uname].role       = role;
+    users[uname].supabaseId = userId;
+    saveUsers(users);
+    localStorage.setItem('cloud6_session', uname);
+
+    currentUser = { username: uname, name: fullName, email: email, role: role, supabaseId: userId };
+    _roleLoaded = true;
+
+    // 4. Close modal and clear fields
+    document.getElementById('adminModal').style.display = 'none';
+    emailEl.value = '';
+    passEl.value  = '';
+    errEl.textContent = '';
+    btn.disabled = false; btn.textContent = origText;
+
+    // 5. Enter the app
+    enterApp();
+
+  } catch(e){
+    console.error('[cloud6] doAdminLogin error:', e);
+    errEl.textContent = 'Something went wrong. Please try again.';
+    btn.disabled = false; btn.textContent = origText;
+  }
+}
+
 // Show auth screen (hide everything else)
 function showAuthScreen(){
   // Stop any playing audio
@@ -3163,6 +3331,11 @@ function updateUserDisplay(){
     avatar.title = currentUser.name || 'Student Profile';
     avatar.onclick = null;
   }
+  // Hide PRO badge labels on subject tabs and home cards for admins — they own everything
+  try {
+    var proBadgeEls = document.querySelectorAll('[data-i18n="ui.proBadge"]');
+    proBadgeEls.forEach(function(el){ el.style.display = isAdmin() ? 'none' : ''; });
+  } catch(e){}
 }
 
 // Check for existing session on load
@@ -3172,7 +3345,10 @@ function checkAuthSession(){
     const users = getUsers();
     if(users[session]){
       currentUser = { username: session, name: users[session].name, email: users[session].email };
-      if(users[session].role) currentUser.role = users[session].role; // use cached role immediately
+      if(users[session].role){
+        currentUser.role = users[session].role; // use cached role immediately
+        _roleLoaded = true; // cached role is good enough to unblock gates immediately
+      }
       if(users[session].supabaseId) _fetchUserRole(users[session].supabaseId); // re-verify with Supabase
       return true; // user is logged in
     }
@@ -14469,14 +14645,14 @@ function showWorkedExample(){
 
 function openLesson(lessonId){
   stopSpeech();
-  // Gate premium subjects (owner bypasses all gates)
+  // Gate premium subjects (owner/admin bypasses all gates)
   if(isPremiumSubject(currentSubject) && !isOwner() && !isPremiumUser()){
-    if(currentUser && !currentUser.role){
-      // Role still loading — wait then retry
-      _roleFetchPromise.then(function(){ openLesson(lessonId); }).catch(function(){ showPremiumGate(); });
+    if(currentUser && !_roleLoaded){
+      // Role genuinely still loading — wait once (using _roleLoaded prevents infinite loops)
+      _roleFetchPromise.then(function(){ openLesson(lessonId); }).catch(function(){ if(isAdmin()) openLesson(lessonId); else showPremiumGate(); });
       return;
     }
-    showPremiumGate();
+    if(!isAdmin()) showPremiumGate();
     return;
   }
   // Gate guests after 5 questions — require signup to continue
@@ -29872,20 +30048,30 @@ function getSubjectData(subject, grade){
       return shipData;
     })()
   };
-  return map[subject] ? map[subject][grade] : null;
+  var result = map[subject] ? map[subject][grade] : null;
+  // Admin bypass: ship-real-apps content is only mapped to grades 6-12 in the data, but the
+  // admin/founder should be able to view it at any grade level. Fall back to the grade-6 data.
+  if(!result && subject === 'ship-real-apps' && typeof isAdmin === 'function' && isAdmin()
+      && typeof APP_BUILDING !== 'undefined' && APP_BUILDING && APP_BUILDING['ship']){
+    result = APP_BUILDING['ship'];
+  }
+  return result;
 }
 
 function switchSubject(subject){
   stopSpeech();
   if(typeof timerInterval !== 'undefined' && timerInterval){ clearInterval(timerInterval); timerInterval = null; }
-  // Gate premium subjects behind payment (owner bypasses all gates)
+  // Gate premium subjects behind payment (owner/admin bypasses all gates)
   if(isPremiumSubject(subject) && !isOwner() && !isPremiumUser()){
-    if(currentUser && !currentUser.role){
-      // Role still loading from Supabase — wait for it, then retry once
-      _roleFetchPromise.then(function(){ switchSubject(subject); }).catch(function(){ showPremiumGate(); });
+    if(currentUser && !_roleLoaded){
+      // Role is genuinely still in-flight — wait once, then retry.
+      // Using _roleLoaded (not !currentUser.role) prevents an infinite microtask loop when
+      // the fetch already resolved but currentUser.role was undefined (old bug).
+      _roleFetchPromise.then(function(){ switchSubject(subject); }).catch(function(){ if(isAdmin()) switchSubject(subject); else showPremiumGate(); });
       return;
     }
-    showPremiumGate();
+    // Role is loaded — decide right now based on current state
+    if(!isAdmin()) showPremiumGate();
     return;
   }
   currentSubject = subject;
@@ -30246,8 +30432,11 @@ function initApp(){
       if(result.data && result.data.user){
         const u = result.data.user;
         const meta = u.user_metadata || {};
-        var wasGuest = !currentUser;
-        if(!currentUser){
+        // Supabase session wins when: no local user, OR local user's supabaseId doesn't match.
+        // This prevents a stale localStorage student session from overriding an active Google admin session.
+        var supabaseMatches = currentUser && currentUser.supabaseId === u.id;
+        var wasGuest = !supabaseMatches;
+        if(!supabaseMatches){
           // Build username same way as handleOAuthCallback so cache key matches
           var uname = (meta.preferred_username || meta.full_name || u.email.split('@')[0]).toLowerCase().replace(/\s+/g,'_');
           currentUser = { username: uname, name: meta.full_name || '', email: u.email, supabaseId: u.id };
@@ -37533,6 +37722,9 @@ function logoutStudent(){
   if(!confirm(confirmMsg)) return;
   // Save user's progress one final time before logout (per-user key preserved)
   saveProgress();
+  // Block any stale async auth events (e.g. pending updateUser) from re-logging in
+  _loggingOut = true;
+  setTimeout(function(){ _loggingOut = false; }, 4000); // 4s window, then re-allow login
   // Sign out of Supabase so the session token is cleared from localStorage
   // (prevents auto-login on next page load / hard refresh)
   if(supabase && _supabaseReady){
@@ -37542,7 +37734,9 @@ function logoutStudent(){
   clearCurrentSession();
   currentUser = null;
   _roleFetchPromise = Promise.resolve(); // reset role state
-  _supabaseAuthInitialized = false; // allow re-init if user logs back in same session
+  _roleLoaded = false; // allow fresh role fetch on next login
+  // NOTE: do NOT reset _supabaseAuthInitialized — the existing onAuthStateChange
+  // listener stays live so re-login on the same page (without reload) still works
   // Clear legacy progress key (per-user data stays!)
   clearProgress();
   // Reset student progress
