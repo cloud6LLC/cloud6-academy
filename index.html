@@ -30091,11 +30091,28 @@ function _adminSwitchGrade(){
 // ═══════════════════════════════════════════════════════════
 
 function initApp(){
+  // ── Check URL for password reset FIRST (before Supabase ready check) ──
+  // This runs immediately regardless of Supabase load timing.
+  var _hash = window.location.hash;
+  var _params = new URLSearchParams(window.location.search);
+  var _isRecovery = _hash.includes('type=recovery')
+    || _params.get('type') === 'recovery'
+    || _params.get('reset') === 'true';
+  if(_isRecovery){
+    showAuthScreen();
+    showResetForm();
+    // Set up Supabase listener when ready, to handle PKCE token exchange
+    if(_supabaseReady && supabase){
+      supabase.auth.onAuthStateChange(function(event, session){
+        if(event === 'PASSWORD_RECOVERY'){ showAuthScreen(); showResetForm(); }
+      });
+    }
+    return;
+  }
+
   // Handle Supabase OAuth or password reset redirect
   if(_supabaseReady && supabase){
     // ── Early listener for PKCE-style recovery (Supabase v2) ──
-    // Must be set up BEFORE handleOAuthCallback() so it fires even
-    // when the token arrives via query param (?type=recovery).
     supabase.auth.onAuthStateChange(function(event, session){
       if(event === 'PASSWORD_RECOVERY'){
         showAuthScreen();
@@ -30105,19 +30122,6 @@ function initApp(){
 
     // Check for Google OAuth callback first
     if(handleOAuthCallback()) return;
-
-    const hash = window.location.hash;
-    const params = new URLSearchParams(window.location.search);
-    // Detect both implicit-flow (#type=recovery) and PKCE-flow (?type=recovery)
-    var isRecovery = hash.includes('type=recovery')
-      || params.get('type') === 'recovery'
-      || params.get('reset') === 'true';
-    if(isRecovery){
-      // User clicked email reset link — show reset form
-      showAuthScreen();
-      showResetForm();
-      return;
-    }
     // Try to restore Supabase session
     supabase.auth.getUser().then(function(result){
       if(result.data && result.data.user && !currentUser){
