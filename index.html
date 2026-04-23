@@ -2987,6 +2987,13 @@ function doResetPasswordLocal(){
 // Enter the app after successful auth
 function enterApp(){
   document.getElementById('authScreen').style.display = 'none';
+  // Reset guest gate state — logged-in users have no limits
+  guestAnswersTotal = 0;
+  guestPromptShown = false;
+  var gm = document.getElementById('guestSignupRequiredModal');
+  if(gm) gm.remove();
+  var sm = document.getElementById('saveProgressModal');
+  if(sm) sm.remove();
   // Initialize app state
   applySavedProgress();
   document.querySelectorAll('.subject-tab').forEach(tab => {
@@ -30135,18 +30142,26 @@ function initApp(){
     if(handleOAuthCallback()) return;
     // Try to restore Supabase session
     supabase.auth.getUser().then(function(result){
-      if(result.data && result.data.user && !currentUser){
+      if(result.data && result.data.user){
         const u = result.data.user;
         const meta = u.user_metadata || {};
-        currentUser = { username: meta.username || u.email.split('@')[0], name: meta.full_name || '', email: u.email, supabaseId: u.id };
-        setCurrentSession(currentUser.username);
-        // Cache locally
-        const users = getUsers();
-        if(!users[currentUser.username]){
-          users[currentUser.username] = { name: currentUser.name, email: currentUser.email, supabaseId: u.id, createdAt: Date.now() };
-          saveUsers(users);
+        var wasGuest = !currentUser;
+        if(!currentUser){
+          // Build username same way as handleOAuthCallback so cache key matches
+          var uname = (meta.preferred_username || meta.full_name || u.email.split('@')[0]).toLowerCase().replace(/\s+/g,'_');
+          currentUser = { username: uname, name: meta.full_name || '', email: u.email, supabaseId: u.id };
+          setCurrentSession(currentUser.username);
+          // Cache locally so checkAuthSession finds them next time
+          var users = getUsers();
+          if(!users[currentUser.username]){
+            users[currentUser.username] = { name: currentUser.name, email: currentUser.email, supabaseId: u.id, createdAt: Date.now() };
+            saveUsers(users);
+          }
         }
-        _fetchUserRole(u.id); // fetch role from profiles on Supabase session restore
+        // Fetch role then enter app (enterApp resets guest gate state)
+        _fetchUserRole(u.id)
+          .then(function(){ if(wasGuest) enterApp(); else updateUserDisplay(); })
+          .catch(function(){ if(wasGuest) enterApp(); else updateUserDisplay(); });
       }
     }).catch(function(){});
   }
