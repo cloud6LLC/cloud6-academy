@@ -37509,9 +37509,16 @@ function logoutStudent(){
   if(!confirm(confirmMsg)) return;
   // Save user's progress one final time before logout (per-user key preserved)
   saveProgress();
+  // Sign out of Supabase so the session token is cleared from localStorage
+  // (prevents auto-login on next page load / hard refresh)
+  if(supabase && _supabaseReady){
+    supabase.auth.signOut().catch(function(){});
+  }
   // Clear auth session
   clearCurrentSession();
   currentUser = null;
+  _roleFetchPromise = Promise.resolve(); // reset role state
+  _supabaseAuthInitialized = false; // allow re-init if user logs back in same session
   // Clear legacy progress key (per-user data stays!)
   clearProgress();
   // Reset student progress
