@@ -586,7 +586,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
   <div class="subject-tab" data-subject="social-studies" onclick="switchSubject(&#39;social-studies&#39;)" style="padding:8px 14px;border-radius:8px;cursor:pointer;font-size:13px;font-weight:600;white-space:nowrap;transition:all 0.2s" data-i18n="ui.subjSocialLabel">
     🌍 Social Studies
   </div>
-  <div class="subject-tab" data-subject="ship-real-apps" onclick="(function(){var g=parseInt(currentGrade);if(isNaN(g)||g<6){alert(t('ui.alertShipRealApps'));return;}switchSubject('ship-real-apps');})()" style="padding:8px 14px;border-radius:8px;cursor:pointer;font-size:13px;font-weight:700;white-space:nowrap;transition:all 0.2s;background:linear-gradient(135deg,rgba(0,184,148,0.12),rgba(9,132,227,0.12));border:1px solid rgba(0,184,148,0.4);color:#00b894" data-i18n="ui.subjShipRealLabel">
+  <div class="subject-tab" data-subject="ship-real-apps" onclick="(function(){if(!isOwner()){var g=parseInt(currentGrade);if(isNaN(g)||g<6){alert(t('ui.alertShipRealApps'));return;}}switchSubject('ship-real-apps');})()" style="padding:8px 14px;border-radius:8px;cursor:pointer;font-size:13px;font-weight:700;white-space:nowrap;transition:all 0.2s;background:linear-gradient(135deg,rgba(0,184,148,0.12),rgba(9,132,227,0.12));border:1px solid rgba(0,184,148,0.4);color:#00b894" data-i18n="ui.subjShipRealLabel">
     🚀 Ship Real Apps
   </div>
   <div class="subject-tab" data-subject="recommendations" onclick="switchSubject(&#39;recommendations&#39;)" style="padding:8px 14px;border-radius:8px;cursor:pointer;font-size:13px;font-weight:600;white-space:nowrap;transition:all 0.2s" data-i18n="ui.subjRecsLabel">
@@ -1225,6 +1225,29 @@ const I18N = {
       // Alerts
       alertShipRealApps: '🚀 Ship Real Apps is for Grades 6-12! Switch to grade 6 or above to unlock.',
       alertAdminComingSoon: 'Admin login coming soon!',
+      owner_badge: 'OWNER',
+      admin_console_title: 'Admin Console',
+      admin_sec_a: '§A — Platform Stats',
+      admin_sec_b: '§B — User List',
+      admin_sec_c: '§C — Owner Controls',
+      admin_total_users: 'Total Users',
+      admin_students: 'Students',
+      admin_teachers: 'Teachers',
+      admin_admins: 'Admins',
+      admin_last7: 'New — Last 7 Days',
+      admin_last30: 'New — Last 30 Days',
+      admin_col_email: 'Email',
+      admin_col_name: 'Full Name',
+      admin_col_username: 'Username',
+      admin_col_role: 'Role',
+      admin_col_created: 'Joined',
+      admin_reset_xp: '🗑 Reset My XP',
+      admin_reset_lessons: '🗑 Reset My Lessons',
+      admin_switch_grade: 'Switch Grade',
+      admin_go: 'Go →',
+      admin_loading: 'Loading…',
+      admin_load_users: '🔄 Load User List from Supabase',
+      admin_shortcut_hint: 'Shortcut: Ctrl+Shift+A (Mac: Cmd+Shift+A)',
 
       // Question/reading flow
       readBeforeYouAnswer: '📖 Read Before You Answer',
@@ -1584,6 +1607,29 @@ const I18N = {
       // Alerts
       alertShipRealApps: '🚀 ¡Publica Apps Reales es para grados 6 a 12! Cambia al 6to grado o superior para desbloquearlo.',
       alertAdminComingSoon: '¡Acceso para administradores próximamente!',
+      owner_badge: 'PROPIETARIA',
+      admin_console_title: 'Consola de Administrador',
+      admin_sec_a: '§A — Estadísticas de la Plataforma',
+      admin_sec_b: '§B — Lista de Usuarios',
+      admin_sec_c: '§C — Controles del Propietario',
+      admin_total_users: 'Total de Usuarios',
+      admin_students: 'Estudiantes',
+      admin_teachers: 'Maestros',
+      admin_admins: 'Administradores',
+      admin_last7: 'Nuevos — Últimos 7 Días',
+      admin_last30: 'Nuevos — Últimos 30 Días',
+      admin_col_email: 'Correo',
+      admin_col_name: 'Nombre Completo',
+      admin_col_username: 'Usuario',
+      admin_col_role: 'Rol',
+      admin_col_created: 'Registro',
+      admin_reset_xp: '🗑 Restablecer mi XP',
+      admin_reset_lessons: '🗑 Restablecer mis Lecciones',
+      admin_switch_grade: 'Cambiar Grado',
+      admin_go: 'Ir →',
+      admin_loading: 'Cargando…',
+      admin_load_users: '🔄 Cargar Usuarios desde Supabase',
+      admin_shortcut_hint: 'Atajo: Ctrl+Shift+A (Mac: Cmd+Shift+A)',
 
       // Question/reading flow
       readBeforeYouAnswer: '📖 Lee Antes de Responder',
@@ -2370,6 +2416,38 @@ function isPremiumSubject(subject){
   return subject === 'app-building' || subject === 'financial-literacy';
 }
 
+// ─── OWNER / ADMIN ROLE ─────────────────────────────────────
+// Source of truth: public.profiles.role column ('student'|'teacher'|'admin').
+// Both isAdmin() and isOwner() return true when role === 'admin'.
+// Fail closed — any missing field, failed query, or missing user → false.
+function isAdmin(){
+  try { return currentUser != null && currentUser.role === 'admin'; } catch(e){ return false; }
+}
+function isOwner(){ return isAdmin(); } // alias — either name works throughout codebase
+
+// Async: fetch role from Supabase public.profiles table and cache it.
+// profiles.id is the auth user UUID (same as auth.users.id).
+// Called after every successful Supabase auth event (login, signup, OAuth, session restore).
+// On ANY query failure, role stays 'student' — fail closed.
+function _fetchUserRole(supabaseId){
+  if(!supabase || !_supabaseReady || !supabaseId) return;
+  supabase.from('profiles').select('role').eq('id', supabaseId).single()
+    .then(function(res){
+      var role = (res && res.data && res.data.role) ? res.data.role : 'student';
+      if(currentUser){ currentUser.role = role; }
+      try {
+        var us = getUsers();
+        if(currentUser && us[currentUser.username]){
+          us[currentUser.username].role = role;
+          saveUsers(us);
+        }
+      } catch(e){}
+      updateUserDisplay(); // refresh badge (OWNER pill appears for admin, Pro button for others)
+    })
+    .catch(function(){ if(currentUser && !currentUser.role) currentUser.role = 'student'; }); // fail closed
+}
+// ─────────────────────────────────────────────────────────────
+
 // Show premium upgrade modal when user tries to access paid content
 function showPremiumGate(){
   var existing = document.getElementById('premiumGateModal');
@@ -2559,6 +2637,7 @@ function doSignup(){
       document.getElementById('signupEmail').value = '';
       document.getElementById('signupPassword').value = '';
       document.getElementById('signupConfirm').value = '';
+      _fetchUserRole(result.data.user ? result.data.user.id : null); // fetch role from profiles after signup
       enterApp();
     }).catch(function(e){
       if(signupBtn){ signupBtn.textContent = 'Create Account'; signupBtn.disabled = false; }
@@ -2663,6 +2742,7 @@ function handleOAuthCallback(){
             }
           });
         }
+        _fetchUserRole(u.id); // fetch role from profiles after Google OAuth login
         enterApp();
       }
     }).catch(function(){ showAuthScreen(); });
@@ -2721,6 +2801,7 @@ function doLogin(){
         }
       });
 
+      _fetchUserRole(user.id); // fetch role from profiles after Supabase email/password login
       enterApp();
     }).catch(function(e){
       if(loginBtn){ loginBtn.textContent = 'Sign In'; loginBtn.disabled = false; }
@@ -2938,7 +3019,9 @@ function updateUserDisplay(){
   const initial = currentUser.name ? currentUser.name.charAt(0).toUpperCase() : 'S';
   if(avatar){
     avatar.innerHTML = `
-      <div onclick="showPricingScreen()" style="padding:5px 10px;border-radius:16px;background:linear-gradient(135deg,#00b894,#00cec9);color:#fff;font-size:11px;font-weight:700;cursor:pointer;white-space:nowrap;box-shadow:0 2px 6px rgba(0,184,148,0.3)">⭐ Pro</div>
+      ${isAdmin()
+        ? '<div onclick="showAdminConsole()" title="' + t('ui.admin_shortcut_hint') + '" style="padding:4px 10px;border-radius:12px;background:rgba(255,255,255,0.25);color:#fff;font-size:11px;font-weight:700;cursor:pointer;white-space:nowrap">' + t('ui.owner_badge') + '</div>'
+        : '<div onclick="showPricingScreen()" style="padding:5px 10px;border-radius:16px;background:linear-gradient(135deg,#00b894,#00cec9);color:#fff;font-size:11px;font-weight:700;cursor:pointer;white-space:nowrap;box-shadow:0 2px 6px rgba(0,184,148,0.3)">⭐ Pro</div>'}
       <div style="background:rgba(0,184,148,0.12);color:#00b894;padding:5px 10px;border-radius:16px;font-size:11px;font-weight:700;white-space:nowrap">⭐ ${totalXP} XP</div>
       <div onclick="showProfile()" style="width:32px;height:32px;border-radius:50%;background:#00b894;color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;font-weight:700;font-size:13px;flex-shrink:0">${initial}</div>
     `;
@@ -2955,6 +3038,8 @@ function checkAuthSession(){
     const users = getUsers();
     if(users[session]){
       currentUser = { username: session, name: users[session].name, email: users[session].email };
+      if(users[session].role) currentUser.role = users[session].role; // use cached role immediately
+      if(users[session].supabaseId) _fetchUserRole(users[session].supabaseId); // re-verify with Supabase
       return true; // user is logged in
     }
     clearCurrentSession(); // stale session
@@ -14250,13 +14335,13 @@ function showWorkedExample(){
 
 function openLesson(lessonId){
   stopSpeech();
-  // Gate premium subjects
-  if(isPremiumSubject(currentSubject) && !isPremiumUser()){
+  // Gate premium subjects (owner bypasses all gates)
+  if(!isOwner() && isPremiumSubject(currentSubject) && !isPremiumUser()){
     showPremiumGate();
     return;
   }
   // Gate guests after 5 questions — require signup to continue
-  if(!currentUser && guestAnswersTotal >= 5){
+  if(!isOwner() && !currentUser && guestAnswersTotal >= 5){
     showGuestSignupRequired();
     return;
   }
@@ -15942,21 +16027,21 @@ Object.assign(CATEGORY_TRANSLATIONS_ES, {
 
 Object.assign(LESSON_TRANSLATIONS_ES, {
   // ─── APP BUILDING 2 (titles + taglines) ───
-  'app-building:ab2a1': { title: 'Partes de una App', tagline: '¡Las apps están hechas de varias piezas que trabajan juntas!' },
-  'app-building:ab2a2': { title: 'Por Qué Algunas Apps Son Populares', tagline: '¡Las buenas apps resuelven problemas reales muy bien!' },
-  'app-building:ab2a3': { title: 'Distintos Tipos de Apps', tagline: '¡Las apps vienen en muchas categorías!' },
-  'app-building:ab2b1': { title: 'Necesidades vs. Deseos', tagline: '¡Las apps inteligentes se enfocan primero en las NECESIDADES!' },
-  'app-building:ab2b2': { title: 'Personas de Usuario (Para Quién Estás Construyendo)', tagline: '¡Diseña para alguien ESPECÍFICO!' },
-  'app-building:ab2b3': { title: 'Hacer Apps Fáciles de Usar', tagline: '¡La simplicidad es poderosa!' },
-  'app-building:ab2c1': { title: 'Maneras en que las Apps Ganan Dinero', tagline: '¡Las apps usan distintos modelos de negocio!' },
-  'app-building:ab2c2': { title: 'Anuncios en las Apps', tagline: '¡Los anuncios ayudan a que las apps gratuitas ganen dinero!' },
-  'app-building:ab2c3': { title: 'Compras Dentro de la App', tagline: '¡Funciones extra que puedes comprar!' },
-  'app-building:ab2d1': { title: 'Planea Tu Idea de App', tagline: '¡Un buen plan = mejor construcción!' },
-  'app-building:ab2d2': { title: 'Dibuja las Pantallas de Tu App', tagline: '¡Dibuja antes de programar!' },
-  'app-building:ab2d3': { title: 'Construye Paso a Paso', tagline: '¡Divide los proyectos grandes en pasos pequeños!' },
-  'app-building:ab2e1': { title: 'Aprende a Programar Ya', tagline: '¡Puedes empezar a aprender en cualquier momento!' },
-  'app-building:ab2e2': { title: 'El Camino para Ser Programador de Apps', tagline: '¡Así se llega a ser programador de apps!' },
-  'app-building:ab2e3': { title: '¡Sigue Soñando en Grande!', tagline: '¡Tu app podría cambiar el mundo!' },
+  'app-building:ab2a1': { title: 'Partes de una App', tagline: '¡Las apps están hechas de varias piezas que trabajan juntas!', intro: 'Las apps tienen pantallas (la parte que ves), botones (cosas que tocas), datos (información que recuerda) y lógica (cómo decide qué hacer). ¡Todas estas partes trabajan juntas para que la app funcione! Entender las partes te ayuda a construir mejores apps.', keyPoints: ['Pantallas = lo que ven los usuarios', 'Botones = controles del usuario', 'Datos = información guardada', 'Lógica = cómo piensa la app', 'Las partes trabajan juntas perfectamente'], funFact: '🧩 ¡Una app simple puede tener 5 partes. Las apps complejas tienen miles!' },
+  'app-building:ab2a2': { title: 'Por Qué Algunas Apps Son Populares', tagline: '¡Las buenas apps resuelven problemas reales muy bien!', intro: 'Algunas apps consiguen 100 millones de descargas. Otras consiguen cero. ¿La diferencia? Las apps populares: 1) Resuelven un problema real. 2) Lo hacen de manera hermosa. 3) Hacen felices a los usuarios. 4) Siguen mejorando. ¡Esas cuatro cosas = éxito!', keyPoints: ['Resolver un problema real', 'Resolverlo mejor que los demás', 'Hacer la experiencia hermosa', 'Seguir agregando mejoras', 'Escuchar los comentarios de los usuarios'], funFact: '⭐ ¡Instagram tuvo éxito porque hizo que compartir fotos fuera FÁCIL y hermoso!' },
+  'app-building:ab2a3': { title: 'Distintos Tipos de Apps', tagline: '¡Las apps vienen en muchas categorías!', intro: 'Juegos, redes sociales, productividad, salud, educación — existen apps para todo. Cada tipo tiene diferentes objetivos y funciones. Un juego intenta ser DIVERTIDO. Una app de productividad intenta ser EFICIENTE. ¡Entender los tipos de apps te ayuda a diseñar mejor!', keyPoints: ['Juegos = entretenimiento', 'Social = conexión', 'Productividad = hacer las cosas', 'Educación = aprendizaje', 'Salud = bienestar'], funFact: '📊 ¡Cada año nacen nuevas categorías de apps!' },
+  'app-building:ab2b1': { title: 'Necesidades vs. Deseos', tagline: '¡Las apps inteligentes se enfocan primero en las NECESIDADES!', intro: 'Los usuarios NECESITAN mapas para encontrar lugares. Los usuarios QUIEREN filtros hermosos. Las buenas apps se enfocan en resolver necesidades, luego agregan deseos. ¡Si tu app está llena de cosas geniales pero no resuelve el problema principal, la gente no la usará!', keyPoints: ['Necesidades = el problema principal', 'Deseos = extras agradables', 'Siempre resuelve primero las necesidades', 'Luego agrega deseos divertidos', 'No dejes que los deseos distraigan de las necesidades'], funFact: '⚖️ ¡La NECESIDAD de Instagram: compartir fotos. El DESEO: filtros geniales. ¡Los dos están ahí!' },
+  'app-building:ab2b2': { title: 'Personas de Usuario (Para Quién Estás Construyendo)', tagline: '¡Diseña para alguien ESPECÍFICO!', intro: 'Los diseñadores profesionales crean "personas" — personas inventadas que representan usuarios reales. Ejemplo: "Sara, 10 años, le encanta jugar, se aburre con tutoriales largos." ¡Diseña específicamente para SARA, no para "todos"! Esto hace mejores apps.', keyPoints: ['Crea usuarios ficticios pero realistas', 'Dales nombres y edades', 'Comprende sus problemas', 'Diseña específicamente para ellos', 'Esto supera diseñar para todos en general'], funFact: '👥 ¡Netflix tiene personas detalladas para diferentes tipos de espectadores!' },
+  'app-building:ab2b3': { title: 'Hacer Apps Fáciles de Usar', tagline: '¡La simplicidad es poderosa!', intro: 'Las mejores apps son SIMPLES. No tienes que pensar mucho. Los botones son obvios. La navegación tiene sentido. Cuando una app es fácil, a todos les encanta. ¡Fácil no es flojo — lo fácil requiere un GRAN diseño!', keyPoints: ['Simple > complicado', 'Botones y menús obvios', 'Instrucciones claras cuando se necesitan', 'Pruébala con otras personas', 'Si los niños pueden usarla, los adultos también'], funFact: '🎯 ¡El mejor diseño es INVISIBLE — simplemente sabes qué hacer!' },
+  'app-building:ab2c1': { title: 'Maneras en que las Apps Ganan Dinero', tagline: '¡Las apps usan distintos modelos de negocio!', intro: 'Algunas apps son gratis (ganan dinero con anuncios). Algunas cuestan dinero por adelantado. Algunas son gratis pero cobran por extras. Algunas tienen suscripciones. ¡Entender cómo ganan dinero las apps te ayuda a planear el futuro de TU app!', keyPoints: ['Gratis con anuncios = monetizar con publicidad', 'Apps de pago = cobrar por adelantado', 'Gratis con compras dentro de la app = gratis, pero pagas por extras', 'Suscripciones = pagar mensual o anual', 'Elige el modelo que se adapte a tu app'], funFact: '💵 ¡La mayoría de las apps exitosas usan múltiples estrategias para ganar dinero!' },
+  'app-building:ab2c2': { title: 'Anuncios en las Apps', tagline: '¡Los anuncios ayudan a que las apps gratuitas ganen dinero!', intro: 'Has visto anuncios en las apps gratuitas. ¡Esos anuncios son la forma en que la app gana dinero! Las empresas pagan al desarrollador para mostrar anuncios. Así es como YouTube, Instagram y muchas otras apps siguen siendo gratis. Anuncios = dinero. Dinero = los desarrolladores pueden seguir mejorando.', keyPoints: ['Los anuncios financian las apps gratuitas', 'Las empresas pagan por espacio publicitario', 'Los usuarios ven anuncios, los desarrolladores ganan', 'Más usuarios = anuncios más valiosos', 'El diseño de los anuncios es importante'], funFact: '📺 ¡La función más famosa de YouTube surgió gracias a los ingresos publicitarios!' },
+  'app-building:ab2c3': { title: 'Compras Dentro de la App', tagline: '¡Funciones extra que puedes comprar!', intro: 'En los juegos, compras monedas, apariencias o mejoras. En las apps, puedes comprar más funciones. Estas son las compras dentro de la app. ¡Juego gratis + comprar mejoras = el desarrollador gana dinero Y tú puedes probarlo gratis!', keyPoints: ['Compras dentro de la app = extras opcionales', 'Los cosméticos (apariencias, colores) son populares', 'Las mejoras hacen los juegos más fáciles', 'Las funciones premium desbloquean más', 'Las buenas apps hacen que las compras sean justas y opcionales'], funFact: '🎁 ¡Clash of Clans gana millones al día con compras dentro de la app!' },
+  'app-building:ab2d1': { title: 'Planea Tu Idea de App', tagline: '¡Un buen plan = mejor construcción!', intro: 'Antes de programar, escribe un plan: ¿Qué hace tu app? ¿Quién la usa? ¿Qué problema resuelve? ¿Cuáles son las pantallas principales? ¡Un plan simple ahorra HORAS de tiempo de construcción! Los desarrolladores profesionales pasan semanas planificando.', keyPoints: ['Escribe qué hace tu app', 'Describe quién la usa', 'Enumera las pantallas principales', 'Explica las funciones principales', 'Planifica antes de construir'], funFact: '📋 ¡Los grandes constructores pasan el 30% del tiempo planificando y el 70% construyendo!' },
+  'app-building:ab2d2': { title: 'Dibuja las Pantallas de Tu App', tagline: '¡Dibuja antes de programar!', intro: 'Dibuja las pantallas principales de tu app. ¿Dónde van los botones? ¿Dónde está el título? ¿Qué información se muestra? Estos bocetos son tu plano. No necesitas computadora — solo papel y lápiz. ¡Los bocetos previenen errores más adelante!', keyPoints: ['Dibuja cada pantalla principal', 'Marca dónde van los botones y el texto', 'Haz bocetos rápidos y básicos', 'Muestra el flujo entre pantallas', 'Los bocetos ahorran tiempo de construcción'], funFact: '✏️ ¡La primera versión de Facebook fue dibujada en una servilleta!' },
+  'app-building:ab2d3': { title: 'Construye Paso a Paso', tagline: '¡Divide los proyectos grandes en pasos pequeños!', intro: 'No intentes construir toda la app de una vez. Divídela en partes pequeñas: 1) Construye la pantalla de inicio. 2) Haz que funcionen los botones. 3) Agrega la segunda pantalla. 4) Conéctalas. ¡Pasos pequeños = progreso más rápido y menos errores!', keyPoints: ['Divide los proyectos grandes en pasos', 'Construye una pantalla a la vez', 'Prueba cada parte a medida que avanzas', 'Celebra los pequeños logros', 'Pasos pequeños = éxito'], funFact: '🔨 ¡Los desarrolladores profesionales construyen en pasos pequeñísimos!' },
+  'app-building:ab2e1': { title: 'Aprende a Programar Ya', tagline: '¡Puedes empezar a aprender en cualquier momento!', intro: '¡Puedes COMENZAR a aprender a programar AHORA MISMO! Sitios web como Code.org, Scratch y otros enseñan a niños de tu edad. Los juegos, acertijos y proyectos divertidos te enseñan programación real. ¡Para cuando seas adolescente, podrías estar construyendo apps reales!', keyPoints: ['Aprender a programar es para todos', 'Empieza con herramientas divertidas como Scratch', 'Code.org tiene lecciones geniales', 'Aprender requiere paciencia', 'Puedes aprender a tu propio ritmo'], funFact: '💻 ¡El programador autodidacta más joven tenía 7 años!' },
+  'app-building:ab2e2': { title: 'El Camino para Ser Programador de Apps', tagline: '¡Así se llega a ser programador de apps!', intro: 'Camino: 1) Aprende los conceptos básicos de programación (7-12 años). 2) Construye proyectos pequeños (12-16 años). 3) Únete a comunidades (cualquier edad). 4) Construye apps reales (adolescentes+). 5) Publica (cuando estés listo). 6) Márketing (haz crecer tu base de usuarios). ¡Toma tiempo, pero es POSIBLE!', keyPoints: ['Aprende primero los fundamentos de programación', 'Construye proyectos pequeños para practicar', 'Únete a comunidades de programación', 'No te compares con los demás', 'Celebra tu progreso'], funFact: '🛤️ ¡Todos los desarrolladores de apps siguieron un camino similar!' },
+  'app-building:ab2e3': { title: '¡Sigue Soñando en Grande!', tagline: '¡Tu app podría cambiar el mundo!', intro: 'A lo largo de la historia, los niños han tenido ideas que se convirtieron en apps que cambiaron el mundo. ¡Tú podrías ser el siguiente! Sigue aprendiendo, mantén la curiosidad, construye cosas, recibe retroalimentación y mejora. La grandeza viene de la pasión + la práctica. ¡TUS ideas importan!', keyPoints: ['Tus ideas pueden hacerse realidad', 'La persistencia supera la perfección', 'La retroalimentación te hace mejor', 'Las pequeñas ideas crecen hasta convertirse en grandes', 'Nunca dejes de aprender y construir'], funFact: '✨ ¡Al fundador de Instagram le dijeron que su idea era un mal clon. ¡Ahora es una de las empresas más valiosas de la historia!' },
 
   // ─── FINANCIAL LITERACY 2 ───
   'financial-literacy:fl2a1': { title: 'Billetes y Monedas Trabajando Juntos', tagline: '¡Mezcla billetes y monedas!' },
@@ -16197,21 +16282,21 @@ Object.assign(CATEGORY_TRANSLATIONS_ES, {
 
 Object.assign(LESSON_TRANSLATIONS_ES, {
   // ─── APP BUILDING 3 ───
-  'app-building:ab3a1': { title: '¿Qué Es una App?', tagline: '¡Las apps son ayudantes en tu teléfono!' },
-  'app-building:ab3a2': { title: '¡Los Problemas Son Ideas para Apps!', tagline: 'Cada gran app empezó como un problema.' },
-  'app-building:ab3a3': { title: 'La App de Mis Sueños', tagline: '¿Qué app quisieras TÚ que existiera?' },
-  'app-building:ab3b1': { title: '¿Cómo Se Ven las Apps?', tagline: '¡Todas las apps comparten las mismas partes básicas!' },
-  'app-building:ab3b2': { title: 'Los Colores Cuentan una Historia', tagline: '¡Los colores hacen SENTIR cosas!' },
-  'app-building:ab3b3': { title: 'Diseña Tu Primera Pantalla', tagline: '¡Dibújala antes de construirla!' },
-  'app-building:ab3c1': { title: '¿Qué Es el Vibe Coding?', tagline: '¡Le dices a la IA qué construir y ella lo hace por ti!' },
-  'app-building:ab3c2': { title: 'Háblale a la IA Como a un Amigo', tagline: '¡Mejores palabras, mejor app!' },
-  'app-building:ab3c3': { title: '¡Construye Tu Primera Mini App!', tagline: '¡Vamos a construir algo juntos!' },
-  'app-building:ab3d1': { title: '¿Qué Es el App Store?', tagline: '¡Es como una tienda gigante de apps!' },
-  'app-building:ab3d2': { title: 'Apps Gratis vs. Apps de Pago', tagline: '¿Cómo ganan dinero las apps GRATIS?' },
-  'app-building:ab3d3': { title: 'Reseñas y Calificaciones', tagline: '¡Las estrellas ayudan a decidir si descargar!' },
-  'app-building:ab3e1': { title: 'Cuéntales de Tu App a Tus Amigos', tagline: '¡Corre la voz!' },
-  'app-building:ab3e2': { title: 'El Nombre de Tu App Importa', tagline: '¡Un buen nombre se te queda en la cabeza!' },
-  'app-building:ab3e3': { title: 'Show and Tell: Tu Pitch de App', tagline: '¡Explica tu app en 10 segundos!' },
+  'app-building:ab3a1': { title: '¿Qué Es una App?', tagline: '¡Las apps son ayudantes en tu teléfono!', intro: 'Una app es un programa en tu teléfono o tableta que te ayuda a hacer algo. Cuando juegas un juego, ves un video o hablas con un amigo, ¡estás usando una app! Las apps son construidas por personas comunes que tuvieron una gran idea.', keyPoints: ['Las apps son herramientas que viven en teléfonos y tabletas', 'Alguien tuvo que CONSTRUIR cada app que usas', 'Los juegos, videos y mensajes son todos apps', '¡TÚ también puedes aprender a construir apps!'], funFact: '🤯 ¡Hay más de 1.8 MILLONES de apps en el App Store de Apple ahora mismo! Y cada una comenzó como solo una IDEA en la cabeza de alguien.' },
+  'app-building:ab3a2': { title: '¡Los Problemas Son Ideas para Apps!', tagline: 'Cada gran app empezó como un problema.', intro: 'Cada app que te gusta comenzó porque alguien tenía un PROBLEMA. ¿No puedes encontrar un viaje? ¡Uber! ¿Quieres compartir fotos? ¡Instagram! ¿No puedes recordar la tarea? ¡Una app rastreadora de tareas! Mira a tu alrededor — los problemas están EN TODAS PARTES, y cada uno podría ser TU idea de app.', keyPoints: ['Las mejores apps resuelven problemas reales', 'Fíjate en lo que te molesta — ¡esa es una idea de app!', 'Los problemas en la escuela, el hogar o con amigos son grandes puntos de partida', 'Problemas simples = apps simples = grandes primeros proyectos'], funFact: '💡 ¡Los fundadores de Airbnb estaban quebrados y no podían pagar el alquiler. Pusieron colchones de aire en el suelo y los alquilaron. ¡Ese problema se convirtió en una empresa de 75 MIL MILLONES de dólares!' },
+  'app-building:ab3a3': { title: 'La App de Mis Sueños', tagline: '¿Qué app quisieras TÚ que existiera?', intro: 'Cierra los ojos y piensa: ¿qué es algo que te molesta? Quizás pierdes tus juguetes, olvidas alimentar a tu mascota o no puedes decidir qué juego jugar. ¡ESA frustración es la semilla de tu primera idea de app!', keyPoints: ['Piensa en TU vida cotidiana — ¿qué te molesta?', 'Pregunta a tus amigos qué apps desearían que existieran', 'Las mejores ideas parecen obvias DESPUÉS de que alguien las construye', '¡Anota tus ideas para no olvidarlas!'], funFact: '🚀 ¡Una niña de 7 años programó su primera app para ayudar a su abuela a recordar tomar su medicina. Ganó un premio! ¡Nunca eres demasiado joven para construir algo increíble!' },
+  'app-building:ab3b1': { title: '¿Cómo Se Ven las Apps?', tagline: '¡Todas las apps comparten las mismas partes básicas!', intro: 'Abre cualquier app en tu teléfono y notarás que todas tienen partes similares: un encabezado en la parte superior con el nombre de la app, botones que puedes tocar, imágenes y texto en el medio, y generalmente una barra en la parte inferior para cambiar entre secciones.', keyPoints: ['La parte superior de una app generalmente muestra el nombre', 'El medio muestra el contenido principal', 'Los botones te permiten HACER cosas', 'La barra inferior te ayuda a navegar entre secciones'], funFact: '✏️ ¡Los diseñadores de Apple dibujan ideas de apps en PAPEL primero antes de tocar una computadora! ¡Hasta las apps de miles de millones de dólares comienzan como dibujos a lápiz!' },
+  'app-building:ab3b2': { title: 'Los Colores Cuentan una Historia', tagline: '¡Los colores hacen SENTIR cosas!', intro: '¿Sabías que los colores te hacen sentir emociones diferentes? El azul hace que las personas se sientan tranquilas y seguras (¡por eso Facebook y Twitter son azules!). El rojo hace que las personas se sientan emocionadas. El verde significa avance o salud. ¡Cuando diseñas tu app, los colores que eliges importan MUCHO!', keyPoints: ['Azul = confianza, calma (Facebook, Twitter)', 'Rojo = emocionante, urgente (YouTube, Netflix)', 'Verde = saludable, avance (Spotify, WhatsApp)', 'Amarillo = feliz, energético (Snapchat)', 'Morado = creativo, especial (Twitch)'], funFact: '🎨 ¡Los restaurantes de comida rápida usan rojo y amarillo porque esos colores hacen que la gente tenga HAMBRE y quiera comer RÁPIDO! ¡Cada elección de color es intencional!' },
+  'app-building:ab3b3': { title: 'Diseña Tu Primera Pantalla', tagline: '¡Dibújala antes de construirla!', intro: 'Antes de construir una app, los diseñadores hacen bocetos rápidos llamados wireframes. Un wireframe es como un plano — muestra dónde va todo en la pantalla sin preocuparse todavía por los colores o las imágenes. ¡Puedes dibujar uno ahora mismo en papel!', keyPoints: ['Un wireframe es un boceto simple de la pantalla de tu app', 'Usa cajas para imágenes, líneas para texto', 'Muestra dónde van los botones', '¡No necesitas ser artista — los dibujos de palitos están bien!', 'Los diseñadores profesionales hacen esto para cada app'], funFact: '📱 ¡El iPhone original fue diseñado dibujando CIENTOS de bocetos en papel. Steve Jobs rechazó la mayoría. ¡El que eligió cambió el mundo!' },
+  'app-building:ab3c1': { title: '¿Qué Es el Vibe Coding?', tagline: '¡Le dices a la IA qué construir y ella lo hace por ti!', intro: 'El vibe coding es la nueva y más genial forma de construir apps. En lugar de escribir código de computadora complicado, ¡simplemente DESCRIBES lo que quieres en lenguaje común y la IA lo construye por ti! Es como tener un ayudante mágico que convierte tus palabras en apps reales.', keyPoints: ['El vibe coding significa describir a la IA lo que quieres', '¡La IA entiende el lenguaje simple — no se necesita código!', 'Cuanto mejor lo describes, mejor queda la app', '¡Empresas reales se están construyendo así AHORA MISMO!'], funFact: '⚡ ¡El CEO de Nvidia dijo que la IA creará a los JÓVENES MILLONARIOS más jóvenes de la historia! ¡Niños como tú que aprenden a construir con IA ahora tendrán una ventaja enorme!' },
+  'app-building:ab3c2': { title: 'Háblale a la IA Como a un Amigo', tagline: '¡Mejores palabras, mejor app!', intro: 'Cuando hablas con la IA para construir tu app, necesitas ser ESPECÍFICO. Decir "hazme una app" no funcionará bien. Pero decir "hazme una app azul de seguimiento de mascotas con un botón grande que dice Agregar Mi Mascota" — ¡ESO obtiene resultados increíbles! Es como ordenar comida: "Quiero comida" vs "Quiero una pizza de queso con pepperoni".', keyPoints: ['Sé específico sobre QUÉ hace la app', 'Dile a la IA sobre los colores que quieres', 'Describe los botones y lo que hacen', 'Di PARA QUIÉN es la app', '¡Siempre puedes decirle a la IA que cambie las cosas!'], funFact: '🧠 ¡La habilidad de hablar con la IA se llama "ingeniería de prompts" — y las empresas pagan más de 100,000 dólares al año a quienes son buenos en ello! ¡Estás aprendiendo una habilidad laboral REAL ahora mismo!' },
+  'app-building:ab3c3': { title: '¡Construye Tu Primera Mini App!', tagline: '¡Vamos a construir algo juntos!', intro: '¡Es hora de ver la magia! Vamos a usar nuestro constructor de apps con IA para crear una app sencilla de seguimiento de mascotas. Escribirás lo que quieres y verás cómo aparece en la vista previa del teléfono. ¿Listo? ¡Vamos!', keyPoints: ['Escribe tu descripción en el cuadro de chat', 'Observa cómo se actualiza la vista previa del teléfono', 'Puedes seguir mejorándola con más prompts', '¡No hay respuesta incorrecta — sé creativo!'], funFact: '🎮 ¡El juego Flappy Bird fue creado por UNA sola persona y ganaba 50,000 dólares AL DÍA con anuncios! ¡Las apps simples pueden ganar dinero real!' },
+  'app-building:ab3d1': { title: '¿Qué Es el App Store?', tagline: '¡Es como una tienda gigante de apps!', intro: 'El App Store es donde la gente va a descargar apps en sus iPhones e iPads. ¡Es como un centro comercial gigante, pero en lugar de ropa y juguetes, está lleno de APPS! Cuando construyes una app, el App Store es donde la gente la encontrará y la descargará.', keyPoints: ['El App Store de Apple tiene más de 1.8 millones de apps', 'Google tiene el Play Store para teléfonos Android', 'Algunas apps son gratis, otras cuestan dinero', 'La gente lee reseñas antes de descargar', '¡El App Store abrió en 2008 con solo 500 apps!'], funFact: '📱 ¡El primer App Store del iPhone tenía solo 500 apps. Ahora tiene 1.8 MILLONES. ¡Eso significa que todavía hay lugar para TU idea de app!' },
+  'app-building:ab3d2': { title: 'Apps Gratis vs. Apps de Pago', tagline: '¿Cómo ganan dinero las apps GRATIS?', intro: '¿Alguna vez te preguntaste: si una app es gratis, ¿cómo gana dinero quien la hizo? En realidad hay formas ASTUTAS (¡pero inteligentes!) en que las apps gratuitas ganan dinero. Algunas muestran anuncios. Algunas te permiten comprar extras dentro de la app. ¡Algunas te dan una versión gratuita pero cobran por las funciones geniales!', keyPoints: ['Gratis + Anuncios: gratis para usar pero muestra publicidad', 'Freemium: versión básica gratis, paga por funciones premium', 'Suscripción: paga cada mes (como Netflix)', 'Compra única: paga una vez para descargar', '¡Compras dentro de la app: compra extras adentro (como skins de Fortnite!)'], funFact: '🎮 ¡Fortnite es GRATIS para descargar pero gana más de 5 MIL MILLONES de dólares al año! ¡Que sea gratis no significa que el creador no gane dinero!' },
+  'app-building:ab3d3': { title: 'Reseñas y Calificaciones', tagline: '¡Las estrellas ayudan a decidir si descargar!', intro: 'Cuando buscas una app, ¿qué es lo primero que revisas? ¡Las ESTRELLAS! Una app de 5 estrellas parece genial, y una de 1 estrella parece terrible. Las reseñas y calificaciones son muy importantes porque ayudan a otras personas a decidir si tu app es buena.', keyPoints: ['Las apps se califican del 1 al 5 estrellas', 'Más estrellas = más personas la descargan', 'La gente escribe reseñas compartiendo lo que le gusta y lo que no', 'Usuarios felices = buenas reseñas = más descargas', '¡Siempre debes intentar que tu app obtenga 5 estrellas!'], funFact: '⭐ ¡Las apps con 4.5+ estrellas reciben 4 veces más descargas que las apps con 3 estrellas! ¡Una estrella más puede significar MILLONES de usuarios más!' },
+  'app-building:ab3e1': { title: 'Cuéntales de Tu App a Tus Amigos', tagline: '¡Corre la voz!', intro: 'Construiste una app increíble — ¡pero qué pasa si nadie lo sabe? Ahí es donde entra el MÁRKETING. El márketing simplemente significa contarle a la gente sobre tu app y entusiasmarla para que la pruebe. ¿La forma más fácil? ¡Empieza con tus amigos y familiares!', keyPoints: ['Márketing = contarle a la gente sobre tu app', 'Empieza con amigos y familiares', 'Muéstrale a la gente cómo tu app les ayuda', 'Haz un video divertido mostrando lo que hace', 'El boca a boca es el márketing más poderoso'], funFact: '📱 ¡WhatsApp creció hasta 1 MIL MILLONES de usuarios con CERO publicidad. No gastaron ni un solo dólar en anuncios. ¡La gente simplemente se lo contó a sus amigos!' },
+  'app-building:ab3e2': { title: 'El Nombre de Tu App Importa', tagline: '¡Un buen nombre se te queda en la cabeza!', intro: '¿Qué suena mejor: "Aplicación de Compartir Fotos y Videos Sociales" o "Instagram"? El NOMBRE de tu app es lo primero que la gente ve. Un gran nombre es corto, pegadizo e insinúa lo que hace la app. Instagram = Instant + Telegram. Snapchat = Snap + Chat. ¿Ves el patrón?', keyPoints: ['Hazlo corto — 1 o 2 palabras es lo mejor', 'Tu nombre debe insinuar lo que hace la app', 'Hazlo fácil de escribir y recordar', 'Verifica que nadie más esté usando el nombre', '¿Lo dices en voz alta — suena bien?'], funFact: '🍎 ¡Steve Jobs casi llamó a Apple "Matrix Electronics"! ¡Imagínate decir "Necesito cargar mi Matrix"! ¡Menos mal que eligieron Apple!' },
+  'app-building:ab3e3': { title: 'Show and Tell: Tu Pitch de App', tagline: '¡Explica tu app en 10 segundos!', intro: 'Imagina que alguien pregunta "¿Qué hace tu app?" y solo tienes 10 segundos para responder. Esa explicación rápida se llama PITCH. Los mejores pitches son muy simples. El pitch de Uber fue: "Presiona un botón, consigue un viaje." ¡Solo son 6 palabras!', keyPoints: ['Un pitch explica tu app en una oración', 'Incluye QUÉ hace y PARA QUIÉN es', 'Practícalo diciendo en voz alta', 'Si tu abuela puede entenderlo, está bien', '¡Mantenlo en menos de 10 palabras si puedes!'], funFact: '💡 ¡El pitch original de Airbnb fue: "Reserva habitaciones con locales en lugar de hoteles". ¡Solo 8 palabras describieron una empresa de 75 MIL MILLONES de dólares!' },
 
   // ─── FINANCIAL LITERACY 3 ───
   'financial-literacy:3A1': { title: 'Puedo Ser el Jefe', tagline: 'No tienes que esperar a que alguien te dé dinero' },
@@ -18738,21 +18823,21 @@ Object.assign(CATEGORY_TRANSLATIONS_ES, {
 
 Object.assign(LESSON_TRANSLATIONS_ES, {
   // ─── App Building Grade 4 ───
-  'app-building:ab4a1': { title: 'Ve la Necesidad, Cubre la Necesidad', tagline: '¡Las personas exitosas encuentran problemas y los resuelven!' },
-  'app-building:ab4a2': { title: '¿Quién Tiene Este Problema?', tagline: '¡Conocer a tu usuario = construir una mejor app!' },
-  'app-building:ab4a3': { title: '5 Ideas de App en 5 Minutos', tagline: '¡Lluvia de ideas rápida — no lo pienses de más!' },
-  'app-building:ab4b1': { title: 'Las Pantallas de la App Son Como Cuartos', tagline: '¡Cada pantalla tiene un propósito!' },
-  'app-building:ab4b2': { title: 'Botones Que Tienen Sentido', tagline: '¡Los buenos botones te dicen qué hacen!' },
-  'app-building:ab4b3': { title: 'Hazla Bonita (Diseño de Interfaz)', tagline: '¡Las apps bonitas tienen más descargas!' },
-  'app-building:ab4c1': { title: 'Tu Primer Prompt para la IA', tagline: '¡Las palabras se vuelven apps — como magia!' },
-  'app-building:ab4c2': { title: 'Haz que la IA Cambie Cosas', tagline: '¿No te gusta? ¡Dile a la IA que lo arregle!' },
-  'app-building:ab4c3': { title: 'Construir Varias Pantallas', tagline: '¡Las apps reales tienen más de una pantalla!' },
-  'app-building:ab4d1': { title: 'Cómo Llegan las Apps a la Tienda', tagline: '¡Hay un proceso para publicar tu app!' },
-  'app-building:ab4d2': { title: 'Tu Página en el App Store', tagline: '¡Esto es lo que la gente ve antes de descargar!' },
-  'app-building:ab4d3': { title: 'TestFlight: ¡Que tus Amigos la Prueben Primero!', tagline: '¡Prueba tu app con personas reales antes de publicarla!' },
-  'app-building:ab4e1': { title: 'Hacer un Ícono Genial para la App', tagline: '¡Tu ícono es la cara de tu app!' },
-  'app-building:ab4e2': { title: 'Conseguir tus Primeros 100 Usuarios', tagline: '¡100 usuarios es el número mágico!' },
-  'app-building:ab4e3': { title: 'Lo Que Hace que la Gente SIGA Usando tu App', tagline: '¡Las descargas no importan si la gente la borra!' },
+  'app-building:ab4a1': { title: 'Ve la Necesidad, Cubre la Necesidad', tagline: '¡Las personas exitosas encuentran problemas y los resuelven!', intro: 'Los empresarios exitosos tienen algo en común: VEN problemas que otros ignoran y CONSTRUYEN soluciones. Cuando ves una larga fila en una tienda, eso es un problema. Cuando ves a tu mamá luchando para encontrar recetas, eso es un problema. ¡Cada problema es una oportunidad de negocio!', keyPoints: ['Los emprendedores buscan problemas en todas partes', '"Ve la necesidad, cúbrela" es el lema del emprendedor', 'Los problemas en la escuela son GRANDES ideas de apps', 'Cuanto más grande es el problema, más grande es la oportunidad', '¡No necesitas inventar algo nuevo — solo hacer algo MEJOR!'], funFact: '🦈 ¡En Shark Tank, los inversores siempre preguntan: "¿Qué problema resuelve esto?" Si no puedes responder eso claramente, no invertirán. ¡Tu idea de app necesita un problema claro!' },
+  'app-building:ab4a2': { title: '¿Quién Tiene Este Problema?', tagline: '¡Conocer a tu usuario = construir una mejor app!', intro: 'Antes de construir cualquier cosa, necesitas saber PARA QUIÉN la estás construyendo. Esta persona se llama tu "usuario objetivo". Una app de tarea para un alumno de 3° grado se ve completamente diferente a una para un estudiante de preparatoria. ¡Cuanto más entiendas a tu usuario, mejor será tu app!', keyPoints: ['Tu "usuario objetivo" es la persona que usará tu app', 'Piensa en su edad, qué le gusta, qué le frustra', 'Personas diferentes necesitan soluciones diferentes', 'Habla con personas reales sobre sus problemas', 'Las mejores apps se sienten como si hubieran sido hechas SOLO para ti'], funFact: '🎯 ¡Cuando Snapchat se lanzó por primera vez, era SOLO para estudiantes universitarios! ¡Ese enfoque súper específico es lo que hizo que se volviera viral! Empieza específico, crece después.' },
+  'app-building:ab4a3': { title: '5 Ideas de App en 5 Minutos', tagline: '¡Lluvia de ideas rápida — no lo pienses de más!', intro: 'Aquí hay un secreto: los mejores emprendedores no esperan la idea "perfecta". Hacen una lluvia de MUCHAS ideas rápidamente, luego eligen la mejor. Pon un temporizador por 5 minutos y anota cada idea de app que se te ocurra, ¡incluso las más tontas! Siempre puedes mejorar después.', keyPoints: ['Primero cantidad, luego calidad — deja que fluyan las ideas', 'Ninguna idea es demasiado tonta durante la lluvia de ideas', 'Mira a tu alrededor para inspirarte', 'Piensa en apps que desearías que existieran', 'Combina dos ideas existentes en algo nuevo'], funFact: '💡 ¡James Dyson creó 5,127 prototipos antes de que su aspiradora funcionara! La primera idea rara vez es la definitiva. ¡Sigue con la lluvia de ideas!' },
+  'app-building:ab4b1': { title: 'Las Pantallas de la App Son Como Cuartos', tagline: '¡Cada pantalla tiene un propósito!', intro: 'Piensa en tu app como una casa. La pantalla de inicio es la puerta principal — es lo primero que la gente ve. Las otras pantallas son como cuartos — cada uno hace algo diferente. Una buena app tiene 3-5 pantallas principales, igual que una casa tiene sala, cocina, recámara y baño.', keyPoints: ['Pantalla de inicio = puerta principal (¡primera impresión!)', 'Cada pantalla debe hacer UNA cosa principal', 'La mayoría de las apps tienen 3-5 pantallas principales', 'Los usuarios siempre deben saber dónde están', 'Un botón "atrás" es como regresar al cuarto anterior'], funFact: '🏗️ ¡Instagram solo tiene 5 pantallas principales: Feed, Buscar, Crear, Reels y Perfil! ¡Lo simple es poderoso!' },
+  'app-building:ab4b2': { title: 'Botones Que Tienen Sentido', tagline: '¡Los buenos botones te dicen qué hacen!', intro: 'Un botón en tu app debe ser como un letrero en una puerta — debes saber qué pasa cuando lo tocas SIN adivinar. "Guardar" te dice que guarda. "Eliminar" te dice que elimina. "Haz clic aquí" no te dice NADA. ¡Los buenos botones son claros y cortos!', keyPoints: ['Los botones deben decir qué HACEN', 'Usa palabras de acción: Guardar, Agregar, Enviar, Compartir, Eliminar', 'Haz los botones importantes grandes y coloridos', 'Los botones menos importantes pueden ser más pequeños', '¡Nunca pongas solo "Haz Clic Aquí" — di qué hace el botón!'], funFact: '🔘 ¡El botón "Compra en 1 Clic" de Amazon vale MILES DE MILLONES! ¡Un botón simple cambió las compras en línea para siempre!' },
+  'app-building:ab4b3': { title: 'Hazla Bonita (Diseño de Interfaz)', tagline: '¡Las apps bonitas tienen más descargas!', intro: 'UI significa Interfaz de Usuario — es cómo SE VE tu app. Dos apps pueden hacer exactamente lo mismo, pero la más bonita obtendrá muchas más descargas. Piénsalo: ¿preferirías comer en un plato limpio y hermoso o en uno sucio y feo? ¡Misma comida, experiencia diferente!', keyPoints: ['Usa solo 2-3 colores en tu app (¡no 10!)', 'Asegúrate de que el texto sea fácil de leer (no muy pequeño)', 'Deja espacio en blanco — no comprimas todo junto', 'Las esquinas redondeadas lucen modernas y amigables', 'Los íconos ayudan a las personas a entender más rápido que las palabras'], funFact: '✨ ¡Cuando Apple rediseñó sus apps con esquinas redondeadas y colores suaves, las descargas aumentaron un 30%! ¡Lo bonito importa!' },
+  'app-building:ab4c1': { title: 'Tu Primer Prompt para la IA', tagline: '¡Las palabras se vuelven apps — como magia!', intro: 'Cuando usas un constructor de apps con IA como Lovable, escribes una descripción y la IA convierte tus palabras en una app real. Pero aquí está el truco: necesitas ser ESPECÍFICO. No digas solo "hazme una app". Di "hazme una app azul de seguimiento de mascotas llamada PawPal con un botón que dice Agregar Mi Mascota". ¡Más detalle = mejor resultado!', keyPoints: ['Empieza con el NOMBRE de la app', 'Describe los COLORES y el estilo', 'Lista las FUNCIONES principales (botones, pantallas)', 'Di PARA QUIÉN es', '¡Siempre puedes pedirle a la IA que cambie cosas después!'], funFact: '⚡ ¡En 2024, un adolescente usó IA para construir y lanzar una app real en solo 3 HORAS! ¡A los desarrolladores profesionales les tomaba 3 MESES construir algo similar hace unos años!' },
+  'app-building:ab4c2': { title: 'Haz que la IA Cambie Cosas', tagline: '¿No te gusta? ¡Dile a la IA que lo arregle!', intro: 'Una de las cosas más geniales de construir con IA es que puedes seguir mejorando. ¿No te gusta el color? Di "cámbialo a morado". ¿Quieres un botón más grande? Di "haz el botón más grande". ¿Quieres agregar una función? ¡Solo descríbela! Es como tener una conversación con un constructor que hace todo lo que le pides.', keyPoints: ['Siempre puedes decirle a la IA que cambie las cosas', 'Sé específico: "haz el botón azul" no "hazlo ver mejor"', 'La IA recuerda lo que construyó antes, así que puedes agregarle cosas', 'Prueba diferentes ideas — siempre puedes volver atrás', 'Cuanto más practicas, mejor te vuelves con los prompts'], funFact: '🔄 ¡Los desarrolladores de apps reales en grandes empresas como Google actualizan sus apps cada 2 SEMANAS! Construir nunca está "terminado" — ¡siempre puedes hacerlo mejor!' },
+  'app-building:ab4c3': { title: 'Construir Varias Pantallas', tagline: '¡Las apps reales tienen más de una pantalla!', intro: 'Hasta ahora has construido pantallas individuales. Pero las apps reales tienen MÚLTIPLES pantallas que se conectan entre sí. Instagram tiene una pantalla de Feed, una de Búsqueda, una de Perfil y más. Cuando construyes con IA, puedes pedirle que cree pantallas adicionales y agregue navegación para moverse entre ellas.', keyPoints: ['La mayoría de las apps tienen 3-5 pantallas principales', 'Una barra de navegación en la parte inferior ayuda a cambiar de pantalla', 'Cada pantalla debe tener UN propósito principal', 'Dile a la IA qué hace CADA pantalla', 'La pantalla de inicio siempre es la más importante'], funFact: '📲 ¡El éxito de TikTok viene de tener solo UNA pantalla principal — el feed "Para Ti"! ¡A veces menos pantallas = mejor experiencia!' },
+  'app-building:ab4d1': { title: 'Cómo Llegan las Apps a la Tienda', tagline: '¡Hay un proceso para publicar tu app!', intro: 'Poner tu app en el App Store no es como publicar en redes sociales — no puedes simplemente subirla y aparece. Apple tiene un equipo de PERSONAS REALES que revisan cada app antes de que se permita en la tienda. Verifican si funciona correctamente, es segura y sigue las reglas.', keyPoints: ['Apple revisa CADA app antes de publicarla', 'El proceso de revisión toma aproximadamente 1-3 días', 'Tu app debe seguir las pautas de Apple', 'Las apps que se bloquean o tienen errores son rechazadas', 'Puedes corregir los problemas y enviar de nuevo si te rechazan'], funFact: '🔍 ¡Apple emplea a más de 500 personas cuyo ÚNICO trabajo es revisar apps todo el día! ¡Revisan aproximadamente 100,000 apps por SEMANA!' },
+  'app-building:ab4d2': { title: 'Tu Página en el App Store', tagline: '¡Esto es lo que la gente ve antes de descargar!', intro: 'Cuando alguien encuentra tu app en la tienda, ve tu página del App Store. Tiene tu ícono de app, nombre, capturas de pantalla, descripción y reseñas. ¡Esta página tiene que convencer a la gente de tocar "Descargar"! Si se ve aburrida o confusa, ¡saltarán tu app!', keyPoints: ['El ícono de tu app es lo primero que la gente ve', 'Las capturas de pantalla muestran cómo se ve la app POR DENTRO', 'La descripción explica qué hace la app', 'Las palabras clave ayudan a la gente a ENCONTRAR tu app al buscar', '¡Buenas capturas de pantalla pueden duplicar tus descargas!'], funFact: '🖼️ ¡Las apps con vistas previas en video en su página de la tienda obtienen un 35% más de descargas que las apps con solo capturas de pantalla! ¡Muestra tu app en ACCIÓN!' },
+  'app-building:ab4d3': { title: 'TestFlight: ¡Que tus Amigos la Prueben Primero!', tagline: '¡Prueba tu app con personas reales antes de publicarla!', intro: 'Antes de que tu app salga en el App Store para TODOS, puedes dejar que un pequeño grupo de amigos y familiares la prueben primero usando Apple TestFlight. Esto se llama prueba beta. Tus probadores encuentran errores y te dicen qué es confuso, ¡para que puedas arreglarlo antes de que todo el mundo lo vea!', keyPoints: ['TestFlight es la herramienta de Apple para pruebas beta', '¡Puedes invitar hasta 10,000 probadores!', 'Los probadores te dan retroalimentación sobre qué funciona y qué no', 'Corrige errores y problemas ANTES de tu lanzamiento público', '¡Todas las grandes apps hacen pruebas beta — incluso Apple!'], funFact: '🧪 ¡Gmail estuvo en "prueba beta" durante CINCO AÑOS (2004-2009) antes de que Google dijera que estaba oficialmente terminado! Las pruebas son muy importantes.' },
+  'app-building:ab4e1': { title: 'Hacer un Ícono Genial para la App', tagline: '¡Tu ícono es la cara de tu app!', intro: 'El ícono de tu app es un pequeño cuadrado que tiene que verse increíble siendo de solo 2.5 cm. ¡Es como la cara de tu app — la gente decide tocarlo en menos de 1 segundo! Los mejores íconos son simples, usan 1-2 colores y muestran instantáneamente de qué trata la app.', keyPoints: ['Hazlo simple — evita los detalles pequeños', 'Usa solo 1-2 colores principales', 'Hazlo reconocible incluso en tamaños pequeños', 'No uses palabras en el ícono (muy pequeñas para leer)', 'Mira íconos de apps populares para inspirarte'], funFact: '🎨 ¡El ícono de Instagram fue rediseñado en 2016 y la gente lo odió al principio. ¡Pero se convirtió en uno de los íconos más reconocidos del mundo! ¡A veces los cambios audaces funcionan!' },
+  'app-building:ab4e2': { title: 'Conseguir tus Primeros 100 Usuarios', tagline: '¡100 usuarios es el número mágico!', intro: 'Toda app comienza con CERO usuarios. Tu objetivo es llegar a 100 usuarios reales lo más rápido posible. ¿Por qué 100? Porque si 100 personas usan tu app, aprenderás qué está funcionando, qué está roto y qué mejorar. ¡Estos primeros usuarios son ORO!', keyPoints: ['Cuéntale a todos los que conoces — amigos, familiares, maestros', 'Publícalo en redes sociales', 'Pide a los usuarios retroalimentación honesta', 'Arregla los problemas rápidamente basándote en la retroalimentación', 'Los usuarios felices le cuentan a sus amigos (boca a boca)'], funFact: '📈 ¡Facebook comenzó solo con estudiantes de Harvard. Luego solo con estudiantes universitarios. No lo abrieron a todos hasta que tenían millones de usuarios. ¡Empieza pequeño y crece!' },
+  'app-building:ab4e3': { title: 'Lo Que Hace que la Gente SIGA Usando tu App', tagline: '¡Las descargas no importan si la gente la borra!', intro: 'Que alguien descargue tu app es genial, pero lo que realmente importa es si la SIGUEN usando. Si alguien descarga tu app y nunca la vuelve a abrir, eso es un problema. Las mejores apps le dan a la gente una razón para volver cada día — como rachas, notificaciones o contenido nuevo.', keyPoints: ['Rachas: "¡Has usado esta app 7 días seguidos!"', 'Notificaciones: "¡Tienes contenido nuevo esperándote!"', 'Recompensas: "¡Ganaste 50 puntos XP hoy!"', 'Contenido fresco: cosas nuevas que ver cada vez que la abres', 'Haz que la app sea un HÁBITO, no algo de una sola vez'], funFact: '🔥 ¡El búho de Duolingo te envía notificaciones diciendo "¡Olvidaste tu lección de hoy!" ¡Este simple recordatorio les ayudó a conseguir 500 MILLONES de usuarios!' },
 
   // ─── Financial Literacy Grade 4 ───
   'financial-literacy:4A1': { title: 'Pensar Como Dueño, No Como Empleado', tagline: 'Los dueños ganan más dinero que las personas que trabajan para ellos' },
@@ -28837,6 +28922,156 @@ try { autoTranslateActivitiesES(); } catch(e){ console.warn('Auto activity trans
   act('ab12f3','¡Construye tu SaaS MetricsPro!',null);
 })();
 
+// ── Grade 10 App Building — translations ──
+(function(){
+  if(typeof APP_BUILDING==='undefined'||!APP_BUILDING[10])return;
+  var gd=APP_BUILDING[10];
+  gd.description_es='Construye aplicaciones reales con estrategia de negocios, diseño, desarrollo con IA y habilidades de lanzamiento al mercado.';
+  gd.categories.A.name_es='Lluvia de Ideas e Ideación';
+  gd.categories.B.name_es='Diseño y Experiencia de Usuario';
+  gd.categories.C.name_es='Construcción con IA';
+  gd.categories.D.name_es='App Store y Publicación';
+  gd.categories.E.name_es='Marketing y Crecimiento';
+  gd.categories.F.name_es='Construye Tu App';
+  var lm={};
+  Object.keys(gd.categories).forEach(function(ck){
+    (gd.categories[ck].lessons||[]).forEach(function(l){lm[l.id]=l;});
+  });
+  function ct(id,intro,kp,ff){var l=lm[id];if(!l||!l.content)return;l.content.intro_es=intro;l.content.keyPoints_es=kp;l.content.funFact_es=ff;}
+  function tt(id,t,tg){var l=lm[id];if(!l)return;if(t)l.title_es=t;if(tg)l.tagline_es=tg;}
+  function mact(id,instr,c0t,c0e,c1t,c1e,c2t,c2e,c3t,c3e){var l=lm[id];if(!l||!l.activity)return;l.activity.instructions_es=instr;var c=l.activity.choices;if(c){if(c[0]){c[0].text_es=c0t;c[0].explanation_es=c0e;}if(c[1]){c[1].text_es=c1t;c[1].explanation_es=c1e;}if(c[2]){c[2].text_es=c2t;c[2].explanation_es=c2e;}if(c3t&&c[3]){c[3].text_es=c3t;c[3].explanation_es=c3e;}}}
+  function act(id,instr,si){var l=lm[id];if(!l||!l.activity)return;if(instr)l.activity.instructions_es=instr;if(si&&l.activity.sortItems)l.activity.sortItems_es=si;}
+  tt('ab10a1','Business Model Canvas: El Plan de Negocios en Una Página','¡Entiende todo tu negocio en una sola página!');
+  ct('ab10a1','Un modelo de negocios no es solo "ganar dinero." Es: QUIÉN (segmentos de clientes) paga QUÉ (propuesta de valor) de QUÉ FORMA (fuentes de ingresos). El Business Model Canvas = 9 cajas que muestran: socios, actividades, recursos, propuesta de valor, relaciones con clientes, canales, clientes, costos, ¡e ingresos!',['Segmentos de clientes: ¿QUIÉN usará tu app?','Propuesta de valor: ¿QUÉ problema resuelves?','Fuentes de ingresos: ¿CÓMO ganas dinero?','Estructura de costos: ¿CUÁLES son los costos principales?','Métricas clave: ¿QUÉ importa más?'],'📄 ¡Cuando Eric Ries creó el Lean Canvas (modelo de negocios + pensamiento startup), revolucionó la forma en que las startups planifican!');
+  act('ab10a1','¡Pon los elementos del modelo de negocios en orden lógico!',['Decidir el modelo de ingresos (¿suscripciones? ¿anuncios? ¿compras?)','Identificar segmentos de clientes (¿quién necesita esto?)','Calcular la estructura de costos (servidores, salarios, etc.)','Definir la propuesta de valor (por qué tu app es mejor)','Planificar alianzas clave (procesadores de pago, nube)']);
+  tt('ab10a2','Psicología de Precios: Por Qué $9.99 Supera a $10','¡Los precios son un superpoder que la mayoría de los creadores de apps ignoran!');
+  ct('ab10a2','¿Por qué es $9.99 y no $10? Psicología. ¿Por qué algunas apps triunfan con el modelo freemium y otras fracasan? La elección del modelo. ¿Por qué las suscripciones parecen más baratas ($1/mes) que el pago anual por adelantado ($12/año)? El enfoque. ¡Los precios no son arbitrarios — son estratégicos!',['La percepción del precio importa: $9.99 < $10 psicológicamente','Niveles: Gratis / Pro / Premium (bueno / mejor / el mejor)','Las suscripciones parecen más baratas pero se acumulan','Las compras únicas parecen más grandes por adelantado','Lanza alto, baja si es necesario (nunca subas desde el precio de lanzamiento)'],'💰 ¡Cuando las empresas cambian sus precios de "$10/mes" a "$3/mes + premium a $15", los ingresos a menudo AUMENTAN!');
+  mact('ab10a2','Tu app cuesta $5 para descargar. ¿Deberías bajarla a $2.99 para conseguir más ventas?','Sí, siempre baja el precio','Precio más bajo = mayor volumen de ventas pero menor margen. ¡Depende de la elasticidad!','No, mantenlo alto','Precio alto = menos ventas. ¡Prueba distintos puntos de precio!','Prueba $5, $2.99 y gratis con anuncios, y mide los ingresos por modelo','¡SÍ! Los datos superan a las suposiciones. ¡Prueba y mide!','El precio no importa','¡La estrategia de precios es ENORME!');
+  tt('ab10a3','Product-Market Fit: El Santo Grial de las Startups','¡Cuando tu app es tan buena que los usuarios no pueden vivir sin ella!');
+  ct('ab10a3','Product-market fit = tu app resuelve un problema tan bien que los usuarios la encuentran y la promocionan de forma orgánica. El crecimiento se siente sin esfuerzo. Los usuarios están desesperados por usarla. La mayoría de las startups fracasan porque nunca logran el PMF. ¿Cómo saber si lo tienes? ¡El 40%+ de los usuarios estarían "muy decepcionados" si la app desapareciera!',['Mide: ¿Los usuarios estarían muy decepcionados sin tu app?','40%+ diciendo sí = probablemente tienes product-market fit','<40% = sigue iterando, todavía no llegaste','El crecimiento orgánico se acelera cuando tienes PMF','El PMF hace que conseguir inversión sea FÁCIL (los inversores ven la demanda orgánica)'],'🎯 ¡Dropbox no tuvo PMF hasta que lanzó el programa de referidos. Entonces el crecimiento se volvió exponencial!');
+  act('ab10a3','¡Pon el camino hacia el PMF en orden!',['Lograr el product-market fit (usuarios desesperados por tu app)','Iterar como loco basándote en el feedback','Conseguir usuarios tempranos para probar','Medir: ¿El 40%+ se decepcionaría sin tu app?','Una vez que tienes PMF, escala agresivamente']);
+  tt('ab10b1','Paridad de Funciones y Posicionamiento Competitivo','¡No necesitas TODAS las funciones — solo las importantes!');
+  ct('ab10b1','Los competidores tienen 100 funciones. Tú lanzas con 5. ¡Bien! El enfoque supera a la sobrecarga de funciones. Paridad de funciones = tener todos los imprescindibles críticos. No necesitas paridad de funciones el día 1 — ¡solo en las categorías que más importan!',['Identifica las funciones críticas vs. las deseables','Conjunto mínimo de funciones viables: funcionalidad central','Aplaza: Las funciones avanzadas vienen después','Ventaja competitiva: Una cosa que haces MUCHO mejor','La simplicidad en el lanzamiento supera a la completitud'],'⚖️ ¡Slack no tenía ni la mitad de sus funciones actuales el día 1. Se enfocaron en UNA cosa: chat de equipo simple y rápido!');
+  act('ab10b1','¡Relaciona cada categoría de función con su importancia!',null);
+  tt('ab10b2','Retención vs. Viralidad: ¿Qué Estrategia Para Tu App?','¡Apps de retención (pegajosas) vs. apps virales (que se propagan como fuego)!');
+  ct('ab10b2','Algunas apps ganan siendo tan pegajosas que los usuarios las abren diariamente (Duolingo, Snapchat). Otras ganan por viralidad (TikTok, Wordle). ¡Ambas requieren estrategias diferentes! Retención = notificaciones, gamificación, hábitos. Viralidad = compartir, efectos de red, FOMO. ¡Saber cuál estás optimizando es clave!',['Retención: Hacer que los usuarios abran la app diariamente (enfócate en el hábito)','Viralidad: Hacer que compartir sea tan fácil que sea automático','TikTok optimiza para viralidad (los compartidos multiplican el alcance)','Netflix optimiza para retención (seguir viendo)','Híbrido: Tanto retención COMO viralidad (lo más difícil pero lo más poderoso)'],'🎯 ¡Cuando Wordle añadió la opción de compartir (sin spoilers), la viralidad EXPLOTÓ!');
+  mact('ab10b2','Tu app es una herramienta para tomar notas. ¿Qué estrategia importa más?','Viral (los usuarios comparten notas en todas partes)','¡Tomar notas es algo personal — la retención importa más!','Retención (los usuarios la abren diariamente para tomar notas)','¡SÍ! Uso diario = pegajosa = éxito para las herramientas.','Ninguna importa','¡Ambas importan, pero una es más importante para tu categoría!','Publicidad','¡La retención y la viralidad importan mucho más!');
+  tt('ab10b3','Telemetría y Analítica: Conoce lo que los Usuarios Realmente Hacen','¡Observar a los usuarios te enseña más que preguntarles!');
+  ct('ab10b3','Los usuarios dicen una cosa, hacen otra. La analítica = observar el comportamiento. ¿En qué botones tocan realmente los usuarios? ¿Dónde se atascan? ¿Cuándo se van? Los mapas de calor muestran exactamente dónde interactúan los usuarios. Las grabaciones de sesiones muestran cómo usan la app. ¡La telemetría = la verdad!',['Instala analítica (Amplitude, Mixpanel, Firebase)','Rastrea acciones clave (toques de botones, vistas de pantalla, compras)','Mapas de calor: Ve exactamente dónde interactúan los usuarios','Grabaciones de sesiones: Observa sesiones reales de usuarios','Embudos: Identifica dónde abandonan los usuarios'],'📊 ¡Cuando YouTube añadió el seguimiento del tiempo de visualización, descubrieron que los usuarios ven mucho más si las recomendaciones son "adecuadas"!');
+  act('ab10b3','¡Pon la implementación de analítica en orden!',['Identificar eventos clave a rastrear (registro, compra, compartir)','Actuar sobre los insights (cambiar lo que no funciona)','Revisar la analítica semanalmente para encontrar patrones','Instalar la herramienta de analítica (Firebase, Amplitude, etc.)','Configurar dashboards para monitorear métricas críticas']);
+  tt('ab10c1','Desarrollo Full-Stack: Frontend + Backend','¡Construir apps implica tanto código visible para el usuario como código detrás de escena!');
+  ct('ab10c1','Frontend = lo que ven los usuarios (botones, pantallas, diseño). Backend = servidores que gestionan datos, pagos, autenticación. La mayoría de las apps necesitan AMBOS. Frontend + Backend = Full-stack. Cuando construyes con IA, estás construyendo el frontend. ¡El backend (bases de datos, APIs, servidores) es por separado!',['Frontend: Interfaz de usuario, interacciones del usuario (botones, formularios)','Backend: Servidores, bases de datos, autenticación, pagos','API: Conexión entre frontend y backend','DevOps: Mantener los servidores funcionando, gestionar la escala','Desarrollador full-stack: Conoce ambos (¡raro, muy bien pagado!)'],'🏗️ ¡Los ingenieros de backend de Instagram manejan más de 500 millones de solicitudes POR SEGUNDO!');
+  act('ab10c1','Diseña una app social con frontend (lo que ven los usuarios) y backend (almacenamiento de datos). Explica cómo se comunican a través de la API.',null);
+  tt('ab10c2','DevOps e Infraestructura: Manteniendo las Apps Funcionando 24/7','¡Tu app necesita mantenerse en línea mientras duermes!');
+  ct('ab10c2','Tu app se cae. Los usuarios se van. DevOps = mantener las apps funcionando 24/7. Autoescalado cuando el tráfico aumenta. Copias de seguridad en caso de que fallen los servidores. Monitoreo que te alerta al instante si algo sale mal. ¡Esto es invisible pero crítico!',['Tiempo de actividad: Porcentaje de tiempo que la app está disponible (objetivo: 99.9%)','Monitoreo: Te alerta si ocurren problemas','Copias de seguridad: Copias de datos regulares en caso de desastre','Autoescalado: Los servidores se añaden/eliminan según el tráfico','Balanceo de carga: Distribuir el tráfico entre varios servidores'],'⚙️ ¡Los servicios de AWS como CloudFront, RDS y Lambda manejan DevOps a escala!');
+  act('ab10c2','Si tu app tiene un 99.9% de tiempo de actividad, eso significa que está fuera de servicio _____ horas al año.',null);
+  tt('ab10c3','Integración y Despliegue Continuo: Enviando Código Rápido','¡Cambias el código y automáticamente se prueba y despliega!');
+  ct('ab10c3','Forma antigua: Los desarrolladores envían código, los testers prueban durante semanas, se despliega una vez al mes. Nueva forma: Envías código, las pruebas automatizadas se ejecutan al instante, se despliega si las pruebas pasan. CI/CD = ciclo continuo de pruebas + despliegue. ¡Hace que el envío sea RÁPIDO y SEGURO!',['CI: Las pruebas automatizadas se ejecutan en cada cambio de código','CD: Despliega automáticamente si las pruebas pasan','Evita que el código roto llegue a los usuarios','Permite enviar varias veces al día','GitHub Actions, GitLab CI automatizan esto'],'🚀 ¡Netflix despliega nuevo código más de 1000 VECES AL DÍA usando CI/CD!');
+  act('ab10c3','¡Pon el flujo de desarrollo a producción en orden!',['Las pruebas automatizadas verifican que el código es seguro','El código se despliega en producción (los usuarios lo ven)','El desarrollador escribe y confirma el código','El monitoreo vigila los problemas','Si las pruebas fallan, el desarrollador corrige e intenta de nuevo']);
+  tt('ab10d1','Creando la Estructura de Tu Empresa de Apps','¡Los aspectos legales importan: Propietario único vs. LLC vs. Corporación!');
+  ct('ab10d1','Estás ganando dinero. ¿Deberías ser propietario único? ¿LLC? ¿S-Corp? ¿C-Corp? Las diferentes estructuras afectan: impuestos, responsabilidad, capacidad de recibir inversión. La mayoría de los creadores de apps empiezan como LLC (limita la responsabilidad) y luego se convierten en C-Corp si buscan inversión de capital de riesgo. ¡Habla con un abogado!',['Propietario único: Tú y la app (simple, arriesgado)','LLC: Sociedad de responsabilidad limitada (común para startups)','S-Corp: Tributación de transferencia (para apps rentables)','C-Corp: Corporación (requerida si buscas financiamiento de capital de riesgo)','Contrata a un abogado ($500-1000) antes de ganar dinero'],'🏢 ¡Toda empresa de apps exitosa está incorporada. ¡Es innegociable!');
+  mact('ab10d1','Tu app gana $100,000 al año. ¿Deberías incorporarte?','No, seguir como propietario único','¡A esta escala, necesitas protección de responsabilidad + optimización fiscal!','Sí, formar una LLC como mínimo, considera una S-Corp para los impuestos','¡SÍ! Protege tus activos personales y optimiza los impuestos.','Formar una C-Corp inmediatamente','La C-Corp generalmente es para buscar capital de riesgo, es excesiva aquí.','No importa, es solo una app','¡La estructura importa para impuestos, responsabilidad y credibilidad!');
+  tt('ab10d2','Monetización de Apps a Fondo: Decisiones sobre el Modelo de Ingresos','¡Elige la monetización equivocada y fracasarás aunque tengas 1 millón de usuarios!');
+  ct('ab10d2','Suscripción (Netflix): Ingresos recurrentes, predecibles, usuarios leales. Anuncios (YouTube): Acceso gratuito, gran escala, difícil mantener a los usuarios contentos. Freemium (Spotify): Gratis básico, pago por premium, lo mejor de ambos. Compra única (Minecraft): Costo por adelantado, bueno para juegos. ¡Cada modelo tiene su matemática — entiéndela!',['Suscripción: $10/mes = $120/año por usuario (¡matemática de escala!)','Anuncios: Necesitas 1 millón de usuarios para ganar dinero real','Freemium: El 2-5% convierte, el 95%+ se queda gratis','Compras dentro de la app: Los usuarios gastan $5-50 en elementos cosméticos','Híbrido: Combina modelos (anuncios + premium + compras)'],'💵 ¡El modelo de suscripción de Spotify requiere una conversión del 40%+ O la mitad de la base de usuarios — economía diferente a la de YouTube (anuncios)!');
+  act('ab10d2','¡Ordena los modelos de monetización por dificultad de escala!',['Compras dentro de la app (más difícil convertir usuarios)','Freemium (se necesita conversión del 2-5%)','Suscripción (conversión típica del 10-15%)','Anuncios (sin necesidad de conversión, gran escala)','Compra única (por adelantado, una sola oportunidad)']);
+  tt('ab10d3','Expandiéndose Más Allá de iOS: Android, Web, Escritorio','¡Apple es solo 1 plataforma. ¡Los creadores de apps inteligentes se expanden!');
+  ct('ab10d3','iOS (iPhone/iPad) genera 3 veces más ingresos que Android (Google Play). Pero Android tiene 2 veces más usuarios. Las aplicaciones web funcionan en navegadores (gratis, universales). Las aplicaciones de escritorio (Mac, Windows) llegan a profesionales. ¡Estrategia inteligente: primero iOS (mayores ingresos), luego Android, luego web!',['iOS: Mayor ingreso por usuario, revisión estricta','Android (Play Store): Menores ingresos pero 2 veces más usuarios','Web (PWA): Llega a usuarios sin la tienda de apps','Mac/Windows: Apps de escritorio para profesionales','Herramientas multiplataforma: React Native, Flutter ahorran tiempo'],'🌍 ¡Las apps exitosas se expanden más allá de iOS en 6 meses!');
+  mact('ab10d3','Tienes una app iOS exitosa. ¿Qué deberías construir a continuación?','Nuevas funciones de iOS','¡Bien, pero te estás perdiendo el 50% de los usuarios móviles!','Versión de Android (la misma app para Google Play)','¡SÍ! Duplica tus usuarios potenciales aunque los ingresos sean menores.','Expandirse inmediatamente a 5 plataformas','¡Demasiado trabajo! Prioriza.','Cerrar iOS y pasarte solo a la web','¡No mates a tu gallina de los huevos de oro!');
+  tt('ab10e1','Creando el Pitch Deck para Inversores (10-15 diapositivas)','¡Cómo explicar tu negocio en 15 minutos!');
+  ct('ab10e1','Problema, solución, mercado, modelo de negocios, tracción, equipo, solicitud. Eso es un pitch deck. Los inversores ven más de 100 presentaciones por semana. Tu deck debe captar la atención en 2 diapositivas o dejarán de escuchar. ¡Hazlo convincente!',['Diapositiva 1: Problema (relacionable y específico)','Diapositiva 2: Solución (TU forma de resolverlo)','Diapositiva 3: Mercado (tamaño + TAM/SAM/SOM)','Diapositiva 4: Producto (captura de pantalla o demo)','Diapositiva 5: Modelo de negocios (ingresos, economía unitaria)','Diapositiva 6: Tracción (usuarios, ingresos, crecimiento)','Diapositiva 7: Equipo (quién está construyendo esto)','Diapositiva 8: Solicitud (cuánto dinero + cómo lo usarás)'],'📊 ¡Los mejores pitch decks tienen texto mínimo + visuales fuertes!');
+  act('ab10e1','¡Pon las diapositivas del pitch deck en el orden correcto!',['Solicitud: ¿Cuánto dinero necesitas?','Equipo: ¿Quién está construyendo esto?','Problema: ¿Qué está roto en el mundo?','Tracción: Usuarios, ingresos, métricas de crecimiento','Modelo de negocios: ¿Cómo ganas dinero?']);
+  tt('ab10e2','Encontrar Co-Fundadores y Construir Tu Equipo','¡No puedes construir solo. ¡Los grandes equipos = grandes empresas!');
+  ct('ab10e2','Los fundadores en solitario tienen un 10% de probabilidad de una gran salida. Los equipos tienen un 40%. ¿Por qué? Habilidades complementarias, responsabilidad mutua, carga compartida. Encuentra co-fundadores con habilidades diferentes: tú te enfocas en el producto, tu socio en la ingeniería. ¡Encuentra personas en quienes confíes y con quienes puedas debatir!',['Co-fundador: Equidad igual, compromiso igual','Asesores: Ayuda ocasional, equidad como recompensa','Empleados: Contratar después de tener ingresos/financiamiento','Equidad: El fundador obtiene 20-30%, el equipo/futuros empleados comparten el resto','Vesting: Los fundadores ganan su equidad en 4 años (cliffs)'],'👥 ¡Las empresas exitosas casi siempre tienen co-fundadores. Airbnb, Facebook, Instagram, Uber — ¡todos tuvieron equipos!');
+  mact('ab10e2','¿Cuál es la mejor manera de encontrar un co-fundador?','Publicar en Instagram: "¡Busco co-fundador!"','¡Muy vago y atrae a las personas equivocadas!','Encontrar a alguien con habilidades complementarias en tu red, discutir la visión y empezar a trabajar juntos','¡SÍ! Los mejores co-fundadores son personas en las que ya confías.','Contratar a una persona aleatoria que conociste una vez','¡Los co-fundadores deben ser personas que conoces y en las que confías!','Hacerlo solo para siempre','¡Los equipos superan a los fundadores en solitario para escalar!');
+  tt('ab10e3','Construyendo Tu Marca Personal (Como Fundador)','¡Los inversores invierten en fundadores, no solo en ideas!');
+  ct('ab10e3','Los inversores apuestan más por las personas que por los productos. Construye tu marca personal: actualizaciones en Twitter sobre tu app, hablar en conferencias, publicaciones de blog sobre tu trayectoria. ¡Cuando la gente te conoce y te respeta, recaudar dinero, contratar y vender se vuelven FÁCILES!',['Twitter: Comparte actualizaciones, insights, lecciones aprendidas','Blog: Análisis profundos sobre tu app/mercado/lecciones','Podcast: Entrevista a otros creadores, cuenta tu historia','Charlas en conferencias: Comparte conocimiento, construye autoridad','Comunidad: Construye una comunidad alrededor de tu misión'],'🌟 ¡Los fundadores con marcas personales sólidas recaudan dinero 3 veces más rápido!');
+  act('ab10e3','Los mejores fundadores construyen una _____ para que la gente los conozca, les caigan bien y confíen en ellos antes de que necesiten recaudar dinero.',null);
+  tt('ab10f1','Modelos de Ingresos y Estrategia de Precios','¡Las apps que ganan dinero pueden escalar y contratar equipos!');
+  ct('ab10f1','Desde el primer día, piensa en los ingresos. ¿Funciones premium? ¿Suscripciones? ¿Anuncios? No pensar en esto hasta el día 100 es un desastre. Buenos precios = los usuarios entienden el valor. Malos precios = usuarios enojados y sin ingresos. ¡Stripe gana 250 mil millones al año con suscripciones. ¡Las suscripciones funcionan!',['Elige tu modelo de ingresos desde el principio: premium, suscripción, anuncios o híbrido','Fija el precio basándote en el VALOR, no en los costos','Decide qué funciones son gratis vs. de pago','Diseña paywalls que muestren valor sin frustrar a los usuarios','Rastrea la economía unitaria: LTV vs. CAC'],'💵 ¡Dropbox cobra $120/año. Eso no es caro — es VALIOSO. Los usuarios pagan porque no pueden vivir sin él!');
+  act('ab10f1','Las apps que ganan dinero pueden _____ y contratar equipos para crecer aún más rápido.',null);
+  tt('ab10f2','Diseñando Sistemas Escalables','¡Cada crecimiento de 10x rompe algo nuevo!');
+  ct('ab10f2','Tu app funciona con 1,000 usuarios. ¿Qué se rompe con 1 millón? La base de datos se vuelve lenta. Las APIs se agotan. Los servidores se caen. Los constructores inteligentes piensan en la escala desde el primer día. ¡Es mucho más barato construir bien desde el principio que reescribir a escala!',['Planifica para un crecimiento de 10x en cada nivel (1K→10K→100K→1M)','Usa bases de datos en la nube que se autoescalen','Diseña APIs eficientemente (caché, paginación)','Monitorea el rendimiento desde el primer día','Planifica la infraestructura global desde el principio'],'📈 ¡Netflix maneja 230 MILLONES de usuarios. Su infraestructura es tan compleja que inspiró todo un campo de la ingeniería!');
+  mact('ab10f2','¿Por qué planificar para la escala desde el principio?','Probablemente no lo necesitarás','¡Mejor sobreprepararme que caerse bajo la carga!','Es mucho más barato construir bien desde el principio que reescribir después','¡SÍ! Reescribir a escala cuesta millones.','Solo las grandes empresas necesitan pensar en la escala','¡Incluso las apps pequeñas necesitan una arquitectura escalable!','Los servicios en la nube manejan todo el escalado automáticamente','¡La nube ayuda, pero aún necesitas un diseño inteligente!');
+  tt('ab10f3','¡Constrúyelo! App de Suscripción FitPro','¡Construye una app de fitness real con niveles de precios!');
+  ct('ab10f3','FitPro es una app de fitness con niveles gratuito y de pago. Gratis: registro básico de entrenamientos. Pro ($9.99/mes): coaching con IA, planes de comidas y analítica. ¡Diseñarás el paywall, pensarás en LTV vs. CAC y planificarás la economía unitaria real!',['Diseña la pantalla de inicio mostrando el progreso del usuario','Crea el paywall premium que convierte','Construye la pantalla de precios/suscripción','Muestra cómo LTV > CAC hace que el negocio funcione','Planifica el lanzamiento de funciones'],'🤖 ¡El mercado de suscripciones de la App Store de Apple vale 20 mil millones. ¡Las suscripciones son el futuro de los ingresos de apps!');
+  act('ab10f3','Diseña el tablero de entrenamientos mostrando la actividad diaria con un claro aviso de actualización.',null);
+})();
+
+// ── Grade 11 App Building — translations ──
+(function(){
+  if(typeof APP_BUILDING==='undefined'||!APP_BUILDING[11])return;
+  var gd=APP_BUILDING[11];
+  gd.description_es='Domina estrategias avanzadas de escalado, optimización del rendimiento, privacidad, lanzamiento en la App Store y crecimiento global.';
+  gd.categories.A.name_es='Lluvia de Ideas e Ideación';
+  gd.categories.B.name_es='Diseño y Experiencia de Usuario';
+  gd.categories.C.name_es='Construcción con IA';
+  gd.categories.D.name_es='App Store y Publicación';
+  gd.categories.E.name_es='Marketing y Crecimiento';
+  gd.categories.F.name_es='Construye Tu App';
+  var lm={};
+  Object.keys(gd.categories).forEach(function(ck){
+    (gd.categories[ck].lessons||[]).forEach(function(l){lm[l.id]=l;});
+  });
+  function ct(id,intro,kp,ff){var l=lm[id];if(!l||!l.content)return;l.content.intro_es=intro;l.content.keyPoints_es=kp;l.content.funFact_es=ff;}
+  function tt(id,t,tg){var l=lm[id];if(!l)return;if(t)l.title_es=t;if(tg)l.tagline_es=tg;}
+  function mact(id,instr,c0t,c0e,c1t,c1e,c2t,c2e,c3t,c3e){var l=lm[id];if(!l||!l.activity)return;l.activity.instructions_es=instr;var c=l.activity.choices;if(c){if(c[0]){c[0].text_es=c0t;c[0].explanation_es=c0e;}if(c[1]){c[1].text_es=c1t;c[1].explanation_es=c1e;}if(c[2]){c[2].text_es=c2t;c[2].explanation_es=c2e;}if(c3t&&c[3]){c[3].text_es=c3t;c[3].explanation_es=c3e;}}}
+  function act(id,instr,si){var l=lm[id];if(!l||!l.activity)return;if(instr)l.activity.instructions_es=instr;if(si&&l.activity.sortItems)l.activity.sortItems_es=si;}
+  tt('ab11a1','Escalando de 1M a 100M Usuarios: Problemas a Escala','¡Cada crecimiento de 10x rompe algo!');
+  ct('ab11a1','1 millón de usuarios: Tu app funciona genial. 10 millones de usuarios: La base de datos es lenta. 100 millones de usuarios: La infraestructura cuesta $1 millón al mes. Escalar = resolver problemas que solo aparecen a una escala masiva. Reddit se caía regularmente bajo la carga. Slack tenía problemas de API a escala. ¡Espera y planifica para los problemas!',['1 millón de usuarios: Optimización de la base de datos','10 millones de usuarios: Necesitas fragmentación + múltiples bases de datos','100 millones de usuarios: CDN, servidores globales, autoescalado','1,000 millones de usuarios: Infraestructura de IA/ML, bases de datos de petabytes','¡Escalar no es más servidores. ¡Es un rediseño arquitectónico!'],'📈 ¡Cuando Slack alcanzó 100,000 usuarios simultáneos, toda su infraestructura tuvo que cambiar!');
+  act('ab11a1','¡Pon los desafíos de escalado en orden de cuándo aparecen!',['Bases de datos a escala de petabytes (1,000 millones de usuarios)','Una sola base de datos se convierte en cuello de botella (10 millones de usuarios)','Los tiempos de respuesta de la API se ralentizan (50 millones de usuarios)','La app funciona bien (1 millón de usuarios)','Los costos de infraestructura se vuelven masivos (100 millones de usuarios)']);
+  tt('ab11a2','Crecimiento Internacional: Localizando Tu App','¡Solo en inglés te limita a 1,500 millones de personas. ¡Localiza para llegar a 7,800 millones!');
+  ct('ab11a2','Traduce tu app al español, mandarín, árabe. ¡Pero no es solo el idioma — las monedas, los formatos de fecha y las leyes difieren por país! Lo que es legal en EE.UU. puede ser ilegal en la UE. Diferentes métodos de pago por región. ¡Localizar = el doble de trabajo, pero el doble de usuarios potenciales!',['Traducción del idioma (no solo el idioma, sino la cultura)','Soporte de monedas (precios en moneda local)','Métodos de pago (Alipay en China, iDEAL en Países Bajos)','Cumplimiento legal (GDPR en UE, diferentes reglas de privacidad)','Pruebas locales (diferentes dispositivos, redes, idiomas)'],'🌍 ¡TikTok conquistó EE.UU. solo después de perfeccionar China primero. ¡La localización = clave para la escala global!');
+  mact('ab11a2','Estás expandiéndote a Japón. ¿Qué necesitas cambiar?','Solo traducir al japonés','¡Mucho más que traducción!','Traducir, añadir precios en yenes, añadir métodos de pago japoneses, asegurar el cumplimiento de privacidad con la ley japonesa','¡SÍ! Localización = idioma + moneda + pagos + cumplimiento legal.','Nada, la app funciona en todo el mundo','¡No hay dos mercados idénticos!','Solo lanzar en países de habla inglesa','¡Te perderías el 80% del mundo!');
+  tt('ab11a3','Sostenibilidad: Construyendo Apps que Duran (No Solo Tendencias)','¡Tu app tendrá 10 años. ¿Seguirá siendo relevante?');
+  ct('ab11a3','Snapchat parecía una moda pasajera. Instagram era una app de fotos (ahora es todo). Twitter era un proyecto secundario. Las grandes apps evolucionan para seguir siendo relevantes. Planifica para: nuevas funciones, cambios en las preferencias de los usuarios, tecnología emergente. ¡Construye un modelo de negocios sostenible que dure!',['Innovación continua: Sigue construyendo o muere','Comunidad: Construye lealtad para que los usuarios se queden','Rentabilidad: Las apps rentables pueden sobrevivir más tiempo','Adaptabilidad: Cambia con el mercado','Legado: ¿Qué impacto quieres dejar?'],'🌱 ¡Las apps exitosas tienen más de 10 años porque siguen evolucionando!');
+  act('ab11a3','Para hacer una app que dure más de 10 años, debes _____ continuamente o ver cómo los competidores te reemplazan.',null);
+  tt('ab11b1','UX de App de Pago vs. UX de App Gratuita: ¡Diferentes Estrategias!','Los usuarios de pago esperan más. Los usuarios gratuitos esperan menos.');
+  ct('ab11b1','Cuando construyes una app, la experiencia de usuario (UX) cambia dependiendo de si los usuarios pagan por ella o la obtienen gratis. Las apps de pago deben entregar valor inmediato ya que los usuarios gastaron dinero. Las apps gratuitas a menudo usan anuncios o compras dentro de la app, lo que significa que la UX debe mantener a los usuarios comprometidos el tiempo suficiente para generar ingresos. Entender estas diferentes estrategias te ayuda a diseñar mejores apps para tu modelo de negocios.',['Apps de pago: Experiencia premium, sin anuncios, funciones completas desde el día 1','Apps gratuitas: Funciones limitadas, anuncios, el tutorial enseña el valor','Freemium: Gratis con limitaciones, pago por premium','Suscripción: Acceso, no propiedad (modelo Netflix)','Cada modelo requiere un enfoque de UX diferente'],'💰 ¡Las apps de pago pueden tolerar precios más altos si la UX es premium!');
+  act('ab11b1','¡Relaciona cada modelo de monetización con las expectativas de UX!',null);
+  tt('ab11b2','Onboarding: Los Primeros 60 Segundos lo Definen Todo','¡Si no los enganchas en 60 segundos, borran la app!');
+  ct('ab11b2','La primera pantalla después de la instalación es CRÍTICA. Muestra valor inmediatamente. No pidas 10 permisos. No los hagas crear una cuenta. No expliques las funciones. Muestra una DEMO. ¡Deja que experimenten la magia en 10 toques!',['Muestra valor inmediatamente (primera pantalla)','Permite la primera acción sin necesidad de cuenta','Minimiza las solicitudes de permisos (pide después)','Usa tutoriales interactivos (no tutoriales de texto)','Celebra las pequeñas victorias (la primera acción debe sentirse bien)'],'⚡ ¡Las apps con un excelente onboarding tienen un 30% más de retención el día 1!');
+  act('ab11b2','¡Pon los pasos del excelente onboarding en orden!',['Creación de cuenta (solo después de que estén enganchados)','Celebrar la primera acción ("¡Lo lograste!")','Mostrar valor con una demo o experiencia guiada','Omitir permisos opcionales','Permitir la exploración sin iniciar sesión']);
+  tt('ab11b3','Engagement: Haciendo que los Usuarios Abran la App Diariamente','¡El 99% de las desinstalaciones ocurren porque los usuarios dejan de abrir la app!');
+  ct('ab11b3','Rachas (Snapchat), notificaciones (Instagram), contenido nuevo (TikTok), logros (juegos) — estos mantienen a los usuarios abriendo la app diariamente. Diseña para la formación de hábitos. Haz que el uso diario sea gratificante. ¡Pero no seas intrusivo — respeta el tiempo de los usuarios!',['Rachas: Recompensa los días consecutivos de uso','Notificaciones: Recuerda a los usuarios con suavidad (no de forma molesta)','Contenido fresco: Nuevo contenido cada vez que abren','Logros: Desbloquea insignias y recompensas','Competencia social: Tablas de clasificación, desafíos'],'🔥 ¡Cuando abres Duolingo después de un día sin usarlo, el búho dice "¡Olvidaste tu lección!" Los usuarios no quieren romper la racha!');
+  mact('ab11b3','Tu app de notas quiere usuarios diarios. ¿Cuál es la mejor táctica de engagement?','Enviar 20 notificaciones por día','¡Demasiado! Los usuarios desactivarán las notificaciones.','Crear un contador de rachas: mostrar cuántos días seguidos han usado la app','¡SÍ! Nadie quiere romper una racha. ¡Simple y poderoso!','Aparecer constantemente con "Por favor úsame"','¡Molesto! Los usuarios desinstalarán la app.','No preocuparse por el engagement','¡Sin engagement, los usuarios se van!');
+  tt('ab11c1','Construyendo Apps Complejas: Integración de Múltiples Funciones','¡Escalando de app simple a producto complejo!');
+  ct('ab11c1','App simple: 1 función principal, 1 tabla de base de datos. App compleja: 10 funciones, 50 tablas de base de datos, integraciones con servicios externos (pagos, correos electrónicos, analítica). ¡Construir apps complejas = entender la arquitectura, planificar minuciosamente, probar obsesivamente!',['Arquitectura: Cómo fluyen los datos entre servicios','Dependencias: La función A necesita la función B','Pruebas: Mucho más difícil con más funciones','Rendimiento: Más funciones = app más lenta (hay que optimizar)','Escalabilidad: Las apps complejas deben escalar bien'],'🏗️ ¡Instagram empezó simple (fotos). ¡Ahora: historias, reels, compras, creadores, mensajería, notificaciones, anuncios, analítica!');
+  act('ab11c1','Construye una app con 3+ funciones: seguimiento de hábitos, compartir en redes sociales y logros. Explica cómo se integran y se comunican a través de la base de datos.',null);
+  tt('ab11c2','Optimización del Rendimiento: Haciendo las Apps Rápidas','¡Los usuarios borran las apps lentas. ¡Optimiza o muere!');
+  ct('ab11c2','La app carga en 5 segundos = borrada. Carga en 1 segundo = se queda. Cada 100 ms de retraso = 1% más de desinstalaciones. Optimización: carga diferida de imágenes, caché de datos, comprimir redes, usar CDN, minimizar código, ¡eliminar funciones sin usar!',['Tiempo de carga: menos de 1 segundo a la pantalla principal','Carga diferida: Las imágenes se cargan mientras el usuario desplaza','Caché: Almacena datos para que carguen rápido al volver','Compresión: Reduce el tamaño de la app (preferiblemente menos de 100 MB)','Optimización de red: Comprime las respuestas de la API'],'⚡ ¡Cuando Google redujo el tiempo de carga de los resultados de búsqueda en 0.1 segundos, el uso aumentó un 1%!');
+  act('ab11c2','¡Pon la optimización del rendimiento en orden!',['Los usuarios se quejan de que la app es lenta','Establecer objetivos de rendimiento (menos de 1 segundo de tiempo de carga)','Medir el rendimiento con herramientas','Identificar cuellos de botella (¿qué es lento?)','Optimizar (carga diferida, caché, compresión)']);
+  tt('ab11c3','Privacidad por Diseño: Protegiendo los Datos de los Usuarios','¡La privacidad debe estar integrada, no añadida después!');
+  ct('ab11c3','¿Recolectas datos? Sé transparente. ¿Almacenas datos? Encríptales. ¿Compartes datos? Obtén permiso. GDPR (UE), CCPA (California), PIPL de China — las leyes de privacidad se están endureciendo. ¡Integra la privacidad desde el día 1 o enfrenta multas de hasta $10 millones!',['Transparencia: Dile a los usuarios qué datos recopilas','Encriptación: Encripta los datos en reposo y en tránsito','Datos mínimos: No recopiles lo que no necesitas','Control del usuario: Permite a los usuarios eliminar sus datos','Cumplimiento: Conoce las leyes de privacidad en tus mercados'],'🔒 ¡La laxa privacidad de Facebook causó una multa de $5,000 millones de la FTC. ¡Lección: la privacidad importa!');
+  mact('ab11c3','Los datos de los usuarios son valiosos para entrenar IA. ¿Deberías vender datos de usuarios?','Sí, los usuarios son el producto','Solo si dan su consentimiento explícito Y eres transparente.','Solo si pides permiso y los usuarios aceptan claramente','¡SÍ! La transparencia y el consentimiento ahora son requeridos por ley.','Véndelos de forma anónima, así está bien','¡Los datos anonimizados aún pueden ser re-identificados!','No recopilar ningún dato','Necesitas datos para mejorar las apps — ¡solo sé ético al respecto!');
+  tt('ab11d1','Publicando una App GRATUITA en la Apple App Store','¡El proceso es el mismo para gratuitas y de pago, pero la estrategia es diferente!');
+  ct('ab11d1','Apps gratuitas: Sin riesgo para que los usuarios descarguen. Objetivo: Conseguir el mayor número de usuarios posible, monetizar con anuncios/IAP. El proceso de envío es idéntico al de las apps de pago, pero optimizas para el volumen (buenas capturas de pantalla, palabras clave fuertes, cobertura de prensa). Estrategia de app gratuita: 1 millón de usuarios con 0.5% de monetización = $5,000 de ingresos. ¡Mejor que 100 usuarios a $10 de precio!',['App gratuita: Establece el precio en GRATIS','Monetización: Planifica anuncios, IAP o suscripción','Palabras clave: Optimiza para la búsqueda (la mayoría de usuarios gratuitos llegan por búsqueda)','Capturas de pantalla: Enfatiza el valor (sin mensajes de paywall)','TestFlight: Prueba exhaustiva en beta (volumen = errores)','Envía igual que las de pago (proceso de revisión idéntico)','Lanzamiento: ¡Establece fecha de lanzamiento y publica!'],'📱 ¡Instagram, TikTok, Facebook son gratuitas. ¡Gratis + escala = más de $30,000 millones de ingresos!');
+  act('ab11d1','¡Pon los pasos de lanzamiento de la app gratuita en el orden exacto!',['Establecer fecha de lanzamiento y publicar en la App Store','Preparar metadatos (nombre, descripción, capturas de pantalla)','TestFlight con más de 1,000 beta testers','Crear Cuenta de Desarrollador de Apple ($99/año)','Enviar para revisión a través de App Store Connect','Elegir precio: GRATIS','Planificar la monetización (anuncios, IAP, suscripción)']);
+  tt('ab11d2','Publicando una App DE PAGO en la Apple App Store (Cobrar POR ADELANTADO)','¡Las apps de pago son diferentes! ¡Establece el precio, los usuarios pagan PRIMERO y descargan después!');
+  ct('ab11d2','App de pago ($4.99): El usuario ve el botón "Obtener" → paga $4.99 → obtiene la app. Apple se lleva el 30% (o el 15% después de $1 millón de ingresos anuales). ¡Estrategia: posicionamiento premium, audiencia más pequeña dispuesta a pagar, expectativas más altas! ¡Una app de pago debe ser PERFECTA porque los usuarios pagaron por adelantado!',['Establece el punto de precio: $0.99, $4.99, $9.99, $19.99, etc.','Apple se lleva el 30% (año 1+) o el 15% (después de $1 millón de ingresos anuales)','Sin monetización adicional: No puedes añadir anuncios a las apps de pago','Ventana de reembolso: Los usuarios pueden reembolsar en 14 días','Posicionamiento: Calidad > cantidad. App premium = precio premium','TestFlight es esencial: ¡Errores = reembolsos!','Estrategia: Construye audiencia antes del lanzamiento (pago = poco volumen de descargas)'],'💵 ¡Minecraft ($7 de pago) gana $3,000 millones/año. ¡El pago puede funcionar!');
+  mact('ab11d2','Construyes una app de notas de alta calidad. ¿Deberías cobrar $9.99 por adelantado o gratis con anuncios?','Gratis con anuncios (maximizar usuarios)','¡Si es calidad premium, cóbrale!','$9.99 (posicionamiento premium, audiencia más pequeña pagando)','¡SÍ! Una app premium merece un precio premium. Usuarios de calidad > cantidad.','Gratis, esperando que la gente quiera pagar después','¡Casi nadie paga después!','$0.99 (entrada barata)','¡Si vale $9.99, no la infravalores a $0.99!');
+  tt('ab11d3','TestFlight, App Store Connect y el Proceso de Revisión','¡Todas las herramientas detrás de escena y el proceso de revisión explicados!');
+  ct('ab11d3','TestFlight = pruebas beta (invita a 10,000 testers, recibe feedback). App Store Connect = portal de envío (sube el binario, escribe la descripción, establece precios). Proceso de revisión = 24-72 horas de revisores de Apple verificando: sin crashes, sin fraudes, sin violaciones de reglas. ¡Todas las apps (gratuitas y de pago) pasan por la misma revisión!',['TestFlight: Solo para iOS, la web no tiene equivalente de TestFlight','Números de compilación: Rastrea diferentes versiones de la app (1.0, 1.1, 1.2)','Carga del binario: El código de la app compilado que envías','Metadatos: Nombre, descripción, palabras clave, categorías','Revisión: Normalmente 24-72 horas, hasta 7 días si hay problemas','Rechazo: Corrige y reenvía (generalmente aprobado a la 2da vez)','Fecha de lanzamiento: Tú controlas cuándo los usuarios lo ven'],'🧪 ¡Las grandes empresas usan TestFlight para probar con más de 1,000 usuarios antes del lanzamiento público!');
+  act('ab11d3','¡Pon el envío a la App Store en el orden exacto!',['Establecer fecha de lanzamiento y publicar','Esperar la revisión de Apple (24-72 horas)','Beta de TestFlight con más de 1,000 usuarios','Crear el listado en App Store Connect','Enviar para revisión desde App Store Connect','Preparar metadatos y subir el binario','Corregir problemas si hay rechazo, reenviar']);
+  tt('ab11d4','Entendiendo la Comisión del 30% vs. 15% de Apple (Año 1 vs. Después)','¡La estructura de comisiones de Apple cambió — conoce las reglas!');
+  ct('ab11d4','Año 1: Apple se lleva el 30% de TODOS los ingresos (suscripciones, compras, apps de pago). Después de que tu app gane $1,000,000 anuales: ¡Apple baja al 15%! Este cambio es ENORME para las apps exitosas. ¿Ganas $2 millones/año? Pagas el 30% en el primer millón ($300,000), el 15% en el segundo millón ($150,000).',['Año 1: Comisión del 30% sobre todos los ingresos','Después de $1 millón de ingresos anuales: Comisión del 15% sobre ingresos por encima de $1 millón','Esto aplica a: Apps de pago, suscripciones, IAP','NO aplica a: Ingresos por anuncios (lo negocias con la red de anuncios por separado)','Matemática: $2M de ingresos = $300,000 para Apple (año 1) vs. $250,000 (año 2+)'],'💰 ¡Al alcanzar $1 millón/año, la tasa del 15% ahorra a las apps exitosas $150,000 por millón!');
+  mact('ab11d4','Tu app gana $1.5 millones en el año 1. ¿Cuánto se lleva Apple?','$450,000 (30% de todos los ingresos)','¡SÍ! El año 1 es el 30% completo. El próximo año tras alcanzar $1 millón, baja al 15% en nuevos ingresos.','$225,000 (15% de todos los ingresos)','¡Eso solo entra en vigor DESPUÉS de alcanzar $1 millón anual. ¡El año 1 es el 30%!','$300,000 + $75,000 = $375,000 (30% del primer $1M, 15% del último $500K)','El nivel comienza DESPUÉS de alcanzar el umbral de $1 millón, no dentro del año.','Depende de la categoría de la app','¡La tasa es la misma para todos los tipos de apps!');
+  tt('ab11e1','Lanzando con Éxito: Estrategia del Día del Lanzamiento, Semana 1 y Mes 1','¡Tu lanzamiento es un sprint, no un maratón!');
+  ct('ab11e1','Día 0 (noche anterior): Notifica a todos. Comunicados de prensa. Día 1: Levántate temprano, monitorea los crashes, responde al feedback. Semana 1: Mantén el impulso, newsletter por correo electrónico, actualizaciones en Twitter. Mes 1: Analiza datos, corrige el feedback principal, planifica el mes 2. ¡El lanzamiento no es el día 1 — es un impulso de 30 días!',['Día 0: Notifica a la lista de correo, prensa, comunidad','Día 1: Actualizaciones en vivo, monitoreo, corrige problemas inmediatos','Semana 1: Tweets diarios, Reddit, participación en la comunidad','Semana 2: Duplica lo que funciona','Semanas 3-4: Analiza métricas, planifica mejoras'],'🚀 ¡Los productos que ejecutan grandes lanzamientos crecen 10 veces más rápido que los que no lo hacen!');
+  act('ab11e1','¡Pon la línea de tiempo del lanzamiento en orden!',['Mes 1: Analiza datos, recoge feedback, planifica mejoras','Día 1: Lanzamiento, monitorea crashes, sé receptivo','Semana 1: Participación diaria (Twitter, Reddit, correo)','Semanas 2-3: Construye impulso, aborda problemas, itera','Día 0: Prepara todo (prensa, notificación a la comunidad)']);
+  tt('ab11e2','De 1M a 100M Usuarios: Estrategias de Crecimiento a Escala','¡El manual cambia cuando eres enorme!');
+  ct('ab11e2','1 millón de usuarios: Boca a boca orgánico. 10 millones de usuarios: Empieza con anuncios de pago (si la economía unitaria funciona). 100 millones de usuarios: Alianzas con plataformas (TikTok, destacado de Apple). A escala, tu cuello de botella no es el marketing — ¡es la calidad del producto y la infraestructura. ¡El crecimiento viene de la retención, no de los anuncios!',['1M: Enfócate en la retención (mantén lo que tienes)','10M: Expándete internacionalmente, anuncios de pago si son rentables','50M: Alianzas con plataformas (spotlight de Apple, TikTok)','100M: Tus propios medios (canal de YouTube, podcast)','1,000M: Conviértete tú mismo en la plataforma (APIs, ecosistema)'],'📈 ¡Apple destaca una app → 2-10 millones de descargas al instante! ¡A escala, los socios de distribución importan más que los anuncios de pago!');
+  act('ab11e2','Una vez que alcanzas 100 millones de usuarios, el cuello de botella para el crecimiento ya no es el _____, sino la calidad del producto y la infraestructura.',null);
+  tt('ab11f1','ASO en la App Store y Estrategia de Lanzamiento','¡Ser descubierto es la mitad de la batalla!');
+  ct('ab11f1','El 80% de los usuarios deciden basándose en las capturas de pantalla y la descripción antes de siquiera probar tu app. Podrías tener un producto brillante, pero si tu listado en la App Store es malo, nadie la descarga. Las palabras clave importan. Las capturas de pantalla importan. La descripción importa. ¡Esto es marketing!',['Escribe descripciones que muestren VALOR, no funciones','Crea 5 capturas de pantalla impresionantes mostrando las funciones principales','Usa palabras clave que la gente BUSCA (investiga apps de la competencia)','Diseña la vista previa en miniatura (se muestra en los resultados de búsqueda)','Planifica tu lanzamiento: lanzamiento suave, beta de TestFlight y luego público'],'📦 ¡Cuando Airbnb rediseñó sus capturas de pantalla de la App Store para mostrar viajes (emoción) en lugar de funciones de reserva (mecánica), las descargas se triplicaron!');
+  act('ab11f1','¡Pon los pasos de optimización de la App Store en orden!',['Investigar palabras clave y precios de la competencia','Escribir la descripción de la app (beneficios primero, funciones después)','Crear 5 capturas de pantalla mostrando las funciones principales','Enviar a TestFlight para feedback de usuarios','Lanzar en la App Store y monitorear las reseñas']);
+  tt('ab11f2','Pruebas Beta y Ciclos de Iteración','¡Los usuarios reales revelan lo que no puedes ver solo!');
+  ct('ab11f2','TestFlight te permite enviar a 10,000 beta testers antes del lanzamiento público. Encontrarán errores, odiarán tu UX, amarán funciones inesperadas. Ese feedback es ORO. Itera rápido, envía V2, itera de nuevo. Los ciclos de lanzamiento solían tomar meses. ¡Ahora son días!',['Configura TestFlight (la distribución beta de Apple)','Recluta 50-1,000 beta testers reales en tu nicho','Rastrea los registros de crashes y la analítica de usuarios obsesivamente','Lee las reseñas y el feedback (prioriza patrones sobre casos aislados)','Envía actualizaciones semanales basadas en datos reales'],'🧪 ¡Cuando Slack hizo pruebas beta, descubrió que a los equipos les encantaba la función de búsqueda más que cualquier otra. ¡La duplicaron!');
+  mact('ab11f2','¿Qué hace que las pruebas beta sean efectivas?','Probar con tu familia y amigos','¡Están sesgados. ¡Necesitas extraños!','Los usuarios reales revelan errores y problemas de UX que no puedes ver','¡SÍ! Itera basándote en datos reales, no en suposiciones.','Deberías ignorar todo el feedback y lanzarlo','Así es como mueren las apps. ¡El feedback es crítico!','Las pruebas beta retrasan demasiado el lanzamiento','¡Es más rápido iterar en beta que corregir después del lanzamiento!');
+  tt('ab11f3','¡Constrúyelo! App de Productividad FlowBoard','¡Un tablero kanban de tareas listo para el lanzamiento en la App Store!');
+  ct('ab11f3','FlowBoard es una app de gestión de tareas que usa la metodología kanban (Por Hacer, En Progreso, Hecho). Diseñarás el tablero, el seguimiento del progreso y las funciones de equipo. ¡Esta es una app real que los estudiantes pueden enviar a la App Store!',['Diseña el tablero kanban (tareas arrastrables)','Crea tarjetas de tareas con detalles','Construye funciones de colaboración en equipo','Diseña capturas de pantalla y descripción para la App Store','Planifica el momento del lanzamiento y la estrategia beta'],'🤖 ¡Trello (app de tablero kanban) pasó de proyecto secundario a 100 millones de usuarios. ¡Concepto simple, ejecución perfecta!');
+  act('ab11f3','Diseña el tablero kanban mostrando las columnas Por Hacer, En Progreso y Hecho con tarjetas de tareas arrastrables.',null);
+})();
+
 // ── Grade 11 Math — translations ──
 (function(){
   if(typeof MATH_CURRICULUM==='undefined'||!MATH_CURRICULUM[11])return;
@@ -29504,8 +29739,8 @@ function getSubjectData(subject, grade){
 function switchSubject(subject){
   stopSpeech();
   if(typeof timerInterval !== 'undefined' && timerInterval){ clearInterval(timerInterval); timerInterval = null; }
-  // Gate premium subjects behind payment
-  if(isPremiumSubject(subject) && !isPremiumUser()){
+  // Gate premium subjects behind payment (owner bypasses all gates)
+  if(!isOwner() && isPremiumSubject(subject) && !isPremiumUser()){
     showPremiumGate();
     return;
   }
@@ -29605,24 +29840,261 @@ function closeSaveProgressModal(){
   if(m) m.remove();
 }
 
+// ═══════════════════════════════════════════════════════════
+// ADMIN CONSOLE — Admin-only, Ctrl+Shift+A / Cmd+Shift+A
+// Reads role from Supabase profiles table (role = 'admin').
+// Silent-fails for non-admins — no error, no flash, nothing.
+// ═══════════════════════════════════════════════════════════
+document.addEventListener('keydown', function(e){
+  if((e.ctrlKey || e.metaKey) && e.shiftKey && (e.key === 'A' || e.key === 'a')){
+    e.preventDefault();
+    if(isAdmin()) showAdminConsole();
+  }
+});
+
+function showAdminConsole(){
+  if(!isAdmin()) return; // silent fail for non-admins
+  var existing = document.getElementById('adminConsoleModal');
+  if(existing){ existing.remove(); return; } // second press toggles off
+
+  var clSize = (typeof completedLessons !== 'undefined' && completedLessons) ? completedLessons.size : 0;
+  var grades = ['PK','K',1,2,3,4,5,6,7,8,9,10,11,12];
+  var gradeOpts = grades.map(function(g){ return '<option value="'+g+'"'+(g==currentGrade?' selected':'')+'>Grade '+g+'</option>'; }).join('');
+
+  var modal = document.createElement('div');
+  modal.id = 'adminConsoleModal';
+  modal.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.82);z-index:99999;display:flex;align-items:flex-start;justify-content:center;padding:24px;box-sizing:border-box;overflow-y:auto';
+  modal.innerHTML = '<div style="background:#1e272e;border-radius:16px;max-width:820px;width:100%;padding:28px;box-shadow:0 20px 60px rgba(0,0,0,0.6);border:1px solid rgba(0,184,148,0.2);margin-top:20px">'
+
+    // ── Header ──
+    + '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:24px">'
+    +   '<div style="display:flex;align-items:center;gap:10px">'
+    +     '<span style="font-size:22px">👑</span>'
+    +     '<h2 style="margin:0;font-size:20px;font-weight:800;color:#00b894">' + t('ui.admin_console_title') + '</h2>'
+    +     '<span style="font-size:11px;background:rgba(255,255,255,0.12);color:#fff;padding:3px 9px;border-radius:10px;font-weight:700">' + t('ui.owner_badge') + '</span>'
+    +   '</div>'
+    +   '<button onclick="document.getElementById(\'adminConsoleModal\').remove()" style="background:rgba(255,255,255,0.08);border:none;color:#b2bec3;font-size:18px;cursor:pointer;border-radius:8px;width:32px;height:32px;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0">×</button>'
+    + '</div>'
+
+    // ── Section A: Platform Stats ──
+    + '<div style="margin-bottom:22px">'
+    +   '<h3 style="margin:0 0 12px;font-size:11px;font-weight:700;color:#636e72;text-transform:uppercase;letter-spacing:0.8px">' + t('ui.admin_sec_a') + '</h3>'
+    +   '<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:10px">'
+    +     '<div style="background:rgba(255,255,255,0.04);border-radius:10px;padding:14px;text-align:center">'
+    +       '<div id="ac-stat-total" style="font-size:24px;font-weight:800;color:#00b894">' + t('ui.admin_loading') + '</div>'
+    +       '<div style="font-size:11px;color:#636e72;margin-top:3px">' + t('ui.admin_total_users') + '</div>'
+    +     '</div>'
+    +     '<div style="background:rgba(255,255,255,0.04);border-radius:10px;padding:14px;text-align:center">'
+    +       '<div id="ac-stat-last7" style="font-size:24px;font-weight:800;color:#fdcb6e">' + t('ui.admin_loading') + '</div>'
+    +       '<div style="font-size:11px;color:#636e72;margin-top:3px">' + t('ui.admin_last7') + '</div>'
+    +     '</div>'
+    +     '<div style="background:rgba(255,255,255,0.04);border-radius:10px;padding:14px;text-align:center">'
+    +       '<div id="ac-stat-last30" style="font-size:24px;font-weight:800;color:#74b9ff">' + t('ui.admin_loading') + '</div>'
+    +       '<div style="font-size:11px;color:#636e72;margin-top:3px">' + t('ui.admin_last30') + '</div>'
+    +     '</div>'
+    +   '</div>'
+    +   '<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:10px">'
+    +     '<div style="background:rgba(255,255,255,0.04);border-radius:10px;padding:10px;text-align:center">'
+    +       '<div id="ac-stat-students" style="font-size:18px;font-weight:700;color:#dfe6e9">' + t('ui.admin_loading') + '</div>'
+    +       '<div style="font-size:11px;color:#636e72;margin-top:2px">' + t('ui.admin_students') + '</div>'
+    +     '</div>'
+    +     '<div style="background:rgba(255,255,255,0.04);border-radius:10px;padding:10px;text-align:center">'
+    +       '<div id="ac-stat-teachers" style="font-size:18px;font-weight:700;color:#dfe6e9">' + t('ui.admin_loading') + '</div>'
+    +       '<div style="font-size:11px;color:#636e72;margin-top:2px">' + t('ui.admin_teachers') + '</div>'
+    +     '</div>'
+    +     '<div style="background:rgba(255,255,255,0.04);border-radius:10px;padding:10px;text-align:center">'
+    +       '<div id="ac-stat-admins" style="font-size:18px;font-weight:700;color:#a29bfe">' + t('ui.admin_loading') + '</div>'
+    +       '<div style="font-size:11px;color:#636e72;margin-top:2px">' + t('ui.admin_admins') + '</div>'
+    +     '</div>'
+    +   '</div>'
+    +   '<div style="display:grid;grid-template-columns:repeat(2,1fr);gap:10px">'
+    +     '<div style="background:rgba(255,255,255,0.04);border-radius:10px;padding:10px;text-align:center">'
+    +       '<div id="ac-xpTotal" style="font-size:18px;font-weight:700;color:#00b894">⭐ ' + totalXP + ' XP</div>'
+    +       '<div style="font-size:11px;color:#636e72;margin-top:2px">Your XP (session)</div>'
+    +     '</div>'
+    +     '<div style="background:rgba(255,255,255,0.04);border-radius:10px;padding:10px;text-align:center">'
+    +       '<div id="ac-lessonsTotal" style="font-size:18px;font-weight:700;color:#fdcb6e">' + clSize + '</div>'
+    +       '<div style="font-size:11px;color:#636e72;margin-top:2px">Your Lessons Done</div>'
+    +     '</div>'
+    +   '</div>'
+    + '</div>'
+
+    // ── Section B: User List ──
+    + '<div style="margin-bottom:22px">'
+    +   '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">'
+    +     '<h3 style="margin:0;font-size:11px;font-weight:700;color:#636e72;text-transform:uppercase;letter-spacing:0.8px">' + t('ui.admin_sec_b') + '</h3>'
+    +     '<button onclick="_adminLoadUserList()" style="background:rgba(0,184,148,0.15);border:1px solid rgba(0,184,148,0.3);color:#00b894;padding:6px 12px;border-radius:7px;font-size:11px;font-weight:600;cursor:pointer">' + t('ui.admin_load_users') + '</button>'
+    +   '</div>'
+    +   '<div id="ac-user-table-wrap" style="overflow-x:auto;border-radius:10px;border:1px solid rgba(255,255,255,0.06);max-height:240px;overflow-y:auto">'
+    +     '<div style="padding:20px;text-align:center;color:#636e72;font-size:12px">' + t('ui.admin_loading') + '</div>'
+    +   '</div>'
+    + '</div>'
+
+    // ── Section C: Owner Controls ──
+    + '<div style="margin-bottom:20px">'
+    +   '<h3 style="margin:0 0 12px;font-size:11px;font-weight:700;color:#636e72;text-transform:uppercase;letter-spacing:0.8px">' + t('ui.admin_sec_c') + '</h3>'
+    +   '<div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center">'
+    +     '<button onclick="_adminResetMyXP()" style="background:rgba(214,48,49,0.15);border:1px solid rgba(214,48,49,0.3);color:#ff7675;padding:8px 14px;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer">' + t('ui.admin_reset_xp') + '</button>'
+    +     '<button onclick="_adminResetMyLessons()" style="background:rgba(214,48,49,0.15);border:1px solid rgba(214,48,49,0.3);color:#ff7675;padding:8px 14px;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer">' + t('ui.admin_reset_lessons') + '</button>'
+    +     '<div style="display:flex;align-items:center;gap:8px">'
+    +       '<span style="font-size:12px;color:#b2bec3;font-weight:600">' + t('ui.admin_switch_grade') + ':</span>'
+    +       '<select id="ac-grade-select" style="background:#2d3436;color:#dfe6e9;border:1px solid rgba(255,255,255,0.12);border-radius:6px;padding:6px 10px;font-size:12px;cursor:pointer">' + gradeOpts + '</select>'
+    +       '<button onclick="_adminSwitchGrade()" style="background:rgba(0,184,148,0.15);border:1px solid rgba(0,184,148,0.3);color:#00b894;padding:7px 12px;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer">' + t('ui.admin_go') + '</button>'
+    +     '</div>'
+    +   '</div>'
+    +   '<div id="ac-action-msg" style="margin-top:10px;font-size:12px;color:#00b894"></div>'
+    + '</div>'
+
+    // ── Footer ──
+    + '<div style="padding-top:14px;border-top:1px solid rgba(255,255,255,0.06);font-size:11px;color:#636e72">'
+    +   t('ui.admin_shortcut_hint')
+    +   ' &nbsp;|&nbsp; <strong style="color:#00b894">' + t('ui.admin_col_email') + ':</strong> ' + (currentUser ? currentUser.email : '—')
+    +   ' &nbsp;|&nbsp; <strong style="color:#00b894">Grade:</strong> ' + currentGrade
+    + '</div>'
+
+  + '</div>';
+  document.body.appendChild(modal);
+
+  // Auto-load all data after rendering
+  _adminLoadStats();
+  _adminLoadUserList();
+}
+
+// Section A — load platform stats from Supabase
+function _adminLoadStats(){
+  if(!supabase || !_supabaseReady) return;
+  var now = new Date();
+  var d7  = new Date(now - 7*24*60*60*1000).toISOString();
+  var d30 = new Date(now - 30*24*60*60*1000).toISOString();
+  Promise.all([
+    supabase.from('profiles').select('*', { count: 'exact', head: true }),
+    supabase.from('profiles').select('*', { count: 'exact', head: true }).eq('role','student'),
+    supabase.from('profiles').select('*', { count: 'exact', head: true }).eq('role','teacher'),
+    supabase.from('profiles').select('*', { count: 'exact', head: true }).eq('role','admin'),
+    supabase.from('profiles').select('*', { count: 'exact', head: true }).gte('created_at', d7),
+    supabase.from('profiles').select('*', { count: 'exact', head: true }).gte('created_at', d30)
+  ]).then(function(r){
+    function cnt(res){ return res.count != null ? res.count : '?'; }
+    var set = function(id, v){ var el=document.getElementById(id); if(el) el.textContent = v; };
+    set('ac-stat-total',    cnt(r[0]));
+    set('ac-stat-students', cnt(r[1]));
+    set('ac-stat-teachers', cnt(r[2]));
+    set('ac-stat-admins',   cnt(r[3]));
+    set('ac-stat-last7',    cnt(r[4]));
+    set('ac-stat-last30',   cnt(r[5]));
+  }).catch(function(){
+    var set = function(id){ var el=document.getElementById(id); if(el) el.textContent = '?'; };
+    ['ac-stat-total','ac-stat-students','ac-stat-teachers','ac-stat-admins','ac-stat-last7','ac-stat-last30'].forEach(set);
+  });
+}
+
+// Section B — load user list from Supabase profiles (100 rows)
+function _adminLoadUserList(){
+  if(!isAdmin()) return;
+  var wrap = document.getElementById('ac-user-table-wrap');
+  if(!wrap) return;
+  if(!supabase || !_supabaseReady){ wrap.innerHTML = '<div style="padding:14px;text-align:center;color:#636e72;font-size:12px">Supabase not ready.</div>'; return; }
+  wrap.innerHTML = '<div style="padding:14px;text-align:center;color:#636e72;font-size:12px">' + t('ui.admin_loading') + '</div>';
+  supabase.from('profiles')
+    .select('id, email, full_name, username, role, created_at')
+    .order('created_at', { ascending: false })
+    .limit(100)
+    .then(function(res){
+      if(res.error || !res.data || res.data.length === 0){
+        wrap.innerHTML = '<div style="padding:14px;text-align:center;color:#636e72;font-size:12px">No data — run the RLS policy SQL below to grant access.</div>';
+        return;
+      }
+      var roleColor = { admin:'#a29bfe', teacher:'#74b9ff', student:'#636e72' };
+      var rows = res.data.map(function(u){
+        var rc = roleColor[u.role] || '#636e72';
+        var dt = u.created_at ? u.created_at.substring(0,10) : '—';
+        return '<tr style="border-bottom:1px solid rgba(255,255,255,0.05)">'
+          + '<td style="padding:6px 10px;font-size:11px;color:#b2bec3;white-space:nowrap;max-width:180px;overflow:hidden;text-overflow:ellipsis">' + (u.email||'—') + '</td>'
+          + '<td style="padding:6px 10px;font-size:11px;color:#dfe6e9">' + (u.full_name||'—') + '</td>'
+          + '<td style="padding:6px 10px;font-size:11px;color:#b2bec3">' + (u.username||'—') + '</td>'
+          + '<td style="padding:6px 10px;font-size:11px;font-weight:700;color:'+rc+'">' + (u.role||'—') + '</td>'
+          + '<td style="padding:6px 10px;font-size:11px;color:#636e72;white-space:nowrap">' + dt + '</td>'
+          + '</tr>';
+      }).join('');
+      wrap.innerHTML = '<table style="width:100%;border-collapse:collapse">'
+        + '<thead><tr style="background:rgba(255,255,255,0.04);position:sticky;top:0">'
+        +   '<th style="padding:7px 10px;font-size:10px;color:#636e72;text-align:left;font-weight:600">' + t('ui.admin_col_email') + '</th>'
+        +   '<th style="padding:7px 10px;font-size:10px;color:#636e72;text-align:left;font-weight:600">' + t('ui.admin_col_name') + '</th>'
+        +   '<th style="padding:7px 10px;font-size:10px;color:#636e72;text-align:left;font-weight:600">' + t('ui.admin_col_username') + '</th>'
+        +   '<th style="padding:7px 10px;font-size:10px;color:#636e72;text-align:left;font-weight:600">' + t('ui.admin_col_role') + '</th>'
+        +   '<th style="padding:7px 10px;font-size:10px;color:#636e72;text-align:left;font-weight:600">' + t('ui.admin_col_created') + '</th>'
+        + '</tr></thead>'
+        + '<tbody>' + rows + '</tbody></table>';
+    })
+    .catch(function(){ wrap.innerHTML = '<div style="padding:14px;text-align:center;color:#ff7675;font-size:12px">Query failed — check RLS policy (SQL below).</div>'; });
+}
+
+function _adminResetMyXP(){
+  if(!isAdmin()) return;
+  if(!confirm('Reset YOUR XP to 0? This cannot be undone.')) return;
+  totalXP = 0;
+  saveProgress();
+  if(supabase && _supabaseReady && currentUser && currentUser.supabaseId){
+    supabase.from('xp_summary').upsert({ user_id: currentUser.supabaseId, total_xp: 0 }).catch(function(){});
+  }
+  updateUserDisplay();
+  var badge = document.querySelector('.xp-badge');
+  if(badge) badge.textContent = '⭐ 0 XP';
+  var el = document.getElementById('ac-xpTotal');
+  if(el) el.textContent = '⭐ 0 XP';
+  var msg = document.getElementById('ac-action-msg');
+  if(msg) msg.textContent = '✅ XP reset to 0.';
+}
+
+function _adminResetMyLessons(){
+  if(!isAdmin()) return;
+  if(!confirm('Reset YOUR completed lessons? This cannot be undone.')) return;
+  if(typeof completedLessons !== 'undefined' && completedLessons) completedLessons.clear();
+  saveProgress();
+  var el = document.getElementById('ac-lessonsTotal');
+  if(el) el.textContent = '0';
+  var msg = document.getElementById('ac-action-msg');
+  if(msg) msg.textContent = '✅ Completed lessons cleared.';
+}
+
+function _adminSwitchGrade(){
+  if(!isAdmin()) return;
+  var sel = document.getElementById('ac-grade-select');
+  if(!sel) return;
+  var g = sel.value;
+  if(!isNaN(g) && g !== '') g = parseInt(g);
+  loadGrade(g);
+  var msg = document.getElementById('ac-action-msg');
+  if(msg) msg.textContent = '✅ Switched to Grade ' + g + '.';
+}
+// ═══════════════════════════════════════════════════════════
+
 function initApp(){
   // Handle Supabase OAuth or password reset redirect
   if(_supabaseReady && supabase){
+    // ── Early listener for PKCE-style recovery (Supabase v2) ──
+    // Must be set up BEFORE handleOAuthCallback() so it fires even
+    // when the token arrives via query param (?type=recovery).
+    supabase.auth.onAuthStateChange(function(event, session){
+      if(event === 'PASSWORD_RECOVERY'){
+        showAuthScreen();
+        showResetForm();
+      }
+    });
+
     // Check for Google OAuth callback first
     if(handleOAuthCallback()) return;
 
     const hash = window.location.hash;
     const params = new URLSearchParams(window.location.search);
-    if(hash.includes('type=recovery') || params.get('reset') === 'true'){
+    // Detect both implicit-flow (#type=recovery) and PKCE-flow (?type=recovery)
+    var isRecovery = hash.includes('type=recovery')
+      || params.get('type') === 'recovery'
+      || params.get('reset') === 'true';
+    if(isRecovery){
       // User clicked email reset link — show reset form
       showAuthScreen();
       showResetForm();
-      // Listen for password update
-      supabase.auth.onAuthStateChange(function(event, session){
-        if(event === 'PASSWORD_RECOVERY'){
-          showResetForm();
-        }
-      });
       return;
     }
     // Try to restore Supabase session
@@ -29638,6 +30110,7 @@ function initApp(){
           users[currentUser.username] = { name: currentUser.name, email: currentUser.email, supabaseId: u.id, createdAt: Date.now() };
           saveUsers(users);
         }
+        _fetchUserRole(u.id); // fetch role from profiles on Supabase session restore
       }
     }).catch(function(){});
   }
@@ -35751,8 +36224,8 @@ function builderLogChat(msg){
 let builderInitialized = false;
 function showAppBuilder(){
   stopSpeech();
-  // Gate behind premium
-  if(!isPremiumUser()){
+  // Gate behind premium (owner bypasses)
+  if(!isOwner() && !isPremiumUser()){
     showPremiumGate();
     return;
   }
@@ -35800,8 +36273,8 @@ function sendBuilderMessage(){
   const msg = input.value.trim();
   if(!msg) return;
 
-  // Check prompt limit
-  if(builderState.promptCount >= 50){
+  // Check prompt limit (owner has unlimited prompts)
+  if(!isOwner() && builderState.promptCount >= 50){
     const chatArea = document.getElementById('builder-chat-messages');
     chatArea.innerHTML += '<div class="chat-msg system" style="background:rgba(214,48,49,0.2);color:#d63031">⚠️ You have reached the 50-prompt limit for this session.</div>';
     chatArea.scrollTop = chatArea.scrollHeight;
