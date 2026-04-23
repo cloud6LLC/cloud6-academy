@@ -2404,7 +2404,9 @@ let guestAnswersTotal = 0;  // tracks ALL answers in guest mode (correct + wrong
 let guestPromptShown = false; // only show once per session
 
 // Check if user has premium (paid) access
+// Admins always return true so every gate is bypassed even if isPremium flag not set
 function isPremiumUser(){
+  if(isAdmin()) return true; // admin/owner always has full access
   if(!currentUser) return false;
   var users = getUsers();
   var u = users[currentUser.username];
@@ -2419,16 +2421,25 @@ function isPremiumSubject(subject){
 // ─── OWNER / ADMIN ROLE ─────────────────────────────────────
 // Source of truth: public.profiles.role column ('student'|'teacher'|'admin').
 // Both isAdmin() and isOwner() return true when role === 'admin'.
-// Fail closed — any missing field, failed query, or missing user → false.
+// Belt-and-suspenders: checks currentUser.role first, then localStorage cache.
 function isAdmin(){
-  try { return currentUser != null && currentUser.role === 'admin'; } catch(e){ return false; }
+  try {
+    if(!currentUser) return false;
+    // Primary: in-memory role (set by _fetchUserRole)
+    if(currentUser.role === 'admin') return true;
+    // Fallback: localStorage cache (available immediately on session restore)
+    var users = getUsers();
+    var u = users[currentUser.username];
+    if(u && u.role === 'admin') return true;
+    return false;
+  } catch(e){ return false; }
 }
 function isOwner(){ return isAdmin(); } // alias — either name works throughout codebase
 
 // Async: fetch role from Supabase public.profiles table and cache it.
 // profiles.id is the auth user UUID (same as auth.users.id).
 // Called after every successful Supabase auth event (login, signup, OAuth, session restore).
-// On ANY query failure, role stays 'student' — fail closed.
+// On ANY query failure, role stays at whatever was cached — fail safe for admins.
 function _fetchUserRole(supabaseId){
   if(!supabase || !_supabaseReady || !supabaseId) return Promise.resolve();
   return supabase.from('profiles').select('role').eq('id', supabaseId).single()
@@ -2444,7 +2455,10 @@ function _fetchUserRole(supabaseId){
       } catch(e){}
       updateUserDisplay(); // refresh badge (OWNER pill appears for admin, Pro button for others)
     })
-    .catch(function(){ if(currentUser && !currentUser.role) currentUser.role = 'student'; }); // fail closed
+    .catch(function(e){
+      console.warn('[cloud6] _fetchUserRole failed:', e);
+      // Do NOT overwrite a cached admin role on error — fail safe
+    });
 }
 // ─────────────────────────────────────────────────────────────
 
