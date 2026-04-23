@@ -2845,6 +2845,29 @@ function doForgotPassword(){
   const input = document.getElementById('forgotUsername').value.trim().toLowerCase();
   if(!input) return showAuthError('forgotError', 'Please enter your username or email.');
 
+  const isEmail = input.includes('@');
+
+  // If input is an email AND Supabase is ready, send reset directly — no local lookup needed.
+  // This covers Google OAuth users who may not exist in localStorage.
+  if(isEmail && _supabaseReady && supabase){
+    const resetBtn = document.querySelector('#forgotForm button');
+    if(resetBtn){ resetBtn.textContent = 'Sending email...'; resetBtn.disabled = true; }
+    CloudSync.resetPassword(input).then(function(result){
+      if(resetBtn){ resetBtn.textContent = 'Reset Password'; resetBtn.disabled = false; }
+      document.getElementById('forgotUsername').value = '';
+      // Always show success — Supabase doesn't confirm if email exists (security best practice)
+      const successEl = document.getElementById('forgotSuccess');
+      successEl.textContent = '📧 If an account exists for that email, a reset link has been sent. Check your inbox (and spam folder).';
+      successEl.style.display = 'block';
+      document.getElementById('forgotError').style.display = 'none';
+    }).catch(function(){
+      if(resetBtn){ resetBtn.textContent = 'Reset Password'; resetBtn.disabled = false; }
+      showAuthError('forgotError', 'Could not send reset email. Please try again.');
+    });
+    return;
+  }
+
+  // Username-based lookup (local accounts)
   const users = getUsers();
   let foundUsername = null;
   let foundEmail = null;
@@ -2858,21 +2881,21 @@ function doForgotPassword(){
     }
   }
 
-  // Try Supabase email reset if we have an email
+  if(!foundUsername) return showAuthError('forgotError', 'No account found with that username or email.');
+
+  // Try Supabase reset with the found email
   if(_supabaseReady && supabase && foundEmail){
     const resetBtn = document.querySelector('#forgotForm button');
     if(resetBtn){ resetBtn.textContent = 'Sending email...'; resetBtn.disabled = true; }
-
     CloudSync.resetPassword(foundEmail).then(function(result){
       if(resetBtn){ resetBtn.textContent = 'Reset Password'; resetBtn.disabled = false; }
       if(result.success){
         document.getElementById('forgotUsername').value = '';
         const successEl = document.getElementById('forgotSuccess');
-        successEl.textContent = '📧 Password reset email sent! Check your inbox (and spam folder) for a link to reset your password.';
+        successEl.textContent = '📧 Password reset email sent! Check your inbox (and spam folder).';
         successEl.style.display = 'block';
         document.getElementById('forgotError').style.display = 'none';
       } else {
-        // Fall back to local reset
         _resetTargetUser = foundUsername;
         document.getElementById('forgotUsername').value = '';
         showResetForm();
@@ -2881,9 +2904,7 @@ function doForgotPassword(){
     return;
   }
 
-  if(!foundUsername) return showAuthError('forgotError', 'No account found with that username or email.');
-
-  // Local fallback: show reset form directly
+  // Local fallback
   _resetTargetUser = foundUsername;
   document.getElementById('forgotUsername').value = '';
   showResetForm();
