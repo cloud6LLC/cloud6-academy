@@ -2430,8 +2430,8 @@ function isOwner(){ return isAdmin(); } // alias — either name works throughou
 // Called after every successful Supabase auth event (login, signup, OAuth, session restore).
 // On ANY query failure, role stays 'student' — fail closed.
 function _fetchUserRole(supabaseId){
-  if(!supabase || !_supabaseReady || !supabaseId) return;
-  supabase.from('profiles').select('role').eq('id', supabaseId).single()
+  if(!supabase || !_supabaseReady || !supabaseId) return Promise.resolve();
+  return supabase.from('profiles').select('role').eq('id', supabaseId).single()
     .then(function(res){
       var role = (res && res.data && res.data.role) ? res.data.role : 'student';
       if(currentUser){ currentUser.role = role; }
@@ -2637,8 +2637,9 @@ function doSignup(){
       document.getElementById('signupEmail').value = '';
       document.getElementById('signupPassword').value = '';
       document.getElementById('signupConfirm').value = '';
-      _fetchUserRole(result.data.user ? result.data.user.id : null); // fetch role from profiles after signup
-      enterApp();
+      _fetchUserRole(result.data.user ? result.data.user.id : null) // fetch role, then enter app
+        .then(function(){ enterApp(); })
+        .catch(function(){ enterApp(); }); // always enter even if role fetch fails
     }).catch(function(e){
       if(signupBtn){ signupBtn.textContent = 'Create Account'; signupBtn.disabled = false; }
       console.warn('Supabase error, falling back to local:', e);
@@ -2742,8 +2743,9 @@ function handleOAuthCallback(){
             }
           });
         }
-        _fetchUserRole(u.id); // fetch role from profiles after Google OAuth login
-        enterApp();
+        _fetchUserRole(u.id) // fetch role, then enter app
+          .then(function(){ enterApp(); })
+          .catch(function(){ enterApp(); }); // always enter even if role fetch fails
       }
     }).catch(function(){ showAuthScreen(); });
     return true; // We're handling OAuth callback
@@ -2801,8 +2803,9 @@ function doLogin(){
         }
       });
 
-      _fetchUserRole(user.id); // fetch role from profiles after Supabase email/password login
-      enterApp();
+      _fetchUserRole(user.id) // fetch role, then enter app
+        .then(function(){ enterApp(); })
+        .catch(function(){ enterApp(); }); // always enter even if role fetch fails
     }).catch(function(e){
       if(loginBtn){ loginBtn.textContent = 'Sign In'; loginBtn.disabled = false; }
       doLoginLocal(input, pw);
