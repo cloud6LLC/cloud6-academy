@@ -2469,7 +2469,7 @@ function isOwner(){ return isAdmin(); } // alias — either name works throughou
 function _fetchUserRole(supabaseId){
   if(!supabase || !_supabaseReady || !supabaseId) return Promise.resolve();
 
-  // Helper: read best available cached role from localStorage
+  // Helper: best cached role from localStorage
   function _cachedRole(){
     try {
       var uc = getUsers();
@@ -2479,62 +2479,63 @@ function _fetchUserRole(supabaseId){
     return null;
   }
 
-  _roleFetchPromise = supabase.from('profiles').select('role').eq('id', supabaseId).single()
-    .then(function(res){
-      var role = null;
-
-      if(res && res.error){
-        // DB error (RLS blocked, row missing, network…) — fall back to localStorage cache
-        console.warn('[cloud6] _fetchUserRole DB error:', res.error.message || res.error);
-        role = _cachedRole();
-      } else {
-        role = (res && res.data && res.data.role) ? res.data.role : _cachedRole();
-      }
-
-      // CRITICAL: always set currentUser.role so gate code never enters an infinite wait loop.
-      // Priority: DB result → localStorage cache → 'student' (safest fallback).
-      if(currentUser){
-        currentUser.role = role || currentUser.role || 'student';
-      }
-
-      // Persist to localStorage only when we got a clean DB result
-      if(role && !(res && res.error)){
-        try {
-          var us = getUsers();
-          if(currentUser && us[currentUser.username]){
-            us[currentUser.username].role = role;
-            saveUsers(us);
-          }
-        } catch(e){}
-      }
-
-      _roleLoaded = true; // unblock gate code — role is now definitively known
-      console.log('[ADMIN DEBUG] role loaded — currentUser:', JSON.stringify({username: currentUser && currentUser.username, role: currentUser && currentUser.role}), '| isAdmin():', isAdmin());
-      updateUserDisplay();
-      // View correction: if admin is already in the app but on the wrong screen, fix it now.
-      // This handles session-restore (page refresh while logged in) where enterApp() is
-      // not called but initApp() already showed student home.
+  // Helper: finalise role, update state, run view correction
+  function _applyRole(role){
+    if(currentUser){
+      currentUser.role = role || currentUser.role || 'student';
+    }
+    // Persist clean result to localStorage
+    if(role){
       try {
-        if(isAdmin()){
-          var _adsEl = document.getElementById('adminDashboardScreen');
-          if(_adsEl && _adsEl.style.display === 'none') showAdminDashboard();
+        var us = getUsers();
+        if(currentUser && us[currentUser.username]){
+          us[currentUser.username].role = role;
+          saveUsers(us);
         }
-      } catch(e2){}
+      } catch(e){}
+    }
+    _roleLoaded = true;
+    console.log('[cloud6] role resolved:', currentUser && currentUser.role, '| isAdmin:', isAdmin());
+    updateUserDisplay();
+    // View correction — handles session-restore where enterApp() wasn't called
+    try {
+      if(isAdmin()){
+        var ads = document.getElementById('adminDashboardScreen');
+        if(ads && ads.style.display === 'none') showAdminDashboard();
+      }
+    } catch(e2){}
+  }
+
+  // Layer 1: query by Supabase UUID (maybeSingle — 0 rows is NOT an error)
+  _roleFetchPromise = supabase.from('profiles').select('role').eq('id', supabaseId).maybeSingle()
+    .then(function(res){
+      if(res && !res.error && res.data && res.data.role){
+        // UUID matched — best result
+        _applyRole(res.data.role);
+        return;
+      }
+      // Layer 2: UUID had no match OR returned an error — try email lookup
+      var email = currentUser && currentUser.email;
+      if(email && supabase && _supabaseReady){
+        return supabase.from('profiles').select('role').eq('email', email).maybeSingle()
+          .then(function(r2){
+            if(r2 && !r2.error && r2.data && r2.data.role){
+              _applyRole(r2.data.role);
+            } else {
+              // Layer 3: localStorage cache
+              _applyRole(_cachedRole());
+            }
+          }).catch(function(){
+            _applyRole(_cachedRole());
+          });
+      } else {
+        // Layer 3: localStorage cache
+        _applyRole(_cachedRole());
+      }
     })
     .catch(function(e){
-      console.warn('[cloud6] _fetchUserRole network error:', e);
-      // Network hard-fail: use cache or 'student' — never leave role undefined
-      if(currentUser && !currentUser.role){
-        currentUser.role = _cachedRole() || 'student';
-      }
-      _roleLoaded = true;
-      updateUserDisplay();
-      try {
-        if(isAdmin()){
-          var _adsCatch = document.getElementById('adminDashboardScreen');
-          if(_adsCatch && _adsCatch.style.display === 'none') showAdminDashboard();
-        }
-      } catch(e2){}
+      console.warn('[cloud6] _fetchUserRole error:', e);
+      _applyRole(_cachedRole());
     });
   return _roleFetchPromise;
 }
@@ -2587,10 +2588,25 @@ function _onSupabaseReady(){
         updateUserDisplay();
       }
 
-      // DB fetch to verify/update role (also writes back to metadata)
+      // DB fetch — source of truth for role
       _fetchUserRole(u.id)
-        .then(function(){ if(wasGuest) enterApp(); else updateUserDisplay(); })
-        .catch(function(){ if(wasGuest) enterApp(); else updateUserDisplay(); });
+        .then(function(){
+          if(wasGuest){
+            // Fresh login (OAuth redirect or first load) — full app init
+            enterApp();
+          } else {
+            // Session restore (page refresh while logged in) — updateUserDisplay()
+            // already called inside _fetchUserRole; just ensure admin lands correctly
+            updateUserDisplay();
+            if(isAdmin()){
+              var ads = document.getElementById('adminDashboardScreen');
+              if(ads && ads.style.display === 'none') showAdminDashboard();
+            }
+          }
+        })
+        .catch(function(){
+          if(wasGuest) enterApp(); else updateUserDisplay();
+        });
     }
   });
 
