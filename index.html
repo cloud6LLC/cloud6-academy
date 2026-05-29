@@ -14818,6 +14818,7 @@ function renderLessonModal(lesson){
             ${t('ui.lessonLearnExample')}
           </button>
           <button class="submit-btn" onclick="startQuestions()" style="margin-top:16px">${t('ui.lessonStartQuestions')}</button>
+          <button onclick="showAiTutorModal()" style="margin-top:12px;display:inline-flex;align-items:center;gap:8px;padding:12px 24px;background:#fff;color:#6c5ce7;border:2px solid #6c5ce7;border-radius:12px;font-size:14px;font-weight:700;cursor:pointer;transition:all 0.2s" onmouseover="this.style.background='#6c5ce711'" onmouseout="this.style.background='#fff'">🤖 ${currentLang==='es'?'No entiendo esto':'I don\'t get this'}</button>
         </div>
         <div id="questions-area" style="display:none"></div>
       </div>
@@ -30742,11 +30743,14 @@ function initApp(){
   updateBuilderNav();
   updateTeacherNav();
   // Route admin to their dashboard immediately if role is already known from cache
-  if(_roleLoaded && isAdmin()){
-    showAdminDashboard();
-  } else {
-    showHome();
-  }
+  // Check URL hash/pathname for iReady routes first
+  var _initRoute = ((window.location.hash||'').replace('#','')||window.location.pathname.replace('/','').split('?')[0]).toLowerCase();
+  if(_initRoute === 'placement'){ showPlacementQuiz(); }
+  else if(_initRoute === 'parent'){ showParentDashboard(); }
+  else if(_initRoute === 'progress'){ showStudentProgress(); }
+  else if(_initRoute === 'teacher'){ showTeacherDashboard(); }
+  else if(_roleLoaded && isAdmin()){ showAdminDashboard(); }
+  else { showHome(); }
   // Apply saved language to UI on load
   try { document.documentElement.lang = currentLang; } catch(e){}
   applyTranslations();
@@ -35443,6 +35447,10 @@ function hideAllScreens(){
   document.getElementById('printablesScreen').style.display = 'none';
   document.getElementById('subjectBar').style.display = 'none';
   var _ads = document.getElementById('adminDashboardScreen'); if(_ads) _ads.style.display = 'none';
+  var _pqs = document.getElementById('placementScreen'); if(_pqs) _pqs.style.display = 'none';
+  var _pds = document.getElementById('parentDashboardScreen'); if(_pds) _pds.style.display = 'none';
+  var _sps = document.getElementById('studentProgressScreen'); if(_sps) _sps.style.display = 'none';
+  var _atm = document.getElementById('aiTutorModal'); if(_atm) _atm.style.display = 'none';
 }
 
 // Show/hide Build App nav based on grade (6+ only)
@@ -39306,5 +39314,260 @@ window.addEventListener('DOMContentLoaded', function(){
   <a href="https://buy.stripe.com/14A8wO20TaWT0IegQU3Nm0d" target="_blank" style="padding:10px 20px;border-radius:8px;font-size:13px;font-weight:700;text-decoration:none;white-space:nowrap;color:#fff">Try Free →</a>
   <span onclick="document.getElementById('upgradePrompt').style.display='none'" style="cursor:pointer;color:rgba(255,255,255,0.5);font-size:20px;padding:4px">✕</span>
 </div>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- PLACEMENT QUIZ SCREEN  /placement  #placement              -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<div id="placementScreen" style="display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:#f5f6fa;z-index:300;overflow-y:auto">
+  <div style="background:linear-gradient(135deg,#00b894,#0984e3);padding:20px 28px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:1">
+    <div style="font-size:20px;font-weight:800;color:#fff">📊 Placement Quiz</div>
+    <button onclick="hidePlacementQuiz()" style="width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,0.2);border:none;color:#fff;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center">✕</button>
+  </div>
+  <div id="placementContent" style="max-width:640px;margin:0 auto;padding:32px 24px"></div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- PARENT DASHBOARD  /parent  #parent                        -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<div id="parentDashboardScreen" style="display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:#f5f6fa;z-index:300;overflow-y:auto">
+  <div style="background:linear-gradient(135deg,#e17055,#fdcb6e);padding:20px 28px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:1">
+    <div style="font-size:20px;font-weight:800;color:#fff">👨‍👩‍👧 Parent Dashboard</div>
+    <button onclick="hideParentDashboard()" style="width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,0.2);border:none;color:#fff;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center">✕</button>
+  </div>
+  <div id="parentContent" style="max-width:900px;margin:0 auto;padding:32px 24px"></div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- STUDENT PROGRESS  /progress  #progress                    -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<div id="studentProgressScreen" style="display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:#f5f6fa;z-index:300;overflow-y:auto">
+  <div style="background:linear-gradient(135deg,#6c5ce7,#a29bfe);padding:20px 28px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:1">
+    <div style="font-size:20px;font-weight:800;color:#fff">📈 My Progress</div>
+    <button onclick="hideStudentProgress()" style="width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,0.2);border:none;color:#fff;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center">✕</button>
+  </div>
+  <div id="studentProgressContent" style="max-width:900px;margin:0 auto;padding:32px 24px"></div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- AI TUTOR MODAL (shown inside lesson)                       -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<div id="aiTutorModal" style="display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.6);z-index:600;align-items:center;justify-content:center;padding:24px">
+  <div style="background:#fff;border-radius:20px;max-width:560px;width:100%;max-height:85vh;overflow-y:auto;padding:28px;box-shadow:0 20px 60px rgba(0,0,0,0.3)">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px">
+      <div style="font-size:18px;font-weight:800;color:#6c5ce7">🤖 AI Tutor</div>
+      <button onclick="closeAiTutorModal()" style="width:32px;height:32px;border-radius:50%;background:#f0f0f0;border:none;font-size:18px;cursor:pointer">✕</button>
+    </div>
+    <div id="aiTutorBody"></div>
+  </div>
+</div>
+
+<script>
+// ═══════════════════════════════════════════════════════════
+// iREADY FEATURE 1 — PLACEMENT QUIZ
+// ═══════════════════════════════════════════════════════════
+var _placementSubject='math',_placementQIndex=0,_placementAnswers=[],_placementQuestions=[];
+var PLACEMENT_QUESTIONS={
+  math:[
+    {q:'What is 3 + 4?',choices:['5','6','7','8'],answer:2,level:1},
+    {q:'What is 15 − 7?',choices:['6','7','8','9'],answer:2,level:2},
+    {q:'What is 6 × 7?',choices:['36','42','48','56'],answer:1,level:3},
+    {q:'What is 144 ÷ 12?',choices:['10','11','12','13'],answer:2,level:4},
+    {q:'What is 3/4 + 1/2?',choices:['4/6','1/2','5/4','7/4'],answer:2,level:5},
+    {q:'What is 20% of 80?',choices:['12','14','16','18'],answer:2,level:6},
+    {q:'Solve: 2x + 6 = 14. x = ?',choices:['3','4','5','6'],answer:1,level:7},
+    {q:'What is the slope of y = 3x − 5?',choices:['-5','3','5','-3'],answer:1,level:8},
+    {q:'Factor: x² − 9',choices:['(x+3)(x−3)','(x−3)²','(x+9)(x−1)','(x+3)²'],answer:0,level:9},
+    {q:'What is sin(30°)?',choices:['√3/2','1/2','√2/2','1'],answer:1,level:10},
+  ],
+  english:[
+    {q:'Which word is a noun?',choices:['run','happy','cat','quickly'],answer:2,level:1},
+    {q:'Choose the correct sentence:',choices:['He run fast.','She doesn\'t likes it.','They are playing.','I goed home.'],answer:2,level:2},
+    {q:'What is the main idea of a paragraph?',choices:['The last sentence','The topic sentence','A detail','A transition'],answer:1,level:3},
+    {q:'Identify the figure of speech: "The moon was a silver coin."',choices:['Simile','Metaphor','Personification','Alliteration'],answer:1,level:4},
+    {q:'Which is a complex sentence?',choices:['She ran.','He ate and slept.','Although tired, she studied.','Jump!'],answer:2,level:5},
+    {q:'What does "benevolent" mean?',choices:['Harmful','Kind','Loud','Careful'],answer:1,level:6},
+    {q:'What is a thesis statement?',choices:['A question','The central argument','A supporting detail','A conclusion'],answer:1,level:7},
+    {q:'"Neither the students nor the teacher ___ ready."',choices:['were','are','was','been'],answer:2,level:8},
+    {q:'What device is used in: "O Romeo, Romeo! wherefore art thou?"',choices:['Soliloquy','Aside','Dramatic irony','Apostrophe'],answer:0,level:9},
+    {q:'What is the tone of a satirical essay?',choices:['Mournful','Celebratory','Ironic/critical','Neutral'],answer:2,level:10},
+  ],
+  science:[
+    {q:'What do plants need to make food?',choices:['Soil only','Sunlight, water, CO₂','Just water','Moonlight'],answer:1,level:1},
+    {q:'What state of matter has a definite shape and volume?',choices:['Gas','Liquid','Solid','Plasma'],answer:2,level:2},
+    {q:'What is the function of the mitochondria?',choices:['Store DNA','Make protein','Produce energy','Control the cell'],answer:2,level:3},
+    {q:'What type of rock is formed from cooled lava?',choices:['Sedimentary','Metamorphic','Igneous','Fossil'],answer:2,level:4},
+    {q:"What is Newton's 2nd Law?",choices:['F=mv','F=ma','E=mc²','F=mg'],answer:1,level:5},
+    {q:'What is the charge of a proton?',choices:['Negative','Neutral','Positive','Variable'],answer:2,level:6},
+    {q:'What organelle performs photosynthesis?',choices:['Nucleus','Mitochondria','Ribosome','Chloroplast'],answer:3,level:7},
+    {q:'What is the pH of a neutral substance?',choices:['0','7','14','1'],answer:1,level:8},
+    {q:'What is the law of conservation of energy?',choices:['Energy is created','Energy is destroyed','Energy is neither created nor destroyed','Energy is infinite'],answer:2,level:9},
+    {q:'What is natural selection?',choices:['Random mutation','Survival of strongest','Organisms with favorable traits reproduce more','Artificial breeding'],answer:2,level:10},
+  ],
+  history:[
+    {q:'Who was the first U.S. President?',choices:['Lincoln','Jefferson','Washington','Adams'],answer:2,level:1},
+    {q:'In what year did the U.S. declare independence?',choices:['1776','1789','1812','1620'],answer:0,level:2},
+    {q:'What document ended slavery in the U.S.?',choices:['Constitution','Bill of Rights','Emancipation Proclamation','Civil Rights Act'],answer:2,level:3},
+    {q:'What caused WWI?',choices:['Pearl Harbor','Assassination of Archduke Franz Ferdinand','Boston Tea Party','D-Day'],answer:1,level:4},
+    {q:'What was the Cold War?',choices:['A war in Alaska','A nuclear war','A geopolitical rivalry between the US and USSR','A trade war'],answer:2,level:5},
+    {q:'What was the significance of the Magna Carta (1215)?',choices:['It ended the Black Plague','It limited royal power and established rights','It started the Crusades','It created Parliament'],answer:1,level:6},
+    {q:'What was Manifest Destiny?',choices:['A treaty with Mexico','A belief in U.S. westward expansion','A Civil War strategy','A trade policy'],answer:1,level:7},
+    {q:'What was the Marshall Plan?',choices:['A D-Day invasion plan','U.S. aid to rebuild post-WWII Europe','A Cold War arms treaty','A colonial policy'],answer:1,level:8},
+    {q:'What sparked the French Revolution?',choices:['Loss of a war','Invasion by Spain','Economic crisis and inequality','Religious conflict'],answer:2,level:9},
+    {q:'What was the significance of the Berlin Conference (1884)?',choices:['It ended WWI','European powers divided Africa','It established the UN','It created NATO'],answer:1,level:10},
+  ],
+};
+
+function showPlacementQuiz(){
+  hideAllScreens();
+  _placementQIndex=0;_placementAnswers=[];
+  document.getElementById('placementScreen').style.display='block';
+  window.location.hash='placement';
+  renderPlacementStart();
+}
+function hidePlacementQuiz(){
+  document.getElementById('placementScreen').style.display='none';
+  window.location.hash='';showHome();
+}
+function renderPlacementStart(){
+  var lang=currentLang;
+  document.getElementById('placementContent').innerHTML='<div style="text-align:center;margin-bottom:32px"><div style="font-size:56px;margin-bottom:12px">📊</div><h2 style="font-size:28px;font-weight:800;color:#2d3436;margin-bottom:8px">'+(lang==='es'?'Quiz de Nivel':'Placement Quiz')+'</h2><p style="color:#636e72;font-size:15px;max-width:480px;margin:0 auto">'+(lang==='es'?'Responde 10 preguntas para determinar tu nivel.':'Answer 10 questions to find your grade level.')+'</p></div><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-bottom:28px">'+['math','english','science','history'].map(function(s){var icons={math:'📐',english:'📖',science:'🔬',history:'🏛️'};var lbl={math:{en:'Math',es:'Matemáticas'},english:{en:'English',es:'Inglés'},science:{en:'Science',es:'Ciencias'},history:{en:'History',es:'Historia'}};return'<button onclick="startPlacement(\''+s+'\')" style="padding:20px;border-radius:12px;border:2px solid #00b894;background:#fff;font-size:16px;font-weight:700;color:#00b894;cursor:pointer;transition:all 0.2s" onmouseover="this.style.background=\'#00b89411\'" onmouseout="this.style.background=\'#fff\'">'+icons[s]+' '+(lang==='es'?lbl[s].es:lbl[s].en)+'</button>';}).join('')+'</div><div style="text-align:center;color:#636e72;font-size:13px">'+(lang==='es'?'Elige una materia para empezar':'Choose a subject to begin')+'</div>';
+}
+function startPlacement(subject){
+  _placementSubject=subject;_placementQIndex=0;_placementAnswers=[];
+  _placementQuestions=(PLACEMENT_QUESTIONS[subject]||PLACEMENT_QUESTIONS.math).slice();
+  renderPlacementQuestion();
+}
+function renderPlacementQuestion(){
+  var lang=currentLang;var q=_placementQuestions[_placementQIndex];
+  if(!q){finishPlacement();return;}
+  var pct=Math.round((_placementQIndex/_placementQuestions.length)*100);
+  document.getElementById('placementContent').innerHTML='<div style="margin-bottom:20px"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px"><span style="font-size:13px;font-weight:600;color:#636e72">'+(lang==='es'?'Pregunta':'Question')+' '+(_placementQIndex+1)+' '+(lang==='es'?'de':'of')+' '+_placementQuestions.length+'</span><span style="font-size:13px;color:#636e72">'+pct+'%</span></div><div style="height:6px;background:#e0e0e0;border-radius:3px;overflow:hidden"><div style="width:'+pct+'%;height:100%;background:linear-gradient(135deg,#00b894,#0984e3);border-radius:3px;transition:width 0.3s"></div></div></div><div style="background:#fff;border-radius:16px;padding:28px;box-shadow:0 2px 16px rgba(0,0,0,0.06);margin-bottom:20px"><p style="font-size:18px;font-weight:600;color:#2d3436;margin-bottom:24px;line-height:1.5">'+q.q+'</p><div style="display:flex;flex-direction:column;gap:10px">'+q.choices.map(function(c,i){return'<button onclick="answerPlacement('+i+')" style="padding:14px 18px;border:2px solid #e0e0e0;border-radius:10px;background:#fff;text-align:left;cursor:pointer;font-size:15px;transition:all 0.2s;display:flex;align-items:center;gap:12px" onmouseover="this.style.borderColor=\'#00b894\';this.style.background=\'#f0fdf8\'" onmouseout="this.style.borderColor=\'#e0e0e0\';this.style.background=\'#fff\'"><span style="width:28px;height:28px;border-radius:50%;background:#f0f0f0;display:inline-flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;flex-shrink:0">\'ABCD\'['+i+']</span>'+c+'</button>';}).join('')+'</div></div>';
+  // Fix letter display
+  document.getElementById('placementContent').querySelectorAll('[onclick^="answerPlacement"]').forEach(function(btn,i){btn.querySelector('span').textContent='ABCD'[i];});
+}
+function answerPlacement(choiceIdx){
+  var q=_placementQuestions[_placementQIndex];
+  _placementAnswers.push({level:q.level,correct:choiceIdx===q.answer});
+  _placementQIndex++;renderPlacementQuestion();
+}
+function finishPlacement(){
+  var lang=currentLang;
+  var correct=_placementAnswers.filter(function(a){return a.correct;}).length;
+  var total=_placementAnswers.length;
+  var avgLevel=_placementAnswers.reduce(function(sum,a){return sum+(a.correct?a.level:a.level-1);},0)/total;
+  var estimatedGrade=Math.max(0,Math.min(12,Math.round(avgLevel)));
+  var gradeLabels=['Pre-K','1st','2nd','3rd','4th','5th','6th','7th','8th','9th','10th','11th','12th'];
+  var gradeName=gradeLabels[estimatedGrade]||estimatedGrade+'th';
+  if(currentUser&&window._supabaseClient){
+    window._supabaseClient.from('student_placement').upsert({user_id:currentUser.supabaseId||currentUser.username,subject:_placementSubject,grade_level:estimatedGrade,score:Math.round((correct/total)*100),placed_at:new Date().toISOString()},{onConflict:'user_id,subject'}).then(function(){});
+  }
+  document.getElementById('placementContent').innerHTML='<div style="text-align:center;padding:32px 0"><div style="font-size:64px;margin-bottom:16px">🎯</div><h2 style="font-size:28px;font-weight:800;color:#2d3436;margin-bottom:8px">'+(lang==='es'?'¡Resultado!':'Your Result!')+'</h2><div style="background:linear-gradient(135deg,#00b894,#0984e3);border-radius:16px;padding:24px;display:inline-block;margin:16px 0"><div style="color:rgba(255,255,255,0.8);font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px">'+(lang==='es'?'Nivel estimado':'Estimated Level')+'</div><div style="font-size:48px;font-weight:800;color:#fff">'+gradeName+' Grade</div><div style="color:rgba(255,255,255,0.8);font-size:14px;margin-top:4px">'+correct+'/'+total+' '+(lang==='es'?'correctas':'correct')+'</div></div><p style="color:#636e72;font-size:15px;max-width:400px;margin:16px auto 28px">'+(lang==='es'?'Recomendamos empezar en '+gradeName+' grado.':'We recommend starting at '+gradeName+' grade.')+'</p><div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap"><button onclick="(function(){loadGrade(\''+Math.max(1,estimatedGrade)+'\');switchSubject(\''+_placementSubject+'\');showAcademy();hidePlacementQuiz();})()" style="padding:14px 28px;background:linear-gradient(135deg,#00b894,#0984e3);color:#fff;border:none;border-radius:12px;font-size:15px;font-weight:700;cursor:pointer;box-shadow:0 4px 16px rgba(0,184,148,0.3)">'+(lang==='es'?'Empezar lecciones →':'Start Lessons →')+'</button><button onclick="renderPlacementStart()" style="padding:14px 28px;background:#fff;color:#636e72;border:2px solid #e0e0e0;border-radius:12px;font-size:15px;font-weight:600;cursor:pointer">'+(lang==='es'?'Probar otra materia':'Try Another Subject')+'</button></div></div>';
+}
+
+// ═══════════════════════════════════════════════════════════
+// iREADY FEATURE 2 — PARENT DASHBOARD
+// ═══════════════════════════════════════════════════════════
+function showParentDashboard(){
+  hideAllScreens();
+  document.getElementById('parentDashboardScreen').style.display='block';
+  window.location.hash='parent';
+  renderParentDashboard();
+}
+function hideParentDashboard(){
+  document.getElementById('parentDashboardScreen').style.display='none';
+  window.location.hash='';showHome();
+}
+async function renderParentDashboard(){
+  var lang=currentLang;var el=document.getElementById('parentContent');
+  if(!currentUser){
+    el.innerHTML='<div style="text-align:center;padding:48px 0"><div style="font-size:48px;margin-bottom:12px">👨‍👩‍👧</div><h3 style="color:#2d3436;margin-bottom:8px">'+(lang==='es'?'Inicia sesión para ver el progreso':'Sign in to view progress')+'</h3><button onclick="showAuthScreen();hideParentDashboard()" style="padding:14px 32px;background:linear-gradient(135deg,#00b894,#0984e3);color:#fff;border:none;border-radius:12px;font-size:15px;font-weight:700;cursor:pointer">'+(lang==='es'?'Iniciar sesión':'Sign In')+'</button></div>';
+    return;
+  }
+  el.innerHTML='<div style="text-align:center;padding:40px;color:#636e72"><div style="font-size:32px;margin-bottom:12px">⏳</div>'+(lang==='es'?'Cargando...':'Loading...')+'</div>';
+  try{
+    var sb=window._supabaseClient;var uid=currentUser.supabaseId||currentUser.username;
+    var links=[];
+    if(sb&&currentUser.supabaseId){var lr=await sb.from('student_parent_links').select('student_id,student_username').eq('parent_id',currentUser.supabaseId);links=lr.data||[];}
+    var pr=sb?await sb.from('progress').select('subject,completed,score').eq('user_id',uid).limit(200):{data:[]};
+    var xr=sb?await sb.from('xp_summary').select('total_xp,level').eq('user_id',uid).single():{data:null};
+    var ownProgress=pr.data||[];var ownXP=xr.data;
+    var subjects=['math','science','english','history','social-studies','app-building','financial-literacy'];
+    var subIcons={math:'📐',science:'🔬',english:'📖',history:'🏛️','social-studies':'🌍','app-building':'📱','financial-literacy':'💰'};
+    var bySubject={};
+    ownProgress.forEach(function(p){if(!bySubject[p.subject])bySubject[p.subject]={completed:0};if(p.completed)bySubject[p.subject].completed++;});
+    el.innerHTML='<div style="margin-bottom:28px"><h3 style="font-size:22px;font-weight:800;color:#2d3436;margin-bottom:4px">'+(lang==='es'?'Hola':'Hello')+', '+(currentUser.name||currentUser.username)+'!</h3><p style="color:#636e72;font-size:14px">'+(lang==='es'?'Resumen de actividad de aprendizaje.':'Learning activity summary.')+'</p></div>'+(ownXP?'<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:16px;margin-bottom:28px"><div style="background:#fff;border-radius:12px;padding:20px;text-align:center;border:1px solid #e0e0e0"><div style="font-size:28px;font-weight:800;color:#00b894">'+(ownXP.total_xp||0)+'</div><div style="font-size:12px;color:#636e72;margin-top:4px">⭐ XP Total</div></div><div style="background:#fff;border-radius:12px;padding:20px;text-align:center;border:1px solid #e0e0e0"><div style="font-size:28px;font-weight:800;color:#0984e3">'+(ownXP.level||1)+'</div><div style="font-size:12px;color:#636e72;margin-top:4px">🏆 Level</div></div><div style="background:#fff;border-radius:12px;padding:20px;text-align:center;border:1px solid #e0e0e0"><div style="font-size:28px;font-weight:800;color:#e17055">'+ownProgress.filter(function(p){return p.completed;}).length+'</div><div style="font-size:12px;color:#636e72;margin-top:4px">✅ '+(lang==='es'?'Completadas':'Completed')+'</div></div></div>':'')+'<h4 style="font-size:16px;font-weight:700;color:#2d3436;margin-bottom:16px">'+(lang==='es'?'Progreso por Materia':'Progress by Subject')+'</h4><div style="display:grid;gap:12px;margin-bottom:28px">'+subjects.map(function(s){var p=bySubject[s]||{completed:0};var icon=subIcons[s]||'📚';var label=s.replace(/-/g,' ').replace(/\b\w/g,function(c){return c.toUpperCase();});return'<div style="background:#fff;border-radius:12px;padding:16px 20px;border:1px solid #e0e0e0;display:flex;align-items:center;gap:16px"><span style="font-size:24px">'+icon+'</span><div style="flex:1"><div style="font-weight:600;color:#2d3436;font-size:14px;margin-bottom:6px">'+label+'</div><div style="height:6px;background:#f0f0f0;border-radius:3px;overflow:hidden"><div style="width:'+Math.min(100,p.completed*5)+'%;height:100%;background:#00b894;border-radius:3px"></div></div></div><div style="font-size:14px;font-weight:700;color:#00b894;min-width:32px;text-align:right">'+p.completed+'</div></div>';}).join('')+'</div>'+(links.length>0?'<h4 style="font-size:16px;font-weight:700;color:#2d3436;margin-bottom:12px">'+(lang==='es'?'Tus Estudiantes':'Your Students')+'</h4><div style="display:grid;gap:8px">'+links.map(function(l){return'<div style="background:#fff;border-radius:12px;padding:14px 18px;border:1px solid #e0e0e0;display:flex;align-items:center;justify-content:space-between"><span style="font-weight:600;color:#2d3436">👤 '+(l.student_username||l.student_id)+'</span><span style="font-size:12px;color:#636e72">'+(lang==='es'?'Vinculado':'Linked')+'</span></div>';}).join('')+'</div>':'<div style="background:#f8f9fa;border-radius:12px;padding:20px;border:1px dashed #b2bec3;text-align:center;color:#636e72;font-size:14px"><p style="margin-bottom:8px">'+(lang==='es'?'No hay estudiantes vinculados.':'No students linked yet.')+'</p></div>');
+  }catch(e){el.innerHTML='<div style="text-align:center;color:#d63031;padding:40px">Error loading data.</div>';}
+}
+
+// ═══════════════════════════════════════════════════════════
+// iREADY FEATURE 3 — TEACHER DASHBOARD (hash routing only — UI already exists)
+// ═══════════════════════════════════════════════════════════
+// showTeacherDashboard() is already defined earlier; hash routing wires it to /teacher
+
+// ═══════════════════════════════════════════════════════════
+// iREADY FEATURE 4 — STUDENT PROGRESS DASHBOARD
+// ═══════════════════════════════════════════════════════════
+function showStudentProgress(){
+  hideAllScreens();
+  document.getElementById('studentProgressScreen').style.display='block';
+  window.location.hash='progress';
+  renderStudentProgress();
+}
+function hideStudentProgress(){
+  document.getElementById('studentProgressScreen').style.display='none';
+  window.location.hash='';showHome();
+}
+async function renderStudentProgress(){
+  var lang=currentLang;var el=document.getElementById('studentProgressContent');
+  if(!currentUser){
+    el.innerHTML='<div style="text-align:center;padding:48px 0"><div style="font-size:48px;margin-bottom:12px">📈</div><h3 style="color:#2d3436;margin-bottom:8px">'+(lang==='es'?'Inicia sesión para ver tu progreso':'Sign in to see your progress')+'</h3><button onclick="showAuthScreen();hideStudentProgress()" style="padding:14px 32px;background:linear-gradient(135deg,#6c5ce7,#a29bfe);color:#fff;border:none;border-radius:12px;font-size:15px;font-weight:700;cursor:pointer">'+(lang==='es'?'Iniciar sesión':'Sign In')+'</button></div>';
+    return;
+  }
+  el.innerHTML='<div style="text-align:center;padding:40px;color:#636e72"><div style="font-size:32px">⏳</div>'+(lang==='es'?'Cargando...':'Loading...')+'</div>';
+  try{
+    var sb=window._supabaseClient;var uid=currentUser.supabaseId||currentUser.username;
+    var xr=sb?await sb.from('xp_summary').select('*').eq('user_id',uid).single():{data:null};
+    var pr=sb?await sb.from('progress').select('*').eq('user_id',uid).order('updated_at',{ascending:false}).limit(300):{data:[]};
+    var sr=sb?await sb.from('student_streaks').select('*').eq('user_id',uid).single():{data:null};
+    var xp=xr.data;var progress=pr.data||[];var streak=sr.data;
+    var completed=progress.filter(function(p){return p.completed;});
+    var xpTotal=xp?xp.total_xp:(completed.length*10);
+    var level=xp?xp.level:Math.floor(xpTotal/100)+1;
+    var currentStreak=streak?streak.current_streak:0;
+    var subjects=['math','science','english','history','social-studies','app-building','financial-literacy'];
+    var subIcons={math:'📐',science:'🔬',english:'📖',history:'🏛️','social-studies':'🌍','app-building':'📱','financial-literacy':'💰'};
+    var bySubject={};
+    progress.forEach(function(p){if(!bySubject[p.subject])bySubject[p.subject]={completed:0,total:0};bySubject[p.subject].total++;if(p.completed)bySubject[p.subject].completed++;});
+    var today=new Date();var heatmap=[];
+    for(var i=27;i>=0;i--){var d=new Date(today);d.setDate(d.getDate()-i);var ds=d.toISOString().split('T')[0];var cnt=progress.filter(function(p){return p.updated_at&&p.updated_at.startsWith(ds)&&p.completed;}).length;heatmap.push({date:ds,count:cnt});}
+    var heatmapHtml=heatmap.map(function(h){var col=h.count===0?'#f0f0f0':h.count===1?'#b2f5ea':h.count<=3?'#00cec9':'#00b894';return'<div title="'+h.date+': '+h.count+' lesson'+(h.count!==1?'s':'')+'" style="width:14px;height:14px;border-radius:3px;background:'+col+'"></div>';}).join('');
+    var subjectHtml=subjects.filter(function(s){return bySubject[s];}).map(function(s){var dta=bySubject[s];var pct=dta.total>0?Math.round((dta.completed/dta.total)*100):0;var icon=subIcons[s]||'📚';var label=s.replace(/-/g,' ').replace(/\b\w/g,function(c){return c.toUpperCase();});return'<div style="background:#fff;border-radius:12px;padding:14px 18px;border:1px solid #e0e0e0"><div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px"><span style="font-weight:600;font-size:14px;color:#2d3436">'+icon+' '+label+'</span><span style="font-size:13px;font-weight:700;color:#00b894">'+pct+'%</span></div><div style="height:6px;background:#f0f0f0;border-radius:3px;overflow:hidden"><div style="width:'+pct+'%;height:100%;background:#00b894;border-radius:3px"></div></div><div style="font-size:11px;color:#636e72;margin-top:4px">'+dta.completed+' / '+dta.total+' '+(lang==='es'?'lecciones':'lessons')+'</div></div>';}).join('')||'<p style="color:#636e72;font-size:14px">'+(lang==='es'?'Aún no hay lecciones completadas.':'No lessons completed yet. Start learning!')+'</p>';
+    el.innerHTML='<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:16px;margin-bottom:28px"><div style="background:linear-gradient(135deg,#00b894,#00cec9);border-radius:16px;padding:20px;text-align:center"><div style="font-size:32px;font-weight:800;color:#fff">'+xpTotal+'</div><div style="font-size:12px;color:rgba(255,255,255,0.85);margin-top:4px">⭐ XP Total</div></div><div style="background:linear-gradient(135deg,#0984e3,#6c5ce7);border-radius:16px;padding:20px;text-align:center"><div style="font-size:32px;font-weight:800;color:#fff">'+level+'</div><div style="font-size:12px;color:rgba(255,255,255,0.85);margin-top:4px">🏆 Level</div></div><div style="background:linear-gradient(135deg,#e17055,#fdcb6e);border-radius:16px;padding:20px;text-align:center"><div style="font-size:32px;font-weight:800;color:#fff">'+currentStreak+'🔥</div><div style="font-size:12px;color:rgba(255,255,255,0.85);margin-top:4px">'+(lang==='es'?'Días seguidos':'Day Streak')+'</div></div><div style="background:linear-gradient(135deg,#a29bfe,#6c5ce7);border-radius:16px;padding:20px;text-align:center"><div style="font-size:32px;font-weight:800;color:#fff">'+completed.length+'</div><div style="font-size:12px;color:rgba(255,255,255,0.85);margin-top:4px">✅ '+(lang==='es'?'Completadas':'Completed')+'</div></div></div><div style="background:#fff;border-radius:16px;padding:20px;margin-bottom:24px;border:1px solid #e0e0e0"><h4 style="font-size:15px;font-weight:700;color:#2d3436;margin-bottom:16px">📅 '+(lang==='es'?'Actividad últimos 28 días':'Activity — Last 28 Days')+'</h4><div style="display:flex;gap:4px;flex-wrap:wrap">'+heatmapHtml+'</div><div style="display:flex;align-items:center;gap:8px;margin-top:10px;font-size:11px;color:#636e72"><span>'+(lang==='es'?'Menos':'Less')+'</span><div style="width:10px;height:10px;border-radius:2px;background:#f0f0f0"></div><div style="width:10px;height:10px;border-radius:2px;background:#b2f5ea"></div><div style="width:10px;height:10px;border-radius:2px;background:#00cec9"></div><div style="width:10px;height:10px;border-radius:2px;background:#00b894"></div><span>'+(lang==='es'?'Más':'More')+'</span></div></div><h4 style="font-size:15px;font-weight:700;color:#2d3436;margin-bottom:12px">'+(lang==='es'?'Progreso por Materia':'Progress by Subject')+'</h4><div style="display:grid;gap:10px;margin-bottom:24px">'+subjectHtml+'</div><div style="text-align:center"><button onclick="showAcademy();hideStudentProgress()" style="padding:14px 32px;background:linear-gradient(135deg,#6c5ce7,#a29bfe);color:#fff;border:none;border-radius:12px;font-size:15px;font-weight:700;cursor:pointer;box-shadow:0 4px 16px rgba(108,92,231,0.3)">'+(lang==='es'?'Continuar aprendiendo →':'Continue Learning →')+'</button></div>';
+  }catch(e){el.innerHTML='<div style="text-align:center;color:#d63031;padding:40px">Error loading data.</div>';}
+}
+
+// ═══════════════════════════════════════════════════════════
+// iREADY FEATURE 5 — AI TUTOR BUTTON (inside every lesson)
+// ═══════════════════════════════════════════════════════════
+function showAiTutorModal(){
+  var lang=currentLang;var lesson=currentOpenLesson;
+  var modal=document.getElementById('aiTutorModal');var body=document.getElementById('aiTutorBody');
+  var kps=lesson&&lesson.content&&lesson.content.keyPoints;
+  var kpArr=Array.isArray(kps)?kps:(kps?[kps]:[]);
+  var kpHtml=kpArr.slice(0,4).filter(function(k){return typeof k==='string';}).map(function(k){return'<li style="margin-bottom:6px;color:#444;font-size:13px">'+k+'</li>';}).join('');
+  var tips=lang==='es'?['Vuelve a leer la introducción lentamente','Escribe el concepto con tus propias palabras','Busca un ejemplo de tu vida diaria','Pregunta a tu maestro/a o a un amigo']:['Re-read the introduction slowly and carefully','Write the concept in your own words','Think of a real-life example','Ask your teacher or a classmate for help'];
+  body.innerHTML=(lesson?'<p style="color:#636e72;font-size:14px;margin-bottom:16px"><strong>'+(lesson.emoji||'📚')+' '+tf(lesson,'title')+'</strong></p>':'')+(kpHtml?'<div style="background:#f0f7ff;border-radius:10px;padding:14px 16px;margin-bottom:16px"><div style="font-weight:700;font-size:13px;color:#0984e3;margin-bottom:8px">'+(lang==='es'?'Puntos Clave:':'Key Points:')+'</div><ul style="margin:0;padding-left:16px">'+kpHtml+'</ul></div>':'')+'<div style="background:#f8f9fa;border-radius:10px;padding:14px 16px;margin-bottom:16px"><div style="font-weight:700;font-size:13px;color:#6c5ce7;margin-bottom:8px">💡 '+(lang==='es'?'Estrategias:':'Study Strategies:')+'</div><ul style="margin:0;padding-left:16px">'+tips.map(function(t){return'<li style="margin-bottom:6px;font-size:13px;color:#444">'+t+'</li>';}).join('')+'</ul></div><div style="display:flex;gap:10px;flex-wrap:wrap"><button onclick="closeAiTutorModal();speakLesson()" style="flex:1;min-width:120px;padding:12px;background:linear-gradient(135deg,#00b894,#00cec9);color:#fff;border:none;border-radius:10px;font-weight:700;font-size:13px;cursor:pointer">🔊 '+(lang==='es'?'Escuchar lección':'Listen to Lesson')+'</button><button onclick="closeAiTutorModal()" style="flex:1;min-width:120px;padding:12px;background:#f0f0f0;color:#636e72;border:none;border-radius:10px;font-weight:700;font-size:13px;cursor:pointer">'+(lang==='es'?'Cerrar':'Close')+'</button></div>';
+  modal.style.display='flex';
+  if(currentUser&&window._supabaseClient&&lesson){var today=new Date().toISOString().split('T')[0];window._supabaseClient.from('ai_tutor_uses').insert({user_id:currentUser.supabaseId||currentUser.username,lesson_id:lesson.id,used_at:new Date().toISOString(),date:today}).then(function(){});}
+}
+function closeAiTutorModal(){document.getElementById('aiTutorModal').style.display='none';}
+
+// ═══════════════════════════════════════════════════════════
+// NAV LINKS for iReady pages (accessible from footer/nav)
+// ═══════════════════════════════════════════════════════════
+function gotoPlacement(){showPlacementQuiz();}
+function gotoParent(){showParentDashboard();}
+function gotoProgress(){showStudentProgress();}
+</script>
 </body>
 </html>
