@@ -1890,6 +1890,7 @@ var _supabaseAuthInitialized = false; // prevents double-init when CDN loads aft
 var _roleFetchPromise = Promise.resolve(); // updated each time _fetchUserRole runs; gates await this
 var _roleLoaded = false;   // true after _fetchUserRole resolves (success OR failure) — prevents infinite gate loops
 var _loggingOut = false;   // set true during logout to block any stale auth events from re-logging in
+var _lastEnterApp = 0;     // timestamp of last enterApp() call — prevents double-fire from onAuthStateChange + doSignup/doLogin both resolving
 var _adminUserRows = [];   // cache for admin user management role-change actions
 // Supabase loads async via dynamic script loader above — check if already loaded
 try {
@@ -3180,6 +3181,9 @@ function doResetPasswordLocal(){
 
 // Enter the app after successful auth
 function enterApp(){
+  var _now = Date.now();
+  if(_now - _lastEnterApp < 1500) return; // debounce: onAuthStateChange + doSignup/Login both fire enterApp
+  _lastEnterApp = _now;
   document.getElementById('authScreen').style.display = 'none';
   // Reset guest gate state — logged-in users have no limits
   guestAnswersTotal = 0;
@@ -3200,6 +3204,8 @@ function enterApp(){
   if(badge) badge.textContent = '⭐ ' + totalXP + ' XP';
   // Update user avatar and name in header
   updateUserDisplay();
+  // Snap to top instantly so the underlying page isn't revealed mid-scroll
+  window.scrollTo(0, 0);
   // Route: admins go to Admin Dashboard, everyone else to Home
   if(_roleLoaded && isAdmin()){
     hideLoader();
@@ -38010,6 +38016,7 @@ function logoutStudent(){
   currentUser = null;
   _roleFetchPromise = Promise.resolve(); // reset role state
   _roleLoaded = false; // allow fresh role fetch on next login
+  _lastEnterApp = 0; // allow enterApp() to fire on next login
   // NOTE: do NOT reset _supabaseAuthInitialized — the existing onAuthStateChange
   // listener stays live so re-login on the same page (without reload) still works
   // Clear legacy progress key (per-user data stays!)
@@ -38174,6 +38181,7 @@ function hideLoader(){
   if(!loader) return;
   const bar = document.getElementById('cloud6-load-bar');
   if(bar) bar.style.width = '100%';
+  loader.style.pointerEvents = 'none'; // allow clicks through immediately while fading
   loader.style.opacity = '0';
   setTimeout(function(){ if(loader.parentNode) loader.remove(); }, 500);
 }
