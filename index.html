@@ -3200,6 +3200,8 @@ function enterApp(){
   if(badge) badge.textContent = '⭐ ' + totalXP + ' XP';
   // Update user avatar and name in header
   updateUserDisplay();
+  // Snap to top instantly so the underlying page isn't revealed mid-scroll
+  window.scrollTo(0, 0);
   // Route: admins go to Admin Dashboard, everyone else to Home
   if(_roleLoaded && isAdmin()){
     hideLoader();
