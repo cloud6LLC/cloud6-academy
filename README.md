@@ -1,4 +1,8 @@
 # Cloud6 Academy — Origin Version 🎓
+<img width="1395" height="669" alt="Screenshot 2026-06-10 at 3 00 55 PM" src="https://github.com/user-attachments/assets/ffa22f3d-b37d-42e9-bd91-7ef3977c325f" />
+<img width="1388" height="693" alt="Screenshot 2026-06-10 at 3 01 12 PM" src="https://github.com/user-attachments/assets/f5bfd006-f0e3-450a-b2e4-d3665455ae77" />
+<img width="1392" height="620" alt="Screenshot 2026-06-10 at 3 01 55 PM" src="https://github.com/user-attachments/assets/7bfc6ae9-42d1-4584-8b07-b5e8127c5f04" />
+<img width="1392" height="704" alt="Screenshot 2026-06-10 at 3 02 08 PM" src="https://github.com/user-attachments/assets/205026e8-667b-44a6-a74c-f39cc31244a9" />
 
 **This single HTML file (~18,000 lines) was v1 of Cloud6 Academy** — a bilingual English/Spanish K-12 learning platform, built solo with Claude Code.
 
