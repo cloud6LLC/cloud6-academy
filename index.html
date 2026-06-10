@@ -379,8 +379,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
     try {
       if(window.supabase && window.supabase.createClient){
         window._supabaseClient = window.supabase.createClient(
-          'https://ugfglcetltxlncmorlif.supabase.co',
-          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVnZmdsY2V0bHR4bG5jbW9ybGlmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ2NzEyNTMsImV4cCI6MjA5MDI0NzI1M30.jIAnaWUvO6mRf__Pq__O748dv-kA7aXFDgOZRczAsZI'
+          'YOUR_SUPABASE_URL',
+          'YOUR_SUPABASE_ANON_KEY'
         );
         if(typeof supabase !== 'undefined') supabase = window._supabaseClient;
         _supabaseReady = true;
@@ -1881,9 +1881,9 @@ function setLanguage(lang){
 // ═══════════════════════════════════════════════════════════
 // SUPABASE CLOUD DATABASE CONNECTION
 // ═══════════════════════════════════════════════════════════
-const SUPABASE_URL = 'https://ugfglcetltxlncmorlif.supabase.co';
-const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVnZmdsY2V0bHR4bG5jbW9ybGlmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ2NzEyNTMsImV4cCI6MjA5MDI0NzI1M30.jIAnaWUvO6mRf__Pq__O748dv-kA7aXFDgOZRczAsZI';
-const AI_PROXY_URL = 'https://ugfglcetltxlncmorlif.supabase.co/functions/v1/ai-proxy'; // Supabase Edge Function — keeps API key server-side
+const SUPABASE_URL = 'YOUR_SUPABASE_URL';
+const SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY';
+const AI_PROXY_URL = 'YOUR_SUPABASE_URL/functions/v1/ai-proxy'; // Supabase Edge Function — keeps API key server-side
 var supabase = null;
 var _supabaseReady = false;
 var _supabaseAuthInitialized = false; // prevents double-init when CDN loads after initApp
