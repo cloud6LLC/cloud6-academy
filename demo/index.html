@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cloud6 — Watch Your Business Get Its App</title>
+<style>
+  :root{ --accent:#7c5cff; --accent2:#00d4ff; --accent3:#ff5ca8; --ink:#f5f6ff; --dim:#aab1d6;}
+  *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
+  html,body{height:100%;overflow:hidden;}
+  body{font-family:'Avenir Next','Segoe UI',system-ui,sans-serif;background:#0b0f2a;color:var(--ink);}
+  #scene{position:fixed;inset:0;}
+
+  .ui{position:fixed;inset:0;z-index:10;pointer-events:none;display:flex;flex-direction:column;
+    align-items:center;justify-content:center;padding:24px;}
+  .card{pointer-events:auto;background:rgba(11,14,38,.82);backdrop-filter:blur(14px);
+    border:1px solid rgba(255,255,255,.14);border-radius:28px;padding:38px 42px;max-width:640px;
+    text-align:center;box-shadow:0 30px 80px rgba(0,0,0,.5);
+    animation:rise .7s cubic-bezier(.2,.9,.3,1.2);}
+  @keyframes rise{from{opacity:0;transform:translateY(40px) scale(.95);}to{opacity:1;transform:none;}}
+  .kicker{display:inline-block;font-size:12px;font-weight:800;letter-spacing:2.5px;text-transform:uppercase;
+    color:var(--accent2);background:rgba(0,212,255,.1);border:1px solid rgba(0,212,255,.35);
+    padding:6px 16px;border-radius:999px;margin-bottom:18px;}
+  h1{font-size:clamp(30px,5vw,46px);font-weight:900;line-height:1.08;margin-bottom:12px;}
+  h1 .grad{background:linear-gradient(90deg,var(--accent2),var(--accent),var(--accent3));
+    -webkit-background-clip:text;background-clip:text;color:transparent;}
+  .sub{color:var(--dim);font-size:16px;line-height:1.55;margin-bottom:26px;}
+  .picks{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;}
+  .pick{cursor:pointer;background:rgba(255,255,255,.06);border:2px solid rgba(255,255,255,.15);
+    border-radius:20px;padding:18px 22px;min-width:130px;transition:transform .16s cubic-bezier(.2,.9,.3,1.5),border-color .2s;}
+  .pick:hover{transform:translateY(-5px) scale(1.05);border-color:var(--accent2);}
+  .pick .em{font-size:42px;display:block;margin-bottom:6px;}
+  .pick .nm{font-weight:800;font-size:15px;}
+
+  .toast{position:fixed;top:26px;left:50%;transform:translateX(-50%);z-index:12;pointer-events:none;
+    background:rgba(11,14,38,.85);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.15);
+    border-radius:999px;padding:12px 26px;font-weight:800;font-size:15px;opacity:0;transition:opacity .4s;}
+  .toast.show{opacity:1;}
+
+  .final{display:none;}
+  .final.show{display:flex;}
+  .btn{display:inline-block;text-decoration:none;border:none;cursor:pointer;font-weight:800;font-size:17px;color:#fff;
+    background:linear-gradient(90deg,var(--accent),var(--accent3));padding:15px 30px;border-radius:999px;
+    box-shadow:0 10px 30px rgba(124,92,255,.5);transition:transform .15s;}
+  .btn:hover{transform:translateY(-2px) scale(1.04);}
+  .btn.ghost{background:transparent;border:1.5px solid rgba(255,255,255,.25);box-shadow:none;color:var(--dim);
+    font-size:14px;padding:12px 22px;margin-left:10px;}
+  .btn.ghost:hover{color:#fff;}
+  .foot{margin-top:22px;font-size:13px;color:var(--dim);}
+  .foot a{color:var(--accent2);text-decoration:none;font-weight:700;}
+
+  .lang{position:fixed;top:22px;right:22px;z-index:12;pointer-events:auto;background:rgba(255,255,255,.08);
+    border:1px solid rgba(255,255,255,.16);color:var(--ink);border-radius:999px;padding:8px 16px;
+    font-weight:700;font-size:13px;cursor:pointer;}
+  .brand-tag{position:fixed;bottom:18px;left:22px;z-index:12;font-weight:800;font-size:14px;color:var(--dim);
+    display:flex;align-items:center;gap:8px;}
+  .brand-tag .dot{width:26px;height:26px;border-radius:8px;display:grid;place-items:center;font-size:14px;
+    background:linear-gradient(135deg,var(--accent),var(--accent2));}
+  .skip{position:fixed;bottom:18px;right:22px;z-index:12;pointer-events:auto;background:none;border:none;
+    color:var(--dim);font-weight:700;font-size:13px;cursor:pointer;opacity:.7;display:none;}
+  .skip:hover{opacity:1;color:#fff;}
+</style>
+</head>
+<body>
+<div id="scene"></div>
+
+<button class="lang" id="langBtn" onclick="toggleLang()">🌎 Español</button>
+<div class="brand-tag"><span class="dot">☁️</span> Cloud6 App Development LLC</div>
+<button class="skip" id="skipBtn" onclick="skipToEnd()">Skip ⏭</button>
+<div class="toast" id="toast"></div>
+
+
+<div class="ui" id="pickUI">
+  <div class="card">
+    <span class="kicker" id="k1">LIVE 3D DEMO</span>
+    <h1><span id="h1a">Watch your business</span><br><span class="grad" id="h1b">get its app.</span></h1>
+    <p class="sub" id="s1">Pick a business. We'll build it — block by block — and then hand it the app it deserves.</p>
+    <div class="picks">
+      <div class="pick" onclick="begin('taco')"><span class="em">🌮</span><span class="nm" id="pTaco">Taco Truck</span></div>
+      <div class="pick" onclick="begin('coffee')"><span class="em">☕</span><span class="nm" id="pCoffee">Coffee Shop</span></div>
+      <div class="pick" onclick="begin('gym')"><span class="em">💪</span><span class="nm" id="pGym">Gym</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="ui final" id="finalUI">
+  <div class="card">
+    <span class="kicker" style="color:var(--accent3);border-color:rgba(255,92,168,.4);background:rgba(255,92,168,.1);" id="k2">YOUR APP IS READY 🎉</span>
+    <h1><span class="grad" id="h2a">Cloud6 builds apps</span><br><span id="h2b">for businesses like yours.</span></h1>
+    <p class="sub" id="s2">Custom apps and websites — bilingual, affordable, built by a founder who has shipped 3 apps to the App Store. Your customers are on their phones. Your business should be too.</p>
+    <div>
+      <a class="btn" href="https://calendar.app.google/fbfh146tAxrpUqpKA" target="_blank" id="ctaBook">📅 Book a free 15-min chat</a>
+      <button class="btn ghost" onclick="restart()" id="ctaAgain">Build another</button>
+    </div>
+    <p class="foot" id="foot1">Marisa Gomez-Garcia · Cloud6 App Development LLC ·
+      <a href="https://cloud6llc.github.io/cloud6-academy/" target="_blank">cloud6 academy</a></p>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+/* ============ i18n ============ */
+const I18N={
+ en:{k1:'LIVE 3D DEMO',h1a:'Watch your business',h1b:'get its app.',
+     s1:"Pick a business. We'll build it — block by block — and then hand it the app it deserves.",
+     pTaco:'Taco Truck',pCoffee:'Coffee Shop',pGym:'Gym',
+     k2:'YOUR APP IS READY 🎉',h2a:'Cloud6 builds apps',h2b:'for businesses like yours.',
+     s2:'Custom apps and websites — bilingual, affordable, built by a founder who has shipped 3 apps to the App Store. Your customers are on their phones. Your business should be too.',
+     ctaBook:'📅 Book a free 15-min chat',ctaAgain:'Build another',
+     msgs:['Laying the foundation…','Raising the walls…','Adding the details…','Almost there…','Now… the magic ✨'],
+     phoneMsg:'Delivering your app 📱',revealMsg:'There it is — your storefront 👀',lang:'🌎 Español',skip:'Skip ⏭'},
+ es:{k1:'DEMO 3D EN VIVO',h1a:'Mira cómo tu negocio',h1b:'recibe su app.',
+     s1:'Elige un negocio. Lo construiremos — bloque por bloque — y luego le daremos la app que se merece.',
+     pTaco:'Taquería Móvil',pCoffee:'Cafetería',pGym:'Gimnasio',
+     k2:'TU APP ESTÁ LISTA 🎉',h2a:'Cloud6 crea apps',h2b:'para negocios como el tuyo.',
+     s2:'Apps y sitios web a tu medida — bilingües, accesibles, creados por una fundadora con 3 apps en el App Store. Tus clientes viven en su teléfono. Tu negocio también debería.',
+     ctaBook:'📅 Agenda 15 min gratis',ctaAgain:'Construir otro',
+     msgs:['Poniendo los cimientos…','Levantando las paredes…','Agregando los detalles…','Ya casi…','Ahora… la magia ✨'],
+     phoneMsg:'Entregando tu app 📱',revealMsg:'Ahí está — tu negocio 👀',lang:'🇺🇸 English',skip:'Saltar ⏭'}
+};
+let lang='en';
+function applyLang(){
+  const d=I18N[lang];
+  ['k1','h1a','h1b','s1','pTaco','pCoffee','pGym','k2','h2a','h2b','s2','ctaAgain'].forEach(id=>{
+    const el=document.getElementById(id); if(el) el.textContent=d[id];});
+  document.getElementById('ctaBook').textContent=d.ctaBook;
+  document.getElementById('langBtn').textContent=d.lang;
+  document.getElementById('skipBtn').textContent=d.skip;
+}
+function toggleLang(){lang=lang==='en'?'es':'en';applyLang();}
+
+/* ============ THREE setup ============ */
+const container=document.getElementById('scene');
+const renderer=new THREE.WebGLRenderer({antialias:true});
+renderer.setPixelRatio(Math.min(devicePixelRatio,2));
+renderer.setSize(innerWidth,innerHeight);
+renderer.shadowMap.enabled=true;
+renderer.shadowMap.type=THREE.PCFSoftShadowMap;
+container.appendChild(renderer.domElement);
+
+const scene=new THREE.Scene();
+scene.background=new THREE.Color(0x0b0f2a);
+scene.fog=new THREE.Fog(0x0b0f2a,70,210);
+
+const camera=new THREE.PerspectiveCamera(46,innerWidth/innerHeight,.1,300);
+
+const amb=new THREE.AmbientLight(0x8890c0,.75); scene.add(amb);
+const sun=new THREE.DirectionalLight(0xffeedd,1.15);
+sun.position.set(18,30,12); sun.castShadow=true;
+sun.shadow.mapSize.set(2048,2048);
+sun.shadow.camera.left=-30;sun.shadow.camera.right=30;
+sun.shadow.camera.top=30;sun.shadow.camera.bottom=-30;
+scene.add(sun);
+const rim=new THREE.DirectionalLight(0x00d4ff,.35); rim.position.set(-20,10,-14); scene.add(rim);
+const pink=new THREE.PointLight(0xff5ca8,.5,60); pink.position.set(-10,8,14); scene.add(pink);
+
+/* ground */
+const ground=new THREE.Mesh(new THREE.CircleGeometry(70,64),
+  new THREE.MeshStandardMaterial({color:0x141a3d,roughness:.95}));
+ground.rotation.x=-Math.PI/2; ground.receiveShadow=true; scene.add(ground);
+const grid=new THREE.GridHelper(140,70,0x2a3268,0x1c2450);
+grid.position.y=.01; scene.add(grid);
+
+/* stars */
+(()=>{const g=new THREE.BufferGeometry();const n=400;const p=new Float32Array(n*3);
+for(let i=0;i<n;i++){const r=90+Math.random()*80,th=Math.random()*Math.PI*2,ph=Math.random()*Math.PI*.5;
+p[i*3]=r*Math.sin(ph)*Math.cos(th);p[i*3+1]=20+r*Math.cos(ph)*.5;p[i*3+2]=r*Math.sin(ph)*Math.sin(th);}
+g.setAttribute('position',new THREE.BufferAttribute(p,3));
+scene.add(new THREE.Points(g,new THREE.PointsMaterial({color:0xaab6ff,size:.7,transparent:true,opacity:.8})));})();
+
+/* ============ voxel clouds — the Cloud6 sky, always under construction ============ */
+const cloudGeo=new THREE.BoxGeometry(1,1,1);
+/* Minecraft-style clouds are UNLIT — flat white, no shading */
+const cloudMat=new THREE.MeshBasicMaterial({color:0xffffff,transparent:true,opacity:.94});
+const cloudMatDark=new THREE.MeshBasicMaterial({color:0xdde6f7,transparent:true,opacity:.94});
+function cloudBlocks(){
+  // cartoon cumulus: 3-4 round DOMES side by side — big one in the middle,
+  // smaller ones on the shoulders. Flat bottom, tall puffy top.
+  const set={},blocks=[];
+  const add=(x,y,z)=>{const k=x+','+y+','+z;if(!set[k]){set[k]=1;blocks.push([x,y,z]);}};
+  const puffs=[];
+  const R=3+Math.floor(Math.random()*2);            // big center dome r=3-4 (tall!)
+  puffs.push([0,R]);
+  puffs.push([-(R+1),2+Math.floor(Math.random()*2)]); // left shoulder
+  puffs.push([ (R+1),2+Math.floor(Math.random()*2)]); // right shoulder
+  if(Math.random()<.5) puffs.push([Math.random()<.5?-(2*R):2*R,2]); // extra wisp
+  puffs.forEach(([cx,r])=>{
+    for(let x=cx-r;x<=cx+r;x++)
+      for(let y=0;y<=r;y++)                          // hemisphere: flat bottom, round top
+        for(let z=-r;z<=r;z++){
+          const dx=x-cx;
+          if(dx*dx+y*y*1.15+z*z<=r*r+r*.6) add(x,y,z);
+        }
+  });
+  // assemble bottom-up with a bit of scatter — looks like construction
+  blocks.sort((a,b)=>a[1]-b[1]||Math.random()-.5);
+  return blocks;
+}
+const clouds=[];
+function placeCloud(c,now,firstTime){
+  const a=Math.random()*Math.PI*2, r=48+Math.random()*38;   // far beyond the camera's orbit
+  c.g.position.set(Math.cos(a)*r, 7+Math.random()*10, Math.sin(a)*r);
+  c.baseY=c.g.position.y;
+  c.g.scale.setScalar(.8+Math.random()*.9);   // keep them puffy — no squash
+  c.wx=(Math.random()-.5)*.014; c.wz=(Math.random()-.5)*.014;
+  c.bob=Math.random()*Math.PI*2;
+  c.bd=3200+Math.random()*1800;                 // build duration
+  c.fd=7000+Math.random()*7000;                 // float duration
+  c.dd=2400;                                    // dissolve duration
+  c.total=c.bd+c.fd+c.dd;
+  c.born=now-(firstTime?Math.random()*c.total:0); // stagger phases on first spawn
+}
+function spawnCloud(now){
+  const g=new THREE.Group();
+  const blocks=cloudBlocks().map(([x,y,z])=>{
+    const m=new THREE.Mesh(cloudGeo, y===0?cloudMatDark:cloudMat); // subtle tint on the flat base only
+    m.position.set(x,y,z); m.visible=false; g.add(m); return m;
+  });
+  const c={g,blocks};
+  placeCloud(c,now,true);
+  scene.add(g); clouds.push(c);
+}
+for(let i=0;i<18;i++) spawnCloud(performance.now());
+function updateClouds(now){
+  clouds.forEach(c=>{
+    let t=now-c.born;
+    if(t>=c.total){ placeCloud(c,now,false); t=0; }
+    const N=c.blocks.length, appear=300;
+    c.blocks.forEach((b,i)=>{
+      if(t<c.bd){                                      // building: blocks pop in one by one
+        const lt=t-i*(c.bd-appear)/N;
+        if(lt<=0){ b.visible=false; return; }
+        b.visible=true; b.scale.setScalar(Math.min(1,lt/appear));
+      } else if(t<c.bd+c.fd){ b.visible=true; b.scale.setScalar(1); }
+      else {                                           // dissolving: blocks shrink away
+        const lt=(t-c.bd-c.fd)-((N-1-i)*(c.dd-appear)/N);
+        if(lt<=0){ b.visible=true; b.scale.setScalar(1); return; }
+        const s=1-Math.min(1,lt/appear);
+        b.visible=s>0.02; b.scale.setScalar(Math.max(.01,s));
+      }
+    });
+    c.g.position.x+=c.wx; c.g.position.z+=c.wz;
+    c.g.position.y=c.baseY+Math.sin(now*.0004+c.bob)*.7;
+  });
+}
+
+/* ============ giant CLOUD6 letters — built block by block, then lit in neon ============ */
+const FONT={
+  'C':['####','#...','#...','#...','####'],
+  'L':['#...','#...','#...','#...','####'],
+  'O':['####','#..#','#..#','#..#','####'],
+  'U':['#..#','#..#','#..#','#..#','####'],
+  'D':['###.','#..#','#..#','#..#','###.'],
+  '6':['####','#...','####','#..#','####']
+};
+const NEON=[0x66e0ff,0x2f8fff,0x8fc4ff,0x1e6dff,0x4dc9ff,0x3aa0ff]; // shades of blue
+const wallBuildMat=new THREE.MeshBasicMaterial({color:0x8f9ac2});
+const wallDimMat=new THREE.MeshBasicMaterial({color:0x272e55});
+const wallNeonMats=NEON.map(c=>new THREE.MeshBasicMaterial({color:c}));
+const wall={g:new THREE.Group(),blocks:[],born:performance.now(),
+  bd:6500,fk:1400,gl:12000,dd:2200,dk:1200};
+wall.total=wall.bd+wall.fk+wall.gl+wall.dd+wall.dk;
+(function buildWall(){
+  const word='CLOUD6';
+  [...word].forEach((ch,i)=>{
+    const rows=FONT[ch];
+    rows.forEach((row,ry)=>{
+      [...row].forEach((cell,rx)=>{
+        if(cell!=='#') return;
+        for(let z=0;z<2;z++){                    // 2 blocks thick for presence
+          const m=new THREE.Mesh(cloudGeo,wallBuildMat);
+          const lx=i*5+rx-14.5, ly=(4-ry)+2;     // baseline lifted 2 blocks off the ground
+          m.position.set(lx,ly,z); m.visible=false;
+          m.userData={letter:i,lx};
+          wall.g.add(m); wall.blocks.push(m);
+        }
+      });
+    });
+  });
+  wall.g.scale.setScalar(1.0);   // closer now, so smaller scale keeps the same on-screen size
+  scene.add(wall.g);
+})();
+const wallGlow=new THREE.PointLight(0x2f8fff,.0,90);
+scene.add(wallGlow);
+function placeWall(A){
+  wall.A=A;
+  const R=40;                                               // closer than the clouds (48+) — always in front
+  wall.g.position.set(Math.cos(A)*R,8,Math.sin(A)*R);      // sky height, but fully in frame
+  wall.g.rotation.y=Math.atan2(-Math.cos(A),-Math.sin(A)); // face the center
+  wallGlow.position.set(Math.cos(A)*34,14,Math.sin(A)*34);
+}
+placeWall(Math.PI*1.25);
+function updateWall(now){
+  let t=now-wall.born;
+  if(t>=wall.total){ wall.born=now; t=0; }
+  const {bd,fk,gl,dd}=wall;
+  wall.blocks.forEach(b=>{
+    const f=(b.userData.lx+14.5)/29;                       // 0..1 left→right
+    if(t<bd){                                              // build in, left to right
+      const lt=t-f*(bd-500)-((b.position.y)*40);
+      if(lt<=0){b.visible=false;return;}
+      b.visible=true; b.material=wallBuildMat;
+      b.scale.setScalar(Math.min(1,lt/320));
+    } else if(t<bd+fk){                                    // neon flicker
+      b.visible=true; b.scale.setScalar(1);
+      const on=Math.floor((t-bd)/140)%2===0 || (t-bd)>fk*.7;
+      b.material=on?wallNeonMats[b.userData.letter]:wallDimMat;
+    } else if(t<bd+fk+gl){                                 // steady neon glow
+      b.visible=true; b.scale.setScalar(1);
+      b.material=wallNeonMats[b.userData.letter];
+    } else if(t<bd+fk+gl+dd){                              // dissolve right to left
+      const lt=(t-bd-fk-gl)-(1-f)*(dd-400);
+      if(lt<=0){b.visible=true;b.material=wallNeonMats[b.userData.letter];b.scale.setScalar(1);return;}
+      const s=1-Math.min(1,lt/350);
+      b.visible=s>.03; b.scale.setScalar(Math.max(.01,s));
+    } else b.visible=false;                                // dark pause before rebuild
+  });
+  const neonPhase=t>=bd&&t<bd+fk+gl;
+  wallGlow.intensity=neonPhase?( t<bd+fk ? (Math.floor((t-bd)/140)%2===0?.8:.1) : .8 ):0;
+}
+
+/* ============ voxel model helpers ============ */
+const S=1; // block size
+function makeModel(){ const blocks=[]; const idx={};
+  const put=(x,y,z,c)=>{ const k=x+','+y+','+z;
+    if(idx[k]!==undefined){ blocks[idx[k]].c=c; } else { idx[k]=blocks.length; blocks.push({x,y,z,c}); } };
+  const fill=(x1,y1,z1,x2,y2,z2,c)=>{for(let x=Math.min(x1,x2);x<=Math.max(x1,x2);x++)
+    for(let y=Math.min(y1,y2);y<=Math.max(y1,y2);y++)
+    for(let z=Math.min(z1,z2);z<=Math.max(z1,z2);z++) put(x,y,z,c);};
+  return {blocks,put,fill};
+}
+
+function tacoTruck(){
+  const m=makeModel(),{fill,put}=m;
+  const CREAM=0xfff1dc,ORANGE=0xff7847,DARK=0x2b2b33,GRAY=0x565b70,RED=0xe03e3e,WHITE=0xffffff,
+        WOOD=0x9a6b3f,GLASS=0x8fd3ff,YELL=0xffd166;
+  // wheels
+  [[-6],[3]].forEach(([z])=>{ [-3,3].forEach(x=>{ fill(x,0,z,x,0,z+1,DARK); }); });
+  // chassis
+  fill(-3,1,-7,3,1,5,GRAY);
+  // body
+  fill(-3,2,-7,3,5,2,CREAM);
+  // cab (front, +z)
+  fill(-3,2,3,3,4,5,ORANGE);
+  fill(-2,4,5,2,4,5,GLASS);           // windshield
+  [[-3],[3]].forEach(([x])=>put(x,2,6,YELL)); // headlights
+  // serving window on +x side
+  fill(3,3,-5,3,4,-1,DARK);
+  fill(4,2,-6,4,2,0,WOOD);            // counter ledge
+  // awning stripes above window
+  for(let z=-6;z<=0;z++) put(4,5,z,(z%2===0)?RED:WHITE);
+  // roof
+  fill(-3,6,-7,3,6,2,ORANGE);
+  // roof sign base
+  fill(-1,7,-4,1,7,-2,RED);
+  return {model:m,sign:'🌮 TACOS',signPos:[0,10.5,-3],front:0,
+    app:{name:'Taco Cielo',color:'#e03e3e',color2:'#ff7847',
+      items:[['🌮','Tacos al Pastor','⭐ 4.9 · Best seller','$3.50'],['🌯','Super Burrito','⭐ 4.8 · Fan favorite','$9.75'],['🧀','Quesabirria','⭐ 5.0 · Trending now','$4.25'],['🥤','Agua Fresca','Horchata · Jamaica','$3.00']],
+      tag:'Hecho con amor'}};
+}
+
+function coffeeShop(){
+  const m=makeModel(),{fill,put}=m;
+  const WALL=0xf3e2c7,TRIM=0x6b4a2f,GLASS=0x9fdcff,GREEN=0x1f7a5c,WHITE=0xffffff,
+        ROOF=0x8a5a33,DOOR=0x5a3a22,BRICK=0xb56a45;
+  // base
+  fill(-6,0,-4,6,0,4,BRICK);
+  // walls
+  fill(-6,1,-4,6,6,4,WALL);
+  // storefront glass (+z face)
+  fill(-5,1,4,-2,4,4,GLASS);
+  fill(2,1,4,5,4,4,GLASS);
+  // door
+  fill(-1,1,4,1,3,4,DOOR); put(1,2,4,0xffd166);
+  // awning stripes
+  for(let x=-6;x<=6;x++) put(x,5,5,(x%2===0)?GREEN:WHITE);
+  // trim + roof
+  fill(-6,7,-4,6,7,4,TRIM);
+  fill(-5,8,-3,5,8,3,ROOF);
+  // chimney/cup base
+  fill(-1,9,-1,1,9,1,GREEN);
+  // side windows
+  fill(-6,2,-2,-6,4,1,GLASS); fill(6,2,-2,6,4,1,GLASS);
+  return {model:m,sign:'☕ CAFÉ',signPos:[0,12.5,0],front:Math.PI/2,
+    app:{name:'Brew Bliss',color:'#1f7a5c',color2:'#66c2a5',
+      items:[['☕','Cafe de Olla','⭐ 4.9 · House special','$4.50'],['🥐','Concha + Latte','Morning combo deal','$7.25'],['🧊','Iced Horchata','⭐ 4.8 · Summer hit','$5.75'],['🍰','Tres Leches','Baked fresh daily','$5.00']],
+      tag:'Your daily ritual'}};
+}
+
+function gym(){
+  const m=makeModel(),{fill,put}=m;
+  const WALL=0x3a4266,DARK=0x232948,BLUE=0x2f6df6,GLASS=0xa8e6ff,YELL=0xffd166,RED=0xff5c5c,GRAY=0x8a92b8;
+  // base + walls
+  fill(-7,0,-4,7,0,4,DARK);
+  fill(-7,1,-4,7,6,4,WALL);
+  // big glass front
+  fill(-6,1,4,-2,5,4,GLASS);
+  fill(2,1,4,6,5,4,GLASS);
+  // door
+  fill(-1,1,4,1,4,4,BLUE); put(1,2,4,YELL);
+  // stripe
+  fill(-7,4,-4,7,4,4,BLUE);
+  // roof
+  fill(-7,7,-4,7,7,4,DARK);
+  // rooftop dumbbell: bar + plates
+  fill(-3,8,0,3,8,0,GRAY);
+  fill(-4,8,-1,-4,9,1,RED); fill(-3,8,-1,-3,9,1,RED);
+  fill(4,8,-1,4,9,1,RED);   fill(3,8,-1,3,9,1,RED);
+  return {model:m,sign:'💪 POWER GYM',signPos:[0,12.5,0],front:Math.PI/2,
+    app:{name:'Power Up',color:'#2f6df6',color2:'#00d4ff',
+      items:[['🥊','Boxing Bootcamp','Tonight · 6:00 PM','Book'],['🧘','Yoga Flow','Tomorrow · 7:00 AM','Book'],['🏋️','Open Gym Pass','All-access day pass','$15'],['⭐','Your Rewards','240 points earned','🎁']],
+      tag:'Stronger every day'}};
+}
+
+const BUILDS={taco:tacoTruck,coffee:coffeeShop,gym:gym};
+
+/* ============ block meshes ============ */
+const boxGeo=new THREE.BoxGeometry(S,S,S);
+const matCache={};
+function matFor(c){ if(!matCache[c]) matCache[c]=new THREE.MeshStandardMaterial({color:c,roughness:.65,metalness:.05}); return matCache[c]; }
+
+let buildGroup=null, phoneGroup=null, signSprite=null, sparkles=null;
+let anim={blocks:[],start:0,dur:0,phase:'idle',phoneStart:0,current:null};
+
+function textSprite(text){
+  const cv=document.createElement('canvas');cv.width=1024;cv.height=200;
+  const ctx=cv.getContext('2d');
+  let size=104; ctx.font='900 '+size+'px Avenir Next, Segoe UI, sans-serif';
+  while(ctx.measureText(text).width>940 && size>40){ size-=6; ctx.font='900 '+size+'px Avenir Next, Segoe UI, sans-serif'; }
+  ctx.textAlign='center';ctx.textBaseline='middle';
+  ctx.shadowColor='rgba(0,212,255,.9)';ctx.shadowBlur=28;
+  ctx.fillStyle='#ffffff';ctx.fillText(text,512,104);
+  const tex=new THREE.CanvasTexture(cv);
+  const sp=new THREE.Sprite(new THREE.SpriteMaterial({map:tex,transparent:true}));
+  sp.scale.set(14,2.73,1); return sp;
+}
+
+/* phone with app screen */
+function phoneScreenTexture(app){
+  const cv=document.createElement('canvas');cv.width=512;cv.height=1024;
+  const x=cv.getContext('2d');
+  x.fillStyle='#f6f7fb';x.fillRect(0,0,512,1024);
+  // header
+  const g=x.createLinearGradient(0,0,512,200);g.addColorStop(0,app.color);g.addColorStop(1,app.color2);
+  x.fillStyle=g;x.fillRect(0,0,512,210);
+  x.fillStyle='#fff';x.font='900 52px Avenir Next, Segoe UI, sans-serif';x.textAlign='left';
+  x.fillText(app.name,36,120,440);
+  x.font='600 30px Avenir Next, sans-serif';x.globalAlpha=.9;x.fillText(app.tag,38,168,440);x.globalAlpha=1;
+  // cards — defined squares: border, shadow, accent bar
+  const rr=(x1,y1,w,h,r)=>{x.beginPath();x.moveTo(x1+r,y1);x.arcTo(x1+w,y1,x1+w,y1+h,r);
+    x.arcTo(x1+w,y1+h,x1,y1+h,r);x.arcTo(x1,y1+h,x1,y1,r);x.arcTo(x1,y1,x1+w,y1,r);x.closePath();};
+  app.items.forEach((it,i)=>{
+    const y=248+i*152;
+    x.save();
+    x.shadowColor='rgba(30,36,80,.18)';x.shadowBlur=16;x.shadowOffsetY=6;
+    x.fillStyle='#ffffff'; rr(42,y,428,124,22); x.fill();
+    x.restore();
+    x.lineWidth=3; x.strokeStyle='#dfe3f2'; rr(42,y,428,124,22); x.stroke();
+    x.fillStyle=app.color; rr(42,y,10,124,5); x.fill();          // accent bar
+    x.font='52px serif'; x.fillText(it[0],70,y+80);
+    x.fillStyle='#20243c';x.font='800 30px Avenir Next, sans-serif';x.fillText(it[1],142,y+52,196);
+    x.fillStyle='#8a8fa8';x.font='600 22px Avenir Next, sans-serif';x.fillText(it[2],142,y+92,196);
+    x.fillStyle=app.color;x.font='900 28px Avenir Next, sans-serif';x.textAlign='right';x.fillText(it[3],452,y+72,92);x.textAlign='left';
+  });
+  // tab bar
+  x.fillStyle='#ffffff';x.fillRect(0,930,512,94);
+  x.fillStyle='#8a8fa8';x.font='700 26px Avenir Next, sans-serif';x.textAlign='center';
+  ['🏠','🛍️','📅','💬'].forEach((t2,i)=>x.fillText(t2,64+i*128,988));
+  return new THREE.CanvasTexture(cv);
+}
+
+function makePhone(app){
+  const g=new THREE.Group();
+  const body=new THREE.Mesh(new THREE.BoxGeometry(5.6,11.2,.6),
+    new THREE.MeshStandardMaterial({color:0x14162a,roughness:.35,metalness:.6}));
+  body.castShadow=true; g.add(body);
+  const screen=new THREE.Mesh(new THREE.PlaneGeometry(5.1,10.6),
+    new THREE.MeshBasicMaterial({map:phoneScreenTexture(app)}));
+  screen.position.z=.32; g.add(screen);
+  const glowGeo=new THREE.PlaneGeometry(6.6,12.4);
+  const glow=new THREE.Mesh(glowGeo,new THREE.MeshBasicMaterial({color:app.color2?new THREE.Color(app.color2):0x00d4ff,
+    transparent:true,opacity:.18,side:THREE.DoubleSide}));
+  glow.position.z=-.4; g.add(glow);
+  return g;
+}
+
+/* sparkles burst */
+function makeSparkles(){
+  const n=260,g=new THREE.BufferGeometry(),p=new Float32Array(n*3),v=[];
+  for(let i=0;i<n;i++){p[i*3]=0;p[i*3+1]=6;p[i*3+2]=0;
+    const th=Math.random()*Math.PI*2,ph=Math.random()*Math.PI;
+    const sp=.18+Math.random()*.3;
+    v.push([Math.sin(ph)*Math.cos(th)*sp,Math.abs(Math.cos(ph))*sp*1.4,Math.sin(ph)*Math.sin(th)*sp]);}
+  g.setAttribute('position',new THREE.BufferAttribute(p,3));
+  const pts=new THREE.Points(g,new THREE.PointsMaterial({color:0xffe28a,size:.32,transparent:true,opacity:1}));
+  pts.userData={v,life:0}; return pts;
+}
+
+/* ============ shooting stars with sparkle trails ============ */
+const shoots=[];
+function resetShoot(st,now){
+  st.start=now+1200+Math.random()*4500;             // wait before the next streak
+  const a=Math.random()*Math.PI*2;
+  const y0=16+Math.random()*14;
+  st.p0=new THREE.Vector3(Math.cos(a)*72,y0,Math.sin(a)*72);
+  const a2=a+(.6+Math.random()*.9)*(Math.random()<.5?1:-1);
+  st.p1=new THREE.Vector3(Math.cos(a2)*42,y0-7-Math.random()*7,Math.sin(a2)*42);
+  st.dur=850+Math.random()*550;
+}
+for(let i=0;i<5;i++){
+  const n=22, g=new THREE.BufferGeometry();
+  g.setAttribute('position',new THREE.BufferAttribute(new Float32Array(n*3),3));
+  const pts=new THREE.Points(g,new THREE.PointsMaterial({color:0xcfe6ff,size:.55,
+    transparent:true,opacity:.95,sizeAttenuation:true}));
+  pts.visible=false; scene.add(pts);
+  const st={pts,n}; resetShoot(st,performance.now()+i*1700);
+  shoots.push(st);
+}
+/* twinkle stars framing the intro card (screen-locked) */
+scene.add(camera);
+const twinkleGroup=new THREE.Group(); camera.add(twinkleGroup);
+const starTex=(()=>{const cv=document.createElement('canvas');cv.width=cv.height=64;
+  const x=cv.getContext('2d');x.translate(32,32);
+  const grad=x.createRadialGradient(0,0,0,0,0,30);
+  grad.addColorStop(0,'rgba(255,255,255,1)');grad.addColorStop(.3,'rgba(190,220,255,.8)');grad.addColorStop(1,'rgba(190,220,255,0)');
+  x.fillStyle=grad;
+  x.beginPath();                                     // 4-point sparkle
+  x.moveTo(0,-30);x.quadraticCurveTo(4,-4,30,0);x.quadraticCurveTo(4,4,0,30);
+  x.quadraticCurveTo(-4,4,-30,0);x.quadraticCurveTo(-4,-4,0,-30);x.fill();
+  return new THREE.CanvasTexture(cv);})();
+const twinkles=[];
+[[-1],[1]].forEach(([side])=>{
+  for(let i=0;i<14;i++){
+    const m=new THREE.Sprite(new THREE.SpriteMaterial({map:starTex,transparent:true}));
+    m.position.set(side*(6.6+Math.random()*4.2),-3+Math.random()*6.5,-14);
+    const s=.28+Math.random()*.45;
+    m.scale.set(s,s,1);
+    twinkleGroup.add(m);
+    twinkles.push({m,s,sp:.0015+Math.random()*.0035,ph:Math.random()*Math.PI*2});
+  }
+});
+function updateHud(now){                             // (keeps its hook name in the loop)
+  twinkleGroup.visible=(anim.phase==='idle')&&(innerWidth/innerHeight>1.15);
+  if(twinkleGroup.visible){
+    twinkles.forEach(t=>{
+      const w=.5+.5*Math.sin(now*t.sp+t.ph);         // 0..1 twinkle wave
+      t.m.material.opacity=.25+.75*w;
+      const k=t.s*(.6+.55*w);
+      t.m.scale.set(k,k,1);
+    });
+  }
+  shoots.forEach(st=>{
+    const t=(now-st.start)/st.dur;
+    if(t<0){ st.pts.visible=false; return; }
+    if(t>1.15){ resetShoot(st,now); st.pts.visible=false; return; }
+    st.pts.visible=true;
+    const pos=st.pts.geometry.attributes.position;
+    for(let i=0;i<st.n;i++){
+      const f=Math.max(0,Math.min(1,t-i*.018));     // trailing sparkles behind the head
+      pos.array[i*3]  =st.p0.x+(st.p1.x-st.p0.x)*f;
+      pos.array[i*3+1]=st.p0.y+(st.p1.y-st.p0.y)*f + (i>0?Math.sin(i*3.7+now*.01)*.12:0);
+      pos.array[i*3+2]=st.p0.z+(st.p1.z-st.p0.z)*f;
+    }
+    pos.needsUpdate=true;
+    st.pts.material.opacity=t>1?Math.max(0,1-(t-1)*6):.95;
+  });
+}
+
+/* ============ build flow ============ */
+const toast=document.getElementById('toast');
+function showToast(txt){toast.textContent=txt;toast.classList.add('show');}
+function hideToast(){toast.classList.remove('show');}
+
+function clearScene(){
+  [buildGroup,phoneGroup,signSprite,sparkles].forEach(o=>{if(o) scene.remove(o);});
+  buildGroup=phoneGroup=signSprite=sparkles=null;
+}
+
+function begin(kind){
+  document.getElementById('pickUI').style.display='none';
+  document.getElementById('finalUI').classList.remove('show');
+  document.getElementById('skipBtn').style.display='block';
+  clearScene();
+  const b=BUILDS[kind]();
+  anim.current=b;
+  placeWall(b.front+Math.PI);   // park the CLOUD6 letters behind the storefront's front view
+  buildGroup=new THREE.Group(); scene.add(buildGroup);
+  // sort: bottom-up, slight random within layer
+  const list=b.model.blocks.slice().sort((a,c)=>a.y-c.y || Math.random()-.5);
+  anim.blocks=list.map((bl,i)=>{
+    const mesh=new THREE.Mesh(boxGeo,matFor(bl.c));
+    mesh.castShadow=true;mesh.receiveShadow=true;
+    mesh.position.set(bl.x*S,bl.y*S+.5+22,bl.z*S); // start high
+    mesh.visible=false;
+    buildGroup.add(mesh);
+    return {mesh,tx:bl.x*S,ty:bl.y*S+.5,tz:bl.z*S,delay:i*(9000/list.length),fall:520};
+  });
+  anim.start=performance.now();
+  anim.dur=9000+700;
+  anim.phase='building';
+}
+
+function skipToEnd(){
+  if(anim.phase==='building'){ anim.start=performance.now()-anim.dur; }
+  else if(anim.phase==='reveal'){ anim.revealStart=performance.now()-4200; }
+  else if(anim.phase==='phone'){ anim.phoneStart=performance.now()-2400; }
+}
+
+function finishBuild(){
+  anim.phase='reveal';
+  anim.revealStart=performance.now();
+  // normalize current angle and pick nearest equivalent of the front angle
+  anim.a0=camAngle%(Math.PI*2);
+  let a1=anim.current.front;
+  a1+=Math.PI*2*Math.round((anim.a0-a1)/(Math.PI*2));
+  anim.a1=a1;
+  showToast(I18N[lang].revealMsg);
+  // sign + sparkles celebrate the finished storefront
+  signSprite=textSprite(anim.current.sign);
+  signSprite.position.set(...anim.current.signPos);
+  scene.add(signSprite);
+  sparkles=makeSparkles(); scene.add(sparkles);
+}
+
+function startPhone(){
+  anim.phase='phone';
+  anim.phoneStart=performance.now();
+  showToast(I18N[lang].phoneMsg);
+  // place the phone well clear of the building: far to the screen-right AND pulled toward the camera
+  const a=anim.a1;
+  anim.px=Math.sin(a)*15+Math.cos(a)*7;
+  anim.pz=-Math.cos(a)*15+Math.sin(a)*7;
+  anim.prot=Math.PI/2-a-0.38;   // angled inward, toward the storefront
+  phoneGroup=makePhone(anim.current.app);
+  phoneGroup.position.set(anim.px,-6.5,anim.pz);
+  phoneGroup.rotation.y=anim.prot;
+  scene.add(phoneGroup);
+}
+
+function finishAll(){
+  anim.phase='done';
+  hideToast();
+  document.getElementById('skipBtn').style.display='none';
+  document.getElementById('finalUI').classList.add('show');
+}
+
+function restart(){
+  clearScene();
+  anim.phase='idle';
+  document.getElementById('finalUI').classList.remove('show');
+  document.getElementById('pickUI').style.display='flex';
+}
+
+/* ============ camera + loop ============ */
+let camAngle=0;
+const easeOut=t=>1-Math.pow(1-t,3);
+const bounce=t=>{ if(t<1) return 1-Math.pow(1-t,2); return 1; };
+
+function animate(now){
+  requestAnimationFrame(animate);
+  let R=26,H=14,look=[0,5,0];
+  if(anim.phase==='idle'||anim.phase==='building'){
+    camAngle+=.0022;
+  } else if(anim.phase==='reveal'){
+    const t=Math.min(1,(now-anim.revealStart)/2600);
+    const e=t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2;   // ease in-out
+    camAngle=anim.a0+(anim.a1-anim.a0)*e;
+    R=26-3.5*e; H=14-4.5*e;
+    if(now-anim.revealStart>2600+1600) startPhone();
+  } else {                                       // phone & done: hold front view
+    camAngle=anim.a1+Math.sin(now*.0006)*.05;
+    R=24; H=9.5;
+    look=[anim.px*.35,5.4,anim.pz*.35];
+  }
+  camera.position.set(Math.cos(camAngle)*R,H,Math.sin(camAngle)*R);
+  camera.lookAt(look[0],look[1],look[2]);
+
+  if(anim.phase==='building'){
+    const t=now-anim.start;
+    let done=0;
+    const msgs=I18N[lang].msgs;
+    showToast(msgs[Math.min(msgs.length-1,Math.floor((t/anim.dur)*msgs.length))]);
+    anim.blocks.forEach(b=>{
+      const lt=t-b.delay;
+      if(lt<=0) return;
+      b.mesh.visible=true;
+      const f=Math.min(1,lt/b.fall);
+      const e=easeOut(f);
+      b.mesh.position.y=(22*(1-e))+b.ty;
+      b.mesh.scale.setScalar(f<0.15? .5+f/0.15*.5 : 1);
+      if(f>=1){b.mesh.position.y=b.ty;done++;}
+    });
+    if(done>=anim.blocks.length) finishBuild();
+  }
+
+  if(anim.phase==='phone'){
+    const t=(now-anim.phoneStart)/2400;
+    const f=Math.min(1,t);
+    const e=easeOut(f);
+    phoneGroup.position.y=-6.5+(6.5+6.2)*e;   // rise to y≈6.2
+    phoneGroup.rotation.y=anim.prot+Math.sin(now*.001)*.06;
+    if(f>=1 && t<1.2) phoneGroup.position.y=6.2+Math.sin(now*.002)*.25;
+    if(t>=1.4) finishAll();
+  }
+  if(anim.phase==='done' && phoneGroup){
+    phoneGroup.position.y=6.2+Math.sin(now*.002)*.25;
+    phoneGroup.rotation.y=anim.prot+Math.sin(now*.001)*.06;
+  }
+
+  if(sparkles){
+    const d=sparkles.userData; d.life++;
+    const pos=sparkles.geometry.attributes.position;
+    for(let i=0;i<pos.count;i++){
+      pos.array[i*3]+=d.v[i][0]; pos.array[i*3+1]+=d.v[i][1]; pos.array[i*3+2]+=d.v[i][2];
+      d.v[i][1]-=.004;
+    }
+    pos.needsUpdate=true;
+    sparkles.material.opacity=Math.max(0,1-d.life/140);
+    if(d.life>150){scene.remove(sparkles);sparkles=null;}
+  }
+  if(signSprite) signSprite.position.y+=Math.sin(now*.0018)*.004;
+  updateClouds(now);
+  updateWall(now);
+  updateHud(now);
+
+  renderer.render(scene,camera);
+}
+requestAnimationFrame(animate);
+
+addEventListener('resize',()=>{
+  camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();
+  renderer.setSize(innerWidth,innerHeight);
+});
+applyLang();
+</script>
+</body>
+</html>
