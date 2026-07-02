@@ -41,7 +41,10 @@
     background:rgba(8,11,26,.9);backdrop-filter:blur(14px);border:1px solid rgba(102,224,255,.3);
     border-radius:20px;padding:20px 26px;max-width:340px;text-align:center;opacity:0;
     pointer-events:none;transition:opacity .3s,transform .3s;}
-  .card.show{opacity:1;transform:translateX(-50%) translateY(0);}
+  .card.show{opacity:1;transform:translateX(-50%) translateY(0);pointer-events:auto;}
+  .card .x{position:absolute;top:8px;right:14px;background:none;border:none;color:var(--dim);
+    font-size:20px;font-weight:800;cursor:pointer;}
+  .card .x:hover{color:#fff;}
   .card .em{font-size:40px;}
   .card b{display:block;font-size:19px;margin:6px 0 4px;}
   .card p{color:var(--dim);font-size:13.5px;line-height:1.5;}
@@ -65,6 +68,7 @@
 </div>
 
 <div class="card" id="card">
+  <button class="x" onclick="hideCard()">✕</button>
   <span class="em" id="cardEm">🐾</span>
   <b id="cardTitle">Pet Tracker</b>
   <p id="cardDesc">Feeding, walks and pick-up schedules — a real app built by an App Creator Lab student.</p>
@@ -77,20 +81,20 @@ const I18N={
  en:{h1a:"Our students don't play in worlds.",h1b:"They build them.",
      sub:"Every glowing tower is a project kids can build in the App Creator Lab. Tap one.",
      tip:"👆 Tap the glowing towers",ctaBook:"📅 Book a free class",ctaSite:"🎓 App Creator Lab",lang:"🌎 Español",
-     projects:{pet:["Pet Tracker","Feeding, walks and pick-up schedules with times and days of the week — a real app built by an App Creator Lab student."],
-       shark:["Interactive Shark Lessons","Learn shark species through interactive lessons — tap, explore and quiz your way through the ocean. Built by a student."],
-       war:["War Machines","War planes, jets and tanks — with stats, tiles and photos for every machine. Built by a student."],
+     projects:{pet:["Pet Tracker","Feeding, walks and pick-up schedules with times and days of the week — a real app built by an App Creator Lab student, age 10."],
+       shark:["Interactive Shark Lessons","Learn shark species through interactive lessons — tap, explore and quiz your way through the ocean. Built by a student, age 12."],
+       war:["War Machines","War planes, jets and tanks — with stats, tiles and photos for every machine. Built by a student, age 13."],
        boba:["Boba Shop App","Ordering, rewards and a live menu — a guided project students build step by step in class."],
-       game:["Arcade Game","A playable browser game with scores and levels — a guided class project."],
+       game:["Arcade Game","A playable browser game with scores and levels — built by a student, age 11."],
        music:["Music Mixer","A beat maker with real sounds — a guided class project where students code every button."]}},
  es:{h1a:"Nuestros estudiantes no juegan en mundos.",h1b:"Los construyen.",
      sub:"Cada torre iluminada es un proyecto que los niños pueden crear en el App Creator Lab. Toca una.",
      tip:"👆 Toca las torres brillantes",ctaBook:"📅 Reserva una clase gratis",ctaSite:"🎓 App Creator Lab",lang:"🇺🇸 English",
-     projects:{pet:["Pet Tracker","Comidas, paseos y recogida con horarios por día de la semana — una app real creada por un estudiante del App Creator Lab."],
-       shark:["Lecciones de Tiburones","Aprende especies de tiburones con lecciones interactivas — explora y responde quizzes. Creada por un estudiante."],
-       war:["Máquinas de Guerra","Aviones, jets y tanques — con estadísticas, fichas y fotos de cada máquina. Creada por un estudiante."],
+     projects:{pet:["Pet Tracker","Comidas, paseos y recogida con horarios por día de la semana — una app real creada por un estudiante de 10 años del App Creator Lab."],
+       shark:["Lecciones de Tiburones","Aprende especies de tiburones con lecciones interactivas — explora y responde quizzes. Creada por un estudiante de 12 años."],
+       war:["Máquinas de Guerra","Aviones, jets y tanques — con estadísticas, fichas y fotos de cada máquina. Creada por un estudiante de 13 años."],
        boba:["App de Boba","Pedidos, premios y menú en vivo — un proyecto guiado que los estudiantes construyen paso a paso en clase."],
-       game:["Juego Arcade","Un juego jugable con puntajes y niveles — un proyecto guiado de clase."],
+       game:["Juego Arcade","Un juego jugable con puntajes y niveles — creado por un estudiante de 11 años."],
        music:["Mezclador de Música","Una caja de ritmos con sonidos reales — un proyecto guiado donde los estudiantes programan cada botón."]}}
 };
 let lang='en';
@@ -237,21 +241,26 @@ for(let i=0;i<16;i++){
 
 /* ============ interaction: tap a glowing tower ============ */
 const ray=new THREE.Raycaster(), mouse=new THREE.Vector2();
-let currentProject=null, cardTimer=null;
+let currentProject=null;
 function showCard(pr){
   currentProject=pr;
   const [title,desc]=I18N[lang].projects[pr.key];
   document.getElementById('cardEm').textContent=pr.emoji;
   document.getElementById('cardTitle').textContent=title;
   document.getElementById('cardDesc').textContent=desc;
-  const el=document.getElementById('card'); el.classList.add('show');
-  clearTimeout(cardTimer); cardTimer=setTimeout(()=>{el.classList.remove('show');currentProject=null;},6500);
+  document.getElementById('card').classList.add('show');
+}
+function hideCard(){
+  document.getElementById('card').classList.remove('show');
+  currentProject=null;
 }
 addEventListener('pointerdown',e=>{
+  if(e.target.closest('.card')||e.target.closest('.cta')||e.target.closest('.lang')) return;
   mouse.x=(e.clientX/innerWidth)*2-1; mouse.y=-(e.clientY/innerHeight)*2+1;
   ray.setFromCamera(mouse,camera);
   const hit=ray.intersectObjects(clickables)[0];
-  if(hit) showCard(hit.object.userData.project);
+  if(hit) showCard(hit.object.userData.project);   // tap a tower: open (or switch) the card
+  else if(currentProject) hideCard();              // tap anywhere else: close it and keep exploring
 });
 
 /* mouse parallax */
