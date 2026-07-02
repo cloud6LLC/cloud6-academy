@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cloud6 Slice — Slice with your hand!</title>
+<style>
+  :root{--blue:#2f8fff;--cyan:#66e0ff;--pink:#ff5ca8;--ink:#f5f6ff;}
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html,body{height:100%;overflow:hidden;background:#05070f;font-family:'Avenir Next','Segoe UI',system-ui,sans-serif;color:var(--ink);}
+  #stage{position:fixed;inset:0;}
+  video{position:fixed;inset:0;width:100%;height:100%;object-fit:cover;transform:scaleX(-1);filter:brightness(.75);}
+  canvas{position:fixed;inset:0;width:100%;height:100%;}
+  .overlay{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;
+    background:rgba(5,7,15,.78);backdrop-filter:blur(8px);z-index:10;text-align:center;padding:20px;}
+  h1{font-size:clamp(38px,7vw,72px);font-weight:900;}
+  h1 .grad{background:linear-gradient(90deg,var(--cyan),var(--blue),var(--pink));
+    -webkit-background-clip:text;background-clip:text;color:transparent;}
+  .sub{color:#a9b0d8;font-size:clamp(14px,2.2vw,19px);margin:14px 0 30px;line-height:1.6;max-width:560px;}
+  .btn{border:none;cursor:pointer;font-weight:800;font-size:20px;color:#fff;font-family:inherit;
+    background:linear-gradient(90deg,var(--blue),var(--pink));padding:18px 44px;border-radius:999px;
+    box-shadow:0 10px 40px rgba(47,143,255,.55);transition:transform .15s;}
+  .btn:hover{transform:translateY(-2px) scale(1.05);}
+  .hud{position:fixed;top:16px;left:20px;z-index:5;font-weight:900;font-size:30px;text-shadow:0 2px 12px #000;}
+  .hud small{display:block;font-size:13px;color:var(--cyan);letter-spacing:2px;}
+  .lives{position:fixed;top:16px;right:20px;z-index:5;font-size:26px;text-shadow:0 2px 10px #000;}
+  .brand{position:fixed;bottom:14px;left:18px;z-index:5;font-weight:800;font-size:13px;color:#a9b0d8;
+    text-shadow:0 2px 8px #000;}
+  .combo{position:fixed;top:70px;left:20px;z-index:5;font-weight:900;font-size:20px;color:#ffd166;
+    text-shadow:0 2px 10px #000;opacity:0;transition:opacity .2s;}
+  #hint{position:fixed;bottom:16px;right:20px;z-index:5;font-size:13px;font-weight:700;color:#a9b0d8;text-shadow:0 2px 8px #000;}
+  #err{color:#ff8a8a;font-weight:700;margin-top:14px;display:none;max-width:460px;}
+</style>
+</head>
+<body>
+<video id="cam" playsinline muted></video>
+<canvas id="game"></canvas>
+
+<div class="hud" style="display:none;" id="hud"><small>SCORE</small><span id="score">0</span></div>
+<div class="lives" style="display:none;" id="lives">❤️❤️❤️</div>
+<div class="combo" id="combo"></div>
+<div class="brand">☁️ Cloud6 Slice · cloud6apps</div>
+<div id="hint" style="display:none;">✋ slice with your index finger · avoid 💣</div>
+
+<div class="overlay" id="menu">
+  <h1>☁️ Cloud6 <span class="grad">SLICE</span></h1>
+  <p class="sub">Fruit-ninja style — but you slice <b>tacos, boba & coffee</b> with your bare hand ✋<br>
+  Allow the camera, stand back a little, and swipe your index finger through the flying food. Don't hit the bombs!</p>
+  <button class="btn" onclick="start()">🎥 Turn on camera & play</button>
+  <p id="err"></p>
+</div>
+
+<div class="overlay" id="over" style="display:none;">
+  <h1><span class="grad" id="finalScore">0</span></h1>
+  <p class="sub" id="overMsg">Nice slicing! Kids build games like this in the App Creator Lab 🎓</p>
+  <button class="btn" onclick="restart()">🔁 Play again</button>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js"></script>
+<script>
+const cv=document.getElementById('game'), ctx=cv.getContext('2d');
+const video=document.getElementById('cam');
+let W,H; function resize(){W=cv.width=innerWidth;H=cv.height=innerHeight;}
+resize(); addEventListener('resize',resize);
+
+/* ---------- game state ---------- */
+const FOODS=['🌮','🧋','☕','🍩','🥑','🍓'];
+let fruits=[], particles=[], pops=[], trail=[];
+let score=0, lives=3, combo=0, comboTimer=0, playing=false, lastSpawn=0, difficulty=1;
+
+/* ---------- hand tracking ---------- */
+let blades=[{finger:null,last:null,trail:[]},{finger:null,last:null,trail:[]}];
+let targets=[null,null], handReady=false;
+const hands=new Hands({locateFile:f=>`https://cdn.jsdelivr.net/npm/@mediapipe/hands/${f}`});
+hands.setOptions({maxNumHands:2,modelComplexity:1,minDetectionConfidence:.5,minTrackingConfidence:.5});
+
+/* map a landmark to SCREEN coordinates, accounting for the object-fit:cover crop.
+   The visible video is scaled by max(W/vw, H/vh) and center-cropped — without this
+   the blade drifts away from your real finger the further you are from center. */
+function mapToScreen(lm){
+  const vw=video.videoWidth||1280, vh=video.videoHeight||720;
+  const s=Math.max(W/vw, H/vh);
+  const ox=(W-vw*s)/2, oy=(H-vh*s)/2;
+  return { x: W-(lm.x*vw*s+ox),      // mirrored
+           y: lm.y*vh*s+oy };
+}
+hands.onResults(res=>{
+  handReady=true;
+  targets=[null,null];
+  (res.multiHandLandmarks||[]).slice(0,2).forEach((h,i)=>{
+    targets[i]=mapToScreen(h[8]);                       // index fingertip per hand
+  });
+});
+
+async function start(){
+  const err=document.getElementById('err');
+  try{
+    const stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:'user',width:1280,height:720}});
+    video.srcObject=stream; await video.play();
+    const camera=new Camera(video,{onFrame:async()=>{await hands.send({image:video});},width:640,height:360});
+    camera.start();
+    document.getElementById('menu').style.display='none';
+    document.getElementById('hud').style.display='block';
+    document.getElementById('lives').style.display='block';
+    document.getElementById('hint').style.display='block';
+    playing=true; score=0; lives=3; combo=0; fruits=[]; particles=[]; difficulty=1;
+    updateHud();
+  }catch(e){
+    err.style.display='block';
+    err.textContent='Camera blocked: '+e.message+' — click the camera icon in the address bar and allow access, then try again.';
+  }
+}
+function restart(){
+  document.getElementById('over').style.display='none';
+  playing=true; score=0; lives=3; combo=0; fruits=[]; particles=[]; difficulty=1; updateHud();
+}
+
+/* ---------- fruits ---------- */
+function spawn(){
+  const bomb=Math.random()<Math.min(.18,.08+difficulty*.01);
+  const x=W*.15+Math.random()*W*.7;
+  fruits.push({
+    x, y:H+60,
+    vx:(W/2-x)*.002+(Math.random()-.5)*3,
+    vy:-(H*.0175)-Math.random()*4-difficulty*.3,
+    g:H*.0000225,
+    em:bomb?'💣':FOODS[Math.floor(Math.random()*FOODS.length)],
+    bomb, r:44, rot:Math.random()*Math.PI, vr:(Math.random()-.5)*.1, dead:false
+  });
+}
+
+/* ---------- slicing ---------- */
+function sliceCheck(finger,lastFinger){
+  if(!finger||!lastFinger) return;
+  const dx=finger.x-lastFinger.x, dy=finger.y-lastFinger.y;
+  const speed=Math.hypot(dx,dy);
+  if(speed<9) return;                                   // gentler swipe threshold
+  fruits.forEach(f=>{
+    if(f.dead) return;
+    // distance from fruit center to swipe segment
+    const t=Math.max(0,Math.min(1,((f.x-lastFinger.x)*dx+(f.y-lastFinger.y)*dy)/(speed*speed)));
+    const px=lastFinger.x+t*dx, py=lastFinger.y+t*dy;
+    if(Math.hypot(f.x-px,f.y-py)<f.r+30){
+      f.dead=true;
+      if(f.bomb){ boom(f); loseLife(); combo=0; }
+      else{
+        combo++; comboTimer=90;
+        const pts=10*Math.min(combo,5);
+        score+=pts; updateHud();
+        pops.push({x:f.x,y:f.y,txt:'+'+pts+(combo>=3?' 🔥':''),life:50});
+        juice(f);
+      }
+    }
+  });
+}
+function juice(f){
+  const colors=['#ff5ca8','#66e0ff','#ffd166','#39d98a','#ff8a5c'];
+  for(let i=0;i<14;i++){
+    const a=Math.random()*Math.PI*2, s=2+Math.random()*7;
+    particles.push({x:f.x,y:f.y,vx:Math.cos(a)*s,vy:Math.sin(a)*s-2,
+      c:colors[Math.floor(Math.random()*colors.length)],life:40+Math.random()*20,r:3+Math.random()*5});
+  }
+  // two spinning halves
+  [-1,1].forEach(d=>particles.push({x:f.x,y:f.y,vx:d*4,vy:-5,em:f.em,rot:f.rot,vr:d*.25,life:50,half:d}));
+}
+function boom(f){
+  for(let i=0;i<28;i++){
+    const a=Math.random()*Math.PI*2, s=3+Math.random()*10;
+    particles.push({x:f.x,y:f.y,vx:Math.cos(a)*s,vy:Math.sin(a)*s,
+      c:i%2?'#ffb020':'#ff4444',life:34+Math.random()*18,r:4+Math.random()*7});
+  }
+}
+function loseLife(){
+  lives--; updateHud();
+  if(lives<=0){
+    playing=false;
+    document.getElementById('finalScore').textContent=score+' pts';
+    document.getElementById('overMsg').textContent=
+      score>400?'Legendary slicing!! 🏆 Kids build games like this in the App Creator Lab 🎓'
+      :'Nice slicing! Kids build games like this in the App Creator Lab 🎓';
+    document.getElementById('over').style.display='flex';
+  }
+}
+function updateHud(){
+  document.getElementById('score').textContent=score;
+  document.getElementById('lives').textContent='❤️'.repeat(Math.max(0,lives));
+  const c=document.getElementById('combo');
+  if(combo>=2){c.textContent='COMBO ×'+Math.min(combo,5);c.style.opacity=1;}
+  else c.style.opacity=0;
+}
+
+/* ---------- loop ---------- */
+function loop(now){
+  requestAnimationFrame(loop);
+  ctx.clearRect(0,0,W,H);
+
+  if(playing){
+    difficulty+=.0004;
+    if(now-lastSpawn>Math.max(500,1300-difficulty*80)){ lastSpawn=now; spawn(); if(Math.random()<.3)spawn(); }
+    blades.forEach(b=>sliceCheck(b.finger,b.last));
+  }
+
+  /* fruits */
+  fruits.forEach(f=>{
+    f.vy+=f.g*1000/60; f.x+=f.vx; f.y+=f.vy; f.rot+=f.vr;
+    if(!f.dead&&playing&&f.y>H+80&&f.vy>0){ f.dead=true;
+      if(!f.bomb){ combo=0; loseLife(); } }
+  });
+  fruits=fruits.filter(f=>!f.dead&&f.y<H+120);
+  ctx.textAlign='center';ctx.textBaseline='middle';
+  fruits.forEach(f=>{
+    ctx.save();ctx.translate(f.x,f.y);ctx.rotate(f.rot);
+    ctx.font='64px serif';ctx.fillText(f.em,0,0);ctx.restore();
+  });
+
+  /* particles */
+  particles.forEach(p=>{
+    p.x+=p.vx;p.y+=p.vy;p.vy+=.25;p.life--;
+    if(p.em){ p.rot+=p.vr;
+      ctx.save();ctx.translate(p.x,p.y);ctx.rotate(p.rot);ctx.globalAlpha=Math.max(0,p.life/50);
+      ctx.beginPath();
+      if(p.half>0) ctx.rect(-40,-40,40,80); else ctx.rect(0,-40,40,80);
+      ctx.clip();ctx.font='64px serif';ctx.fillText(p.em,0,0);ctx.restore();
+    }else{
+      ctx.globalAlpha=Math.max(0,p.life/50);ctx.fillStyle=p.c;
+      ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,7);ctx.fill();ctx.globalAlpha=1;
+    }
+  });
+  particles=particles.filter(p=>p.life>0);
+
+  /* score pops */
+  pops.forEach(p=>{p.y=(p.y||0);p.life--;});
+  pops=pops.filter(p=>p.life>0);
+  ctx.font='900 26px Avenir Next, sans-serif';
+  pops.forEach(p=>{
+    ctx.globalAlpha=Math.max(0,p.life/50);ctx.fillStyle='#ffd166';
+    ctx.fillText(p.txt,p.x,p.y-(50-p.life));ctx.globalAlpha=1;
+  });
+
+  /* two blades — smooth each finger toward its latest detection every frame
+     (60fps blades even though tracking runs ~20fps) */
+  const bladeColors=['102,224,255','255,92,168'];  // cyan right, pink left
+  blades.forEach((b,i)=>{
+    const target=targets[i];
+    if(target){
+      if(!b.finger) b.finger={...target};
+      else { b.finger.x+=(target.x-b.finger.x)*.55; b.finger.y+=(target.y-b.finger.y)*.55; }
+    } else b.finger=null;
+
+    if(b.finger){ b.trail.push({...b.finger}); if(b.trail.length>14) b.trail.shift(); }
+    else b.trail=[];
+    if(b.trail.length>1){
+      for(let j=1;j<b.trail.length;j++){
+        const a=j/b.trail.length;
+        ctx.strokeStyle=`rgba(${bladeColors[i]},${a})`;
+        ctx.lineWidth=a*10;ctx.lineCap='round';
+        ctx.beginPath();ctx.moveTo(b.trail[j-1].x,b.trail[j-1].y);ctx.lineTo(b.trail[j].x,b.trail[j].y);ctx.stroke();
+      }
+      const tip=b.trail[b.trail.length-1];
+      ctx.fillStyle='#fff';ctx.shadowColor=`rgb(${bladeColors[i]})`;ctx.shadowBlur=18;
+      ctx.beginPath();ctx.arc(tip.x,tip.y,7,0,7);ctx.fill();ctx.shadowBlur=0;
+    }
+    b.last=b.finger?{...b.finger}:null;
+  });
+
+  if(comboTimer>0){comboTimer--;if(comboTimer===0){combo=0;updateHud();}}
+}
+requestAnimationFrame(loop);
+</script>
+</body>
+</html>
