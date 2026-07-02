@@ -672,6 +672,9 @@ function animate(now){
     R=24; H=9.5;
     look=[anim.px*.35,5.4,anim.pz*.35];
   }
+  /* narrow/portrait windows: pull the camera back so the whole scene stays in frame */
+  const ar=innerWidth/innerHeight;
+  if(ar<1.5){ const k=Math.min(2.1,1.5/ar); R*=k; H*=1+(k-1)*.35; }
   camera.position.set(Math.cos(camAngle)*R,H,Math.sin(camAngle)*R);
   camera.lookAt(look[0],look[1],look[2]);
 
