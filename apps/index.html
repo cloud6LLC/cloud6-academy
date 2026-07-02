@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cloud6 — We Build Apps. Literally.</title>
+<style>
+  :root{--blue:#2f8fff;--cyan:#66e0ff;--ink:#f5f6ff;--dim:#a9b0d8;}
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'Avenir Next','Segoe UI',system-ui,sans-serif;background:#05070f;color:var(--ink);}
+  #scene{position:fixed;inset:0;z-index:1;}
+  #scroller{height:560vh;position:relative;z-index:0;}
+
+  .cap{position:fixed;z-index:10;left:50%;transform:translateX(-50%);text-align:center;
+    opacity:0;transition:opacity .5s;pointer-events:none;width:min(90vw,760px);}
+  .cap h1{font-size:clamp(34px,6vw,64px);font-weight:900;line-height:1.05;}
+  .cap .grad{background:linear-gradient(90deg,var(--cyan),var(--blue));
+    -webkit-background-clip:text;background-clip:text;color:transparent;}
+  .cap p{color:var(--dim);font-size:clamp(15px,2.2vw,19px);margin-top:14px;line-height:1.5;}
+  #cap0{top:12vh;}
+  #cap1{bottom:10vh;} #cap2{bottom:10vh;} #cap3{bottom:10vh;}
+  #capFinal{top:50%;transform:translate(-50%,-50%);pointer-events:none;
+    background:rgba(5,7,15,.72);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.12);
+    border-radius:28px;padding:38px 44px;}
+  #capFinal .btn-row{pointer-events:auto;margin-top:26px;}
+  .btn{display:inline-block;text-decoration:none;font-weight:800;font-size:17px;color:#fff;
+    background:linear-gradient(90deg,var(--blue),var(--cyan));padding:15px 32px;border-radius:999px;
+    box-shadow:0 10px 34px rgba(47,143,255,.45);transition:transform .15s;}
+  .btn:hover{transform:translateY(-2px) scale(1.04);}
+  .hint{position:fixed;bottom:26px;left:50%;transform:translateX(-50%);z-index:10;color:var(--dim);
+    font-weight:700;font-size:13px;letter-spacing:1.5px;text-transform:uppercase;opacity:1;transition:opacity .4s;
+    animation:bob 1.8s ease-in-out infinite;}
+  @keyframes bob{0%,100%{transform:translate(-50%,0);}50%{transform:translate(-50%,8px);}}
+  .brand{position:fixed;top:20px;left:22px;z-index:10;font-weight:800;font-size:14px;color:var(--dim);
+    display:flex;align-items:center;gap:8px;}
+  .brand .dot{width:26px;height:26px;border-radius:8px;display:grid;place-items:center;font-size:14px;
+    background:linear-gradient(135deg,var(--blue),var(--cyan));}
+  .progress{position:fixed;top:0;left:0;height:3px;z-index:20;width:0;
+    background:linear-gradient(90deg,var(--blue),var(--cyan));}
+</style>
+</head>
+<body>
+<div id="scene"></div>
+<div id="scroller"></div>
+<div class="progress" id="prog"></div>
+<div class="brand"><span class="dot">☁️</span> Cloud6 App Development LLC</div>
+<div class="hint" id="hint">Scroll ↓</div>
+
+<div class="cap" id="cap0">
+  <h1>Every great app<br><span class="grad">starts in pieces.</span></h1>
+  <p>Scroll to watch one come together.</p>
+</div>
+<div class="cap" id="cap1"><h1 style="font-size:clamp(22px,3.5vw,34px);">The hardware is the easy part.</h1>
+  <p>Design · Code · Database · Launch — that's where we come in.</p></div>
+<div class="cap" id="cap2"><h1 style="font-size:clamp(22px,3.5vw,34px);">Piece by piece. Detail by detail.</h1>
+  <p>Built by a founder who has shipped 3 apps to the App Store.</p></div>
+<div class="cap" id="cap3"><h1 style="font-size:clamp(22px,3.5vw,34px);">And then… it comes alive.</h1><p>&nbsp;</p></div>
+<div class="cap" id="capFinal">
+  <h1><span class="grad">We build apps.</span><br><span class="grad">Literally.</span></h1>
+  <p>Custom apps & websites for your business — bilingual, affordable, founder-built.</p>
+  <div class="btn-row">
+    <a class="btn" href="https://calendar.app.google/fbfh146tAxrpUqpKA" target="_blank">📅 Book a free 15-min chat</a>
+  </div>
+  <p style="margin-top:20px;font-size:13px;">Marisa Gomez-Garcia · Cloud6 App Development LLC</p>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+/* ================= scene ================= */
+const renderer=new THREE.WebGLRenderer({antialias:true});
+renderer.setPixelRatio(Math.min(devicePixelRatio,2));
+renderer.setSize(innerWidth,innerHeight);
+document.getElementById('scene').appendChild(renderer.domElement);
+const scene=new THREE.Scene();
+scene.background=new THREE.Color(0x05070f);
+scene.fog=new THREE.Fog(0x05070f,30,80);
+const camera=new THREE.PerspectiveCamera(42,innerWidth/innerHeight,.1,200);
+
+scene.add(new THREE.AmbientLight(0x707aa8,.7));
+const key=new THREE.DirectionalLight(0xffffff,1.1); key.position.set(8,12,10); scene.add(key);
+const rim=new THREE.DirectionalLight(0x2f8fff,.9); rim.position.set(-10,-4,-8); scene.add(rim);
+const cyanPt=new THREE.PointLight(0x66e0ff,.7,40); cyanPt.position.set(-6,5,8); scene.add(cyanPt);
+
+/* dust particles */
+(()=>{const n=500,g=new THREE.BufferGeometry(),p=new Float32Array(n*3);
+for(let i=0;i<n;i++){p[i*3]=(Math.random()-.5)*70;p[i*3+1]=(Math.random()-.5)*44;p[i*3+2]=(Math.random()-.5)*50;}
+g.setAttribute('position',new THREE.BufferAttribute(p,3));
+scene.add(new THREE.Points(g,new THREE.PointsMaterial({color:0x5a6ab0,size:.09,transparent:true,opacity:.7})));})();
+
+/* ================= phone parts ================= */
+const phone=new THREE.Group(); scene.add(phone);
+const parts=[];
+const M={
+  graphite:new THREE.MeshStandardMaterial({color:0x2a2f45,roughness:.35,metalness:.75}),
+  darkglass:new THREE.MeshStandardMaterial({color:0x0d1226,roughness:.1,metalness:.4}),
+  copper:new THREE.MeshStandardMaterial({color:0xc47f3e,roughness:.4,metalness:.8}),
+  pcb:new THREE.MeshStandardMaterial({color:0x14532d,roughness:.6,metalness:.3}),
+  silver:new THREE.MeshStandardMaterial({color:0x9aa4c0,roughness:.3,metalness:.9}),
+  gold:new THREE.MeshStandardMaterial({color:0xd8b45a,roughness:.35,metalness:.85}),
+  black:new THREE.MeshStandardMaterial({color:0x0a0c18,roughness:.5,metalness:.5})
+};
+function addPart(mesh,target,order){
+  mesh.userData.target=target;
+  // exploded start: pushed away from target along a random direction + spin
+  const dir=new THREE.Vector3((Math.random()-.5),(Math.random()-.5),(Math.random()-.5)).normalize();
+  mesh.userData.from={
+    pos:new THREE.Vector3().copy(target.pos).addScaledVector(dir,9+Math.random()*10),
+    rot:new THREE.Euler(Math.random()*3-1.5,Math.random()*3-1.5,Math.random()*3-1.5)
+  };
+  mesh.userData.order=order;
+  phone.add(mesh); parts.push(mesh);
+}
+const V=(x,y,z)=>new THREE.Vector3(x,y,z);
+const E=(x,y,z)=>new THREE.Euler(x||0,y||0,z||0);
+
+/* body frame */
+addPart(new THREE.Mesh(new THREE.BoxGeometry(6.2,12.4,.7),M.graphite),{pos:V(0,0,0),rot:E()},0);
+/* back panel */
+addPart(new THREE.Mesh(new THREE.BoxGeometry(5.9,12.1,.16),M.darkglass),{pos:V(0,0,-.42),rot:E()},1);
+/* battery */
+addPart(new THREE.Mesh(new THREE.BoxGeometry(3.4,5.6,.34),M.copper),{pos:V(-.9,-1.4,.12),rot:E()},2);
+/* logic board */
+addPart(new THREE.Mesh(new THREE.BoxGeometry(1.9,7.6,.3),M.pcb),{pos:V(1.7,.4,.12),rot:E()},3);
+/* chip on board */
+addPart(new THREE.Mesh(new THREE.BoxGeometry(1.1,1.1,.4),M.gold),{pos:V(1.7,1.6,.3),rot:E()},4);
+/* camera module */
+(()=>{const g=new THREE.Group();
+  g.add(new THREE.Mesh(new THREE.BoxGeometry(2.2,2.2,.5),M.graphite));
+  const lens=new THREE.Mesh(new THREE.CylinderGeometry(.55,.55,.6,24),M.black);
+  lens.rotation.x=Math.PI/2; lens.position.set(-.45,.45,.1); g.add(lens);
+  const lens2=lens.clone(); lens2.position.set(.5,-.4,.1); g.add(lens2);
+  addPart(g,{pos:V(-1.6,4.6,-.25),rot:E()},5);})();
+/* speaker bar */
+addPart(new THREE.Mesh(new THREE.BoxGeometry(2.6,.4,.3),M.silver),{pos:V(0,-5.6,.15),rot:E()},6);
+/* side buttons */
+addPart(new THREE.Mesh(new THREE.BoxGeometry(.16,1.6,.3),M.silver),{pos:V(3.16,1.8,0),rot:E()},7);
+addPart(new THREE.Mesh(new THREE.BoxGeometry(.16,.9,.3),M.silver),{pos:V(3.16,3.4,0),rot:E()},8);
+/* charging port */
+addPart(new THREE.Mesh(new THREE.BoxGeometry(1.4,.28,.3),M.black),{pos:V(0,-6.05,0),rot:E()},9);
+/* antenna bands */
+addPart(new THREE.Mesh(new THREE.BoxGeometry(6.24,.12,.72),M.silver),{pos:V(0,5.4,0),rot:E()},10);
+addPart(new THREE.Mesh(new THREE.BoxGeometry(6.24,.12,.72),M.silver),{pos:V(0,-5.4,0),rot:E()},11);
+
+/* ================= screen (boot + app) ================= */
+function bootTexture(){
+  const cv=document.createElement('canvas');cv.width=512;cv.height=1024;
+  const x=cv.getContext('2d');
+  x.fillStyle='#05070f';x.fillRect(0,0,512,1024);
+  const g=x.createRadialGradient(256,470,20,256,470,300);
+  g.addColorStop(0,'rgba(47,143,255,.35)');g.addColorStop(1,'rgba(5,7,15,0)');
+  x.fillStyle=g;x.fillRect(0,0,512,1024);
+  x.font='120px serif';x.textAlign='center';x.fillText('☁️',256,460);
+  x.fillStyle='#fff';x.font='900 64px Avenir Next, Segoe UI, sans-serif';
+  x.fillText('Cloud6',256,590);
+  x.fillStyle='#66e0ff';x.font='600 30px Avenir Next, sans-serif';
+  x.fillText('We build apps.',256,650);
+  return new THREE.CanvasTexture(cv);
+}
+function appTexture(){
+  const cv=document.createElement('canvas');cv.width=512;cv.height=1024;
+  const x=cv.getContext('2d');
+  x.fillStyle='#f6f7fb';x.fillRect(0,0,512,1024);
+  const g=x.createLinearGradient(0,0,512,200);g.addColorStop(0,'#2f8fff');g.addColorStop(1,'#66e0ff');
+  x.fillStyle=g;x.fillRect(0,0,512,205);
+  x.fillStyle='#fff';x.font='900 50px Avenir Next, Segoe UI, sans-serif';x.textAlign='left';
+  x.fillText('Your App',36,115,440);
+  x.font='600 28px Avenir Next, sans-serif';x.globalAlpha=.9;x.fillText('Built by Cloud6',38,162,440);x.globalAlpha=1;
+  const rr=(x1,y1,w,h,r)=>{x.beginPath();x.moveTo(x1+r,y1);x.arcTo(x1+w,y1,x1+w,y1+h,r);
+    x.arcTo(x1+w,y1+h,x1,y1+h,r);x.arcTo(x1,y1+h,x1,y1,r);x.arcTo(x1,y1,x1+w,y1,r);x.closePath();};
+  [['🛍️','Online Ordering','Customers order in 2 taps'],
+   ['📅','Booking','Fill your calendar while you sleep'],
+   ['⭐','Rewards','Keep them coming back'],
+   ['💬','Chat','Talk to customers directly']].forEach((it,i)=>{
+    const y=245+i*155;
+    x.save();x.shadowColor='rgba(30,36,80,.16)';x.shadowBlur=14;x.shadowOffsetY=5;
+    x.fillStyle='#fff';rr(42,y,428,126,22);x.fill();x.restore();
+    x.lineWidth=3;x.strokeStyle='#dfe3f2';rr(42,y,428,126,22);x.stroke();
+    x.fillStyle='#2f8fff';rr(42,y,10,126,5);x.fill();
+    x.font='50px serif';x.fillText(it[0],68,y+80);
+    x.fillStyle='#20243c';x.font='800 30px Avenir Next, sans-serif';x.fillText(it[1],138,y+54,300);
+    x.fillStyle='#8a8fa8';x.font='600 22px Avenir Next, sans-serif';x.fillText(it[2],138,y+94,310);
+  });
+  x.fillStyle='#fff';x.fillRect(0,930,512,94);
+  x.fillStyle='#8a8fa8';x.font='700 26px Avenir Next, sans-serif';x.textAlign='center';
+  ['🏠','🛍️','📅','💬'].forEach((t,i)=>x.fillText(t,64+i*128,988));
+  return new THREE.CanvasTexture(cv);
+}
+const bootMat=new THREE.MeshBasicMaterial({map:bootTexture(),transparent:true,opacity:0});
+const appMat=new THREE.MeshBasicMaterial({map:appTexture(),transparent:true,opacity:0});
+/* screen glass part (assembles last) */
+const screenGlass=new THREE.Mesh(new THREE.BoxGeometry(5.9,12.1,.14),M.darkglass);
+addPart(screenGlass,{pos:V(0,0,.42),rot:E()},12);
+const bootPlane=new THREE.Mesh(new THREE.PlaneGeometry(5.6,11.6),bootMat);
+bootPlane.position.set(0,0,.52); phone.add(bootPlane);
+const appPlane=new THREE.Mesh(new THREE.PlaneGeometry(5.6,11.6),appMat);
+appPlane.position.set(0,0,.53); phone.add(appPlane);
+/* glow behind phone */
+const glow=new THREE.Mesh(new THREE.PlaneGeometry(9,16),
+  new THREE.MeshBasicMaterial({color:0x2f8fff,transparent:true,opacity:0,side:THREE.DoubleSide}));
+glow.position.z=-1.2; phone.add(glow);
+
+/* ================= scroll-driven timeline ================= */
+let target=0, p=0;
+function onScroll(){
+  const max=document.getElementById('scroller').offsetHeight-innerHeight;
+  target=Math.max(0,Math.min(1,scrollY/max));
+}
+addEventListener('scroll',onScroll,{passive:true}); onScroll();
+
+const ease=t=>t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2;
+const clamp01=t=>Math.max(0,Math.min(1,t));
+const N=parts.length;
+
+function setCap(id,on){document.getElementById(id).style.opacity=on?1:0;}
+
+function animate(now){
+  requestAnimationFrame(animate);
+  p+=(target-p)*.07;   // smooth scrub
+  document.getElementById('prog').style.width=(p*100)+'%';
+  document.getElementById('hint').style.opacity=p<.02?1:0;
+
+  /* parts assemble across p 0.05..0.72, staggered by order */
+  parts.forEach(m=>{
+    const w0=.05+m.userData.order*(.62/N), w1=w0+.16;
+    const f=ease(clamp01((p-w0)/(w1-w0)));
+    const {from,target:t}=m.userData;
+    m.position.lerpVectors(from.pos,t.pos,f);
+    m.rotation.set(
+      from.rot.x*(1-f)+t.rot.x*f,
+      from.rot.y*(1-f)+t.rot.y*f,
+      from.rot.z*(1-f)+t.rot.z*f);
+  });
+
+  /* phone slowly rotates; settles front-facing for boot */
+  const settle=ease(clamp01((p-.62)/.18));
+  phone.rotation.y=(1-settle)*(.7+p*2.2)+settle*0;
+  phone.rotation.x=(1-settle)*(.25*Math.sin(now*.0004))+settle*0;
+
+  /* boot: p .74..0.84 — flicker on; app: p .86..0.95 */
+  const bootF=clamp01((p-.74)/.10);
+  const flick=bootF>0&&bootF<1?(Math.floor(now/90)%2===0?1:.25):1;
+  bootMat.opacity=bootF*flick*(1-clamp01((p-.86)/.06));
+  appMat.opacity=clamp01((p-.86)/.09);
+  glow.material.opacity=bootF*.22;
+
+  /* camera dolly (pulls back automatically on narrow/portrait windows) */
+  const ar=innerWidth/innerHeight;
+  const wide=ar<1.2?Math.min(1.9,1.2/ar):1;
+  const cz=(26-(10*ease(clamp01(p/.7)))-(2*ease(clamp01((p-.8)/.2))))*wide;
+  camera.position.set(Math.sin(p*1.4)*4*(1-settle),1.5-p*1.2,cz);
+  camera.lookAt(0,0,0);
+
+  /* captions */
+  setCap('cap0',p<.10);
+  setCap('cap1',p>=.16&&p<.36);
+  setCap('cap2',p>=.40&&p<.60);
+  setCap('cap3',p>=.66&&p<.82);
+  setCap('capFinal',p>=.90);
+
+  renderer.render(scene,camera);
+}
+requestAnimationFrame(animate);
+addEventListener('resize',()=>{
+  camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();
+  renderer.setSize(innerWidth,innerHeight);
+});
+</script>
+</body>
+</html>
